@@ -21,9 +21,13 @@
 
 ;; 80 column line
 (setq fill-column 80)
-; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
+;; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
 (setq display-fill-column-indicator-character ?\u00A6)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+
+;; Split to the right and bellow
+(setq evil-split-window-below t)
+(setq evil-vsplit-window-right t)
 
 ;; ------------------------ REMAPS ------------------------
 
