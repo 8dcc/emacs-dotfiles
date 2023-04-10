@@ -5,30 +5,10 @@
 (setq user-full-name "8dcc"
       user-mail-address "8dcc.git@gmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
+;; Fonts
 (setq doom-font (font-spec :family "Dina" :size 10))
+
+;; Theme
 (setq doom-theme 'doom-one)
 
 ;; Style of line numbers. If set to `nil', line numbers are disabled, `t' for
@@ -40,7 +20,7 @@
 (setq org-directory "~/org/")
 
 ;; 80 column line
-(display-fill-column-indicator--turn-on)
+(display-fill-column-indicator-mode t)
 
 ;; ------------------------ PLUGINS ------------------------
 
@@ -81,3 +61,6 @@
 (after! indent-guides
         (setq highlight-indent-guides-method 'column)
         (setq highlight-indent-guides-character, "¦"))
+
+;; SPC b f -> Format
+(map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
