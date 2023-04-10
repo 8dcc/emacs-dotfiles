@@ -25,7 +25,11 @@
 (setq display-fill-column-indicator-character ?\u00A6)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
-;; ------------------------ PLUGINS ------------------------
+;; ------------------------ MODULES ------------------------
+
+;; Generate doxygen documentation from C code
+(add-to-list 'load-path (expand-file-name "~/.config/doom/modules/user-defined/"))
+(load "gendoxy.el")
 
 ;; Indent guides
 ;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
