@@ -25,6 +25,17 @@
 (setq display-fill-column-indicator-character ?\u00A6)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
+;; ------------------------ REMAPS ------------------------
+
+;; :q -> SPC b k
+(map! [remap evil-quit] #'kill-current-buffer)
+
+;; :wq -> SPC Z X
+(map! [remap evil-save-and-close] #'doom/save-and-kill-buffer)
+
+;; SPC b f -> Format
+(map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
+
 ;; ------------------------ MODULES ------------------------
 
 ;; Generate doxygen documentation from C code
@@ -36,6 +47,3 @@
 ;(after! indent-guides
 ;        (setq highlight-indent-guides-method 'column)
 ;        (setq highlight-indent-guides-character, "¦"))
-
-;; SPC b f -> Format
-(map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
