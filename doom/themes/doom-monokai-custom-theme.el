@@ -48,6 +48,7 @@ determine the exact padding."
    (fg         '("#F8F8F2" "#DFDFDF" "brightwhite"))
    (fg-alt     '("#556172" "#4D4D4D" "white"))
 
+   (c-white    '("#DDDDDD" "#DDDDDD" "white"))
    (grey       '("#525254" "#525254" "brightblack"))
    (red        '("#E74C3C" "#E74C3C" "red"))
    (orange     '("#FD971F" "#FD971F" "brightred"))
@@ -101,7 +102,7 @@ determine the exact padding."
 
 
   ;;;; Base theme face overrides
-  ((cursor :background fg-alt)
+  ((cursor :background c-white)
    (lazy-highlight :background violet :foreground base0 :distant-foreground base0 :bold bold)
    ((line-number &override) :foreground base5 :distant-foreground nil)
    ((line-number-current-line &override) :foreground base7 :distant-foreground nil)
