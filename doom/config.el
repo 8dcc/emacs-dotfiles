@@ -6,7 +6,9 @@
       user-mail-address "8dcc.git@gmail.com")
 
 ;; Fonts
-(setq doom-font (font-spec :family "Dina" :size 10))
+(setq doom-font (font-spec :family "Dina" :size 10)
+      doom-variable-pitch-font (font-spec :family "Inter" :weight 'light :size 14)
+      doom-big-font-increment 5)
 
 ;; Theme
 (setq doom-theme 'doom-monokai-custom)
@@ -26,8 +28,8 @@
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
 ;; Split to the right and bellow
-(setq evil-split-window-below t)
-(setq evil-vsplit-window-right t)
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
 
 ;; ------------------------ REMAPS ------------------------
 
@@ -51,3 +53,6 @@
 ;(after! indent-guides
 ;        (setq highlight-indent-guides-method 'column)
 ;        (setq highlight-indent-guides-character, "¦"))
+
+;; Nov.el (For epubs). Uses doom-variable-pitch-font
+(require 'nov)
