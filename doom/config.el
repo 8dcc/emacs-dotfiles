@@ -51,19 +51,7 @@
 (map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
 
 ;; ------------------------ MODULES ------------------------
-
-;; Generate doxygen documentation from C code
-(add-to-list 'load-path (expand-file-name "~/.config/doom/modules/user-defined/"))
-(require 'gendoxy)
-
-;; Indent guides
-;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;(after! indent-guides
-;        (setq highlight-indent-guides-method 'column)
-;        (setq highlight-indent-guides-character, "¦"))
-
-;; Nov.el (For epubs). Uses doom-variable-pitch-font
-(require 'nov)
+;; For packages, see packages.el
 
 ;; For streaming from libre.fm using emms
 (require 'emms-librefm-stream)
