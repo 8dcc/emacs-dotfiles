@@ -26,10 +26,6 @@
 ;; normal numbers and `relative' for relative line numbers.
 (setq display-line-numbers-type 'relative)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
 ;; 80 column line
 (setq fill-column 80)
 ;; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
@@ -58,7 +54,7 @@
 
 ;; Generate doxygen documentation from C code
 (add-to-list 'load-path (expand-file-name "~/.config/doom/modules/user-defined/"))
-(load "gendoxy.el")
+(require 'gendoxy)
 
 ;; Indent guides
 ;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
