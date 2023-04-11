@@ -59,3 +59,5 @@
 
 ;; For streaming from libre.fm using emms
 (require 'emms-librefm-stream)
+(setq emms-librefm-scrobbler-username "8dcc"
+      emms-librefm-scrobbler-password "PASSWORD")
