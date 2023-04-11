@@ -56,3 +56,6 @@
 
 ;; Nov.el (For epubs). Uses doom-variable-pitch-font
 (require 'nov)
+
+;; For streaming from libre.fm using emms
+(require 'emms-librefm-stream)
