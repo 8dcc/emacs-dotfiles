@@ -6,9 +6,18 @@
       user-mail-address "8dcc.git@gmail.com")
 
 ;; Fonts
+;;  * media-fonts/dina
+;;  * media-fonts/fira-mono
+;;  * media-fonts/fira-code
 (setq doom-font (font-spec :family "Dina" :size 10)
-      doom-variable-pitch-font (font-spec :family "Inter" :weight 'light :size 14)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :weight 'light :size 14)
       doom-big-font-increment 5)
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.5))))
+  '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
+  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.0))))
+  '(org-level-4 ((t (:inherit outline-4 :family "Fira Code" :height 1.0))))
+  '(org-level-5 ((t (:inherit outline-5 :family "Fira Code" :height 1.0)))))
 
 ;; Theme
 (setq doom-theme 'doom-monokai-custom)
@@ -30,6 +39,9 @@
 ;; Split to the right and bellow
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
+
+;; Org agenda location
+(setq org-directory (expand-file-name "~/Sync/Org/"))
 
 ;; ------------------------ REMAPS ------------------------
 
