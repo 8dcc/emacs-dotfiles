@@ -28,9 +28,12 @@
 
 ;; 80 column line
 (setq fill-column 80)
+
 ;; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
-(setq display-fill-column-indicator-character ?\u00A6)
-(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+;(setq display-fill-column-indicator-character ?\u00A6)
+(add-hook! 'prog-mode-hook 'display-fill-column-indicator-mode)
+(add-hook! 'prog-mode-hook
+  (setq display-fill-column-indicator-character ?\u00A6))
 
 ;; Split to the right and bellow
 (setq evil-split-window-below t
