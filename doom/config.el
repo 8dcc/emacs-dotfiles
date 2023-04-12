@@ -53,6 +53,10 @@
 ;; SPC b f -> Format
 (map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
 
+;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
+;; SPC t w is used to toggle soft line wrapping when displaying.
+(map! :desc "Auto fill mode" :n "SPC t W" 'auto-fill-mode)
+
 ;; ------------------------ MODULES ------------------------
 ;; For packages, see packages.el
 
