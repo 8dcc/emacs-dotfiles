@@ -75,3 +75,4 @@
 (require 'emms-librefm-stream)
 (setq emms-librefm-scrobbler-username "8dcc"
       emms-librefm-scrobbler-password "PASSWORD")
+(emms-mode-line-mode 0)         ; Only display time, not song
