@@ -1,5 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; ------------------------ FUNCTIONS ------------------------
+
+;; ~/.config/doom/custom-functions.el
+(add-to-list 'load-path (expand-file-name "~/.config/doom/custom-lisp/"))
+(require 'custom-functions)
+
 ;; ------------------------ GENERAL SETTINGS ------------------------
 ;; Identification for GPG configuration, email, templates...
 (setq user-full-name "8dcc"
@@ -57,6 +63,10 @@
 ;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
 ;; SPC t w is used to toggle soft line wrapping when displaying.
 (map! :desc "Auto fill mode" :n "SPC t W" 'auto-fill-mode)
+
+;; SPC c p -> Compile in parent directory (custom function from
+;;            custom-lisp/custom-functions.el)
+(map! :desc "Compile parent" :n "SPC c p" 'make-parent)
 
 ;; ------------------------ MODULES ------------------------
 ;; For packages, see packages.el
