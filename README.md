@@ -3,5 +3,8 @@
 
 ### Installation
 #### `doom/`
-Move this folder to `~/.config/doom/`
+Move the contents of this folder to `~/.config/doom/` (or `~/.doom.d/`)
+
+#### `emacs/`
+Move the contents of this folder to `~/.emacs.d/`
 
