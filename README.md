@@ -6,5 +6,5 @@
 Move the contents of this folder to `~/.config/doom/` (or `~/.doom.d/`)
 
 #### `emacs/`
-Move the contents of this folder to `~/.emacs.d/`
+Move the contents of this folder to `~/.config/emacs/` (`~/.emacs.d/`)
 
