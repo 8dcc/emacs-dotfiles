@@ -3,7 +3,7 @@
 ;; ------------------------ FUNCTIONS ------------------------
 
 ;; $DOOMDIR/custom-lisp/custom-functions.el
-(add-to-list 'load-path (expand-file-name "./custom-lisp/"))
+(add-to-list 'load-path (concat doom-user-dir "custom-lisp/"))
 (require 'custom-functions)
 
 ;; ------------------------ GENERAL SETTINGS ------------------------
