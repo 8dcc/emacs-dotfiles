@@ -13,10 +13,9 @@
       (setq parent-level 1))
   (if (equal targets nil)
       (setq targets ""))
-  (let ((rel-path ""))
-    (while (> parent-level 0)
-      (setq rel-path (concat rel-path "../"))
-      (setq parent-level (- parent-level 1)))
+  (let ((rel-path "./"))
+    (dotimes (i parent-level)
+      (setq rel-path (concat rel-path "../")))
     (compile (format "make -C %s %s" rel-path targets))))
 
 ;;; custom-functions.el ends here
