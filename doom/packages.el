@@ -12,6 +12,9 @@
 ;; Nov.el (For epubs). Uses doom-variable-pitch-font
 (package! nov :pin "6c992c2c5c4ad03a0f432a74fe4d0cde3b6da4bd")
 
+;; Org auto tangle
+(package! org-auto-tangle :pin "817eabf902e759e96782bdc54d2dab36c4a2c5ab")
+
 ;; Generate doxygen documentation from C code
 (package! gendoxy :pin "824d11fdceb01dca9ae2757670ee1f24ca2477de"
   :recipe (:host github :repo "mp81ss/gendoxy"))
