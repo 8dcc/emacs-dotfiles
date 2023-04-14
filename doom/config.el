@@ -51,7 +51,7 @@
 
 ;; Org visual settings
 (setq org-fontify-quote-and-verse-blocks t
-      org-org-hide-emphasis-markers t
+      org-hide-emphasis-markers t
       org-edit-src-content-indentation 0
       org-src-tab-acts-natively t
       org-src-fontify-natively t)
