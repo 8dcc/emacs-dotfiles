@@ -9,9 +9,6 @@
 ;; Nasm support
 (package! nasm-mode :pin "824d11fdceb01dca9ae2757670ee1f24ca2477de")
 
-;; Common lisp support
-(package! slime :pin "dd179f4a0c6874fe0e49fb6c460e9e52a5f58833")
-
 ;; Nov.el (For epubs). Uses doom-variable-pitch-font
 (package! nov :pin "6c992c2c5c4ad03a0f432a74fe4d0cde3b6da4bd")
 
