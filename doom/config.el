@@ -75,6 +75,11 @@
 ;;            custom-lisp/custom-functions.el)
 (map! :desc "Compile parent" :n "SPC c p" 'make-parent)
 
+;; C-+ -> Increase font size
+;; C-= -> Reset font size
+(map! :desc "Increase font size" :n "C-+" 'text-scale-increase)
+(map! :desc "Reset font size" :n "C-=" 'doom/reset-font-size)
+
 ;; ------------------------ MODULES ------------------------
 ;; For packages, see packages.el
 
