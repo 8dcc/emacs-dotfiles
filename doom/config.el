@@ -49,6 +49,12 @@
 ;; Org agenda location
 (setq org-directory (expand-file-name "~/Sync/Org/"))
 
+;; Org visual settings
+(setq org-fontify-quote-and-verse-blocks t
+      org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-fontify-natively t)
+
 ;; ------------------------ REMAPS ------------------------
 
 ;; :q -> SPC b k
@@ -80,3 +86,6 @@
 ;; Hook for org-auto-tangle pacakage
 (after! org-auto-tangle
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
+
+;; Enable "<s TAB" keys for src blocks
+(require 'org-tempo)
