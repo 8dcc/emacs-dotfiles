@@ -85,8 +85,7 @@
 (emms-mode-line-mode 0)         ; Only display time, not song
 
 ;; Hook for org-auto-tangle pacakage
-(after! org-auto-tangle
-  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
 ;; Enable "<s TAB" keys for src blocks
 (require 'org-tempo)
