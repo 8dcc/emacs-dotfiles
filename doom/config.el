@@ -13,7 +13,7 @@
 
 ;; Fonts
 ;;  * media-fonts/dina
-;;  * media-fonts/fira-mono
+;;  * media-fonts/fira-sans
 ;;  * media-fonts/fira-code
 (setq doom-font (font-spec :family "Dina" :size 10)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :weight 'light :size 14)
