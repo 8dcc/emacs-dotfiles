@@ -109,8 +109,8 @@
 ;; Function for connecting to libera-chat. Prompt for password. Not sure how to
 ;; use concat within interactive.
 (defun erc-libera (erc-pass)
-  ;(interactive (concat "sPassword for " erc-nick ":"))
-  (interactive "sPassword: ")
+  (interactive (list
+                (read-passwd (concat "Password for " erc-nick ": "))))
   (erc-tls :server   "irc.libera.chat"
            :port     "6697"
            :password erc-pass))
@@ -148,7 +148,11 @@
 ;; For streaming from libre.fm using emms
 (require 'emms-librefm-stream)
 (setq emms-librefm-scrobbler-username "8dcc"
-      emms-librefm-scrobbler-password "PASSWORD")
+      emms-librefm-scrobbler-password "PASSWORD"
+      emms-player-mpv-parameters '("--quiet"
+                                   "--really-quiet"
+                                   "--no-audio-display"
+                                   "--no-video"))       ; No video for youtube
 (emms-mode-line-mode 0)         ; Only display time, not song
 
 ;; Hook for org-auto-tangle pacakage
