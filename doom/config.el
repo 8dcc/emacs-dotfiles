@@ -91,6 +91,12 @@
       erc-fill-static-center 15
       ;; Rename buffers to network name instead of ip:port
       erc-rename-buffers t
+      ;; Prompt at the bottom of the screen
+      erc-scrolltobottom-mode t
+      ;; Messages to mode-line
+      erc-track-mode t
+      erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
 
       ;; Kill buffers for channels after /part
       erc-kill-buffer-on-part t
