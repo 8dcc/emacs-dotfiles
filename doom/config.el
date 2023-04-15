@@ -85,7 +85,7 @@
       ;; Hide joins/leaves/quits
       erc-hide-list '("JOIN" "PART" "QUIT")
       ;; Max line width
-      erc-fill-column 100
+      erc-fill-column 130
       ;; Align usernames to col 20
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 15
