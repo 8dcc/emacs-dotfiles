@@ -34,7 +34,6 @@
 (setq fill-column 80)
 
 ;; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
-;(setq display-fill-column-indicator-character ?\u00A6)
 (add-hook! 'prog-mode-hook 'display-fill-column-indicator-mode)
 (add-hook! 'prog-mode-hook
   (setq display-fill-column-indicator-character ?\u00A6))
@@ -56,6 +55,66 @@
       org-src-tab-acts-natively t
       org-src-fontify-natively t)
 
+;; ------------------------ IRC ------------------------
+
+;; ERC variables (IRC client)
+(setq erc-nick           "x8dcc"
+      erc-system-name    "x8dcc"
+      erc-user-full-name "x8dcc"
+
+      ;; Don't give away machine name
+      erc-anonymous-login t
+      ;; Don't reply to ctcp
+      erc-disable-ctcp-replies t
+      ;; Notify ctcp requests
+      erc-paranoid t
+      ;; Warn blank lines
+      erc-warn-about-blank-lines t
+
+      ;; Enable logging
+      erc-enable-logging t
+      ;; Directory for logs
+      erc-log-channels-directory "~/.erc-log"
+      ;; When to write logs
+      erc-log-write-after-send t
+      erc-log-write-after-insert t
+      ;; Timestamps
+      erc-stamp-mode t
+      erc-hide-timestamps t
+
+      ;; Hide joins/leaves/quits
+      erc-hide-list '("JOIN" "PART" "QUIT")
+      ;; Max line width
+      erc-fill-column 100
+      ;; Align usernames to col 20
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 15
+      ;; Rename buffers to network name instead of ip:port
+      erc-rename-buffers t
+
+      ;; Kill buffers for channels after /part
+      erc-kill-buffer-on-part t
+      ;; Kill buffers for private queries after quitting the server
+      erc-kill-queries-on-quit t
+      ;; Kill buffers for server messages after quitting the server
+      erc-kill-server-buffer-on-quit t)
+
+;; Set prompt to buffer name
+(setq erc-prompt (lambda ()
+                   (concat "[" (buffer-name) "]:")))
+
+;; Enable spelling beacuse I can't wreti
+(erc-spelling-mode 1)
+
+;; Function for connecting to libera-chat. Prompt for password. Not sure how to
+;; use concat within interactive.
+(defun erc-libera (erc-pass)
+  ;(interactive (concat "sPassword for " erc-nick ":"))
+  (interactive "sPassword: ")
+  (erc-tls :server   "irc.libera.chat"
+           :port     "6697"
+           :password erc-pass))
+
 ;; ------------------------ REMAPS ------------------------
 
 ;; :q -> SPC b k
@@ -66,6 +125,9 @@
 
 ;; SPC b f -> Format
 (map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
+
+;; SPC b l -> List buffers in current window
+(map! :desc "List buffers" :n "SPC b l" 'buffer-menu)
 
 ;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
 ;; SPC t w is used to toggle soft line wrapping when displaying.
