@@ -39,7 +39,8 @@
   (setq display-fill-column-indicator-character ?\u00A6))
 
 ;; Show battery in mode line. Useful for laptops.
-(display-battery-mode)
+(after! battery
+  (display-battery-mode))
 
 ;; Split to the right and bellow
 (setq evil-split-window-below t
