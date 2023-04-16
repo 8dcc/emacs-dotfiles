@@ -11,6 +11,7 @@
 (*track* (type . streamlist) (name . "http://www.somafm.com/groovesalad.pls") (metadata "SomaFM: Groove Salad" "http://www.somafm.com/groovesalad.pls" 1 streamlist))
 (*track* (type . streamlist) (name . "http://www.somafm.com/dronezone.pls") (metadata "SomaFM: Drone Zone" "http://www.somafm.com/dronezone.pls" 1 streamlist))
 (*track* (type . streamlist) (name . "http://www.somafm.com/tagstrance.pls") (metadata "SomaFM: Tag's Trance" "http://www.somafm.com/tagstrance.pls" 1 streamlist))
+(*track* (type . streamlist) (name . "http://www.somafm.com/seventies.pls") (metadata "SomaFM: Left Coast 70s" "http://www.somafm.com/seventies.pls" 1 streamlist))
 (*track* (type . streamlist) (name . "http://www.somafm.com/sfinsf.pls") (metadata "SomaFM: SF in SF" "http://www.somafm.com/sfinsf.pls" 1 streamlist))
 (*track* (type . streamlist) (name . "http://www.somafm.com/metal.pls") (metadata "SomaFM: Metal Detector" "http://www.somafm.com/metal.pls" 1 streamlist))
 (*track* (type . streamlist) (name . "http://www.somafm.com/sf1033.pls") (metadata "SomaFM: Ambient Scanner" "http://www.somafm.com/sf1033.pls" 1 streamlist))
