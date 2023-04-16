@@ -57,6 +57,11 @@
 
 ;; ------------------------ IRC ------------------------
 
+(require 'erc)
+(require 'erc-log)
+(require 'erc-spelling)
+(require 'erc-stamp)
+
 ;; ERC variables (IRC client)
 (setq erc-nick           "x8dcc"
       erc-system-name    "x8dcc"
@@ -94,7 +99,6 @@
       ;; Prompt at the bottom of the screen
       erc-scrolltobottom-mode t
       ;; Messages to mode-line
-      erc-track-mode t
       erc-track-showcount t
       erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
 
@@ -109,8 +113,12 @@
 (setq erc-prompt (lambda ()
                    (concat "[" (buffer-name) "]:")))
 
-;; Enable spelling beacuse I can't wreti
-(erc-spelling-mode 1)
+;; Enable spelling and logging beacuse I can't wreti
+(after! erc
+        (erc-track-enable)
+        (erc-spelling-enable)
+        (erc-log-enable)
+        (erc-scrolltobottom-enable))
 
 ;; Function for connecting to libera-chat. Prompt for password. Not sure how to
 ;; use concat within interactive.
