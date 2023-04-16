@@ -112,6 +112,7 @@
       erc-rename-buffers t
       ;; Prompt at the bottom of the screen
       erc-scrolltobottom-mode t
+      erc-input-line-position -1
       ;; Messages to mode-line
       erc-track-showcount t
       erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
