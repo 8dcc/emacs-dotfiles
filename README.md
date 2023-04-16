@@ -22,6 +22,12 @@ emerge -a media-fonts/dina media-fonts/fira-sans media-fonts/fira-code
 
 # For emms (media player)
 emerge -a media-video/mpv
+
+# For spelling. Optional dicts with aspell-*
+emerge -a app-text/aspell app-dicts/aspell-en
+
+# For sly (common-lisp)
+emerge -a dev-lisp/sbcl
 ```
 
 You will also need `youtube-dl` from [here](https://github.com/yt-dlp/yt-dlp/releases/tag/2023.03.04)
