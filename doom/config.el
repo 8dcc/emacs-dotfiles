@@ -38,9 +38,10 @@
 (add-hook! 'prog-mode-hook
   (setq display-fill-column-indicator-character ?\u00A6))
 
-;; Show battery in mode line. Useful for laptops.
+;; Show battery in mode line. If the battery is "N/A", don't display.
 (after! battery
-  (display-battery-mode))
+  (if (not (string= "N/A" (substring (battery) 6 9)))
+      (display-battery-mode)))
 
 ;; Split to the right and bellow
 (setq evil-split-window-below t
@@ -145,7 +146,10 @@
 (map! :desc "Format current buffer" :n "SPC b f" '+format/buffer)
 
 ;; SPC b l -> List buffers in current window
-(map! :desc "List buffers" :n "SPC b l" 'buffer-menu)
+(map! :after evil
+      :desc "List buffers"
+      :leader
+      :n "b l" #'buffer-menu)
 
 ;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
 ;; SPC t w is used to toggle soft line wrapping when displaying.
