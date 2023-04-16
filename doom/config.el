@@ -39,9 +39,11 @@
   (setq display-fill-column-indicator-character ?\u00A6))
 
 ;; Show battery in mode line. If the battery is "N/A", don't display.
+(require 'battery)
 (after! battery
-  (if (not (string= "N/A" (substring (battery) 6 9)))
-      (display-battery-mode)))
+  (if (not (string= "N/A"
+                    (battery-format "%B" (funcall battery-status-function))))
+      (display-battery-mode 1)))
 
 ;; Split to the right and bellow
 (setq evil-split-window-below t
