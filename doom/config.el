@@ -61,6 +61,7 @@
 (require 'erc-log)
 (require 'erc-spelling)
 (require 'erc-stamp)
+(require 'erc-track)
 
 ;; ERC variables (IRC client)
 (setq erc-nick           "x8dcc"
