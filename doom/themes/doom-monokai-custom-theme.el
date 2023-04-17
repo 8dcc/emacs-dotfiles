@@ -48,6 +48,9 @@ determine the exact padding."
    (fg         '("#F8F8F2" "#DFDFDF" "brightwhite"))
    (fg-alt     '("#556172" "#4D4D4D" "white"))
 
+   ;; Darker selection
+   (region-col '("#3A3A3A" "#454545" "brightblack"))
+
    (c-white    '("#DDDDDD" "#DDDDDD" "white"))
    (grey       '("#525254" "#525254" "brightblack"))
    (red        '("#E74C3C" "#E74C3C" "red"))
@@ -78,7 +81,7 @@ determine the exact padding."
    (strings        yellow)
    (variables      fg)
    (numbers        violet)
-   (region         base4)
+   (region         region-col)
    (error          red)
    (warning        yellow)
    (success        green)
@@ -104,8 +107,8 @@ determine the exact padding."
   ;;;; Base theme face overrides
   ((cursor :background c-white)
    (lazy-highlight :background violet :foreground base0 :distant-foreground base0 :bold bold)
-   ((line-number &override) :foreground base5 :distant-foreground nil)
-   ((line-number-current-line &override) :foreground base7 :distant-foreground nil)
+   ((line-number &override) :foreground base5 :distant-foreground nil :slant 'normal)
+   ((line-number-current-line &override) :foreground base7 :distant-foreground nil :slant 'normal)
    (mode-line
     :background modeline-bg :foreground modeline-fg
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color modeline-bg)))
