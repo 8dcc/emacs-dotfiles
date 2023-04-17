@@ -38,7 +38,7 @@
 (add-hook! 'prog-mode-hook
   (setq display-fill-column-indicator-character ?\u00A6))
 
-;; Enable literal tabs for C code (if not on begining of line)
+;; Enable literal tabs for C code (if not on beginning of line)
 (setq c-tab-always-indent nil)
 
 ;; Show battery in mode line. If the battery is "N/A", don't display.
@@ -183,7 +183,7 @@
                                    "--no-video"))       ; No video for youtube
 (emms-mode-line-mode 0)         ; Only display time, not song
 
-;; Hook for org-auto-tangle pacakage
+;; Hook for org-auto-tangle package
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
 ;; Enable "<s TAB" keys for src blocks
