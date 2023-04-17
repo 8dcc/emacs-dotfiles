@@ -39,7 +39,9 @@
   (setq display-fill-column-indicator-character ?\u00A6))
 
 ;; Enable literal tabs for C code (if not on beginning of line)
-(setq c-tab-always-indent nil)
+(setq c-default-style "k&r"
+      c-basic-offset 4
+      c-tab-always-indent nil)
 
 ;; Show battery in mode line. If the battery is "N/A", don't display.
 (require 'battery)
