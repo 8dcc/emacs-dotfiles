@@ -44,6 +44,7 @@
       c-tab-always-indent nil)
 
 ;; Show battery in mode line. If the battery is "N/A", don't display.
+;; TODO: (add-hook! 'battery-update-functions #'my-battery-alarm)
 (require 'battery)
 (after! battery
   (if (not (string= "N/A"
