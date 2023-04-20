@@ -7,6 +7,7 @@
 (require 'custom-functions)
 
 ;; ------------------------ GENERAL SETTINGS ------------------------
+
 ;; Identification for GPG configuration, email, templates...
 (setq user-full-name "8dcc"
       user-mail-address "8dcc.git@gmail.com")
@@ -38,10 +39,7 @@
 (add-hook! 'prog-mode-hook
   (setq display-fill-column-indicator-character ?\u00A6))
 
-;; Enable literal tabs for C code (if not on beginning of line)
-(setq c-default-style "k&r"
-      c-basic-offset 4
-      c-tab-always-indent nil)
+;; ------------------------ BATTERY ------------------------
 
 ;; Show battery in mode line. If the battery is "N/A", don't display.
 ;; TODO: (add-hook! 'battery-update-functions #'my-battery-alarm)
@@ -50,6 +48,8 @@
   (if (not (string= "N/A"
                     (battery-format "%B" (funcall battery-status-function))))
       (display-battery-mode 1)))
+
+;; ------------------------ ORG ------------------------
 
 ;; Split to the right and bellow
 (setq evil-split-window-below t
@@ -64,6 +64,12 @@
       org-edit-src-content-indentation 0
       org-src-tab-acts-natively t
       org-src-fontify-natively t)
+
+;; Hook for org-auto-tangle package
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+
+;; Enable "<s TAB" keys for src blocks
+(require 'org-tempo)
 
 ;; ------------------------ IRC ------------------------
 
@@ -173,21 +179,58 @@
 (map! :desc "Increase font size" :n "C-+" 'text-scale-increase)
 (map! :desc "Reset font size" :n "C-=" 'doom/reset-font-size)
 
-;; ------------------------ MODULES ------------------------
-;; For packages, see packages.el
+;; ------------------------ EMMS ------------------------
 
 ;; For streaming from libre.fm using emms
 (require 'emms-librefm-stream)
+
 (setq emms-librefm-scrobbler-username "8dcc"
       emms-librefm-scrobbler-password "PASSWORD"
       emms-player-mpv-parameters '("--quiet"
                                    "--really-quiet"
                                    "--no-audio-display"
                                    "--no-video"))       ; No video for youtube
+
 (emms-mode-line-mode 0)         ; Only display time, not song
 
-;; Hook for org-auto-tangle package
-(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+;; ------------------------ CC-MODE ------------------------
 
-;; Enable "<s TAB" keys for src blocks
-(require 'org-tempo)
+;; Enable literal tabs for C code (if not on beginning of line)
+(setq c-default-style "k&r"
+      c-basic-offset 4
+      c-tab-always-indent nil)
+
+;; TODO
+;  ;; Printf format for C. Source:
+;  ;;   https://gustafwaldemarson.com/posts/printf-format-highlighting-in-emacs
+;  (defface font-lock-format-specifier-face
+;    '((t . (:inherit font-lock-regexp-grouping-backslash
+;            :foreground "OrangeRed1")))
+;    "Font-lock face used to highlight printf format specifiers."
+;    :group 'font-lock-faces)
+;
+;  (defvar printf-fmt-regexp
+;    (concat "\\(%"
+;            "\\([[:digit:]]+\\$\\)?"   ; Posix argument position extension.
+;            "[-+' #0*]*"
+;            "\\(?:[[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)"
+;            "\\(?:\\.\\(?:[[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?"
+;            "\\(?:[hlLjzt]\\|ll\\|hh\\)?"
+;            "\\(?:[aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)")
+;    "Regular expression to capture all possible `printf' formats in C/C++.")
+;
+;  (defun printf-fmt-matcher (end)
+;    "Search for `printf' format specifiers within strings up to END."
+;    (let ((pos)
+;          (case-fold-search nil))
+;      (while (and (setq pos (re-search-forward printf-fmt-regexp end t))
+;                  (null (nth 3 (syntax-ppss pos)))))
+;      pos))
+;
+;  (defun my-cc-mode-common-hook ()
+;    "Setup common utilities for all C-like modes."
+;    (font-lock-add-keywords
+;     nil
+;     '((printf-fmt-matcher (0 'font-lock-format-specifier-face prepend)))))
+;
+;  (add-hook 'c-mode-common-hook #'my-cc-mode-common-hook)
