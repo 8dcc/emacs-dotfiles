@@ -15,6 +15,6 @@
 ;; Org auto tangle
 (package! org-auto-tangle :pin "817eabf902e759e96782bdc54d2dab36c4a2c5ab")
 
-;; Generate doxygen documentation from C code
-(package! gendoxy :pin "824d11fdceb01dca9ae2757670ee1f24ca2477de"
-  :recipe (:host github :repo "mp81ss/gendoxy"))
+;; Generate doxygen documentation from C code. Forked for more compact coments
+(package! gendoxy :pin "d81a9fad640db336d590f60d8447b2c6224eb2b1"
+  :recipe (:host github :repo "8dcc/gendoxy"))
