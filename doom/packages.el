@@ -18,3 +18,7 @@
 ;; Generate doxygen documentation from C code. Forked for more compact coments
 (package! gendoxy :pin "d81a9fad640db336d590f60d8447b2c6224eb2b1"
   :recipe (:host github :repo "8dcc/gendoxy"))
+
+;; Play chess from emacs. Supports games-board/gnuchess
+;; URL: https://github.com/jwiegley/emacs-chess
+(package! chess :pin "865b2ab11469f3bd1bc4d7b3669cb4626c37be08")
