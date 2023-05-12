@@ -204,6 +204,11 @@
       c-basic-offset 4
       c-tab-always-indent nil)
 
+;; Use intel syntax for objdump disassembly, use nasm mode instead of asm-mode
+(after! disaster
+  (setq disaster-objdump "objdump -d -M att -Sl --no-show-raw-insn -M intel"
+        disaster-assembly-mode #'nasm-mode))
+
 ;; TODO
 ;  ;; Printf format for C. Source:
 ;  ;;   https://gustafwaldemarson.com/posts/printf-format-highlighting-in-emacs

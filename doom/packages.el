@@ -22,3 +22,6 @@
 ;; Play chess from emacs. Supports games-board/gnuchess
 ;; URL: https://github.com/jwiegley/emacs-chess
 (package! chess :pin "865b2ab11469f3bd1bc4d7b3669cb4626c37be08")
+
+;; For disassembling C sources
+(package! disaster :pin "16bba9afb92aacf06c088c29ba47813b65a80d87")
