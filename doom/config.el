@@ -45,9 +45,11 @@
 ;; TODO: (add-hook! 'battery-update-functions #'my-battery-alarm)
 (require 'battery)
 (after! battery
-  (if (not (string= "N/A"
-                    (battery-format "%B" (funcall battery-status-function))))
-      (display-battery-mode 1)))
+  (let ((battstr (battery-format "%B" (funcall battery-status-function))))
+    (if (or (string= "N/A" battstr)
+            (string= "unknown" battstr))
+        (display-battery-mode 0)
+      (display-battery-mode 1))))
 
 ;; ------------------------ ORG ------------------------
 
