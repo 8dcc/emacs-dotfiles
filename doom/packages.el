@@ -7,7 +7,7 @@
 ;; Make sure you check the repos/updates from time to time.
 
 ;; Nasm support
-(package! nasm-mode :pin "824d11fdceb01dca9ae2757670ee1f24ca2477de")
+(package! nasm-mode :pin "65ca6546fc395711fac5b3b4299e76c2303d43a8")
 
 ;; Nov.el (For epubs). Uses doom-variable-pitch-font
 (package! nov :pin "6c992c2c5c4ad03a0f432a74fe4d0cde3b6da4bd")
@@ -20,8 +20,7 @@
   :recipe (:host github :repo "8dcc/gendoxy"))
 
 ;; Play chess from emacs. Supports games-board/gnuchess
-;; URL: https://github.com/jwiegley/emacs-chess
-(package! chess :pin "865b2ab11469f3bd1bc4d7b3669cb4626c37be08")
+(package! chess)
 
 ;; For disassembling C sources
 (package! disaster :pin "16bba9afb92aacf06c088c29ba47813b65a80d87")
