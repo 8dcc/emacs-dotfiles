@@ -2,6 +2,7 @@
 
 (provide 'custom-functions)
 
+;; NOTE: Not really useful since you can use <SPC p c> to compile from project
 (defun make-parent (&optional parent-level targets)
   "Compile current project with the make file at N parent levels,
 using the specified targets."
@@ -15,6 +16,7 @@ using the specified targets."
     (dotimes (i parent-level)
       (setq rel-path (concat rel-path "../")))
     (compile (format "make -C %s %s" rel-path targets))))
+
 
 ;; FIXME: Play beep (sound file) when battery% <10.
 (defvar my-prev-battery nil)
