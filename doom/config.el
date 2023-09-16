@@ -153,6 +153,10 @@
 
 ;; ------------------------ REMAPS ------------------------
 
+;; meta <-> super
+(setq x-meta-keysym 'super
+      x-super-keysym 'meta)
+
 ;; :q -> SPC b k
 (map! [remap evil-quit] #'kill-current-buffer)
 
