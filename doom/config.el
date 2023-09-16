@@ -153,41 +153,42 @@
 
 ;; ------------------------ REMAPS ------------------------
 
-;; meta <-> super
-(setq x-meta-keysym 'super
-      x-super-keysym 'meta)
-
 ;; :q -> SPC b k
 (map! [remap evil-quit] #'kill-current-buffer)
 
 ;; :wq -> SPC Z X
 (map! [remap evil-save-and-close] #'doom/save-and-kill-buffer)
 
-;; SPC b f -> Format
-(map! :desc "Format current buffer" :n "SPC b f" #'+format/buffer)
+;; SPC b f -> Format (not used much since I format on save)
+(map! :desc "[Custom] Format current buffer" :n "SPC b f" #'+format/buffer)
 
 ;; SPC b l -> List buffers in current window
 (map! :after evil
       :leader
-      :desc "List buffers" :n "b l" #'buffer-menu)
+      :desc "[Custom] Open buffer list" :n "b l" #'buffer-menu)
 
 ;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
 ;; SPC t w is used to toggle soft line wrapping when displaying.
-(map! :desc "Auto fill mode" :n "SPC t W" #'auto-fill-mode)
+(map! :desc "[Custom] Auto fill mode" :n "SPC t W" #'auto-fill-mode)
+
+;; SPC c p -> Compile in parent directory (custom function from
+;;            custom-lisp/custom-functions.el)
+(map! :desc "[Custom] Compile parent" :n "SPC c p" #'make-parent)
+
+;; C-+ -> Increase font size
+;; C-= -> Reset font size
+(map! :desc "[Custom] Increase font size" :n "C-+" #'text-scale-increase)
+(map! :desc "[Custom] Reset font size" :n "C-=" #'doom/reset-font-size)
 
 ;; SPC t i -> Toggle org-mode inline images (Same as "z i")
 (map! :after org
       :map org-mode-map
-      :desc "Inline images" :n "SPC t i" #'org-toggle-inline-images)
+      :desc "[Custom] Inline images" :n "SPC t i" #'org-toggle-inline-images)
 
-;; SPC c p -> Compile in parent directory (custom function from
-;;            custom-lisp/custom-functions.el)
-(map! :desc "Compile parent" :n "SPC c p" #'make-parent)
-
-;; C-+ -> Increase font size
-;; C-= -> Reset font size
-(map! :desc "Increase font size" :n "C-+" #'text-scale-increase)
-(map! :desc "Reset font size" :n "C-=" #'doom/reset-font-size)
+;; C-<TAB> -> Scroll top 3 of stack (Same as M-<TAB>, except I use that in DWM)
+(map! :after calc-misc
+      :map calc-mode-map
+      :desc "[Custom] Scroll down" :n "C-<TAB>" #'calc-scroll-up)
 
 ;; ------------------------ EMMS ------------------------
 
@@ -214,38 +215,3 @@
 (after! disaster
   (setq disaster-objdump "objdump -d -M att -Sl --no-show-raw-insn -M intel"
         disaster-assembly-mode #'nasm-mode))
-
-;; TODO
-;  ;; Printf format for C. Source:
-;  ;;   https://gustafwaldemarson.com/posts/printf-format-highlighting-in-emacs
-;  (defface font-lock-format-specifier-face
-;    '((t . (:inherit font-lock-regexp-grouping-backslash
-;            :foreground "OrangeRed1")))
-;    "Font-lock face used to highlight printf format specifiers."
-;    :group 'font-lock-faces)
-;
-;  (defvar printf-fmt-regexp
-;    (concat "\\(%"
-;            "\\([[:digit:]]+\\$\\)?"   ; Posix argument position extension.
-;            "[-+' #0*]*"
-;            "\\(?:[[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)"
-;            "\\(?:\\.\\(?:[[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?"
-;            "\\(?:[hlLjzt]\\|ll\\|hh\\)?"
-;            "\\(?:[aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)")
-;    "Regular expression to capture all possible `printf' formats in C/C++.")
-;
-;  (defun printf-fmt-matcher (end)
-;    "Search for `printf' format specifiers within strings up to END."
-;    (let ((pos)
-;          (case-fold-search nil))
-;      (while (and (setq pos (re-search-forward printf-fmt-regexp end t))
-;                  (null (nth 3 (syntax-ppss pos)))))
-;      pos))
-;
-;  (defun my-cc-mode-common-hook ()
-;    "Setup common utilities for all C-like modes."
-;    (font-lock-add-keywords
-;     nil
-;     '((printf-fmt-matcher (0 'font-lock-format-specifier-face prepend)))))
-;
-;  (add-hook 'c-mode-common-hook #'my-cc-mode-common-hook)
