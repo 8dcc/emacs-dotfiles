@@ -185,11 +185,6 @@
       :map org-mode-map
       :desc "[Custom] Inline images" :n "SPC t i" #'org-toggle-inline-images)
 
-;; C-<TAB> -> Scroll top 3 of stack (Same as M-<TAB>, except I use that in DWM)
-(map! :after calc-misc
-      :map calc-mode-map
-      :desc "[Custom] Scroll down" :n "C-<TAB>" #'calc-scroll-up)
-
 ;; ------------------------ EMMS ------------------------
 
 ;; For streaming from libre.fm using emms
