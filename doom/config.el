@@ -199,6 +199,14 @@
 
 (emms-mode-line-mode 0)         ; Only display time, not song
 
+;; ------------------------ MAIL ------------------------
+
+(require 'smtpmail)
+(setq send-mail-function   'smtpmail-send-it
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-stream-type 'ssl
+      smtpmail-smtp-service 465)
+
 ;; ------------------------ CC-MODE ------------------------
 
 ;; Enable literal tabs for C code (if not on beginning of line)
