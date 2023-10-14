@@ -7,7 +7,7 @@
 ;; Make sure you check the repos/updates from time to time.
 
 ;; Nasm support. Forked for simpler comment system
-(package! nasm-mode :pin "c69b3b083d889dc9aecaf81368e0263690b7caef"
+(package! nasm-mode :pin "4db384ef241c986444233a298ede25fd7d9ebfe9"
   :recipe (:host github :repo "8dcc/nasm-mode"))
 
 ;; Nov.el (For epubs). Uses doom-variable-pitch-font
