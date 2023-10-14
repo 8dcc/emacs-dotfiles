@@ -40,6 +40,9 @@ doom emacs, you can follow these steps:
 # Your doom emacs install, where bin/doom is
 cd ~/.config/emacs/
 
+# You might need to do this if it's an older commit. 1672534861 is 1/1/2023
+git fetch --shallow-since=1672534861
+
 # Where COMMIT-HASH is the commit you want from https://github.com/doomemacs/doomemacs/commits/master
 # If you have another installation with the version you want, you can do
 # `git log` to get the current commit hash.
