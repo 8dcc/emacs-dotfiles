@@ -48,7 +48,6 @@ git fetch --shallow-since=1672534861
 # `git log` to get the current commit hash.
 git checkout COMMIT-HASH
 
-
 # Re-build doom emacs
 ~/.config/emacs/bin/doom clean && ~/.config/emacs/bin/doom build && ~/.config/emacs/bin/doom sync -u
 ```
