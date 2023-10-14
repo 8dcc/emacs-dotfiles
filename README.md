@@ -47,7 +47,7 @@ git checkout COMMIT-HASH
 
 
 # Re-build doom emacs
-.config/emacs/bin/doom clean && .config/emacs/bin/doom build && .config/emacs/bin/doom sync -u
+~/.config/emacs/bin/doom clean && ~/.config/emacs/bin/doom build && ~/.config/emacs/bin/doom sync -u
 ```
 
 The current commit I use is `4e105a95af9c4c7e86471e5566eb7a5ff776ec92`.
