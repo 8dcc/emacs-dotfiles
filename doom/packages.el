@@ -21,7 +21,7 @@
   :recipe (:host github :repo "8dcc/gendoxy"))
 
 ;; Play chess from emacs. Supports games-board/gnuchess
-(package! chess)
+(package! chess :pin "e4adaf1a8e276ff556763aca8a47e10193f2bed4")
 
 ;; For disassembling C sources
 (package! disaster :pin "16bba9afb92aacf06c088c29ba47813b65a80d87")
