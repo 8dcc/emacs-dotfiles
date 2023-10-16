@@ -254,3 +254,11 @@
 (after! disaster
   (setq disaster-objdump "objdump -d -M att -Sl --no-show-raw-insn -M intel"
         disaster-assembly-mode #'nasm-mode))
+
+;; --- SPELL-FU ----------------------------------------------------------------
+
+;; Dictionaries for spell checking
+(add-hook 'spell-fu-mode-hook
+          (lambda ()
+            (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
+            (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
