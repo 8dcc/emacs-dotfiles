@@ -208,6 +208,10 @@
 (map! :desc "[Custom] Auto fill mode"
       :leader :n "t W" #'auto-fill-mode)
 
+;; SPC t c -> Locally toggle column line (instead of globally)
+(map! :desc "[Local] Fill column line"
+      :leader :n "t c" #'display-fill-column-indicator-mode)
+
 ;; SPC c p -> Compile in parent directory (custom function from
 ;;            custom-lisp/custom-functions.el)
 ;; TODO: Delete since "SPC p c" is a thing
