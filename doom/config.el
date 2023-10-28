@@ -196,20 +196,23 @@
 (map! [remap evil-save-and-close] #'doom/save-and-kill-buffer)
 
 ;; SPC b f -> Format (not used much since I format on save)
-(map! :desc "[Custom] Format current buffer" :n "SPC b f" #'+format/buffer)
+(map! :desc "[Custom] Format current buffer"
+      :leader :n "b f" #'+format/buffer)
 
 ;; SPC b l -> List buffers in current window
-(map! :after evil
-      :leader
-      :desc "[Custom] Open buffer list" :n "b l" #'buffer-menu)
+(map! :after evil :desc "[Custom] Open buffer list"
+      :leader :n "b l" #'buffer-menu)
 
 ;; SPC t W -> Toggle Auto Fill mode (automatic line wrapping)
 ;; SPC t w is used to toggle soft line wrapping when displaying.
-(map! :desc "[Custom] Auto fill mode" :n "SPC t W" #'auto-fill-mode)
+(map! :desc "[Custom] Auto fill mode"
+      :leader :n "t W" #'auto-fill-mode)
 
 ;; SPC c p -> Compile in parent directory (custom function from
 ;;            custom-lisp/custom-functions.el)
-(map! :desc "[Custom] Compile parent" :n "SPC c p" #'make-parent)
+;; TODO: Delete since "SPC p c" is a thing
+(map! :desc "[Custom] Compile parent"
+      :leader :n "c p" #'make-parent)
 
 ;; C-+ -> Increase font size
 ;; C-= -> Reset font size
@@ -217,9 +220,8 @@
 (map! :desc "[Custom] Reset font size" :n "C-=" #'doom/reset-font-size)
 
 ;; SPC t i -> Toggle org-mode inline images (Same as "z i")
-(map! :after org
-      :map org-mode-map
-      :desc "[Custom] Inline images" :n "SPC t i" #'org-toggle-inline-images)
+(map! :after org :map org-mode-map :desc "[Custom] Inline images"
+      :leader :n "t i" #'org-toggle-inline-images)
 
 ;; --- EMMS --------------------------------------------------------------------
 
