@@ -82,7 +82,8 @@
 
 ;; --- BATTERY -----------------------------------------------------------------
 
-;; Show battery in mode line. If the battery is "N/A" or "unknown", don't display.
+;; Show battery in mode line. If the battery is "N/A" or "unknown", don't
+;; display.
 (require 'battery)
 (after! battery
   (let ((battstr (battery-format "%B" (funcall battery-status-function))))
@@ -211,12 +212,6 @@
 ;; SPC t c -> Locally toggle column line (instead of globally)
 (map! :desc "[Local] Fill column line"
       :leader :n "t c" #'display-fill-column-indicator-mode)
-
-;; SPC c p -> Compile in parent directory (custom function from
-;;            custom-lisp/custom-functions.el)
-;; TODO: Delete since "SPC p c" is a thing
-(map! :desc "[Custom] Compile parent"
-      :leader :n "c p" #'make-parent)
 
 ;; C-+ -> Increase font size
 ;; C-= -> Reset font size
