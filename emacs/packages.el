@@ -45,14 +45,18 @@
 ;;------------------------------------------------------------------------------
 ;; Dashboard
 
-;; TODO: Customize dashboard
 (use-package dashboard
   :ensure t
   :init
   (setq dashboard-banner-logo-title "8dcc's Emacs"
         dashboard-startup-banner (concat user-emacs-directory
                                          "img/splash.png")
-        dashboard-center-content t)
+        dashboard-center-content t
+        dashboard-show-shortcuts nil
+        dashboard-set-footer nil
+        dashboard-page-separator "\n\n"
+        dashboard-items '((recents . 10)
+                          (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
 
