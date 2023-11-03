@@ -48,11 +48,11 @@
 
 ;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
 ;; of ?\u2502 (│) if there are spaces between lines.
-(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 (add-hook 'prog-mode-hook
           (lambda ()
             (setq display-fill-column-indicator-character ?\u00A6
-                  fill-column 80)))
+                  fill-column 80)
+            (display-fill-column-indicator-mode)))
 
 ;; Wrap lines by default
 (global-visual-line-mode 1)
@@ -76,7 +76,7 @@
 (set-face-attribute 'default nil
   :font "Dina 8")
 
-;; Fallback
+;; Fallback (needs to be set to unicode, can't use nil)
 (set-fontset-font t 'unicode "Cozette 10")
 
 ;; Variable pitch
