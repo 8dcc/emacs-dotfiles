@@ -17,7 +17,7 @@
   :after evil
   :ensure t
   :config
-    (evil-collection-init))
+  (evil-collection-init))
 
 ;;------------------------------------------------------------------------------
 ;; General (Space keybind prefix)
@@ -25,7 +25,7 @@
 (use-package general
   :ensure t
   :config
-    (general-evil-setup t))
+  (general-evil-setup t))
 
 ;;------------------------------------------------------------------------------
 ;; Which key (keybind completion menu)
@@ -34,4 +34,25 @@
   :ensure t)
 (which-key-mode)
 
+;;------------------------------------------------------------------------------
+;; Projectile
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode 1))
+
+;;------------------------------------------------------------------------------
+;; Dashboard
+
+;; TODO: Customize dashboard
+(use-package dashboard
+  :ensure t
+  :init
+  (setq dashboard-banner-logo-title "8dcc's Emacs"
+        dashboard-startup-banner (concat user-emacs-directory
+                                         "img/splash.png")
+        dashboard-center-content t)
+  :config
+  (dashboard-setup-startup-hook))
 
