@@ -23,21 +23,10 @@
 ;;------------------------------------------------------------------------------
 ;; Theme
 
-;; Add theme to whitelist and load
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("5efe1fe52c7b6b8fa3217865cce8102eb6e53d1698acbe6395f67862b4753b34" default))
- '(package-selected-packages '(which-key evil-collection)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+
+;; Load ~/.emacs.d/x8dcc-theme.el
 (load-theme 'x8dcc)
 
 ;; Remove GUI bars
@@ -45,7 +34,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; Change splash screen image
+;; Change splash screen image (should not matter since it's overwritten by
+;; dashboard)
 (setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
 
 ;;------------------------------------------------------------------------------
@@ -56,27 +46,38 @@
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
-;; 80 column line
-(setq fill-column 80)
-
-;; Using ?\u00A6 (¦) instead of "│" if there are spaces between lines.
+;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
+;; of ?\u2502 (│) if there are spaces between lines.
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 (add-hook 'prog-mode-hook
           (lambda ()
-            (setq display-fill-column-indicator-character ?\u00A6)))
+            (setq display-fill-column-indicator-character ?\u00A6
+                  fill-column 80)))
 
 ;; Wrap lines by default
 (global-visual-line-mode 1)
+
+;;------------------------------------------------------------------------------
+;; Battery
+
+;; Show battery in mode line. If the battery is "N/A" or "unknown", don't
+;; display.
+(require 'battery)
+(let ((battstr (battery-format "%B" (funcall battery-status-function))))
+  (if (or (string= "N/A" battstr)
+          (string= "unknown" battstr))
+    (display-battery-mode 0)
+    (display-battery-mode 1)))
 
 ;;------------------------------------------------------------------------------
 ;; Fonts
 
 ;; Default
 (set-face-attribute 'default nil
-  :family "Dina 11")
+  :font "Dina 8")
 
 ;; Fallback
-(set-fontset-font t nil "Cozette 11")
+(set-fontset-font t 'unicode "Cozette 10")
 
 ;; Variable pitch
 (set-face-attribute 'variable-pitch nil
@@ -85,10 +86,10 @@
 
 ;; Fixed pitch
 (set-face-attribute 'fixed-pitch nil
-  :font "Dina 11")
+  :font "Dina 8")
 
 ;; Needed for emacsclient (?)
-(add-to-list 'default-frame-alist '(font . "Dina 11"))
+(add-to-list 'default-frame-alist '(font . "Dina 8"))
 
 ;;------------------------------------------------------------------------------
 ;; Custom keybinds
@@ -100,7 +101,26 @@
 
 ;; Other <SPC> keybinds
 (nvmap :prefix "SPC"
+  "SPC" '(projectile-find-file :which-key "Find file in project")
   "."   '(find-file :which-key "Find file")
+  ;; Buffer
   "b l" '(buffer-menu :which-key "Buffer menu")
+  ;; Toggle
   "t W" '(auto-fill-mode :which-key "Auto fill mode")
-  "t c" '(display-fill-column-indicator-mode :which-key "Fill column line"))
+  "t c" '(display-fill-column-indicator-mode :which-key "Fill column line")
+  ;; Window
+  "w c" '(evil-window-delete :which-key "Close window")
+  ;"w n" '(evil-window-new :which-key "New window")
+  "w s" '(evil-window-split :which-key "Horizontal split window")
+  "w v" '(evil-window-vsplit :which-key "Vertical split window")
+  "w h" '(evil-window-left :which-key "Window left")
+  "w l" '(evil-window-right :which-key "Window right")
+  "w j" '(evil-window-down :which-key "Window down")
+  "w k" '(evil-window-up :which-key "Window up")
+  "w w" '(evil-window-next :which-key "Next window")
+  "w H" '(evil-window-move-far-left :which-key "Move window left")
+  "w L" '(evil-window-move-far-right :which-key "Move window right")
+  "w J" '(evil-window-move-very-bottom :which-key "Move window down")
+  "w K" '(evil-window-move-very-top :which-key "Move window up"))
+;; TODO: Add a bunch of keybinds:
+;;  - SPC tab *
