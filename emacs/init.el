@@ -96,6 +96,18 @@
 (global-set-key (kbd "C-<home>") (lambda () (interactive)
                                    (text-scale-adjust 0)))
 
+;; Quit from minibuffer with one ESC
+(global-set-key [escape] 'keyboard-escape-quit)
+
+;; :q -> SPC b k
+(global-set-key [remap evil-quit] #'kill-current-buffer)
+
+;; :wq -> SPC b s + SPC b k
+(global-set-key [remap evil-save-and-close]
+                (lambda () (interactive)
+                  (basic-save-buffer)
+                  (kill-current-buffer)))
+
 ;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
 ;;  - SPC TAB *
@@ -109,6 +121,9 @@
   "b s" '(basic-save-buffer :wk "Save buffer")
   "b r" '(revert-buffer :wk "Revert buffer")
   "b k" '(kill-current-buffer :wk "Kill current buffer")
+  ;; Magit
+  "g"   '(:ignore t :wk "Git")
+  "g g" '(magit-status :wk "Magit status")
   ;; Help
   "h"   '(:ignore t :wk "Help")
   "h f" '(describe-function :wk "Describe function")
@@ -161,10 +176,11 @@
 ;; Wrap lines by default (using words)
 (global-visual-line-mode 1)
 
-;; Auto-close brackets
+;; Auto-close brackets, disable emacs' weird indentation
 (add-hook 'prog-mode-hook
           (lambda ()
-            (electric-pair-mode t)))
+            (electric-pair-mode t)
+            (electric-indent-mode -1)))
 
 ;;------------------------------------------------------------------------------
 ;; Backups
