@@ -1,7 +1,7 @@
 
 ;; TODO:
 ;; Pop-ups for help, etc.
-;; Shells/terms
+;; M-x completion (menu)
 
 ;;------------------------------------------------------------------------------
 ;; Evil mode
@@ -79,7 +79,7 @@
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
-        `(("TODO"       warning bold)
+        '(("TODO"       warning bold)
           ("FIXME"      error bold)
           ("DELME"      error bold)
           ("HACK"       font-lock-constant-face bold)
@@ -127,6 +127,14 @@
       (direction . bottom)
       (reusable-frames . visible)
       (window-height . 0.35))))
+
+;;------------------------------------------------------------------------------
+;; Drag stuff (M-<down> and M-<up>)
+
+(use-package drag-stuff
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
 
 ;;------------------------------------------------------------------------------
 ;; Nasm mode (fork)
