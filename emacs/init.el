@@ -94,31 +94,44 @@
 (global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
 (global-set-key (kbd "C-<home>") (lambda () (interactive) (text-scale-adjust 0)))
 
-;; Other <SPC> keybinds
-(nvmap :prefix "SPC"
-  "SPC" '(projectile-find-file :which-key "Find file in project")
-  "."   '(find-file :which-key "Find file")
-  ;; Buffer
-  "b l" '(buffer-menu :which-key "Buffer menu")
-  ;; Toggle
-  "t W" '(auto-fill-mode :which-key "Auto fill mode")
-  "t c" '(display-fill-column-indicator-mode :which-key "Fill column line")
-  ;; Window
-  "w c" '(evil-window-delete :which-key "Close window")
-  ;"w n" '(evil-window-new :which-key "New window")
-  "w s" '(evil-window-split :which-key "Horizontal split window")
-  "w v" '(evil-window-vsplit :which-key "Vertical split window")
-  "w h" '(evil-window-left :which-key "Window left")
-  "w l" '(evil-window-right :which-key "Window right")
-  "w j" '(evil-window-down :which-key "Window down")
-  "w k" '(evil-window-up :which-key "Window up")
-  "w w" '(evil-window-next :which-key "Next window")
-  "w H" '(evil-window-move-far-left :which-key "Move window left")
-  "w L" '(evil-window-move-far-right :which-key "Move window right")
-  "w J" '(evil-window-move-very-bottom :which-key "Move window down")
-  "w K" '(evil-window-move-very-top :which-key "Move window up"))
+;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
-;;  - SPC tab *
+;;  - SPC TAB *
+;;  - SPC o t/*
+(x8dcc/leader-keys
+  "SPC" '(projectile-find-file :wk "Find file in project")
+  "."   '(find-file :wk "Find file")
+  ;; Buffer
+  "b"   '(:ignore t :wk "Buffer")
+  "b l" '(buffer-menu :wk "Buffer menu")
+  "b s" '(basic-save-buffer :wk "Save buffer")
+  "b r" '(revert-buffer :wk "Revert buffer")
+  ;; Help
+  "h"   '(:ignore t :wk "Help")
+  "h f" '(describe-function :wk "Describe function")
+  "h k" '(describe-key :wk "Describe key")
+  "h m" '(describe-mode :wk "Describe mode")
+  "h v" '(describe-variable :wk "Describe variable")
+  ;; Open
+  "o"   '(:ignore t :wk "Open")
+  ;; Toggle
+  "t"   '(:ignore t :wk "Togle")
+  "t W" '(auto-fill-mode :wk "Auto fill mode")
+  "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
+  ;; Window
+  "w"   '(:ignore t :wk "Window")
+  "w c" '(evil-window-delete :wk "Close window")
+  "w s" '(evil-window-split :wk "Horizontal split window")
+  "w v" '(evil-window-vsplit :wk "Vertical split window")
+  "w h" '(evil-window-left :wk "Window left")
+  "w l" '(evil-window-right :wk "Window right")
+  "w j" '(evil-window-down :wk "Window down")
+  "w k" '(evil-window-up :wk "Window up")
+  "w w" '(evil-window-next :wk "Next window")
+  "w H" '(evil-window-move-far-left :wk "Move window left")
+  "w L" '(evil-window-move-far-right :wk "Move window right")
+  "w J" '(evil-window-move-very-bottom :wk "Move window down")
+  "w K" '(evil-window-move-very-top :wk "Move window up"))
 
 ;;------------------------------------------------------------------------------
 ;; Misc visual settings
