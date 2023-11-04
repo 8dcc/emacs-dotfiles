@@ -53,3 +53,9 @@
   :config
   (dashboard-setup-startup-hook))
 
+;;------------------------------------------------------------------------------
+;; Nasm mode (fork)
+
+(straight-use-package
+  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+
