@@ -31,7 +31,8 @@
   '(minibuffer-prompt      ((t (:foreground "#767679" :bold t))))
   '(font-lock-warning-face ((t (:foreground "#E6DB74" :bold t))))
   '(show-paren-match       ((t (:bold t))))
-  '(show-paren-mismatch    ((t (:foreground "#F8F8F2" :background "#E74C3C" :bold t)))))
+  '(show-paren-mismatch    ((t (:foreground "#F8F8F2" :background "#E74C3C" :bold t))))
+  '(link                   ((t (:underline t)))))
 
 ;;;###autoload
 (and load-file-name
