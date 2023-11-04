@@ -32,6 +32,9 @@
   '(font-lock-warning-face ((t (:foreground "#E6DB74" :bold t))))
   '(show-paren-match       ((t (:bold t))))
   '(show-paren-mismatch    ((t (:foreground "#F8F8F2" :background "#E74C3C" :bold t))))
+  '(success                ((t (:foreground "#A6E22E"))))
+  '(error                  ((t (:foreground "#E74C3C"))))
+  '(warning                ((t (:foreground "#E6DB74"))))
   '(link                   ((t (:underline t)))))
 
 ;;;###autoload
