@@ -4,6 +4,25 @@
       user-mail-address "8dcc.git@gmail.com")
 
 ;;------------------------------------------------------------------------------
+;; Theme
+
+;; Remove GUI bars
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Use separate custom file for readability
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+
+;; Load ~/.emacs.d/x8dcc-theme.el
+(load-theme 'x8dcc)
+
+;; Change splash screen image (should not matter since it's overwritten by
+;; dashboard)
+(setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
+
+;;------------------------------------------------------------------------------
 ;; Package managers
 
 ;; Install straight.el (with use-package) for more convenience. See:
@@ -30,24 +49,6 @@
 
 ;; Install and load packages from separate file for more readability
 (load (concat user-emacs-directory "packages.el"))
-
-;;------------------------------------------------------------------------------
-;; Theme
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file)
-
-;; Load ~/.emacs.d/x8dcc-theme.el
-(load-theme 'x8dcc)
-
-;; Remove GUI bars
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-;; Change splash screen image (should not matter since it's overwritten by
-;; dashboard)
-(setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
 
 ;;------------------------------------------------------------------------------
 ;; Misc visual settings
