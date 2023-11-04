@@ -51,7 +51,8 @@
 ;; https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/
 (defvar bootstrap-version)
 (let ((bootstrap-file
-        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (expand-file-name "straight/repos/straight.el/bootstrap.el"
+                          user-emacs-directory))
       (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
@@ -92,7 +93,8 @@
 (global-set-key (kbd "C--")            'text-scale-decrease)
 (global-set-key (kbd "C-<wheel-up>")   'text-scale-increase)
 (global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
-(global-set-key (kbd "C-<home>") (lambda () (interactive) (text-scale-adjust 0)))
+(global-set-key (kbd "C-<home>") (lambda () (interactive)
+                                   (text-scale-adjust 0)))
 
 ;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
@@ -103,9 +105,10 @@
   "."   '(find-file :wk "Find file")
   ;; Buffer
   "b"   '(:ignore t :wk "Buffer")
-  "b l" '(buffer-menu :wk "Buffer menu")
+  "b l" '(buffer-menu :wk "Buffer list")
   "b s" '(basic-save-buffer :wk "Save buffer")
   "b r" '(revert-buffer :wk "Revert buffer")
+  "b k" '(kill-current-buffer :wk "Kill current buffer")
   ;; Help
   "h"   '(:ignore t :wk "Help")
   "h f" '(describe-function :wk "Describe function")
@@ -162,6 +165,15 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode t)))
+
+;;------------------------------------------------------------------------------
+;; Backups
+
+;; Change backup directory to `~/.emacs.d/trash'. We use list and cons because
+;; we need to evaluate the concat and the value has to be in the form:
+;; '((".*" . "PATH"))
+(setq backup-directory-alist
+      (list (cons ".*" (concat user-emacs-directory "trash"))))
 
 ;;------------------------------------------------------------------------------
 ;; Battery
