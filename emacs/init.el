@@ -23,6 +23,28 @@
 (setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
 
 ;;------------------------------------------------------------------------------
+;; Fonts
+
+;; Default
+(set-face-attribute 'default nil
+  :font "Dina 8")
+
+;; Fallback (needs to be set to unicode, can't use nil)
+(set-fontset-font t 'unicode "Cozette 10")
+
+;; Variable pitch
+(set-face-attribute 'variable-pitch nil
+  :font "Fira Sans 12"
+  :weight 'light)
+
+;; Fixed pitch
+(set-face-attribute 'fixed-pitch nil
+  :font "Dina 8")
+
+;; Needed for emacsclient (?)
+(add-to-list 'default-frame-alist '(font . "Dina 8"))
+
+;;------------------------------------------------------------------------------
 ;; Package managers
 
 ;; Install straight.el (with use-package) for more convenience. See:
@@ -49,28 +71,6 @@
 
 ;; Install and load packages from separate file for more readability
 (load (concat user-emacs-directory "packages.el"))
-
-;;------------------------------------------------------------------------------
-;; Fonts
-
-;; Default
-(set-face-attribute 'default nil
-  :font "Dina 8")
-
-;; Fallback (needs to be set to unicode, can't use nil)
-(set-fontset-font t 'unicode "Cozette 10")
-
-;; Variable pitch
-(set-face-attribute 'variable-pitch nil
-  :font "Fira Sans 12"
-  :weight 'light)
-
-;; Fixed pitch
-(set-face-attribute 'fixed-pitch nil
-  :font "Dina 8")
-
-;; Needed for emacsclient (?)
-(add-to-list 'default-frame-alist '(font . "Dina 8"))
 
 ;;------------------------------------------------------------------------------
 ;; Scrolling and motion
