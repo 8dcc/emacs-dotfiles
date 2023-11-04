@@ -64,7 +64,11 @@
 ;;------------------------------------------------------------------------------
 ;; Magit
 
-(use-package magit)
+(use-package magit
+  :config
+  ;; Fullscreen status window
+  (setq magit-display-buffer-function
+        #'magit-display-buffer-fullframe-status-v1))
 
 ;;------------------------------------------------------------------------------
 ;; Highlight TODOs
@@ -98,6 +102,31 @@
                           (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
+
+;;------------------------------------------------------------------------------
+;; Vterm
+
+(use-package vterm
+  :config
+  (setq shell-file-name "/bin/bash"
+        vterm-max-scrollback 1000))
+
+(use-package vterm-toggle
+  :after vterm
+  :config
+  (setq vterm-toggle-fullscreen-p nil)
+  (setq vterm-toggle-scope 'project)
+  (add-to-list
+    'display-buffer-alist
+    '((lambda (buffer-or-name _)
+        (let ((buffer (get-buffer buffer-or-name)))
+          (with-current-buffer buffer
+            (or (equal major-mode 'vterm-mode)
+                (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+      (display-buffer-reuse-window display-buffer-at-bottom)
+      (direction . bottom)
+      (reusable-frames . visible)
+      (window-height . 0.35))))
 
 ;;------------------------------------------------------------------------------
 ;; Nasm mode (fork)
