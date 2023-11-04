@@ -1,23 +1,34 @@
 
-;; Identification for GPG configuration, email, templates...
+;; Identification for GPG configuration, email, templates, etc.
 (setq user-full-name "8dcc"
       user-mail-address "8dcc.git@gmail.com")
 
 ;;------------------------------------------------------------------------------
 ;; Package managers
 
-;; Setup package.el to work with MELPA
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(package-refresh-contents)
-(package-initialize)
+;; Install straight.el (with use-package) for more convenience. See:
+;; https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/
+(defvar bootstrap-version)
+(let ((bootstrap-file
+        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+      (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Install use-package for more convenience
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+;; Install use-package (through straight.el) for more convenience. Setting
+;; straight-use-package-by-default tells use-package to always use straight.el
+;; to install packages (instead of package.el), even without specifying
+;; ":straight t".
+(setq straight-use-package-by-default t)
+(straight-use-package 'use-package)
 
-;; Load packages from our file
+;; Install and load packages from separate file for more readability
 (load (concat user-emacs-directory "packages.el"))
 
 ;;------------------------------------------------------------------------------
