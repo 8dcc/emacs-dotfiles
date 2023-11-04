@@ -51,40 +51,6 @@
 (load (concat user-emacs-directory "packages.el"))
 
 ;;------------------------------------------------------------------------------
-;; Misc visual settings
-
-;; Style of line numbers. If set to `nil', line numbers are disabled, `t' for
-;; normal numbers and `relative' for relative line numbers.
-;; If display-line-numbers-width-start is `t', the width of the line numbers
-;; will be calculated depending on the lines of each buffer.
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative
-      display-line-numbers-width-start t)
-
-;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
-;; of ?\u2502 (│) if there are spaces between lines.
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq display-fill-column-indicator-character ?\u00A6
-                  fill-column 80)
-            (display-fill-column-indicator-mode)))
-
-;; Wrap lines by default
-(global-visual-line-mode 1)
-
-;;------------------------------------------------------------------------------
-;; Battery
-
-;; Show battery in mode line. If the battery is "N/A" or "unknown", don't
-;; display.
-(require 'battery)
-(let ((battstr (battery-format "%B" (funcall battery-status-function))))
-  (if (or (string= "N/A" battstr)
-          (string= "unknown" battstr))
-    (display-battery-mode 0)
-    (display-battery-mode 1)))
-
-;;------------------------------------------------------------------------------
 ;; Fonts
 
 ;; Default
@@ -116,7 +82,7 @@
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t
-      mouse-wheel-scroll-amount '(2 ((shift) . hscroll)))
+      mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
 
 ;;------------------------------------------------------------------------------
 ;; Custom keybinds
@@ -153,3 +119,66 @@
   "w K" '(evil-window-move-very-top :which-key "Move window up"))
 ;; TODO: Add a bunch of keybinds:
 ;;  - SPC tab *
+
+;;------------------------------------------------------------------------------
+;; Misc visual settings
+
+;; Style of line numbers. If set to `nil', line numbers are disabled, `t' for
+;; normal numbers and `relative' for relative line numbers.
+;; If display-line-numbers-width-start is `t', the width of the line numbers
+;; will be calculated depending on the lines of each buffer.
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-width-start t)
+
+;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
+;; of ?\u2502 (│) if there are spaces between lines.
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq display-fill-column-indicator-character ?\u00A6
+                  fill-column 80)
+            (display-fill-column-indicator-mode)))
+
+;;------------------------------------------------------------------------------
+;; Misc modes
+
+;; Wrap lines by default (using words)
+(global-visual-line-mode 1)
+
+;; Auto-close brackets
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (electric-pair-mode t)))
+
+;;------------------------------------------------------------------------------
+;; Battery
+
+;; Show battery in mode line. If the battery is "N/A" or "unknown", don't
+;; display.
+(require 'battery)
+(let ((battstr (battery-format "%B" (funcall battery-status-function))))
+  (if (or (string= "N/A" battstr)
+          (string= "unknown" battstr))
+    (display-battery-mode 0)
+    (display-battery-mode 1)))
+
+;;------------------------------------------------------------------------------
+;; Org mode
+
+;; Org agenda location
+(setq org-directory (expand-file-name "~/Sync/Org/"))
+
+;; Org visual settings
+(setq org-fontify-quote-and-verse-blocks t
+      org-hide-emphasis-markers t
+      org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-fontify-natively t)
+
+;;------------------------------------------------------------------------------
+;; C mode
+
+;; Enable explicit tabs for C code (if not on beginning of line)
+(setq c-default-style "k&r"
+      c-basic-offset 4
+      c-tab-always-indent nil)
