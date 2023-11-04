@@ -17,7 +17,7 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
-;; Load packages
+;; Load packages from our file
 (load (concat user-emacs-directory "packages.el"))
 
 ;;------------------------------------------------------------------------------
@@ -43,8 +43,11 @@
 
 ;; Style of line numbers. If set to `nil', line numbers are disabled, `t' for
 ;; normal numbers and `relative' for relative line numbers.
+;; If display-line-numbers-width-start is `t', the width of the line numbers
+;; will be calculated depending on the lines of each buffer.
 (global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-width-start t)
 
 ;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
 ;; of ?\u2502 (│) if there are spaces between lines.
@@ -92,12 +95,26 @@
 (add-to-list 'default-frame-alist '(font . "Dina 8"))
 
 ;;------------------------------------------------------------------------------
+;; Scrolling and motion
+
+;; Scroll smoothly when cursor moves out of the screen (1 line at a time)
+;; Don't accelerate scrolling
+;; Scroll window under mouse
+;; Scroll 2 lines at a time with mouse wheel, and scroll horizontally with shift
+(setq scroll-step 1
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-follow-mouse t
+      mouse-wheel-scroll-amount '(2 ((shift) . hscroll)))
+
+;;------------------------------------------------------------------------------
 ;; Custom keybinds
 
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+;; Zoom in and out
+(global-set-key (kbd "C-+")            'text-scale-increase)
+(global-set-key (kbd "C--")            'text-scale-decrease)
+(global-set-key (kbd "C-<wheel-up>")   'text-scale-increase)
+(global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
+(global-set-key (kbd "C-<home>") (lambda () (interactive) (text-scale-adjust 0)))
 
 ;; Other <SPC> keybinds
 (nvmap :prefix "SPC"
