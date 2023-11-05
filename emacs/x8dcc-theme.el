@@ -114,7 +114,7 @@
     `(vterm-color-black         ((t (:foreground ,col-term-back :background ,col-gray3))))
     `(vterm-color-blue          ((t (:foreground ,col-blue      :background ,col-bright-blue))))
     `(vterm-color-cyan          ((t (:foreground ,col-cyan      :background ,col-bright-cyan))))
-    `(vterm-color-green         ((t (:foreground ,col-yellow    :background ,col-bright-yellow))))
+    `(vterm-color-green         ((t (:foreground ,col-green     :background ,col-bright-green))))
     `(vterm-color-magenta       ((t (:foreground ,col-magenta   :background ,col-bright-magenta))))
     `(vterm-color-red           ((t (:foreground ,col-red       :background ,col-bright-red))))
     `(vterm-color-white         ((t (:foreground ,col-white     :background ,col-white))))
