@@ -48,7 +48,10 @@
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.6))))
   '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
-  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2)))))
+  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2))))
+  '(org-todo          ((t (:inherit warning :bold t))))
+  '(org-done          ((t (:inherit shadow :bold t))))
+  '(org-headline-done ((t (:inherit org-done)))))
 
 ;;------------------------------------------------------------------------------
 ;; Package managers
