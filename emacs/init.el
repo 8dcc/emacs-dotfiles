@@ -205,6 +205,11 @@
             (electric-pair-mode t)
             (electric-indent-mode -1)))
 
+;; Don't show vi's '~' in dashboard
+(add-hook 'dashboard-mode-hook
+          (lambda ()
+            (vi-tilde-fringe-mode 0)))
+
 ;;------------------------------------------------------------------------------
 ;; Backups
 
