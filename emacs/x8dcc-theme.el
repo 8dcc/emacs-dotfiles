@@ -60,7 +60,7 @@
       (col-term-back      "#1B2229"))
   (custom-theme-set-faces 'x8dcc
     `(default                  ((t (:foreground ,col-default :background ,col-background))))
-    `(fringe                   ((t (:background ,col-background))))
+    `(fringe                   ((t (:foreground ,col-gray3   :background ,col-background))))
     `(border                   ((t (:foreground ,col-gray6))))
     `(vertical-border          ((t (:foreground ,col-gray6))))
     `(cursor                   ((t (:background ,col-gray2))))
