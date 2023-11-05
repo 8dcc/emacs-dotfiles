@@ -165,52 +165,51 @@
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-  (setq-default left-fringe-width  3)
   (fringe-helper-define
     'git-gutter-fr:added nil
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX.")
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX")
   (fringe-helper-define
     'git-gutter-fr:deleted nil
-    ".........."
-    ".........."
-    ".........."
-    ".........."
-    ".........."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".........."
-    ".........."
-    "..........")
+    "..."
+    "..."
+    "..."
+    "..."
+    "..."
+    "..."
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "..."
+    "...")
   (fringe-helper-define
     'git-gutter-fr:modified nil
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX."
-    ".XXXXXXXX.")
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX")
   (set-face-foreground 'git-gutter-fr:modified "#4FC3F7")
   (global-git-gutter-mode 1))
 
@@ -229,6 +228,15 @@
 ;(use-package rainbow-mode
 ;  :diminish
 ;  :hook prog-mode)
+
+;;------------------------------------------------------------------------------
+;; Show vi's '~' on EOF
+
+(use-package vi-tilde-fringe
+  :diminish
+  :config
+  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0])
+  (global-vi-tilde-fringe-mode 1))
 
 ;;------------------------------------------------------------------------------
 ;; Nasm mode (fork)
