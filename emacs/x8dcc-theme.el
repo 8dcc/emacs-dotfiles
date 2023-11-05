@@ -9,16 +9,17 @@
 ;; -----------------------|-----------------------------------------------------
 ;;  fringe                | Left border of a buffer, usually where the git diff lines are
 ;;  region                | Selected text (e.g. visual mode)
-;;  mode-line             | Bar above the minibuffer with the buffer name, modes, etc.
 ;;  minibuffer-prompt     | "M-x" and evil's ":" prompt text (not the user input)
+;;  mode-line             | Face for the text in the modeline (bar above the minibuffer with the buffer name, modes, etc.)
+;;  mode-line-highlight   | Face when hovering buttons in the modeline
+;;  link                  | Face used by links, inherited by buttons
+;;  widget-button-pressed | Face used by dashboard's buttons when being pressed (not hovered)
+;;  highlight             | Face used when hovering buttons, for example
+;;  shadow                | Colors used, for example, by the fill-column line
 ;;  font-lock-*-face      | Faces for prog-mode token types
 ;;  show-paren-match      | Face for the open and closing parentheses that are being hovered
 ;;  term-color-*          | Colors used by terminals (not vterm or eshell)
 ;;  vterm-color-*         | Colors used by vterm
-;;  highlight             | Face used when hovering buttons, for example
-;;  shadow                | Colors used, for example, by the fill-column line
-;;  link                  | Face used by links, inherited by buttons
-;;  widget-button-pressed | Face used by dashboard's buttons when being pressed (not hovered)
 ;;
 ;; TODO:
 ;;  border
@@ -64,11 +65,20 @@
     `(cursor                   ((t (:background ,col-gray2))))
     `(region                   ((t (:background ,col-gray5))))
     `(secondary-selection      ((t (:background ,col-gray5))))
-    `(mode-line                ((t (:foreground ,col-default :background ,col-gray9))))
-    `(mode-line-inactive       ((t (:foreground ,col-gray4   :background ,col-gray8 :bold nil))))
     `(minibuffer-prompt        ((t (:foreground ,col-gray2   :bold t))))
     `(line-number              ((t (:foreground ,col-gray3))))
     `(line-number-current-line ((t (:foreground ,col-gray2))))
+    `(mode-line                ((t (:foreground ,col-default :background ,col-gray9))))
+    `(mode-line-inactive       ((t (:foreground ,col-gray4   :background ,col-gray8 :bold nil))))
+    `(mode-line-highlight      ((t (:foreground ,col-gray9   :background ,col-gray1))))
+    `(link                     ((t (:underline t))))
+    `(widget-button-pressed    ((t (:foreground ,col-background :background ,col-white :bold t))))
+
+    `(success   ((t (:foreground ,col-green))))
+    `(error     ((t (:foreground ,col-red))))
+    `(warning   ((t (:foreground ,col-yellow))))
+    `(highlight ((t (:foreground ,col-background :background ,col-gray1))))
+    `(shadow    ((t (:foreground ,col-gray3))))
 
     `(font-lock-builtin-face       ((t (:foreground ,col-orange))))
     `(font-lock-comment-face       ((t (:foreground ,col-gray3))))
@@ -108,16 +118,7 @@
     `(vterm-color-magenta       ((t (:foreground ,col-magenta   :background ,col-bright-magenta))))
     `(vterm-color-red           ((t (:foreground ,col-red       :background ,col-bright-red))))
     `(vterm-color-white         ((t (:foreground ,col-white     :background ,col-white))))
-    `(vterm-color-yellow        ((t (:foreground ,col-yellow    :background ,col-bright-yellow))))
-
-    `(success   ((t (:foreground ,col-green))))
-    `(error     ((t (:foreground ,col-red))))
-    `(warning   ((t (:foreground ,col-yellow))))
-    `(highlight ((t (:foreground ,col-background :background ,col-gray1))))
-    `(shadow    ((t (:foreground ,col-gray3))))
-
-    `(link                   ((t (:underline t))))
-    `(widget-button-pressed  ((t (:foreground ,col-background :background ,col-white :bold t))))))
+    `(vterm-color-yellow        ((t (:foreground ,col-yellow    :background ,col-bright-yellow))))))
 
 ;;;###autoload
 (and load-file-name
