@@ -116,8 +116,7 @@
 
 ;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
-;;  - SPC TAB *
-;;  - SPC t v -> visible-mode
+;;  - SPC TAB * -> Workspaces
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
   "."   '(find-file :wk "Find file")
@@ -144,9 +143,10 @@
   "s o" '(occur :wk "Search occurrences")
   ;; Toggle
   "t"   '(:ignore t :wk "Toggle")
-  "t W" '(auto-fill-mode :wk "Auto fill mode")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t p" '(popper-toggle :wk "Popups")
+  "t v" '(visible-mode :wk "Toggle visible")
+  "t W" '(auto-fill-mode :wk "Auto fill mode")
   ;; Window
   "w"   '(:ignore t :wk "Window")
   "w c" '(evil-window-delete :wk "Close window")
