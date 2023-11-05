@@ -44,6 +44,12 @@
 ;; Needed for emacsclient (?)
 (add-to-list 'default-frame-alist '(font . "Dina 8"))
 
+;; Org mode titles
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.6))))
+  '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
+  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2)))))
+
 ;;------------------------------------------------------------------------------
 ;; Package managers
 
@@ -111,6 +117,7 @@
 ;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
 ;;  - SPC TAB *
+;;  - SPC t v -> visible-mode
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
   "."   '(find-file :wk "Find file")
@@ -186,6 +193,9 @@
 ;; Wrap lines by default (using words)
 (global-visual-line-mode 1)
 
+;; Automatically show changes if the file has changed on disk
+(global-auto-revert-mode t)
+
 ;; Auto-close brackets, disable emacs' weird indentation
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -216,6 +226,9 @@
 ;;------------------------------------------------------------------------------
 ;; Org mode
 
+;; Enable "<s TAB" completion
+(require 'org-tempo)
+
 ;; Org agenda location
 (setq org-directory (expand-file-name "~/Sync/Org/"))
 
@@ -225,6 +238,17 @@
       org-edit-src-content-indentation 0
       org-src-tab-acts-natively t
       org-src-fontify-natively t)
+
+;; Enable org-indent-mode (Hide leading '*' from titles)
+;; Disable electric-pair-mode pairing of '<', so we can use "<s TAB" completion
+(add-hook 'org-mode-hook (lambda ()
+                           (org-indent-mode 1)
+                           (setq-local
+                             electric-pair-inhibit-predicate
+                             `(lambda (c)
+                                (if (char-equal c ?<)
+                                  t
+                                  (,electric-pair-inhibit-predicate c))))))
 
 ;;------------------------------------------------------------------------------
 ;; C mode
