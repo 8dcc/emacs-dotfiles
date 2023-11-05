@@ -123,11 +123,11 @@
 
     `(outline-1 ((t (:foreground ,col-magenta :bold t))))
     `(outline-2 ((t (:foreground ,col-orange  :bold t))))
-    `(outline-3 ((t (:foreground ,col-yellow  :bold t))))
-    `(outline-4 ((t (:foreground ,col-green   :bold t))))
-    `(outline-5 ((t (:foreground ,col-cyan    :bold t))))
-    `(outline-6 ((t (:foreground ,col-blue    :bold t))))
-    `(outline-7 ((t (:foreground ,col-purple  :bold t))))
+    `(outline-3 ((t (:foreground ,col-purple  :bold t))))
+    `(outline-4 ((t (:foreground ,col-cyan    :bold t))))
+    `(outline-5 ((t (:foreground ,col-green   :bold t))))
+    `(outline-6 ((t (:foreground ,col-default :bold t))))
+    `(outline-7 ((t (:foreground ,col-default :bold t))))
     `(outline-8 ((t (:foreground ,col-default :bold t))))))
 
 ;;;###autoload
