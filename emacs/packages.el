@@ -71,23 +71,6 @@
         #'magit-display-buffer-fullframe-status-v1))
 
 ;;------------------------------------------------------------------------------
-;; Highlight TODOs
-
-(use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
-  :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(("TODO"       warning bold)
-          ("FIXME"      error bold)
-          ("DELME"      error bold)
-          ("HACK"       font-lock-constant-face bold)
-          ("REVIEW"     font-lock-keyword-face bold)
-          ("NOTE"       success bold)
-          ("DEPRECATED" font-lock-doc-face bold))))
-
-;;------------------------------------------------------------------------------
 ;; Dashboard
 
 (use-package dashboard
@@ -102,6 +85,27 @@
                           (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
+
+;;------------------------------------------------------------------------------
+;; Popups
+
+(use-package popper
+  :config
+  (setq popper-group-function #'popper-group-by-projectile
+        popper-mode-line '(" *POP* ")
+        popper-reference-buffers '(compilation-mode
+                                   messages-mode
+                                   help-mode
+                                   occur-mode
+                                   "^\\*Warnings\\*"
+                                   "^\\*Compile-Log\\*"
+                                   ;"^\\*Messages\\*"
+                                   "^\\*Backtrace\\*"
+                                   "^\\*evil-registers\\*"
+                                   "^\\*Apropos\\*"
+                                   ;"^\\*Completions\\*"
+                                   "^Calc:"))
+  (popper-mode 1))
 
 ;;------------------------------------------------------------------------------
 ;; Vterm
@@ -127,6 +131,23 @@
       (direction . bottom)
       (reusable-frames . visible)
       (window-height . 0.35))))
+
+;;------------------------------------------------------------------------------
+;; Highlight TODOs
+
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        '(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("DELME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
 
 ;;------------------------------------------------------------------------------
 ;; Drag stuff (M-<down> and M-<up>)
