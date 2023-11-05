@@ -6,13 +6,14 @@
 
 (deftheme x8dcc "Custom theme by 8dcc")
 (let ((col-default        "#F8F8F2")
+      (col-background     "#272822")
       (col-gray1          "#DDDDDD")
       (col-gray2          "#767679")
       (col-gray3          "#555556")
       (col-gray4          "#4E4E4E")
       (col-gray5          "#3A3A3A")
       (col-gray6          "#3E3F36")
-      (col-gray7          "#272822")
+      (col-gray7          "#222222")
       (col-gray8          "#171819")
       (col-gray9          "#161613")
       (col-black          "#000000")
@@ -33,9 +34,9 @@
       (col-bright-magenta "#FA5C87")
       (col-term-back      "#1B2229"))
   (custom-theme-set-faces 'x8dcc
-    `(default                  ((t (:foreground ,col-default :background ,col-gray7))))
+    `(default                  ((t (:foreground ,col-default :background ,col-background))))
     `(cursor                   ((t (:background ,col-gray2))))
-    `(fringe                   ((t (:background ,col-gray7))))
+    `(fringe                   ((t (:background ,col-background))))
     `(vertical-border          ((t (:foreground ,col-gray6))))
     `(border                   ((t (:foreground ,col-gray6))))
     `(line-number              ((t (:foreground ,col-gray3))))
@@ -88,7 +89,7 @@
     `(success                ((t (:foreground ,col-green))))
     `(error                  ((t (:foreground ,col-red))))
     `(warning                ((t (:foreground ,col-yellow))))
-    `(highlight              ((t (:background ,col-orange))))
+    `(highlight              ((t (:foreground ,col-background :background ,col-gray1))))
     `(link                   ((t (:underline t))))))
 
 ;;;###autoload
