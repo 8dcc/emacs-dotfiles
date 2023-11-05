@@ -170,6 +170,12 @@
                   fill-column 80)
             (display-fill-column-indicator-mode)))
 
+;; Hide line numbers in vterm buffers
+(add-hook 'vterm-mode-hook
+          (lambda ()
+            (display-line-numbers-mode 0)))
+
+
 ;;------------------------------------------------------------------------------
 ;; Misc modes
 
