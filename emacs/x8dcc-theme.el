@@ -61,6 +61,7 @@
   '(success                ((t (:foreground "#A6E22E"))))
   '(error                  ((t (:foreground "#E74C3C"))))
   '(warning                ((t (:foreground "#E6DB74"))))
+  '(highlight              ((t (:background "#FD971F"))))
   '(link                   ((t (:underline t)))))
 
 ;;;###autoload
