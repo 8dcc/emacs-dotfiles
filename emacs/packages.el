@@ -137,6 +137,13 @@
   (drag-stuff-define-keys))
 
 ;;------------------------------------------------------------------------------
+;; Display colors of RGB strings (uncomment when needed)
+
+;(use-package rainbow-mode
+;  :diminish
+;  :hook prog-mode)
+
+;;------------------------------------------------------------------------------
 ;; Nasm mode (fork)
 
 (straight-use-package
