@@ -111,7 +111,6 @@
 ;; SPC keybinds. See packages.el, :config of the `general' package.
 ;; TODO: Add a bunch of keybinds:
 ;;  - SPC TAB *
-;;  - SPC o t/*
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
   "."   '(find-file :wk "Find file")
@@ -132,10 +131,15 @@
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
   "o"   '(:ignore t :wk "Open")
+  "o t" '(vterm-toggle :wk "Toggle vterm")
+  ;; Search
+  "s"   '(:ignore t :wk "Search")
+  "s o" '(occur :wk "Search occurrences")
   ;; Toggle
-  "t"   '(:ignore t :wk "Togle")
+  "t"   '(:ignore t :wk "Toggle")
   "t W" '(auto-fill-mode :wk "Auto fill mode")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
+  "t p" '(popper-toggle :wk "Popups")
   ;; Window
   "w"   '(:ignore t :wk "Window")
   "w c" '(evil-window-delete :wk "Close window")
