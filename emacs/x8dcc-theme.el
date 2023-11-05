@@ -16,6 +16,8 @@
 ;;  widget-button-pressed | Face used by dashboard's buttons when being pressed (not hovered)
 ;;  highlight             | Face used when hovering buttons, for example
 ;;  shadow                | Colors used, for example, by the fill-column line
+;;  isearch               | Face used for the current search match
+;;  lazy-highlight        | Face used for the other search matches
 ;;  font-lock-*-face      | Faces for prog-mode token types
 ;;  show-paren-match      | Face for the open and closing parentheses that are being hovered
 ;;  term-color-*          | Colors used by terminals (not vterm or eshell)
@@ -25,7 +27,6 @@
 ;; TODO:
 ;;  border
 ;;  vertical-border
-;;  lazy-highlight
 ;;  match
 ;;  menu
 
@@ -63,7 +64,7 @@
     `(fringe                   ((t (:foreground ,col-gray3   :background ,col-background))))
     `(border                   ((t (:foreground ,col-gray6))))
     `(vertical-border          ((t (:foreground ,col-gray6))))
-    `(cursor                   ((t (:background ,col-gray2))))
+    `(cursor                   ((t (:background ,col-gray1))))
     `(region                   ((t (:background ,col-gray5))))
     `(secondary-selection      ((t (:background ,col-gray5))))
     `(minibuffer-prompt        ((t (:foreground ,col-gray2   :bold t))))
@@ -80,6 +81,9 @@
     `(warning   ((t (:foreground ,col-yellow))))
     `(highlight ((t (:foreground ,col-background :background ,col-gray1))))
     `(shadow    ((t (:foreground ,col-gray3))))
+
+    `(isearch        ((t (:foreground ,col-background :background ,col-yellow))))
+    `(lazy-highlight ((t (:foreground ,col-background :background ,col-yellow))))
 
     `(font-lock-builtin-face       ((t (:foreground ,col-orange))))
     `(font-lock-comment-face       ((t (:foreground ,col-gray3))))
@@ -120,6 +124,8 @@
     `(vterm-color-red           ((t (:foreground ,col-red       :background ,col-bright-red))))
     `(vterm-color-white         ((t (:foreground ,col-white     :background ,col-white))))
     `(vterm-color-yellow        ((t (:foreground ,col-yellow    :background ,col-bright-yellow))))
+
+    `(vertico-current ((t (:background "#202020"))))
 
     `(outline-1 ((t (:foreground ,col-magenta :bold t))))
     `(outline-2 ((t (:foreground ,col-orange  :bold t))))
