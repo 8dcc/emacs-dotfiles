@@ -150,6 +150,60 @@
           ("DEPRECATED" font-lock-doc-face bold))))
 
 ;;------------------------------------------------------------------------------
+;; Git gutter fringe plus
+
+(use-package git-gutter-fringe
+  :config
+  (setq-default left-fringe-width  3)
+  (fringe-helper-define
+    'git-gutter-fr:added nil
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX.")
+  (fringe-helper-define
+    'git-gutter-fr:deleted nil
+    ".........."
+    ".........."
+    ".........."
+    ".........."
+    ".........."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".........."
+    ".........."
+    "..........")
+  (fringe-helper-define
+    'git-gutter-fr:modified nil
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX."
+    ".XXXXXXXX.")
+  (set-face-foreground 'git-gutter-fr:modified "#4FC3F7")
+  (global-git-gutter-mode 1))
+
+;;------------------------------------------------------------------------------
 ;; Drag stuff (M-<down> and M-<up>)
 
 (use-package drag-stuff
