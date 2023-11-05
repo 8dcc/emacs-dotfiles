@@ -1,7 +1,14 @@
 
 ;; TODO:
-;; Pop-ups for help, etc.
 ;; M-x completion (menu)
+
+;;------------------------------------------------------------------------------
+;; Diminish (hide minor modes from the modeline)
+
+(use-package diminish
+  :config
+  (diminish 'abbrev-mode)
+  (diminish 'visual-line-mode))
 
 ;;------------------------------------------------------------------------------
 ;; Evil mode
@@ -18,6 +25,7 @@
 
 ;; Install evil-collection package for using vim keybinds in other buffer types
 (use-package evil-collection
+  :diminish evil-collection-unimpaired-mode
   :after evil
   :config
   (add-to-list 'evil-collection-mode-list 'help)
@@ -41,6 +49,7 @@
 ;; Which key (keybind completion menu)
 
 (use-package which-key
+  :diminish
   :init
   (which-key-mode 1)
   :config
@@ -58,6 +67,7 @@
 ;; Projectile
 
 (use-package projectile
+  :diminish
   :config
   (projectile-global-mode 1))
 
@@ -153,6 +163,7 @@
 ;; Git gutter fringe plus
 
 (use-package git-gutter-fringe
+  :diminish git-gutter-mode
   :config
   (setq-default left-fringe-width  3)
   (fringe-helper-define
@@ -207,6 +218,7 @@
 ;; Drag stuff (M-<down> and M-<up>)
 
 (use-package drag-stuff
+  :diminish
   :config
   (drag-stuff-global-mode 1)
   (drag-stuff-define-keys))
