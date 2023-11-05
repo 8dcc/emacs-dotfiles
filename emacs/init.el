@@ -176,6 +176,13 @@
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t)
 
+;; Don't hide isearch results after some time.
+;; TODO: This doesn't really work with evil's "n"
+(setq lazy-highlight-cleanup nil
+      lazy-highlight-initial-delay nil
+      lazy-highlight-max-at-a-time nil
+      isearch-allow-scroll t)
+
 ;; Set 80 column line with specified character. Try using ?\u00A6 (¦) instead
 ;; of ?\u2502 (│) if there are spaces between lines.
 (add-hook 'prog-mode-hook
@@ -197,12 +204,12 @@
 (global-visual-line-mode 1)
 
 ;; Automatically show changes if the file has changed on disk
-(global-auto-revert-mode t)
+(global-auto-revert-mode 1)
 
 ;; Auto-close brackets, disable emacs' weird indentation
 (add-hook 'prog-mode-hook
           (lambda ()
-            (electric-pair-mode t)
+            (electric-pair-mode 1)
             (electric-indent-mode -1)))
 
 ;; Don't show vi's '~' in dashboard
