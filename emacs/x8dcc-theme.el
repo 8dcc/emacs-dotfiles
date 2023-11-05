@@ -18,6 +18,7 @@
 ;;  shadow                | Colors used, for example, by the fill-column line
 ;;  isearch               | Face used for the current search match
 ;;  lazy-highlight        | Face used for the other search matches
+;;  match                 | Face used for *Occur* matches (M-x occur)
 ;;  font-lock-*-face      | Faces for prog-mode token types
 ;;  show-paren-match      | Face for the open and closing parentheses that are being hovered
 ;;  term-color-*          | Colors used by terminals (not vterm or eshell)
@@ -27,7 +28,6 @@
 ;; TODO:
 ;;  border
 ;;  vertical-border
-;;  match
 ;;  menu
 
 (deftheme x8dcc "Custom theme by 8dcc")
@@ -84,6 +84,7 @@
 
     `(isearch        ((t (:foreground ,col-background :background ,col-yellow))))
     `(lazy-highlight ((t (:foreground ,col-background :background ,col-yellow))))
+    `(match          ((t (:foreground ,col-red :bold t))))
 
     `(font-lock-builtin-face       ((t (:foreground ,col-orange))))
     `(font-lock-comment-face       ((t (:foreground ,col-gray3))))
