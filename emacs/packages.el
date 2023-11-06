@@ -177,50 +177,13 @@
   :config
   (fringe-helper-define
     'git-gutter-fr:added nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
+    ".")
   (fringe-helper-define
     'git-gutter-fr:deleted nil
-    "..."
-    "..."
-    "..."
-    "..."
-    "..."
-    "..."
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "..."
-    "...")
+    ".")
   (fringe-helper-define
     'git-gutter-fr:modified nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
-  (set-face-foreground 'git-gutter-fr:modified "#4FC3F7")
+    ".")
   (global-git-gutter-mode 1))
 
 ;;------------------------------------------------------------------------------
@@ -233,11 +196,11 @@
   (drag-stuff-define-keys))
 
 ;;------------------------------------------------------------------------------
-;; Display colors of RGB strings (uncomment when needed)
+;; Display colors of RGB strings
 
-;(use-package rainbow-mode
-;  :diminish
-;  :hook prog-mode)
+(use-package rainbow-mode
+  :diminish
+  :hook prog-mode)
 
 ;;------------------------------------------------------------------------------
 ;; Show vi's '~' on EOF
