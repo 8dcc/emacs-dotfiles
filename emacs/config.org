@@ -50,7 +50,7 @@ it's overwritten by dashboard.
 
 * Fonts
 
-Default font. The =.bdf= is in my [[https://github.com/8dcc/linux-dotfiles][linux-dotfiles]] repo.
+Default font. Most of the =.bdf= files are in my [[https://github.com/8dcc/linux-dotfiles][linux-dotfiles]] repo.
 
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
@@ -84,12 +84,20 @@ I guess this is needed for =emacsclient=.
 Change org titles and =org-done= faces.
 
 #+begin_src emacs-lisp
-(custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.6))))
-  '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
-  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2))))
-  '(org-done          ((t (:inherit shadow :bold t))))
-  '(org-headline-done ((t (:inherit org-done)))))
+(set-face-attribute
+ 'org-level-1 nil
+ :family "Fira Code" :height 1.6 :inherit 'outline-1)
+
+(set-face-attribute
+ 'org-level-2 nil
+ :family "Fira Code" :height 1.2 :inherit 'outline-2)
+
+(set-face-attribute
+ 'org-level-3 nil
+ :family "Fira Code" :height 1.2 :inherit 'outline-3)
+
+(set-face-attribute 'org-done nil          :inherit 'shadow :bold t)
+(set-face-attribute 'org-headline-done nil :inherit 'shadow)
 #+end_src
 
 * Packages
@@ -347,6 +355,15 @@ since I use that often.
           ("DEPRECATED" font-lock-doc-face bold))))
 #+end_src
 
+** Rainbow delimiters
+
+Add rainbow colors to parentheses.
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
+#+end_src
+
 ** Git gutter fringe
 
 Show git changes in the fringe. We use =fringe-helper-define= to specify
@@ -372,6 +389,8 @@ default fringe background.
     "XXX"
     "XXX"
     "XXX"
+    "XXX"
+    "XXX"
     "XXX")
   (fringe-helper-define
     'git-gutter-fr:deleted nil
@@ -381,15 +400,19 @@ default fringe background.
     "..."
     "..."
     "..."
+    "..."
     "XXX"
     "XXX"
     "XXX"
     "XXX"
     "XXX"
     "..."
+    "..."
     "...")
   (fringe-helper-define
     'git-gutter-fr:modified nil
+    "XXX"
+    "XXX"
     "XXX"
     "XXX"
     "XXX"
