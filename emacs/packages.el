@@ -1,7 +1,4 @@
 
-;; TODO:
-;; M-x completion (menu)
-
 ;;------------------------------------------------------------------------------
 ;; Diminish (hide minor modes from the modeline)
 
@@ -107,9 +104,15 @@
   (vertico-reverse-mode))
 
 ;;------------------------------------------------------------------------------
+;; Orderless (Better search completions for M-x, files, etc.)
+
+(use-package orderless
+  :config
+  (setq completion-styles '(orderless basic)))
+
+;;------------------------------------------------------------------------------
 ;; Popups
 
-;; TODO: Fork to fix modeline
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
