@@ -1,7 +1,7 @@
-;;; x8dcc-theme.el --- x8dcc
+;;; x8dcc-monokai-theme.el --- x8dcc
 ;;; Version: 1.0
 ;;; Commentary:
-;;; Custom theme by x8dcc
+;;; Custom monokai theme by x8dcc
 ;;; Code:
 
 ;; Small cheatsheet of the faces:
@@ -30,7 +30,7 @@
 ;;  vertical-border
 ;;  menu
 
-(deftheme x8dcc "Custom theme by 8dcc")
+(deftheme x8dcc-monokai "Custom theme by 8dcc")
 (let ((col-default        "#F8F8F2")
       (col-background     "#272822")
       (col-gray1          "#DDDDDD")
@@ -59,7 +59,7 @@
       (col-bright-blue    "#5CA8DD")
       (col-bright-magenta "#FA5C87")
       (col-term-back      "#1B2229"))
-  (custom-theme-set-faces 'x8dcc
+  (custom-theme-set-faces 'x8dcc-monokai
     `(default                  ((t (:foreground ,col-default :background ,col-background))))
     `(fringe                   ((t (:foreground ,col-gray3   :background ,col-background))))
     `(border                   ((t (:foreground ,col-gray6))))
@@ -145,6 +145,6 @@
                     (file-name-directory load-file-name))))
 ;; Automatically add this theme to the load path
 
-(provide-theme 'x8dcc)
+(provide-theme 'x8dcc-monokai)
 
 ;;; x8dcc-theme.el ends here
