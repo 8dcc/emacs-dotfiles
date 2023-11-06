@@ -166,6 +166,47 @@
   "w K" '(evil-window-move-very-top :wk "Move window up"))
 
 ;;------------------------------------------------------------------------------
+;; Modeline
+
+;; Display line and column number
+(column-number-mode 1)
+
+(defun my-mode-line-render (left right)
+  "Return a string of `window-width' length.
+   With LEFT and RIGHT justified respectively."
+  (let ((available-width
+         (- (window-total-width)
+            (+ (length (format-mode-line left))
+               (length (format-mode-line right))))))
+    (append left
+            ;; (("%%%ds", 5) "") -> ("%5s", "") -> "     "
+            (list (format (format "%%%ds" available-width) ""))
+            right)))
+
+;; We need to use setq-default since it's a buffer-local variable.
+;; TODO: Fork popper
+(setq-default mode-line-format
+              '(:eval
+                 (my-mode-line-render
+                   ;; Left-aligned
+                   (quote ("%e "
+                           mode-line-front-space
+                           mode-line-mule-info
+                           mode-line-client
+                           mode-line-modified
+                           ;mode-line-remote
+                           mode-line-frame-identification
+                           evil-mode-line-tag
+                           "  "
+                           mode-line-buffer-identification))
+                   ;; Right-aligned
+                   (quote ((vc-mode vc-mode)
+                           "  "
+                           mode-line-misc-info
+                           mode-line-modes
+                           mode-line-position)))))
+
+;;------------------------------------------------------------------------------
 ;; Misc visual settings
 
 ;; Style of line numbers. If set to `nil', line numbers are disabled, `t' for
@@ -195,7 +236,6 @@
 (add-hook 'vterm-mode-hook
           (lambda ()
             (display-line-numbers-mode 0)))
-
 
 ;;------------------------------------------------------------------------------
 ;; Misc modes
