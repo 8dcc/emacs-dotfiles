@@ -159,7 +159,7 @@ standard)."
 
 ;;; Special purpose
 
-      (bg-completion       "#004253")
+      (bg-completion       bg-dim)
       (bg-hover            "#8e3e3b")
       (bg-hover-secondary  "#00405f")
       (bg-hl-line          "#2f3849")
@@ -212,9 +212,9 @@ standard)."
 
 ;;; Paren match
 
-      (bg-paren-match        "#2f7f9f")
+      (bg-paren-match        bg-main)
       (bg-paren-expression   "#453040")
-      (underline-paren-match unspecified)
+      (bold-paren-match      t)
 
 ;;; Mappings
 
@@ -228,18 +228,18 @@ standard)."
       (identifier red-faint)
 
       (err red-warmer)
-      (warning magenta)
-      (info cyan)
+      (warning yellow)
+      (info green)
 
       (underline-err red-intense)
       (underline-warning magenta-intense)
-      (underline-note cyan-intense)
+      (underline-note green-intense)
 
       (bg-prominent-err bg-red-intense)
       (fg-prominent-err fg-main)
       (bg-prominent-warning bg-magenta-intense)
       (fg-prominent-warning fg-main)
-      (bg-prominent-note bg-cyan-intense)
+      (bg-prominent-note bg-green-intense)
       (fg-prominent-note fg-main)
 
 ;;;; Code mappings
@@ -275,7 +275,7 @@ standard)."
 ;;;; Completion mappings
 
       (fg-completion-match-0 cyan)
-      (fg-completion-match-1 red-warmer)
+      (fg-completion-match-1 green-warmer)
       (fg-completion-match-2 magenta)
       (fg-completion-match-3 cyan-cooler)
       (bg-completion-match-0 unspecified)

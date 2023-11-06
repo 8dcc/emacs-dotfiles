@@ -2561,9 +2561,9 @@ FG and BG are the main colors."
     `(git-gutter:separator ((,c :inherit modus-themes-intense-cyan)))
     `(git-gutter:unchanged ((,c :inherit modus-themes-intense-magenta)))
 ;;;;; git-gutter-fr
-    `(git-gutter-fr:added ((,c :background ,bg-added-fringe)))
-    `(git-gutter-fr:deleted ((,c :background ,bg-removed-fringe)))
-    `(git-gutter-fr:modified ((,c :background ,bg-changed-fringe)))
+    `(git-gutter-fr:added ((,c :foreground ,bg-added-fringe :inherit fringe)))
+    `(git-gutter-fr:deleted ((,c :foreground ,bg-removed-fringe :inherit fringe)))
+    `(git-gutter-fr:modified ((,c :foreground ,bg-changed-fringe :inherit fringe)))
 ;;;;; git-rebase
     `(git-rebase-comment-hash ((,c :inherit (bold font-lock-comment-face) :foreground ,identifier)))
     `(git-rebase-comment-heading  ((,c :inherit (bold font-lock-comment-face))))
@@ -3609,7 +3609,7 @@ FG and BG are the main colors."
     `(shortdoc-heading ((,c :inherit bold)))
     `(shortdoc-section (())) ; remove the default's variable-pitch style
 ;;;;; show-paren-mode
-    `(show-paren-match ((,c :background ,bg-paren-match :foreground ,fg-main :underline ,underline-paren-match)))
+    `(show-paren-match ((,c :background ,bg-paren-match :foreground ,fg-main :bold ,bold-paren-match)))
     `(show-paren-match-expression ((,c :background ,bg-paren-expression)))
     `(show-paren-mismatch ((,c :inherit modus-themes-prominent-error)))
 ;;;;; shr
