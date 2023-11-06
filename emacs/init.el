@@ -169,9 +169,10 @@
 ;;------------------------------------------------------------------------------
 ;; Modeline
 
-;; Display line and column number
+;; Display line and column number on modeline
 (column-number-mode 1)
 
+;; Unused
 (defun my-mode-line-render (left right)
   "Return a string of `window-width' length.
    With LEFT and RIGHT justified respectively."
@@ -185,27 +186,23 @@
             right)))
 
 ;; We need to use setq-default since it's a buffer-local variable.
-;; TODO: Fork popper
 (setq-default mode-line-format
-              '(:eval
-                 (my-mode-line-render
-                   ;; Left-aligned
-                   (quote ("%e "
-                           mode-line-front-space
-                           mode-line-mule-info
-                           mode-line-client
-                           mode-line-modified
-                           ;mode-line-remote
-                           mode-line-frame-identification
-                           evil-mode-line-tag
-                           "  "
-                           mode-line-buffer-identification))
-                   ;; Right-aligned
-                   (quote ((vc-mode vc-mode)
-                           "  "
-                           mode-line-misc-info
-                           mode-line-modes
-                           mode-line-position)))))
+              '("%e "
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-client
+                mode-line-modified
+                mode-line-remote
+                mode-line-frame-identification
+                "  "
+                mode-line-buffer-identification
+                "  "
+                mode-line-position
+                "  "
+                mode-line-modes
+                (vc-mode vc-mode)
+                "  "
+                mode-line-misc-info))
 
 ;;------------------------------------------------------------------------------
 ;; Misc visual settings

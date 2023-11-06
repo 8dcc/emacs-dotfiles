@@ -20,7 +20,8 @@
         evil-want-keybinding nil
         evil-split-window-below t
         evil-vsplit-window-right t
-        evil-undo-system 'undo-redo)
+        evil-undo-system 'undo-redo
+        evil-mode-line-format '(after . mode-line-frame-identification))
   (evil-mode))
 
 ;; Install evil-collection package for using vim keybinds in other buffer types
