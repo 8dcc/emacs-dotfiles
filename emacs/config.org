@@ -560,6 +560,10 @@ TODO: Add missing keybinds:
   ;; Open
   "o"   '(:ignore t :wk "Open")
   "o t" '(vterm-toggle :wk "Toggle vterm")
+  ;; Project
+  "p"   '(:ignore t :wk "Project")
+  "p c" '(projectile-compile-project :wk "Compile project")
+  "p C" '(projectile-repeat-last-command :wk "Re-compile project")
   ;; Search
   "s"   '(:ignore t :wk "Search")
   "s o" '(occur :wk "Search occurrences")
