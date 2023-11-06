@@ -187,7 +187,7 @@
 
 ;; We need to use setq-default since it's a buffer-local variable.
 (setq-default mode-line-format
-              '("%e "
+              '("%e  λ "
                 mode-line-front-space
                 mode-line-mule-info
                 mode-line-client
