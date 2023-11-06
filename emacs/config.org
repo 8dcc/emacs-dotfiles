@@ -1,0 +1,449 @@
+#+title: Vanilla emacs configuration
+#+options: toc:nil
+#+property: header-args:emacs-lisp :tangle config.el
+#+auto_tangle: t
+#+author: 8dcc
+
+#+TOC: headlines 2
+
+* Identification
+
+Identification for GPG configuration, email, templates, etc.
+
+#+begin_src emacs-lisp
+(setq user-full-name "8dcc"
+      user-mail-address "8dcc.git@gmail.com")
+#+end_src
+
+* Theme
+
+Remove GUI bars.
+
+#+begin_src emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+end_src
+
+Use a separate Custom file for more readability. This will contain the
+SHA-256 hash of the trusted themes, and other user changes. For more
+information, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html][50.1.4 Saving Customizations]] and
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html][50.1.7 Custom Themes]].
+
+#+begin_src emacs-lisp
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file)
+#+end_src
+
+Load my custom theme from =~/.emacs.d/themes/x8dcc-modus-vivendi-theme.el=.
+
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
+(load-theme 'x8dcc-modus-vivendi)
+#+end_src
+
+Change the emacs splash screen image. This should not matter since
+it's overwritten by dashboard.
+
+#+begin_src emacs-lisp
+(setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
+#+end_src
+
+* Fonts
+
+Default font. The =.bdf= is in my [[https://github.com/8dcc/linux-dotfiles][linux-dotfiles]] repo.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil
+  :font "Dina 8")
+#+end_src
+
+Fallback font for unicode. You can't specify =nil= there, it needs to be
+='unicode=.
+
+#+begin_src emacs-lisp
+(set-fontset-font t 'unicode "Cozette 10")
+#+end_src
+
+Variable pitch and fixed pitch fonts.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'variable-pitch nil
+  :font "Fira Sans 12"
+  :weight 'light)
+
+(set-face-attribute 'fixed-pitch nil
+  :font "Dina 8")
+#+end_src
+
+I guess this is needed for =emacsclient=.
+
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(font . "Dina 8"))
+#+end_src
+
+Change org titles and =org-done= faces.
+
+#+begin_src emacs-lisp
+(custom-set-faces
+  '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.6))))
+  '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
+  '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2))))
+  '(org-done          ((t (:inherit shadow :bold t))))
+  '(org-headline-done ((t (:inherit org-done)))))
+#+end_src
+
+* Package managers
+
+Install [[about:blank][straight.el]] (with [[https://github.com/jwiegley/use-package][use-package]]) for more convenience. For more
+information, see: [[https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/][Link]]
+
+#+begin_src emacs-lisp
+(defvar bootstrap-version)
+(let ((bootstrap-file
+        (expand-file-name "straight/repos/straight.el/bootstrap.el"
+                          user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+      (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+#+end_src
+
+Install =use-package= (through =straight.el=) for more
+convenience. Setting =straight-use-package-by-default= tells use-package
+to always use straight.el to install packages (instead of emacs'
+package.el), even without specifying =:straight t=.
+
+#+begin_src emacs-lisp
+(setq straight-use-package-by-default t)
+(straight-use-package 'use-package)
+#+end_src
+
+Install and load packages from a separate file for more readability.
+
+TODO: Maybe move here since we are using org-mode now
+
+#+begin_src emacs-lisp
+(load (concat user-emacs-directory "packages.el"))
+#+end_src
+
+* Input
+** Scrolling and motion
+
+1. Scroll smoothly when cursor moves out of the screen (1 line at a time).
+2. Don't accelerate scrolling.
+3. Scroll window under mouse.
+4. Scroll 2 lines at a time with mouse wheel, and scroll horizontally with shift.
+
+#+begin_src emacs-lisp
+(setq scroll-step 1
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-follow-mouse t
+      mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
+#+end_src
+
+** Misc keybinds
+
+Zoom keybinds.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-+")            'text-scale-increase)
+(global-set-key (kbd "C--")            'text-scale-decrease)
+(global-set-key (kbd "C-<wheel-up>")   'text-scale-increase)
+(global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
+(global-set-key (kbd "C-<home>") (lambda () (interactive)
+                                   (text-scale-adjust 0)))
+#+end_src
+
+Quit from minibuffer with one ESC, instead of 3 ESCs or C-g.
+
+#+begin_src emacs-lisp
+(global-set-key [escape] 'keyboard-escape-quit)
+#+end_src
+
+Remap evil's =:q= to =SPC b k.=
+
+#+begin_src emacs-lisp
+(global-set-key [remap evil-quit] #'kill-current-buffer)
+#+end_src
+
+Remap evil's =:wq= to =SPC b s= + =SPC b k=.
+
+#+begin_src emacs-lisp
+(global-set-key [remap evil-save-and-close]
+                (lambda () (interactive)
+                  (basic-save-buffer)
+                  (kill-current-buffer)))
+#+end_src
+
+** Space keybinds
+
+See also [[./packages.el][packages.el]], =:config= section of the =general= package.
+
+TODO: Add missing keybinds:
+- =SPC TAB *=: workspaces package.
+
+#+begin_src emacs-lisp
+(x8dcc/leader-keys
+  "SPC" '(projectile-find-file :wk "Find file in project")
+  "."   '(find-file :wk "Find file")
+  ;; Buffer
+  "b"   '(:ignore t :wk "Buffer")
+  "b l" '(buffer-menu :wk "Buffer list")
+  "b s" '(basic-save-buffer :wk "Save buffer")
+  "b r" '(revert-buffer :wk "Revert buffer")
+  "b k" '(kill-current-buffer :wk "Kill current buffer")
+  ;; Magit
+  "g"   '(:ignore t :wk "Git")
+  "g g" '(magit-status :wk "Magit status")
+  ;; Help
+  "h"   '(:ignore t :wk "Help")
+  "h f" '(describe-function :wk "Describe function")
+  "h k" '(describe-key :wk "Describe key")
+  "h m" '(describe-mode :wk "Describe mode")
+  "h v" '(describe-variable :wk "Describe variable")
+  ;; Open
+  "o"   '(:ignore t :wk "Open")
+  "o t" '(vterm-toggle :wk "Toggle vterm")
+  ;; Search
+  "s"   '(:ignore t :wk "Search")
+  "s o" '(occur :wk "Search occurrences")
+  ;; Toggle
+  "t"   '(:ignore t :wk "Toggle")
+  "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
+  "t p" '(popper-toggle :wk "Popups")
+  "t v" '(visible-mode :wk "Toggle visible")
+  "t W" '(auto-fill-mode :wk "Auto fill mode")
+  ;; Window
+  "w"   '(:ignore t :wk "Window")
+  "w c" '(evil-window-delete :wk "Close window")
+  "w s" '(evil-window-split :wk "Horizontal split window")
+  "w v" '(evil-window-vsplit :wk "Vertical split window")
+  "w h" '(evil-window-left :wk "Window left")
+  "w l" '(evil-window-right :wk "Window right")
+  "w j" '(evil-window-down :wk "Window down")
+  "w k" '(evil-window-up :wk "Window up")
+  "w w" '(evil-window-next :wk "Next window")
+  "w H" '(evil-window-move-far-left :wk "Move window left")
+  "w L" '(evil-window-move-far-right :wk "Move window right")
+  "w J" '(evil-window-move-very-bottom :wk "Move window down")
+  "w K" '(evil-window-move-very-top :wk "Move window up"))
+#+end_src
+
+* Modeline
+
+Display line and column number on modeline, not just line.
+
+#+begin_src emacs-lisp
+(column-number-mode 1)
+#+end_src
+
+This function is used to justify elements of the modeline to the
+left. It's a bit unreliable, so it's currently unused.
+
+#+begin_src emacs-lisp
+(defun my-mode-line-render (left right)
+  "Return a string of `window-width' length.
+   With LEFT and RIGHT justified respectively."
+  (let ((available-width
+         (- (window-total-width)
+            (+ (length (format-mode-line left))
+               (length (format-mode-line right))))))
+    (append left
+            ;; (("%%%ds", 5) "") -> ("%5s", "") -> "     "
+            (list (format (format "%%%ds" available-width) ""))
+            right)))
+#+end_src
+
+Set the modeline format itself. We need to use =setq-default= since it's
+a buffer-local variable.
+
+Note that the evil mode indicator is set inside [[./packages.el][packages.el]], =:init=
+section of the =evil= package
+(=evil-mode-line-format '(after . mode-line-frame-identification=).
+
+#+begin_src emacs-lisp
+(setq-default mode-line-format
+              '("%e  λ "
+                mode-line-front-space
+                mode-line-mule-info
+                mode-line-client
+                mode-line-modified
+                mode-line-remote
+                mode-line-frame-identification
+                "  "
+                mode-line-buffer-identification
+                "  "
+                mode-line-position
+                "  "
+                mode-line-modes
+                (vc-mode vc-mode)
+                "  "
+                mode-line-misc-info))
+#+end_src
+
+* Misc visual settings
+
+Style of line numbers. If set to =nil=, line numbers are disabled, =t= for
+normal numbers and =relative= for relative line numbers.
+
+If =display-line-numbers-width-start= is =t=, the width of the line
+numbers will be calculated depending on the lines of each buffer.
+TODO: This doesn't always work.
+
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative
+      display-line-numbers-width-start t)
+#+end_src
+
+Hide line numbers in vterm buffers.
+
+#+begin_src emacs-lisp
+(add-hook 'vterm-mode-hook
+          (lambda ()
+            (display-line-numbers-mode 0)))
+#+end_src
+
+Don't hide =isearch= results after some time.
+TODO: This doesn't really work with evil's =n=.
+
+#+begin_src emacs-lisp
+(setq lazy-highlight-cleanup nil
+      lazy-highlight-initial-delay nil
+      lazy-highlight-max-at-a-time nil
+      isearch-allow-scroll t)
+#+end_src
+
+Set 80 as the column line, with the specified character.
+NOTE: Try using =?\u00A6= (=¦=) instead of =?\u2502= (=│=) if there are spaces
+between lines.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq display-fill-column-indicator-character ?\u00A6
+                  fill-column 80)
+            (display-fill-column-indicator-mode 1)))
+#+end_src
+
+* Misc mode settings
+
+Wrap lines by default (using words)
+TODO: Disabling this is not like vim's =:set nowrap=. This issue is
+fixed in doom emacs.
+
+#+begin_src emacs-lisp
+(global-visual-line-mode 1)
+#+end_src
+
+Automatically show changes if the file has changed on disk.
+
+#+begin_src emacs-lisp
+(global-auto-revert-mode 1)
+#+end_src
+
+Auto-close brackets and disable emacs' weird indentation.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (electric-pair-mode 1)
+            (electric-indent-mode -1)))
+#+end_src
+
+Don't show vi's '~' (from =vi-tilde-fringe= package) in dashboard.
+
+#+begin_src emacs-lisp
+(add-hook 'dashboard-mode-hook
+          (lambda ()
+            (vi-tilde-fringe-mode 0)))
+#+end_src
+
+* Backups
+
+Change backup directory to =~/.emacs.d/trash/=. We use list and cons
+because we need to evaluate the concat and the value has to be in the
+form ='((".*" . "PATH"))=.
+
+TODO: Emacs still generates some =#file.txt#= and =file.txt~= files.
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+      (list (cons ".*" (concat user-emacs-directory "trash"))))
+#+end_src
+
+* Battery
+
+Show battery in mode line. If the battery is "N/A" or "unknown", don't
+display.
+
+#+begin_src emacs-lisp
+(require 'battery)
+(let ((battstr (battery-format "%B" (funcall battery-status-function))))
+  (if (or (string= "N/A" battstr)
+          (string= "unknown" battstr))
+    (display-battery-mode 0)
+    (display-battery-mode 1)))
+#+end_src
+
+* Org mode
+
+Enable "<s TAB" completion.
+
+#+begin_src emacs-lisp
+(require 'org-tempo)
+#+end_src
+
+Org agenda location.
+
+#+begin_src emacs-lisp
+(setq org-directory (expand-file-name "~/Sync/Org/"))
+#+end_src
+
+Org visual settings.
+
+TODO: Extend explanation.
+
+#+begin_src emacs-lisp
+(setq org-fontify-quote-and-verse-blocks t
+      org-hide-emphasis-markers t
+      org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-fontify-natively t)
+#+end_src
+
+Enable =org-indent-mode=, which hides leading '*' from titles.
+
+Set =org-link-descriptive= to hide org links. This is changed by the
+=org-toggle-link-display= function.
+
+Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
+completion.
+
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook (lambda ()
+                           (org-indent-mode 1)
+                           (setq org-link-descriptive 1)
+                           (setq-local
+                             electric-pair-inhibit-predicate
+                             `(lambda (c)
+                                (if (char-equal c ?<)
+                                  t
+                                  (,electric-pair-inhibit-predicate c))))))
+#+end_src
+
+* C mode
+
+Enable explicit tabs for C code (if not on beginning of line).
+
+#+begin_src emacs-lisp
+(setq c-default-style "k&r"
+      c-basic-offset 4
+      c-tab-always-indent nil)
+#+end_src
