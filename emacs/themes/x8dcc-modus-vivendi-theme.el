@@ -172,10 +172,10 @@ standard)."
 
       (bg-mode-line-active        "#003c52")
       (fg-mode-line-active        "#f0f0f0")
-      (border-mode-line-active    "#5f8fb4")
+      (border-mode-line-active    nil)
       (bg-mode-line-inactive      "#2d2d2d")
       (fg-mode-line-inactive      "#969696")
-      (border-mode-line-inactive  "#606060")
+      (border-mode-line-inactive  nil)
 
       (modeline-err     "#ff7fbf")
       (modeline-warning "#df9f93")
@@ -187,19 +187,19 @@ standard)."
 
 ;;; Diffs
 
-      (bg-added           "#004254")
-      (bg-added-faint     "#003042")
-      (bg-added-refine    "#004f7f")
-      (bg-added-fringe    "#008fcf")
-      (fg-added           "#9fdfdf")
-      (fg-added-intense   "#50c0ef")
+      (bg-added           "#00381f")
+      (bg-added-faint     "#002910")
+      (bg-added-refine    "#034f2f")
+      (bg-added-fringe    "#5BD75B")
+      (fg-added           "#a0e0a0")
+      (fg-added-intense   "#80e080")
 
-      (bg-changed         "#2f123f")
-      (bg-changed-faint   "#1f022f")
-      (bg-changed-refine  "#3f325f")
-      (bg-changed-fringe  "#7f55a0")
-      (fg-changed         "#e3cfff")
-      (fg-changed-intense "#cf9fe2")
+      (bg-changed         "#004254")
+      (bg-changed-faint   "#003042")
+      (bg-changed-refine  "#004f7f")
+      (bg-changed-fringe  "#50c0ef")
+      (fg-changed         "#9fdfdf")
+      (fg-changed-intense "#50c0ef")
 
       (bg-removed         "#4f1119")
       (bg-removed-faint   "#380a0f")
@@ -220,7 +220,7 @@ standard)."
 
 ;;;; General mappings
 
-      (fringe bg-dim)
+      (fringe bg-main)
       (cursor red-intense)
 
       (keybind red)
@@ -245,9 +245,9 @@ standard)."
 ;;;; Code mappings
 
       (builtin magenta)
-      (comment red-faint)
+      (comment fg-dim)
       (constant green-faint)
-      (docstring fg-alt)
+      (docstring fg-dim)
       (docmarkup magenta-faint)
       (fnname cyan-warmer)
       (keyword red-cooler)
@@ -300,8 +300,8 @@ standard)."
 
       (fg-line-number-inactive fg-dim)
       (fg-line-number-active fg-main)
-      (bg-line-number-inactive bg-dim)
-      (bg-line-number-active bg-active)
+      (bg-line-number-inactive bg-main)
+      (bg-line-number-active bg-main)
 
 ;;;; Link mappings
 

@@ -17,7 +17,7 @@
 
 ;; Load ~/.emacs.d/themes/x8dcc-theme.el
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-(load-theme 'x8dcc)
+(load-theme 'x8dcc-modus-vivendi)
 
 ;; Change splash screen image (should not matter since it's overwritten by
 ;; dashboard)
