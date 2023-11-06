@@ -1,7 +1,6 @@
 #+title: Vanilla emacs configuration
 #+options: toc:nil
 #+property: header-args:emacs-lisp :tangle config.el
-#+auto_tangle: t
 #+author: 8dcc
 
 #+TOC: headlines 2
