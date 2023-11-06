@@ -15,7 +15,8 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
-;; Load ~/.emacs.d/x8dcc-theme.el
+;; Load ~/.emacs.d/themes/x8dcc-theme.el
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 (load-theme 'x8dcc)
 
 ;; Change splash screen image (should not matter since it's overwritten by
