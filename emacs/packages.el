@@ -92,13 +92,23 @@
         dashboard-set-footer nil
         dashboard-page-separator "\n\n"
         dashboard-items '((recents . 10)
-                          (projects . 5)))
+                          (projects . 5)
+                          (agenda . 5)))
   :config
   (dashboard-setup-startup-hook))
 
 ;;------------------------------------------------------------------------------
+;; Vertico (Vertical completion for M-x, etc.)
+
+(use-package vertico
+  :init
+  (vertico-mode)
+  (vertico-reverse-mode))
+
+;;------------------------------------------------------------------------------
 ;; Popups
 
+;; TODO: Fork to fix modeline
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
