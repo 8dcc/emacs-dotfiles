@@ -357,15 +357,15 @@ standard)."
 
 ;;;; Rainbow mappings
 
-      (rainbow-0 cyan)
-      (rainbow-1 red)
-      (rainbow-2 cyan-warmer)
-      (rainbow-3 red-cooler)
-      (rainbow-4 cyan-cooler)
-      (rainbow-5 magenta)
-      (rainbow-6 cyan-faint)
-      (rainbow-7 magenta-faint)
-      (rainbow-8 red-faint)
+      (rainbow-0 red)
+      (rainbow-1 blue)
+      (rainbow-2 yellow)
+      (rainbow-3 green)
+      (rainbow-4 red)
+      (rainbow-5 blue)
+      (rainbow-6 yellow)
+      (rainbow-7 green)
+      (rainbow-8 red)
 
 ;;;; Space mappings
 
