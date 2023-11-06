@@ -163,15 +163,15 @@ standard)."
       (bg-hover            "#8e3e3b")
       (bg-hover-secondary  "#00405f")
       (bg-hl-line          "#2f3849")
-      (bg-region           "#5a5a5a")
-      (fg-region           "#ffffff")
+      (bg-region           "#505050")
+      (fg-region           unspecified)
 
       (bg-char-0 "#922a00")
       (bg-char-1 "#00709f")
       (bg-char-2 "#5f3faf")
 
-      (bg-mode-line-active        "#003c52")
-      (fg-mode-line-active        "#f0f0f0")
+      (bg-mode-line-active        "#555555")
+      (fg-mode-line-active        "#ffffff")
       (border-mode-line-active    nil)
       (bg-mode-line-inactive      "#2d2d2d")
       (fg-mode-line-inactive      "#969696")
@@ -221,7 +221,7 @@ standard)."
 ;;;; General mappings
 
       (fringe bg-main)
-      (cursor red-intense)
+      (cursor fg-main)
 
       (keybind red)
       (name red-cooler)
@@ -346,13 +346,13 @@ standard)."
 
       (prose-block fg-dim)
       (prose-code cyan)
-      (prose-done cyan)
+      (prose-done fg-dim)
       (prose-macro red-warmer)
       (prose-metadata fg-dim)
       (prose-metadata-value fg-alt)
       (prose-table fg-alt)
       (prose-tag fg-alt)
-      (prose-todo red)
+      (prose-todo yellow)
       (prose-verbatim magenta-warmer)
 
 ;;;; Rainbow mappings

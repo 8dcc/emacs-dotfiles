@@ -1754,7 +1754,7 @@ FG and BG are the main colors."
 ;;;;; absolute essentials
     `(default ((,c :background ,bg-main :foreground ,fg-main)))
     `(cursor ((,c :background ,cursor)))
-    `(fringe ((,c :background ,fringe :foreground ,fg-main)))
+    `(fringe ((,c :background ,fringe :foreground ,fg-dim)))
     `(menu ((,c :background ,bg-dim :foreground ,fg-main)))
     `(scroll-bar ((,c :background ,bg-dim :foreground ,fg-dim)))
     `(tool-bar ((,c :background ,bg-dim :foreground ,fg-main)))
@@ -2270,7 +2270,7 @@ FG and BG are the main colors."
     `(disk-usage-symlink ((,c :inherit dired-symlink)))
     `(disk-usage-symlink-directory ((,c :inherit dired-symlink)))
 ;;;;; display-fill-column-indicator-mode
-    `(fill-column-indicator ((,c :height 1 :background ,bg-active :foreground ,bg-active)))
+    `(fill-column-indicator ((,c :background ,bg-main :inherit shadow)))
 ;;;;; doom-modeline
     `(doom-modeline-bar ((,c :background ,blue)))
     `(doom-modeline-bar-inactive ((,c :background ,border)))
@@ -3099,7 +3099,7 @@ FG and BG are the main colors."
     `(mode-line-active ((,c :inherit mode-line)))
     `(mode-line-buffer-id ((,c :inherit bold)))
     `(mode-line-emphasis ((,c :inherit bold :foreground ,modeline-info)))
-    `(mode-line-highlight ((,c :background ,bg-hover :foreground ,fg-main :box ,fg-main)))
+    `(mode-line-highlight ((,c :background ,bg-dim :foreground ,fg-main)))
     `(mode-line-inactive ((,c :inherit modus-themes-ui-variable-pitch
                               :box ,border-mode-line-inactive
                               :background ,bg-mode-line-inactive
