@@ -50,7 +50,6 @@
   '(org-level-1 ((t (:inherit outline-1 :family "Fira Code" :height 1.6))))
   '(org-level-2 ((t (:inherit outline-2 :family "Fira Code" :height 1.2))))
   '(org-level-3 ((t (:inherit outline-3 :family "Fira Code" :height 1.2))))
-  '(org-todo          ((t (:inherit warning :bold t))))
   '(org-done          ((t (:inherit shadow :bold t))))
   '(org-headline-done ((t (:inherit org-done)))))
 
@@ -296,6 +295,7 @@
 ;; Disable electric-pair-mode pairing of '<', so we can use "<s TAB" completion
 (add-hook 'org-mode-hook (lambda ()
                            (org-indent-mode 1)
+                           (setq org-link-descriptive 1)
                            (setq-local
                              electric-pair-inhibit-predicate
                              `(lambda (c)
