@@ -212,7 +212,7 @@ standard)."
 
 ;;; Paren match
 
-      (bg-paren-match        bg-main)
+      (bg-paren-match        undefined)
       (bg-paren-expression   "#453040")
       (bold-paren-match      t)
 
