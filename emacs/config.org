@@ -182,10 +182,9 @@ evil's insert. For the main keybinds, see [[Space keybinds][Space keybinds]].
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal visual emacs)
     :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "M-SPC"))
+    :prefix "SPC"))
 #+end_src
 
 ** Which key
@@ -559,6 +558,7 @@ TODO: Add missing keybinds:
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
   "o"   '(:ignore t :wk "Open")
+  "o e" '(eshell :wk "Open eshell")
   "o t" '(vterm-toggle :wk "Toggle vterm")
   ;; Project
   "p"   '(:ignore t :wk "Project")

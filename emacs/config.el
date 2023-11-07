@@ -85,10 +85,9 @@
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal visual emacs)
     :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "M-SPC"))
+    :prefix "SPC"))
 
 (use-package which-key
   :diminish
@@ -313,7 +312,12 @@
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
   "o"   '(:ignore t :wk "Open")
+  "o e" '(eshell :wk "Open eshell")
   "o t" '(vterm-toggle :wk "Toggle vterm")
+  ;; Project
+  "p"   '(:ignore t :wk "Project")
+  "p c" '(projectile-compile-project :wk "Compile project")
+  "p C" '(projectile-repeat-last-command :wk "Re-compile project")
   ;; Search
   "s"   '(:ignore t :wk "Search")
   "s o" '(occur :wk "Search occurrences")
