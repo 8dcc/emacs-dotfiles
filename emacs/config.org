@@ -472,9 +472,11 @@ For displaying vi's =~= on EOF. Displays on the fringe.
 #+begin_src emacs-lisp
 (use-package vi-tilde-fringe
   :diminish
+  :hook ((prog-mode . vi-tilde-fringe-mode)
+         (org-mode  . vi-tilde-fringe-mode)
+         (text-mode . vi-tilde-fringe-mode))
   :config
-  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0])
-  (global-vi-tilde-fringe-mode 1))
+  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 #+end_src
 
 The bitmap array =[0 0 0 9 21 18 0 0]= corresponds to the '~' character
@@ -770,14 +772,6 @@ Auto-close brackets and disable emacs' weird indentation.
           (lambda ()
             (electric-pair-mode 1)
             (electric-indent-mode -1)))
-#+end_src
-
-Don't show vi's '~' (from =vi-tilde-fringe= package) in dashboard.
-
-#+begin_src emacs-lisp
-(add-hook 'dashboard-mode-hook
-          (lambda ()
-            (vi-tilde-fringe-mode 0)))
 #+end_src
 
 * Backups

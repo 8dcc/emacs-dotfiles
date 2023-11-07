@@ -273,9 +273,11 @@
 
 (use-package vi-tilde-fringe
   :diminish
+  :hook ((prog-mode . vi-tilde-fringe-mode)
+         (org-mode  . vi-tilde-fringe-mode)
+         (text-mode . vi-tilde-fringe-mode))
   :config
-  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0])
-  (global-vi-tilde-fringe-mode 1))
+  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 
 (straight-use-package
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
@@ -431,10 +433,6 @@
           (lambda ()
             (electric-pair-mode 1)
             (electric-indent-mode -1)))
-
-(add-hook 'dashboard-mode-hook
-          (lambda ()
-            (vi-tilde-fringe-mode 0)))
 
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "trash"))))
