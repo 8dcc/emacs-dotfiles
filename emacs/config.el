@@ -179,23 +179,6 @@
       (reusable-frames . visible)
       (window-height . 0.35))))
 
-(use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
-  :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(("TODO"       warning bold)
-          ("FIXME"      error bold)
-          ("DELME"      error bold)
-          ("HACK"       font-lock-constant-face bold)
-          ("REVIEW"     font-lock-keyword-face bold)
-          ("NOTE"       success bold)
-          ("DEPRECATED" font-lock-doc-face bold))))
-
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
-
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
@@ -258,9 +241,29 @@
   (drag-stuff-global-mode 1)
   (drag-stuff-define-keys))
 
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        '(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("DELME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
+
 (use-package rainbow-mode
   :diminish
   :hook prog-mode)
+
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
+
+(use-package highlight-numbers
+  :hook ((prog-mode . highlight-numbers-mode)))
 
 (use-package vi-tilde-fringe
   :diminish
@@ -384,6 +387,10 @@
           (lambda ()
             (display-line-numbers-mode 0)))
 
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (display-line-numbers-mode 0)))
+
 (setq truncate-lines nil)
 (global-visual-line-mode 1)
 
@@ -413,6 +420,8 @@
 (add-hook 'dashboard-mode-hook
           (lambda ()
             (vi-tilde-fringe-mode 0)))
+
+(setq vc-follow-symlinks t)
 
 (setq backup-directory-alist
       (list (cons ".*" (concat user-emacs-directory "trash")))

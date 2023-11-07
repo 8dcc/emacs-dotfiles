@@ -333,36 +333,6 @@ buffer.
       (window-height . 0.35))))
 #+end_src
 
-** Highlight TODOs
-
-Highlight common keywords inside =org-mode= and =prog-mode=. Added =DELME=
-since I use that often.
-
-#+begin_src emacs-lisp
-(use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
-  :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(("TODO"       warning bold)
-          ("FIXME"      error bold)
-          ("DELME"      error bold)
-          ("HACK"       font-lock-constant-face bold)
-          ("REVIEW"     font-lock-keyword-face bold)
-          ("NOTE"       success bold)
-          ("DEPRECATED" font-lock-doc-face bold))))
-#+end_src
-
-** Rainbow delimiters
-
-Add rainbow colors to parentheses.
-
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
-#+end_src
-
 ** Git gutter fringe
 
 Show git changes in the fringe. We use =fringe-helper-define= to specify
@@ -440,6 +410,27 @@ For dragging lines with =M-<down>= and =M-<up>=.
   (drag-stuff-define-keys))
 #+end_src
 
+** Highlight TODOs
+
+Highlight common keywords inside =org-mode= and =prog-mode=. Added =DELME=
+since I use that often.
+
+#+begin_src emacs-lisp
+(use-package hl-todo
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        '(("TODO"       warning bold)
+          ("FIXME"      error bold)
+          ("DELME"      error bold)
+          ("HACK"       font-lock-constant-face bold)
+          ("REVIEW"     font-lock-keyword-face bold)
+          ("NOTE"       success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
+#+end_src
+
 ** Rainbow mode
 
 For displaying colors in the background of RGB strings.
@@ -448,6 +439,24 @@ For displaying colors in the background of RGB strings.
 (use-package rainbow-mode
   :diminish
   :hook prog-mode)
+#+end_src
+
+** Rainbow delimiters
+
+Add rainbow colors to parentheses.
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
+#+end_src
+
+** Highlight numbers
+
+For highlighting numeric literals.
+
+#+begin_src emacs-lisp
+(use-package highlight-numbers
+  :hook ((prog-mode . highlight-numbers-mode)))
 #+end_src
 
 ** Vi tilde
@@ -658,10 +667,14 @@ TODO: This doesn't always work.
       display-line-numbers-width-start t)
 #+end_src
 
-Hide line numbers in vterm buffers.
+Hide line numbers in vterm and eshell buffers.
 
 #+begin_src emacs-lisp
 (add-hook 'vterm-mode-hook
+          (lambda ()
+            (display-line-numbers-mode 0)))
+
+(add-hook 'eshell-mode-hook
           (lambda ()
             (display-line-numbers-mode 0)))
 #+end_src
@@ -734,6 +747,12 @@ Don't show vi's '~' (from =vi-tilde-fringe= package) in dashboard.
 (add-hook 'dashboard-mode-hook
           (lambda ()
             (vi-tilde-fringe-mode 0)))
+#+end_src
+
+Follow git symlinks by default.
+
+#+begin_src emacs-lisp
+(setq vc-follow-symlinks t)
 #+end_src
 
 * Backups
