@@ -111,9 +111,18 @@
 
 (use-package magit
   :config
-  ;; Fullscreen status window
   (setq magit-display-buffer-function
-        #'magit-display-buffer-fullframe-status-v1))
+        (lambda (buffer)
+          (display-buffer
+           buffer (if (and (derived-mode-p 'magit-mode)
+                           (memq (with-current-buffer buffer major-mode)
+                                 '(magit-process-mode
+                                   magit-revision-mode
+                                   magit-diff-mode
+                                   magit-stash-mode
+                                   magit-status-mode)))
+                      nil
+                    '(display-buffer-same-window))))))
 
 (use-package dashboard
   :init
