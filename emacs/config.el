@@ -278,6 +278,21 @@
   :config
   (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 
+(use-package writeroom-mode
+  :config
+  (setq writeroom-mode-line nil
+        writeroom-restore-window-config t
+        writeroom-width 81
+        writeroom-global-effects '(writeroom-set-alpha
+                                   writeroom-set-menu-bar-lines
+                                   writeroom-set-tool-bar-lines
+                                   writeroom-set-vertical-scroll-bars
+                                   writeroom-set-bottom-divider-width))
+  (add-hook 'writeroom-mode-enable-hook (lambda ()
+                                          (fringe-mode 0)))
+  (add-hook 'writeroom-mode-disable-hook (lambda ()
+                                           (fringe-mode nil))))
+
 (straight-use-package
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
@@ -317,6 +332,7 @@
   ;; Help
   "h"   '(:ignore t :wk "Help")
   "h f" '(describe-function :wk "Describe function")
+  "h F" '(describe-face :wk "Describe face")
   "h k" '(describe-key :wk "Describe key")
   "h m" '(describe-mode :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
@@ -335,10 +351,12 @@
   "t"   '(:ignore t :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t p" '(popper-toggle :wk "Popups")
+  "t r" '(read-only-mode :wk "Read only")
   "t s" '(whitespace-mode :wk "Whitespace visualization")
   "t v" '(visible-mode :wk "Visible")
   "t w" '(toggle-truncate-lines :wk "Line wrapping")
   "t W" '(auto-fill-mode :wk "Auto fill mode")
+  "t z" '(writeroom-mode :wk "Zen mode")
   ;; Window
   "w"   '(:ignore t :wk "Window")
   "w c" '(evil-window-delete :wk "Close window")

@@ -189,7 +189,7 @@ evil's insert. For the main keybinds, see [[Space keybinds][Space keybinds]].
 
 ** Which key
 
-For the keybind completion menu. Press =C-x= and wait for ~1 second to
+For the keybind completion menu. Press =C-x= and wait for about 1 second to
 display a list of available keybinds.
 
 #+begin_src emacs-lisp
@@ -481,13 +481,49 @@ For displaying vi's =~= on EOF. Displays on the fringe.
   (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 #+end_src
 
-The bitmap array =[0 0 0 9 21 18 0 0]= corresponds to the '~' character
+The bitmap array =[0 0 0 9 21 18 0 0]= corresponds to the =~= character
 in the font Dina:
 
 #+begin_src
 0b001001 ->  #  #
 0b010101 -> # # #
 0b010010 -> #  #
+#+end_src
+
+** Whiteroom mode
+
+Great mode for distraction-free editing.
+
+We set =writeroom-mode-line= to =nil=, change to =t= to display the modeline. We also
+set =writeroom-restore-window-config=, which makes sense since it's going to
+overwrite the window layout.
+
+We use 81 for =writeroom-width= so our whole 80 char =fill-column= fits. We don't
+use =(+ fill-column 1)= because we haven't set it yet. See [[Misc visual settings][Misc visual settings]].
+
+We also remove =writeroom-set-fullscreen= from =writeroom-global-effects=, so the
+emacs window doesn't get changed. We already disabled all the other menu bar
+items in [[Theme][Theme]].
+
+Lastly, we disable fringes in =writeroom-mode-enable-hook=, and re-enable them in
+=writeroom-mode-disable-hook=. We could also increase and reset the font size from
+these lambdas.
+
+#+begin_src emacs-lisp
+(use-package writeroom-mode
+  :config
+  (setq writeroom-mode-line nil
+        writeroom-restore-window-config t
+        writeroom-width 81
+        writeroom-global-effects '(writeroom-set-alpha
+                                   writeroom-set-menu-bar-lines
+                                   writeroom-set-tool-bar-lines
+                                   writeroom-set-vertical-scroll-bars
+                                   writeroom-set-bottom-divider-width))
+  (add-hook 'writeroom-mode-enable-hook (lambda ()
+                                          (fringe-mode 0)))
+  (add-hook 'writeroom-mode-disable-hook (lambda ()
+                                           (fringe-mode nil))))
 #+end_src
 
 ** Nasm mode
@@ -596,6 +632,7 @@ TODO: Add missing keybinds:
   "t v" '(visible-mode :wk "Visible")
   "t w" '(toggle-truncate-lines :wk "Line wrapping")
   "t W" '(auto-fill-mode :wk "Auto fill mode")
+  "t z" '(writeroom-mode :wk "Zen mode")
   ;; Window
   "w"   '(:ignore t :wk "Window")
   "w c" '(evil-window-delete :wk "Close window")
