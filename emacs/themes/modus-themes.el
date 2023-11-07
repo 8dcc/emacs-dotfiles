@@ -615,7 +615,7 @@ and related user options."
 (make-obsolete-variable 'modus-themes-fringes nil "4.0.0")
 (make-obsolete-variable 'modus-themes-lang-checkers nil "4.0.0")
 
-(defcustom modus-themes-org-blocks nil
+(defcustom modus-themes-org-blocks 'gray-background
   "Set the overall style of Org code blocks, quotes, and the like.
 
 Nil (the default) means that the block has no background of its
@@ -1588,7 +1588,7 @@ Optional OL is the color of an overline."
                   (eq modus-themes-org-blocks 'greyscale))))
     (list :inherit 'modus-themes-fixed-pitch
           :background (if gray bg 'unspecified)
-          :foreground (if gray 'unspecified fg)
+          :foreground fg
           :extend (if gray t 'unspecified))))
 
 (defun modus-themes--completion-line (bg)
@@ -3309,8 +3309,8 @@ FG and BG are the main colors."
     `(org-agenda-structure-filter ((,c :inherit org-agenda-structure :foreground ,warning)))
     `(org-agenda-structure-secondary ((,c :inherit font-lock-doc-face)))
     `(org-archived ((,c :background ,bg-inactive :foreground ,fg-main)))
-    `(org-block ((,c ,@(modus-themes--org-block fg-main bg-dim))))
-    `(org-block-begin-line ((,c ,@(modus-themes--org-block prose-block bg-inactive))))
+    `(org-block ((,c ,@(modus-themes--org-block fg-main "#141414"))))
+    `(org-block-begin-line ((,c ,@(modus-themes--org-block prose-block bg-dim))))
     `(org-block-end-line ((,c :inherit org-block-begin-line)))
     `(org-checkbox ((,c :foreground ,warning)))
     `(org-checkbox-statistics-done ((,c :inherit org-done)))
