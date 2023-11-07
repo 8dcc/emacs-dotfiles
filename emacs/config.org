@@ -769,25 +769,30 @@ Don't show vi's '~' (from =vi-tilde-fringe= package) in dashboard.
 
 * Backups
 
-Change backup directory to =~/.emacs.d/trash/=. We use list and cons
-because we need to evaluate the concat and the value has to be in the
-form ='((".*" . "PATH"))=.
+Emacs uses =file.txt~= files for backups, and =#file.txt#= for temporary
+files. Having them in the same folder as the original file is not
+ideal.
+
+Change backup directory to =~/.emacs.d/trash/=. Note that we use =`( )=
+instead of a normal quote to evaluate the =,( )= part.
 
 We also set other variables to not de-link hard links
 (=backup-by-copying=), use version numbers on backups (=version-control=),
 deleting excess backups (=delete-old-versions=), and specifying the
 number of versions to keep.
 
-TODO: Emacs still generates some =#file.txt#= and =file.txt~= files.
-
 #+begin_src emacs-lisp
 (setq backup-directory-alist
-      (list (cons ".*" (concat user-emacs-directory "trash")))
-      backup-by-copying      t
-      version-control        t
-      delete-old-versions    t
-      kept-new-versions      20
-      kept-old-versions      5)
+      `((".*" . ,(concat user-emacs-directory "trash"))))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "trash") t)))
+
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-new-versions 20
+      kept-old-versions 5)
 #+end_src
 
 * Battery

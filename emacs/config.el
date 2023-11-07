@@ -432,12 +432,16 @@
             (vi-tilde-fringe-mode 0)))
 
 (setq backup-directory-alist
-      (list (cons ".*" (concat user-emacs-directory "trash")))
-      backup-by-copying      t
-      version-control        t
-      delete-old-versions    t
-      kept-new-versions      20
-      kept-old-versions      5)
+      `((".*" . ,(concat user-emacs-directory "trash"))))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "trash") t)))
+
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-new-versions 20
+      kept-old-versions 5)
 
 (require 'battery)
 (let ((battstr (battery-format "%B" (funcall battery-status-function))))
