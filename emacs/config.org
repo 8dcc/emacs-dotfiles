@@ -665,6 +665,7 @@ normal numbers and =relative= for relative line numbers.
 
 If =display-line-numbers-width-start= is =t=, the width of the line
 numbers will be calculated depending on the lines of each buffer.
+
 TODO: This doesn't always work.
 
 #+begin_src emacs-lisp
@@ -685,6 +686,15 @@ Hide line numbers in vterm and eshell buffers.
             (display-line-numbers-mode 0)))
 #+end_src
 
+Open eshell in a side window, instead of taking over the current
+window.
+
+#+begin_src emacs-lisp
+(add-to-list 'display-buffer-alist
+             '("\\*eshell\\*"
+               (display-buffer-in-side-window (side . bottom))))
+#+end_src
+
 By default, don't truncate lines, wrap them (=truncate-lines=). This can
 be toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
 
@@ -696,6 +706,7 @@ Wrap lines using words by default (=global-visual-line-mode=).
 #+end_src
 
 Don't hide =isearch= results after some time.
+
 TODO: This doesn't really work with evil's =n=.
 
 #+begin_src emacs-lisp
@@ -706,14 +717,16 @@ TODO: This doesn't really work with evil's =n=.
 #+end_src
 
 Set 80 as the column line, with the specified character.
+
 NOTE: Try using =?\u00A6= (=¦=) instead of =?\u2502= (=│=) if there are spaces
 between lines.
 
 #+begin_src emacs-lisp
+(setq-default display-fill-column-indicator-character ?\u00A6
+              fill-column 80)
+
 (add-hook 'prog-mode-hook
           (lambda ()
-            (setq display-fill-column-indicator-character ?\u00A6
-                  fill-column 80)
             (display-fill-column-indicator-mode 1)))
 #+end_src
 

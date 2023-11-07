@@ -397,6 +397,10 @@
           (lambda ()
             (display-line-numbers-mode 0)))
 
+(add-to-list 'display-buffer-alist
+             '("\\*eshell\\*"
+               (display-buffer-in-side-window (side . bottom))))
+
 (setq truncate-lines nil)
 (global-visual-line-mode 1)
 
@@ -405,10 +409,11 @@
       lazy-highlight-max-at-a-time nil
       isearch-allow-scroll t)
 
+(setq-default display-fill-column-indicator-character ?\u00A6
+              fill-column 80)
+
 (add-hook 'prog-mode-hook
           (lambda ()
-            (setq display-fill-column-indicator-character ?\u00A6
-                  fill-column 80)
             (display-fill-column-indicator-mode 1)))
 
 (setq vc-follow-symlinks t)
