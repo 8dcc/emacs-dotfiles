@@ -401,6 +401,8 @@
 
 (global-auto-revert-mode 1)
 
+(save-place-mode 1)
+
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)
@@ -411,7 +413,12 @@
             (vi-tilde-fringe-mode 0)))
 
 (setq backup-directory-alist
-      (list (cons ".*" (concat user-emacs-directory "trash"))))
+      (list (cons ".*" (concat user-emacs-directory "trash")))
+      backup-by-copying      t
+      version-control        t
+      delete-old-versions    t
+      kept-new-versions      20
+      kept-old-versions      5)
 
 (require 'battery)
 (let ((battstr (battery-format "%B" (funcall battery-status-function))))
