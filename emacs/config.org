@@ -572,7 +572,8 @@ TODO: Add missing keybinds:
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t p" '(popper-toggle :wk "Popups")
   "t s" '(whitespace-mode :wk "Whitespace visualization")
-  "t v" '(visible-mode :wk "Toggle visible")
+  "t v" '(visible-mode :wk "Visible")
+  "t w" '(toggle-truncate-lines :wk "Line wrapping")
   "t W" '(auto-fill-mode :wk "Auto fill mode")
   ;; Window
   "w"   '(:ignore t :wk "Window")
@@ -665,6 +666,16 @@ Hide line numbers in vterm buffers.
             (display-line-numbers-mode 0)))
 #+end_src
 
+By default, don't truncate lines, wrap them (=truncate-lines=). This can
+be toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
+
+Wrap lines using words by default (=global-visual-line-mode=).
+
+#+begin_src emacs-lisp
+(setq truncate-lines nil)
+(global-visual-line-mode 1)
+#+end_src
+
 Don't hide =isearch= results after some time.
 TODO: This doesn't really work with evil's =n=.
 
@@ -694,14 +705,6 @@ Use spaces instead of tabs. Should be the default already.
 #+begin_src emacs-lisp
 (indent-tabs-mode 0)
 (setq-default tabs-width 4)
-#+end_src
-
-Wrap lines by default (using words)
-TODO: Disabling this is not like vim's =:set nowrap=. This issue is
-fixed in doom emacs.
-
-#+begin_src emacs-lisp
-(global-visual-line-mode 1)
 #+end_src
 
 Automatically show changes if the file has changed on disk.

@@ -326,7 +326,8 @@
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t p" '(popper-toggle :wk "Popups")
   "t s" '(whitespace-mode :wk "Whitespace visualization")
-  "t v" '(visible-mode :wk "Toggle visible")
+  "t v" '(visible-mode :wk "Visible")
+  "t w" '(toggle-truncate-lines :wk "Line wrapping")
   "t W" '(auto-fill-mode :wk "Auto fill mode")
   ;; Window
   "w"   '(:ignore t :wk "Window")
@@ -383,6 +384,9 @@
           (lambda ()
             (display-line-numbers-mode 0)))
 
+(setq truncate-lines nil)
+(global-visual-line-mode 1)
+
 (setq lazy-highlight-cleanup nil
       lazy-highlight-initial-delay nil
       lazy-highlight-max-at-a-time nil
@@ -396,8 +400,6 @@
 
 (indent-tabs-mode 0)
 (setq-default tabs-width 4)
-
-(global-visual-line-mode 1)
 
 (global-auto-revert-mode 1)
 
