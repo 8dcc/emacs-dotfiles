@@ -198,26 +198,32 @@
     "XXX"
     "XXX"
     "XXX"
+    "XXX"
+    "XXX"
     "XXX")
   (fringe-helper-define
     'git-gutter-fr:deleted nil
-    "..."
-    "..."
-    "..."
-    "..."
-    "..."
-    "..."
-    "..."
     "XXX"
     "XXX"
     "XXX"
     "XXX"
     "XXX"
-    "..."
-    "..."
-    "...")
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX"
+    "XXX")
   (fringe-helper-define
     'git-gutter-fr:modified nil
+    "XXX"
+    "XXX"
     "XXX"
     "XXX"
     "XXX"
@@ -405,12 +411,16 @@
                   fill-column 80)
             (display-fill-column-indicator-mode 1)))
 
-(indent-tabs-mode 0)
-(setq-default tabs-width 4)
+(setq vc-follow-symlinks t)
 
 (global-auto-revert-mode 1)
 
 (save-place-mode 1)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(indent-tabs-mode 0)
+(setq-default tabs-width 4)
 
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -420,8 +430,6 @@
 (add-hook 'dashboard-mode-hook
           (lambda ()
             (vi-tilde-fringe-mode 0)))
-
-(setq vc-follow-symlinks t)
 
 (setq backup-directory-alist
       (list (cons ".*" (concat user-emacs-directory "trash")))
