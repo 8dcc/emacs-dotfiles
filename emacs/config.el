@@ -71,6 +71,7 @@
         evil-split-window-below t
         evil-vsplit-window-right t
         evil-undo-system 'undo-redo
+        evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   (evil-mode))
 
@@ -218,7 +219,9 @@
   :hook prog-mode)
 
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)))
+  :hook ((emacs-lisp-mode  . rainbow-delimiters-mode)
+         (scheme-mode      . rainbow-delimiters-mode)
+         (common-lisp-mode . rainbow-delimiters-mode)))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
@@ -397,7 +400,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (indent-tabs-mode 0)
-(setq-default tabs-width 4)
+(setq-default tab-width 4)
 
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -504,6 +507,10 @@
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)
+                             (scheme . t)))
+
 (setq c-default-style "k&r"
-      c-basic-offset 'tab-width
+      c-basic-offset tab-width
       c-tab-always-indent nil)
