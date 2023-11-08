@@ -563,10 +563,10 @@ functionality. Uses a =straight.el= recipe.
 Zoom keybinds.
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-+")            'text-scale-increase)
-(global-set-key (kbd "C--")            'text-scale-decrease)
-(global-set-key (kbd "C-<wheel-up>")   'text-scale-increase)
-(global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
+(global-set-key (kbd "C-+")            #'text-scale-increase)
+(global-set-key (kbd "C--")            #'text-scale-decrease)
+(global-set-key (kbd "C-<wheel-up>")   #'text-scale-increase)
+(global-set-key (kbd "C-<wheel-down>") #'text-scale-decrease)
 (global-set-key (kbd "C-<home>") (lambda () (interactive)
                                    (text-scale-adjust 0)))
 #+end_src
@@ -574,7 +574,13 @@ Zoom keybinds.
 Quit from minibuffer with one ESC, instead of 3 ESCs or C-g.
 
 #+begin_src emacs-lisp
-(global-set-key [escape] 'keyboard-escape-quit)
+(global-set-key [escape] #'keyboard-escape-quit)
+#+end_src
+
+Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-S-v") #'yank)
 #+end_src
 
 Remap evil's =:q= to =SPC b k.=

@@ -271,14 +271,16 @@ and ALIGNMENT as parameters."
       mouse-wheel-follow-mouse t
       mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
 
-(global-set-key (kbd "C-+")            'text-scale-increase)
-(global-set-key (kbd "C--")            'text-scale-decrease)
-(global-set-key (kbd "C-<wheel-up>")   'text-scale-increase)
-(global-set-key (kbd "C-<wheel-down>") 'text-scale-decrease)
+(global-set-key (kbd "C-+")            #'text-scale-increase)
+(global-set-key (kbd "C--")            #'text-scale-decrease)
+(global-set-key (kbd "C-<wheel-up>")   #'text-scale-increase)
+(global-set-key (kbd "C-<wheel-down>") #'text-scale-decrease)
 (global-set-key (kbd "C-<home>") (lambda () (interactive)
                                    (text-scale-adjust 0)))
 
-(global-set-key [escape] 'keyboard-escape-quit)
+(global-set-key [escape] #'keyboard-escape-quit)
+
+(global-set-key (kbd "C-S-v") #'yank)
 
 (global-set-key [remap evil-quit] #'kill-current-buffer)
 
