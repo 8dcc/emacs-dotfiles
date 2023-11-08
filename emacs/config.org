@@ -584,8 +584,7 @@ Remap evil's =:wq= to =SPC b s= + =SPC b k=.
 
 See also [[General][General]] package.
 
-TODO: Add missing keybinds:
-- =SPC TAB *=: workspaces package.
+*** Global keybinds
 
 #+begin_src emacs-lisp
 (x8dcc/leader-keys
@@ -648,7 +647,7 @@ TODO: Add missing keybinds:
   "w K" '(evil-window-move-very-top :wk "Move window up"))
 #+end_src
 
-Keymaps for org mode.
+*** Org mode keybinds
 
 #+begin_src emacs-lisp
 (x8dcc/org-keys
