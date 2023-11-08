@@ -423,6 +423,67 @@
     (display-battery-mode 0)
     (display-battery-mode 1)))
 
+(require 'erc)
+(require 'erc-log)
+(require 'erc-stamp)
+(require 'erc-track)
+;(require 'erc-spelling)
+
+(erc-log-enable)
+(erc-stamp-enable)
+(erc-track-enable)
+;(erc-spelling-enable)
+
+(setq erc-nick           "x8dcc"
+      erc-system-name    "x8dcc"
+      erc-user-full-name "x8dcc"
+
+      ;; Don't give away machine name
+      erc-anonymous-login t
+      ;; Don't reply to ctcp
+      erc-disable-ctcp-replies t
+      ;; Notify ctcp requests
+      erc-paranoid t
+      ;; Warn blank lines
+      erc-warn-about-blank-lines t
+
+      ;; Enable logging
+      erc-enable-logging t
+      ;; Directory for logs
+      erc-log-channels-directory "~/.erc-log"
+      ;; When to write logs
+      erc-log-write-after-send t
+      erc-log-write-after-insert t
+      ;; Timestamps
+      erc-stamp-mode t
+      erc-hide-timestamps t
+
+      ;; Hide joins/leaves/quits
+      erc-hide-list '("JOIN" "PART" "QUIT")
+      ;; Max line width
+      erc-fill-column 100
+      ;; Align usernames to col 20
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 15
+      ;; Rename buffers to network name instead of ip:port
+      erc-rename-buffers t
+      ;; Prompt at the bottom of the screen
+      erc-scrolltobottom-mode t
+      erc-input-line-position -1
+      ;; Messages to mode-line
+      erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
+
+      ;; Kill buffers for channels after /part
+      erc-kill-buffer-on-part t
+      ;; Kill buffers for private queries after quitting the server
+      erc-kill-queries-on-quit t
+      ;; Kill buffers for server messages after quitting the server
+      erc-kill-server-buffer-on-quit t)
+
+(setq erc-prompt (lambda ()
+                   (concat "[" (buffer-name) "]:")))
+
 (require 'org-tempo)
 
 (setq org-directory (expand-file-name "~/Sync/Org/"))
