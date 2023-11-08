@@ -785,13 +785,19 @@ Automatically update buffer if the file has changed on disk.
 (global-auto-revert-mode 1)
 #+end_src
 
-Open files at last edited position.
+Open files at last edited position. Persists across sessions.
 
 #+begin_src emacs-lisp
 (save-place-mode 1)
 #+end_src
 
-Delete trailing whitespaces on buffer safe.
+Remember minibuffer history between sessions
+
+#+begin_src emacs-lisp
+(savehist-mode 1)
+#+end_src
+
+Delete trailing whitespaces on buffer save.
 
 #+begin_src emacs-lisp
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

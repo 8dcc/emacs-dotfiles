@@ -410,6 +410,8 @@
 
 (save-place-mode 1)
 
+(savehist-mode 1)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (indent-tabs-mode 0)
