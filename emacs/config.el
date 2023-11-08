@@ -114,6 +114,7 @@
   (projectile-global-mode 1))
 
 (use-package magit
+  :hook ((git-commit-setup . evil-insert-state))
   :config
   (setq magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))
