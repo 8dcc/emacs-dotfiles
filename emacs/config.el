@@ -96,8 +96,6 @@
 
 (use-package which-key
   :diminish
-  :init
-  (which-key-mode 1)
   :config
   (setq which-key-side-window-location 'bottom
         which-key-sort-order #'which-key-key-order-alpha
@@ -107,7 +105,8 @@
         which-key-min-display-lines 6
         which-key-idle-delay 0.8
         which-key-max-description-length 25
-        which-key-allow-imprecise-window-fit t))
+        which-key-allow-imprecise-window-fit t)
+  (which-key-mode 1))
 
 (use-package projectile
   :diminish
@@ -134,7 +133,7 @@
   (dashboard-setup-startup-hook))
 
 (use-package vertico
-  :init
+  :config
   (vertico-mode)
   (vertico-reverse-mode))
 

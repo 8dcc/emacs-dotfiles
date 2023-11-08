@@ -213,8 +213,6 @@ display a list of available keybinds.
 #+begin_src emacs-lisp
 (use-package which-key
   :diminish
-  :init
-  (which-key-mode 1)
   :config
   (setq which-key-side-window-location 'bottom
         which-key-sort-order #'which-key-key-order-alpha
@@ -224,7 +222,8 @@ display a list of available keybinds.
         which-key-min-display-lines 6
         which-key-idle-delay 0.8
         which-key-max-description-length 25
-        which-key-allow-imprecise-window-fit t))
+        which-key-allow-imprecise-window-fit t)
+  (which-key-mode 1))
 #+end_src
 
 ** Projectile
@@ -281,7 +280,7 @@ not bellow it.
 
 #+begin_src emacs-lisp
 (use-package vertico
-  :init
+  :config
   (vertico-mode)
   (vertico-reverse-mode))
 #+end_src
