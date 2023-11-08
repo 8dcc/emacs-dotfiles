@@ -187,7 +187,9 @@
       (reusable-frames . visible)
       (window-height . 0.35))))
 
-(defmacro my-fringe-helper-rect (name alignment w h)
+(defmacro x8dcc/fringe-helper-rect (name alignment w h)
+  "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
+and ALIGNMENT as parameters."
   `(define-fringe-bitmap ,name
      (apply #'vector
             (make-list ,h
@@ -197,9 +199,9 @@
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-  (my-fringe-helper-rect 'git-gutter-fr:added nil 3 20)
-  (my-fringe-helper-rect 'git-gutter-fr:deleted nil 3 20)
-  (my-fringe-helper-rect 'git-gutter-fr:modified nil 3 20)
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:added nil 3 30)
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:deleted nil 3 30)
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
   (global-git-gutter-mode 1))
 
 (use-package drag-stuff
@@ -281,6 +283,12 @@
                   (basic-save-buffer)
                   (kill-current-buffer)))
 
+(defun x8dcc/org-insert-link ()
+  "Inserts a space in the current position, and calls `org-insert-link'."
+  (interactive)
+  (insert " ")
+  (funcall-interactively #'org-insert-link))
+
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
   "."   '(find-file            :wk "Find file")
@@ -354,8 +362,8 @@
  "m e l" '(org-latex-export-to-latex :wk "LaTeX")
  "m e p" '(org-latex-export-to-pdf   :wk "PDF")
  ;; Link
- "m l"   '(:ignore t       :wk "Link")
- "m l l" '(org-insert-link :wk "Insert")
+ "m l"   '(:ignore t             :wk "Link")
+ "m l l" '(x8dcc/org-insert-link :wk "Insert")
  ;; Priority
  "m p"   '(:ignore t         :wk "Priority")
  "m p d" '(org-priority-down :wk "Decrease")
@@ -368,9 +376,9 @@
 
 (column-number-mode 1)
 
-(defun my-mode-line-render (left right)
-  "Return a string of `window-width' length.
-   With LEFT and RIGHT justified respectively."
+(defun x8dcc/mode-line-render (left right)
+  "Return a string of `window-width' length. With LEFT and RIGHT justified
+respectively."
   (let ((available-width
          (- (window-total-width)
             (+ (length (format-mode-line left))
