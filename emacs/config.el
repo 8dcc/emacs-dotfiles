@@ -178,66 +178,19 @@
       (reusable-frames . visible)
       (window-height . 0.35))))
 
+(defmacro my-fringe-helper-rect (name alignment w h)
+  `(define-fringe-bitmap ,name
+     (apply #'vector
+            (make-list ,h
+                       (- (ash 1 ,w) 1)))
+     nil nil ,alignment))
+
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-(fringe-helper-define
-    'git-gutter-fr:added nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
-  (fringe-helper-define
-    'git-gutter-fr:deleted nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
-  (fringe-helper-define
-    'git-gutter-fr:modified nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
+  (my-fringe-helper-rect 'git-gutter-fr:added nil 3 20)
+  (my-fringe-helper-rect 'git-gutter-fr:deleted nil 3 20)
+  (my-fringe-helper-rect 'git-gutter-fr:modified nil 3 20)
   (global-git-gutter-mode 1))
 
 (use-package drag-stuff

@@ -337,72 +337,37 @@ buffer.
 
 ** Git gutter fringe
 
-Show git changes in the fringe. We use =fringe-helper-define= to specify
-the bitmap character used in the fringe. The foreground ("X") will be
-drawn with my theme's =bg-[added/changed/removed]= faces, and with the
-default fringe background.
+Show git changes in the fringe.
+
+First of all, we create a macro for defining a fringe bitmap from a width and a
+height. This macro will calculate the number needed for each row of the bitmap
+from the width, make a list of =h= elements, and turn it into a vector. It will
+pass that, with the =name= and =alignment= to =define-fringe-bitmap=. For more
+information, see [[https://github.com/8dcc/lisp-stuff/blob/main/src/bitmap-rect.org][8dcc/lisp-stuff]].
+
+#+begin_src emacs-lisp
+(defmacro my-fringe-helper-rect (name alignment w h)
+  `(define-fringe-bitmap ,name
+     (apply #'vector
+            (make-list ,h
+                       (- (ash 1 ,w) 1)))
+     nil nil ,alignment))
+#+end_src
+
+We then use our new =my-fringe-helper-rect= to specify the width and height of the
+bitmap used in the fringe. It will be drawn with my theme's
+=bg-[added/changed/removed]= faces, and with the default fringe background.
+
+NOTE: For more information on creating the bitmaps easily with strings, see the
+=fringe-helper-define= macro.
 
 #+begin_src emacs-lisp
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-(fringe-helper-define
-    'git-gutter-fr:added nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
-  (fringe-helper-define
-    'git-gutter-fr:deleted nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
-  (fringe-helper-define
-    'git-gutter-fr:modified nil
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX"
-    "XXX")
+  (my-fringe-helper-rect 'git-gutter-fr:added nil 3 20)
+  (my-fringe-helper-rect 'git-gutter-fr:deleted nil 3 20)
+  (my-fringe-helper-rect 'git-gutter-fr:modified nil 3 20)
   (global-git-gutter-mode 1))
 #+end_src
 
