@@ -135,8 +135,12 @@
 
 (use-package vertico
   :config
-  (vertico-mode)
-  (vertico-reverse-mode))
+  (vertico-mode 1)
+  (vertico-reverse-mode 1))
+
+(use-package marginalia
+  :config
+  (marginalia-mode 1))
 
 (use-package orderless
   :config

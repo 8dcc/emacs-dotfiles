@@ -282,8 +282,18 @@ not bellow it.
 #+begin_src emacs-lisp
 (use-package vertico
   :config
-  (vertico-mode)
-  (vertico-reverse-mode))
+  (vertico-mode 1)
+  (vertico-reverse-mode 1))
+#+end_src
+
+** Marginalia
+
+For extra information on the minibuffer when using [[Vertico][vertico]].
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :config
+  (marginalia-mode 1))
 #+end_src
 
 ** Orderless
