@@ -649,8 +649,6 @@ See also [[General][General]] package.
 
 *** Org mode keybinds
 
-TODO: Add =org-*-export-as-*= (Not =to-*=)
-
 #+begin_src emacs-lisp
 (x8dcc/org-keys
  "m"     '(:ignore t :wk "Org")
