@@ -282,6 +282,9 @@
   "b s" '(basic-save-buffer :wk "Save buffer")
   "b r" '(revert-buffer :wk "Revert buffer")
   "b k" '(kill-current-buffer :wk "Kill current buffer")
+  ;; File
+  "f"   '(:ignore t :wk "File")
+  "f r" '(recentf-open :wk "Open recent")
   ;; Magit
   "g"   '(:ignore t :wk "Git")
   "g g" '(magit-status :wk "Magit status")
@@ -300,6 +303,7 @@
   "p"   '(:ignore t :wk "Project")
   "p c" '(projectile-compile-project :wk "Compile project")
   "p C" '(projectile-repeat-last-command :wk "Re-compile project")
+  "p r" '(projectile-recentf :wk "Recent files")
   ;; Search
   "s"   '(:ignore t :wk "Search")
   "s o" '(occur :wk "Search occurrences")
