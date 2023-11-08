@@ -88,6 +88,10 @@
   (general-create-definer x8dcc/leader-keys
     :states '(normal visual emacs)
     :keymaps 'override
+    :prefix "SPC")
+  (general-create-definer x8dcc/org-keys
+    :states '(normal visual emacs)
+    :keymaps 'org-mode-map
     :prefix "SPC"))
 
 (use-package which-key
@@ -331,6 +335,11 @@
   "w L" '(evil-window-move-far-right :wk "Move window right")
   "w J" '(evil-window-move-very-bottom :wk "Move window down")
   "w K" '(evil-window-move-very-top :wk "Move window up"))
+
+(x8dcc/org-keys
+ "m"   '(:ignore t :wk "Org")
+ "m t" '(org-todo :wk "Toggle todo")
+ "m T" '(org-babel-tangle :wk "Tangle current file"))
 
 (column-number-mode 1)
 

@@ -180,8 +180,16 @@ For using vi-like keybinds in other buffer types.
 
 ** General
 
-Use =SPC= as prefix for normal modes, and =M-SPC= for other modes like
-evil's insert. For the main keybinds, see [[Space keybinds][Space keybinds]].
+Define our own =SPC= keybinds.
+
+The =general-create-definer= macro is used to define our own =x8dcc/*= macro, which
+will be used later for defining the keys more easily. We specify the states for
+the keybinds (all except of evil's insert), we specify the keymaps (See
+[[elisp:(describe-variable 'general-keymap-aliases)][general-keymap-aliases]]), and the prefix. We could use =SPC= as prefix for normal
+modes, and =M-SPC= for other modes like evil's insert by specifying
+=:global-prefix "M-SPC"=.
+
+For the main keybinds, see [[Space keybinds][Space keybinds]].
 
 #+begin_src emacs-lisp
 (use-package general
@@ -190,6 +198,10 @@ evil's insert. For the main keybinds, see [[Space keybinds][Space keybinds]].
   (general-create-definer x8dcc/leader-keys
     :states '(normal visual emacs)
     :keymaps 'override
+    :prefix "SPC")
+  (general-create-definer x8dcc/org-keys
+    :states '(normal visual emacs)
+    :keymaps 'org-mode-map
     :prefix "SPC"))
 #+end_src
 
@@ -624,6 +636,15 @@ TODO: Add missing keybinds:
   "w L" '(evil-window-move-far-right :wk "Move window right")
   "w J" '(evil-window-move-very-bottom :wk "Move window down")
   "w K" '(evil-window-move-very-top :wk "Move window up"))
+#+end_src
+
+Keymaps for org mode.
+
+#+begin_src emacs-lisp
+(x8dcc/org-keys
+ "m"   '(:ignore t :wk "Org")
+ "m t" '(org-todo :wk "Toggle todo")
+ "m T" '(org-babel-tangle :wk "Tangle current file"))
 #+end_src
 
 * Modeline
