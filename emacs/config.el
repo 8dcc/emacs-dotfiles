@@ -341,9 +341,23 @@
   "w K" '(evil-window-move-very-top :wk "Move window up"))
 
 (x8dcc/org-keys
- "m"   '(:ignore t :wk "Org")
- "m t" '(org-todo :wk "Toggle todo")
- "m T" '(org-babel-tangle :wk "Tangle current file"))
+ "m"     '(:ignore t :wk "Org")
+ "m d"   '(:ignore t :wk "Date")
+ "m d d" '(org-deadline :wk "Deadline")
+ "m d s" '(org-schedule :wk "Schedule")
+ "m e"   '(:ignore t :wk "Export")
+ "m e a" '(org-ascii-export-to-ascii :wk "ASCII (text)")
+ "m e h" '(org-html-export-to-html :wk "HTML")
+ "m e l" '(org-latex-export-to-latex :wk "LaTeX")
+ "m e p" '(org-latex-export-to-pdf :wk "PDF")
+ "m l"   '(:ignore t :wk "Link")
+ "m l l" '(org-insert-link :wk "Insert")
+ "m p"   '(:ignore t :wk "Priority")
+ "m p d" '(org-priority-down :wk "Decrease")
+ "m p p" '(org-priority :wk "Insert")
+ "m p u" '(org-priority-up :wk "Increase")
+ "m t"   '(org-todo :wk "Toggle todo")
+ "m T"   '(org-babel-tangle :wk "Tangle current file"))
 
 (column-number-mode 1)
 
