@@ -236,6 +236,10 @@ and ALIGNMENT as parameters."
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
 
+(use-package clang-format
+  :config
+  (setq clang-format-style "file"))
+
 (use-package vi-tilde-fringe
   :diminish
   :hook ((prog-mode . vi-tilde-fringe-mode)
@@ -294,10 +298,11 @@ and ALIGNMENT as parameters."
   "."   '(find-file            :wk "Find file")
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
+  "b f" '(clang-format-buffer :wk "Format (clang-format)")
+  "b k" '(kill-current-buffer :wk "Kill current")
   "b l" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
-  "b k" '(kill-current-buffer :wk "Kill current")
   ;; File
   "f"   '(:ignore t    :wk "File")
   "f r" '(recentf-open :wk "Open recent")

@@ -464,6 +464,16 @@ For highlighting numeric literals.
   :hook ((prog-mode . highlight-numbers-mode)))
 #+end_src
 
+** Clang format
+
+For formatting C files. You can find my =.clang-format= in my [[https://github.com/8dcc/linux-dotfiles/tree/main/dotfiles/clang-format][8dcc/linux-dotfiles]] repo.
+
+#+begin_src emacs-lisp
+(use-package clang-format
+  :config
+  (setq clang-format-style "file"))
+#+end_src
+
 ** Vi tilde
 
 For displaying vi's =~= on EOF. Displays on the fringe.
@@ -613,10 +623,11 @@ description.
   "."   '(find-file            :wk "Find file")
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
+  "b f" '(clang-format-buffer :wk "Format (clang-format)")
+  "b k" '(kill-current-buffer :wk "Kill current")
   "b l" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
-  "b k" '(kill-current-buffer :wk "Kill current")
   ;; File
   "f"   '(:ignore t    :wk "File")
   "f r" '(recentf-open :wk "Open recent")
