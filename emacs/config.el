@@ -544,13 +544,14 @@ respectively."
 
 (require 'org-tempo)
 
-(setq org-directory (expand-file-name "~/Sync/Org/"))
+(setq org-directory (expand-file-name "~/Sync/Org/")
+      org-agenda-files (list (concat org-directory "agenda.org")))
 
 (setq org-fontify-quote-and-verse-blocks t
+      org-src-fontify-natively t
       org-hide-emphasis-markers t
       org-edit-src-content-indentation 0
-      org-src-tab-acts-natively t
-      org-src-fontify-natively t)
+      org-src-tab-acts-natively t)
 
 (add-hook 'org-mode-hook (lambda ()
                            (org-indent-mode 1)

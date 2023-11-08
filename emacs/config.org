@@ -1017,19 +1017,23 @@ Enable "<s TAB" completion.
 Org agenda location.
 
 #+begin_src emacs-lisp
-(setq org-directory (expand-file-name "~/Sync/Org/"))
+(setq org-directory (expand-file-name "~/Sync/Org/")
+      org-agenda-files (list (concat org-directory "agenda.org")))
 #+end_src
 
 Org visual settings.
 
-TODO: Extend explanation.
+The two fontify variables are used to control the styles of code, quote and
+verse blocks. The =org-hide-emphasis-markers= variable is used to hide the =*text*=
+markers, and just display bold. The last two variables are set to make sure the
+indentation acts nativelly inside source blocks.
 
 #+begin_src emacs-lisp
 (setq org-fontify-quote-and-verse-blocks t
+      org-src-fontify-natively t
       org-hide-emphasis-markers t
       org-edit-src-content-indentation 0
-      org-src-tab-acts-natively t
-      org-src-fontify-natively t)
+      org-src-tab-acts-natively t)
 #+end_src
 
 Enable =org-indent-mode=, which hides leading '*' from titles.
