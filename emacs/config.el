@@ -442,10 +442,6 @@ respectively."
           (lambda ()
             (display-line-numbers-mode 0)))
 
-(add-to-list 'display-buffer-alist
-             '("\\*eshell\\*"
-               (display-buffer-in-side-window (side . bottom))))
-
 (setq truncate-lines nil)
 (global-visual-line-mode 1)
 
@@ -460,6 +456,11 @@ respectively."
 (add-hook 'prog-mode-hook
           (lambda ()
             (display-fill-column-indicator-mode 1)))
+
+(setq org-agenda-start-on-weekday 1
+      calendar-week-start-day 1
+      org-agenda-weekend-days '(6 0)
+      calendar-weekend-days '(6 0))
 
 (setq vc-follow-symlinks t)
 
@@ -504,6 +505,10 @@ respectively."
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
+
+(add-to-list 'display-buffer-alist
+             '("\\*eshell\\*"
+               (display-buffer-in-side-window (side . bottom))))
 
 (require 'erc)
 (require 'erc-log)

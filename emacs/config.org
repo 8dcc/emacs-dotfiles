@@ -757,7 +757,11 @@ Notes:
 *** Org mode keybinds
 
 Notes:
-- See also [[*Misc org keybinds][Misc org keybinds]].
+- Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo
+  state.
+
+See also:
+- [[*Misc org keybinds][Misc org keybinds]].
 - For more information on the =x8dcc/*= functions, see [[Custom functions][Custom functions]].
 
 #+begin_src emacs-lisp
@@ -840,7 +844,7 @@ the [[Evil & Evil collection][Evil]] package
                 mode-line-misc-info))
 #+end_src
 
-* Misc visual settings
+* Line numbers
 
 Style of line numbers. If set to =nil=, line numbers are disabled, =t= for
 normal numbers and =relative= for relative line numbers.
@@ -868,14 +872,7 @@ Hide line numbers in vterm and eshell buffers.
             (display-line-numbers-mode 0)))
 #+end_src
 
-Open eshell in a side window, instead of taking over the current
-window.
-
-#+begin_src emacs-lisp
-(add-to-list 'display-buffer-alist
-             '("\\*eshell\\*"
-               (display-buffer-in-side-window (side . bottom))))
-#+end_src
+* Misc visual settings
 
 By default, don't truncate lines, wrap them (=truncate-lines=). This can
 be toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
@@ -910,6 +907,15 @@ between lines.
 (add-hook 'prog-mode-hook
           (lambda ()
             (display-fill-column-indicator-mode 1)))
+#+end_src
+
+Set monday as the first day of the week.
+
+#+begin_src emacs-lisp
+(setq org-agenda-start-on-weekday 1
+      calendar-week-start-day 1
+      org-agenda-weekend-days '(6 0)
+      calendar-weekend-days '(6 0))
 #+end_src
 
 * Misc mode settings
@@ -1022,6 +1028,15 @@ executing a previous command.
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
+#+end_src
+
+Open eshell in a side window, instead of taking over the current
+window.
+
+#+begin_src emacs-lisp
+(add-to-list 'display-buffer-alist
+             '("\\*eshell\\*"
+               (display-buffer-in-side-window (side . bottom))))
 #+end_src
 
 * ERC
