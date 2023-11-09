@@ -1099,6 +1099,7 @@ Set prompt to buffer name.
 #+end_src
 
 * Org mode
+** Basic org settings
 
 Enable "<s TAB" completion.
 
@@ -1112,6 +1113,17 @@ Org agenda location.
 (setq org-directory (expand-file-name "~/Sync/Org/")
       org-agenda-files (list (concat org-directory "agenda.org")))
 #+end_src
+
+Enable code block evaluation for the specified languages. Capitalization
+matters.
+
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)
+                             (scheme . t)))
+#+end_src
+
+** Visual org settings
 
 Org visual settings.
 
@@ -1146,15 +1158,6 @@ completion.
                                 (if (char-equal c ?<)
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
-#+end_src
-
-Enable code block evaluation for the specified languages. Capitalization
-matters.
-
-#+begin_src emacs-lisp
-(org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)
-                             (scheme . t)))
 #+end_src
 
 * C mode

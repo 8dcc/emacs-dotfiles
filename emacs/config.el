@@ -571,6 +571,10 @@ respectively."
 (setq org-directory (expand-file-name "~/Sync/Org/")
       org-agenda-files (list (concat org-directory "agenda.org")))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)
+                             (scheme . t)))
+
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t
@@ -586,10 +590,6 @@ respectively."
                                 (if (char-equal c ?<)
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages '((C . t)
-                             (scheme . t)))
 
 (setq c-default-style "k&r"
       c-basic-offset tab-width
