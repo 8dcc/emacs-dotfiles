@@ -524,11 +524,14 @@ Required by =org-html-export-to-html=.
 
 Display unicode icons instead of =*= for org headings.
 
+NOTE: Most of the cozette font icons don't render correctly in titles because
+they are bold.
+
 #+begin_src emacs-lisp
 (use-package org-bullets
   :hook ((org-mode . org-bullets-mode))
   :config
-  (setq org-bullets-bullet-list '("○" "◇" "◆")))
+  (setq org-bullets-bullet-list '("·")))
 #+end_src
 
 ** Whiteroom mode
