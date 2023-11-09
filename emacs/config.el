@@ -478,8 +478,7 @@ respectively."
 
 (add-hook 'prog-mode-hook
           (lambda ()
-            (electric-pair-mode 1)
-            (electric-indent-mode -1)))
+            (electric-pair-mode 1)))
 
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "trash"))))
