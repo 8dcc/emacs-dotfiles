@@ -591,6 +591,14 @@ respectively."
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
 
+(setq org-capture-templates
+      '(("n" "Note" entry
+         (file+headline "notes.org" "Notes")
+         "* Note from %T\n%?")
+        ("q" "Quote" entry
+         (file+headline "notes.org" "Notes")
+         "* Quote from %T\n%?\nTODO: Add quote blocks here")))
+
 (setq c-default-style "k&r"
       c-basic-offset tab-width
       c-tab-always-indent nil)
