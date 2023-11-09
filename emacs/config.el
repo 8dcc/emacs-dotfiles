@@ -19,27 +19,15 @@
 (set-fontset-font t 'unicode "Cozette 10")
 
 (set-face-attribute 'variable-pitch nil
-  :font "Fira Sans 12"
-  :weight 'light)
+  :font "Fira Sans 10"
+  :weight 'regular)
 
 (set-face-attribute 'fixed-pitch nil
   :font "Dina 8")
 
 (add-to-list 'default-frame-alist '(font . "Dina 8"))
 
-(set-face-attribute
- 'org-level-1 nil
- :family "Fira Code" :height 1.6 :inherit 'outline-1)
-
-(set-face-attribute
- 'org-level-2 nil
- :family "Fira Code" :height 1.2 :inherit 'outline-2)
-
-(set-face-attribute
- 'org-level-3 nil
- :family "Fira Code" :height 1.2 :inherit 'outline-3)
-
-(set-face-attribute 'org-done nil          :inherit 'shadow :bold t)
+(set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
 (set-face-attribute 'org-headline-done nil :inherit 'shadow)
 
 (defvar bootstrap-version)
@@ -259,6 +247,11 @@ and ALIGNMENT as parameters."
   (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 
 (use-package htmlize)
+
+(use-package org-bullets
+  :hook ((org-mode . org-bullets-mode))
+  :config
+  (setq org-bullets-bullet-list '("○" "◇" "◆")))
 
 (use-package writeroom-mode
   :config
