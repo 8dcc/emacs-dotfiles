@@ -775,6 +775,7 @@ Notes:
  ;; Link
  "m l"   '(:ignore t             :wk "Link")
  "m l l" '(x8dcc/org-insert-link :wk "Insert")
+ "m l s" '(org-store-link        :wk "Store")
  ;; Priority
  "m p"   '(:ignore t         :wk "Priority")
  "m p d" '(org-priority-down :wk "Decrease")
