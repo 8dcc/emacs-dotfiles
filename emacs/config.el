@@ -272,6 +272,12 @@ and ALIGNMENT as parameters."
 (straight-use-package
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
+(defun x8dcc/org-insert-link ()
+  "Inserts a space in the current position, and calls `org-insert-link'."
+  (interactive)
+  (insert " ")
+  (funcall-interactively #'org-insert-link))
+
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t
@@ -295,11 +301,11 @@ and ALIGNMENT as parameters."
                   (basic-save-buffer)
                   (kill-current-buffer)))
 
-(defun x8dcc/org-insert-link ()
-  "Inserts a space in the current position, and calls `org-insert-link'."
-  (interactive)
-  (insert " ")
-  (funcall-interactively #'org-insert-link))
+(keymap-set org-mode-map "C-<up>"   #'org-move-subtree-up)
+(keymap-set org-mode-map "C-<down>" #'org-move-subtree-down)
+
+(keymap-set org-mode-map "C-<left>"  #'org-shiftmetaleft)
+(keymap-set org-mode-map "C-<right>" #'org-shiftmetaright)
 
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
