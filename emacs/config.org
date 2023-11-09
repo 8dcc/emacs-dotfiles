@@ -717,6 +717,7 @@ Notes:
   "o"   '(:ignore t    :wk "Open")
   "o -" '(dired-jump   :wk "Dired")
   "o a" '(org-agenda   :wk "Org agenda")
+  "o c" '(org-capture  :wk "Org capture")
   "o e" '(eshell       :wk "Eshell")
   "o t" '(vterm-toggle :wk "Toggle vterm")
   ;; Project
@@ -1183,16 +1184,14 @@ Used to quickly store data using templates.
 See section [[https://orgmode.org/manual/Template-elements.html][10.1.3.1 Template elements]] and [[https://orgmode.org/manual/Template-expansion.html][10.1.3.2 Template expansion]] of the
 org manual for more information.
 
-TODO: Add quote blocks for =q=.
-
 #+begin_src emacs-lisp
 (setq org-capture-templates
       '(("n" "Note" entry
          (file+headline "notes.org" "Notes")
-         "* Note from %T\n%?")
-        ("q" "Quote" entry
-         (file+headline "notes.org" "Notes")
-         "* Quote from %T\n%?\nTODO: Add quote blocks here")))
+         "* %T Note\n%?")
+        ("s" "Selection" entry
+         (file+headline "notes.org" "Selections")
+         "* %T Selection from [[%F][%f]]\n%?\n#+begin_quote\n%i\n#+end_quote")))
 #+end_src
 
 * C mode

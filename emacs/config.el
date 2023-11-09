@@ -336,6 +336,7 @@ and ALIGNMENT as parameters."
   "o"   '(:ignore t    :wk "Open")
   "o -" '(dired-jump   :wk "Dired")
   "o a" '(org-agenda   :wk "Org agenda")
+  "o c" '(org-capture  :wk "Org capture")
   "o e" '(eshell       :wk "Eshell")
   "o t" '(vterm-toggle :wk "Toggle vterm")
   ;; Project
@@ -599,10 +600,10 @@ respectively."
 (setq org-capture-templates
       '(("n" "Note" entry
          (file+headline "notes.org" "Notes")
-         "* Note from %T\n%?")
-        ("q" "Quote" entry
-         (file+headline "notes.org" "Notes")
-         "* Quote from %T\n%?\nTODO: Add quote blocks here")))
+         "* %T Note\n%?")
+        ("s" "Selection" entry
+         (file+headline "notes.org" "Selections")
+         "* %T Selection from [[%F][%f]]\n%?\n#+begin_quote\n%i\n#+end_quote")))
 
 (setq c-default-style "k&r"
       c-basic-offset tab-width
