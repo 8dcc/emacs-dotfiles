@@ -976,6 +976,31 @@ display.
     (display-battery-mode 1)))
 #+end_src
 
+* Eshell
+
+Change the eshell prompt.
+
+The third parameter of =concat= is used to reset the font face after changing the
+"λ" color. If we didn't do this, the text written by the user would be the same
+color as the lambda. I don't really like this method, but I don't know any other
+way of "resetting" the face.
+
+We also need to set =eshell-prompt-regexp= to match our new prompt. This is
+important so eshell knows what part of the line was the user input when
+executing a previous command.
+
+#+begin_src emacs-lisp
+(setq eshell-prompt-function (lambda ()
+                               (concat
+                                (abbreviate-file-name (eshell/pwd))
+                                (propertize " λ" 'face '(:foreground "#8490B3"))
+                                (propertize " " 'face '(:inherit default))))
+      eshell-prompt-regexp "^[^#λ]* [#λ] ")
+#+end_src
+
+#+RESULTS:
+: ^[^#λ]* [#λ]
+
 * ERC
 
 Enable ERC features.

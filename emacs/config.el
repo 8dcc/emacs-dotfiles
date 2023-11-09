@@ -491,6 +491,13 @@ respectively."
     (display-battery-mode 0)
     (display-battery-mode 1)))
 
+(setq eshell-prompt-function (lambda ()
+                               (concat
+                                (abbreviate-file-name (eshell/pwd))
+                                (propertize " λ" 'face '(:foreground "#8490B3"))
+                                (propertize " " 'face '(:inherit default))))
+      eshell-prompt-regexp "^[^#λ]* [#λ] ")
+
 (require 'erc)
 (require 'erc-log)
 (require 'erc-stamp)
