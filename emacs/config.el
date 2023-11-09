@@ -117,7 +117,7 @@
         dashboard-page-separator "\n\n"
         dashboard-items '((recents . 10)
                           (projects . 5)
-                          (agenda . 5)))
+                          (agenda . 10)))
   :config
   (dashboard-setup-startup-hook))
 
@@ -156,6 +156,7 @@
                                    "^\\*Backtrace\\*"
                                    "^\\*evil-registers\\*"
                                    "^\\*Apropos\\*"
+                                   "^\\*scratch\\*"
                                    ;"^\\*Messages\\*"
                                    ;"^\\*Completions\\*"
                                    "^Calc:"))
@@ -303,6 +304,7 @@ and ALIGNMENT as parameters."
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
   "."   '(find-file            :wk "Find file")
+  "x"   '(scratch-buffer       :wk "Scratch buffer")
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
   "b f" '(clang-format-buffer :wk "Format (clang-format)")
@@ -327,6 +329,7 @@ and ALIGNMENT as parameters."
   ;; Open
   "o"   '(:ignore t    :wk "Open")
   "o -" '(dired-jump   :wk "Dired")
+  "o a" '(org-agenda   :wk "Org agenda")
   "o e" '(eshell       :wk "Eshell")
   "o t" '(vterm-toggle :wk "Toggle vterm")
   ;; Project
