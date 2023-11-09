@@ -516,6 +516,14 @@ in the font Dina:
 0b010010 -> #  #
 #+end_src
 
+** Htmlize
+
+Required by =org-html-export-to-html=.
+
+#+begin_src emacs-lisp
+(use-package htmlize)
+#+end_src
+
 ** Whiteroom mode
 
 Great mode for distraction-free editing.

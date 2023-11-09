@@ -258,6 +258,8 @@ and ALIGNMENT as parameters."
   :config
   (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 
+(use-package htmlize)
+
 (use-package writeroom-mode
   :config
   (setq writeroom-mode-line nil
