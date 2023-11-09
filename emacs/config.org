@@ -668,12 +668,13 @@ useful in large org files.
 (keymap-set org-mode-map "C-<down>" #'org-move-subtree-down)
 #+end_src
 
-Use =C-<left>= and =C-<right>= to change the current header's level. This is bound
-by defect to =M-S-<left>= and =M-S-<right>=.
+Use =C-S-<left>= and =C-S-<right>= to change the current header's level. This is
+bound by defect to =M-S-<left>= and =M-S-<right>=. We don't set it to =C-<left>= and
+=C-<right>= because these are used to jump between words.
 
 #+begin_src emacs-lisp
-(keymap-set org-mode-map "C-<left>"  #'org-shiftmetaleft)
-(keymap-set org-mode-map "C-<right>" #'org-shiftmetaright)
+(keymap-set org-mode-map "C-S-<left>"  #'org-shiftmetaleft)
+(keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
 #+end_src
 
 ** Space keybinds

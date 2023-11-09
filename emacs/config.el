@@ -304,8 +304,8 @@ and ALIGNMENT as parameters."
 (keymap-set org-mode-map "C-<up>"   #'org-move-subtree-up)
 (keymap-set org-mode-map "C-<down>" #'org-move-subtree-down)
 
-(keymap-set org-mode-map "C-<left>"  #'org-shiftmetaleft)
-(keymap-set org-mode-map "C-<right>" #'org-shiftmetaright)
+(keymap-set org-mode-map "C-S-<left>"  #'org-shiftmetaleft)
+(keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
 
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
