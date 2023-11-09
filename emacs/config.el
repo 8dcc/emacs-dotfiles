@@ -146,6 +146,15 @@
   :config
   (setq completion-styles '(orderless basic)))
 
+(use-package consult
+  :config
+  (setq completion-in-region-function
+		(lambda (&rest args)
+          (apply (if vertico-mode
+					 #'consult-completion-in-region
+                   #'completion--in-region)
+				 args))))
+
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
@@ -302,7 +311,8 @@ and ALIGNMENT as parameters."
   "b"   '(:ignore t           :wk "Buffer")
   "b f" '(clang-format-buffer :wk "Format (clang-format)")
   "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(buffer-menu         :wk "List")
+  "b l" '(consult-buffer      :wk "Go to (consult)")
+  "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
   ;; File
@@ -329,8 +339,9 @@ and ALIGNMENT as parameters."
   "p C" '(projectile-repeat-last-command :wk "Re-compile")
   "p r" '(projectile-recentf             :wk "Recent files")
   ;; Search
-  "s"   '(:ignore t :wk "Search")
-  "s o" '(occur     :wk "Search occurrences")
+  "s"   '(:ignore t     :wk "Search")
+  "s i" '(consult-imenu :wk "Symbol")
+  "s o" '(occur         :wk "Occurrences")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")

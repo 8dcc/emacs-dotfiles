@@ -307,6 +307,24 @@ Adds a better search completion to =completion-styles= (Used in =M-x=,
   (setq completion-styles '(orderless basic)))
 #+end_src
 
+** Consult
+
+For providing better completion buffers similar to [[Vertico][vertico]] (same author).
+
+We set =completion-in-region-function= to =#'consult-completion-in-region= for
+better completion in buffers like eshell. See [[https://github.com/minad/vertico#completion-at-point-and-completion-in-region][vertico readme]].
+
+#+begin_src emacs-lisp
+(use-package consult
+  :config
+  (setq completion-in-region-function
+		(lambda (&rest args)
+          (apply (if vertico-mode
+					 #'consult-completion-in-region
+                   #'completion--in-region)
+				 args))))
+#+end_src
+
 ** Popper
 
 For converting less-important buffers into popups. They can be toggled
@@ -623,6 +641,10 @@ description.
 
 *** Global keybinds
 
+Notes:
+- You can use =consult-recent-file= instead of =recentf-open= for previsualizing the
+  buffers, but I don't like that.
+
 #+begin_src emacs-lisp
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project")
@@ -631,7 +653,8 @@ description.
   "b"   '(:ignore t           :wk "Buffer")
   "b f" '(clang-format-buffer :wk "Format (clang-format)")
   "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(buffer-menu         :wk "List")
+  "b l" '(consult-buffer      :wk "Go to (consult)")
+  "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
   ;; File
@@ -658,8 +681,9 @@ description.
   "p C" '(projectile-repeat-last-command :wk "Re-compile")
   "p r" '(projectile-recentf             :wk "Recent files")
   ;; Search
-  "s"   '(:ignore t :wk "Search")
-  "s o" '(occur     :wk "Search occurrences")
+  "s"   '(:ignore t     :wk "Search")
+  "s i" '(consult-imenu :wk "Symbol")
+  "s o" '(occur         :wk "Occurrences")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
