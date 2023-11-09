@@ -162,12 +162,13 @@
                                    messages-mode
                                    help-mode
                                    occur-mode
+								   man-mode
                                    "^\\*Warnings\\*"
                                    "^\\*Compile-Log\\*"
-                                   ;"^\\*Messages\\*"
                                    "^\\*Backtrace\\*"
                                    "^\\*evil-registers\\*"
                                    "^\\*Apropos\\*"
+                                   ;"^\\*Messages\\*"
                                    ;"^\\*Completions\\*"
                                    "^Calc:"))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
