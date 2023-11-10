@@ -714,12 +714,12 @@ Notes:
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
-  "o"   '(:ignore t    :wk "Open")
-  "o -" '(dired-jump   :wk "Dired")
-  "o a" '(org-agenda   :wk "Org agenda")
-  "o c" '(org-capture  :wk "Org capture")
-  "o e" '(eshell       :wk "Eshell")
-  "o t" '(vterm-toggle :wk "Toggle vterm")
+  "o"   '(:ignore t          :wk "Open")
+  "o -" '(dired-jump         :wk "Dired")
+  "o a" '(org-agenda         :wk "Org agenda")
+  "o d" '(projectile-run-gdb :wk "Debugger")
+  "o e" '(eshell             :wk "Eshell")
+  "o t" '(vterm-toggle       :wk "Toggle vterm")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
