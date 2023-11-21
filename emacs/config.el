@@ -347,6 +347,7 @@ and ALIGNMENT as parameters."
   ;; Search
   "s"   '(:ignore t     :wk "Search")
   "s i" '(consult-imenu :wk "Symbol")
+  "s l" '(consult-line  :wk "Line")
   "s o" '(occur         :wk "Occurrences")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
