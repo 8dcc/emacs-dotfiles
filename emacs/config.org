@@ -876,14 +876,14 @@ Hide line numbers in vterm and eshell buffers.
 
 * Misc visual settings
 
-By default, don't truncate lines, wrap them (=truncate-lines=). This can
-be toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
+By default, don't wrap lines, truncate them (=truncate-lines=). This can be
+toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
 
-Wrap lines using words by default (=global-visual-line-mode=).
+Don't wrap lines using words by default (=global-visual-line-mode=).
 
 #+begin_src emacs-lisp
-(setq truncate-lines nil)
-(global-visual-line-mode 1)
+(setq truncate-lines t)
+(global-visual-line-mode 0)
 #+end_src
 
 Don't hide =isearch= results after some time.
