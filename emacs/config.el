@@ -444,7 +444,7 @@ respectively."
           (lambda ()
             (display-line-numbers-mode 0)))
 
-(setq truncate-lines t)
+(setq-default truncate-lines t)
 (global-visual-line-mode 0)
 
 (setq lazy-highlight-cleanup nil

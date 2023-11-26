@@ -882,7 +882,7 @@ toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
 Don't wrap lines using words by default (=global-visual-line-mode=).
 
 #+begin_src emacs-lisp
-(setq truncate-lines t)
+(setq-default truncate-lines t)
 (global-visual-line-mode 0)
 #+end_src
 
