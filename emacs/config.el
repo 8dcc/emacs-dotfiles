@@ -474,7 +474,7 @@ respectively."
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(indent-tabs-mode 0)
+(setq-default indent-tabs-mode 0)
 (setq-default tab-width 4)
 
 (add-hook 'prog-mode-hook
