@@ -164,6 +164,59 @@
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
+(use-package spell-fu
+  :hook ((org-mode      . spell-fu-mode)
+         (markdown-mode . spell-fu-mode)
+         (erc-mode      . spell-fu-mode)
+         (mail-mode     . spell-fu-mode)
+         (text-mode     . spell-fu-mode))
+  :config
+  (add-hook 'spell-fu-mode-hook
+            (lambda ()
+              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
+              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+  (add-hook 'markdown-mode
+            (lambda ()
+              (setq spell-fu-faces-exclude
+                    '(markdown-code-face
+                      markdown-html-attr-name-face
+                      markdown-html-attr-value-face
+                      markdown-html-tag-name-face
+                      markdown-inline-code-face
+                      markdown-link-face
+                      markdown-markup-face
+                      markdown-plain-url-face
+                      markdown-reference-face
+                      markdown-url-face))))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq spell-fu-faces-exclude
+                    '(org-block
+                      org-block-begin-line
+                      org-block-end-line
+                      org-cite
+                      org-cite-key
+                      org-code
+                      org-date
+                      org-footnote
+                      org-formula
+                      org-inline-src-block
+                      org-latex-and-related
+                      org-link
+                      org-meta-line
+                      org-property-value
+                      org-ref-cite-face
+                      org-special-keyword
+                      org-tag
+                      org-todo
+                      org-todo-keyword-done
+                      org-todo-keyword-habt
+                      org-todo-keyword-kill
+                      org-todo-keyword-outd
+                      org-todo-keyword-todo
+                      org-todo-keyword-wait
+                      org-verbatim)))))
+
 (use-package vterm
   :config
   (setq shell-file-name "/bin/bash"
@@ -185,23 +238,6 @@
       (direction . bottom)
       (reusable-frames . visible)
       (window-height . 0.35))))
-
-(defmacro x8dcc/fringe-helper-rect (name alignment w h)
-  "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
-and ALIGNMENT as parameters."
-  `(define-fringe-bitmap ,name
-     (apply #'vector
-            (make-list ,h
-                       (- (ash 1 ,w) 1)))
-     nil nil ,alignment))
-
-(use-package git-gutter-fringe
-  :diminish git-gutter-mode
-  :config
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:added nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:deleted nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
-  (global-git-gutter-mode 1))
 
 (use-package drag-stuff
   :diminish
@@ -253,6 +289,23 @@ and ALIGNMENT as parameters."
   :hook ((org-mode . org-bullets-mode))
   :config
   (setq org-bullets-bullet-list '("·")))
+
+(defmacro x8dcc/fringe-helper-rect (name alignment w h)
+  "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
+and ALIGNMENT as parameters."
+  `(define-fringe-bitmap ,name
+     (apply #'vector
+            (make-list ,h
+                       (- (ash 1 ,w) 1)))
+     nil nil ,alignment))
+
+(use-package git-gutter-fringe
+  :diminish git-gutter-mode
+  :config
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:added nil 3 30)
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:deleted nil 3 30)
+  (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
+  (global-git-gutter-mode 1))
 
 (use-package writeroom-mode
   :config
