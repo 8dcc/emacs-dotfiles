@@ -581,6 +581,8 @@ respectively."
  'org-babel-load-languages '((C . t)
                              (scheme . t)))
 
+(setq org-html-postamble nil)
+
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t

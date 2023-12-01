@@ -1140,6 +1140,12 @@ matters.
                              (scheme . t)))
 #+end_src
 
+Disable footers in HTML exports.
+
+#+begin_src emacs-lisp
+(setq org-html-postamble nil)
+#+end_src
+
 ** Visual org settings
 
 Org visual settings.
