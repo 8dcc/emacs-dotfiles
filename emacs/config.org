@@ -955,7 +955,7 @@ Delete trailing whitespaces on buffer save.
 Use spaces instead of tabs. Should be the default already.
 
 #+begin_src emacs-lisp
-(setq-default indent-tabs-mode 0)
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 #+end_src
 
