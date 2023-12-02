@@ -428,30 +428,33 @@ and ALIGNMENT as parameters."
   "w K" '(evil-window-move-very-top    :wk "Move current up"))
 
 (x8dcc/org-keys
- "m"     '(:ignore t :wk "Org")
- ;; Date
- "m d"   '(:ignore t    :wk "Date")
- "m d d" '(org-deadline :wk "Deadline")
- "m d s" '(org-schedule :wk "Schedule")
- ;; Export
- "m e"   '(:ignore t                 :wk "Export")
- "m e a" '(org-ascii-export-to-ascii :wk "ASCII (text)")
- "m e h" '(org-html-export-to-html   :wk "HTML")
- "m e l" '(org-latex-export-to-latex :wk "LaTeX")
- "m e p" '(org-latex-export-to-pdf   :wk "PDF")
- ;; Link
- "m l"   '(:ignore t             :wk "Link")
- "m l l" '(x8dcc/org-insert-link :wk "Insert")
- "m l s" '(org-store-link        :wk "Store")
- ;; Priority
- "m p"   '(:ignore t         :wk "Priority")
- "m p d" '(org-priority-down :wk "Decrease")
- "m p p" '(org-priority      :wk "Insert")
- "m p u" '(org-priority-up   :wk "Increase")
- ;; Todo
- "m t"   '(org-todo :wk "Toggle todo")
- ;; Tangle
- "m T"   '(org-babel-tangle :wk "Tangle current file"))
+  ;; Toggle -> Org inline images
+  "t i"   '(org-toggle-inline-images :wk "Inline images")
+  ;; Org
+  "m"     '(:ignore t :wk "Org")
+  ;; Org -> Date
+  "m d"   '(:ignore t    :wk "Date")
+  "m d d" '(org-deadline :wk "Deadline")
+  "m d s" '(org-schedule :wk "Schedule")
+  ;; Org -> Export
+  "m e"   '(:ignore t                 :wk "Export")
+  "m e a" '(org-ascii-export-to-ascii :wk "ASCII (text)")
+  "m e h" '(org-html-export-to-html   :wk "HTML")
+  "m e l" '(org-latex-export-to-latex :wk "LaTeX")
+  "m e p" '(org-latex-export-to-pdf   :wk "PDF")
+  ;; Org -> Link
+  "m l"   '(:ignore t             :wk "Link")
+  "m l l" '(x8dcc/org-insert-link :wk "Insert")
+  "m l s" '(org-store-link        :wk "Store")
+  ;; Org -> Priority
+  "m p"   '(:ignore t         :wk "Priority")
+  "m p d" '(org-priority-down :wk "Decrease")
+  "m p p" '(org-priority      :wk "Insert")
+  "m p u" '(org-priority-up   :wk "Increase")
+  ;; Org -> Todo
+  "m t"   '(org-todo :wk "Toggle todo")
+  ;; Org -> Tangle
+  "m T"   '(org-babel-tangle :wk "Tangle current file"))
 
 (column-number-mode 1)
 
@@ -634,7 +637,8 @@ respectively."
  'org-babel-load-languages '((C . t)
                              (scheme . t)))
 
-(setq org-html-postamble nil)
+(setq org-html-postamble nil
+      org-export-time-stamp-file nil)
 
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
