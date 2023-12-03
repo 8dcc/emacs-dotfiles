@@ -594,7 +594,7 @@ respectively."
       ;; Enable logging
       erc-enable-logging t
       ;; Directory for logs
-      erc-log-channels-directory "~/.erc-log"
+      erc-log-channels-directory (concat user-emacs-directory "erc-log")
       ;; When to write logs
       erc-log-write-after-send t
       erc-log-write-after-insert t
