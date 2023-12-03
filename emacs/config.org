@@ -1215,6 +1215,31 @@ Disable footers in HTML exports.
       org-export-time-stamp-file nil)
 #+end_src
 
+Enable colored links in PDF exports.
+
+#+begin_src emacs-lisp
+(setq org-latex-hyperref-template
+      "\\hypersetup{
+          pdfauthor={%a},
+          pdftitle={%t},
+          pdfkeywords={%k},
+          pdfsubject={%d},
+          pdfcreator={%c},
+          pdflang={%L},
+          colorlinks=true
+       }\n")
+#+end_src
+
+NOTE: You will probably need the following packages for exporting PDF files:
+
+#+begin_src bash
+# Arch:
+sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaingeneric
+
+# Gentoo (untested):
+sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
+#+end_src
+
 ** Visual org settings
 
 Org visual settings.

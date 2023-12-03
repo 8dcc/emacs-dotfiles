@@ -640,6 +640,17 @@ respectively."
 (setq org-html-postamble nil
       org-export-time-stamp-file nil)
 
+(setq org-latex-hyperref-template
+      "\\hypersetup{
+          pdfauthor={%a},
+          pdftitle={%t},
+          pdfkeywords={%k},
+          pdfsubject={%d},
+          pdfcreator={%c},
+          pdflang={%L},
+          colorlinks=true
+       }\n")
+
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t
