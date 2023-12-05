@@ -1249,7 +1249,7 @@ Org visual settings.
 The two fontify variables are used to control the styles of code, quote and
 verse blocks. The =org-hide-emphasis-markers= variable is used to hide the =*text*=
 markers, and just display bold. The last two variables are set to make sure the
-indentation acts nativelly inside source blocks.
+indentation acts natively inside source blocks.
 
 #+begin_src emacs-lisp
 (setq org-fontify-quote-and-verse-blocks t
