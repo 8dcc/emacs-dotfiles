@@ -400,10 +400,12 @@ and ALIGNMENT as parameters."
   "p p" '(projectile-switch-project      :wk "Recent projects")
   "p r" '(projectile-recentf             :wk "Recent files")
   ;; Search
-  "s"   '(:ignore t     :wk "Search")
-  "s i" '(consult-imenu :wk "Symbol")
-  "s l" '(consult-line  :wk "Line")
-  "s o" '(occur         :wk "Occurrences")
+  "s"   '(:ignore t          :wk "Search")
+  "s h" '(highlight-regexp   :wk "Highlight")
+  "s H" '(unhighlight-regexp :wk "Unhighlight")
+  "s i" '(consult-imenu      :wk "Symbol")
+  "s l" '(consult-line       :wk "Line")
+  "s o" '(occur              :wk "Occurrences")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
