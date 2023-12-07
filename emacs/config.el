@@ -397,6 +397,7 @@ and ALIGNMENT as parameters."
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
   "p C" '(projectile-repeat-last-command :wk "Re-compile")
+  "p p" '(projectile-switch-project      :wk "Recent projects")
   "p r" '(projectile-recentf             :wk "Recent files")
   ;; Search
   "s"   '(:ignore t     :wk "Search")
