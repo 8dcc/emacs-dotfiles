@@ -475,6 +475,21 @@ respectively."
             (list (format (format "%%%ds" available-width) ""))
             right)))
 
+(defun x8dcc/mode-line-region-chars (prefix middle subfix)
+  "If there are characters in the selection, return a string with the number of
+characters and lines, between the `prefix' and `subfix' arguments. If the region
+takes up more than one line, it will also display the `middle' argument right
+after the number of characters, followed by the number of lines."
+  (if (use-region-p)
+      (let ((characters (abs (- (region-end) (region-beginning))))
+            (lines (abs (- (line-number-at-pos (region-end))
+                           (line-number-at-pos (region-beginning))))))
+        (concat prefix
+                (number-to-string characters)
+                (if (> lines 0)
+                    (concat middle (number-to-string lines)))
+                subfix))))
+
 (setq-default mode-line-format
               '("%e  λ "
                 mode-line-front-space
@@ -487,6 +502,7 @@ respectively."
                 mode-line-buffer-identification
                 "  "
                 mode-line-position
+                (:eval (x8dcc/mode-line-region-chars "(Sel " " L" ") "))
                 "  "
                 mode-line-modes
                 (vc-mode vc-mode)
