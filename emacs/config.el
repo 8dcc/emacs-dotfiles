@@ -487,7 +487,7 @@ after the number of characters, followed by the number of lines."
         (concat prefix
                 (number-to-string characters)
                 (if (> lines 0)
-                    (concat middle (number-to-string (+ lines 1)))
+                    (concat middle (number-to-string (+ lines 1))))
                 subfix))))
 
 (setq-default mode-line-format
