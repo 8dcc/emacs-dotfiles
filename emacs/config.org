@@ -149,6 +149,10 @@ We set =evil-want-C-i-jump= to =nil= to avoid some =TAB= problems.
 We also set =evil-mode-line-format= for displaying the evil mode before the buffer
 name.
 
+We alias =forward-evil-word= to =forward-evil-symbol= and set
+=evil-symbol-word-search= so using =b= and =e= ignores =_= and =-= depending on the
+language's symbols.
+
 #+begin_src emacs-lisp
 (use-package evil
   :init
@@ -159,7 +163,10 @@ name.
         evil-undo-system 'undo-redo
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
-  (evil-mode))
+  (evil-mode)
+  :config
+  (defalias #'forward-evil-word #'forward-evil-symbol)
+  (setq-default evil-symbol-word-search t))
 #+end_src
 
 For using vi-like keybinds in other buffer types.

@@ -61,7 +61,10 @@
         evil-undo-system 'undo-redo
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
-  (evil-mode))
+  (evil-mode)
+  :config
+  (defalias #'forward-evil-word #'forward-evil-symbol)
+  (setq-default evil-symbol-word-search t))
 
 (use-package evil-collection
   :diminish evil-collection-unimpaired-mode
