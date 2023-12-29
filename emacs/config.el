@@ -83,6 +83,10 @@
   (general-create-definer x8dcc/org-keys
     :states '(normal visual emacs)
     :keymaps 'org-mode-map
+    :prefix "SPC")
+  (general-create-definer x8dcc/c-keys
+    :states '(normal visual emacs)
+    :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
     :prefix "SPC"))
 
 (use-package which-key
@@ -370,7 +374,6 @@ and ALIGNMENT as parameters."
   "x"   '(scratch-buffer       :wk "Scratch buffer")
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
-  "b f" '(clang-format-buffer :wk "Format (clang-format)")
   "b k" '(kill-current-buffer :wk "Kill current")
   "b l" '(consult-buffer      :wk "Go to (consult)")
   "b L" '(buffer-menu         :wk "List")
@@ -463,6 +466,10 @@ and ALIGNMENT as parameters."
   "m t"   '(org-todo :wk "Toggle todo")
   ;; Org -> Tangle
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
+
+(x8dcc/c-keys
+  ;; Buffer -> Format
+  "b f" '(clang-format-buffer :wk "Format"))
 
 (column-number-mode 1)
 

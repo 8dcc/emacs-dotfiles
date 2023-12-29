@@ -204,6 +204,10 @@ For the main keybinds, see [[Space keybinds][Space keybinds]].
   (general-create-definer x8dcc/org-keys
     :states '(normal visual emacs)
     :keymaps 'org-mode-map
+    :prefix "SPC")
+  (general-create-definer x8dcc/c-keys
+    :states '(normal visual emacs)
+    :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
     :prefix "SPC"))
 #+end_src
 
@@ -767,7 +771,6 @@ Notes:
   "x"   '(scratch-buffer       :wk "Scratch buffer")
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
-  "b f" '(clang-format-buffer :wk "Format (clang-format)")
   "b k" '(kill-current-buffer :wk "Kill current")
   "b l" '(consult-buffer      :wk "Go to (consult)")
   "b L" '(buffer-menu         :wk "List")
@@ -841,7 +844,7 @@ Notes:
 
 See also:
 - [[*Misc org keybinds][Misc org keybinds]].
-- For more information on the =x8dcc/*= functions, see [[Custom functions][Custom functions]].
+- For more information on the =x8dcc/*= functions, see [[*General][General]] and [[Custom functions][Custom functions]].
 
 #+begin_src emacs-lisp
 (x8dcc/org-keys
@@ -872,6 +875,22 @@ See also:
   "m t"   '(org-todo :wk "Toggle todo")
   ;; Org -> Tangle
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
+#+end_src
+
+*** C mode keybinds
+
+Keybinds for =c-mode-map=, =c++-mode-map=, =java-mode-map=, =js-mode-map= and
+=js-json-mode-map=.
+
+See also:
+- [[*C mode][C mode]].
+- For more information on the =x8dcc/*= functions, see [[*General][General]] and
+  [[Custom functions][Custom functions]].
+
+#+begin_src emacs-lisp
+(x8dcc/c-keys
+  ;; Buffer -> Format
+  "b f" '(clang-format-buffer :wk "Format"))
 #+end_src
 
 * Modeline
