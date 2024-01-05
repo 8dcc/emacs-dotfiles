@@ -495,7 +495,7 @@ after the number of characters, followed by the number of lines."
             (lines (abs (- (line-number-at-pos (region-end))
                            (line-number-at-pos (region-beginning))))))
         (concat prefix
-                (number-to-string characters)
+                (number-to-string (+ characters 1))
                 (if (> lines 0)
                     (concat middle (number-to-string (+ lines 1))))
                 subfix))))
