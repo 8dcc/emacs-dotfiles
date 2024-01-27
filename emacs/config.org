@@ -495,7 +495,9 @@ For displaying colors in the background of RGB strings.
 #+begin_src emacs-lisp
 (use-package rainbow-mode
   :diminish
-  :hook prog-mode)
+  :hook ((html-mode . rainbow-mode)
+         (css-mode  . rainbow-mode)
+         (js-mode   . rainbow-mode)))
 #+end_src
 
 ** Rainbow delimiters

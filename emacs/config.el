@@ -269,7 +269,9 @@
 
 (use-package rainbow-mode
   :diminish
-  :hook prog-mode)
+  :hook ((html-mode . rainbow-mode)
+         (css-mode  . rainbow-mode)
+         (js-mode   . rainbow-mode)))
 
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode  . rainbow-delimiters-mode)
