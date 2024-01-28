@@ -98,8 +98,8 @@ Change =org-done= faces. The code for changing the org titles is commented.
 * Packages
 ** Package managers
 
-Install [[about:blank][straight.el]] (with [[https://github.com/jwiegley/use-package][use-package]]) for more convenience. For more
-information, see: [[https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/][Link]]
+Bootstrap [[about:blank][straight.el]], which will be used as a "back-end" for =use-package=. For
+more information, see: [[https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/][Link]].
 
 #+begin_src emacs-lisp
 (defvar bootstrap-version)
@@ -117,15 +117,18 @@ information, see: [[https://web.archive.org/web/20230522053703/https://jeffkreef
   (load bootstrap-file nil 'nomessage))
 #+end_src
 
-Install =use-package= (through =straight.el=) for more
-convenience. Setting =straight-use-package-by-default= tells use-package
-to always use straight.el to install packages (instead of emacs'
-package.el), even without specifying =:straight t=.
+Install [[https://github.com/jwiegley/use-package][use-package]] (through =straight.el=) for more convenience. Setting
+=straight-use-package-by-default= tells use-package to always use straight.el to
+install packages (instead of emacs' package.el), even without specifying
+=:straight t=.
 
 #+begin_src emacs-lisp
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 #+end_src
+
+See also [[file:./straight/versions/default.el][versions/default.el]], the resulting [[https://github.com/radian-software/straight.el#configuration-reproducibility][lockfile]] of
+=M-x straight-freeze-versions=.
 
 ** Diminish
 
