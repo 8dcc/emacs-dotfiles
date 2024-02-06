@@ -568,6 +568,8 @@ after the number of characters, followed by the number of lines."
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+(setq-default indent-line-function #'tab-to-tab-stop)
+
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))

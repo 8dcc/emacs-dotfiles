@@ -1086,6 +1086,12 @@ Use spaces instead of tabs. Should be the default already.
 (setq-default tab-width 4)
 #+end_src
 
+Don't use =#'indent-relative= for indentation by default.
+
+#+begin_src emacs-lisp
+(setq-default indent-line-function #'tab-to-tab-stop)
+#+end_src
+
 Auto-close brackets.
 
 #+begin_src emacs-lisp
