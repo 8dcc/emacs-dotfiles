@@ -25,7 +25,7 @@
  ("magit" . "2b02bfb0495bf738e006d82f3a233e8f511b90b8")
  ("marginalia" . "e4ff0838da33bf5102ee009ff28d541f0b51c9a3")
  ("melpa" . "d1e2861bb7c39ad2741db8652b7ddfedf93da61e")
- ("nasm-mode" . "df98737e264624012053fd2674fbb90b6d3fe2d6")
+ ("nasm-mode" . "07a2b43868cd3ed3bff685549d1c01b355b2115c")
  ("nongnu-elpa" . "e5adab3409abfa69ecbaeb07bb88d48f78e03d3f")
  ("orderless" . "89eb3775daa53cfb52ad03015410c23f28c72d30")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
