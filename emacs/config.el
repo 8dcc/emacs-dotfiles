@@ -587,11 +587,12 @@ after the number of characters, followed by the number of lines."
       kept-old-versions 5)
 
 (require 'battery)
-(let ((battstr (battery-format "%B" (funcall battery-status-function))))
-  (if (or (string= "N/A" battstr)
-          (string= "unknown" battstr))
-    (display-battery-mode 0)
-    (display-battery-mode 1)))
+(if (not (null battery-status-function))
+    (let ((battstr (battery-format "%B" (funcall battery-status-function))))
+      (if (or (string= "N/A" battstr)
+              (string= "unknown" battstr))
+          (display-battery-mode 0)
+        (display-battery-mode 1))))
 
 (setq eshell-prompt-function (lambda ()
                                (concat
