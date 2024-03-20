@@ -357,7 +357,13 @@ and ALIGNMENT as parameters."
 
 (global-set-key (kbd "C-S-v") #'yank)
 
-(global-set-key (kbd "<backtab>") #'evil-shift-left)
+(global-set-key (kbd "<backtab>")
+                (lambda () (interactive)
+                  ;; If there is a region active, use `evil-shift-left',
+                  ;; otherwise shift the current line.
+                  (if (use-region-p)
+                      (evil-shift-left (region-beginning) (region-end))
+                    (evil-shift-left-line 1))))
 
 (global-set-key [remap evil-quit] #'kill-current-buffer)
 

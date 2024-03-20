@@ -726,10 +726,14 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
 more settings related to indentation and =<tab>=, see [[*Misc mode settings][Misc mode settings]].
 
-TODO: Use =evil-shift-left= or =evil-shift-left-line= depending on region.
-
 #+begin_src emacs-lisp
-(global-set-key (kbd "<backtab>") #'evil-shift-left)
+(global-set-key (kbd "<backtab>")
+                (lambda () (interactive)
+                  ;; If there is a region active, use `evil-shift-left',
+                  ;; otherwise shift the current line.
+                  (if (use-region-p)
+                      (evil-shift-left (region-beginning) (region-end))
+                    (evil-shift-left-line 1))))
 #+end_src
 
 Remap evil's =:q= to =SPC b k.=
@@ -918,7 +922,7 @@ Display line and column number on modeline, not just line.
 #+end_src
 
 This function is used to justify elements of the modeline to the
-left. It's a bit unreliable, so it's currently unused.
+left. *It's a bit unreliable, so it's currently unused.*
 
 #+begin_src emacs-lisp
 (defun x8dcc/mode-line-render (left right)
