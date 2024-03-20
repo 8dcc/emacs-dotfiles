@@ -723,6 +723,15 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 (global-set-key (kbd "C-S-v") #'yank)
 #+end_src
 
+Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
+more settings related to indentation and =<tab>=, see [[*Misc mode settings][Misc mode settings]].
+
+TODO: Use =evil-shift-left= or =evil-shift-left-line= depending on region.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "<backtab>") #'evil-shift-left)
+#+end_src
+
 Remap evil's =:q= to =SPC b k.=
 
 #+begin_src emacs-lisp
@@ -981,7 +990,7 @@ normal numbers and =relative= for relative line numbers.
 If =display-line-numbers-width-start= is =t=, the width of the line
 numbers will be calculated depending on the lines of each buffer.
 
-TODO: This doesn't always work.
+TODO: Does this always work?
 
 #+begin_src emacs-lisp
 (global-display-line-numbers-mode 1)
@@ -1086,13 +1095,21 @@ Use spaces instead of tabs. Should be the default already.
 (setq-default tab-width 4)
 #+end_src
 
-Don't use =#'indent-relative= for indentation by default.
+Use =#'indent-relative-first-indent-point= instead of =#'indent-relative= for more
+intuitive indentation.
 
 #+begin_src emacs-lisp
-(setq-default indent-line-function #'tab-to-tab-stop)
+(setq-default indent-line-function #'indent-relative-first-indent-point)
 #+end_src
 
-Auto-close brackets.
+Set =tab-always-indent= to =nil= instead of =t= so it inserts literal tabs (or spaces)
+after trying to indent the line.
+
+#+begin_src emacs-lisp
+(setq tab-always-indent nil)
+#+end_src
+
+Enable auto-closing of brackets with =electric-pair-mode=.
 
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook

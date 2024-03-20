@@ -357,6 +357,8 @@ and ALIGNMENT as parameters."
 
 (global-set-key (kbd "C-S-v") #'yank)
 
+(global-set-key (kbd "<backtab>") #'evil-shift-left)
+
 (global-set-key [remap evil-quit] #'kill-current-buffer)
 
 (global-set-key [remap evil-save-and-close]
@@ -568,7 +570,9 @@ after the number of characters, followed by the number of lines."
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(setq-default indent-line-function #'tab-to-tab-stop)
+(setq-default indent-line-function #'indent-relative-first-indent-point)
+
+(setq tab-always-indent nil)
 
 (add-hook 'prog-mode-hook
           (lambda ()
