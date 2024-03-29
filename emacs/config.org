@@ -1271,6 +1271,41 @@ Set prompt to buffer name.
                    (concat "[" (buffer-name) "]:")))
 #+end_src
 
+* Mail
+
+Set SMTP encryption, server and port.
+
+#+begin_src emacs-lisp
+(setq smtpmail-stream-type 'ssl
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 465)
+#+end_src
+
+For your credentials, you will need to create =~/.authinfo.gpg=. Generate a GPG
+key pair with:
+
+#+begin_src bash
+gpg --quick-generate-key "My Name <my@email.address>"
+#+end_src
+
+Then, add your credentials to =~/.authinfo= in the following format. Keep in mind
+that =PASSWORD= is not the password you use to log-in to google, but an *App
+password*. Create one [[https://myaccount.google.com/apppasswords][here]].
+
+#+begin_src text
+machine smtp.gmail.com login EMAIL password "PASSWORD" port 465
+#+end_src
+
+Then encrypt the file using =M-x epa-encrypt-file= or by running:
+
+#+begin_src bash
+gpg -c ~/.authinfo
+#+end_src
+
+You can then delete the original =~/.authinfo= file.
+
+For more information, see [[https://www.emacswiki.org/emacs/GnusAuthinfo][EmacsWiki]].
+
 * Org mode
 ** Basic org settings
 

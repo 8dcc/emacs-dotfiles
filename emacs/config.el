@@ -677,6 +677,10 @@ after the number of characters, followed by the number of lines."
 (setq erc-prompt (lambda ()
                    (concat "[" (buffer-name) "]:")))
 
+(setq smtpmail-stream-type 'ssl
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 465)
+
 (require 'org-tempo)
 
 (setq org-directory (expand-file-name "~/Sync/Org/")
