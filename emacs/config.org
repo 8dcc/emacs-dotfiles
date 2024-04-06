@@ -1281,6 +1281,13 @@ Set SMTP encryption, server and port.
       smtpmail-smtp-service 465)
 #+end_src
 
+This is needed so it asks for password in the minibuffer. I needed it to avoid a
+=gpg= error when running [[*ERC][ERC]].
+
+#+begin_src emacs-lisp
+(setq epa-pinentry-mode 'loopback)
+#+end_src
+
 For your credentials, you will need to create =~/.authinfo.gpg=. Generate a GPG
 key pair with:
 

@@ -681,6 +681,8 @@ after the number of characters, followed by the number of lines."
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465)
 
+(setq epa-pinentry-mode 'loopback)
+
 (require 'org-tempo)
 
 (setq org-directory (expand-file-name "~/Sync/Org/")
