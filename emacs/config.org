@@ -663,7 +663,7 @@ functionality. Uses a =straight.el= recipe.
 #+end_src
 
 * Input
-** Custom functions
+** Custom input functions
 
 Small wrappers used for the keybinds.
 
@@ -865,7 +865,7 @@ Notes:
 
 See also:
 - [[*Misc org keybinds][Misc org keybinds]].
-- For more information on the =x8dcc/*= functions, see [[*General][General]] and [[Custom functions][Custom functions]].
+- For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Custom input functions][Custom input functions]].
 
 #+begin_src emacs-lisp
 (x8dcc/org-keys
@@ -1405,6 +1405,28 @@ completion.
                                 (if (char-equal c ?<)
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
+#+end_src
+
+Create an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][overlay]] for setting as invisible the commas that are used to escape
+asterisks in org buffers. Credits to [[https://emacs.stackexchange.com/a/70127/40363][StackOverlow answer]].
+
+NOTE: This is currently not called in any hook to avoid a performance impact.
+
+#+begin_src emacs-lisp
+(defun x8dcc/make-invisible (regex &optional group-num)
+  "Add all ocurrences of `regex' to an invisible overlay. If `group-num' is
+supplied, it will only add the N-th parentheses group of the regex to the
+overlay."
+  (interactive "sRegex:")
+  (unless group-num (setq group-num 0))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward regex nil t)
+      (setq invisible-overlay (make-overlay (match-beginning group) (match-end group)))
+      (overlay-put invisible-overlay 'invisible t))))
+
+;; NOTE: For hiding org commas, use:
+;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 #+end_src
 
 ** Org capture

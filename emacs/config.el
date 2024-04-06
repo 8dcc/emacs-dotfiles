@@ -722,6 +722,21 @@ after the number of characters, followed by the number of lines."
                                   t
                                   (,electric-pair-inhibit-predicate c))))))
 
+(defun x8dcc/make-invisible (regex &optional group-num)
+  "Add all ocurrences of `regex' to an invisible overlay. If `group-num' is
+supplied, it will only add the N-th parentheses group of the regex to the
+overlay."
+  (interactive "sRegex:")
+  (unless group-num (setq group-num 0))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward regex nil t)
+      (setq invisible-overlay (make-overlay (match-beginning group) (match-end group)))
+      (overlay-put invisible-overlay 'invisible t))))
+
+;; NOTE: For hiding org commas, use:
+;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
+
 (setq org-capture-templates
       '(("n" "Note" entry
          (file+headline "notes.org" "Notes")
