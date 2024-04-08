@@ -616,6 +616,11 @@ after the number of characters, followed by the number of lines."
              '("\\*eshell\\*"
                (display-buffer-in-side-window (side . bottom))))
 
+(setq dired-listing-switches "-l --all --sort=version --group-directories-first --human-readable")
+
+(setq dired-recursive-copies  'top
+      dired-recursive-deletes 'top)
+
 (require 'erc)
 (require 'erc-log)
 (require 'erc-stamp)
