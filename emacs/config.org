@@ -1340,8 +1340,10 @@ Enable "<s TAB" completion.
 Org agenda location.
 
 #+begin_src emacs-lisp
-(setq org-directory (expand-file-name "~/Sync/Org/")
-      org-agenda-files (list (concat org-directory "agenda.org")))
+(let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
+  (if (file-directory-p expanded-org-directory)
+      (setq org-directory expanded-org-directory
+            org-agenda-files (list (concat org-directory "agenda.org")))))
 #+end_src
 
 Enable code block evaluation for the specified languages. Capitalization

@@ -690,8 +690,10 @@ after the number of characters, followed by the number of lines."
 
 (require 'org-tempo)
 
-(setq org-directory (expand-file-name "~/Sync/Org/")
-      org-agenda-files (list (concat org-directory "agenda.org")))
+(let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
+  (if (file-directory-p expanded-org-directory)
+      (setq org-directory expanded-org-directory
+            org-agenda-files (list (concat org-directory "agenda.org")))))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
