@@ -439,7 +439,14 @@ and ALIGNMENT as parameters."
   "w H" '(evil-window-move-far-left    :wk "Move current left")
   "w L" '(evil-window-move-far-right   :wk "Move current right")
   "w J" '(evil-window-move-very-bottom :wk "Move current down")
-  "w K" '(evil-window-move-very-top    :wk "Move current up"))
+  "w K" '(evil-window-move-very-top    :wk "Move current up")
+  ;; Fold
+  "z"   '(:ignore t        :wk "Fold")
+  "z a" '(evil-toggle-fold :wk "Toggle")
+  "z c" '(evil-close-fold  :wk "Close")
+  "z m" '(evil-close-folds :wk "Close all")
+  "z o" '(evil-open-fold   :wk "Open")
+  "z r" '(evil-open-folds  :wk "Open all"))
 
 (x8dcc/org-keys
   ;; Toggle -> Org inline images
@@ -472,7 +479,8 @@ and ALIGNMENT as parameters."
 
 (x8dcc/c-keys
   ;; Buffer -> Format
-  "b f" '(clang-format-buffer :wk "Format"))
+  "b f" '(clang-format-buffer :wk "Format")
+  "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 
 (column-number-mode 1)
 
@@ -741,3 +749,6 @@ overlay."
 (setq c-default-style "k&r"
       c-basic-offset tab-width
       c-tab-always-indent nil)
+
+(setq hide-ifdef-initially t
+      hide-ifdef-lines t)

@@ -387,7 +387,6 @@ filename.
   (emms-mode-line-mode 0))
 #+end_src
 
-
 ** Spelling
 
 We will use the =spell-fu= package for normal spelling. I don't use any packages
@@ -395,11 +394,11 @@ for code completion or code syntax.
 
 We will use both =en_US= and =es= dictionaries.
 
-TODO: Make sure =aspell= is installed in the system before trying to add
-dictionaries.
-
 We also exclude a list of faces when using to avoid highlighting source code
 blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/doomemacs/blob/a89d4b7df556bb8b309d1c23e0b60404e750f156/modules/checkers/spell/config.el#L85][doom emacs]] repository.
+
+TODO: Check if =aspell= is installed in the system before trying to add
+dictionaries.
 
 #+begin_src emacs-lisp
 (use-package spell-fu
@@ -851,7 +850,14 @@ Notes:
   "w H" '(evil-window-move-far-left    :wk "Move current left")
   "w L" '(evil-window-move-far-right   :wk "Move current right")
   "w J" '(evil-window-move-very-bottom :wk "Move current down")
-  "w K" '(evil-window-move-very-top    :wk "Move current up"))
+  "w K" '(evil-window-move-very-top    :wk "Move current up")
+  ;; Fold
+  "z"   '(:ignore t        :wk "Fold")
+  "z a" '(evil-toggle-fold :wk "Toggle")
+  "z c" '(evil-close-fold  :wk "Close")
+  "z m" '(evil-close-folds :wk "Close all")
+  "z o" '(evil-open-fold   :wk "Open")
+  "z r" '(evil-open-folds  :wk "Open all"))
 #+end_src
 
 *** Org mode keybinds
@@ -908,7 +914,8 @@ See also:
 #+begin_src emacs-lisp
 (x8dcc/c-keys
   ;; Buffer -> Format
-  "b f" '(clang-format-buffer :wk "Format"))
+  "b f" '(clang-format-buffer :wk "Format")
+  "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 #+end_src
 
 * Modeline
@@ -1464,4 +1471,11 @@ Enable explicit tabs for C code (if not on beginning of line).
 (setq c-default-style "k&r"
       c-basic-offset tab-width
       c-tab-always-indent nil)
+#+end_src
+
+When using the =SPC z i= keybind, also call =hide-ifdefs=.
+
+#+begin_src emacs-lisp
+(setq hide-ifdef-initially t
+      hide-ifdef-lines t)
 #+end_src
