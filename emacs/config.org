@@ -190,9 +190,9 @@ Define our own =SPC= keybinds.
 The =general-create-definer= macro is used to define our own =x8dcc/*= macro, which
 will be used later for defining the keys more easily. We specify the states for
 the keybinds (all except of evil's insert), we specify the keymaps (See
-[[elisp:(describe-variable 'general-keymap-aliases)][general-keymap-aliases]]), and the prefix. We could use =SPC= as prefix for normal
-modes, and =M-SPC= for other modes like evil's insert by specifying
-=:global-prefix "M-SPC"=.
+[[elisp:(describe-variable 'general-keymap-aliases)][general-keymap-aliases]]), and the prefix. We will use =SPC= as prefix for normal
+modes, and =M-SPC= for other modes like /emacs/ or evil's /insert/. See also
+=general-non-normal-states=.
 
 For the main keybinds, see [[Space keybinds][Space keybinds]].
 
@@ -201,17 +201,20 @@ For the main keybinds, see [[Space keybinds][Space keybinds]].
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC")
+    :prefix "SPC"
+    :global-prefix "M-SPC")
   (general-create-definer x8dcc/org-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps 'org-mode-map
-    :prefix "SPC")
+    :prefix "SPC"
+    :global-prefix "M-SPC")
   (general-create-definer x8dcc/c-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
-    :prefix "SPC"))
+    :prefix "SPC"
+    :global-prefix "M-SPC"))
 #+end_src
 
 ** Which key
@@ -801,6 +804,8 @@ Notes:
   "h"   '(:ignore t         :wk "Help")
   "h f" '(describe-function :wk "Describe function")
   "h F" '(describe-face     :wk "Describe face")
+  "h i" '(info              :wk "Open info")
+  "h I" '(shortdoc          :wk "Open shortdoc")
   "h k" '(describe-key      :wk "Describe key")
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")

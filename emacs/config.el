@@ -77,17 +77,20 @@
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC")
+    :prefix "SPC"
+    :global-prefix "M-SPC")
   (general-create-definer x8dcc/org-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps 'org-mode-map
-    :prefix "SPC")
+    :prefix "SPC"
+    :global-prefix "M-SPC")
   (general-create-definer x8dcc/c-keys
-    :states '(normal visual emacs)
+    :states '(normal insert visual emacs)
     :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
-    :prefix "SPC"))
+    :prefix "SPC"
+    :global-prefix "M-SPC"))
 
 (use-package which-key
   :diminish
@@ -390,6 +393,8 @@ and ALIGNMENT as parameters."
   "h"   '(:ignore t         :wk "Help")
   "h f" '(describe-function :wk "Describe function")
   "h F" '(describe-face     :wk "Describe face")
+  "h i" '(info              :wk "Open info")
+  "h I" '(shortdoc          :wk "Open shortdoc")
   "h k" '(describe-key      :wk "Describe key")
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
