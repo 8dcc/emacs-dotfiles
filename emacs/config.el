@@ -225,28 +225,6 @@
                       org-todo-keyword-wait
                       org-verbatim)))))
 
-(use-package vterm
-  :config
-  (setq shell-file-name "/bin/bash"
-        vterm-max-scrollback 1000))
-
-(use-package vterm-toggle
-  :after vterm
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
-  (add-to-list
-    'display-buffer-alist
-    '((lambda (buffer-or-name _)
-        (let ((buffer (get-buffer buffer-or-name)))
-          (with-current-buffer buffer
-            (or (equal major-mode 'vterm-mode)
-                (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-      (display-buffer-reuse-window display-buffer-at-bottom)
-      (direction . bottom)
-      (reusable-frames . visible)
-      (window-height . 0.35))))
-
 (use-package drag-stuff
   :diminish
   :config
@@ -408,7 +386,6 @@ and ALIGNMENT as parameters."
   "o a" '(org-agenda         :wk "Org agenda")
   "o d" '(projectile-run-gdb :wk "Debugger")
   "o e" '(eshell             :wk "Eshell")
-  "o t" '(vterm-toggle       :wk "Toggle vterm")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -535,10 +512,6 @@ after the number of characters, followed by the number of lines."
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t)
-
-(add-hook 'vterm-mode-hook
-          (lambda ()
-            (display-line-numbers-mode 0)))
 
 (add-hook 'eshell-mode-hook
           (lambda ()

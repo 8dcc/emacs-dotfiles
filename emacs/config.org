@@ -428,36 +428,6 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                       org-verbatim)))))
 #+end_src
 
-** Vterm
-
-A nice alternative to =eshell=. The =vterm-toggle= package is used to
-spawn the terminal as a "popup", instead of taking over the current
-buffer.
-
-#+begin_src emacs-lisp
-(use-package vterm
-  :config
-  (setq shell-file-name "/bin/bash"
-        vterm-max-scrollback 1000))
-
-(use-package vterm-toggle
-  :after vterm
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
-  (add-to-list
-    'display-buffer-alist
-    '((lambda (buffer-or-name _)
-        (let ((buffer (get-buffer buffer-or-name)))
-          (with-current-buffer buffer
-            (or (equal major-mode 'vterm-mode)
-                (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-      (display-buffer-reuse-window display-buffer-at-bottom)
-      (direction . bottom)
-      (reusable-frames . visible)
-      (window-height . 0.35))))
-#+end_src
-
 ** Drag stuff
 
 For dragging lines with =M-<down>= and =M-<up>=.
@@ -813,7 +783,6 @@ Notes:
   "o a" '(org-agenda         :wk "Org agenda")
   "o d" '(projectile-run-gdb :wk "Debugger")
   "o e" '(eshell             :wk "Eshell")
-  "o t" '(vterm-toggle       :wk "Toggle vterm")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -1003,13 +972,9 @@ TODO: Does this always work?
       display-line-numbers-width-start t)
 #+end_src
 
-Hide line numbers in vterm and eshell buffers.
+Hide line numbers in eshell buffers.
 
 #+begin_src emacs-lisp
-(add-hook 'vterm-mode-hook
-          (lambda ()
-            (display-line-numbers-mode 0)))
-
 (add-hook 'eshell-mode-hook
           (lambda ()
             (display-line-numbers-mode 0)))
