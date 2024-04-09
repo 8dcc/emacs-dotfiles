@@ -172,6 +172,19 @@
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-librefm-scrobbler-username "8dcc"
+        emms-librefm-scrobbler-password "PASSWORD"
+        emms-player-list '(emms-player-mpv
+                           emms-player-vlc)
+        emms-player-mpv-parameters '("--quiet"
+                                     "--really-quiet"
+                                     "--no-audio-display"
+                                     "--no-video"))
+  (emms-mode-line-mode 0))
+
 (use-package spell-fu
   :hook ((org-mode      . spell-fu-mode)
          (markdown-mode . spell-fu-mode)

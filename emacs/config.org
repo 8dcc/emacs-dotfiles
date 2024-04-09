@@ -363,6 +363,31 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
   (popper-mode 1))
 #+end_src
 
+** EMMS
+
+Enable the /Emacs Multi-Media System/ (EMMS).
+
+We add =--no-video= parameter for =mpv= so we can listen to YouTube videos.
+
+We set =emms-mode-line-mode= to zero so it displays only the time instead of the
+filename.
+
+#+begin_src emacs-lisp
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-librefm-scrobbler-username "8dcc"
+        emms-librefm-scrobbler-password "PASSWORD"
+        emms-player-list '(emms-player-mpv
+                           emms-player-vlc)
+        emms-player-mpv-parameters '("--quiet"
+                                     "--really-quiet"
+                                     "--no-audio-display"
+                                     "--no-video"))
+  (emms-mode-line-mode 0))
+#+end_src
+
+
 ** Spelling
 
 We will use the =spell-fu= package for normal spelling. I don't use any packages
