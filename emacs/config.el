@@ -80,17 +80,17 @@
     :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC"
-    :global-prefix "M-SPC")
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/org-keys
     :states '(normal insert visual emacs)
     :keymaps 'org-mode-map
     :prefix "SPC"
-    :global-prefix "M-SPC")
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/c-keys
     :states '(normal insert visual emacs)
     :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
     :prefix "SPC"
-    :global-prefix "M-SPC"))
+    :non-normal-prefix "M-SPC"))
 
 (use-package which-key
   :diminish
