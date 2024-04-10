@@ -392,70 +392,71 @@ filename.
 
 ** Spelling
 
-We will use the =spell-fu= package for normal spelling. I don't use any packages
+We will use the =spell-fu= package for basic spelling. I don't use any packages
 for code completion or code syntax.
+
+The package won't be enabled in Windows systems, since it depends on the =aspell=
+command.
 
 We will use both =en_US= and =es= dictionaries.
 
 We also exclude a list of faces when using to avoid highlighting source code
 blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/doomemacs/blob/a89d4b7df556bb8b309d1c23e0b60404e750f156/modules/checkers/spell/config.el#L85][doom emacs]] repository.
 
-TODO: Check if =aspell= is installed in the system before trying to add
-dictionaries.
-
 #+begin_src emacs-lisp
-(use-package spell-fu
-  :hook ((org-mode      . spell-fu-mode)
-         (markdown-mode . spell-fu-mode)
-         (erc-mode      . spell-fu-mode)
-         (mail-mode     . spell-fu-mode)
-         (text-mode     . spell-fu-mode))
-  :config
-  (add-hook 'spell-fu-mode-hook
-            (lambda ()
-              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
-              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
-  (add-hook 'markdown-mode
-            (lambda ()
-              (setq spell-fu-faces-exclude
-                    '(markdown-code-face
-                      markdown-html-attr-name-face
-                      markdown-html-attr-value-face
-                      markdown-html-tag-name-face
-                      markdown-inline-code-face
-                      markdown-link-face
-                      markdown-markup-face
-                      markdown-plain-url-face
-                      markdown-reference-face
-                      markdown-url-face))))
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (setq spell-fu-faces-exclude
-                    '(org-block
-                      org-block-begin-line
-                      org-block-end-line
-                      org-cite
-                      org-cite-key
-                      org-code
-                      org-date
-                      org-footnote
-                      org-formula
-                      org-inline-src-block
-                      org-latex-and-related
-                      org-link
-                      org-meta-line
-                      org-property-value
-                      org-ref-cite-face
-                      org-special-keyword
-                      org-tag
-                      org-todo
-                      org-todo-keyword-done
-                      org-todo-keyword-habt
-                      org-todo-keyword-kill
-                      org-todo-keyword-outd
-                      org-todo-keyword-todo
-                      org-todo-keyword-wait
-                      org-verbatim)))))
+(unless (member system-type '(ms-dos windows-nt cygwin))
+  (use-package spell-fu
+    :hook ((org-mode      . spell-fu-mode)
+           (markdown-mode . spell-fu-mode)
+           (erc-mode      . spell-fu-mode)
+           (mail-mode     . spell-fu-mode)
+           (text-mode     . spell-fu-mode))
+    :config
+    (add-hook 'spell-fu-mode-hook
+              (lambda ()
+                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
+                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+    (add-hook 'markdown-mode
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(markdown-code-face
+                        markdown-html-attr-name-face
+                        markdown-html-attr-value-face
+                        markdown-html-tag-name-face
+                        markdown-inline-code-face
+                        markdown-link-face
+                        markdown-markup-face
+                        markdown-plain-url-face
+                        markdown-reference-face
+                        markdown-url-face))))
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(org-block
+                        org-block-begin-line
+                        org-block-end-line
+                        org-cite
+                        org-cite-key
+                        org-code
+                        org-date
+                        org-footnote
+                        org-formula
+                        org-inline-src-block
+                        org-latex-and-related
+                        org-link
+                        org-meta-line
+                        org-property-value
+                        org-ref-cite-face
+                        org-special-keyword
+                        org-tag
+                        org-todo
+                        org-todo-keyword-done
+                        org-todo-keyword-habt
+                        org-todo-keyword-kill
+                        org-todo-keyword-outd
+                        org-todo-keyword-todo
+                        org-todo-keyword-wait
+                        org-verbatim))))))
 #+end_src
 
 ** Drag stuff

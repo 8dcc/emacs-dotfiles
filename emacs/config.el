@@ -188,58 +188,59 @@
                                      "--no-video"))
   (emms-mode-line-mode 0))
 
-(use-package spell-fu
-  :hook ((org-mode      . spell-fu-mode)
-         (markdown-mode . spell-fu-mode)
-         (erc-mode      . spell-fu-mode)
-         (mail-mode     . spell-fu-mode)
-         (text-mode     . spell-fu-mode))
-  :config
-  (add-hook 'spell-fu-mode-hook
-            (lambda ()
-              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
-              (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
-  (add-hook 'markdown-mode
-            (lambda ()
-              (setq spell-fu-faces-exclude
-                    '(markdown-code-face
-                      markdown-html-attr-name-face
-                      markdown-html-attr-value-face
-                      markdown-html-tag-name-face
-                      markdown-inline-code-face
-                      markdown-link-face
-                      markdown-markup-face
-                      markdown-plain-url-face
-                      markdown-reference-face
-                      markdown-url-face))))
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (setq spell-fu-faces-exclude
-                    '(org-block
-                      org-block-begin-line
-                      org-block-end-line
-                      org-cite
-                      org-cite-key
-                      org-code
-                      org-date
-                      org-footnote
-                      org-formula
-                      org-inline-src-block
-                      org-latex-and-related
-                      org-link
-                      org-meta-line
-                      org-property-value
-                      org-ref-cite-face
-                      org-special-keyword
-                      org-tag
-                      org-todo
-                      org-todo-keyword-done
-                      org-todo-keyword-habt
-                      org-todo-keyword-kill
-                      org-todo-keyword-outd
-                      org-todo-keyword-todo
-                      org-todo-keyword-wait
-                      org-verbatim)))))
+(unless (member system-type '(ms-dos windows-nt cygwin))
+  (use-package spell-fu
+    :hook ((org-mode      . spell-fu-mode)
+           (markdown-mode . spell-fu-mode)
+           (erc-mode      . spell-fu-mode)
+           (mail-mode     . spell-fu-mode)
+           (text-mode     . spell-fu-mode))
+    :config
+    (add-hook 'spell-fu-mode-hook
+              (lambda ()
+                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
+                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+    (add-hook 'markdown-mode
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(markdown-code-face
+                        markdown-html-attr-name-face
+                        markdown-html-attr-value-face
+                        markdown-html-tag-name-face
+                        markdown-inline-code-face
+                        markdown-link-face
+                        markdown-markup-face
+                        markdown-plain-url-face
+                        markdown-reference-face
+                        markdown-url-face))))
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(org-block
+                        org-block-begin-line
+                        org-block-end-line
+                        org-cite
+                        org-cite-key
+                        org-code
+                        org-date
+                        org-footnote
+                        org-formula
+                        org-inline-src-block
+                        org-latex-and-related
+                        org-link
+                        org-meta-line
+                        org-property-value
+                        org-ref-cite-face
+                        org-special-keyword
+                        org-tag
+                        org-todo
+                        org-todo-keyword-done
+                        org-todo-keyword-habt
+                        org-todo-keyword-kill
+                        org-todo-keyword-outd
+                        org-todo-keyword-todo
+                        org-todo-keyword-wait
+                        org-verbatim))))))
 
 (use-package drag-stuff
   :diminish
