@@ -1037,14 +1037,15 @@ TODO: Does this always work?
       display-line-numbers-width-start t)
 #+end_src
 
-Hide line numbers in the specified buffers. For more information on
+Hide line numbers in the specified modes. For more information on
 =x8dcc/x8dcc/hook-to-targets= see [[*Misc functions and macros][Misc functions and macros]].
 
 #+begin_src emacs-lisp
 (x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
                        '(eshell-mode-hook
                          solitaire-mode-hook
-                         mpuz-mode-hook))
+                         mpuz-mode-hook
+                         bubbles-mode-hook))
 #+end_src
 
 * Misc visual settings

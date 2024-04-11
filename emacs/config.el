@@ -555,7 +555,8 @@ after the number of characters, followed by the number of lines."
 (x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
                        '(eshell-mode-hook
                          solitaire-mode-hook
-                         mpuz-mode-hook))
+                         mpuz-mode-hook
+                         bubbles-mode-hook))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
