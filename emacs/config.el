@@ -330,6 +330,18 @@ and ALIGNMENT as parameters."
 (straight-use-package
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
+(defun x8dcc/hook-funcs (target functions)
+  "Hook each function in FUNCTIONS to TARGET using `add-hook'."
+  (mapcar (lambda (func)
+            (add-hook target func))
+          functions))
+
+(defun x8dcc/hook-to-targets (function targets)
+  "Hook FUNCTION to each target in TARGETS using `add-hook'."
+  (mapcar (lambda (target)
+            (add-hook target function))
+          targets))
+
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
@@ -540,9 +552,10 @@ after the number of characters, followed by the number of lines."
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t)
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (display-line-numbers-mode 0)))
+(x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
+                       '(eshell-mode-hook
+                         solitaire-mode-hook
+                         mpuz-mode-hook))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)

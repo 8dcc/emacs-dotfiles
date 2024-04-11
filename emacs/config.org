@@ -663,6 +663,30 @@ functionality. Uses a =straight.el= recipe.
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 #+end_src
 
+* Misc functions and macros
+
+This function will be used for hooking a list of =functions= into the specified
+=target=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/hook-funcs (target functions)
+  "Hook each function in FUNCTIONS to TARGET using `add-hook'."
+  (mapcar (lambda (func)
+            (add-hook target func))
+          functions))
+#+end_src
+
+This function is similar to =x8dcc/hook-funcs=, but it will be used for hooking a
+*single function* to *each target* of the list.
+
+#+begin_src emacs-lisp
+(defun x8dcc/hook-to-targets (function targets)
+  "Hook FUNCTION to each target in TARGETS using `add-hook'."
+  (mapcar (lambda (target)
+            (add-hook target function))
+          targets))
+#+end_src
+
 * Input
 ** Custom input functions
 
@@ -1013,12 +1037,14 @@ TODO: Does this always work?
       display-line-numbers-width-start t)
 #+end_src
 
-Hide line numbers in eshell buffers.
+Hide line numbers in the specified buffers. For more information on
+=x8dcc/x8dcc/hook-to-targets= see [[*Misc functions and macros][Misc functions and macros]].
 
 #+begin_src emacs-lisp
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (display-line-numbers-mode 0)))
+(x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
+                       '(eshell-mode-hook
+                         solitaire-mode-hook
+                         mpuz-mode-hook))
 #+end_src
 
 * Misc visual settings
