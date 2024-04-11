@@ -775,3 +775,7 @@ overlay."
 
 (setq hide-ifdef-initially t
       hide-ifdef-lines t)
+
+(setq gdb-many-windows t)
+
+(setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
