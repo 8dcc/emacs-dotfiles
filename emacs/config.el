@@ -556,7 +556,10 @@ after the number of characters, followed by the number of lines."
                        '(eshell-mode-hook
                          solitaire-mode-hook
                          mpuz-mode-hook
-                         bubbles-mode-hook))
+                         bubbles-mode-hook
+                         gomoku-mode-hook
+                         snake-mode-hook
+                         tetris-mode-hook))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)

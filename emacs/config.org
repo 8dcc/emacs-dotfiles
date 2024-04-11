@@ -1045,7 +1045,10 @@ Hide line numbers in the specified modes. For more information on
                        '(eshell-mode-hook
                          solitaire-mode-hook
                          mpuz-mode-hook
-                         bubbles-mode-hook))
+                         bubbles-mode-hook
+                         gomoku-mode-hook
+                         snake-mode-hook
+                         tetris-mode-hook))
 #+end_src
 
 * Misc visual settings
