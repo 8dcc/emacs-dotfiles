@@ -386,9 +386,8 @@ and ALIGNMENT as parameters."
 (keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
 
 (x8dcc/leader-keys
-  "SPC" '(projectile-find-file :wk "Find file in project")
-  "."   '(find-file            :wk "Find file")
-  "x"   '(scratch-buffer       :wk "Scratch buffer")
+  "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
+  "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
   "b k" '(kill-current-buffer :wk "Kill current")
@@ -396,6 +395,7 @@ and ALIGNMENT as parameters."
   "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
+  "b x" '(scratch-buffer      :wk "Open scratch buffer")
   ;; File
   "f"   '(:ignore t    :wk "File")
   "f f" '(find-file    :wk "Find file")
