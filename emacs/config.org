@@ -848,7 +848,8 @@ Notes:
   "o -" '(dired-jump         :wk "Dired")
   "o a" '(org-agenda         :wk "Org agenda")
   "o d" '(projectile-run-gdb :wk "Debugger")
-  "o e" '(eshell             :wk "Eshell")
+  "o e" '(x8dcc/eshell-popup :wk "Eshell popup")
+  "o E" '(eshell             :wk "Eshell")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -1233,12 +1234,29 @@ executing a previous command.
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 #+end_src
 
-Open eshell in a side window, instead of taking over the current
-window.
+This function will be used to create an =eshell= buffer named =*eshell-popup*=. This
+will be used for making different rules for normal and popup eshell buffers on
+=display-buffer-alist=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/eshell-popup (&optional buffer-name)
+  "Create or open a popup eshell buffer.
+
+Creates a new `eshell' buffer with the specified BUFFER-NAME, or
+\"*eshell-popup*\" if omited. Useful for setting different rules in
+`display-buffer-alist'."
+  (interactive)
+  (unless buffer-name (setq buffer-name "*eshell-popup*"))
+  (let ((eshell-buffer-name buffer-name))
+    (eshell)))
+#+end_src
+
+If the buffer is called =*eshell-popup*=, open it in a side window, instead of
+taking over the current window.
 
 #+begin_src emacs-lisp
 (add-to-list 'display-buffer-alist
-             '("\\*eshell\\*"
+             '("\\*eshell-popup\\*"
                (display-buffer-in-side-window (side . bottom))))
 #+end_src
 
@@ -1477,9 +1495,11 @@ NOTE: This is currently not called in any hook to avoid a performance impact.
 
 #+begin_src emacs-lisp
 (defun x8dcc/make-invisible (regex &optional group-num)
-  "Add all ocurrences of REGEX to an invisible overlay. If GROUP-NUM is
-supplied, it will only add the N-th parentheses group of the regex to the
-overlay."
+  "Make all ocurrences of REGEX invisible.
+
+Searches all ocurrences of REGEX and adds them to an invisible overlay. If
+GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
+to the overlay."
   (interactive "sRegex:")
   (unless group-num (setq group-num 0))
   (save-excursion

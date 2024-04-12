@@ -423,7 +423,8 @@ and ALIGNMENT as parameters."
   "o -" '(dired-jump         :wk "Dired")
   "o a" '(org-agenda         :wk "Org agenda")
   "o d" '(projectile-run-gdb :wk "Debugger")
-  "o e" '(eshell             :wk "Eshell")
+  "o e" '(x8dcc/eshell-popup :wk "Eshell popup")
+  "o E" '(eshell             :wk "Eshell")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -637,8 +638,19 @@ of characters, followed by the number of lines."
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 
+(defun x8dcc/eshell-popup (&optional buffer-name)
+  "Create or open a popup eshell buffer.
+
+Creates a new `eshell' buffer with the specified BUFFER-NAME, or
+\"*eshell-popup*\" if omited. Useful for setting different rules in
+`display-buffer-alist'."
+  (interactive)
+  (unless buffer-name (setq buffer-name "*eshell-popup*"))
+  (let ((eshell-buffer-name buffer-name))
+    (eshell)))
+
 (add-to-list 'display-buffer-alist
-             '("\\*eshell\\*"
+             '("\\*eshell-popup\\*"
                (display-buffer-in-side-window (side . bottom))))
 
 (setq dired-listing-switches "-l --all --sort=version --group-directories-first --human-readable")
@@ -755,9 +767,11 @@ of characters, followed by the number of lines."
                                   (,electric-pair-inhibit-predicate c))))))
 
 (defun x8dcc/make-invisible (regex &optional group-num)
-  "Add all ocurrences of REGEX to an invisible overlay. If GROUP-NUM is
-supplied, it will only add the N-th parentheses group of the regex to the
-overlay."
+  "Make all ocurrences of REGEX invisible.
+
+Searches all ocurrences of REGEX and adds them to an invisible overlay. If
+GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
+to the overlay."
   (interactive "sRegex:")
   (unless group-num (setq group-num 0))
   (save-excursion
