@@ -804,8 +804,10 @@ See also [[General][General]] package.
 *** Global keybinds
 
 Notes:
-- You can use =consult-recent-file= instead of =recentf-open= for previsualizing the
-  buffers, but I don't like that.
+- You can use =consult-recent-file= instead of =recentf-open= for previewing the
+  file contents, but I don't like that.
+- You can use =consult-buffer= instead of =switch-to-buffer= for previewing the
+  buffers, but this has a performance impact in slow machines.
 
 #+begin_src emacs-lisp
 (x8dcc/leader-keys
@@ -815,7 +817,7 @@ Notes:
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
   "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(consult-buffer      :wk "Go to (consult)")
+  "b l" '(switch-to-buffer    :wk "Switch to")
   "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")

@@ -392,7 +392,7 @@ and ALIGNMENT as parameters."
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
   "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(consult-buffer      :wk "Go to (consult)")
+  "b l" '(switch-to-buffer    :wk "Switch to")
   "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
   "b r" '(revert-buffer       :wk "Revert (discard)")
