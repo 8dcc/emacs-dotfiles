@@ -979,9 +979,9 @@ and lines in the modeline in the following format: =(Sel 51 L4)=.
 #+begin_src emacs-lisp
 (defun x8dcc/mode-line-region-chars (prefix middle subfix)
   "If there are characters in the selection, return a string with the number of
-characters and lines, between the `prefix' and `subfix' arguments. If the region
-takes up more than one line, it will also display the `middle' argument right
-after the number of characters, followed by the number of lines."
+characters and lines, between the PREFIX and SUBFIX. If the region takes up more
+than one line, it will also display the MIDDLE argument right after the number
+of characters, followed by the number of lines."
   (if (use-region-p)
       (let ((characters (abs (- (region-end) (region-beginning))))
             (lines (abs (- (line-number-at-pos (region-end))
@@ -1467,7 +1467,7 @@ NOTE: This is currently not called in any hook to avoid a performance impact.
 
 #+begin_src emacs-lisp
 (defun x8dcc/make-invisible (regex &optional group-num)
-  "Add all ocurrences of `regex' to an invisible overlay. If `group-num' is
+  "Add all ocurrences of REGEX to an invisible overlay. If GROUP-NUM is
 supplied, it will only add the N-th parentheses group of the regex to the
 overlay."
   (interactive "sRegex:")
