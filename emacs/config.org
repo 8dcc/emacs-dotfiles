@@ -823,10 +823,17 @@ Notes:
   "b r" '(revert-buffer       :wk "Revert (discard)")
   ;; File
   "f"   '(:ignore t    :wk "File")
+  "f f" '(find-file    :wk "Find file")
   "f r" '(recentf-open :wk "Open recent")
   ;; Magit
-  "g"   '(:ignore t    :wk "Git")
-  "g g" '(magit-status :wk "Magit status")
+  "g"   '(:ignore t                 :wk "Git")
+  "g c" '(magit-commit              :wk "Commit menu")
+  "g f" '(magit-fetch               :wk "Fetch menu")
+  "g F" '(magit-pull                :wk "Pull menu")
+  "g g" '(magit-status              :wk "Magit status")
+  "g p" '(magit-push                :wk "Push menu")
+  "g s" '(magit-stage-buffer-file   :wk "Stage current")
+  "g u" '(magit-unstage-buffer-file :wk "Unstage current")
   ;; Help
   "h"   '(:ignore t         :wk "Help")
   "h f" '(describe-function :wk "Describe function")
@@ -846,6 +853,7 @@ Notes:
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
   "p C" '(projectile-repeat-last-command :wk "Re-compile")
+  "p f" '(projectile-find-file           :wk "Find file")
   "p p" '(projectile-switch-project      :wk "Recent projects")
   "p r" '(projectile-recentf             :wk "Recent files")
   ;; Search
