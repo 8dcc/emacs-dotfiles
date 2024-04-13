@@ -421,12 +421,12 @@ and ALIGNMENT as parameters."
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
-  "o"   '(:ignore t          :wk "Open")
-  "o -" '(dired-jump         :wk "Dired")
-  "o a" '(org-agenda         :wk "Org agenda")
-  "o d" '(projectile-run-gdb :wk "Debugger")
-  "o e" '(x8dcc/eshell-popup :wk "Eshell popup")
-  "o E" '(eshell             :wk "Eshell")
+  "o"   '(:ignore t                       :wk "Open")
+  "o -" '(dired-jump                      :wk "Dired")
+  "o a" '(org-agenda                      :wk "Org agenda")
+  "o d" '(projectile-run-gdb              :wk "Debugger")
+  "o e" '(x8dcc/eshell-popup              :wk "Eshell popup")
+  "o E" '(x8dcc/eshell-project-or-current :wk "Eshell")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -640,6 +640,15 @@ of characters, followed by the number of lines."
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 
+(defun x8dcc/eshell-project-or-current (&optional eshell-func)
+  "Run ESHELL-FUNC in the project's root whenever possible."
+  (interactive)
+  (unless eshell-func (setq eshell-func #'eshell))
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-acquire-root)
+        (funcall eshell-func))
+    (funcall eshell-func)))
+
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
 
@@ -648,14 +657,9 @@ Creates a new eshell buffer with the specified BUFFER-NAME, or
 `eshell' in the project root or in the current folder. Useful for setting
 different rules in `display-buffer-alist'."
   (interactive)
-  (unless buffer-name
-    (setq buffer-name "*eshell-popup*"))
+  (unless buffer-name (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
-    (if (projectile-project-p)
-        (let ((project (projectile-acquire-root)))
-          (projectile-with-default-dir project
-            (eshell)))
-      (eshell))))
+    (x8dcc/eshell-project-or-current)))
 
 (add-to-list 'display-buffer-alist
              '("\\*eshell-popup\\*"

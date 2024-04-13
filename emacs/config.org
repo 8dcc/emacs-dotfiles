@@ -846,12 +846,12 @@ Notes:
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
   ;; Open
-  "o"   '(:ignore t          :wk "Open")
-  "o -" '(dired-jump         :wk "Dired")
-  "o a" '(org-agenda         :wk "Org agenda")
-  "o d" '(projectile-run-gdb :wk "Debugger")
-  "o e" '(x8dcc/eshell-popup :wk "Eshell popup")
-  "o E" '(eshell             :wk "Eshell")
+  "o"   '(:ignore t                       :wk "Open")
+  "o -" '(dired-jump                      :wk "Dired")
+  "o a" '(org-agenda                      :wk "Org agenda")
+  "o d" '(projectile-run-gdb              :wk "Debugger")
+  "o e" '(x8dcc/eshell-popup              :wk "Eshell popup")
+  "o E" '(x8dcc/eshell-project-or-current :wk "Eshell")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -1236,13 +1236,25 @@ executing a previous command.
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 #+end_src
 
+This function is basically the same from =projectile-run-eshell= in
+[[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]]. If we are in a project, it will open the shell in the project's
+root. The difference is that if we are not, it will open =eshell= normally. It
+also does not rename the buffer, so our =display-buffer-alist= rules still apply.
+
+#+begin_src emacs-lisp
+(defun x8dcc/eshell-project-or-current (&optional eshell-func)
+  "Run ESHELL-FUNC in the project's root whenever possible."
+  (interactive)
+  (unless eshell-func (setq eshell-func #'eshell))
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-acquire-root)
+        (funcall eshell-func))
+    (funcall eshell-func)))
+#+end_src
+
 This function will be used to create an =eshell= buffer named =*eshell-popup*=. This
 will be used for making different rules for normal and popup eshell buffers on
 =display-buffer-alist=.
-
-If we are in a project, it will open the shell in the project's root. The code
-is the same from [[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]], but modified so it doesn't rename the buffer,
-and our =display-buffer-alist= rule still applies.
 
 #+begin_src emacs-lisp
 (defun x8dcc/eshell-popup (&optional buffer-name)
@@ -1253,14 +1265,9 @@ Creates a new eshell buffer with the specified BUFFER-NAME, or
 `eshell' in the project root or in the current folder. Useful for setting
 different rules in `display-buffer-alist'."
   (interactive)
-  (unless buffer-name
-    (setq buffer-name "*eshell-popup*"))
+  (unless buffer-name (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
-    (if (projectile-project-p)
-        (let ((project (projectile-acquire-root)))
-          (projectile-with-default-dir project
-            (eshell)))
-      (eshell))))
+    (x8dcc/eshell-project-or-current)))
 #+end_src
 
 If the buffer is called =*eshell-popup*=, open it in a side window, instead of
