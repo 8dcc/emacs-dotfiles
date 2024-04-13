@@ -1275,6 +1275,14 @@ Allow dired to recursively copy and delete folders, after asking for confirmatio
       dired-recursive-deletes 'top)
 #+end_src
 
+* Ediff
+
+Don't open a new frame for the =ediff= control panel.
+
+#+begin_src emacs-lisp
+(setq ediff-window-setup-function #'ediff-setup-windows-plain)
+#+end_src
+
 * ERC
 
 Enable ERC features.

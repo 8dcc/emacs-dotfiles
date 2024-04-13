@@ -658,6 +658,8 @@ Creates a new `eshell' buffer with the specified BUFFER-NAME, or
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
 
+(setq ediff-window-setup-function #'ediff-setup-windows-plain)
+
 (require 'erc)
 (require 'erc-log)
 (require 'erc-stamp)
