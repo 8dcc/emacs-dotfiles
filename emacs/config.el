@@ -109,7 +109,7 @@
 (use-package projectile
   :diminish
   :config
-  (projectile-global-mode 1))
+  (projectile-mode 1))
 
 (use-package magit
   :hook ((git-commit-setup . evil-insert-state))
@@ -717,8 +717,6 @@ different rules in `display-buffer-alist'."
       ;; Align usernames to col 20
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 15
-      ;; Rename buffers to network name instead of ip:port
-      erc-rename-buffers t
       ;; Prompt at the bottom of the screen
       erc-scrolltobottom-mode t
       erc-input-line-position -1
@@ -742,7 +740,7 @@ different rules in `display-buffer-alist'."
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465)
 
-(setq epa-pinentry-mode 'loopback)
+(setq epg-pinentry-mode 'loopback)
 
 (require 'org-tempo)
 
@@ -796,8 +794,8 @@ to the overlay."
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward regex nil t)
-      (setq invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num)))
-      (overlay-put invisible-overlay 'invisible t))))
+      (let ((invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num))))
+        (overlay-put invisible-overlay 'invisible t)))))
 
 ;; NOTE: For hiding org commas, use:
 ;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)

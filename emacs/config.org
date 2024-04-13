@@ -246,7 +246,7 @@ For managing projects.
 (use-package projectile
   :diminish
   :config
-  (projectile-global-mode 1))
+  (projectile-mode 1))
 #+end_src
 
 ** Magit
@@ -1360,8 +1360,6 @@ General ERC settings.
       ;; Align usernames to col 20
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 15
-      ;; Rename buffers to network name instead of ip:port
-      erc-rename-buffers t
       ;; Prompt at the bottom of the screen
       erc-scrolltobottom-mode t
       erc-input-line-position -1
@@ -1400,7 +1398,7 @@ This is needed so it asks for password in the minibuffer. I needed it to avoid a
 =gpg= error when running [[*ERC][ERC]].
 
 #+begin_src emacs-lisp
-(setq epa-pinentry-mode 'loopback)
+(setq epg-pinentry-mode 'loopback)
 #+end_src
 
 For your credentials, you will need to create =~/.authinfo.gpg=. Generate a GPG
@@ -1541,8 +1539,8 @@ to the overlay."
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward regex nil t)
-      (setq invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num)))
-      (overlay-put invisible-overlay 'invisible t))))
+      (let ((invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num))))
+        (overlay-put invisible-overlay 'invisible t)))))
 
 ;; NOTE: For hiding org commas, use:
 ;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
