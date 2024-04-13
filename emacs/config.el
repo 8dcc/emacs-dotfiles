@@ -403,6 +403,7 @@ and ALIGNMENT as parameters."
   ;; Magit
   "g"   '(:ignore t                 :wk "Git")
   "g c" '(magit-commit              :wk "Commit menu")
+  "g e" '(magit-ediff-wdim          :wk "Ediff")
   "g f" '(magit-fetch               :wk "Fetch menu")
   "g F" '(magit-pull                :wk "Pull menu")
   "g g" '(magit-status              :wk "Magit status")
