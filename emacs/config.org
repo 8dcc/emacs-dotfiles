@@ -1280,7 +1280,8 @@ Allow dired to recursively copy and delete folders, after asking for confirmatio
 Don't open a new frame for the =ediff= control panel.
 
 #+begin_src emacs-lisp
-(setq ediff-window-setup-function #'ediff-setup-windows-plain)
+(setq ediff-window-setup-function #'ediff-setup-windows-plain
+      ediff-split-window-function #'split-window-horizontally)
 #+end_src
 
 * ERC
