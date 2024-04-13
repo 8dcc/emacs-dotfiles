@@ -397,9 +397,10 @@ and ALIGNMENT as parameters."
   "b r" '(revert-buffer       :wk "Revert (discard)")
   "b x" '(scratch-buffer      :wk "Open scratch buffer")
   ;; File
-  "f"   '(:ignore t    :wk "File")
-  "f f" '(find-file    :wk "Find file")
-  "f r" '(recentf-open :wk "Open recent")
+  "f"   '(:ignore t          :wk "File")
+  "f f" '(find-file          :wk "Find file")
+  "f o" '(ff-find-other-file :wk "Find other file")
+  "f r" '(recentf-open       :wk "Open recent")
   ;; Magit
   "g"   '(:ignore t                 :wk "Git")
   "g c" '(magit-commit              :wk "Commit menu")
@@ -805,6 +806,9 @@ to the overlay."
 
 (setq hide-ifdef-initially t
       hide-ifdef-lines t)
+
+(with-eval-after-load 'find-file
+  (add-to-list 'cc-search-directories "./include"))
 
 (setq gdb-many-windows t)
 
