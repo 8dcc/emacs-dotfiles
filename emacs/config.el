@@ -715,7 +715,7 @@ Creates a new `eshell' buffer with the specified BUFFER-NAME, or
       erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
 
       ;; Don't bury ERC buffers by default
-      erc-join-buffer buffer
+      erc-join-buffer 'buffer
       ;; Kill buffers for channels after /part
       erc-kill-buffer-on-part t
       ;; Kill buffers for private queries after quitting the server
