@@ -1536,12 +1536,12 @@ NOTE: This is currently not called in any hook to avoid a performance impact.
 Searches all ocurrences of REGEX and adds them to an invisible overlay. If
 GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
 to the overlay."
-  (interactive "sRegex:")
+  (interactive "sRegex: ")
   (unless group-num (setq group-num 0))
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward regex nil t)
-      (setq invisible-overlay (make-overlay (match-beginning group) (match-end group)))
+      (setq invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num)))
       (overlay-put invisible-overlay 'invisible t))))
 
 ;; NOTE: For hiding org commas, use:
