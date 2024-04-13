@@ -1240,17 +1240,27 @@ This function will be used to create an =eshell= buffer named =*eshell-popup*=. 
 will be used for making different rules for normal and popup eshell buffers on
 =display-buffer-alist=.
 
+If we are in a project, it will open the shell in the project's root. The code
+is the same from [[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]], but modified so it doesn't rename the buffer,
+and our =display-buffer-alist= rule still applies.
+
 #+begin_src emacs-lisp
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
 
-Creates a new `eshell' buffer with the specified BUFFER-NAME, or
-\"*eshell-popup*\" if omited. Useful for setting different rules in
-`display-buffer-alist'."
+Creates a new eshell buffer with the specified BUFFER-NAME, or
+\"*eshell-popup*\" if omited. Depending on `projectile-project-p', it will call
+`eshell' in the project root or in the current folder. Useful for setting
+different rules in `display-buffer-alist'."
   (interactive)
-  (unless buffer-name (setq buffer-name "*eshell-popup*"))
+  (unless buffer-name
+    (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
-    (eshell)))
+    (if (projectile-project-p)
+        (let ((project (projectile-acquire-root)))
+          (projectile-with-default-dir project
+            (eshell)))
+      (eshell))))
 #+end_src
 
 If the buffer is called =*eshell-popup*=, open it in a side window, instead of

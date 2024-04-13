@@ -643,13 +643,19 @@ of characters, followed by the number of lines."
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
 
-Creates a new `eshell' buffer with the specified BUFFER-NAME, or
-\"*eshell-popup*\" if omited. Useful for setting different rules in
-`display-buffer-alist'."
+Creates a new eshell buffer with the specified BUFFER-NAME, or
+\"*eshell-popup*\" if omited. Depending on `projectile-project-p', it will call
+`eshell' in the project root or in the current folder. Useful for setting
+different rules in `display-buffer-alist'."
   (interactive)
-  (unless buffer-name (setq buffer-name "*eshell-popup*"))
+  (unless buffer-name
+    (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
-    (eshell)))
+    (if (projectile-project-p)
+        (let ((project (projectile-acquire-root)))
+          (projectile-with-default-dir project
+            (eshell)))
+      (eshell))))
 
 (add-to-list 'display-buffer-alist
              '("\\*eshell-popup\\*"
