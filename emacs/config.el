@@ -671,15 +671,17 @@ Creates a new `eshell' buffer with the specified BUFFER-NAME, or
 (erc-track-enable)
 ;(erc-spelling-enable)
 
+(advice-add 'erc :override #'erc-tls)
+
 (setq erc-nick           "x8dcc"
       erc-system-name    "x8dcc"
       erc-user-full-name "x8dcc"
 
       ;; Don't give away machine name
       erc-anonymous-login t
-      ;; Don't reply to ctcp
+      ;; Don't reply to CTCP
       erc-disable-ctcp-replies t
-      ;; Notify ctcp requests
+      ;; Notify CTCP requests
       erc-paranoid t
       ;; Warn blank lines
       erc-warn-about-blank-lines t
@@ -711,6 +713,8 @@ Creates a new `eshell' buffer with the specified BUFFER-NAME, or
       erc-track-showcount t
       erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
 
+      ;; Don't bury ERC buffers by default
+      erc-join-buffer buffer
       ;; Kill buffers for channels after /part
       erc-kill-buffer-on-part t
       ;; Kill buffers for private queries after quitting the server

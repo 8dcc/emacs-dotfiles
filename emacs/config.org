@@ -1300,6 +1300,12 @@ Enable ERC features.
 ;(erc-spelling-enable)
 #+end_src
 
+Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][advice]] so =erc-tls= is called instead of =erc=.
+
+#+begin_src emacs-lisp
+(advice-add 'erc :override #'erc-tls)
+#+end_src
+
 General ERC settings.
 
 #+begin_src emacs-lisp
@@ -1309,9 +1315,9 @@ General ERC settings.
 
       ;; Don't give away machine name
       erc-anonymous-login t
-      ;; Don't reply to ctcp
+      ;; Don't reply to CTCP
       erc-disable-ctcp-replies t
-      ;; Notify ctcp requests
+      ;; Notify CTCP requests
       erc-paranoid t
       ;; Warn blank lines
       erc-warn-about-blank-lines t
@@ -1343,6 +1349,8 @@ General ERC settings.
       erc-track-showcount t
       erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
 
+      ;; Don't bury ERC buffers by default
+      erc-join-buffer buffer
       ;; Kill buffers for channels after /part
       erc-kill-buffer-on-part t
       ;; Kill buffers for private queries after quitting the server
