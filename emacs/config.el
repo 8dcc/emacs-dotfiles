@@ -481,7 +481,7 @@ and ALIGNMENT as parameters."
 (x8dcc/org-keys
   ;; Toggle -> Org inline images
   "t i"   '(org-toggle-inline-images :wk "Inline images")
-  ;; Org
+  ;; Mode (Org)
   "m"     '(:ignore t :wk "Org")
   ;; Org -> Date
   "m d"   '(:ignore t    :wk "Date")
@@ -508,8 +508,12 @@ and ALIGNMENT as parameters."
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
 
 (x8dcc/c-keys
-  ;; Buffer -> Format
+  ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
+  ;; Mode (C)
+  "m"   '(:ignore t :wk "C")
+  "m g" '(x8dcc/c-include-guard :wk "Include guards")
+  ;; Fold
   "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 
 (column-number-mode 1)
@@ -825,6 +829,20 @@ to the overlay."
   (setq-default ff-quiet-mode t)
   (dolist (path '("./include" ".."))
     (add-to-list 'cc-search-directories path)))
+
+(defun x8dcc/c-include-guard (&optional filename)
+  (interactive)
+  (unless filename
+    (setq filename (file-name-base buffer-file-name)))
+  (let ((macro-name (upcase (concat filename "_H_" ))))
+    (save-excursion
+      (goto-char (point-min))
+      (insert "\n"
+              "#ifndef " macro-name "\n"
+              "#define " macro-name " 1\n")
+      (goto-char (point-max))
+      (insert "\n"
+              "#endif /* " macro-name " */"))))
 
 (setq gdb-many-windows t)
 
