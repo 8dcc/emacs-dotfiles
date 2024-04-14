@@ -817,7 +817,9 @@ to the overlay."
       hide-ifdef-lines t)
 
 (with-eval-after-load 'find-file
-  (add-to-list 'cc-search-directories "./include"))
+  (setq-default ff-quiet-mode t)
+  (dolist (path '("./include" ".."))
+    (add-to-list 'cc-search-directories path)))
 
 (setq gdb-many-windows t)
 

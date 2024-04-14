@@ -1588,7 +1588,9 @@ For using =ff-find-other-file=, search also in the specified include folders.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'find-file
-  (add-to-list 'cc-search-directories "./include"))
+  (setq-default ff-quiet-mode t)
+  (dolist (path '("./include" ".."))
+    (add-to-list 'cc-search-directories path)))
 #+end_src
 
 * GDB
