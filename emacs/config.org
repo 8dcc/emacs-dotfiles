@@ -801,6 +801,17 @@ bound by defect to =M-S-<left>= and =M-S-<right>=. We don't set it to =C-<left>=
 (keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
 #+end_src
 
+** Misc eshell keybinds
+
+Better function for clearing than =recenter-top-bottom=.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'eshell
+  (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
+                                      (eshell/clear-scrollback)
+                                      (eshell-emit-prompt))))
+#+end_src
+
 ** Space keybinds
 
 See also [[General][General]] package.

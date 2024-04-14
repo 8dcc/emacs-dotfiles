@@ -386,6 +386,11 @@ and ALIGNMENT as parameters."
 (keymap-set org-mode-map "C-S-<left>"  #'org-shiftmetaleft)
 (keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
 
+(with-eval-after-load 'eshell
+  (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
+                                      (eshell/clear-scrollback)
+                                      (eshell-emit-prompt))))
+
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
