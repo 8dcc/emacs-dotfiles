@@ -372,6 +372,9 @@ Enable the /Emacs Multi-Media System/ (EMMS).
 
 We add =--no-video= parameter for =mpv= so we can listen to YouTube videos.
 
+Since =emms-volume-*= changes the volume of the whole system, I added =--volume=X=
+to the =mpv= parameters, since it's always a bit loud by default.
+
 We set =emms-mode-line-mode= to zero so it displays only the time instead of the
 filename.
 
@@ -386,7 +389,8 @@ filename.
         emms-player-mpv-parameters '("--quiet"
                                      "--really-quiet"
                                      "--no-audio-display"
-                                     "--no-video"))
+                                     "--no-video"
+                                     "--volume=50"))
   (emms-mode-line-mode 0))
 #+end_src
 

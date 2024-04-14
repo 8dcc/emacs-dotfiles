@@ -185,7 +185,8 @@
         emms-player-mpv-parameters '("--quiet"
                                      "--really-quiet"
                                      "--no-audio-display"
-                                     "--no-video"))
+                                     "--no-video"
+                                     "--volume=50"))
   (emms-mode-line-mode 0))
 
 (unless (member system-type '(ms-dos windows-nt cygwin))
