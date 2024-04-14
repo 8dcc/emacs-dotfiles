@@ -626,13 +626,18 @@ of characters, followed by the number of lines."
       kept-new-versions 20
       kept-old-versions 5)
 
+(with-eval-after-load 'battery
+  (if (not (null battery-status-function))
+      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
+            (power-status (battery-format "%B" (funcall battery-status-function))))
+        (if (or (string= "N/A" power-source)
+                (string= "unknown" power-source)
+                (string= "N/A" power-status)
+                (string= "unknown" power-status))
+            (display-battery-mode 0)
+          (display-battery-mode 1)))))
+
 (require 'battery)
-(if (not (null battery-status-function))
-    (let ((battstr (battery-format "%B" (funcall battery-status-function))))
-      (if (or (string= "N/A" battstr)
-              (string= "unknown" battstr))
-          (display-battery-mode 0)
-        (display-battery-mode 1))))
 
 (setq eshell-prompt-function (lambda ()
                                (concat
