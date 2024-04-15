@@ -727,81 +727,61 @@ See [[*Org mode keybinds][Org mode keybinds]].
       mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
 #+end_src
 
-** Misc global keybinds
+** Misc keybinds
+*** Global
 
 Zoom keybinds.
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-+")            #'text-scale-increase)
-(global-set-key (kbd "C--")            #'text-scale-decrease)
-(global-set-key (kbd "C-<wheel-up>")   #'text-scale-increase)
-(global-set-key (kbd "C-<wheel-down>") #'text-scale-decrease)
-(global-set-key (kbd "C-<home>") (lambda () (interactive)
-                                   (text-scale-adjust 0)))
+(keymap-global-set "C-+"            #'text-scale-increase)
+(keymap-global-set "C--"            #'text-scale-decrease)
+(keymap-global-set "C-<wheel-up>"   #'text-scale-increase)
+(keymap-global-set "C-<wheel-down>" #'text-scale-decrease)
+(keymap-global-set "C-<home>" (lambda () (interactive)
+                                (text-scale-adjust 0)))
 #+end_src
 
 Quit from minibuffer with one ESC, instead of 3 ESCs or C-g.
 
 #+begin_src emacs-lisp
-(global-set-key [escape] #'keyboard-escape-quit)
+(keymap-global-set "<escape>" #'keyboard-escape-quit)
 #+end_src
 
 Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-S-v") #'yank)
+(keymap-global-set "C-S-v" #'yank)
 #+end_src
 
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
 more settings related to indentation and =<tab>=, see [[*Misc mode settings][Misc mode settings]].
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "<backtab>")
-                (lambda () (interactive)
-                  ;; If there is a region active, use `evil-shift-left',
-                  ;; otherwise shift the current line.
-                  (if (use-region-p)
-                      (evil-shift-left (region-beginning) (region-end))
-                    (evil-shift-left-line 1))))
+(keymap-global-set "<backtab>"
+		           (lambda () (interactive)
+		             ;; If there is a region active, use `evil-shift-left',
+		             ;; otherwise shift the current line.
+		             (if (use-region-p)
+			             (evil-shift-left (region-beginning) (region-end))
+		               (evil-shift-left-line 1))))
 #+end_src
 
 Remap evil's =:q= to =SPC b k.=
 
 #+begin_src emacs-lisp
-(global-set-key [remap evil-quit] #'kill-current-buffer)
+(keymap-global-set "<remap> <evil-quit>" #'kill-current-buffer)
 #+end_src
 
 Remap evil's =:wq= to =SPC b s= + =SPC b k=.
 
 #+begin_src emacs-lisp
-(global-set-key [remap evil-save-and-close]
-                (lambda () (interactive)
-                  (basic-save-buffer)
-                  (kill-current-buffer)))
+(keymap-global-set "<remap> <evil-save-and-close>"
+                   (lambda () (interactive)
+                     (basic-save-buffer)
+                     (kill-current-buffer)))
 #+end_src
 
-** Misc org keybinds
-
-Use =C-<up>= and =C-<down>= to move subtrees in org-mode. Although we are using the
-[[*Drag stuff][drag stuff]] package, this only moves individual lines, and not subtrees. We could
-overwrite the =M-<up>= and =M-<down>= keybinds, but moving individual lines is still
-useful in large org files.
-
-#+begin_src emacs-lisp
-(keymap-set org-mode-map "C-<up>"   #'org-move-subtree-up)
-(keymap-set org-mode-map "C-<down>" #'org-move-subtree-down)
-#+end_src
-
-Use =C-S-<left>= and =C-S-<right>= to change the current header's level. This is
-bound by defect to =M-S-<left>= and =M-S-<right>=. We don't set it to =C-<left>= and
-=C-<right>= because these are used to jump between words.
-
-#+begin_src emacs-lisp
-(keymap-set org-mode-map "C-S-<left>"  #'org-shiftmetaleft)
-(keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
-#+end_src
-
-** Misc eshell keybinds
+*** Eshell
 
 Better function for clearing than =recenter-top-bottom=.
 
@@ -810,6 +790,18 @@ Better function for clearing than =recenter-top-bottom=.
   (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
                                       (eshell/clear-scrollback)
                                       (eshell-emit-prompt))))
+#+end_src
+
+*** Ediff
+
+In the =ediff-control-buffer=, remap evil's =:q= to =ediff-quit=. We need to hook it
+since =ediff-mode-map= is a buffer-local variable.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'ediff-util
+  (add-hook 'ediff-startup-hook
+            (lambda ()
+              (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
 #+end_src
 
 ** Space keybinds

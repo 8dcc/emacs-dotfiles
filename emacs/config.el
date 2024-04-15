@@ -354,42 +354,41 @@ and ALIGNMENT as parameters."
       mouse-wheel-follow-mouse t
       mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
 
-(global-set-key (kbd "C-+")            #'text-scale-increase)
-(global-set-key (kbd "C--")            #'text-scale-decrease)
-(global-set-key (kbd "C-<wheel-up>")   #'text-scale-increase)
-(global-set-key (kbd "C-<wheel-down>") #'text-scale-decrease)
-(global-set-key (kbd "C-<home>") (lambda () (interactive)
-                                   (text-scale-adjust 0)))
+(keymap-global-set "C-+"            #'text-scale-increase)
+(keymap-global-set "C--"            #'text-scale-decrease)
+(keymap-global-set "C-<wheel-up>"   #'text-scale-increase)
+(keymap-global-set "C-<wheel-down>" #'text-scale-decrease)
+(keymap-global-set "C-<home>" (lambda () (interactive)
+				(text-scale-adjust 0)))
 
-(global-set-key [escape] #'keyboard-escape-quit)
+(keymap-global-set "<escape>" #'keyboard-escape-quit)
 
-(global-set-key (kbd "C-S-v") #'yank)
+(keymap-global-set "C-S-v" #'yank)
 
-(global-set-key (kbd "<backtab>")
-                (lambda () (interactive)
-                  ;; If there is a region active, use `evil-shift-left',
-                  ;; otherwise shift the current line.
-                  (if (use-region-p)
-                      (evil-shift-left (region-beginning) (region-end))
-                    (evil-shift-left-line 1))))
+(keymap-global-set "<backtab>"
+		   (lambda () (interactive)
+		     ;; If there is a region active, use `evil-shift-left',
+		     ;; otherwise shift the current line.
+		     (if (use-region-p)
+			 (evil-shift-left (region-beginning) (region-end))
+		       (evil-shift-left-line 1))))
 
-(global-set-key [remap evil-quit] #'kill-current-buffer)
+(keymap-global-set "<remap> <evil-quit>" #'kill-current-buffer)
 
-(global-set-key [remap evil-save-and-close]
-                (lambda () (interactive)
-                  (basic-save-buffer)
-                  (kill-current-buffer)))
-
-(keymap-set org-mode-map "C-<up>"   #'org-move-subtree-up)
-(keymap-set org-mode-map "C-<down>" #'org-move-subtree-down)
-
-(keymap-set org-mode-map "C-S-<left>"  #'org-shiftmetaleft)
-(keymap-set org-mode-map "C-S-<right>" #'org-shiftmetaright)
+(keymap-global-set "<remap> <evil-save-and-close>"
+                   (lambda () (interactive)
+                     (basic-save-buffer)
+                     (kill-current-buffer)))
 
 (with-eval-after-load 'eshell
   (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
                                       (eshell/clear-scrollback)
                                       (eshell-emit-prompt))))
+
+(with-eval-after-load 'ediff-util
+  (add-hook 'ediff-startup-hook
+            (lambda ()
+              (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
 
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
