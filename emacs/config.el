@@ -344,6 +344,20 @@ and ALIGNMENT as parameters."
             (add-hook target function))
           targets))
 
+(defun x8dcc/separator-comment (&optional max-width)
+  (interactive)
+  (unless max-width
+    (setq max-width fill-column))
+  (let* ((start (string-trim comment-start))
+         (end   (string-trim comment-end))
+         (remaining (- max-width (+ (length start)
+                                    (length end)))))
+    (save-excursion
+      (end-of-line)
+      (insert "\n" start)
+      (insert-char ?- remaining)
+      (insert end))))
+
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
@@ -426,6 +440,9 @@ and ALIGNMENT as parameters."
   "h k" '(describe-key      :wk "Describe key")
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
+  ;; Insert
+  "i"   '(:ignore t               :wk "Insert")
+  "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Open
   "o"   '(:ignore t                       :wk "Open")
   "o -" '(dired-jump                      :wk "Dired")
@@ -487,7 +504,9 @@ and ALIGNMENT as parameters."
   "z r" '(evil-open-folds  :wk "Open all"))
 
 (x8dcc/org-keys
-  ;; Toggle -> Org inline images
+  ;; Insert
+  "i h"   '(x8dcc/org-insert-header :wk "Default header")
+  ;; Toggle
   "t i"   '(org-toggle-inline-images :wk "Inline images")
   ;; Mode (Org)
   "m"     '(:ignore t :wk "Org")
@@ -518,9 +537,8 @@ and ALIGNMENT as parameters."
 (x8dcc/c-keys
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
-  ;; Mode (C)
-  "m"   '(:ignore t :wk "C")
-  "m g" '(x8dcc/c-include-guard :wk "Include guards")
+  ;; Insert
+  "i g" '(x8dcc/c-include-guard :wk "Include guards")
   ;; Fold
   "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 

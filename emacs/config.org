@@ -698,6 +698,24 @@ This function is similar to =x8dcc/hook-funcs=, but it will be used for hooking 
           targets))
 #+end_src
 
+Insert a separator comment that fills up to the line column.
+
+#+begin_src emacs-lisp
+(defun x8dcc/separator-comment (&optional max-width)
+  (interactive)
+  (unless max-width
+    (setq max-width fill-column))
+  (let* ((start (string-trim comment-start))
+         (end   (string-trim comment-end))
+         (remaining (- max-width (+ (length start)
+                                    (length end)))))
+    (save-excursion
+      (end-of-line)
+      (insert "\n" start)
+      (insert-char ?- remaining)
+      (insert end))))
+#+end_src
+
 * Input
 ** Custom input functions
 
@@ -859,6 +877,9 @@ Notes:
   "h k" '(describe-key      :wk "Describe key")
   "h m" '(describe-mode     :wk "Describe mode")
   "h v" '(describe-variable :wk "Describe variable")
+  ;; Insert
+  "i"   '(:ignore t               :wk "Insert")
+  "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Open
   "o"   '(:ignore t                       :wk "Open")
   "o -" '(dired-jump                      :wk "Dired")
@@ -932,7 +953,9 @@ See also:
 
 #+begin_src emacs-lisp
 (x8dcc/org-keys
-  ;; Toggle -> Org inline images
+  ;; Insert
+  "i h"   '(x8dcc/org-insert-header :wk "Default header")
+  ;; Toggle
   "t i"   '(org-toggle-inline-images :wk "Inline images")
   ;; Mode (Org)
   "m"     '(:ignore t :wk "Org")
@@ -975,9 +998,8 @@ See also:
 (x8dcc/c-keys
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
-  ;; Mode (C)
-  "m"   '(:ignore t :wk "C")
-  "m g" '(x8dcc/c-include-guard :wk "Include guards")
+  ;; Insert
+  "i g" '(x8dcc/c-include-guard :wk "Include guards")
   ;; Fold
   "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 #+end_src
