@@ -55,16 +55,17 @@
 (use-package evil
   :init
   (setq evil-want-integration t
-        evil-want-keybinding nil
-        evil-split-window-below t
+        evil-want-keybinding nil)
+  :config
+  (setq evil-split-window-below t
         evil-vsplit-window-right t
-        evil-undo-system 'undo-redo
+        evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
-  (evil-mode)
-  :config
+  (evil-select-search-module 'evil-search-module 'evil-search)
   (defalias #'forward-evil-word #'forward-evil-symbol)
-  (setq-default evil-symbol-word-search t))
+  (setq-default evil-symbol-word-search t)
+  (evil-mode 1))
 
 (use-package evil-collection
   :diminish evil-collection-unimpaired-mode
@@ -359,19 +360,19 @@ and ALIGNMENT as parameters."
 (keymap-global-set "C-<wheel-up>"   #'text-scale-increase)
 (keymap-global-set "C-<wheel-down>" #'text-scale-decrease)
 (keymap-global-set "C-<home>" (lambda () (interactive)
-				(text-scale-adjust 0)))
+                                (text-scale-adjust 0)))
 
 (keymap-global-set "<escape>" #'keyboard-escape-quit)
 
 (keymap-global-set "C-S-v" #'yank)
 
 (keymap-global-set "<backtab>"
-		   (lambda () (interactive)
-		     ;; If there is a region active, use `evil-shift-left',
-		     ;; otherwise shift the current line.
-		     (if (use-region-p)
-			 (evil-shift-left (region-beginning) (region-end))
-		       (evil-shift-left-line 1))))
+		           (lambda () (interactive)
+		             ;; If there is a region active, use `evil-shift-left',
+		             ;; otherwise shift the current line.
+		             (if (use-region-p)
+			             (evil-shift-left (region-beginning) (region-end))
+		               (evil-shift-left-line 1))))
 
 (keymap-global-set "<remap> <evil-quit>" #'kill-current-buffer)
 
@@ -449,6 +450,7 @@ and ALIGNMENT as parameters."
   "s l" '(consult-line                 :wk "Jump to line")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(rgrep                        :wk "Recursive grep")
+  "s s" '(isearch-forward              :wk "I-search")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
@@ -585,11 +587,6 @@ of characters, followed by the number of lines."
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
 
-(setq lazy-highlight-cleanup nil
-      lazy-highlight-initial-delay nil
-      lazy-highlight-max-at-a-time nil
-      isearch-allow-scroll t)
-
 (setq-default display-fill-column-indicator-character ?\u00A6
               fill-column 80)
 
@@ -687,6 +684,17 @@ different rules in `display-buffer-alist'."
 
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
+
+(setq lazy-highlight-cleanup t
+      lazy-highlight-initial-delay 2
+      lazy-highlight-max-at-a-time nil)
+
+(setq isearch-allow-scroll t
+      search-whitespace-regexp ".*?")
+
+(setq isearch-lazy-count t
+      lazy-count-prefix-format "(%s/%s) "
+      lazy-count-subfix-format nil)
 
 (require 'erc)
 (require 'erc-log)
