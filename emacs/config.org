@@ -1331,7 +1331,7 @@ similar to [[*Orderless][Orderless]].
 
 #+begin_src emacs-lisp
 (setq isearch-allow-scroll t
-      search-whitespace-regexp ".*?")
+      search-whitespace-regexp ".{,10}")
 #+end_src
 
 We will display the match number out of the total I-search matches.

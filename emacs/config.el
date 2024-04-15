@@ -690,7 +690,7 @@ different rules in `display-buffer-alist'."
       lazy-highlight-max-at-a-time nil)
 
 (setq isearch-allow-scroll t
-      search-whitespace-regexp ".*?")
+      search-whitespace-regexp ".{,10}")
 
 (setq isearch-lazy-count t
       lazy-count-prefix-format "(%s/%s) "
