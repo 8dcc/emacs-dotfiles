@@ -55,13 +55,13 @@
 (use-package evil
   :init
   (setq evil-want-integration t
-        evil-want-keybinding nil)
-  :config
-  (setq evil-split-window-below t
+        evil-want-keybinding nil
+        evil-split-window-below t
         evil-vsplit-window-right t
         evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
+  :config
   (evil-select-search-module 'evil-search-module 'evil-search)
   (defalias #'forward-evil-word #'forward-evil-symbol)
   (setq-default evil-symbol-word-search t)
