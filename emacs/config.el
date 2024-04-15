@@ -832,6 +832,17 @@ to the overlay."
          (file+headline "notes.org" "Selections")
          "* %T Selection from [[%F][%f]]\n%?\n#+begin_quote\n%i\n#+end_quote")))
 
+(defun x8dcc/org-insert-header (&optional title)
+  (interactive)
+  (unless title
+    (setq title (capitalize (file-name-base buffer-file-name))))
+  (save-excursion
+    (goto-char (point-min))
+    (insert "#+TITLE: " title "\n"
+            "#+OPTIONS: toc:2\n"
+            "#+STARTUP: showeverything\n"
+            "#+AUTHOR: " user-full-name "\n")))
+
 (setq c-default-style "k&r"
       c-basic-offset tab-width
       c-tab-always-indent nil)
