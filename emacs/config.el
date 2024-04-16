@@ -420,6 +420,7 @@ and ALIGNMENT as parameters."
   "f"   '(:ignore t          :wk "File")
   "f f" '(find-file          :wk "Find file")
   "f o" '(ff-find-other-file :wk "Find other file")
+  "f O" '(find-file-at-point :wk "Find file at point")
   "f r" '(recentf-open       :wk "Open recent")
   ;; Magit
   "g"   '(:ignore t                 :wk "Git")
