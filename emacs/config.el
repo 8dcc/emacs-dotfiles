@@ -190,11 +190,7 @@
 
 (unless (member system-type '(ms-dos windows-nt cygwin))
   (use-package spell-fu
-    :hook ((org-mode      . spell-fu-mode)
-           (markdown-mode . spell-fu-mode)
-           (erc-mode      . spell-fu-mode)
-           (mail-mode     . spell-fu-mode)
-           (text-mode     . spell-fu-mode))
+    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode) . spell-fu-mode)
     :config
     (add-hook 'spell-fu-mode-hook
               (lambda ()
@@ -249,8 +245,7 @@
   (drag-stuff-define-keys))
 
 (use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
-         (prog-mode . hl-todo-mode))
+  :hook ((org-mode prog-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
@@ -264,14 +259,10 @@
 
 (use-package rainbow-mode
   :diminish
-  :hook ((html-mode . rainbow-mode)
-         (css-mode  . rainbow-mode)
-         (js-mode   . rainbow-mode)))
+  :hook ((html-mode css-mode js-mode)  . rainbow-mode))
 
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode  . rainbow-delimiters-mode)
-         (scheme-mode      . rainbow-delimiters-mode)
-         (common-lisp-mode . rainbow-delimiters-mode)))
+  :hook ((emacs-lisp-mode scheme-mode common-lisp-mode) . rainbow-delimiters-mode))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
@@ -282,9 +273,7 @@
 
 (use-package vi-tilde-fringe
   :diminish
-  :hook ((prog-mode . vi-tilde-fringe-mode)
-         (org-mode  . vi-tilde-fringe-mode)
-         (text-mode . vi-tilde-fringe-mode))
+  :hook ((prog-mode org-mode text-mode) . vi-tilde-fringe-mode)
   :config
   (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
 
