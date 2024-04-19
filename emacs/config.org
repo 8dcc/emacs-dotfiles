@@ -906,6 +906,7 @@ Notes:
   "s l" '(consult-line                 :wk "Jump to line")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace interactively")
+  "s R" '(query-replace-regexp         :wk "Replace regex")
   "s s" '(isearch-forward              :wk "I-search")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
