@@ -703,6 +703,18 @@ Insert a separator comment that fills up to the line column.
       (insert end))))
 #+end_src
 
+Is this file really big? It will be used for disabling some modes. Credits
+[[https://github.com/seagle0128/.emacs.d/blob/19efe194cabc2f2984e6463a8d9730d8163acd8f/lisp/init-funcs.el#L267-L271][seagle0128]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/huge-file ()
+  "Returns `t' if the current buffer has either too many characters (>500000),
+or too many lines (>10000)."
+  (or (> (buffer-size) 500000)
+      (and (fboundp 'buffer-line-statistics)
+           (> (car (buffer-line-statistics)) 10000))))
+#+end_src
+
 * Input
 ** Custom input functions
 

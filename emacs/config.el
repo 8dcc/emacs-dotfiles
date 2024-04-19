@@ -345,6 +345,13 @@ and ALIGNMENT as parameters."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/huge-file ()
+  "Returns `t' if the current buffer has either too many characters (>500000),
+or too many lines (>10000)."
+  (or (> (buffer-size) 500000)
+      (and (fboundp 'buffer-line-statistics)
+           (> (car (buffer-line-statistics)) 10000))))
+
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
