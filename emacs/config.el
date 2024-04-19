@@ -179,9 +179,7 @@
 (use-package emms
   :config
   (emms-all)
-  (setq emms-librefm-scrobbler-username "8dcc"
-        emms-librefm-scrobbler-password "PASSWORD"
-        emms-player-list '(emms-player-mpv
+  (setq emms-player-list '(emms-player-mpv
                            emms-player-vlc)
         emms-player-mpv-parameters '("--quiet"
                                      "--really-quiet"
