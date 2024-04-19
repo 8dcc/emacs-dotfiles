@@ -373,6 +373,39 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
   (popper-mode 1))
 #+end_src
 
+** Highlight indentation
+
+We will enable indentation guides in C mode by default. It can also be toggled
+with =SPC t C=, see [[*Space keybinds][Space keybinds]].
+
+We will use the same character as the fill column, and we will ignore the first
+indentation level.
+
+Setting =highlight-indent-guides-auto-enabled= is necessary for changing the face
+foreground.
+
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :diminish
+  :hook ((c-mode) . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-character ?\u00A6
+        highlight-indent-guides-suppress-auto-error t
+        highlight-indent-guides-auto-enabled nil)
+  (set-face-foreground 'highlight-indent-guides-character-face "#1A1A1A"))
+#+end_src
+
+This is the function for not highlighting the first level.
+
+#+begin_src emacs-lisp
+(defun x8dcc/indent-guide-highlighter (level responsive display)
+  (if (> level 0)
+      (highlight-indent-guides--highlighter-default level responsive display)))
+
+(setq highlight-indent-guides-highlighter-function 'x8dcc/indent-guide-highlighter)
+#+end_src
+
 ** EMMS
 
 Enable the /Emacs Multi-Media System/ (EMMS).
@@ -910,6 +943,7 @@ Notes:
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
+  "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t p" '(popper-toggle                      :wk "Popups")
   "t r" '(read-only-mode                     :wk "Read only")
   "t s" '(spell-fu-mode                      :wk "Spell checking")

@@ -176,6 +176,22 @@
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
+(use-package highlight-indent-guides
+  :diminish
+  :hook ((c-mode) . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-character ?\u00A6
+        highlight-indent-guides-suppress-auto-error t
+        highlight-indent-guides-auto-enabled nil)
+  (set-face-foreground 'highlight-indent-guides-character-face "#1A1A1A"))
+
+(defun x8dcc/indent-guide-highlighter (level responsive display)
+  (if (> level 0)
+      (highlight-indent-guides--highlighter-default level responsive display)))
+
+(setq highlight-indent-guides-highlighter-function 'x8dcc/indent-guide-highlighter)
+
 (use-package emms
   :config
   (emms-all)
@@ -468,6 +484,7 @@ or too many lines (>10000)."
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
+  "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t p" '(popper-toggle                      :wk "Popups")
   "t r" '(read-only-mode                     :wk "Read only")
   "t s" '(spell-fu-mode                      :wk "Spell checking")
