@@ -62,7 +62,7 @@
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
-  (evil-select-search-module 'evil-search-module 'evil-search)
+  (evil-select-search-module 'evil-search-module 'isearch)
   (defalias #'forward-evil-word #'forward-evil-symbol)
   (setq-default evil-symbol-word-search t)
   (evil-mode 1))

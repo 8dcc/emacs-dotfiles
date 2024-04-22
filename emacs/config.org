@@ -156,8 +156,9 @@ For vi-like keybinds. Some notes about the configuration:
 - We set =evil-want-C-i-jump= to =nil= to avoid some =TAB= problems.
 - We set =evil-mode-line-format= for displaying the evil mode before the buffer
   name. See also [[*Modeline][Modeline]].
-- We will use evil's search module because some I-search options don't work well
-  with evil (highlight persistence, etc.).
+- We will use I-search as evil's search module so it's consistent when using
+  =query-replace= and commands like that (although some stuff like highlight
+  persistence doesn't behave like in vim).
 - We alias =forward-evil-word= to =forward-evil-symbol= and set
   =evil-symbol-word-search= so using =b= and =e= ignores =_= and =-= depending on the
   language's symbols.
@@ -173,7 +174,7 @@ For vi-like keybinds. Some notes about the configuration:
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
-  (evil-select-search-module 'evil-search-module 'evil-search)
+  (evil-select-search-module 'evil-search-module 'isearch)
   (defalias #'forward-evil-word #'forward-evil-symbol)
   (setq-default evil-symbol-word-search t)
   (evil-mode 1))
