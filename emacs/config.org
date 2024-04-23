@@ -1690,6 +1690,12 @@ Enable explicit tabs for C code (if not on beginning of line).
       c-tab-always-indent nil)
 #+end_src
 
+Use doxygen style for documentation comments.
+
+#+begin_src emacs-lisp
+(setq c-doc-comment-style 'doxygen)
+#+end_src
+
 When using the =SPC z i= keybind, also call =hide-ifdefs=.
 
 #+begin_src emacs-lisp

@@ -878,6 +878,8 @@ to the overlay."
       c-basic-offset tab-width
       c-tab-always-indent nil)
 
+(setq c-doc-comment-style 'doxygen)
+
 (setq hide-ifdef-initially t
       hide-ifdef-lines t)
 
