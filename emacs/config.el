@@ -180,9 +180,7 @@
                                    "^\\*evil-registers\\*"
                                    "^\\*Apropos\\*"
                                    "^\\*scratch\\*"
-                                   ;"^\\*Messages\\*"
-                                   ;"^\\*Completions\\*"
-                                   "^Calc:"))
+                                   "^\\*Macroexpansion\\*"))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
