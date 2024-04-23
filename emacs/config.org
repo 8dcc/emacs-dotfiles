@@ -918,9 +918,11 @@ Notes:
   "o"   '(:ignore t                       :wk "Open")
   "o -" '(dired-jump                      :wk "Dired")
   "o a" '(org-agenda                      :wk "Org agenda")
+  "o c" '(calc                            :wk "Calculator")
   "o d" '(projectile-run-gdb              :wk "Debugger")
   "o e" '(x8dcc/eshell-popup              :wk "Eshell popup")
   "o E" '(x8dcc/eshell-project-or-current :wk "Eshell")
+  "o m" '(man                             :wk "Manpage")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
