@@ -758,6 +758,24 @@ or too many lines (>10000)."
            (> (car (buffer-line-statistics)) 10000))))
 #+end_src
 
+Align the text relative to all occurrences of the provided regular expression or
+string in the selection. See also [[https://www.emacswiki.org/emacs/AlignCommands][EmacsWiki]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/align-repeat-regexp (regexp)
+  "Apply alignment relative to all occurrences of REGEXP in the selection."
+  (interactive "sAlign regexp: ")
+  (if (use-region-p)
+      (align-regexp (region-beginning) (region-end)
+                    (concat "\\(" regexp "\\)") 1 1 t)
+    (message "No selection")))
+
+(defun x8dcc/align-repeat (separator)
+  "Apply alignment relative to all occurrences of SEPARATOR in the selection."
+  (interactive "sColumn separator: ")
+  (x8dcc/align-repeat-regexp (regexp-quote separator)))
+#+end_src
+
 * Input
 ** Custom input functions
 
