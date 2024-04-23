@@ -87,9 +87,20 @@
     :keymaps 'org-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/lisp-keys
+    :states '(normal insert visual emacs)
+    :keymaps '(lisp-mode-map
+               emacs-lisp-mode-map
+               lisp-interaction-mode-map
+               lisp-data-mode-map)
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/c-keys
     :states '(normal insert visual emacs)
-    :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
+    :keymaps '(c-mode-map
+               c++-mode-map
+               java-mode-map
+               js-mode-map)
     :prefix "SPC"
     :non-normal-prefix "M-SPC"))
 
@@ -548,6 +559,13 @@ or too many lines (>10000)."
   "m t"   '(org-todo :wk "Toggle todo")
   ;; Org -> Tangle
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
+
+(x8dcc/lisp-keys
+  ;; Evaluate
+  "e"   '(:ignore t            :wk "Evaluate")
+  "e e" '(eval-last-sexp       :wk "Last sexp")
+  "e E" '(eval-print-last-sexp :wk "Print last sexp")
+  "e b" '(eval-buffer          :wk "Current buffer"))
 
 (x8dcc/c-keys
   ;; Buffer

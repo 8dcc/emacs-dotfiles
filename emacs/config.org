@@ -218,9 +218,20 @@ For the main keybinds, see [[Space keybinds][Space keybinds]].
     :keymaps 'org-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/lisp-keys
+    :states '(normal insert visual emacs)
+    :keymaps '(lisp-mode-map
+               emacs-lisp-mode-map
+               lisp-interaction-mode-map
+               lisp-data-mode-map)
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/c-keys
     :states '(normal insert visual emacs)
-    :keymaps '(c-mode-map c++-mode-map java-mode-map js-mode-map js-json-mode-map)
+    :keymaps '(c-mode-map
+               c++-mode-map
+               java-mode-map
+               js-mode-map)
     :prefix "SPC"
     :non-normal-prefix "M-SPC"))
 #+end_src
@@ -1022,10 +1033,25 @@ See also:
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
 #+end_src
 
+*** Lisp mode keybinds
+
+Keybinds for =lisp-mode-map=, =emacs-lisp-mode-map=, =lisp-interaction-mode-map= and
+=lisp-data-mode-map=.
+
+For more information on the =x8dcc/*= functions, see [[*General][General]] and [[Custom functions][Custom functions]].
+
+#+begin_src emacs-lisp
+(x8dcc/lisp-keys
+  ;; Evaluate
+  "e"   '(:ignore t            :wk "Evaluate")
+  "e e" '(eval-last-sexp       :wk "Last sexp")
+  "e E" '(eval-print-last-sexp :wk "Print last sexp")
+  "e b" '(eval-buffer          :wk "Current buffer"))
+#+end_src
+
 *** C mode keybinds
 
-Keybinds for =c-mode-map=, =c++-mode-map=, =java-mode-map=, =js-mode-map= and
-=js-json-mode-map=.
+Keybinds for =c-mode-map=, =c++-mode-map=, =java-mode-map= and =js-mode-map=.
 
 See also:
 - [[*C mode][C mode]].
