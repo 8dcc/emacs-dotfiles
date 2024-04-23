@@ -572,6 +572,9 @@ or too many lines (>10000)."
   "b f" '(clang-format-buffer :wk "Format")
   ;; Insert
   "i g" '(x8dcc/c-include-guard :wk "Include guards")
+  ;; Evaluate
+  "e"   '(:ignore t      :wk "Evaluate")
+  "e m" '(c-macro-expand :wk "Expand macros in region")
   ;; Fold
   "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
 
