@@ -704,6 +704,22 @@ functionality. Uses a =straight.el= recipe.
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 #+end_src
 
+** Disaster
+
+Disassemble C/C++ code under cursor in Emacs.
+
+It will use my own fork of =nasm-mode= instead of emacs' =asm-mode=. See [[*Nasm mode][Nasm mode]].
+
+FIXME: This doesn't really work as intended, source lines are not exported. See
+[[https://github.com/jart/disaster/issues/31][disaster#31]].
+
+#+begin_src emacs-lisp
+(use-package disaster
+  :init
+  (setq disaster-assembly-mode 'nasm-mode
+        disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
+#+end_src
+
 * Misc functions and macros
 
 This function will be used for hooking a list of =functions= into the specified

@@ -344,6 +344,11 @@ and ALIGNMENT as parameters."
 (straight-use-package
   '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
+(use-package disaster
+  :init
+  (setq disaster-assembly-mode 'nasm-mode
+        disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
+
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
   (mapcar (lambda (func)
