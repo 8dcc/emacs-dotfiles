@@ -935,13 +935,14 @@ Notes:
   "f o" '(ff-find-other-file :wk "Find other file")
   "f O" '(find-file-at-point :wk "Find file at point")
   "f r" '(recentf-open       :wk "Open recent")
-  ;; Magit
+  ;; Git
   "g"   '(:ignore t                 :wk "Git")
   "g c" '(magit-commit              :wk "Commit menu")
   "g e" '(magit-ediff-wdim          :wk "Ediff")
   "g f" '(magit-fetch               :wk "Fetch menu")
   "g F" '(magit-pull                :wk "Pull menu")
   "g g" '(magit-status              :wk "Magit status")
+  "g G" '(vc-refresh-state          :wk "Refresh VC state")
   "g p" '(magit-push                :wk "Push menu")
   "g s" '(magit-stage-buffer-file   :wk "Stage current")
   "g u" '(magit-unstage-buffer-file :wk "Unstage current")
