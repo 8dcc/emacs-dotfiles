@@ -583,7 +583,8 @@ or too many lines (>10000)."
   "e"   '(:ignore t            :wk "Evaluate")
   "e e" '(eval-last-sexp       :wk "Last sexp")
   "e E" '(eval-print-last-sexp :wk "Print last sexp")
-  "e b" '(eval-buffer          :wk "Current buffer"))
+  "e b" '(eval-buffer          :wk "Current buffer")
+  "e r" '(eval-region          :wk "Region"))
 
 (x8dcc/c-keys
   ;; Buffer
