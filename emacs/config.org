@@ -994,6 +994,7 @@ Notes:
   "s r" '(query-replace                :wk "Replace interactively")
   "s R" '(query-replace-regexp         :wk "Replace regex")
   "s s" '(isearch-forward              :wk "I-search")
+  "s S" '(isearch-forward-regexp       :wk "I-search regex")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
