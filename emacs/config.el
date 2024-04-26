@@ -384,19 +384,6 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
-(defun x8dcc/align-repeat-regexp (regexp)
-  "Apply alignment relative to all occurrences of REGEXP in the selection."
-  (interactive "sAlign regexp: ")
-  (if (use-region-p)
-      (align-regexp (region-beginning) (region-end)
-                    (concat "\\(" regexp "\\)") 1 1 t)
-    (message "No selection")))
-
-(defun x8dcc/align-repeat (separator)
-  "Apply alignment relative to all occurrences of SEPARATOR in the selection."
-  (interactive "sColumn separator: ")
-  (x8dcc/align-repeat-regexp (regexp-quote separator)))
-
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
