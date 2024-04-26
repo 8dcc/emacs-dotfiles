@@ -696,12 +696,19 @@ these lambdas.
 
 ** Nasm mode
 
-Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified
-functionality. Uses a =straight.el= recipe.
+Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality. Uses a
+=straight.el= recipe.
 
 #+begin_src emacs-lisp
 (straight-use-package
-  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+ '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+#+end_src
+
+Use it as the default mode for =.asm= files. For more information on
+=auto-mode-alist=, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Choosing-Modes.html][Choosing File Modes]].
+
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
 ** Disaster

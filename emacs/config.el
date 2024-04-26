@@ -342,7 +342,9 @@ and ALIGNMENT as parameters."
                                            (fringe-mode nil))))
 
 (straight-use-package
-  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+ '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+
+(add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
 (use-package disaster
   :init
