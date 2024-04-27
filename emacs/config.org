@@ -1670,6 +1670,12 @@ indentation acts natively inside source blocks.
       org-src-tab-acts-natively t)
 #+end_src
 
+Set the default folding levels for org buffers.
+
+#+begin_src emacs-lisp
+(setq org-startup-folded "nofold")
+#+end_src
+
 Enable =org-indent-mode=, which hides leading '*' from titles.
 
 Set =org-link-descriptive= to hide org links. This is changed by the
@@ -1812,9 +1818,9 @@ Insert the default header for my ORG files.
   (save-excursion
     (goto-char (point-min))
     (insert "#+TITLE: " title "\n"
+            "#+AUTHOR: " user-full-name "\n"
             "#+OPTIONS: toc:2\n"
-            "#+STARTUP: showeverything\n"
-            "#+AUTHOR: " user-full-name "\n")))
+            "#+STARTUP: nofold\n")))
 #+end_src
 
 * C mode

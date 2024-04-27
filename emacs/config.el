@@ -866,6 +866,8 @@ different rules in `display-buffer-alist'."
       org-edit-src-content-indentation 0
       org-src-tab-acts-natively t)
 
+(setq org-startup-folded "nofold")
+
 (add-hook 'org-mode-hook (lambda ()
                            (org-indent-mode 1)
                            (setq org-link-descriptive 1)
@@ -949,9 +951,9 @@ already have one. See `x8dcc/org-custom-id-get'."
   (save-excursion
     (goto-char (point-min))
     (insert "#+TITLE: " title "\n"
+            "#+AUTHOR: " user-full-name "\n"
             "#+OPTIONS: toc:2\n"
-            "#+STARTUP: showeverything\n"
-            "#+AUTHOR: " user-full-name "\n")))
+            "#+STARTUP: nofold\n")))
 
 (setq c-default-style "k&r"
       c-basic-offset tab-width
