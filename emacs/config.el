@@ -901,9 +901,13 @@ to the overlay."
 (defun x8dcc/org-headline-to-id (headline)
   "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
 \"My test... =heading=\" would turn into \"my-test-heading\"."
-  (let ((dashed (replace-regexp-in-string "[^[:alnum:]]+" "-"
-                                          (downcase headline))))
-    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "" dashed)))
+  (setq headline (replace-regexp-in-string "\\(\"+\\|'+\\)" ""
+                                           (downcase headline)))
+  (setq headline (replace-regexp-in-string "[^[:alnum:]]+" "-"
+                                           headline))
+  (setq headline (replace-regexp-in-string "\\(^-+\\|-+$\\)" ""
+                                           headline))
+  headline)
 
 (defun x8dcc/org-custom-id-get (&optional pom create)
   "Get the CUSTOM_ID property of the entry at point-or-marker POM.  If POM is

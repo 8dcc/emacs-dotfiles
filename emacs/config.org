@@ -1729,15 +1729,22 @@ First, we will use this so our =CUSTOM_ID='s are used by the links too.
 #+end_src
 
 Since I want my custom ids to look similar to the headlines themselves, I
-created this =headline-to-id= function.
+created this =headline-to-id= function. First, it converts the headline to
+lowercase, then it removes the quotes, it replaces non-alphanumerical characters
+with a single dash, and then removes any extra dashes from the start and enf of
+the ID.
 
 #+begin_src emacs-lisp
 (defun x8dcc/org-headline-to-id (headline)
   "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
 \"My test... =heading=\" would turn into \"my-test-heading\"."
-  (let ((dashed (replace-regexp-in-string "[^[:alnum:]]+" "-"
-                                          (downcase headline))))
-    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "" dashed)))
+  (setq headline (replace-regexp-in-string "\\(\"+\\|'+\\)" ""
+                                           (downcase headline)))
+  (setq headline (replace-regexp-in-string "[^[:alnum:]]+" "-"
+                                           headline))
+  (setq headline (replace-regexp-in-string "\\(^-+\\|-+$\\)" ""
+                                           headline))
+  headline)
 #+end_src
 
 Next, our =org-custom-id-get= function. It uses =x8dcc/org-headline-to-id= instead
