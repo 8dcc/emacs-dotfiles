@@ -694,6 +694,15 @@ these lambdas.
                                            (fringe-mode nil))))
 #+end_src
 
+** Align all
+
+Personal package for aligning text. Uses a =straight.el= recipe.
+
+#+begin_src emacs-lisp
+(straight-use-package
+ '(x8dcc-align :type git :host github :repo "8dcc/align.el"))
+#+end_src
+
 ** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality. Uses a

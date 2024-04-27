@@ -342,6 +342,9 @@ and ALIGNMENT as parameters."
                                            (fringe-mode nil))))
 
 (straight-use-package
+ '(x8dcc-align :type git :host github :repo "8dcc/align.el"))
+
+(straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
