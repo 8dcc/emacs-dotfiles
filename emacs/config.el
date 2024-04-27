@@ -895,11 +895,6 @@ to the overlay."
 ;; NOTE: For hiding org commas, use:
 ;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 
-(with-eval-after-load 'org-id
-  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
-
-(require 'org-id)
-
 (defun x8dcc/org-headline-to-id (headline)
   "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
 \"My test... =heading=\" would turn into \"my-test-heading\"."

@@ -1725,15 +1725,6 @@ to the overlay."
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to
 [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Lee Hinman]] and [[https://protesilaos.com/][Protesilaos Stavrou]].
 
-First, we will use this so our =CUSTOM_ID='s are used by the links too.
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'org-id
-  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
-
-(require 'org-id)
-#+end_src
-
 Since I want my custom ids to look similar to the headlines themselves, I
 created this =headline-to-id= function. First, it converts the headline to
 lowercase, then it removes the quotes, it replaces non-alphanumerical characters
