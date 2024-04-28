@@ -509,6 +509,8 @@ or too many lines (>10000)."
   "t"   '(:ignore t                          :wk "Toggle")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
+  "t f" '(variable-pitch-mode                :wk "Variable pitch font")
+  "t l" '(display-line-numbers-mode          :wk "Line numbers")
   "t p" '(popper-toggle                      :wk "Last popup")
   "t P" '(popper-toggle-type                 :wk "Popup type")
   "t r" '(read-only-mode                     :wk "Read only")
