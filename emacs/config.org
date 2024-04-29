@@ -357,6 +357,20 @@ better completion in buffers like eshell. See [[https://github.com/minad/vertico
 				 args))))
 #+end_src
 
+** PCRE to Emacs
+
+Set of functions for converting [[https://www.pcre.org/original/doc/html/pcrepattern.html][PCRE]] regular expressions into [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexps.html][Emacs regexps]] and
+viceversa.
+
+We enable the global PCRE mode (experimental according to the owner) for using
+PCRE regex syntax in all emacs commands.
+
+#+begin_src emacs-lisp
+(use-package pcre2el
+  :config
+  (pcre-mode))
+#+end_src
+
 ** Popper
 
 For converting less-important buffers into popups. They can be toggled
@@ -377,7 +391,8 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
                                    "^\\*evil-registers\\*"
                                    "^\\*Apropos\\*"
                                    "^\\*scratch\\*"
-                                   "^\\*Macroexpansion\\*"))
+                                   "^\\*Macroexpansion\\*"
+                                   "^\\* Regexp Explain \\*"))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))

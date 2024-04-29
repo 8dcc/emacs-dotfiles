@@ -166,6 +166,10 @@
                    #'completion--in-region)
 				 args))))
 
+(use-package pcre2el
+  :config
+  (pcre-mode))
+
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
@@ -180,7 +184,8 @@
                                    "^\\*evil-registers\\*"
                                    "^\\*Apropos\\*"
                                    "^\\*scratch\\*"
-                                   "^\\*Macroexpansion\\*"))
+                                   "^\\*Macroexpansion\\*"
+                                   "^\\* Regexp Explain \\*"))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
