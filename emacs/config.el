@@ -166,9 +166,7 @@
                    #'completion--in-region)
 				 args))))
 
-(use-package pcre2el
-  :config
-  (pcre-mode))
+(use-package pcre2el)
 
 (use-package popper
   :config
