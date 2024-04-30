@@ -726,13 +726,11 @@ Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
 And the settings.
 
 #+begin_src emacs-lisp
-;; NOTE: Unused
 (defface x8dcc-big-font-face
-  '((t (:font "Iosevka 8dcc Medium 13" :weight semibold)))
+  '((t (:font "Iosevka 8dcc" :height 120)))
   "Personal face for `big-font-mode'")
 
-(setq big-font-face nil
-      big-font-height 200)
+(setq big-font-face 'x8dcc-big-font-face)
 #+end_src
 
 ** Nasm mode

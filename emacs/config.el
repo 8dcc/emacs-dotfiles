@@ -350,13 +350,11 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(big-font :type git :host github :repo "8dcc/big-font.el"))
 
-;; NOTE: Unused
 (defface x8dcc-big-font-face
-  '((t (:font "Iosevka 8dcc Medium 13" :weight semibold)))
+  '((t (:font "Iosevka 8dcc" :height 120)))
   "Personal face for `big-font-mode'")
 
-(setq big-font-face nil
-      big-font-height 200)
+(setq big-font-face 'x8dcc-big-font-face)
 
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
