@@ -883,11 +883,11 @@ different rules in `display-buffer-alist'."
                            (org-indent-mode 1)
                            (setq org-link-descriptive 1)
                            (setq-local
-                             electric-pair-inhibit-predicate
-                             `(lambda (c)
-                                (if (char-equal c ?<)
+                            electric-pair-inhibit-predicate
+                            (lambda (c)
+                              (if (char-equal c ?<)
                                   t
-                                  (,electric-pair-inhibit-predicate c))))))
+                                (electric-pair-default-inhibit c))))))
 
 (defun x8dcc/make-invisible (regex &optional group-num)
   "Make all ocurrences of REGEX invisible.
