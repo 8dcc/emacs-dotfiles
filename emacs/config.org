@@ -1003,6 +1003,7 @@ Notes:
   "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
   "t l" '(display-line-numbers-mode          :wk "Line numbers")
+  "t L" '(hl-line-mode                       :wk "Highlight line")
   "t p" '(popper-toggle                      :wk "Last popup")
   "t P" '(popper-toggle-type                 :wk "Popup type")
   "t r" '(read-only-mode                     :wk "Read only")
@@ -1192,7 +1193,7 @@ the [[Evil & Evil collection][Evil]] package.
                 mode-line-misc-info))
 #+end_src
 
-* Line numbers
+* Line numbers and line highlight
 
 Style of line numbers. If set to =nil=, line numbers are disabled, =t= for
 normal numbers and =relative= for relative line numbers.
@@ -1220,6 +1221,18 @@ Hide line numbers in the specified modes. For more information on
                          gomoku-mode-hook
                          snake-mode-hook
                          tetris-mode-hook))
+#+end_src
+
+We will also highlight the current line in programming modes.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'hl-line-mode)
+#+end_src
+
+We only want one active highlight line in the current window.
+
+#+begin_src emacs-lisp
+(setq hl-line-sticky-flag nil)
 #+end_src
 
 * Misc visual settings
@@ -1571,7 +1584,8 @@ Set SMTP encryption, server and port.
 #+begin_src emacs-lisp
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 465)
+      smtpmail-smtp-service 465
+      send-mail-function 'smtpmail-send-it)
 #+end_src
 
 This is needed so it asks for password in the minibuffer. I needed it to avoid a

@@ -514,6 +514,7 @@ or too many lines (>10000)."
   "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
   "t l" '(display-line-numbers-mode          :wk "Line numbers")
+  "t L" '(hl-line-mode                       :wk "Highlight line")
   "t p" '(popper-toggle                      :wk "Last popup")
   "t P" '(popper-toggle-type                 :wk "Popup type")
   "t r" '(read-only-mode                     :wk "Read only")
@@ -658,6 +659,10 @@ of characters, followed by the number of lines."
                          gomoku-mode-hook
                          snake-mode-hook
                          tetris-mode-hook))
+
+(add-hook 'prog-mode-hook 'hl-line-mode)
+
+(setq hl-line-sticky-flag nil)
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
@@ -836,7 +841,8 @@ different rules in `display-buffer-alist'."
 
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 465)
+      smtpmail-smtp-service 465
+      send-mail-function 'smtpmail-send-it)
 
 (setq epg-pinentry-mode 'loopback)
 
