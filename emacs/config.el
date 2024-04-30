@@ -348,6 +348,15 @@ and ALIGNMENT as parameters."
  '(x8dcc-align :type git :host github :repo "8dcc/align.el"))
 
 (straight-use-package
+ '(big-font :type git :host github :repo "8dcc/big-font.el"))
+
+(defface x8dcc-big-font-face
+  '((t (:font "Iosevka 8dcc Medium 13" :weight semibold)))
+  "Personal face for `big-font-mode'")
+
+(setq big-font-face 'x8dcc-big-font-face)
+
+(straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
