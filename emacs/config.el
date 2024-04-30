@@ -350,11 +350,13 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(big-font :type git :host github :repo "8dcc/big-font.el"))
 
+;; NOTE: Unused
 (defface x8dcc-big-font-face
   '((t (:font "Iosevka 8dcc Medium 13" :weight semibold)))
   "Personal face for `big-font-mode'")
 
-(setq big-font-face 'x8dcc-big-font-face)
+(setq big-font-face nil
+      big-font-height 200)
 
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
@@ -519,6 +521,7 @@ or too many lines (>10000)."
   "s S" '(isearch-forward-regexp       :wk "I-search regex")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
+  "t b" '(big-font-mode                      :wk "Big font")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
