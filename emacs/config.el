@@ -344,8 +344,11 @@ and ALIGNMENT as parameters."
   (add-hook 'writeroom-mode-disable-hook (lambda ()
                                            (fringe-mode nil))))
 
-(straight-use-package
- '(x8dcc-align :type git :host github :repo "8dcc/align.el"))
+(use-package evil-lion
+  :config
+  (setq evil-lion-left-align-key (kbd "g a"))
+  (setq evil-lion-right-align-key (kbd "g A"))
+  (evil-lion-mode))
 
 (straight-use-package
  '(big-font :type git :host github :repo "8dcc/big-font.el"))

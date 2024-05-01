@@ -705,13 +705,16 @@ these lambdas.
                                            (fringe-mode nil))))
 #+end_src
 
-** Align all
+** Evil lion
 
-Personal package for aligning text. Uses a =straight.el= recipe.
+Evil align operator, port of vim-lion by Tom McDonald.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(x8dcc-align :type git :host github :repo "8dcc/align.el"))
+(use-package evil-lion
+  :config
+  (setq evil-lion-left-align-key (kbd "g a"))
+  (setq evil-lion-right-align-key (kbd "g A"))
+  (evil-lion-mode))
 #+end_src
 
 ** Big font
