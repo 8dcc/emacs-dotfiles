@@ -1765,6 +1765,12 @@ completion.
                                 (electric-pair-default-inhibit c))))))
 #+end_src
 
+Show LaTeX entities and expressions in a different face.
+
+#+begin_src emacs-lisp
+(setq org-highlight-latex-and-related '(latex entities))
+#+end_src
+
 Create an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][overlay]] for setting as invisible the commas that are used to escape
 asterisks in org buffers. Credits to [[https://emacs.stackexchange.com/a/70127/40363][StackOverlow answer]].
 

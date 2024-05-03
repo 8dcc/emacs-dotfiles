@@ -909,6 +909,8 @@ different rules in `display-buffer-alist'."
                                   t
                                 (electric-pair-default-inhibit c))))))
 
+(setq org-highlight-latex-and-related '(latex entities))
+
 (defun x8dcc/make-invisible (regex &optional group-num)
   "Make all ocurrences of REGEX invisible.
 
