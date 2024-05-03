@@ -360,6 +360,13 @@ and ALIGNMENT as parameters."
 (setq big-font-face 'x8dcc-big-font-face)
 
 (straight-use-package
+ '(ada-mode :type git :host github :repo "tkurtbond/old-ada-mode"))
+
+(mapc (lambda (element)
+        (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
+      '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
+
+(straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))

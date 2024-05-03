@@ -736,6 +736,25 @@ And the settings.
 (setq big-font-face 'x8dcc-big-font-face)
 #+end_src
 
+** Ada mode
+
+Major mode for programming in Ada.
+
+Mainstream version is out of date.
+
+#+begin_src emacs-lisp
+(straight-use-package
+ '(ada-mode :type git :host github :repo "tkurtbond/old-ada-mode"))
+#+end_src
+
+Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
+
+#+begin_src emacs-lisp
+(mapc (lambda (element)
+        (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
+      '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
+#+end_src
+
 ** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality. Uses a
