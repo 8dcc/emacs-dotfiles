@@ -1024,14 +1024,14 @@ Notes:
   "i"   '(:ignore t               :wk "Insert")
   "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Open
-  "o"   '(:ignore t                       :wk "Open")
-  "o -" '(dired-jump                      :wk "Dired")
-  "o a" '(org-agenda                      :wk "Org agenda")
-  "o c" '(calc                            :wk "Calculator")
-  "o d" '(projectile-run-gdb              :wk "Debugger")
-  "o e" '(x8dcc/eshell-popup              :wk "Eshell popup")
-  "o E" '(x8dcc/eshell-project-or-current :wk "Eshell")
-  "o m" '(man                             :wk "Manpage")
+  "o"   '(:ignore t             :wk "Open")
+  "o -" '(dired-jump            :wk "Dired")
+  "o a" '(org-agenda            :wk "Org agenda")
+  "o c" '(calc                  :wk "Calculator")
+  "o d" '(projectile-run-gdb    :wk "Debugger")
+  "o e" '(x8dcc/eshell-popup    :wk "Eshell popup")
+  "o E" '(x8dcc/eshell-numbered :wk "Eshell")
+  "o m" '(man                   :wk "Manpage")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -1463,6 +1463,8 @@ This function is basically the same from =projectile-run-eshell= in
 root. The difference is that if we are not, it will open =eshell= normally. It
 also does not rename the buffer, so our =display-buffer-alist= rules still apply.
 
+It will be used for =x8dcc/eshell-popup= and =x8dcc/eshell-numbered=.
+
 #+begin_src emacs-lisp
 (defun x8dcc/eshell-project-or-current (&optional eshell-func)
   "Run ESHELL-FUNC in the project's root whenever possible."
@@ -1472,6 +1474,29 @@ also does not rename the buffer, so our =display-buffer-alist= rules still apply
       (projectile-with-default-dir (projectile-acquire-root)
         (funcall eshell-func))
     (funcall eshell-func)))
+#+end_src
+
+This function will be used to open an eshell buffer by calling
+=x8dcc/eshell-project-or-current=, but will append a counter to the buffer name
+depending on the number of existing eshell buffers. This will /only/ be used when
+opening eshell in the current frame (with =SPC o E=), since we only want to allow
+one =*eshell-popup*=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/eshell-numbered (&optional eshell-func)
+  "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
+first *eshell* buffer, append the count to the buffer name.
+
+Uses `x8dcc/get-buffer-count' for getting the number of eshell buffers."
+  (interactive)
+  (unless eshell-func (setq eshell-func #'eshell))
+  (let* ((eshell-buffer-num (x8dcc/get-buffer-count "\\*eshell\\*"))
+         (eshell-buffer-name (if (> eshell-buffer-num 0)
+                                 (concat "*eshell* ["
+                                         (number-to-string eshell-buffer-num)
+                                         "]")
+                               "*eshell*")))
+    (x8dcc/eshell-project-or-current eshell-func)))
 #+end_src
 
 This function will be used to create an =eshell= buffer named =*eshell-popup*=. This

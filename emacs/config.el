@@ -508,14 +508,14 @@ or too many lines (>10000)."
   "i"   '(:ignore t               :wk "Insert")
   "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Open
-  "o"   '(:ignore t                       :wk "Open")
-  "o -" '(dired-jump                      :wk "Dired")
-  "o a" '(org-agenda                      :wk "Org agenda")
-  "o c" '(calc                            :wk "Calculator")
-  "o d" '(projectile-run-gdb              :wk "Debugger")
-  "o e" '(x8dcc/eshell-popup              :wk "Eshell popup")
-  "o E" '(x8dcc/eshell-project-or-current :wk "Eshell")
-  "o m" '(man                             :wk "Manpage")
+  "o"   '(:ignore t             :wk "Open")
+  "o -" '(dired-jump            :wk "Dired")
+  "o a" '(org-agenda            :wk "Org agenda")
+  "o c" '(calc                  :wk "Calculator")
+  "o d" '(projectile-run-gdb    :wk "Debugger")
+  "o e" '(x8dcc/eshell-popup    :wk "Eshell popup")
+  "o E" '(x8dcc/eshell-numbered :wk "Eshell")
+  "o m" '(man                   :wk "Manpage")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
@@ -770,6 +770,21 @@ of characters, followed by the number of lines."
       (projectile-with-default-dir (projectile-acquire-root)
         (funcall eshell-func))
     (funcall eshell-func)))
+
+(defun x8dcc/eshell-numbered (&optional eshell-func)
+  "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
+first *eshell* buffer, append the count to the buffer name.
+
+Uses `x8dcc/get-buffer-count' for getting the number of eshell buffers."
+  (interactive)
+  (unless eshell-func (setq eshell-func #'eshell))
+  (let* ((eshell-buffer-num (x8dcc/get-buffer-count "\\*eshell\\*"))
+         (eshell-buffer-name (if (> eshell-buffer-num 0)
+                                 (concat "*eshell* ["
+                                         (number-to-string eshell-buffer-num)
+                                         "]")
+                               "*eshell*")))
+    (x8dcc/eshell-project-or-current eshell-func)))
 
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
