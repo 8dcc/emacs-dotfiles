@@ -402,6 +402,14 @@ and ALIGNMENT as parameters."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/get-buffer-count (regexp)
+  "Return the number of buffers whose name matches REGEXP."
+  (length
+   (seq-remove (lambda (buffer)
+                 (not (string-match-p regexp
+                                      (buffer-name buffer))))
+               (buffer-list))))
+
 (defun x8dcc/huge-file ()
   "Returns `t' if the current buffer has either too many characters (>500000),
 or too many lines (>10000)."
