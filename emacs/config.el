@@ -469,6 +469,8 @@ or too many lines (>10000)."
   "b x" '(scratch-buffer      :wk "Open scratch buffer")
   ;; File
   "f"   '(:ignore t          :wk "File")
+  "f c" '(compile            :wk "Compile")
+  "f C" '(recompile          :wk "Re-compile")
   "f f" '(find-file          :wk "Find file")
   "f o" '(ff-find-other-file :wk "Find other file")
   "f O" '(find-file-at-point :wk "Find file at point")
