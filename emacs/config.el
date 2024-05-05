@@ -11,7 +11,7 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 (load-theme 'x8dcc-modus-vivendi)
 
-(setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
+(setq fancy-splash-image (concat user-emacs-directory "my-media/splash.png"))
 
 (set-face-attribute 'default nil
   :font "Dina 8")
@@ -133,7 +133,8 @@
 (use-package dashboard
   :init
   (setq dashboard-banner-logo-title "8dcc's Emacs"
-        dashboard-startup-banner (concat user-emacs-directory "img/splash.png")
+        dashboard-startup-banner (concat user-emacs-directory
+                                        "my-media/splash.png")
         dashboard-center-content t
         dashboard-show-shortcuts nil
         dashboard-set-footer nil
@@ -897,6 +898,8 @@ different rules in `display-buffer-alist'."
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (list (concat org-directory "agenda.org")))))
+
+(setq org-clock-sound (concat org-directory "my-media/notification.wav"))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)

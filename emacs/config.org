@@ -45,7 +45,7 @@ Change the emacs splash screen image. This should not matter since
 it's overwritten by dashboard.
 
 #+begin_src emacs-lisp
-(setq fancy-splash-image (concat user-emacs-directory "img/splash.png"))
+(setq fancy-splash-image (concat user-emacs-directory "my-media/splash.png"))
 #+end_src
 
 * Fonts
@@ -293,7 +293,8 @@ A nice dashboard with recent files, recent projects, and org agenda.
 (use-package dashboard
   :init
   (setq dashboard-banner-logo-title "8dcc's Emacs"
-        dashboard-startup-banner (concat user-emacs-directory "img/splash.png")
+        dashboard-startup-banner (concat user-emacs-directory
+                                        "my-media/splash.png")
         dashboard-center-content t
         dashboard-show-shortcuts nil
         dashboard-set-footer nil
@@ -1718,6 +1719,12 @@ Org agenda location.
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (list (concat org-directory "agenda.org")))))
+#+end_src
+
+Specify the sound for timers.
+
+#+begin_src emacs-lisp
+(setq org-clock-sound (concat org-directory "my-media/notification.wav"))
 #+end_src
 
 Enable code block evaluation for the specified languages. Capitalization
