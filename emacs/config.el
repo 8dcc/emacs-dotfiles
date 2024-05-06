@@ -77,6 +77,8 @@
 (use-package undo-tree
   :config
   (setq undo-tree-auto-save-history t)
+  (add-to-list 'undo-tree-history-directory-alist
+               `("." . ,(concat user-emacs-directory "undo")))
   (global-undo-tree-mode))
 
 (use-package general
