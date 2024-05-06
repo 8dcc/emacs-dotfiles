@@ -174,7 +174,7 @@ standard)."
       (fg-mode-line-active        "#ffffff")
       (border-mode-line-active    nil)
       (bg-mode-line-inactive      "#252525")
-      (fg-mode-line-inactive      "#888888")
+      (fg-mode-line-inactive      "#777777")
       (border-mode-line-inactive  nil)
 
       (modeline-err     "#ff7fbf")
