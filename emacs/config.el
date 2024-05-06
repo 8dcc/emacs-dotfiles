@@ -58,7 +58,7 @@
         evil-want-keybinding nil
         evil-split-window-below t
         evil-vsplit-window-right t
-        evil-undo-system #'undo-redo
+        evil-undo-system #'undo-tree
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
@@ -73,6 +73,11 @@
   :config
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
+
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history t)
+  (global-undo-tree-mode))
 
 (use-package general
   :config
