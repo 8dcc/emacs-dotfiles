@@ -167,8 +167,6 @@
                    #'completion--in-region)
 				 args))))
 
-(use-package pcre2el)
-
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
