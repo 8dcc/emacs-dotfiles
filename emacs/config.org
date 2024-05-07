@@ -200,6 +200,7 @@ complete history of changes, even across sessions.
 
 #+begin_src emacs-lisp
 (use-package undo-tree
+  :diminish
   :config
   (setq undo-tree-auto-save-history t)
   (add-to-list 'undo-tree-history-directory-alist

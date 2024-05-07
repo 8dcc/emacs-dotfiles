@@ -75,6 +75,7 @@
   (evil-collection-init))
 
 (use-package undo-tree
+  :diminish
   :config
   (setq undo-tree-auto-save-history t)
   (add-to-list 'undo-tree-history-directory-alist
