@@ -97,6 +97,11 @@
     :keymaps 'org-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/latex-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'TeX-mode-map
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/lisp-keys
     :states '(normal insert visual emacs)
     :keymaps '(lisp-mode-map
@@ -233,6 +238,13 @@
               (lambda ()
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+    (add-hook 'latex-mode
+              (lambda ()
+                (setq spell-fu-faces-exclude
+                      '(font-lock-keyword-face
+                        font-lock-function-name-face
+                        font-lock-variable-name-face
+                        font-lock-warning-face))))
     (add-hook 'markdown-mode
               (lambda ()
                 (setq spell-fu-faces-exclude
@@ -374,6 +386,8 @@ and ALIGNMENT as parameters."
 (mapc (lambda (element)
         (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
       '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
+
+(use-package auctex)
 
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
@@ -616,6 +630,12 @@ or too many lines (>10000)."
   "m t"   '(org-todo :wk "Toggle todo")
   ;; Org -> Tangle
   "m T"   '(org-babel-tangle :wk "Tangle current file"))
+
+(x8dcc/latex-keys
+  ;; Mode (LaTeX)
+  "m"     '(:ignore t          :wk "LaTeX")
+  "m o"   '(latex-insert-block :wk "Open block")
+  "m c"   '(latex-close-block  :wk "Close block"))
 
 (x8dcc/lisp-keys
   ;; Evaluate
