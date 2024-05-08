@@ -374,11 +374,9 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(big-font :type git :host github :repo "8dcc/big-font.el"))
 
-(defface x8dcc-big-font-face
-  '((t (:font "Iosevka 8dcc" :height 120)))
-  "Personal face for `big-font-mode'")
-
-(setq big-font-face 'x8dcc-big-font-face)
+(setq big-font-heigth 120
+      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
+                              (fixed-pitch . "Iosevka 8dcc")))
 
 (straight-use-package
  '(ada-mode :type git :host github :repo "tkurtbond/old-ada-mode"))
