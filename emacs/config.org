@@ -196,16 +196,18 @@ For using vi-like keybinds in other buffer types.
 
 Instead of treating undo/redo as a linear sequence of changes, =undo-tree-mode=
 treats undo history as a branching tree of changes. It allows you to preserve a
-complete history of changes, even across sessions.
+complete history of changes, even across sessions. See [[https://www.emacswiki.org/emacs/UndoTree][EmacsWiki]].
 
 #+begin_src emacs-lisp
 (use-package undo-tree
   :diminish
+  :init
+  (global-undo-tree-mode 1)
   :config
-  (setq undo-tree-auto-save-history t)
-  (add-to-list 'undo-tree-history-directory-alist
-               `("." . ,(concat user-emacs-directory "undo")))
-  (global-undo-tree-mode))
+  (setq undo-tree-auto-save-history t
+        undo-tree-visualizer-timestamps t
+        undo-tree-history-directory-alist
+        `(("." . ,(concat user-emacs-directory "undo")))))
 #+end_src
 
 ** General

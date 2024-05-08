@@ -76,11 +76,13 @@
 
 (use-package undo-tree
   :diminish
+  :init
+  (global-undo-tree-mode 1)
   :config
-  (setq undo-tree-auto-save-history t)
-  (add-to-list 'undo-tree-history-directory-alist
-               `("." . ,(concat user-emacs-directory "undo")))
-  (global-undo-tree-mode))
+  (setq undo-tree-auto-save-history t
+        undo-tree-visualizer-timestamps t
+        undo-tree-history-directory-alist
+        `(("." . ,(concat user-emacs-directory "undo")))))
 
 (use-package general
   :config
