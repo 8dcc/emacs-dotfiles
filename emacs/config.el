@@ -374,8 +374,8 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(big-font :type git :host github :repo "8dcc/big-font.el"))
 
-(setq big-font-heigth 120
-      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
+(setq big-font-height 120
+      big-font-family-alist '((default     . "Iosevka 8dcc")
                               (fixed-pitch . "Iosevka 8dcc")))
 
 (straight-use-package

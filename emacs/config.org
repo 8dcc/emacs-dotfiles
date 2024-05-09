@@ -752,8 +752,8 @@ And the settings.
 
 #+begin_src emacs-lisp
 (setq big-font-height 120
-      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
-                              (fixed-pitch . "Iosevka Comfy Fixed")))
+      big-font-family-alist '((default     . "Iosevka 8dcc")
+                              (fixed-pitch . "Iosevka 8dcc")))
 #+end_src
 
 ** Ada mode
