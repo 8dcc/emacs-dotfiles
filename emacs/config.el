@@ -378,6 +378,8 @@ and ALIGNMENT as parameters."
       big-font-family-alist '((default     . "Iosevka 8dcc")
                               (fixed-pitch . "Iosevka 8dcc")))
 
+(use-package auctex)
+
 (straight-use-package
  '(ada-mode :type git :host github :repo "tkurtbond/old-ada-mode"))
 
@@ -385,7 +387,11 @@ and ALIGNMENT as parameters."
         (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
       '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
 
-(use-package auctex)
+(straight-use-package
+ '(txl-mode :type git :host github :repo "8dcc/txl-mode.el"))
+
+(add-to-list 'auto-mode-alist
+             '("\\.\\([tT]xl\\|[gG]rm\\|[gG]rammar\\|[rR]ul\\(es\\)?\\|[mM]od\\(ule\\)?\\)$" . txl-mode))
 
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
