@@ -783,18 +783,6 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
       '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
 #+end_src
 
-** TXL mode
-
-Major mode for editing TXL files. See [[https://txl.ca/txl-index.html][txl.ca]].
-
-#+begin_src emacs-lisp
-(straight-use-package
- '(txl-mode :type git :host github :repo "8dcc/txl-mode.el"))
-
-(add-to-list 'auto-mode-alist
-             '("\\.\\([tT]xl\\|[gG]rm\\|[gG]rammar\\|[rR]ul\\(es\\)?\\|[mM]od\\(ule\\)?\\)$" . txl-mode))
-#+end_src
-
 ** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality. Uses a

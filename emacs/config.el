@@ -388,12 +388,6 @@ and ALIGNMENT as parameters."
       '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
 
 (straight-use-package
- '(txl-mode :type git :host github :repo "8dcc/txl-mode.el"))
-
-(add-to-list 'auto-mode-alist
-             '("\\.\\([tT]xl\\|[gG]rm\\|[gG]rammar\\|[rR]ul\\(es\\)?\\|[mM]od\\(ule\\)?\\)$" . txl-mode))
-
-(straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
