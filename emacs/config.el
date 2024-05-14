@@ -238,14 +238,14 @@
               (lambda ()
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
-    (add-hook 'latex-mode
+    (add-hook 'LaTeX-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
                       '(font-lock-keyword-face
                         font-lock-function-name-face
                         font-lock-variable-name-face
                         font-lock-warning-face))))
-    (add-hook 'markdown-mode
+    (add-hook 'markdown-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
                       '(markdown-code-face

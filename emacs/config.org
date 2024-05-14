@@ -490,14 +490,14 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
               (lambda ()
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
                 (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
-    (add-hook 'latex-mode
+    (add-hook 'LaTeX-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
                       '(font-lock-keyword-face
                         font-lock-function-name-face
                         font-lock-variable-name-face
                         font-lock-warning-face))))
-    (add-hook 'markdown-mode
+    (add-hook 'markdown-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
                       '(markdown-code-face
@@ -807,7 +807,8 @@ Disassemble C/C++ code under cursor in Emacs.
 It will use my own fork of =nasm-mode= instead of emacs' =asm-mode=. See [[*Nasm mode][Nasm mode]].
 
 FIXME: This doesn't really work as intended, source lines are not exported. See
-[[https://github.com/jart/disaster/issues/31][disaster#31]].
+[[https://github.com/jart/disaster/issues/31][disaster#31]]. This seems to be an issue with some files when using objdump 2.42
+in arch.
 
 #+begin_src emacs-lisp
 (use-package disaster
