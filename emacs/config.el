@@ -58,7 +58,7 @@
         evil-want-keybinding nil
         evil-split-window-below t
         evil-vsplit-window-right t
-        evil-undo-system #'undo-tree
+        evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
@@ -74,15 +74,7 @@
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
 
-(use-package undo-tree
-  :diminish
-  :init
-  (global-undo-tree-mode 1)
-  :config
-  (setq undo-tree-auto-save-history t
-        undo-tree-visualizer-timestamps t
-        undo-tree-history-directory-alist
-        `(("." . ,(concat user-emacs-directory "undo")))))
+(use-package vundo)
 
 (use-package general
   :config
