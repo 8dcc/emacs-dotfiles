@@ -486,6 +486,7 @@ or too many lines (>10000)."
   "b l" '(switch-to-buffer    :wk "Switch to")
   "b L" '(buffer-menu         :wk "List")
   "b s" '(basic-save-buffer   :wk "Save")
+  "b S" '(write-file          :wk "Save as")
   "b r" '(revert-buffer       :wk "Revert (discard)")
   "b x" '(scratch-buffer      :wk "Open scratch buffer")
   ;; File
@@ -624,8 +625,8 @@ or too many lines (>10000)."
 (x8dcc/latex-keys
   ;; Mode (LaTeX)
   "m"     '(:ignore t          :wk "LaTeX")
-  "m o"   '(latex-insert-block :wk "Open block")
-  "m c"   '(latex-close-block  :wk "Close block"))
+  "m b"   '(latex-insert-block :wk "Open block")
+  "m B"   '(latex-close-block  :wk "Close block"))
 
 (x8dcc/lisp-keys
   ;; Evaluate
