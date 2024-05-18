@@ -488,7 +488,10 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                       '(font-lock-keyword-face
                         font-lock-function-name-face
                         font-lock-variable-name-face
-                        font-lock-warning-face))))
+                        font-lock-warning-face
+                        font-latex-sedate-face
+                        font-latex-warning-face
+                        font-latex-math-face))))
     (add-hook 'markdown-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
@@ -1168,9 +1171,10 @@ For more information on the =x8dcc/*= functions, see [[*General][General]] and
 #+begin_src emacs-lisp
 (x8dcc/latex-keys
   ;; Mode (LaTeX)
-  "m"     '(:ignore t          :wk "LaTeX")
-  "m b"   '(latex-insert-block :wk "Open block")
-  "m B"   '(latex-close-block  :wk "Close block"))
+  "m"     '(:ignore t           :wk "LaTeX")
+  "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
+  "m b"   '(latex-insert-block  :wk "Open block")
+  "m B"   '(latex-close-block   :wk "Close block"))
 #+end_src
 
 *** Lisp mode keybinds
@@ -1970,6 +1974,19 @@ Insert the default header for my ORG files.
             "#+AUTHOR: " user-full-name "\n"
             "#+OPTIONS: toc:2\n"
             "#+STARTUP: nofold\n")))
+#+end_src
+
+* LaTeX mode
+
+Run the =LaTeX= command on the master file. Similar to =TeX-command-master=, but
+doesn't prompt for a command.
+
+Note that =LaTeX= has to be in =TeX-command-list= or the command will fail.
+
+#+begin_src emacs-lisp
+(defun x8dcc/latex-compile ()
+  (interactive)
+  (TeX-command "LaTeX" 'TeX-master-file))
 #+end_src
 
 * C mode

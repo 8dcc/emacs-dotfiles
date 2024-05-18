@@ -236,7 +236,10 @@
                       '(font-lock-keyword-face
                         font-lock-function-name-face
                         font-lock-variable-name-face
-                        font-lock-warning-face))))
+                        font-lock-warning-face
+                        font-latex-sedate-face
+                        font-latex-warning-face
+                        font-latex-math-face))))
     (add-hook 'markdown-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
@@ -624,9 +627,10 @@ or too many lines (>10000)."
 
 (x8dcc/latex-keys
   ;; Mode (LaTeX)
-  "m"     '(:ignore t          :wk "LaTeX")
-  "m b"   '(latex-insert-block :wk "Open block")
-  "m B"   '(latex-close-block  :wk "Close block"))
+  "m"     '(:ignore t           :wk "LaTeX")
+  "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
+  "m b"   '(latex-insert-block  :wk "Open block")
+  "m B"   '(latex-close-block   :wk "Close block"))
 
 (x8dcc/lisp-keys
   ;; Evaluate
@@ -1031,6 +1035,10 @@ already have one. See `x8dcc/org-custom-id-get'."
             "#+AUTHOR: " user-full-name "\n"
             "#+OPTIONS: toc:2\n"
             "#+STARTUP: nofold\n")))
+
+(defun x8dcc/latex-compile ()
+  (interactive)
+  (TeX-command "LaTeX" 'TeX-master-file))
 
 (setq c-default-style "k&r"
       c-basic-offset tab-width
