@@ -708,6 +708,7 @@ of characters, followed by the number of lines."
 (x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
                        '(eshell-mode-hook
                          doc-view-mode-hook
+                         image-mode-hook
                          ;; Games
                          solitaire-mode-hook
                          mpuz-mode-hook
