@@ -41,6 +41,12 @@ Load my custom theme from =~/.emacs.d/themes/x8dcc-modus-vivendi-theme.el=.
 (load-theme 'x8dcc-modus-vivendi)
 #+end_src
 
+Disable emacs' startup message.
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-message t)
+#+end_src
+
 Change the emacs splash screen image. This should not matter since
 it's overwritten by dashboard.
 

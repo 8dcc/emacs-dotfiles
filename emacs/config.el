@@ -11,6 +11,8 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
 (load-theme 'x8dcc-modus-vivendi)
 
+(setq inhibit-startup-message t)
+
 (setq fancy-splash-image (concat user-emacs-directory "my-media/splash.png"))
 
 (set-face-attribute 'default nil
