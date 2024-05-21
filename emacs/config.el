@@ -457,6 +457,9 @@ or too many lines (>10000)."
 
 (keymap-global-set "C-S-v" #'yank)
 
+(keymap-global-set "M-j" #'drag-stuff-down)
+(keymap-global-set "M-k" #'drag-stuff-up)
+
 (keymap-global-set "<backtab>"
 		           (lambda () (interactive)
 		             ;; If there is a region active, use `evil-shift-left',

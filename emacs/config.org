@@ -946,6 +946,13 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 (keymap-global-set "C-S-v" #'yank)
 #+end_src
 
+Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
+
+#+begin_src emacs-lisp
+(keymap-global-set "M-j" #'drag-stuff-down)
+(keymap-global-set "M-k" #'drag-stuff-up)
+#+end_src
+
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
 more settings related to indentation and =<tab>=, see [[*Misc mode settings][Misc mode settings]].
 
