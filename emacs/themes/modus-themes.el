@@ -3309,7 +3309,7 @@ FG and BG are the main colors."
     `(org-agenda-structure-filter ((,c :inherit org-agenda-structure :foreground ,warning)))
     `(org-agenda-structure-secondary ((,c :inherit font-lock-doc-face)))
     `(org-archived ((,c :background ,bg-inactive :foreground ,fg-main)))
-    `(org-block ((,c ,@(modus-themes--org-block fg-main "#141414"))))
+    `(org-block ((,c ,@(modus-themes--org-block fg-main org-src-block-bg))))
     `(org-block-begin-line ((,c ,@(modus-themes--org-block prose-block bg-dim))))
     `(org-block-end-line ((,c :inherit org-block-begin-line)))
     `(org-checkbox ((,c :foreground ,warning)))

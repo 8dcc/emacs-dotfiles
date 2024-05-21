@@ -415,6 +415,10 @@ standard)."
       (bg-term-white-bright    "white")
       (fg-term-white-bright    "white")
 
+;;;; Other custom colors (x8dcc)
+
+      (org-src-block-bg "#141414")
+
 ;;;; Heading mappings
 
       (fg-heading-0 cyan-cooler)
