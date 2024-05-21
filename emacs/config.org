@@ -198,11 +198,11 @@ For using vi-like keybinds in other buffer types.
   (evil-collection-init))
 #+end_src
 
-** Undo tree
+** Vundo
 
-Instead of treating undo/redo as a linear sequence of changes, =undo-tree-mode=
-treats undo history as a branching tree of changes. It allows you to preserve a
-complete history of changes, even across sessions. See [[https://www.emacswiki.org/emacs/UndoTree][EmacsWiki]].
+Instead of treating undo/redo as a linear sequence of changes, emacs treats undo
+history as a branching tree of changes. This package allows you to visualize and
+navigate this tree easily.
 
 #+begin_src emacs-lisp
 (use-package vundo)
