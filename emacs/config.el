@@ -317,12 +317,6 @@
   :config
   (setq clang-format-style "file"))
 
-(use-package vi-tilde-fringe
-  :diminish
-  :hook ((prog-mode org-mode text-mode) . vi-tilde-fringe-mode)
-  :config
-  (setq vi-tilde-fringe-bitmap-array [0 0 0 9 21 18 0 0]))
-
 (use-package htmlize)
 
 (use-package org-bullets
