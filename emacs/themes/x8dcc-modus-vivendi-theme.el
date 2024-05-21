@@ -220,7 +220,7 @@ standard)."
 
 ;;;; General mappings
 
-      (fringe bg-main)
+      (fringe bg-line-number-inactive)
       (cursor fg-main)
 
       (keybind red)
@@ -247,7 +247,7 @@ standard)."
       (builtin magenta)
       (comment fg-dim)
       (constant green-faint)
-      (docstring fg-dim)
+      (docstring comment)
       (docmarkup magenta-faint)
       (fnname cyan-warmer)
       (keyword red-cooler)
@@ -300,8 +300,8 @@ standard)."
 
       (fg-line-number-inactive fg-dim)
       (fg-line-number-active fg-main)
-      (bg-line-number-inactive bg-main)
-      (bg-line-number-active bg-main)
+      (bg-line-number-inactive "#101010")
+      (bg-line-number-active bg-dim)
 
 ;;;; Link mappings
 
