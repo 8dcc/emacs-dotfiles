@@ -203,8 +203,7 @@
   (setq highlight-indent-guides-method 'character
         highlight-indent-guides-character ?\u00A6
         highlight-indent-guides-suppress-auto-error t
-        highlight-indent-guides-auto-enabled nil)
-  (set-face-foreground 'highlight-indent-guides-character-face "#1A1A1A"))
+        highlight-indent-guides-auto-enabled nil))
 
 (defun x8dcc/indent-guide-highlighter (level responsive display)
   (if (> level 0)

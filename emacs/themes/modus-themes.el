@@ -4044,6 +4044,8 @@ FG and BG are the main colors."
     `(whitespace-space-before-tab ((,c :inherit modus-themes-subtle-cyan)))
     `(whitespace-tab ((,c :background ,bg-space :foreground ,fg-space)))
     `(whitespace-trailing ((,c :background ,bg-space-err)))
+;;;;; highlight-indent-guides
+    `(highlight-indent-guides-character-face ((,c :inherit fill-column-indicator)))
 ;;;;; window-divider-mode
     `(window-divider ((,c :foreground ,border)))
     `(window-divider-first-pixel ((,c :foreground ,bg-inactive)))
