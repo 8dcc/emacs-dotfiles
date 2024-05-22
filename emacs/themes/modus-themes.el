@@ -375,13 +375,14 @@ set this variable to a nil value."
   "Alias of `modus-themes-items'.")
 
 (defconst modus-themes-items
-  '( modus-operandi modus-vivendi
+  '( x8dcc-modus-operandi x8dcc-modus-vivendi
+     modus-operandi modus-vivendi
      modus-operandi-tinted modus-vivendi-tinted
      modus-operandi-deuteranopia modus-vivendi-deuteranopia
      modus-operandi-tritanopia modus-vivendi-tritanopia)
   "Symbols of the Modus themes.")
 
-(defcustom modus-themes-to-toggle '(modus-operandi modus-vivendi)
+(defcustom modus-themes-to-toggle '(x8dcc-modus-operandi x8dcc-modus-vivendi)
   "Specify two Modus themes for `modus-themes-toggle' command.
 The variable `modus-themes-items' contains the symbols of all
 official themes that form part of this collection.
