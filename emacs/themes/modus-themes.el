@@ -2271,7 +2271,7 @@ FG and BG are the main colors."
     `(disk-usage-symlink ((,c :inherit dired-symlink)))
     `(disk-usage-symlink-directory ((,c :inherit dired-symlink)))
 ;;;;; display-fill-column-indicator-mode
-    `(fill-column-indicator ((,c :background ,bg-main :inherit shadow)))
+    `(fill-column-indicator ((,c :foreground ,fill-column-indicator-fg)))
 ;;;;; doom-modeline
     `(doom-modeline-bar ((,c :background ,blue)))
     `(doom-modeline-bar-inactive ((,c :background ,border)))

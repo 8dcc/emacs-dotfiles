@@ -418,6 +418,7 @@ standard)."
 ;;;; Other custom colors (x8dcc)
 
       (org-src-block-bg "#141414")
+      (fill-column-indicator-fg "#808080")
 
 ;;;; Heading mappings
 
