@@ -366,8 +366,8 @@ and ALIGNMENT as parameters."
  '(big-font :type git :host github :repo "8dcc/big-font.el"))
 
 (setq big-font-height 120
-      big-font-family-alist '((default     . "Iosevka 8dcc")
-                              (fixed-pitch . "Iosevka 8dcc")))
+      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
+                              (fixed-pitch . "Iosevka Comfy Fixed")))
 
 (use-package auctex)
 
