@@ -52,7 +52,8 @@
 (use-package diminish
   :config
   (diminish 'abbrev-mode)
-  (diminish 'visual-line-mode))
+  (diminish 'visual-line-mode)
+  (diminish 'highlight-indent-guides-mode))
 
 (use-package evil
   :init
@@ -197,14 +198,15 @@
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
-(use-package highlight-indent-guides
-  :diminish
-  :hook ((c-mode) . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character
-        highlight-indent-guides-character ?\u00A6
-        highlight-indent-guides-suppress-auto-error t
-        highlight-indent-guides-auto-enabled nil))
+(straight-use-package
+ '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
+
+(add-hook 'c-mode-hook 'highlight-indent-guides-mode)
+
+(setq highlight-indent-guides-method 'character
+      highlight-indent-guides-character ?\u00A6
+      highlight-indent-guides-suppress-auto-error t
+      highlight-indent-guides-auto-enabled nil)
 
 (defun x8dcc/indent-guide-highlighter (level responsive display)
   (if (> level 0)
