@@ -14,7 +14,7 @@
  ("evil" . "ad80a0a185ba1b28d19813e55acabb9d38419657")
  ("evil-collection" . "18304d9d9e4243687a7bf915dc7e591a216873c6")
  ("fringe-helper.el" . "ef4a9c023bae18ec1ddd7265f1f2d6d2e775efdd")
- ("general.el" . "833dea2c4a60e06fcd552b653dfc8960935c9fb4")
+ ("general.el" . "826bf2b97a0fb4a34c5eb96ec2b172d682fd548f")
  ("git-gutter" . "4c9e2f22b35918ce1cd9e64bce06a3ceda54095f")
  ("git-gutter-fringe" . "648cb5b57faec55711803cdc9434e55a733c3eba")
  ("gnu-elpa-mirror" . "69eb8c9dc8510767d2cbfcce2c41c0d4389f8c16")

@@ -79,6 +79,7 @@
 (use-package vundo)
 
 (use-package general
+  :after evil
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys

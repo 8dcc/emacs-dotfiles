@@ -223,6 +223,7 @@ For the main keybinds, see [[Space keybinds][Space keybinds]].
 
 #+begin_src emacs-lisp
 (use-package general
+  :after evil
   :config
   (general-evil-setup t)
   (general-create-definer x8dcc/leader-keys
