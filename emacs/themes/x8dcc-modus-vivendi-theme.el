@@ -163,7 +163,7 @@ standard)."
       (bg-hover            "#8e3e3b")
       (bg-hover-secondary  "#00405f")
       (bg-hl-line          "#101010")
-      (bg-region           "#404040")
+      (bg-region           "#333333")
       (fg-region           unspecified)
 
       (bg-char-0 "#922a00")
@@ -418,7 +418,7 @@ standard)."
 ;;;; Other custom colors (x8dcc)
 
       (org-src-block-bg "#141414")
-      (fill-column-indicator-fg "#808080")
+      (fill-column-indicator-fg "#4D4D4D")
 
 ;;;; Heading mappings
 
