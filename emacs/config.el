@@ -52,8 +52,7 @@
 (use-package diminish
   :config
   (diminish 'abbrev-mode)
-  (diminish 'visual-line-mode)
-  (diminish 'highlight-indent-guides-mode))
+  (diminish 'visual-line-mode))
 
 (use-package evil
   :init
@@ -201,7 +200,10 @@
 (straight-use-package
  '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
 
-(add-hook 'c-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'c-mode-hook
+          (lambda ()
+            (highlight-indent-guides-mode 1)
+            (diminish 'highlight-indent-guides-mode)))
 
 (setq highlight-indent-guides-method 'character
       highlight-indent-guides-character ?\u00A6

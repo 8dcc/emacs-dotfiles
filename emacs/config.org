@@ -146,8 +146,7 @@ in a lot of =(use-package)= expressions, to hide those minor modes.
 (use-package diminish
   :config
   (diminish 'abbrev-mode)
-  (diminish 'visual-line-mode)
-  (diminish 'highlight-indent-guides-mode))
+  (diminish 'visual-line-mode))
 #+end_src
 
 ** Evil & Evil collection
@@ -422,7 +421,10 @@ with =SPC t C=, see [[*Space keybinds][Space keybinds]].
 Only hook it in =c-mode=, for now.
 
 #+begin_src emacs-lisp
-(add-hook 'c-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'c-mode-hook
+          (lambda ()
+            (highlight-indent-guides-mode 1)
+            (diminish 'highlight-indent-guides-mode)))
 #+end_src
 
 Use the same character as the fill column, and ignore the first indentation
