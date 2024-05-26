@@ -168,15 +168,6 @@
   :config
   (setq completion-styles '(orderless basic)))
 
-(use-package consult
-  :config
-  (setq completion-in-region-function
-		(lambda (&rest args)
-          (apply (if vertico-mode
-					 #'consult-completion-in-region
-                   #'completion--in-region)
-				 args))))
-
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
@@ -550,8 +541,6 @@ or too many lines (>10000)."
   "s g" '(rgrep                        :wk "Recursive grep")
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
-  "s i" '(consult-imenu                :wk "Jump to symbol")
-  "s l" '(consult-line                 :wk "Jump to line")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace interactively")
   "s R" '(query-replace-regexp         :wk "Replace regex")

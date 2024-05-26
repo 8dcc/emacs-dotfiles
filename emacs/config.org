@@ -363,24 +363,6 @@ Adds a better search completion to =completion-styles= (Used in =M-x=,
   (setq completion-styles '(orderless basic)))
 #+end_src
 
-** Consult
-
-For providing better completion buffers similar to [[Vertico][vertico]] (same author).
-
-We set =completion-in-region-function= to =#'consult-completion-in-region= for
-better completion in buffers like eshell. See [[https://github.com/minad/vertico#completion-at-point-and-completion-in-region][vertico readme]].
-
-#+begin_src emacs-lisp
-(use-package consult
-  :config
-  (setq completion-in-region-function
-		(lambda (&rest args)
-          (apply (if vertico-mode
-					 #'consult-completion-in-region
-                   #'completion--in-region)
-				 args))))
-#+end_src
-
 ** Popper
 
 For converting less-important buffers into popups. They can be toggled
@@ -997,11 +979,8 @@ See also [[General][General]] package.
 
 *** Global keybinds
 
-Notes:
-- You can use =consult-recent-file= instead of =recentf-open= for previewing the
-  file contents, but I don't like that.
-- You can use =consult-buffer= instead of =switch-to-buffer= for previewing the
-  buffers, but this has a performance impact in slow machines.
+These are the common keybinds between most major modes, the leader key is =SPC= in
+normal modes, or =M-SPC= on non-normal modes.
 
 #+begin_src emacs-lisp
 (x8dcc/leader-keys
@@ -1071,8 +1050,6 @@ Notes:
   "s g" '(rgrep                        :wk "Recursive grep")
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
-  "s i" '(consult-imenu                :wk "Jump to symbol")
-  "s l" '(consult-line                 :wk "Jump to line")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace interactively")
   "s R" '(query-replace-regexp         :wk "Replace regex")
