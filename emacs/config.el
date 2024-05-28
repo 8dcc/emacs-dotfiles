@@ -424,6 +424,11 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
+(defun x8dcc/indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max))))
+
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
@@ -479,6 +484,7 @@ or too many lines (>10000)."
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
   ;; Buffer
   "b"   '(:ignore t           :wk "Buffer")
+  "b i" '(x8dcc/indent-buffer :wk "Indent")
   "b k" '(kill-current-buffer :wk "Kill current")
   "b l" '(switch-to-buffer    :wk "Switch to")
   "b L" '(buffer-menu         :wk "List")
