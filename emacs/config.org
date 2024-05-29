@@ -1154,8 +1154,8 @@ See also:
 
 *** LaTeX mode keybinds
 
-For more information on the =x8dcc/*= functions, see [[*General][General]] and
-[[*Custom input functions][Custom input functions]].
+For more information on the =x8dcc/*= functions, see [[*General][General]],
+[[*Custom input functions][Custom input functions]] and [[*LaTeX mode][LaTeX mode]].
 
 #+begin_src emacs-lisp
 (x8dcc/latex-keys
@@ -1163,7 +1163,16 @@ For more information on the =x8dcc/*= functions, see [[*General][General]] and
   "m"     '(:ignore t           :wk "LaTeX")
   "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
   "m b"   '(latex-insert-block  :wk "Open block")
-  "m B"   '(latex-close-block   :wk "Close block"))
+  "m B"   '(latex-close-block   :wk "Close block")
+  ;; Text format
+  "m f"   '(:ignore t                   :wk "Text format")
+  "m f b" '(x8dcc/latex-font-bold       :wk "Bold")
+  "m f c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
+  "m f e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
+  "m f i" '(x8dcc/latex-font-italics    :wk "Italics")
+  "m f r" '(x8dcc/latex-font-roman      :wk "Roman")
+  "m f s" '(x8dcc/latex-font-slanted    :wk "Slanted")
+  "m f t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
 #+end_src
 
 *** Lisp mode keybinds
@@ -1977,6 +1986,53 @@ Note that =LaTeX= has to be in =TeX-command-list= or the command will fail.
 (defun x8dcc/latex-compile ()
   (interactive)
   (TeX-command "LaTeX" 'TeX-master-file))
+#+end_src
+
+These functions are used for formatting text with =SPC m f= you will probably need
+the [[*AucTex][AucTex]] package, although you can just change the strings being passed to
+=x8dcc/tex-get-font-key=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/tex-get-font-key (key &optional font-list)
+  "Find the font key in FONT-LIST for the font whose LaTeX command contains
+KEY. Returns nil if the KEY is not found, or a valid font key that can be passed
+to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
+  (unless font-list (setq font-list TeX-font-list))
+  (let ((item (car font-list)))
+    (cond ((string-match-p (regexp-quote key) (cadr item))
+           (car item))
+          ((cdr font-list)
+           (x8dcc/tex-get-font-key key (cdr font-list)))
+          (t nil))))
+
+(defun x8dcc/latex-font-bold ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "bf{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-emphasized ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "emph{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-italics ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "it{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-roman ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "rm{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-smallcaps ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "sc{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-slanted ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "sl{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-typewriter ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "tt{")))
+    (if key (TeX-font nil key))))
 #+end_src
 
 * C mode

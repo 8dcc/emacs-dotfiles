@@ -628,7 +628,16 @@ or too many lines (>10000)."
   "m"     '(:ignore t           :wk "LaTeX")
   "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
   "m b"   '(latex-insert-block  :wk "Open block")
-  "m B"   '(latex-close-block   :wk "Close block"))
+  "m B"   '(latex-close-block   :wk "Close block")
+  ;; Text format
+  "m f"   '(:ignore t                   :wk "Text format")
+  "m f b" '(x8dcc/latex-font-bold       :wk "Bold")
+  "m f c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
+  "m f e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
+  "m f i" '(x8dcc/latex-font-italics    :wk "Italics")
+  "m f r" '(x8dcc/latex-font-roman      :wk "Roman")
+  "m f s" '(x8dcc/latex-font-slanted    :wk "Slanted")
+  "m f t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
 
 (x8dcc/lisp-keys
   ;; Evaluate
@@ -1038,6 +1047,47 @@ already have one. See `x8dcc/org-custom-id-get'."
 (defun x8dcc/latex-compile ()
   (interactive)
   (TeX-command "LaTeX" 'TeX-master-file))
+
+(defun x8dcc/tex-get-font-key (key &optional font-list)
+  "Find the font key in FONT-LIST for the font whose LaTeX command contains
+KEY. Returns nil if the KEY is not found, or a valid font key that can be passed
+to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
+  (unless font-list (setq font-list TeX-font-list))
+  (let ((item (car font-list)))
+    (cond ((string-match-p (regexp-quote key) (cadr item))
+           (car item))
+          ((cdr font-list)
+           (x8dcc/tex-get-font-key key (cdr font-list)))
+          (t nil))))
+
+(defun x8dcc/latex-font-bold ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "bf{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-emphasized ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "emph{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-italics ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "it{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-roman ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "rm{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-smallcaps ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "sc{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-slanted ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "sl{")))
+    (if key (TeX-font nil key))))
+(defun x8dcc/latex-font-typewriter ()
+  (interactive)
+  (let ((key (x8dcc/tex-get-font-key "tt{")))
+    (if key (TeX-font nil key))))
 
 (setq c-default-style "k&r"
       c-basic-offset tab-width
