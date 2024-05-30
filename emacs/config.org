@@ -998,15 +998,16 @@ normal modes, or =M-SPC= on non-normal modes.
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
   ;; Buffer
-  "b"   '(:ignore t           :wk "Buffer")
-  "b i" '(x8dcc/indent-buffer :wk "Indent")
-  "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(switch-to-buffer    :wk "Switch to")
-  "b L" '(buffer-menu         :wk "List")
-  "b s" '(basic-save-buffer   :wk "Save")
-  "b S" '(write-file          :wk "Save as")
-  "b r" '(revert-buffer       :wk "Revert (discard)")
-  "b x" '(scratch-buffer      :wk "Open scratch buffer")
+  "b"   '(:ignore t                        :wk "Buffer")
+  "b i" '(x8dcc/indent-buffer              :wk "Indent")
+  "b k" '(kill-current-buffer              :wk "Kill current")
+  "b l" '(switch-to-buffer                 :wk "Switch to")
+  "b L" '(buffer-menu                      :wk "List")
+  "b s" '(basic-save-buffer                :wk "Save")
+  "b S" '(write-file                       :wk "Save as")
+  "b r" '(revert-buffer                    :wk "Revert (discard)")
+  "b R" '(revert-buffer-with-coding-system :wk "Revert with coding system")
+  "b x" '(scratch-buffer                   :wk "Open scratch buffer")
   ;; File
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
@@ -1369,6 +1370,14 @@ Set monday as the first day of the week.
 #+end_src
 
 * Misc mode settings
+
+Use UTF-8 as the default codification.
+
+#+begin_src emacs-lisp
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8-unix)
+#+end_src
 
 Follow git symlinks by default.
 

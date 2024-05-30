@@ -483,15 +483,16 @@ or too many lines (>10000)."
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
   ;; Buffer
-  "b"   '(:ignore t           :wk "Buffer")
-  "b i" '(x8dcc/indent-buffer :wk "Indent")
-  "b k" '(kill-current-buffer :wk "Kill current")
-  "b l" '(switch-to-buffer    :wk "Switch to")
-  "b L" '(buffer-menu         :wk "List")
-  "b s" '(basic-save-buffer   :wk "Save")
-  "b S" '(write-file          :wk "Save as")
-  "b r" '(revert-buffer       :wk "Revert (discard)")
-  "b x" '(scratch-buffer      :wk "Open scratch buffer")
+  "b"   '(:ignore t                        :wk "Buffer")
+  "b i" '(x8dcc/indent-buffer              :wk "Indent")
+  "b k" '(kill-current-buffer              :wk "Kill current")
+  "b l" '(switch-to-buffer                 :wk "Switch to")
+  "b L" '(buffer-menu                      :wk "List")
+  "b s" '(basic-save-buffer                :wk "Save")
+  "b S" '(write-file                       :wk "Save as")
+  "b r" '(revert-buffer                    :wk "Revert (discard)")
+  "b R" '(revert-buffer-with-coding-system :wk "Revert with coding system")
+  "b x" '(scratch-buffer                   :wk "Open scratch buffer")
   ;; File
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
@@ -742,6 +743,10 @@ of characters, followed by the number of lines."
       calendar-week-start-day 1
       org-agenda-weekend-days '(6 0)
       calendar-weekend-days '(6 0))
+
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8-unix)
 
 (setq vc-follow-symlinks t)
 
