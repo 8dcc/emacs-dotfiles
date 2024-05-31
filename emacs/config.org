@@ -856,7 +856,16 @@ or too many lines (>10000)."
 * Input
 ** Custom input functions
 
-Small wrappers used for the keybinds.
+Delete the last /N/ words backwards, without adding it to the kill-ring (copying
+it).
+
+#+begin_src emacs-lisp
+(defun x8dcc/backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+#+end_src
 
 This function indents the whole buffer, bound to =SPC b i=.
 
@@ -924,6 +933,13 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 
 #+begin_src emacs-lisp
 (keymap-global-set "C-S-v" #'yank)
+#+end_src
+
+Don't copy the last word with =C-<backspace>=, just delete them. See [[*Custom input functions][Custom input
+functions]].
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
 #+end_src
 
 Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.

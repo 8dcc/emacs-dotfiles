@@ -424,6 +424,12 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
+(defun x8dcc/backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+
 (defun x8dcc/indent-buffer ()
   (interactive)
   (save-excursion
@@ -450,6 +456,8 @@ or too many lines (>10000)."
 (keymap-global-set "<escape>" #'keyboard-escape-quit)
 
 (keymap-global-set "C-S-v" #'yank)
+
+(keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
 
 (keymap-global-set "M-j" #'drag-stuff-down)
 (keymap-global-set "M-k" #'drag-stuff-up)
