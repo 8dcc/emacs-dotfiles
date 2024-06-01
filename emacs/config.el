@@ -487,6 +487,11 @@ With argument ARG, do this that many times."
             (lambda ()
               (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
 
+(with-eval-after-load 'cc-mode
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (keymap-set c-mode-map "RET" #'default-indent-new-line))))
+
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"

@@ -1000,6 +1000,18 @@ since =ediff-mode-map= is a buffer-local variable.
               (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
 #+end_src
 
+*** C mode
+
+More "contextual" newlines in C mode. Inserts =comment-continue= when pressing =RET=
+in comments, adds backslashes when pressing =RET= on macros, etc.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'cc-mode
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (keymap-set c-mode-map "RET" #'default-indent-new-line))))
+#+end_src
+
 ** Space keybinds
 
 See also [[General][General]] package.
