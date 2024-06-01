@@ -164,6 +164,15 @@
   :config
   (marginalia-mode 1))
 
+(use-package consult
+  :config
+  (setq completion-in-region-function
+		(lambda (&rest args)
+          (apply (if vertico-mode
+					 #'consult-completion-in-region
+                   #'completion--in-region)
+				 args))))
+
 (use-package orderless
   :config
   (setq completion-styles '(orderless basic)))

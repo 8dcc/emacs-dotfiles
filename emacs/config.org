@@ -352,6 +352,25 @@ For extra information on the minibuffer when using [[Vertico][vertico]].
   (marginalia-mode 1))
 #+end_src
 
+** Consult
+
+For providing better completion buffers similar to [[Vertico][vertico]] (same author). This
+doesn't just add the =consult-*= commands, but also replaces the vanilla
+"completion" buffers in emacs.
+
+We set =completion-in-region-function= to =#'consult-completion-in-region= for
+better completion in buffers like eshell. See [[https://github.com/minad/vertico#completion-at-point-and-completion-in-region][vertico readme]].
+
+#+begin_src emacs-lisp
+(use-package consult
+  :config
+  (setq completion-in-region-function
+		(lambda (&rest args)
+          (apply (if vertico-mode
+					 #'consult-completion-in-region
+                   #'completion--in-region)
+				 args))))
+#+end_src
 ** Orderless
 
 Adds a better search completion to =completion-styles= (Used in =M-x=,
