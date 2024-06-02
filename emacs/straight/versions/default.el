@@ -10,7 +10,7 @@
  ("drag-stuff.el" . "6d06d846cd37c052d79acd0f372c13006aa7e7c8")
  ("el-get" . "a5ba5852648a90ee0cde9fb5d72e69497d260eec")
  ("emacs-dashboard" . "9c8b0cce865e34340c6d435253f6a3aed3b3ace5")
- ("emacs-htmlize" . "dd27bc3f26efd728f2b1f01f9e4ac4f61f2ffbf9")
+ ("emacs-htmlize" . "ed5e5b05fd260e8f161a488d56f10e7f6e01fb75")
  ("emacs-spell-fu" . "e4031935803c66eca2f076dce72b0a6a770d026c")
  ("emacs-which-key" . "4d20bc852545a2e602f59084a630f888542052b1")
  ("emacsmirror-mirror" . "59f19a8ce2e20d8b66f7171739bd01b6d2fc9675")
