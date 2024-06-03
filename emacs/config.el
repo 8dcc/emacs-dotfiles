@@ -1147,3 +1147,7 @@ to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
 (setq gdb-many-windows t)
 
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
+
+(setq compilation-scroll-output 'first-error)
+
+(setq compilation-always-kill t)

@@ -371,6 +371,7 @@ better completion in buffers like eshell. See [[https://github.com/minad/vertico
                    #'completion--in-region)
 				 args))))
 #+end_src
+
 ** Orderless
 
 Adds a better search completion to =completion-styles= (Used in =M-x=,
@@ -2153,4 +2154,20 @@ Restore previous windows when GDB stops.
 
 #+begin_src emacs-lisp
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
+#+end_src
+
+* Compilation
+
+Automatically scroll the output of compilation buffers, unless an error is
+found.
+
+#+begin_src emacs-lisp
+(setq compilation-scroll-output 'first-error)
+#+end_src
+
+Automatically kill running compilation processes when running a new one, without
+asking the user.
+
+#+begin_src emacs-lisp
+(setq compilation-always-kill t)
 #+end_src
