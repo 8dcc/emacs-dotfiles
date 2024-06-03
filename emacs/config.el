@@ -549,7 +549,8 @@ With argument ARG, do this that many times."
   "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
-  "o -" '(dired-jump            :wk "Dired")
+  "o ." '(dired-jump            :wk "Dired")
+  "o !" '(shell-command         :wk "Shell command")
   "o a" '(org-agenda            :wk "Org agenda")
   "o c" '(calc                  :wk "Calculator")
   "o d" '(projectile-run-gdb    :wk "Debugger")
