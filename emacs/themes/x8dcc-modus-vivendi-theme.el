@@ -162,7 +162,7 @@ standard)."
       (bg-completion       bg-dim)
       (bg-hover            "#8e3e3b")
       (bg-hover-secondary  "#00405f")
-      (bg-hl-line          "#101010")
+      (bg-hl-line          bg-dim)
       (bg-region           "#333333")
       (fg-region           unspecified)
 
