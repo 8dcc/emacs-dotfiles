@@ -15,19 +15,19 @@
 
 (setq fancy-splash-image (concat user-emacs-directory "my-media/splash.png"))
 
-(set-face-attribute 'default nil
-  :font "Dina 8")
+(when (member "Dina" (font-family-list))
+    (set-frame-font "Dina 8" t nil))
 
-(set-fontset-font t 'unicode "Cozette 10")
+(when (member "Cozette" (font-family-list))
+  (set-fontset-font t 'unicode "Cozette"))
 
 (set-face-attribute 'variable-pitch nil
-  :font "Fira Sans 10"
+  :family "Fira Sans"
+  :height 100
   :weight 'regular)
 
 (set-face-attribute 'fixed-pitch nil
-  :font "Dina 8")
-
-(add-to-list 'default-frame-alist '(font . "Dina 8"))
+  :inherit 'default)
 
 (set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
 (set-face-attribute 'org-headline-done nil :inherit 'shadow)

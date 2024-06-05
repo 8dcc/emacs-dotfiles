@@ -59,43 +59,31 @@ it's overwritten by dashboard.
 Default font. Most of the =.bdf= files are in my [[https://github.com/8dcc/linux-dotfiles][linux-dotfiles]] repo.
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil
-  :font "Dina 8")
+(when (member "Dina" (font-family-list))
+    (set-frame-font "Dina 8" t nil))
 #+end_src
 
 Fallback font for unicode. You can't specify =nil= there, it needs to be
 ='unicode=.
 
 #+begin_src emacs-lisp
-(set-fontset-font t 'unicode "Cozette 10")
+(when (member "Cozette" (font-family-list))
+  (set-fontset-font t 'unicode "Cozette"))
 #+end_src
 
 Variable pitch and fixed pitch fonts.
 
 #+begin_src emacs-lisp
 (set-face-attribute 'variable-pitch nil
-  :font "Fira Sans 10"
+  :family "Fira Sans"
+  :height 100
   :weight 'regular)
 
 (set-face-attribute 'fixed-pitch nil
-  :font "Dina 8")
+  :inherit 'default)
 #+end_src
 
-I guess this is needed for =emacsclient=.
-
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(font . "Dina 8"))
-#+end_src
-
-Change =org-done= faces. The code for changing the org titles is commented.
-
-#+begin_comment emacs-lisp
-;; NOTE: Unused
-(set-face-attribute 'org-level-1 nil
-                    :family "Fira Code"
-                    :height 1.4
-                    :inherit 'outline-1)
-#+end_comment
+Change =org-done= faces.
 
 #+begin_src emacs-lisp
 (set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
@@ -1345,8 +1333,6 @@ normal numbers and =relative= for relative line numbers.
 
 If =display-line-numbers-width-start= is =t=, the width of the line
 numbers will be calculated depending on the lines of each buffer.
-
-TODO: Does this always work?
 
 #+begin_src emacs-lisp
 (global-display-line-numbers-mode 1)
