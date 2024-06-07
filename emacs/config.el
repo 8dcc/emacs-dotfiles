@@ -326,11 +326,6 @@
 
 (use-package htmlize)
 
-(use-package org-bullets
-  :hook ((org-mode . org-bullets-mode))
-  :config
-  (setq org-bullets-bullet-list '("·")))
-
 (defmacro x8dcc/fringe-helper-rect (name alignment w h)
   "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
 and ALIGNMENT as parameters."
