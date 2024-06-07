@@ -241,6 +241,7 @@
                 (setq spell-fu-faces-exclude
                       '(font-lock-keyword-face
                         font-lock-function-name-face
+                        font-lock-type-face
                         font-lock-variable-name-face
                         font-lock-warning-face
                         font-latex-sedate-face
