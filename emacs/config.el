@@ -416,6 +416,14 @@ and ALIGNMENT as parameters."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/sudo-shell-command (command)
+  (interactive
+   (list (read-shell-command "Shell command: " nil nil)))
+  (shell-command (concat "echo "
+                         (shell-quote-argument (read-passwd "[sudo] Password: "))
+                         " | sudo -S "
+                         command)))
+
 (defun x8dcc/get-buffer-count (regexp)
   "Return the number of buffers whose name matches REGEXP."
   (length

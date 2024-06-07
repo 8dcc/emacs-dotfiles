@@ -826,6 +826,18 @@ Insert a separator comment that fills up to the line column.
       (insert end))))
 #+end_src
 
+Run the specified command as root. See =shell-command= and =sudo(8)=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/sudo-shell-command (command)
+  (interactive
+   (list (read-shell-command "Shell command: " nil nil)))
+  (shell-command (concat "echo "
+                         (shell-quote-argument (read-passwd "[sudo] Password: "))
+                         " | sudo -S "
+                         command)))
+#+end_src
+
 Count the number of buffers whose name matches the specified regular expression.
 
 #+begin_src emacs-lisp
