@@ -1370,6 +1370,12 @@ Don't wrap lines using words by default (=global-visual-line-mode=).
 (global-visual-line-mode 0)
 #+end_src
 
+Don't blink the cursor.
+
+#+begin_src emacs-lisp
+(blink-cursor-mode 0)
+#+end_src
+
 Set 80 as the column line, with the specified character.
 
 NOTE: Try using =?\u00A6= (=¦=) instead of =?\u2502= (=│=) if there are spaces

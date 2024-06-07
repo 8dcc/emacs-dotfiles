@@ -753,6 +753,8 @@ of characters, followed by the number of lines."
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
 
+(blink-cursor-mode 0)
+
 (setq-default display-fill-column-indicator-character ?\u00A6
               fill-column 80)
 
