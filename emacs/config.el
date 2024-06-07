@@ -298,7 +298,7 @@
   (drag-stuff-define-keys))
 
 (use-package hl-todo
-  :hook ((org-mode prog-mode latex-mode) . hl-todo-mode)
+  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
