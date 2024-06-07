@@ -21,13 +21,15 @@
 (when (member "Cozette" (font-family-list))
   (set-fontset-font t 'unicode "Cozette"))
 
-(set-face-attribute 'variable-pitch nil
-  :family "Fira Sans"
-  :height 100
-  :weight 'regular)
+(when (member "Fira Sans" (font-family-list))
+  (set-face-attribute 'variable-pitch nil
+                      :family "Fira Sans"
+                      :height 100
+                      :weight 'regular))
 
-(set-face-attribute 'fixed-pitch nil
-  :inherit 'default)
+(when (member "Dina" (font-family-list))
+  (set-face-attribute 'fixed-pitch nil
+                      :family "Dina"))
 
 (set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
 (set-face-attribute 'org-headline-done nil :inherit 'shadow)

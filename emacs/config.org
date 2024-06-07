@@ -74,13 +74,15 @@ Fallback font for unicode. You can't specify =nil= there, it needs to be
 Variable pitch and fixed pitch fonts.
 
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil
-  :family "Fira Sans"
-  :height 100
-  :weight 'regular)
+(when (member "Fira Sans" (font-family-list))
+  (set-face-attribute 'variable-pitch nil
+                      :family "Fira Sans"
+                      :height 100
+                      :weight 'regular))
 
-(set-face-attribute 'fixed-pitch nil
-  :inherit 'default)
+(when (member "Dina" (font-family-list))
+  (set-face-attribute 'fixed-pitch nil
+                      :family "Dina"))
 #+end_src
 
 Change =org-done= faces.
