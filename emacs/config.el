@@ -559,6 +559,7 @@ With argument ARG, do this that many times."
   "o !" '(shell-command         :wk "Shell command")
   "o a" '(org-agenda            :wk "Org agenda")
   "o c" '(calc                  :wk "Calculator")
+  "o C" '(quick-calc            :wk "Quick calculator")
   "o d" '(projectile-run-gdb    :wk "Debugger")
   "o e" '(x8dcc/eshell-popup    :wk "Eshell popup")
   "o E" '(x8dcc/eshell-numbered :wk "Eshell")
