@@ -505,7 +505,7 @@ With argument ARG, do this that many times."
 (with-eval-after-load 'cc-mode
   (add-hook 'c-mode-hook
             (lambda ()
-              (keymap-set c-mode-map "RET" #'default-indent-new-line))))
+              (keymap-set c-mode-map "RET" #'c-context-line-break))))
 
 (x8dcc/leader-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"

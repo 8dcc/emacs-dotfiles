@@ -1020,7 +1020,7 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 (with-eval-after-load 'cc-mode
   (add-hook 'c-mode-hook
             (lambda ()
-              (keymap-set c-mode-map "RET" #'default-indent-new-line))))
+              (keymap-set c-mode-map "RET" #'c-context-line-break))))
 #+end_src
 
 ** Space keybinds
