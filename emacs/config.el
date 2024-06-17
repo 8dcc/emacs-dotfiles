@@ -80,6 +80,15 @@
 
 (use-package vundo)
 
+(use-package undohist
+  :init
+  (undohist-initialize)
+  :config
+  (setq undohist-ignored-files
+        '("\\.gpg\\'"
+          "COMMIT_EDITMSG"
+          file-remote-p)))
+
 (use-package general
   :after evil
   :config
@@ -474,8 +483,8 @@ With argument ARG, do this that many times."
 
 (keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
 
-(keymap-global-set "M-j" #'drag-stuff-down)
 (keymap-global-set "M-k" #'drag-stuff-up)
+(keymap-global-set "M-j" #'drag-stuff-down)
 
 (keymap-global-set "<backtab>"
 		           (lambda () (interactive)

@@ -188,7 +188,7 @@ For using vi-like keybinds in other buffer types.
   (evil-collection-init))
 #+end_src
 
-** Vundo
+** Vundo & Undo history
 
 Instead of treating undo/redo as a linear sequence of changes, emacs treats undo
 history as a branching tree of changes. This package allows you to visualize and
@@ -196,6 +196,19 @@ navigate this tree easily.
 
 #+begin_src emacs-lisp
 (use-package vundo)
+#+end_src
+
+Remember buffer undo history across sessions.
+
+#+begin_src emacs-lisp
+(use-package undohist
+  :init
+  (undohist-initialize)
+  :config
+  (setq undohist-ignored-files
+        '("\\.gpg\\'"
+          "COMMIT_EDITMSG"
+          file-remote-p)))
 #+end_src
 
 ** General
@@ -956,8 +969,8 @@ functions]].
 Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
 
 #+begin_src emacs-lisp
-(keymap-global-set "M-j" #'drag-stuff-down)
 (keymap-global-set "M-k" #'drag-stuff-up)
+(keymap-global-set "M-j" #'drag-stuff-down)
 #+end_src
 
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
@@ -1443,7 +1456,7 @@ Open files at last edited position. Persists across sessions.
 (save-place-mode 1)
 #+end_src
 
-Remember minibuffer history between sessions
+Remember minibuffer history across sessions.
 
 #+begin_src emacs-lisp
 (savehist-mode 1)
