@@ -86,7 +86,7 @@
   :config
   (setq undohist-ignored-files
         '("\\.gpg\\'"
-          "COMMIT_EDITMSG"
+          x8dcc/is-git-commit-filename
           file-remote-p)))
 
 (use-package general
@@ -432,6 +432,11 @@ and ALIGNMENT as parameters."
                          (shell-quote-argument (read-passwd "[sudo] Password: "))
                          " | sudo -S "
                          command)))
+
+(require 'git-commit)
+(defun x8dcc/is-git-commit-filename (filename)
+  "Returns t if FILENAME matches `git-commit-filename-regexp'."
+  (string-match-p git-commit-filename-regexp filename))
 
 (defun x8dcc/get-buffer-count (regexp)
   "Return the number of buffers whose name matches REGEXP."
