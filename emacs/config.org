@@ -603,7 +603,11 @@ Add rainbow colors to parentheses.
 
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode scheme-mode common-lisp-mode) . rainbow-delimiters-mode))
+  :hook ((emacs-lisp-mode
+          scheme-mode
+          common-lisp-mode
+          LaTeX-mode)
+         . rainbow-delimiters-mode))
 #+end_src
 
 ** Highlight numbers

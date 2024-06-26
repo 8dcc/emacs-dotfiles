@@ -324,7 +324,11 @@
   :hook ((html-mode css-mode js-mode)  . rainbow-mode))
 
 (use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode scheme-mode common-lisp-mode) . rainbow-delimiters-mode))
+  :hook ((emacs-lisp-mode
+          scheme-mode
+          common-lisp-mode
+          LaTeX-mode)
+         . rainbow-delimiters-mode))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
