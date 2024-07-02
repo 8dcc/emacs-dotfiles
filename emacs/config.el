@@ -608,6 +608,7 @@ With argument ARG, do this that many times."
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
   "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
+  "t i" '(toggle-case-fold-search            :wk "Case-sensitive searches")
   "t l" '(display-line-numbers-mode          :wk "Line numbers")
   "t L" '(hl-line-mode                       :wk "Highlight line")
   "t p" '(popper-toggle                      :wk "Last popup")
@@ -645,10 +646,11 @@ With argument ARG, do this that many times."
 (x8dcc/org-keys
   ;; Insert
   "i h"   '(x8dcc/org-insert-header :wk "Default header")
-  ;; Toggle
-  "t i"   '(org-toggle-inline-images :wk "Inline images")
   ;; Mode (Org)
   "m"     '(:ignore t :wk "Org")
+  "m i"   '(org-toggle-inline-images :wk "Toggle inline images")
+  "m t"   '(org-todo                 :wk "Toggle todo")
+  "m T"   '(org-babel-tangle         :wk "Tangle current file")
   ;; Org -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
@@ -667,11 +669,7 @@ With argument ARG, do this that many times."
   "m p"   '(:ignore t         :wk "Priority")
   "m p d" '(org-priority-down :wk "Decrease")
   "m p p" '(org-priority      :wk "Insert")
-  "m p u" '(org-priority-up   :wk "Increase")
-  ;; Org -> Todo
-  "m t"   '(org-todo :wk "Toggle todo")
-  ;; Org -> Tangle
-  "m T"   '(org-babel-tangle :wk "Tangle current file"))
+  "m p u" '(org-priority-up   :wk "Increase"))
 
 (x8dcc/latex-keys
   ;; Mode (LaTeX)
