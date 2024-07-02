@@ -1506,6 +1506,13 @@ after trying to indent the line.
 (setq tab-always-indent nil)
 #+end_src
 
+Don't highlight the region when the mark is active. Useful for using =C-x C-x=
+after =query-replace=. Credits to comment in [[https://stackoverflow.com/a/14883058/11715554][StackOverflow answer]].
+
+#+begin_src emacs-lisp
+(transient-mark-mode 0)
+#+end_src
+
 Enable auto-closing of brackets with =electric-pair-mode=.
 
 #+begin_src emacs-lisp

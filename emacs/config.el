@@ -816,6 +816,8 @@ of characters, followed by the number of lines."
 
 (setq tab-always-indent nil)
 
+(transient-mark-mode 0)
+
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
