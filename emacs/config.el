@@ -177,6 +177,7 @@
 
 (use-package consult
   :config
+  (setq consult-preview-key (list :debounce 0.3 'any))
   (setq completion-in-region-function
 		(lambda (&rest args)
           (apply (if vertico-mode
@@ -597,6 +598,7 @@ With argument ARG, do this that many times."
   "s g" '(rgrep                        :wk "Recursive grep")
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
+  "s i" '(consult-imenu                :wk "Imenu")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace interactively")
   "s R" '(query-replace-regexp         :wk "Replace regex")
