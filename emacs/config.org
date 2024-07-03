@@ -1875,6 +1875,12 @@ Disable footers in HTML exports.
       org-export-time-stamp-file nil)
 #+end_src
 
+Use smart quotes when exporting to HTML or LaTeX.
+
+#+begin_src emacs-lisp
+(setq org-export-with-smart-quotes t)
+#+end_src
+
 Enable colored links in PDF exports.
 
 #+begin_src emacs-lisp

@@ -999,6 +999,8 @@ different rules in `display-buffer-alist'."
 (setq org-html-postamble nil
       org-export-time-stamp-file nil)
 
+(setq org-export-with-smart-quotes t)
+
 (setq org-latex-hyperref-template
       "\\hypersetup{
           pdfauthor={%a},
