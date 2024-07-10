@@ -189,6 +189,11 @@
   :config
   (setq completion-styles '(orderless basic)))
 
+(use-package dumb-jump
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile

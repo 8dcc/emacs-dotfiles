@@ -390,6 +390,18 @@ Adds a better search completion to =completion-styles= (Used in =M-x=,
   (setq completion-styles '(orderless basic)))
 #+end_src
 
+** Dumb jump
+
+Dumb jump is a backend for the =xref= Emacs command. It doesn't use a TAGS file or
+any background processes. Instead, it uses grep-like tools.
+
+#+begin_src emacs-lisp
+(use-package dumb-jump
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+#+end_src
+
 ** Popper
 
 For converting less-important buffers into popups. They can be toggled
@@ -715,7 +727,7 @@ these lambdas.
                                            (fringe-mode nil))))
 #+end_src
 
-** Evil lion
+** Evil lion (alignment)
 
 Evil align operator, port of vim-lion by Tom McDonald.
 
