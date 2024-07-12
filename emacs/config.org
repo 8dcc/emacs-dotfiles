@@ -859,6 +859,19 @@ Insert a separator comment that fills up to the line column.
       (insert end))))
 #+end_src
 
+Toggle newline insertion when saving a file.
+
+#+begin_src emacs-lisp
+(defun x8dcc/toggle-final-newline ()
+  "Toggle newline insertion when saving the current buffer. See
+`require-final-newline'."
+  (interactive)
+  (setq-local require-final-newline (not require-final-newline))
+  (if require-final-newline
+      (message "Final newline enabled in the current buffer.")
+    (message "Final newline disabled in the current buffer.")))
+#+end_src
+
 Run the specified command as root. See =shell-command= and =sudo(8)=. Note how the
 password itself is not saved in the =shell-command-history= inside the
 =~/.emacs.d/history= file, just the shell command is saved.
@@ -1491,12 +1504,6 @@ Remember minibuffer history across sessions.
 (savehist-mode 1)
 #+end_src
 
-Delete trailing whitespaces on buffer save.
-
-#+begin_src emacs-lisp
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+end_src
-
 Use spaces instead of tabs. Should be the default already.
 
 #+begin_src emacs-lisp
@@ -1531,6 +1538,35 @@ Enable auto-closing of brackets with =electric-pair-mode=.
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
+#+end_src
+
+* Buffer save hooks
+
+These variables and functions control whether or not my functions are allowed to
+be called on a buffer save hook.
+
+#+begin_src emacs-lisp
+(defvar x8dcc/allow-modify-on-save t
+  "If non-nil, allow the calling of functions that modify the buffer contents on
+the save hooks.")
+
+(defun x8dcc/toggle-modify-on-save ()
+  "Toggle modifications on buffer save hooks. See `x8dcc/allow-modify-on-save'."
+  (interactive)
+  (setq x8dcc/allow-modify-on-save (not x8dcc/allow-modify-on-save))
+  (if x8dcc/allow-modify-on-save
+      (message "Buffer modifications enabled on save.")
+    (message "Buffer modifications disabled on save.")))
+#+end_src
+
+If modifications are allowed, delete trailing whitespaces when saving the
+buffer.
+
+#+begin_src emacs-lisp
+(add-hook 'before-save-hook
+          (lambda ()
+            (if x8dcc/allow-modify-on-save
+                (delete-trailing-whitespace))))
 #+end_src
 
 * Backups

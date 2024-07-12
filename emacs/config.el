@@ -435,6 +435,15 @@ and ALIGNMENT as parameters."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/toggle-final-newline ()
+  "Toggle newline insertion when saving the current buffer. See
+`require-final-newline'."
+  (interactive)
+  (setq-local require-final-newline (not require-final-newline))
+  (if require-final-newline
+      (message "Final newline enabled in the current buffer.")
+    (message "Final newline disabled in the current buffer.")))
+
 (defun x8dcc/sudo-shell-command (command)
   (interactive
    (list (read-shell-command "Shell command: " nil nil)))
@@ -812,8 +821,6 @@ of characters, followed by the number of lines."
 
 (savehist-mode 1)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
@@ -826,6 +833,23 @@ of characters, followed by the number of lines."
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
+
+(defvar x8dcc/allow-modify-on-save t
+  "If non-nil, allow the calling of functions that modify the buffer contents on
+the save hooks.")
+
+(defun x8dcc/toggle-modify-on-save ()
+  "Toggle modifications on buffer save hooks. See `x8dcc/allow-modify-on-save'."
+  (interactive)
+  (setq x8dcc/allow-modify-on-save (not x8dcc/allow-modify-on-save))
+  (if x8dcc/allow-modify-on-save
+      (message "Buffer modifications enabled on save.")
+    (message "Buffer modifications disabled on save.")))
+
+(add-hook 'before-save-hook
+          (lambda ()
+            (if x8dcc/allow-modify-on-save
+                (delete-trailing-whitespace))))
 
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "trash"))))
