@@ -1857,8 +1857,14 @@ Set SMTP encryption, server and port.
       send-mail-function 'smtpmail-send-it)
 #+end_src
 
-This is needed so it asks for password in the minibuffer. I needed it to avoid a
-=gpg= error when running [[*ERC][ERC]].
+When sending mail, try to sign it with the sender's PGP key.
+
+#+begin_src emacs-lisp
+(setq mml-secure-openpgp-sign-with-sender t)
+#+end_src
+
+The following is needed so Emacs asks for GPG password in the minibuffer. I
+needed it to avoid a =gpg= error when running [[*ERC][ERC]].
 
 #+begin_src emacs-lisp
 (setq epg-pinentry-mode 'loopback)

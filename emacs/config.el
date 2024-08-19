@@ -1012,6 +1012,8 @@ different rules in `display-buffer-alist'."
       smtpmail-smtp-service 465
       send-mail-function 'smtpmail-send-it)
 
+(setq mml-secure-openpgp-sign-with-sender t)
+
 (setq epg-pinentry-mode 'loopback)
 
 (require 'org-tempo)
