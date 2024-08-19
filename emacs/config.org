@@ -1639,6 +1639,12 @@ executing a previous command.
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 #+end_src
 
+Don't show duplicated entries in the eshell history.
+
+#+begin_src emacs-lisp
+(setq eshell-hist-ignoredups t)
+#+end_src
+
 This function is basically the same from =projectile-run-eshell= in
 [[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]]. If we are in a project, it will open the shell in the project's
 root. The difference is that if we are not, it will open =eshell= normally. It

@@ -883,6 +883,8 @@ the save hooks.")
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
 
+(setq eshell-hist-ignoredups t)
+
 (defun x8dcc/eshell-project-or-current (&optional eshell-func)
   "Run ESHELL-FUNC in the project's root whenever possible."
   (interactive)
