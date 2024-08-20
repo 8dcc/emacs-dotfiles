@@ -217,11 +217,6 @@
 (straight-use-package
  '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
 
-(add-hook 'c-mode-hook
-          (lambda ()
-            (highlight-indent-guides-mode 1)
-            (diminish 'highlight-indent-guides-mode)))
-
 (setq highlight-indent-guides-method 'character
       highlight-indent-guides-character ?\u00A6
       highlight-indent-guides-suppress-auto-error t

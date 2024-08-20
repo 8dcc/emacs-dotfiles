@@ -439,15 +439,6 @@ with =SPC t C=, see [[*Space keybinds][Space keybinds]].
  '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
 #+end_src
 
-Only hook it in =c-mode=, for now.
-
-#+begin_src emacs-lisp
-(add-hook 'c-mode-hook
-          (lambda ()
-            (highlight-indent-guides-mode 1)
-            (diminish 'highlight-indent-guides-mode)))
-#+end_src
-
 Use the same character as the fill column, and ignore the first indentation
 level. Setting =highlight-indent-guides-auto-enabled= is necessary for changing
 the face foreground.
