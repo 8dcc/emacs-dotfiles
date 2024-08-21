@@ -402,6 +402,9 @@ and ALIGNMENT as parameters."
 (use-package disaster
   :init
   (setq disaster-assembly-mode 'nasm-mode
+        disaster-cflags "-march=native -ggdb3"
+        disaster-cxxflags disaster-cflags
+        disaster-make-flags "-k CFLAGS=-ggdb3"
         disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
 
 (defun x8dcc/hook-funcs (target functions)
