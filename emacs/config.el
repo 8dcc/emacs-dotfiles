@@ -402,6 +402,15 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 
+(use-package x86-lookup
+  :config
+  (setq x86-lookup-pdf
+        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
+        x86-lookup-browse-pdf-function
+        (lambda (pdf page)
+          (start-process "firefox" nil "firefox"
+                         (format "file://%s#page=%d" pdf page)))))
+
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
   (mapcar (lambda (func)

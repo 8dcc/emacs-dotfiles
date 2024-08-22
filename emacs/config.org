@@ -776,8 +776,7 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
 
 ** Nasm mode
 
-Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality. Uses a
-=straight.el= recipe.
+Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
 
 #+begin_src emacs-lisp
 (straight-use-package
@@ -799,6 +798,23 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 #+end_src
+
+** x86-lookup
+
+Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x86-lookup][skeeto/x86-lookup]].
+
+#+begin_src emacs-lisp
+(use-package x86-lookup
+  :config
+  (setq x86-lookup-pdf
+        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
+        x86-lookup-browse-pdf-function
+        (lambda (pdf page)
+          (start-process "firefox" nil "firefox"
+                         (format "file://%s#page=%d" pdf page)))))
+#+end_src
+
+The volume 2 of the Intel SDM is included in this repository.
 
 * Misc functions and macros
 
