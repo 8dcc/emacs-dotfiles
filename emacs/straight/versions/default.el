@@ -5,7 +5,6 @@
  ("consult" . "fe4852280006e61be7f1374d021ee06155ce5a26")
  ("dash.el" . "6db80c711ce947f6c6fa11e5c2257fff2c79d139")
  ("diminish.el" . "fbd5d846611bad828e336b25d2e131d1bc06b83d")
- ("disaster" . "16bba9afb92aacf06c088c29ba47813b65a80d87")
  ("drag-stuff.el" . "6d06d846cd37c052d79acd0f372c13006aa7e7c8")
  ("el-get" . "a5ba5852648a90ee0cde9fb5d72e69497d260eec")
  ("emacs-dashboard" . "9c8b0cce865e34340c6d435253f6a3aed3b3ace5")

@@ -791,20 +791,13 @@ Use it as the default mode for =.asm= files. For more information on
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
-** Disaster
+** Beardbolt
 
-Disassemble C/C++ code under cursor in Emacs.
-
-It will use my own fork of =nasm-mode= instead of emacs' =asm-mode=. See [[*Nasm mode][Nasm mode]].
+Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
 
 #+begin_src emacs-lisp
-(use-package disaster
-  :init
-  (setq disaster-assembly-mode 'nasm-mode
-        disaster-cflags "-march=native -ggdb3"
-        disaster-cxxflags disaster-cflags
-        disaster-make-flags "-k CFLAGS=-ggdb3"
-        disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
+(straight-use-package
+ '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 #+end_src
 
 * Misc functions and macros

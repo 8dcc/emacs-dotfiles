@@ -399,13 +399,8 @@ and ALIGNMENT as parameters."
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
-(use-package disaster
-  :init
-  (setq disaster-assembly-mode 'nasm-mode
-        disaster-cflags "-march=native -ggdb3"
-        disaster-cxxflags disaster-cflags
-        disaster-make-flags "-k CFLAGS=-ggdb3"
-        disaster-objdump "objdump -d -M intel -Sl --no-show-raw-insn"))
+(straight-use-package
+ '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
