@@ -797,6 +797,8 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
 #+begin_src emacs-lisp
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
+
+(setq beardbolt-shuffle-rainbow t)
 #+end_src
 
 ** x86-lookup
@@ -1302,13 +1304,11 @@ See also:
 (x8dcc/c-keys
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
-  ;; Insert
-  "i g" '(x8dcc/c-include-guard :wk "Include guards")
-  ;; Evaluate
-  "e"   '(:ignore t      :wk "Evaluate")
-  "e m" '(c-macro-expand :wk "Expand macros in region")
-  ;; Fold
-  "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
+  ;; Mode (C)
+  "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
+  "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
+  "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
+  "m m" '(c-macro-expand              :wk "Expand macros in region"))
 #+end_src
 
 * Modeline
@@ -2299,6 +2299,15 @@ This function is useful for adding [[https://en.wikipedia.org/wiki/Include_guard
       (goto-char (point-max))
       (insert "\n"
               "#endif /* " macro-name " */"))))
+#+end_src
+
+This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =beardbolt-compile=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/beardbolt-disassemble ()
+  (interactive)
+  (beardbolt-mode 1)
+  (call-interactively #'beardbolt-compile))
 #+end_src
 
 * GDB

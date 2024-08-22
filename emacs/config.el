@@ -402,6 +402,8 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 
+(setq beardbolt-shuffle-rainbow t)
+
 (use-package x86-lookup
   :config
   (setq x86-lookup-pdf
@@ -716,13 +718,11 @@ With argument ARG, do this that many times."
 (x8dcc/c-keys
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
-  ;; Insert
-  "i g" '(x8dcc/c-include-guard :wk "Include guards")
-  ;; Evaluate
-  "e"   '(:ignore t      :wk "Evaluate")
-  "e m" '(c-macro-expand :wk "Expand macros in region")
-  ;; Fold
-  "z i" '(hide-ifdef-mode :wk "Unused ifdefs"))
+  ;; Mode (C)
+  "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
+  "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
+  "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
+  "m m" '(c-macro-expand              :wk "Expand macros in region"))
 
 (column-number-mode 1)
 
@@ -1264,6 +1264,11 @@ environments."
       (goto-char (point-max))
       (insert "\n"
               "#endif /* " macro-name " */"))))
+
+(defun x8dcc/beardbolt-disassemble ()
+  (interactive)
+  (beardbolt-mode 1)
+  (call-interactively #'beardbolt-compile))
 
 (setq gdb-many-windows t)
 
