@@ -402,7 +402,8 @@ and ALIGNMENT as parameters."
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 
-(setq beardbolt-shuffle-rainbow t)
+(setq beardbolt-shuffle-rainbow t
+      beardbolt-compile-delay nil)
 
 (use-package x86-lookup
   :config

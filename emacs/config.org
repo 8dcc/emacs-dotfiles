@@ -794,11 +794,17 @@ Use it as the default mode for =.asm= files. For more information on
 
 Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
 
+- We set =beardbolt-shuffle-rainbow= to =t= increase contrast between blocks.
+- We set =beardbolt-compile-delay= to =nil= to disable automatic recompilation on
+  buffer change. Just call =x8dcc/beardbolt-disassemble= whenever needed with
+  =SPC m d=.
+
 #+begin_src emacs-lisp
 (straight-use-package
  '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
 
-(setq beardbolt-shuffle-rainbow t)
+(setq beardbolt-shuffle-rainbow t
+      beardbolt-compile-delay nil)
 #+end_src
 
 ** x86-lookup
