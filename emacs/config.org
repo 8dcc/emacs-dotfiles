@@ -395,6 +395,8 @@ Adds a better search completion to =completion-styles= (Used in =M-x=,
 Dumb jump is a backend for the =xref= Emacs command. It doesn't use a TAGS file or
 any background processes. Instead, it uses grep-like tools.
 
+Depends on =s=, =dash= and =popup= packages.
+
 #+begin_src emacs-lisp
 (use-package dumb-jump
   :config
