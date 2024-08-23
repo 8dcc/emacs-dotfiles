@@ -581,6 +581,7 @@ With argument ARG, do this that many times."
   "g u" '(magit-unstage-buffer-file :wk "Unstage current")
   ;; Help
   "h"   '(:ignore t               :wk "Help")
+  "h c" '(describe-char           :wk "Describe char")
   "h e" '(view-echo-area-messages :wk "Echo area messages")
   "h f" '(describe-function       :wk "Describe function")
   "h F" '(describe-face           :wk "Describe face")
