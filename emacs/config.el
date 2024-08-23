@@ -592,6 +592,11 @@ With argument ARG, do this that many times."
   ;; Insert
   "i"   '(:ignore t               :wk "Insert")
   "i s" '(x8dcc/separator-comment :wk "Separator comment")
+  ;; Jump
+  "j"   '(:ignore t             :wk "Jump")
+  "j i" '(consult-imenu         :wk "Imenu")
+  "j x" '(xref-find-references  :wk "X-refs")
+  "j d" '(xref-find-definitions :wk "Definitions")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")
@@ -617,7 +622,6 @@ With argument ARG, do this that many times."
   "s g" '(rgrep                        :wk "Recursive grep")
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
-  "s i" '(consult-imenu                :wk "Imenu")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace interactively")
   "s R" '(query-replace-regexp         :wk "Replace regex")
