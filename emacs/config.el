@@ -720,6 +720,7 @@ With argument ARG, do this that many times."
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
+  "m"   '(:ignore t :wk "C mode")
   "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
   "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
