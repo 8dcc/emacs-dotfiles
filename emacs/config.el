@@ -198,7 +198,7 @@
   :config
   (setq popper-group-function #'popper-group-by-projectile
         popper-reference-buffers '(compilation-mode
-                                   messages-mode
+                                   messages-buffer-mode
                                    help-mode
                                    occur-mode
 								   man-mode
@@ -209,7 +209,7 @@
                                    "^\\*Apropos\\*"
                                    "^\\*scratch\\*"
                                    "^\\*Macroexpansion\\*"
-                                   "^\\* Regexp Explain \\*"))
+                                   "^\\*xref\\*"))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
