@@ -564,16 +564,23 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                         org-verbatim))))))
 #+end_src
 
-** Drag stuff
+** Move text
 
-For dragging lines with =M-<down>= and =M-<up>=.
+For dragging lines with =M-<down>= and =M-<up>=. I started using [[https://github.com/rejeep/drag-stuff.el][drag-stuff.el]], but
+the code is full of errors that generate warnings and hasn't been updated in a
+long time.
 
 #+begin_src emacs-lisp
-(use-package drag-stuff
-  :diminish
+(use-package move-text
   :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
+  (move-text-default-bindings))
+#+end_src
+
+Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
+
+#+begin_src emacs-lisp
+(keymap-global-set "M-k" #'move-text-up)
+(keymap-global-set "M-j" #'move-text-down)
 #+end_src
 
 ** Highlight TODOs
@@ -1016,13 +1023,6 @@ functions]].
 
 #+begin_src emacs-lisp
 (keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
-#+end_src
-
-Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
-
-#+begin_src emacs-lisp
-(keymap-global-set "M-k" #'drag-stuff-up)
-(keymap-global-set "M-j" #'drag-stuff-down)
 #+end_src
 
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For

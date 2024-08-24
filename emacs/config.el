@@ -301,11 +301,12 @@
                         org-todo-keyword-wait
                         org-verbatim))))))
 
-(use-package drag-stuff
-  :diminish
+(use-package move-text
   :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
+  (move-text-default-bindings))
+
+(keymap-global-set "M-k" #'move-text-up)
+(keymap-global-set "M-j" #'move-text-down)
 
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
@@ -511,9 +512,6 @@ With argument ARG, do this that many times."
 (keymap-global-set "C-S-v" #'yank)
 
 (keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
-
-(keymap-global-set "M-k" #'drag-stuff-up)
-(keymap-global-set "M-j" #'drag-stuff-down)
 
 (keymap-global-set "<backtab>"
 		           (lambda () (interactive)
