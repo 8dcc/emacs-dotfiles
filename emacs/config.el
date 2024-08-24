@@ -214,20 +214,6 @@
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
-(straight-use-package
- '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
-
-(setq highlight-indent-guides-method 'character
-      highlight-indent-guides-character ?\u00A6
-      highlight-indent-guides-suppress-auto-error t
-      highlight-indent-guides-auto-enabled nil)
-
-(defun x8dcc/indent-guide-highlighter (level responsive display)
-  (if (> level 0)
-      (highlight-indent-guides--highlighter-default level responsive display)))
-
-(setq highlight-indent-guides-highlighter-function 'x8dcc/indent-guide-highlighter)
-
 (use-package emms
   :config
   (emms-all)
@@ -360,21 +346,6 @@ and ALIGNMENT as parameters."
   (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
   (global-git-gutter-mode 1))
 
-(use-package writeroom-mode
-  :config
-  (setq writeroom-mode-line nil
-        writeroom-restore-window-config t
-        writeroom-width 81
-        writeroom-global-effects '(writeroom-set-alpha
-                                   writeroom-set-menu-bar-lines
-                                   writeroom-set-tool-bar-lines
-                                   writeroom-set-vertical-scroll-bars
-                                   writeroom-set-bottom-divider-width))
-  (add-hook 'writeroom-mode-enable-hook (lambda ()
-                                          (fringe-mode 0)))
-  (add-hook 'writeroom-mode-disable-hook (lambda ()
-                                           (fringe-mode nil))))
-
 (use-package evil-lion
   :config
   (setq evil-lion-left-align-key (kbd "g a"))
@@ -389,13 +360,6 @@ and ALIGNMENT as parameters."
                               (fixed-pitch . "Iosevka Comfy Fixed")))
 
 (use-package auctex)
-
-(straight-use-package
- '(ada-mode :type git :host github :repo "tkurtbond/old-ada-mode"))
-
-(mapc (lambda (element)
-        (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
-      '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
 
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))

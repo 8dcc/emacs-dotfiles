@@ -431,7 +431,7 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
   (popper-mode 1))
 #+end_src
 
-** Highlight indentation
+** COMMENT Highlight indentation
 
 We will enable indentation guides in C mode by default. It can also be toggled
 with =SPC t C=, see [[*Space keybinds][Space keybinds]].
@@ -693,7 +693,7 @@ NOTE: For more information on creating the bitmaps easily with strings, see the
   (global-git-gutter-mode 1))
 #+end_src
 
-** Whiteroom mode
+** COMMENT Whiteroom mode
 
 Great mode for distraction-free editing.
 
@@ -766,7 +766,7 @@ Essential package for LaTeX editing, comes with a useful preview mode.
 (use-package auctex)
 #+end_src
 
-** Ada mode
+** COMMENT Ada mode
 
 Major mode for programming in Ada.
 
