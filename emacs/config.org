@@ -571,16 +571,18 @@ the code is full of errors that generate warnings and hasn't been updated in a
 long time.
 
 #+begin_src emacs-lisp
-(use-package move-text
-  :config
-  (move-text-default-bindings))
+(straight-use-package
+ '(move-text :type git :host github :repo "8dcc/move-text"))
+
+(move-text-default-bindings)
+(add-hook 'text-mode-hook #'move-text-mode)
 #+end_src
 
 Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
 
 #+begin_src emacs-lisp
-(keymap-global-set "M-k" #'move-text-up)
-(keymap-global-set "M-j" #'move-text-down)
+(keymap-set move-text-mode-map "M-j" 'move-text-down)
+(keymap-set move-text-mode-map "M-k" 'move-text-up)
 #+end_src
 
 ** Highlight TODOs

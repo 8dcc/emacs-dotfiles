@@ -301,12 +301,14 @@
                         org-todo-keyword-wait
                         org-verbatim))))))
 
-(use-package move-text
-  :config
-  (move-text-default-bindings))
+(straight-use-package
+ '(move-text :type git :host github :repo "8dcc/move-text"))
 
-(keymap-global-set "M-k" #'move-text-up)
-(keymap-global-set "M-j" #'move-text-down)
+(move-text-default-bindings)
+(add-hook 'text-mode-hook #'move-text-mode)
+
+(keymap-set move-text-mode-map "M-j" 'move-text-down)
+(keymap-set move-text-mode-map "M-k" 'move-text-up)
 
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
