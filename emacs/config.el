@@ -292,6 +292,7 @@
 
 (move-text-default-bindings)
 (add-hook 'text-mode-hook #'move-text-mode)
+(add-hook 'prog-mode-hook #'move-text-mode)
 
 (keymap-set move-text-mode-map "M-j" 'move-text-down)
 (keymap-set move-text-mode-map "M-k" 'move-text-up)

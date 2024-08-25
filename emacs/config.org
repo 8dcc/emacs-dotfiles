@@ -576,6 +576,7 @@ long time.
 
 (move-text-default-bindings)
 (add-hook 'text-mode-hook #'move-text-mode)
+(add-hook 'prog-mode-hook #'move-text-mode)
 #+end_src
 
 Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
