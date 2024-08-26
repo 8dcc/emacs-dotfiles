@@ -93,22 +93,22 @@
   :after evil
   :config
   (general-evil-setup t)
-  (general-create-definer x8dcc/leader-keys
+  (general-create-definer x8dcc/def-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/org-keys
+  (general-create-definer x8dcc/def-keys-org
     :states '(normal insert visual emacs)
     :keymaps 'org-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/latex-keys
+  (general-create-definer x8dcc/def-keys-latex
     :states '(normal insert visual emacs)
     :keymaps 'TeX-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/lisp-keys
+  (general-create-definer x8dcc/def-keys-lisp
     :states '(normal insert visual emacs)
     :keymaps '(lisp-mode-map
                emacs-lisp-mode-map
@@ -116,7 +116,7 @@
                lisp-data-mode-map)
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/c-keys
+  (general-create-definer x8dcc/def-keys-c
     :states '(normal insert visual emacs)
     :keymaps '(c-mode-map
                c++-mode-map
@@ -124,7 +124,7 @@
                js-mode-map)
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/message-keys
+  (general-create-definer x8dcc/def-keys-message
     :states '(normal insert visual emacs)
     :keymaps 'message-mode-map
     :prefix "SPC"
@@ -515,7 +515,7 @@ With argument ARG, do this that many times."
             (lambda ()
               (keymap-set c-mode-map "RET" #'c-context-line-break))))
 
-(x8dcc/leader-keys
+(x8dcc/def-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
   ;; Buffer
@@ -639,7 +639,7 @@ With argument ARG, do this that many times."
   "z o" '(evil-open-fold   :wk "Open")
   "z r" '(evil-open-folds  :wk "Open all"))
 
-(x8dcc/org-keys
+(x8dcc/def-keys-org
   ;; Insert
   "i h"   '(x8dcc/org-insert-header :wk "Default header")
   ;; Mode (Org)
@@ -667,7 +667,7 @@ With argument ARG, do this that many times."
   "m p p" '(org-priority      :wk "Insert")
   "m p u" '(org-priority-up   :wk "Increase"))
 
-(x8dcc/latex-keys
+(x8dcc/def-keys-latex
   ;; Mode (LaTeX)
   "m"     '(:ignore t           :wk "LaTeX")
   "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
@@ -683,7 +683,7 @@ With argument ARG, do this that many times."
   "m f s" '(x8dcc/latex-font-slanted    :wk "Slanted")
   "m f t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
 
-(x8dcc/lisp-keys
+(x8dcc/def-keys-lisp
   ;; Evaluate
   "e"   '(:ignore t            :wk "Evaluate")
   "e e" '(eval-last-sexp       :wk "Last sexp")
@@ -691,7 +691,7 @@ With argument ARG, do this that many times."
   "e b" '(eval-buffer          :wk "Current buffer")
   "e r" '(eval-region          :wk "Region"))
 
-(x8dcc/c-keys
+(x8dcc/def-keys-c
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
@@ -701,7 +701,7 @@ With argument ARG, do this that many times."
   "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
   "m m" '(c-macro-expand              :wk "Expand macros in region"))
 
-(x8dcc/message-keys
+(x8dcc/def-keys-message
   ;; Mode (C)
   "m"   '(:ignore t                       :wk "Message")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
