@@ -123,6 +123,11 @@
                java-mode-map
                js-mode-map)
     :prefix "SPC"
+    :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/message-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'message-mode-map
+    :prefix "SPC"
     :non-normal-prefix "M-SPC"))
 
 (use-package which-key
@@ -638,7 +643,7 @@ With argument ARG, do this that many times."
   ;; Insert
   "i h"   '(x8dcc/org-insert-header :wk "Default header")
   ;; Mode (Org)
-  "m"     '(:ignore t :wk "Org")
+  "m"     '(:ignore t                :wk "Org")
   "m i"   '(org-toggle-inline-images :wk "Toggle inline images")
   "m t"   '(org-todo                 :wk "Toggle todo")
   "m T"   '(org-babel-tangle         :wk "Tangle current file")
@@ -690,11 +695,19 @@ With argument ARG, do this that many times."
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
-  "m"   '(:ignore t :wk "C mode")
+  "m"   '(:ignore t                   :wk "C mode")
   "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
   "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
   "m m" '(c-macro-expand              :wk "Expand macros in region"))
+
+(x8dcc/message-keys
+  ;; Mode (C)
+  "m"   '(:ignore t                       :wk "Message")
+  "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
+  "m p" '(mml-preview                     :wk "Preview")
+  "m s" '(message-send                    :wk "Send")
+  "m S" '(mml-secure-message-sign         :wk "Sign"))
 
 (column-number-mode 1)
 
