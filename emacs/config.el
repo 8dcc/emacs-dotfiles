@@ -323,6 +323,7 @@
   :hook ((emacs-lisp-mode
           scheme-mode
           common-lisp-mode
+          lisp-mode
           LaTeX-mode)
          . rainbow-delimiters-mode))
 
