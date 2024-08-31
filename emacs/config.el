@@ -64,6 +64,7 @@
         evil-vsplit-window-right t
         evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
+        evil-jumps-cross-buffers nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
   (evil-select-search-module 'evil-search-module 'isearch)
@@ -567,8 +568,10 @@ With argument ARG, do this that many times."
   ;; Jump
   "j"   '(:ignore t             :wk "Jump")
   "j i" '(consult-imenu         :wk "Imenu")
-  "j x" '(xref-find-references  :wk "X-refs")
+  "j j" '(evil-jump-backward    :wk "Undo buffer jump")
+  "j J" '(evil-jump-forward     :wk "Redo buffer jump")
   "j d" '(xref-find-definitions :wk "Definitions")
+  "j x" '(xref-find-references  :wk "X-refs")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")

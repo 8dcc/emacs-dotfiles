@@ -150,7 +150,10 @@ For vi-like keybinds. Some notes about the configuration:
 - Configure split direction so new splits are opened to the bottom and to the
   right.
 - We set the undo system to =undo-redo=.
-- We set =evil-want-C-i-jump= to =nil= to avoid some =TAB= problems.
+- We set =evil-want-C-i-jump= to =nil= to avoid some =TAB= problems. TODO: What
+  problems?
+- We set =evil-jumps-cross-buffers= to =nil= so =evil-jump-forward= and
+  =evil-jump-backward= don't change the buffer.
 - We set =evil-mode-line-format= for displaying the evil mode before the buffer
   name. See also [[*Modeline][Modeline]].
 - We will use I-search as evil's search module so it's consistent when using
@@ -169,6 +172,7 @@ For vi-like keybinds. Some notes about the configuration:
         evil-vsplit-window-right t
         evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
+        evil-jumps-cross-buffers nil
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
   (evil-select-search-module 'evil-search-module 'isearch)
@@ -1164,8 +1168,10 @@ normal modes, or =M-SPC= on non-normal modes.
   ;; Jump
   "j"   '(:ignore t             :wk "Jump")
   "j i" '(consult-imenu         :wk "Imenu")
-  "j x" '(xref-find-references  :wk "X-refs")
+  "j j" '(evil-jump-backward    :wk "Undo buffer jump")
+  "j J" '(evil-jump-forward     :wk "Redo buffer jump")
   "j d" '(xref-find-definitions :wk "Definitions")
+  "j x" '(xref-find-references  :wk "X-refs")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")
