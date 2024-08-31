@@ -481,12 +481,23 @@ or too many lines (>10000)."
     (message "Final newline disabled in the current buffer.")))
 
 (defun x8dcc/sudo-shell-command (command)
+"Run the specified shell command as root, asking for the sudo password in the
+minibuffer. Only the shell command is saved in the history.
+
+See also `shell-command'."
   (interactive
    (list (read-shell-command "Shell command: " nil nil)))
   (shell-command (concat "echo "
                          (shell-quote-argument (read-passwd "[sudo] Password: "))
                          " | sudo -S "
                          command)))
+
+(defun x8dcc/evil-kill-buffer-and-window ()
+  "Kill the current buffer with `kill-current-buffer' and delete the current
+window with `evil-delete-window'."
+  (interactive)
+  (kill-current-buffer)
+  (evil-window-delete))
 
 (defun x8dcc/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
@@ -657,20 +668,20 @@ With argument ARG, do this that many times."
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
   "t z" '(writeroom-mode                     :wk "Zen mode")
   ;; Window
-  "w"   '(:ignore t                    :wk "Window")
-  "w c" '(evil-window-delete           :wk "Close")
-  "w C" '(kill-buffer-and-window       :wk "Kill buffer and window")
-  "w h" '(evil-window-left             :wk "Left")
-  "w H" '(evil-window-move-far-left    :wk "Move current left")
-  "w j" '(evil-window-down             :wk "Down")
-  "w J" '(evil-window-move-very-bottom :wk "Move current down")
-  "w k" '(evil-window-up               :wk "Up")
-  "w K" '(evil-window-move-very-top    :wk "Move current up")
-  "w l" '(evil-window-right            :wk "Right")
-  "w L" '(evil-window-move-far-right   :wk "Move current right")
-  "w s" '(evil-window-split            :wk "Split horizontally")
-  "w v" '(evil-window-vsplit           :wk "Split vertically")
-  "w w" '(evil-window-next             :wk "Next")
+  "w"   '(:ignore t                         :wk "Window")
+  "w c" '(evil-window-delete                :wk "Close")
+  "w C" '(x8dcc/evil-kill-buffer-and-window :wk "Kill buffer and window")
+  "w h" '(evil-window-left                  :wk "Left")
+  "w H" '(evil-window-move-far-left         :wk "Move current left")
+  "w j" '(evil-window-down                  :wk "Down")
+  "w J" '(evil-window-move-very-bottom      :wk "Move current down")
+  "w k" '(evil-window-up                    :wk "Up")
+  "w K" '(evil-window-move-very-top         :wk "Move current up")
+  "w l" '(evil-window-right                 :wk "Right")
+  "w L" '(evil-window-move-far-right        :wk "Move current right")
+  "w s" '(evil-window-split                 :wk "Split horizontally")
+  "w v" '(evil-window-vsplit                :wk "Split vertically")
+  "w w" '(evil-window-next                  :wk "Next")
   ;; Fold
   "z"   '(:ignore t        :wk "Fold")
   "z a" '(evil-toggle-fold :wk "Toggle")
