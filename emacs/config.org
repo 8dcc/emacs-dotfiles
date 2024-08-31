@@ -95,7 +95,7 @@ Change =org-done= faces.
 * Packages
 ** Package managers
 
-Bootstrap [[about:blank][straight.el]], which will be used as a "back-end" for =use-package=. For
+Bootstrap [[https://github.com/radian-software/straight.el][straight.el]], which will be used as a "back-end" for =use-package=. For
 more information, see: [[https://web.archive.org/web/20230522053703/https://jeffkreeftmeijer.com/emacs-straight-use-package/][Link]].
 
 #+begin_src emacs-lisp
@@ -1040,7 +1040,7 @@ functions]].
 #+end_src
 
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
-more settings related to indentation and =<tab>=, see [[*Misc mode settings][Misc mode settings]].
+more settings related to indentation and =<tab>=, see [[*Indentation][Indentation]].
 
 #+begin_src emacs-lisp
 (keymap-global-set "<backtab>"
@@ -1104,7 +1104,8 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 
 ** Space keybinds
 
-See also [[General][General]] package.
+For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Custom input functions][Custom input
+  functions]].
 
 *** Global keybinds
 
@@ -1239,14 +1240,7 @@ normal modes, or =M-SPC= on non-normal modes.
 
 *** Org mode keybinds
 
-Notes:
-- Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo
-  state.
-
-See also:
-- [[*Misc org keybinds][Misc org keybinds]].
-- For more information on the =x8dcc/*= functions, see [[*General][General]] and
-  [[*Custom input functions][Custom input functions]].
+Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo state.
 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-org
@@ -1280,8 +1274,7 @@ See also:
 
 *** LaTeX mode keybinds
 
-For more information on the =x8dcc/*= functions, see [[*General][General]],
-[[*Custom input functions][Custom input functions]] and [[*LaTeX mode][LaTeX mode]].
+See [[*LaTeX mode][LaTeX mode]].
 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-latex
@@ -1306,8 +1299,6 @@ For more information on the =x8dcc/*= functions, see [[*General][General]],
 Keybinds for =lisp-mode-map=, =emacs-lisp-mode-map=, =lisp-interaction-mode-map= and
 =lisp-data-mode-map=.
 
-For more information on the =x8dcc/*= functions, see [[*General][General]] and [[Custom functions][Custom functions]].
-
 #+begin_src emacs-lisp
 (x8dcc/def-keys-lisp
   ;; Evaluate
@@ -1322,10 +1313,8 @@ For more information on the =x8dcc/*= functions, see [[*General][General]] and [
 
 Keybinds for =c-mode-map=, =c++-mode-map=, =java-mode-map= and =js-mode-map=.
 
-See also:
-- [[*C mode][C mode]].
-- For more information on the =x8dcc/*= functions, see [[*General][General]] and
-  [[Custom functions][Custom functions]].
+See also [[*C mode][C mode]].
+
 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-c
@@ -1343,10 +1332,6 @@ See also:
 
 Keybinds for =message-mode=.
 
-See also:
-- For more information on the =x8dcc/*= functions, see [[*General][General]] and
-  [[Custom functions][Custom functions]].
-
 #+begin_src emacs-lisp
 (x8dcc/def-keys-message
   ;; Mode (C)
@@ -1357,7 +1342,9 @@ See also:
   "m S" '(mml-secure-message-sign         :wk "Sign"))
 #+end_src
 
-* Modeline
+* General visual settings
+
+** Modeline
 
 Display line and column number on modeline, not just line.
 
@@ -1431,7 +1418,27 @@ the [[Evil & Evil collection][Evil]] package.
                 mode-line-misc-info))
 #+end_src
 
-* Line numbers and line highlight
+*** Battery
+
+Show battery in mode line. If the battery is "N/A" or "unknown", don't
+display.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'battery
+  (if (not (null battery-status-function))
+      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
+            (power-status (battery-format "%B" (funcall battery-status-function))))
+        (if (or (string= "N/A" power-source)
+                (string= "unknown" power-source)
+                (string= "N/A" power-status)
+                (string= "unknown" power-status))
+            (display-battery-mode 0)
+          (display-battery-mode 1)))))
+
+(require 'battery)
+#+end_src
+
+** Line numbers and line highlight
 
 Style of line numbers. If set to =nil=, line numbers are disabled, =t= for
 normal numbers and =relative= for relative line numbers.
@@ -1446,7 +1453,7 @@ numbers will be calculated depending on the lines of each buffer.
 #+end_src
 
 Hide line numbers in the specified modes. For more information on
-=x8dcc/x8dcc/hook-to-targets= see [[*Misc functions and macros][Misc functions and macros]].
+=x8dcc/x8dcc/hook-to-targets= see [[*Auxiliary functions for Elisp][Auxiliary functions for Elisp]].
 
 #+begin_src emacs-lisp
 (x8dcc/hook-to-targets (lambda () (display-line-numbers-mode 0))
@@ -1474,7 +1481,7 @@ We only want one active highlight line in the current window.
 (setq hl-line-sticky-flag nil)
 #+end_src
 
-* Misc visual settings
+** Misc visual settings
 
 By default, don't wrap lines, truncate them (=truncate-lines=). This can be
 toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
@@ -1515,7 +1522,9 @@ Set monday as the first day of the week.
       calendar-weekend-days '(6 0))
 #+end_src
 
-* Misc mode settings
+* General settings
+
+** Codification
 
 Use UTF-8 as the default codification.
 
@@ -1525,17 +1534,7 @@ Use UTF-8 as the default codification.
 (set-keyboard-coding-system 'utf-8-unix)
 #+end_src
 
-Follow git symlinks by default.
-
-#+begin_src emacs-lisp
-(setq vc-follow-symlinks t)
-#+end_src
-
-Automatically update buffer if the file has changed on disk.
-
-#+begin_src emacs-lisp
-(global-auto-revert-mode 1)
-#+end_src
+** Session persistence
 
 Open files at last edited position. Persists across sessions.
 
@@ -1548,6 +1547,36 @@ Remember minibuffer history across sessions.
 #+begin_src emacs-lisp
 (savehist-mode 1)
 #+end_src
+
+** Backups
+
+Emacs uses =file.txt~= files for backups, and =#file.txt#= for temporary
+files. Having them in the same folder as the original file is not
+ideal.
+
+Change backup directory to =~/.emacs.d/trash/=. Note that we use =`( )=
+instead of a normal quote to evaluate the =,( )= part.
+
+We also set other variables to not de-link hard links
+(=backup-by-copying=), use version numbers on backups (=version-control=),
+deleting excess backups (=delete-old-versions=), and specifying the
+number of versions to keep.
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+      `((".*" . ,(concat user-emacs-directory "trash"))))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "trash") t)))
+
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-new-versions 20
+      kept-old-versions 5)
+#+end_src
+
+** Indentation
 
 Use spaces instead of tabs. Should be the default already.
 
@@ -1570,6 +1599,8 @@ after trying to indent the line.
 (setq tab-always-indent nil)
 #+end_src
 
+** Mark and region
+
 Don't highlight the region when the mark is active. Useful for using =C-x C-x=
 after =query-replace=. Credits to comment in [[https://stackoverflow.com/a/14883058/11715554][StackOverflow answer]].
 
@@ -1582,15 +1613,7 @@ perfect for me. For more information on these Transient Mark mode "exceptions"
 (transient-mark-mode 0)
 #+end_src
 
-Enable auto-closing of brackets with =electric-pair-mode=.
-
-#+begin_src emacs-lisp
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (electric-pair-mode 1)))
-#+end_src
-
-* Buffer save hooks
+** On buffer save
 
 These variables and functions control whether or not my functions are allowed to
 be called on a buffer save hook.
@@ -1619,55 +1642,30 @@ buffer.
                 (delete-trailing-whitespace))))
 #+end_src
 
-* Backups
+** Misc
 
-Emacs uses =file.txt~= files for backups, and =#file.txt#= for temporary
-files. Having them in the same folder as the original file is not
-ideal.
-
-Change backup directory to =~/.emacs.d/trash/=. Note that we use =`( )=
-instead of a normal quote to evaluate the =,( )= part.
-
-We also set other variables to not de-link hard links
-(=backup-by-copying=), use version numbers on backups (=version-control=),
-deleting excess backups (=delete-old-versions=), and specifying the
-number of versions to keep.
+Automatically update buffer if the file has changed on disk.
 
 #+begin_src emacs-lisp
-(setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory "trash"))))
-
-(setq auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory "trash") t)))
-
-(setq backup-by-copying t
-      version-control t
-      delete-old-versions t
-      kept-new-versions 20
-      kept-old-versions 5)
+(global-auto-revert-mode 1)
 #+end_src
 
-* Battery
-
-Show battery in mode line. If the battery is "N/A" or "unknown", don't
-display.
+Follow git symlinks by default.
 
 #+begin_src emacs-lisp
-(with-eval-after-load 'battery
-  (if (not (null battery-status-function))
-      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
-            (power-status (battery-format "%B" (funcall battery-status-function))))
-        (if (or (string= "N/A" power-source)
-                (string= "unknown" power-source)
-                (string= "N/A" power-status)
-                (string= "unknown" power-status))
-            (display-battery-mode 0)
-          (display-battery-mode 1)))))
-
-(require 'battery)
+(setq vc-follow-symlinks t)
 #+end_src
 
-* Eshell
+Enable auto-closing of brackets with =electric-pair-mode=.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (electric-pair-mode 1)))
+#+end_src
+
+* Mode-specific settings
+** Eshell
 
 Change the eshell prompt.
 
@@ -1763,7 +1761,7 @@ taking over the current window.
                (display-buffer-in-side-window (side . bottom))))
 #+end_src
 
-* Dired
+** Dired
 
 Change the =ls= flags used by dired.
 
@@ -1778,7 +1776,7 @@ Allow dired to recursively copy and delete folders, after asking for confirmatio
       dired-recursive-deletes 'top)
 #+end_src
 
-* Ediff
+** Ediff
 
 Don't open a new frame for the =ediff= control panel.
 
@@ -1787,7 +1785,7 @@ Don't open a new frame for the =ediff= control panel.
       ediff-split-window-function #'split-window-horizontally)
 #+end_src
 
-* Search and replace
+** Search and replace
 
 See also [[*Evil & Evil collection][Evil & Evil collection]].
 
@@ -1815,7 +1813,7 @@ We will display the match number out of the total I-search matches.
       lazy-count-subfix-format nil)
 #+end_src
 
-* ERC
+** ERC
 
 Enable ERC features.
 
@@ -1896,7 +1894,7 @@ Set prompt to buffer name.
                    (concat "[" (buffer-name) "]:")))
 #+end_src
 
-* Mail
+** Mail
 
 Set SMTP encryption, server and port.
 
@@ -1945,8 +1943,8 @@ You can then delete the original =~/.authinfo= file.
 
 For more information, see [[https://www.emacswiki.org/emacs/GnusAuthinfo][EmacsWiki]].
 
-* Org mode
-** Basic org settings
+** Org mode
+*** Basic org settings
 
 Enable "<s TAB" completion.
 
@@ -2016,7 +2014,7 @@ sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaing
 sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
 #+end_src
 
-** Visual org settings
+*** Visual org settings
 
 Org visual settings.
 
@@ -2089,7 +2087,7 @@ to the overlay."
 ;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 #+end_src
 
-** Custom heading IDs
+*** Custom heading IDs
 
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to
 [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Lee Hinman]] and [[https://protesilaos.com/][Protesilaos Stavrou]].
@@ -2149,7 +2147,7 @@ already have one. See `x8dcc/org-custom-id-get'."
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 #+end_src
 
-** Org capture
+*** Org capture
 
 Used to quickly store data using templates.
 
@@ -2166,7 +2164,7 @@ org manual for more information.
          "* %T Selection from [[%F][%f]]\n%?\n#+begin_quote\n%i\n#+end_quote")))
 #+end_src
 
-** Org functions
+*** Org functions
 
 Insert the default header for my ORG files.
 
@@ -2183,7 +2181,7 @@ Insert the default header for my ORG files.
             "#+STARTUP: nofold\n")))
 #+end_src
 
-* LaTeX mode
+** LaTeX mode
 
 Run the =LaTeX= command on the master file. Similar to =TeX-command-master=, but
 doesn't prompt for a command.
@@ -2302,7 +2300,7 @@ environments."
                 LaTeX-indent-environment-list)))
 #+end_src
 
-* C mode
+** C mode
 
 Enable explicit tabs for C code (if not on beginning of line).
 
@@ -2361,7 +2359,7 @@ This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =bea
   (call-interactively #'beardbolt-compile))
 #+end_src
 
-* GDB
+** GDB
 
 Launch in the /Many Windows/ layout.
 
@@ -2375,7 +2373,7 @@ Restore previous windows when GDB stops.
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
 #+end_src
 
-* Compilation
+** Compilation
 
 Automatically scroll the output of compilation buffers, unless an error is
 found.

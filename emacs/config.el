@@ -760,6 +760,19 @@ of characters, followed by the number of lines."
                 "  "
                 mode-line-misc-info))
 
+(with-eval-after-load 'battery
+  (if (not (null battery-status-function))
+      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
+            (power-status (battery-format "%B" (funcall battery-status-function))))
+        (if (or (string= "N/A" power-source)
+                (string= "unknown" power-source)
+                (string= "N/A" power-status)
+                (string= "unknown" power-status))
+            (display-battery-mode 0)
+          (display-battery-mode 1)))))
+
+(require 'battery)
+
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t)
@@ -801,13 +814,21 @@ of characters, followed by the number of lines."
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8-unix)
 
-(setq vc-follow-symlinks t)
-
-(global-auto-revert-mode 1)
-
 (save-place-mode 1)
 
 (savehist-mode 1)
+
+(setq backup-directory-alist
+      `((".*" . ,(concat user-emacs-directory "trash"))))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "trash") t)))
+
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-new-versions 20
+      kept-old-versions 5)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -817,10 +838,6 @@ of characters, followed by the number of lines."
 (setq tab-always-indent nil)
 
 (transient-mark-mode 0)
-
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (electric-pair-mode 1)))
 
 (defvar x8dcc/allow-modify-on-save t
   "If non-nil, allow the calling of functions that modify the buffer contents on
@@ -839,30 +856,13 @@ the save hooks.")
             (if x8dcc/allow-modify-on-save
                 (delete-trailing-whitespace))))
 
-(setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory "trash"))))
+(global-auto-revert-mode 1)
 
-(setq auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory "trash") t)))
+(setq vc-follow-symlinks t)
 
-(setq backup-by-copying t
-      version-control t
-      delete-old-versions t
-      kept-new-versions 20
-      kept-old-versions 5)
-
-(with-eval-after-load 'battery
-  (if (not (null battery-status-function))
-      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
-            (power-status (battery-format "%B" (funcall battery-status-function))))
-        (if (or (string= "N/A" power-source)
-                (string= "unknown" power-source)
-                (string= "N/A" power-status)
-                (string= "unknown" power-status))
-            (display-battery-mode 0)
-          (display-battery-mode 1)))))
-
-(require 'battery)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (electric-pair-mode 1)))
 
 (setq eshell-prompt-function (lambda ()
                                (concat
