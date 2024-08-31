@@ -400,6 +400,26 @@ and ALIGNMENT as parameters."
             (add-hook target function))
           targets))
 
+(defun x8dcc/count-matching-buffers (regexp)
+  "Return the number of buffers whose name matches REGEXP."
+  (length
+   (seq-remove (lambda (buffer)
+                 (not (string-match-p regexp
+                                      (buffer-name buffer))))
+               (buffer-list))))
+
+(defun x8dcc/is-huge-file ()
+  "Returns `t' if the current buffer has either too many characters (>500000),
+or too many lines (>10000)."
+  (or (> (buffer-size) 500000)
+      (and (fboundp 'buffer-line-statistics)
+           (> (car (buffer-line-statistics)) 10000))))
+
+(require 'git-commit)
+(defun x8dcc/is-git-commit-filename (filename)
+  "Returns t if FILENAME matches `git-commit-filename-regexp'."
+  (string-match-p git-commit-filename-regexp filename))
+
 (defun x8dcc/separator-comment (&optional max-width)
   (interactive)
   (unless max-width
@@ -430,26 +450,6 @@ and ALIGNMENT as parameters."
                          (shell-quote-argument (read-passwd "[sudo] Password: "))
                          " | sudo -S "
                          command)))
-
-(require 'git-commit)
-(defun x8dcc/is-git-commit-filename (filename)
-  "Returns t if FILENAME matches `git-commit-filename-regexp'."
-  (string-match-p git-commit-filename-regexp filename))
-
-(defun x8dcc/get-buffer-count (regexp)
-  "Return the number of buffers whose name matches REGEXP."
-  (length
-   (seq-remove (lambda (buffer)
-                 (not (string-match-p regexp
-                                      (buffer-name buffer))))
-               (buffer-list))))
-
-(defun x8dcc/huge-file ()
-  "Returns `t' if the current buffer has either too many characters (>500000),
-or too many lines (>10000)."
-  (or (> (buffer-size) 500000)
-      (and (fboundp 'buffer-line-statistics)
-           (> (car (buffer-line-statistics)) 10000))))
 
 (defun x8dcc/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
@@ -886,10 +886,10 @@ the save hooks.")
   "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
 first *eshell* buffer, append the count to the buffer name.
 
-Uses `x8dcc/get-buffer-count' for getting the number of eshell buffers."
+Uses `x8dcc/count-matching-buffers' for getting the number of eshell buffers."
   (interactive)
   (unless eshell-func (setq eshell-func #'eshell))
-  (let* ((eshell-buffer-num (x8dcc/get-buffer-count "\\*eshell\\*"))
+  (let* ((eshell-buffer-num (x8dcc/count-matching-buffers "\\*eshell\\*"))
          (eshell-buffer-name (if (> eshell-buffer-num 0)
                                  (concat "*eshell* ["
                                          (number-to-string eshell-buffer-num)

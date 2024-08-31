@@ -842,7 +842,8 @@ Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x8
 
 The volume 2 of the Intel SDM is included in this repository.
 
-* Misc functions and macros
+* Custom functions and macros
+** Auxiliary functions for Elisp
 
 This function will be used for hooking a list of =functions= into the specified
 =target=.
@@ -866,6 +867,42 @@ This function is similar to =x8dcc/hook-funcs=, but it will be used for hooking 
           targets))
 #+end_src
 
+Count the number of buffers whose name matches the specified regular expression.
+
+#+begin_src emacs-lisp
+(defun x8dcc/count-matching-buffers (regexp)
+  "Return the number of buffers whose name matches REGEXP."
+  (length
+   (seq-remove (lambda (buffer)
+                 (not (string-match-p regexp
+                                      (buffer-name buffer))))
+               (buffer-list))))
+#+end_src
+
+Is this file really big? It will be used for disabling some modes. Credits
+[[https://github.com/seagle0128/.emacs.d/blob/19efe194cabc2f2984e6463a8d9730d8163acd8f/lisp/init-funcs.el#L267-L271][seagle0128]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/is-huge-file ()
+  "Returns `t' if the current buffer has either too many characters (>500000),
+or too many lines (>10000)."
+  (or (> (buffer-size) 500000)
+      (and (fboundp 'buffer-line-statistics)
+           (> (car (buffer-line-statistics)) 10000))))
+#+end_src
+
+Check if the provided filename matches the regex for git commit filenames
+(e.g. =COMMIT_EDITMSG=).
+
+#+begin_src emacs-lisp
+(require 'git-commit)
+(defun x8dcc/is-git-commit-filename (filename)
+  "Returns t if FILENAME matches `git-commit-filename-regexp'."
+  (string-match-p git-commit-filename-regexp filename))
+#+end_src
+
+** Text manipulation
+
 Insert a separator comment that fills up to the line column.
 
 #+begin_src emacs-lisp
@@ -883,6 +920,8 @@ Insert a separator comment that fills up to the line column.
       (insert-char ?- remaining)
       (insert end))))
 #+end_src
+
+** New features
 
 Toggle newline insertion when saving a file.
 
@@ -909,40 +948,6 @@ password itself is not saved in the =shell-command-history= inside the
                          (shell-quote-argument (read-passwd "[sudo] Password: "))
                          " | sudo -S "
                          command)))
-#+end_src
-
-Check if the provided filename matches the regex for git commit filenames
-(e.g. =COMMIT_EDITMSG=).
-
-#+begin_src emacs-lisp
-(require 'git-commit)
-(defun x8dcc/is-git-commit-filename (filename)
-  "Returns t if FILENAME matches `git-commit-filename-regexp'."
-  (string-match-p git-commit-filename-regexp filename))
-#+end_src
-
-Count the number of buffers whose name matches the specified regular expression.
-
-#+begin_src emacs-lisp
-(defun x8dcc/get-buffer-count (regexp)
-  "Return the number of buffers whose name matches REGEXP."
-  (length
-   (seq-remove (lambda (buffer)
-                 (not (string-match-p regexp
-                                      (buffer-name buffer))))
-               (buffer-list))))
-#+end_src
-
-Is this file really big? It will be used for disabling some modes. Credits
-[[https://github.com/seagle0128/.emacs.d/blob/19efe194cabc2f2984e6463a8d9730d8163acd8f/lisp/init-funcs.el#L267-L271][seagle0128]].
-
-#+begin_src emacs-lisp
-(defun x8dcc/huge-file ()
-  "Returns `t' if the current buffer has either too many characters (>500000),
-or too many lines (>10000)."
-  (or (> (buffer-size) 500000)
-      (and (fboundp 'buffer-line-statistics)
-           (> (car (buffer-line-statistics)) 10000))))
 #+end_src
 
 * Input
@@ -1719,10 +1724,10 @@ one =*eshell-popup*=.
   "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
 first *eshell* buffer, append the count to the buffer name.
 
-Uses `x8dcc/get-buffer-count' for getting the number of eshell buffers."
+Uses `x8dcc/count-matching-buffers' for getting the number of eshell buffers."
   (interactive)
   (unless eshell-func (setq eshell-func #'eshell))
-  (let* ((eshell-buffer-num (x8dcc/get-buffer-count "\\*eshell\\*"))
+  (let* ((eshell-buffer-num (x8dcc/count-matching-buffers "\\*eshell\\*"))
          (eshell-buffer-name (if (> eshell-buffer-num 0)
                                  (concat "*eshell* ["
                                          (number-to-string eshell-buffer-num)
