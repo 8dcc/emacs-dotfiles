@@ -435,6 +435,42 @@ or too many lines (>10000)."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/increment-number-at-point (&optional increment)
+  "Increment the number at point by INCREMENT."
+  (interactive "*p")
+  (let ((pos (point)))
+    (save-match-data
+      (skip-chars-backward "0-9")
+      (if (looking-at "[0-9]+")
+          (let ((field-width (- (match-end 0) (match-beginning 0)))
+                (newval (+ (string-to-number (match-string 0) 10) increment)))
+            (when (< newval 0)
+              (setq newval (+ (expt 10 field-width) newval)))
+            (replace-match (format (concat "%0" (int-to-string field-width) "d")
+                                   newval)))
+        (user-error "No number at point")))
+    (goto-char pos)))
+
+(defun x8dcc/increment-number-at-point-hex (&optional increment)
+  "Increment the number forward from point by INCREMENT."
+  (interactive "*p")
+  (save-excursion
+    (save-match-data
+      (let (inc-by field-width answer hex-format)
+        (setq inc-by (if increment increment 1))
+        (skip-chars-backward "0123456789abcdefABCDEF")
+        (when (re-search-forward "[0-9a-fA-F]+" nil t)
+          (setq field-width (- (match-end 0) (match-beginning 0)))
+          (setq answer (+ (string-to-number (match-string 0) 16) inc-by))
+          (when (< answer 0)
+            (setq answer (+ (expt 16 field-width) answer)))
+          (if (equal (match-string 0) (upcase (match-string 0)))
+              (setq hex-format "X")
+            (setq hex-format "x"))
+          (replace-match (format (concat "%0" (int-to-string field-width)
+                                         hex-format)
+                                 answer)))))))
+
 (defun x8dcc/toggle-final-newline ()
   "Toggle newline insertion when saving the current buffer. See
 `require-final-newline'."
