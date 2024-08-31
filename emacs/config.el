@@ -530,7 +530,6 @@ With argument ARG, do this that many times."
   "b S" '(write-file                       :wk "Save as")
   "b r" '(revert-buffer                    :wk "Revert (discard)")
   "b R" '(revert-buffer-with-coding-system :wk "Revert with coding system")
-  "b x" '(scratch-buffer                   :wk "Open scratch buffer")
   ;; File
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
@@ -583,6 +582,7 @@ With argument ARG, do this that many times."
   "o e" '(x8dcc/eshell-popup    :wk "Eshell popup")
   "o E" '(x8dcc/eshell-numbered :wk "Eshell")
   "o m" '(man                   :wk "Manpage")
+  "o x" '(scratch-buffer        :wk "Scratch buffer")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
