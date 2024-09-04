@@ -757,8 +757,8 @@ With argument ARG, do this that many times."
   "m"   '(:ignore t                       :wk "Message")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
-  "m s" '(message-send                    :wk "Send")
-  "m S" '(mml-secure-message-sign         :wk "Sign"))
+  "m s" '(mml-secure-message-sign         :wk "Sign")
+  "m S" '(message-send                    :wk "Send"))
 
 (column-number-mode 1)
 

@@ -1399,8 +1399,8 @@ Keybinds for =message-mode=.
   "m"   '(:ignore t                       :wk "Message")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
-  "m s" '(message-send                    :wk "Send")
-  "m S" '(mml-secure-message-sign         :wk "Sign"))
+  "m s" '(mml-secure-message-sign         :wk "Sign")
+  "m S" '(message-send                    :wk "Send"))
 #+end_src
 
 * General visual settings
