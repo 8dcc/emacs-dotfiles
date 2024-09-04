@@ -1703,6 +1703,49 @@ buffer.
                 (delete-trailing-whitespace))))
 #+end_src
 
+** Printing
+*** System configuration
+
+These are the necessary Gentoo packages for printing.
+
+#+begin_src bash
+# For the `lpr' command
+emerge net-print/cups net-print/cups-filters
+
+# For HP printers
+PYTHON_TARGETS="python3_11" PYTHON_SINGLE_TARGET="python3_11" emerge net-print/hplip
+#+end_src
+
+The =cupsd= service has to be running for printing. These commands are for Gentoo,
+which uses OpenRC as its init system.
+
+#+begin_src bash
+# Start it for this session
+rc-service cupsd start
+
+# Add to the default group (auto-start on boot)
+rc-update add cupsd default
+#+end_src
+
+You can configure the printer(s) from the web interface at [[http://localhost:631/]]
+
+For more information, see [[https://wiki.gentoo.org/wiki/Printing][the printing page of the Gentoo wiki]].
+
+*** Emacs configuration
+
+Name of the default printer. Will be used for =lpr='s =-P= parameter.
+
+#+begin_src emacs-lisp
+(setq printer-name "MainPrinter")
+#+end_src
+
+You don't need to set the default printer from Emacs, you can just set the
+default printer system-wise with =lpoptions=.
+
+#+begin_src bash
+lpoptions -d "MY_PRINTER_NAME"
+#+end_src
+
 ** Misc
 
 Automatically update buffer if the file has changed on disk.

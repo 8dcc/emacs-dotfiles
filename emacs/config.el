@@ -906,6 +906,8 @@ the save hooks.")
             (if x8dcc/allow-modify-on-save
                 (delete-trailing-whitespace))))
 
+(setq printer-name "MainPrinter")
+
 (global-auto-revert-mode 1)
 
 (setq vc-follow-symlinks t)
