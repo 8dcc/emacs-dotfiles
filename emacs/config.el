@@ -908,6 +908,13 @@ the save hooks.")
 
 (setq printer-name "MainPrinter")
 
+(defun x8dcc/lpr-buffer-pages (start end)
+  "Print the current buffer using `lpr-buffer' from page START to END. The page
+numbers start at 1."
+  (interactive "nStarting page: \nnEnd page: ")
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d" (max start 1) (max end 1)))))
+    (lpr-buffer)))
+
 (global-auto-revert-mode 1)
 
 (setq vc-follow-symlinks t)

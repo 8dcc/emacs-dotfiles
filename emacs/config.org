@@ -1,7 +1,7 @@
-#+title: Vanilla emacs configuration
-#+options: toc:nil
-#+property: header-args:emacs-lisp :tangle config.el
-#+author: 8dcc
+#+TITLE: Vanilla emacs configuration
+#+OPTIONS: toc:nil
+#+PROPERTY: header-args:emacs-lisp :tangle config.el
+#+AUTHOR: 8dcc
 
 #+TOC: headlines 2
 
@@ -1745,6 +1745,20 @@ default printer system-wise with =lpoptions=.
 #+begin_src bash
 lpoptions -d "MY_PRINTER_NAME"
 #+end_src
+
+Wrapper for printing only the specified pages of a buffer using =lpr-buffer=. See
+[[http://localhost:631/help/options.html?TOPIC=Getting+Started&QUERY=#PAGERANGES][localhost CUPS help]] on the =page-ranges= option.
+
+#+begin_src emacs-lisp
+(defun x8dcc/lpr-buffer-pages (start end)
+  "Print the current buffer using `lpr-buffer' from page START to END. The page
+numbers start at 1."
+  (interactive "nStarting page: \nnEnd page: ")
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d" (max start 1) (max end 1)))))
+    (lpr-buffer)))
+#+end_src
+
+TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other settings.
 
 ** Misc
 
