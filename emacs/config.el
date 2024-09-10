@@ -1081,15 +1081,17 @@ different rules in `display-buffer-alist'."
 
 (setq org-export-with-smart-quotes t)
 
+(setq org-latex-title-command "\\maketitle\\clearpage"
+      org-latex-toc-command "\\tableofcontents\\clearpage\n")
+
 (setq org-latex-hyperref-template
       "\\hypersetup{
           pdfauthor={%a},
           pdftitle={%t},
           pdfkeywords={%k},
           pdfsubject={%d},
-          pdfcreator={%c},
           pdflang={%L},
-          colorlinks=true
+          hidelinks
        }\n")
 
 (setq org-fontify-quote-and-verse-blocks t

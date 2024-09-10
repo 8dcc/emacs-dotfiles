@@ -2107,7 +2107,14 @@ Use smart quotes when exporting to HTML or LaTeX.
 (setq org-export-with-smart-quotes t)
 #+end_src
 
-Enable colored links in PDF exports.
+Use different pages for the title and TOC in LaTeX.
+
+#+begin_src emacs-lisp
+(setq org-latex-title-command "\\maketitle\\clearpage"
+      org-latex-toc-command "\\tableofcontents\\clearpage\n")
+#+end_src
+
+Hide link borders in PDF exports.
 
 #+begin_src emacs-lisp
 (setq org-latex-hyperref-template
@@ -2116,9 +2123,8 @@ Enable colored links in PDF exports.
           pdftitle={%t},
           pdfkeywords={%k},
           pdfsubject={%d},
-          pdfcreator={%c},
           pdflang={%L},
-          colorlinks=true
+          hidelinks
        }\n")
 #+end_src
 
