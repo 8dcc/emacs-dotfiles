@@ -183,7 +183,7 @@
 
 (use-package consult
   :config
-  (setq consult-preview-key (list :debounce 0.3 'any))
+  (setq consult-preview-key (list :debounce 0.5 'any))
   (setq completion-in-region-function
 		(lambda (&rest args)
           (apply (if vertico-mode
@@ -198,7 +198,9 @@
 (use-package dumb-jump
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+  (setq xref-show-definitions-function #'consult-xref
+        xref-show-xrefs-function #'consult-xref
+        xref-prompt-for-identifier nil))
 
 (use-package popper
   :config

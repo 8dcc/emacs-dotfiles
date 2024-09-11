@@ -379,7 +379,7 @@ better completion in buffers like eshell. See [[https://github.com/minad/vertico
 #+begin_src emacs-lisp
 (use-package consult
   :config
-  (setq consult-preview-key (list :debounce 0.3 'any))
+  (setq consult-preview-key (list :debounce 0.5 'any))
   (setq completion-in-region-function
 		(lambda (&rest args)
           (apply (if vertico-mode
@@ -406,11 +406,19 @@ any background processes. Instead, it uses grep-like tools.
 
 Depends on =s=, =dash= and =popup= packages.
 
+We set =xref-show-definitions-function= and =xref-show-xrefs-function= to
+=#'consult-xref= so functions like =xref-find-definitions= and =xref-find-references=
+don't create their own =*xref*= buffers, but instead show a [[*Consult][Consult]] popup. We also
+set =xref-prompt-for-identifier= to =nil= so it doesn't ask us for the symbol we are
+looking for every time; only when it has no choice.
+
 #+begin_src emacs-lisp
 (use-package dumb-jump
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+  (setq xref-show-definitions-function #'consult-xref
+        xref-show-xrefs-function #'consult-xref
+        xref-prompt-for-identifier nil))
 #+end_src
 
 ** Popper
