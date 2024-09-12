@@ -748,9 +748,12 @@ With argument ARG, do this that many times."
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
+  "m a" '(c-toggle-auto-newline       :wk "Toggle auto-newline")
   "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
+  "m h" '(c-toggle-hungry-state       :wk "Toggle hungry-delete-key")
   "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
-  "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
+  "m I" '(hide-ifdef-mode             :wk "Toggle visibility of unused ifdefs")
+  "m l" '(c-toggle-electric-state     :wk "Toggle electric indentation")
   "m m" '(c-macro-expand              :wk "Expand macros in region"))
 
 (x8dcc/def-keys-message
