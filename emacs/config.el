@@ -620,6 +620,8 @@ With argument ARG, do this that many times."
   "j J" '(evil-jump-forward     :wk "Redo buffer jump")
   "j d" '(xref-find-definitions :wk "Definitions")
   "j x" '(xref-find-references  :wk "X-refs")
+  ;; Mode
+  "m"   '(:ignore t :wk "Mode")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")
@@ -693,11 +695,9 @@ With argument ARG, do this that many times."
   "z r" '(evil-open-folds  :wk "Open all"))
 
 (x8dcc/def-keys-org
-  ;; Insert
-  "i h"   '(x8dcc/org-insert-header :wk "Default header")
   ;; Mode (Org)
-  "m"     '(:ignore t                :wk "Org")
   "m i"   '(org-toggle-inline-images :wk "Toggle inline images")
+  "m h"   '(x8dcc/org-insert-header  :wk "Insert default header")
   "m t"   '(org-todo                 :wk "Toggle todo")
   "m T"   '(org-babel-tangle         :wk "Tangle current file")
   ;; Org -> Date
@@ -722,7 +722,6 @@ With argument ARG, do this that many times."
 
 (x8dcc/def-keys-latex
   ;; Mode (LaTeX)
-  "m"     '(:ignore t           :wk "LaTeX")
   "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
   "m b"   '(latex-insert-block  :wk "Open block")
   "m B"   '(latex-close-block   :wk "Close block")
@@ -748,7 +747,6 @@ With argument ARG, do this that many times."
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
-  "m"   '(:ignore t                   :wk "C mode")
   "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
   "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
@@ -756,7 +754,6 @@ With argument ARG, do this that many times."
 
 (x8dcc/def-keys-message
   ;; Mode (C)
-  "m"   '(:ignore t                       :wk "Message")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
   "m s" '(mml-secure-message-sign         :wk "Sign")

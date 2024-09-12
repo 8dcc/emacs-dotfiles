@@ -1073,7 +1073,7 @@ See [[*Org mode keybinds][Org mode keybinds]].
       mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
 #+end_src
 
-** Misc keybinds
+** Misc remaps and tweaks
 *** Global
 
 Zoom keybinds.
@@ -1234,6 +1234,8 @@ normal modes, or =M-SPC= on non-normal modes.
   "j J" '(evil-jump-forward     :wk "Redo buffer jump")
   "j d" '(xref-find-definitions :wk "Definitions")
   "j x" '(xref-find-references  :wk "X-refs")
+  ;; Mode
+  "m"   '(:ignore t :wk "Mode")
   ;; Open
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")
@@ -1313,11 +1315,9 @@ Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo 
 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-org
-  ;; Insert
-  "i h"   '(x8dcc/org-insert-header :wk "Default header")
   ;; Mode (Org)
-  "m"     '(:ignore t                :wk "Org")
   "m i"   '(org-toggle-inline-images :wk "Toggle inline images")
+  "m h"   '(x8dcc/org-insert-header  :wk "Insert default header")
   "m t"   '(org-todo                 :wk "Toggle todo")
   "m T"   '(org-babel-tangle         :wk "Tangle current file")
   ;; Org -> Date
@@ -1348,7 +1348,6 @@ See [[*LaTeX mode][LaTeX mode]].
 #+begin_src emacs-lisp
 (x8dcc/def-keys-latex
   ;; Mode (LaTeX)
-  "m"     '(:ignore t           :wk "LaTeX")
   "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
   "m b"   '(latex-insert-block  :wk "Open block")
   "m B"   '(latex-close-block   :wk "Close block")
@@ -1390,7 +1389,6 @@ See also [[*C mode][C mode]].
   ;; Buffer
   "b f" '(clang-format-buffer :wk "Format")
   ;; Mode (C)
-  "m"   '(:ignore t                   :wk "C mode")
   "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
   "m I" '(hide-ifdef-mode             :wk "Unused ifdefs")
@@ -1404,7 +1402,6 @@ Keybinds for =message-mode=.
 #+begin_src emacs-lisp
 (x8dcc/def-keys-message
   ;; Mode (C)
-  "m"   '(:ignore t                       :wk "Message")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
   "m s" '(mml-secure-message-sign         :wk "Sign")
