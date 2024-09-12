@@ -64,7 +64,7 @@
         evil-vsplit-window-right t
         evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
-        evil-jumps-cross-buffers nil
+        evil-jumps-cross-buffers t
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
   (evil-select-search-module 'evil-search-module 'isearch)
