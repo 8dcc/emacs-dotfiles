@@ -567,8 +567,9 @@ With argument ARG, do this that many times."
               (keymap-set c-mode-map "RET" #'c-context-line-break))))
 
 (x8dcc/def-keys
-  "SPC" '(projectile-find-file :wk "Find file in project") ;; Same as "SPC p f"
-  "."   '(find-file            :wk "Find file")            ;; Same as "SPC f f"
+  "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
+  "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
+  ";"   '(comment-dwim         :wk "Comment (DWIM)")
   ;; Buffer
   "b"   '(:ignore t                        :wk "Buffer")
   "b i" '(x8dcc/indent-buffer              :wk "Indent")
