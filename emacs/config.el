@@ -1091,8 +1091,11 @@ different rules in `display-buffer-alist'."
 
 (setq org-export-with-smart-quotes t)
 
-(setq org-latex-title-command "\\maketitle\\clearpage"
-      org-latex-toc-command "\\tableofcontents\\clearpage\n")
+(setq org-latex-prefer-user-labels t
+      org-html-prefer-user-labels t)
+
+(setq org-latex-title-command "\\maketitle\n\\clearpage"
+      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
 
 (setq org-latex-hyperref-template
       "\\hypersetup{

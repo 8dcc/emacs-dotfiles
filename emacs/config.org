@@ -2128,11 +2128,18 @@ Use smart quotes when exporting to HTML or LaTeX.
 (setq org-export-with-smart-quotes t)
 #+end_src
 
+Prefer user labels when exporting to LaTeX or HTML.
+
+#+begin_src emacs-lisp
+(setq org-latex-prefer-user-labels t
+      org-html-prefer-user-labels t)
+#+end_src
+
 Use different pages for the title and TOC in LaTeX.
 
 #+begin_src emacs-lisp
-(setq org-latex-title-command "\\maketitle\\clearpage"
-      org-latex-toc-command "\\tableofcontents\\clearpage\n")
+(setq org-latex-title-command "\\maketitle\n\\clearpage"
+      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
 #+end_src
 
 Hide link borders in PDF exports.
