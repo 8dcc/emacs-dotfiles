@@ -723,18 +723,25 @@ With argument ARG, do this that many times."
 
 (x8dcc/def-keys-latex
   ;; Mode (LaTeX)
-  "m c"   '(x8dcc/latex-compile :wk "Compile to PDF")
-  "m b"   '(latex-insert-block  :wk "Open block")
-  "m B"   '(latex-close-block   :wk "Close block")
+  "m c"   '(x8dcc/latex-compile   :wk "Compile to PDF")
+  "m b"   '(latex-insert-block    :wk "Open block")
+  "m B"   '(latex-close-block     :wk "Close block")
+  "m m"   '(TeX-insert-macro      :wk "Insert macro")
+  "m p"   '(prettify-symbols-mode :wk "Prettify symbols")
+  "m s"   '(LaTeX-section         :wk "New section")
+  ;; Folding
+  "m f"   '(:ignore t       :wk "Fold")
+  "m f f" '(TeX-fold-dwim   :wk "DWIM")
+  "m f b" '(TeX-fold-buffer :wk "Entire buffer")
   ;; Text format
-  "m f"   '(:ignore t                   :wk "Text format")
-  "m f b" '(x8dcc/latex-font-bold       :wk "Bold")
-  "m f c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
-  "m f e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
-  "m f i" '(x8dcc/latex-font-italics    :wk "Italics")
-  "m f r" '(x8dcc/latex-font-roman      :wk "Roman")
-  "m f s" '(x8dcc/latex-font-slanted    :wk "Slanted")
-  "m f t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
+  "m F"   '(:ignore t                   :wk "Text format")
+  "m F b" '(x8dcc/latex-font-bold       :wk "Bold")
+  "m F c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
+  "m F e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
+  "m F i" '(x8dcc/latex-font-italics    :wk "Italics")
+  "m F r" '(x8dcc/latex-font-roman      :wk "Roman")
+  "m F s" '(x8dcc/latex-font-slanted    :wk "Slanted")
+  "m F t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
 
 (x8dcc/def-keys-lisp
   ;; Evaluate
@@ -1188,6 +1195,13 @@ already have one. See `x8dcc/org-custom-id-get'."
             "#+AUTHOR: " user-full-name "\n"
             "#+OPTIONS: toc:2\n"
             "#+STARTUP: nofold\n")))
+
+(setq TeX-parse-self t)
+
+(add-hook 'LaTeX-mode-hook (lambda ()
+                             (TeX-fold-mode 1)))
+
+(setq TeX-fold-unfold-around-mark t)
 
 (defun x8dcc/latex-compile ()
   (interactive)
