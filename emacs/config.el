@@ -1180,14 +1180,6 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 
-(setq org-capture-templates
-      '(("n" "Note" entry
-         (file+headline "notes.org" "Notes")
-         "* %T Note\n%?")
-        ("s" "Selection" entry
-         (file+headline "notes.org" "Selections")
-         "* %T Selection from [[%F][%f]]\n%?\n#+begin_quote\n%i\n#+end_quote")))
-
 (defun x8dcc/org-insert-header (&optional title)
   (interactive)
   (unless title
