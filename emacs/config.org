@@ -986,6 +986,74 @@ Increment number at point in decimal and hexadecimal format. Credits: [[https://
                                  answer)))))))
 #+end_src
 
+** Input related
+
+Delete the last /N/ words backwards, without adding it to the kill-ring (copying
+it). Bound to =C-<backspace>=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+#+end_src
+
+Indent the whole buffer. Bound to =SPC b i=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max))))
+#+end_src
+
+It's common for me to use =org-insert-link= after typing a sentence ended in a
+space, but when exiting evil's insert mode, the cursor moves on top of that last
+space, inserting the link right after the last word. To fix this, this function
+inserts a space right before inserting the link. We need to use
+=funcall-interactively= so the =org-insert-link= function prompts us for a link
+description. Bound to =SPC m l l=.
+
+TODO: Space is inserted even if you cancel in the =org-insert-link= prompt.
+
+See [[*Org mode keybinds][Org mode keybinds]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-insert-link ()
+  "Inserts a space in the current position, and calls `org-insert-link'."
+  (interactive)
+  (insert " ")
+  (funcall-interactively #'org-insert-link))
+#+end_src
+
+Alternative to =kill-buffer-and-window= that uses =evil-window-delete=. Bound to =SPC w C=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/evil-kill-buffer-and-window ()
+  "Kill the current buffer with `kill-current-buffer' and delete the current
+window with `evil-delete-window'."
+  (interactive)
+  (kill-current-buffer)
+  (evil-window-delete))
+#+end_src
+
+The following evil operator fills the specified text (usually the region) using
+the indentation of the first line as reference. Bound to =g W=.
+
+#+begin_src emacs-lisp
+(evil-define-operator x8dcc/evil-fill-indent (beg end)
+  "Fill text to `fill-column' using `evil-fill' and indent it with
+`evil-indent'."
+  :move-point nil
+  :type line
+  (save-excursion
+    (goto-char beg)
+    (let ((fill-column (- fill-column (current-indentation))))
+      (evil-fill beg end)
+      (evil-indent beg end))))
+#+end_src
+
 ** New features
 
 Toggle newline insertion when saving a file.
@@ -1019,77 +1087,7 @@ See also `shell-command'."
                          command)))
 #+end_src
 
-Alternative to =kill-buffer-and-window= that uses =evil-window-delete=.
-
-#+begin_src emacs-lisp
-(defun x8dcc/evil-kill-buffer-and-window ()
-  "Kill the current buffer with `kill-current-buffer' and delete the current
-window with `evil-delete-window'."
-  (interactive)
-  (kill-current-buffer)
-  (evil-window-delete))
-#+end_src
-
-The following evil operator fills the specified text (usually the region) using
-the indentation of the first line as reference.
-
-#+begin_src emacs-lisp
-(evil-define-operator x8dcc/evil-fill-indent (beg end)
-  "Fill text to `fill-column' using `evil-fill' and indent it with
-`evil-indent'."
-  :move-point nil
-  :type line
-  (save-excursion
-    (goto-char beg)
-    (let ((fill-column (- fill-column (current-indentation))))
-      (evil-fill beg end)
-      (evil-indent beg end))))
-#+end_src
-
 * Input
-** Custom input functions
-
-TODO: Move section to [[*Custom functions and macros][Custom functions and macros]].
-
-Delete the last /N/ words backwards, without adding it to the kill-ring (copying
-it).
-
-#+begin_src emacs-lisp
-(defun x8dcc/backward-delete-word (arg)
-  "Delete characters backward until encountering the beginning of a word.
-With argument ARG, do this that many times."
-  (interactive "p")
-  (delete-region (point) (progn (backward-word arg) (point))))
-#+end_src
-
-This function indents the whole buffer, bound to =SPC b i=.
-
-#+begin_src emacs-lisp
-(defun x8dcc/indent-buffer ()
-  (interactive)
-  (save-excursion
-    (indent-region (point-min) (point-max))))
-#+end_src
-
-It's common for me to use =org-insert-link= after typing a sentence ended in a
-space, but when exiting evil's insert mode, the cursor moves on top of that last
-space, inserting the link right after the last word. To fix this, this function
-inserts a space right before inserting the link. We need to use
-=funcall-interactively= so the =org-insert-link= function prompts us for a link
-description.
-
-TODO: Space is inserted even if you cancel in the =org-insert-link= prompt.
-
-See [[*Org mode keybinds][Org mode keybinds]].
-
-#+begin_src emacs-lisp
-(defun x8dcc/org-insert-link ()
-  "Inserts a space in the current position, and calls `org-insert-link'."
-  (interactive)
-  (insert " ")
-  (funcall-interactively #'org-insert-link))
-#+end_src
-
 ** Scrolling and motion
 
 1. Scroll smoothly when cursor moves out of the screen (1 line at a time).

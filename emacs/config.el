@@ -481,6 +481,41 @@ or too many lines (>10000)."
                                          hex-format)
                                  answer)))))))
 
+(defun x8dcc/backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+
+(defun x8dcc/indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max))))
+
+(defun x8dcc/org-insert-link ()
+  "Inserts a space in the current position, and calls `org-insert-link'."
+  (interactive)
+  (insert " ")
+  (funcall-interactively #'org-insert-link))
+
+(defun x8dcc/evil-kill-buffer-and-window ()
+  "Kill the current buffer with `kill-current-buffer' and delete the current
+window with `evil-delete-window'."
+  (interactive)
+  (kill-current-buffer)
+  (evil-window-delete))
+
+(evil-define-operator x8dcc/evil-fill-indent (beg end)
+  "Fill text to `fill-column' using `evil-fill' and indent it with
+`evil-indent'."
+  :move-point nil
+  :type line
+  (save-excursion
+    (goto-char beg)
+    (let ((fill-column (- fill-column (current-indentation))))
+      (evil-fill beg end)
+      (evil-indent beg end))))
+
 (defun x8dcc/toggle-final-newline ()
   "Toggle newline insertion when saving the current buffer. See
 `require-final-newline'."
@@ -501,41 +536,6 @@ See also `shell-command'."
                          (shell-quote-argument (read-passwd "[sudo] Password: "))
                          " | sudo -S "
                          command)))
-
-(defun x8dcc/evil-kill-buffer-and-window ()
-  "Kill the current buffer with `kill-current-buffer' and delete the current
-window with `evil-delete-window'."
-  (interactive)
-  (kill-current-buffer)
-  (evil-window-delete))
-
-(evil-define-operator x8dcc/evil-fill-indent (beg end)
-  "Fill text to `fill-column' using `evil-fill' and indent it with
-`evil-indent'."
-  :move-point nil
-  :type line
-  (save-excursion
-    (goto-char beg)
-    (let ((fill-column (- fill-column (current-indentation))))
-      (evil-fill beg end)
-      (evil-indent beg end))))
-
-(defun x8dcc/backward-delete-word (arg)
-  "Delete characters backward until encountering the beginning of a word.
-With argument ARG, do this that many times."
-  (interactive "p")
-  (delete-region (point) (progn (backward-word arg) (point))))
-
-(defun x8dcc/indent-buffer ()
-  (interactive)
-  (save-excursion
-    (indent-region (point-min) (point-max))))
-
-(defun x8dcc/org-insert-link ()
-  "Inserts a space in the current position, and calls `org-insert-link'."
-  (interactive)
-  (insert " ")
-  (funcall-interactively #'org-insert-link))
 
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
