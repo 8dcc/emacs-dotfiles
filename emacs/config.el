@@ -511,6 +511,17 @@ window with `evil-delete-window'."
   (kill-current-buffer)
   (evil-window-delete))
 
+(evil-define-operator x8dcc/evil-fill-indent (beg end)
+  "Fill text to `fill-column' using `evil-fill' and indent it with
+`evil-indent'."
+  :move-point nil
+  :type line
+  (save-excursion
+    (goto-char beg)
+    (let ((fill-column (- fill-column (current-indentation))))
+      (evil-fill beg end)
+      (evil-indent beg end))))
+
 (defun x8dcc/backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
@@ -566,6 +577,11 @@ With argument ARG, do this that many times."
                    (lambda ()
                      (interactive)
                      (message "Ignoring quit keybind...")))
+
+(x8dcc/keymaps-set '(evil-normal-state-map
+                     evil-visual-state-map
+                     evil-motion-state-map)
+                   "g W" #'x8dcc/evil-fill-indent)
 
 (with-eval-after-load 'eshell
   (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
