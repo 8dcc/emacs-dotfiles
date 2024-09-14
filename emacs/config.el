@@ -892,9 +892,11 @@ of characters, followed by the number of lines."
 (setq-default display-fill-column-indicator-character ?\u00A6
               fill-column 80)
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (display-fill-column-indicator-mode 1)))
+(x8dcc/hook-to-targets
+ (lambda ()
+   (display-fill-column-indicator-mode 1))
+ '(prog-mode-hook
+   LaTeX-mode-hook))
 
 (setq org-agenda-start-on-weekday 1
       calendar-week-start-day 1

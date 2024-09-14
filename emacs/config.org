@@ -1638,10 +1638,17 @@ between lines.
 #+begin_src emacs-lisp
 (setq-default display-fill-column-indicator-character ?\u00A6
               fill-column 80)
+#+end_src
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (display-fill-column-indicator-mode 1)))
+Display the fill column by default in =prog-mode= and =LaTeX-mode=. Can be toggled
+with =SPC t c=.
+
+#+begin_src emacs-lisp
+(x8dcc/hook-to-targets
+ (lambda ()
+   (display-fill-column-indicator-mode 1))
+ '(prog-mode-hook
+   LaTeX-mode-hook))
 #+end_src
 
 Set monday as the first day of the week.
