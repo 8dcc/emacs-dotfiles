@@ -576,10 +576,8 @@ See also `shell-command'."
                      (interactive)
                      (message "Ignoring quit keybind...")))
 
-(x8dcc/keymaps-set '(evil-normal-state-map
-                     evil-visual-state-map
-                     evil-motion-state-map)
-                   "g W" #'x8dcc/evil-fill-indent)
+(dolist (state '(normal visual motion))
+  (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 
 (with-eval-after-load 'eshell
   (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
