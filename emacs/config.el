@@ -898,9 +898,7 @@ of characters, followed by the number of lines."
  '(prog-mode-hook
    LaTeX-mode-hook))
 
-(setq org-agenda-start-on-weekday 1
-      calendar-week-start-day 1
-      org-agenda-weekend-days '(6 0)
+(setq calendar-week-start-day 1
       calendar-weekend-days '(6 0))
 
 (set-language-environment 'utf-8)
@@ -1112,6 +1110,9 @@ different rules in `display-buffer-alist'."
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (list (concat org-directory "agenda.org")))))
+
+(setq org-agenda-start-on-weekday calendar-week-start-day
+      org-agenda-weekend-days calendar-weekend-days)
 
 (setq org-clock-sound (concat org-directory "my-media/notification.wav"))
 

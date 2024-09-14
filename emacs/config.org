@@ -1654,9 +1654,7 @@ with =SPC t c=.
 Set monday as the first day of the week.
 
 #+begin_src emacs-lisp
-(setq org-agenda-start-on-weekday 1
-      calendar-week-start-day 1
-      org-agenda-weekend-days '(6 0)
+(setq calendar-week-start-day 1
       calendar-weekend-days '(6 0))
 #+end_src
 
@@ -2154,6 +2152,13 @@ Org agenda location.
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (list (concat org-directory "agenda.org")))))
+#+end_src
+
+Set the first day of the week. See [[*Misc visual settings][Misc visual settings]].
+
+#+begin_src emacs-lisp
+(setq org-agenda-start-on-weekday calendar-week-start-day
+      org-agenda-weekend-days calendar-weekend-days)
 #+end_src
 
 Specify the sound for timers.
