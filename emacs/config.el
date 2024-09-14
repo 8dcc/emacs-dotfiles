@@ -393,15 +393,13 @@ and ALIGNMENT as parameters."
 
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
-  (mapcar (lambda (func)
-            (add-hook target func))
-          functions))
+  (dolist (func functions)
+    (add-hook target func)))
 
 (defun x8dcc/hook-to-targets (function targets)
   "Hook FUNCTION to each target in TARGETS using `add-hook'."
-  (mapcar (lambda (target)
-            (add-hook target function))
-          targets))
+  (dolist (target targets)
+    (add-hook target function)))
 
 (defun x8dcc/keymaps-set (keymaps key func)
   "Define the KEY string to FUNC in every keymap in the KEYMAPS list."
