@@ -1154,6 +1154,15 @@ Remap evil's =:wq= to =SPC b s= + =SPC b k=.
                      (kill-current-buffer)))
 #+end_src
 
+Disable evil's =Z Z=.
+
+#+begin_src emacs-lisp
+(keymap-global-set "<remap> <evil-save-modified-and-close>"
+                   (lambda ()
+                     (interactive)
+                     (message "Ignoring quit keybind...")))
+#+end_src
+
 *** Eshell
 
 Better function for clearing than =recenter-top-bottom=.

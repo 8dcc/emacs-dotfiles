@@ -562,6 +562,11 @@ With argument ARG, do this that many times."
                      (basic-save-buffer)
                      (kill-current-buffer)))
 
+(keymap-global-set "<remap> <evil-save-modified-and-close>"
+                   (lambda ()
+                     (interactive)
+                     (message "Ignoring quit keybind...")))
+
 (with-eval-after-load 'eshell
   (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
                                       (eshell/clear-scrollback)
