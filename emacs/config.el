@@ -403,6 +403,16 @@ and ALIGNMENT as parameters."
             (add-hook target function))
           targets))
 
+(defun x8dcc/keymaps-set (keymaps key func)
+  "Define the KEY string to FUNC in every keymap in the KEYMAPS list."
+  (defun eval-keymap (symbol-or-keymap)
+    (if (keymapp symbol-or-keymap)
+        symbol-or-keymap
+      (eval symbol-or-keymap)))
+  (dolist (keymap keymaps)
+    (keymap-set (eval-keymap keymap) key func))
+  func)
+
 (defun x8dcc/count-matching-buffers (regexp)
   "Return the number of buffers whose name matches REGEXP."
   (length
@@ -547,7 +557,8 @@ With argument ARG, do this that many times."
 (keymap-global-set "<remap> <evil-quit>" #'kill-current-buffer)
 
 (keymap-global-set "<remap> <evil-save-and-close>"
-                   (lambda () (interactive)
+                   (lambda ()
+                     (interactive)
                      (basic-save-buffer)
                      (kill-current-buffer)))
 

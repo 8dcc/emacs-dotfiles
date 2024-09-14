@@ -860,6 +860,8 @@ The volume 2 of the Intel SDM is included in this repository.
 This function will be used for hooking a list of =functions= into the specified
 =target=.
 
+TODO: Why do we use =mapcar=? Couldn't we just use =dolist=?
+
 #+begin_src emacs-lisp
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
@@ -877,6 +879,21 @@ This function is similar to =x8dcc/hook-funcs=, but it will be used for hooking 
   (mapcar (lambda (target)
             (add-hook target function))
           targets))
+#+end_src
+
+Define the specified key to the specified function, in all the specified
+keymaps.
+
+#+begin_src emacs-lisp
+(defun x8dcc/keymaps-set (keymaps key func)
+  "Define the KEY string to FUNC in every keymap in the KEYMAPS list."
+  (defun eval-keymap (symbol-or-keymap)
+    (if (keymapp symbol-or-keymap)
+        symbol-or-keymap
+      (eval symbol-or-keymap)))
+  (dolist (keymap keymaps)
+    (keymap-set (eval-keymap keymap) key func))
+  func)
 #+end_src
 
 Count the number of buffers whose name matches the specified regular expression.
@@ -1020,6 +1037,8 @@ window with `evil-delete-window'."
 * Input
 ** Custom input functions
 
+TODO: Move section to [[*Custom functions and macros][Custom functions and macros]].
+
 Delete the last /N/ words backwards, without adding it to the kill-ring (copying
 it).
 
@@ -1129,7 +1148,8 @@ Remap evil's =:wq= to =SPC b s= + =SPC b k=.
 
 #+begin_src emacs-lisp
 (keymap-global-set "<remap> <evil-save-and-close>"
-                   (lambda () (interactive)
+                   (lambda ()
+                     (interactive)
                      (basic-save-buffer)
                      (kill-current-buffer)))
 #+end_src
