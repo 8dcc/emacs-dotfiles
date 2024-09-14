@@ -513,6 +513,7 @@ window with `evil-delete-window'."
   (save-excursion
     (goto-char beg)
     (let ((fill-column (- fill-column (current-indentation))))
+      (indent-region beg end 0)
       (evil-fill beg end)
       (evil-indent beg end))))
 
