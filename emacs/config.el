@@ -759,20 +759,20 @@ See also `shell-command'."
   "m m"   '(TeX-insert-macro          :wk "Insert macro")
   "m p"   '(prettify-symbols-mode     :wk "Prettify symbols")
   "m s"   '(LaTeX-section             :wk "New section")
-  ;; Folding
-  "m f"   '(:ignore t                :wk "Fold")
-  "m f f" '(TeX-fold-dwim            :wk "DWIM")
-  "m f b" '(TeX-fold-buffer          :wk "Fold buffer")
-  "m f B" '(TeX-fold-clearout-buffer :wk "Unfold buffer")
   ;; Text format
-  "m F"   '(:ignore t                   :wk "Text format")
-  "m F b" '(x8dcc/latex-font-bold       :wk "Bold")
-  "m F c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
-  "m F e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
-  "m F i" '(x8dcc/latex-font-italics    :wk "Italics")
-  "m F r" '(x8dcc/latex-font-roman      :wk "Roman")
-  "m F s" '(x8dcc/latex-font-slanted    :wk "Slanted")
-  "m F t" '(x8dcc/latex-font-typewriter :wk "Typewriter"))
+  "m f"   '(:ignore t                   :wk "Text format")
+  "m f b" '(x8dcc/latex-font-bold       :wk "Bold")
+  "m f c" '(x8dcc/latex-font-smallcaps  :wk "Smallcaps")
+  "m f e" '(x8dcc/latex-font-emphasized :wk "Emphasized")
+  "m f i" '(x8dcc/latex-font-italics    :wk "Italics")
+  "m f r" '(x8dcc/latex-font-roman      :wk "Roman")
+  "m f s" '(x8dcc/latex-font-slanted    :wk "Slanted")
+  "m f t" '(x8dcc/latex-font-typewriter :wk "Typewriter")
+  ;; Folding
+  "m F"   '(:ignore t                :wk "Fold")
+  "m F f" '(TeX-fold-dwim            :wk "DWIM")
+  "m F b" '(TeX-fold-buffer          :wk "Fold buffer")
+  "m F B" '(TeX-fold-clearout-buffer :wk "Unfold buffer"))
 
 (x8dcc/def-keys-lisp
   ;; Evaluate
