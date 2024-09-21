@@ -726,25 +726,27 @@ See also `shell-command'."
 
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m i"   '(org-toggle-inline-images :wk "Toggle inline images")
-  "m h"   '(x8dcc/org-insert-header  :wk "Insert default header")
+  "m I"   '(org-toggle-inline-images :wk "Toggle inline images")
   "m t"   '(org-todo                 :wk "Toggle todo")
   "m T"   '(org-babel-tangle         :wk "Tangle current file")
-  ;; Org -> Date
+  ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
   "m d s" '(org-schedule :wk "Schedule")
-  ;; Org -> Export
+  ;; Mode -> Export
   "m e"   '(:ignore t                 :wk "Export")
   "m e a" '(org-ascii-export-to-ascii :wk "ASCII (text)")
   "m e h" '(org-html-export-to-html   :wk "HTML")
   "m e l" '(org-latex-export-to-latex :wk "LaTeX")
   "m e p" '(org-latex-export-to-pdf   :wk "PDF")
-  ;; Org -> Link
+  ;; Mode -> Insert
+  "m i"   '(:ignore t                 :wk "Insert")
+  "m i h" '(x8dcc/skeleton-org-header :wk "Default header")
+  ;; Mode -> Link
   "m l"   '(:ignore t             :wk "Link")
   "m l l" '(x8dcc/org-insert-link :wk "Insert")
   "m l s" '(org-store-link        :wk "Store")
-  ;; Org -> Priority
+  ;; Mode -> Priority
   "m p"   '(:ignore t         :wk "Priority")
   "m p d" '(org-priority-down :wk "Decrease")
   "m p p" '(org-priority      :wk "Insert")
@@ -785,15 +787,18 @@ See also `shell-command'."
 
 (x8dcc/def-keys-c
   ;; Buffer
-  "b f" '(clang-format-buffer :wk "Format")
+  "b f"   '(clang-format-buffer :wk "Format")
   ;; Mode (C)
-  "m a" '(c-toggle-auto-newline       :wk "Toggle auto-newline")
-  "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
-  "m h" '(c-toggle-hungry-state       :wk "Toggle hungry-delete-key")
-  "m i" '(x8dcc/c-include-guard       :wk "Insert include guards")
-  "m I" '(hide-ifdef-mode             :wk "Toggle visibility of unused ifdefs")
-  "m l" '(c-toggle-electric-state     :wk "Toggle electric indentation")
-  "m m" '(c-macro-expand              :wk "Expand macros in region"))
+  "m a"   '(c-toggle-auto-newline       :wk "Toggle auto-newline")
+  "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
+  "m h"   '(c-toggle-hungry-state       :wk "Toggle hungry-delete-key")
+  "m I"   '(hide-ifdef-mode             :wk "Toggle visibility of unused ifdefs")
+  "m l"   '(c-toggle-electric-state     :wk "Toggle electric indentation")
+  "m m"   '(c-macro-expand              :wk "Expand macros in region")
+  ;; Mode -> Insert
+  "m i"   '(:ignore t :wk "Insert")
+  "m i h" '(x8dcc/skeleton-c-header :wk "Header skeleton")
+  "m i s" '(x8dcc/skeleton-c-source :wk "Source skeleton"))
 
 (x8dcc/def-keys-message
   ;; Mode (C)
@@ -1219,16 +1224,19 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 
-(defun x8dcc/org-insert-header (&optional title)
-  (interactive)
-  (unless title
-    (setq title (capitalize (file-name-base buffer-file-name))))
-  (save-excursion
-    (goto-char (point-min))
-    (insert "#+TITLE: " title "\n"
-            "#+AUTHOR: " user-full-name "\n"
-            "#+OPTIONS: toc:2\n"
-            "#+STARTUP: nofold\n")))
+(define-skeleton x8dcc/skeleton-org-header
+  "Insert a basic Org header skeleton."
+  nil
+  '(setq str (skeleton-read "Header name: "))
+  '(setq v1 (if (or (null str)
+                    (string-empty-p str))
+                (capitalize (file-name-base buffer-file-name))
+              str))
+  "#+TITLE: " v1 "\n"
+  "#+AUTHOR: " user-full-name "\n"
+  "#+OPTIONS: toc:2\n"
+  "#+STARTUP: nofold\n\n"
+  _ \n)
 
 (setq TeX-parse-self t)
 
@@ -1439,19 +1447,20 @@ environments."
   > "return 0;\n"
   "}" \n)
 
-(defun x8dcc/c-include-guard (&optional filename)
-  (interactive)
-  (unless filename
-    (setq filename (file-name-base buffer-file-name)))
-  (let ((macro-name (upcase (concat filename "_H_" ))))
-    (save-excursion
-      (goto-char (point-min))
-      (insert "\n"
-              "#ifndef " macro-name "\n"
-              "#define " macro-name " 1\n")
-      (goto-char (point-max))
-      (insert "\n"
-              "#endif /* " macro-name " */"))))
+(define-skeleton x8dcc/skeleton-c-header
+  "Insert a basic C header skeleton with include guards."
+  nil
+  '(setq str (skeleton-read "Header name: "))
+  '(setq v1 (concat (upcase (if (or (null str)
+                                    (string-empty-p str))
+                                (file-name-base buffer-file-name)
+                              str))
+                    "_H_"))
+  "\n"
+  "#ifndef " v1 "\n"
+  "#define " v1 " 1\n\n"
+  _ "\n\n"
+  "#endif /* " v1 " */" \n)
 
 (defun x8dcc/beardbolt-disassemble ()
   (interactive)
