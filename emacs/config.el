@@ -1425,6 +1425,20 @@ environments."
   (dolist (path '("./include" ".."))
     (add-to-list 'cc-search-directories path)))
 
+(define-skeleton x8dcc/skeleton-c-source
+  "Insert a basic C source skeleton with a main function."
+  nil
+  "\n"
+  "#include <stdint.h>\n"
+  "#include <stdbool.h>\n"
+  "#include <stdio.h>\n"
+  "#include <string.h>\n"
+  "#include <stdlib.h>\n\n"
+  "int main(void) {\n"
+  > _ "\n"
+  > "return 0;\n"
+  "}" \n)
+
 (defun x8dcc/c-include-guard (&optional filename)
   (interactive)
   (unless filename

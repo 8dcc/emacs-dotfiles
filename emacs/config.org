@@ -2639,6 +2639,24 @@ For using =ff-find-other-file=, search also in the specified include folders.
     (add-to-list 'cc-search-directories path)))
 #+end_src
 
+Define a skeleton for simple C files.
+
+#+begin_src emacs-lisp
+(define-skeleton x8dcc/skeleton-c-source
+  "Insert a basic C source skeleton with a main function."
+  nil
+  "\n"
+  "#include <stdint.h>\n"
+  "#include <stdbool.h>\n"
+  "#include <stdio.h>\n"
+  "#include <string.h>\n"
+  "#include <stdlib.h>\n\n"
+  "int main(void) {\n"
+  > _ "\n"
+  > "return 0;\n"
+  "}" \n)
+#+end_src
+
 This function is useful for adding [[https://en.wikipedia.org/wiki/Include_guard][include guards]] to C headers.
 
 #+begin_src emacs-lisp
