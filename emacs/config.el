@@ -495,7 +495,8 @@ With argument ARG, do this that many times."
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
-  (insert " ")
+  (if (not (looking-back "^\\|[ \t]"))
+      (insert " "))
   (funcall-interactively #'org-insert-link))
 
 (defun x8dcc/evil-kill-buffer-and-window ()

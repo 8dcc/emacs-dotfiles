@@ -1011,11 +1011,11 @@ Indent the whole buffer. Bound to =SPC b i=.
 It's common for me to use =org-insert-link= after typing a sentence ended in a
 space, but when exiting evil's insert mode, the cursor moves on top of that last
 space, inserting the link right after the last word. To fix this, this function
-inserts a space right before inserting the link. We need to use
-=funcall-interactively= so the =org-insert-link= function prompts us for a link
-description. Bound to =SPC m l l=.
+checks if there is a space/BOL before the point, and if there isn't, it inserts
+a space before inserting the link. We need to use =funcall-interactively= so the
+=org-insert-link= function prompts us for a link description. Bound to =SPC m l l=.
 
-TODO: Space is inserted even if you cancel in the =org-insert-link= prompt.
+TODO: Move to [[*Org mode][Org mode]]? Organize all =x8dcc/...= functions.
 
 See [[*Org mode keybinds][Org mode keybinds]].
 
@@ -1023,7 +1023,8 @@ See [[*Org mode keybinds][Org mode keybinds]].
 (defun x8dcc/org-insert-link ()
   "Inserts a space in the current position, and calls `org-insert-link'."
   (interactive)
-  (insert " ")
+  (if (not (looking-back "^\\|[ \t]"))
+      (insert " "))
   (funcall-interactively #'org-insert-link))
 #+end_src
 
