@@ -1861,6 +1861,23 @@ Enable auto-closing of brackets with =electric-pair-mode=.
 * Mode-specific settings
 ** Eshell
 
+Don't show duplicated entries in the eshell history.
+
+#+begin_src emacs-lisp
+(setq eshell-hist-ignoredups t)
+#+end_src
+
+The default =tab-width= is overwritten in =esh-mode.el=.
+
+TODO: Instead of hardcoding "4" again, set it to the global value directly,
+somehow.
+
+#+begin_src emacs-lisp
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq-local tab-width 4)))
+#+end_src
+
 Change the eshell prompt.
 
 The third parameter of =concat= is used to reset the font face after changing the
@@ -1879,12 +1896,6 @@ executing a previous command.
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
-#+end_src
-
-Don't show duplicated entries in the eshell history.
-
-#+begin_src emacs-lisp
-(setq eshell-hist-ignoredups t)
 #+end_src
 
 This function is basically the same from =projectile-run-eshell= in

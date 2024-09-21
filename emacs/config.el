@@ -965,14 +965,18 @@ numbers start at 1."
           (lambda ()
             (electric-pair-mode 1)))
 
+(setq eshell-hist-ignoredups t)
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq-local tab-width 4)))
+
 (setq eshell-prompt-function (lambda ()
                                (concat
                                 (abbreviate-file-name (eshell/pwd))
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
                                 (propertize " " 'face '(:inherit default))))
       eshell-prompt-regexp "^[^#λ]* [#λ] ")
-
-(setq eshell-hist-ignoredups t)
 
 (defun x8dcc/eshell-project-or-current (&optional eshell-func)
   "Run ESHELL-FUNC in the project's root whenever possible."
