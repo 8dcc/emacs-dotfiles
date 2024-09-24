@@ -639,6 +639,7 @@ See also `shell-command'."
   "h i" '(info                    :wk "Open info")
   "h I" '(shortdoc                :wk "Open shortdoc")
   "h k" '(describe-key            :wk "Describe key")
+  "h l" '(find-library            :wk "Find library")
   "h m" '(describe-mode           :wk "Describe mode")
   "h v" '(describe-variable       :wk "Describe variable")
   ;; Insert
