@@ -1345,6 +1345,16 @@ environments."
                   ("description" LaTeX-indent-item))
                 LaTeX-indent-environment-list)))
 
+(setq c-tab-always-indent nil)
+
+(setq hide-ifdef-initially t
+      hide-ifdef-lines t)
+
+(with-eval-after-load 'find-file
+  (setq-default ff-quiet-mode t)
+  (dolist (path '("./include" ".."))
+    (add-to-list 'cc-search-directories path)))
+
 (c-add-style "x8dcc/c-style"
              `("k&r"
                (c-basic-offset . ,tab-width)
@@ -1424,16 +1434,6 @@ environments."
 (setq c-default-style '((java-mode . "java")
                         (awk-mode . "awk")
                         (other . "x8dcc/c-style")))
-
-(setq c-tab-always-indent nil)
-
-(setq hide-ifdef-initially t
-      hide-ifdef-lines t)
-
-(with-eval-after-load 'find-file
-  (setq-default ff-quiet-mode t)
-  (dolist (path '("./include" ".."))
-    (add-to-list 'cc-search-directories path)))
 
 (define-skeleton x8dcc/skeleton-c-source
   "Insert a basic C source skeleton with a main function."

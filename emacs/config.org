@@ -2379,7 +2379,7 @@ already have one. See `x8dcc/org-custom-id-get'."
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 #+end_src
 
-*** Org functions
+*** Org skeletons
 
 Simple skeleton for Org files.
 
@@ -2400,6 +2400,7 @@ Simple skeleton for Org files.
 #+end_src
 
 ** LaTeX mode
+*** Basic LaTeX settings
 
 For more information about AUCTeX, see the [[https://www.gnu.org/software/auctex/manual/auctex.pdf][manual]].
 
@@ -2434,9 +2435,11 @@ Note that =LaTeX= has to be in =TeX-command-list= or the command will fail.
   (TeX-command "LaTeX" 'TeX-master-file))
 #+end_src
 
-These functions are used for formatting text with =SPC m f= you will probably need
-the [[*AucTex][AucTex]] package, although you can just change the strings being passed to
-=x8dcc/tex-get-font-key=.
+*** Font functions
+
+These functions are used for formatting text with =SPC m f=. You will probably
+need the [[*AucTex][AucTex]] package, although you can just change the strings being passed
+to =x8dcc/tex-get-font-key=.
 
 #+begin_src emacs-lisp
 (defun x8dcc/tex-get-font-key (key &optional font-list)
@@ -2480,6 +2483,8 @@ to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
   (let ((key (x8dcc/tex-get-font-key "tt{")))
     (if key (TeX-font nil key))))
 #+end_src
+
+*** Indentation functions
 
 This function, written by [[https://emacs.stackexchange.com/users/253/dan][Dan]] in [[https://emacs.stackexchange.com/a/3100/40363][this StackExchange answer]], indents =\item=
 lines in =itemize=, =enumerate= and =description= environments in LaTeX. This is
@@ -2541,6 +2546,31 @@ environments."
 #+end_src
 
 ** C mode
+*** Basic C settings
+
+Enable explicit tabs for C code (if not on beginning of line).
+
+#+begin_src emacs-lisp
+(setq c-tab-always-indent nil)
+#+end_src
+
+When using the =SPC z i= keybind, also call =hide-ifdefs=.
+
+#+begin_src emacs-lisp
+(setq hide-ifdef-initially t
+      hide-ifdef-lines t)
+#+end_src
+
+For using =ff-find-other-file=, search also in the specified include folders.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'find-file
+  (setq-default ff-quiet-mode t)
+  (dolist (path '("./include" ".."))
+    (add-to-list 'cc-search-directories path)))
+#+end_src
+
+*** Custom C style
 
 Specify my personal C style. See the =c-default-style= and =c-offsets-alist=
 variables.
@@ -2627,27 +2657,7 @@ variables.
                         (other . "x8dcc/c-style")))
 #+end_src
 
-Enable explicit tabs for C code (if not on beginning of line).
-
-#+begin_src emacs-lisp
-(setq c-tab-always-indent nil)
-#+end_src
-
-When using the =SPC z i= keybind, also call =hide-ifdefs=.
-
-#+begin_src emacs-lisp
-(setq hide-ifdef-initially t
-      hide-ifdef-lines t)
-#+end_src
-
-For using =ff-find-other-file=, search also in the specified include folders.
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'find-file
-  (setq-default ff-quiet-mode t)
-  (dolist (path '("./include" ".."))
-    (add-to-list 'cc-search-directories path)))
-#+end_src
+*** C skeletons
 
 Define a skeleton for simple C files.
 
@@ -2686,6 +2696,8 @@ can be found at commit [[https://github.com/8dcc/emacs-dotfiles/blob/0b03b1f3033
   _ "\n\n"
   "#endif /* " v1 " */" \n)
 #+end_src
+
+*** Misc C functions
 
 This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =beardbolt-compile=.
 
