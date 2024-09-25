@@ -602,6 +602,8 @@ See also `shell-command'."
   ";"   '(comment-dwim         :wk "Comment (DWIM)")
   ;; Buffer
   "b"   '(:ignore t                        :wk "Buffer")
+  "b b" '(previous-buffer                  :wk "Switch to previous")
+  "b B" '(next-buffer                      :wk "Switch to next")
   "b i" '(x8dcc/indent-buffer              :wk "Indent")
   "b k" '(kill-current-buffer              :wk "Kill current")
   "b l" '(switch-to-buffer                 :wk "Switch to")
