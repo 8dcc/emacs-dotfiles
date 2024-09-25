@@ -363,14 +363,14 @@ standard)."
 ;;;; Rainbow mappings
 
       (rainbow-0 red)
-      (rainbow-1 blue)
+      (rainbow-1 yellow-warmer)
       (rainbow-2 yellow)
       (rainbow-3 green)
-      (rainbow-4 red)
-      (rainbow-5 blue)
-      (rainbow-6 yellow)
-      (rainbow-7 green)
-      (rainbow-8 red)
+      (rainbow-4 cyan)
+      (rainbow-5 blue-intense)
+      (rainbow-6 magenta-intense)
+      (rainbow-7 magenta)
+      (rainbow-8 "#a31746")
 
 ;;;; Search mappings
 
