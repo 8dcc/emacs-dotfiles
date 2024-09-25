@@ -158,7 +158,7 @@ standard)."
 
 ;;; Special purpose
 
-      (bg-completion       "#f0c1cf")
+      (bg-completion       "#f2d6ba")
       (bg-hover            "#b2e4dc")
       (bg-hover-secondary  "#f5d0a0")
       (bg-hl-line          "#efe8dc")
