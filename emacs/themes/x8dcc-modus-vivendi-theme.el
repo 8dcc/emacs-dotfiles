@@ -8,20 +8,7 @@
 ;; Mailing-List: https://lists.sr.ht/~protesilaos/modus-themes
 ;; Keywords: faces, theme, accessibility
 
-;; This file is part of GNU Emacs.
-
-;; GNU Emacs is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
-;;
-;; GNU Emacs is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
+;; This file is NOT part of GNU Emacs.
 
 ;;; Commentary:
 ;;
@@ -30,6 +17,8 @@
 ;; values (WCAG AAA).  Please refer to the official Info manual for
 ;; further documentation (distributed with the themes, or available
 ;; at: <https://protesilaos.com/emacs/modus-themes>).
+;;
+;; This file was modified by 8dcc from version 4.3.0.
 
 ;;; Code:
 
