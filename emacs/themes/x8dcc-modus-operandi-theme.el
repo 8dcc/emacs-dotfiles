@@ -65,7 +65,7 @@ standard)."
       (fg-main          "#000000")
       (fg-dim           "#595959")
       (fg-alt           "#193668")
-      (bg-active        "#c9b9b0")
+      (bg-active        "#cdbfb6")
       (bg-inactive      "#dfd5cf")
       (border           "#9f9690")
 
