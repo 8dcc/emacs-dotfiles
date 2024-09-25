@@ -60,14 +60,14 @@ standard)."
     '(
 ;;; Basic values
 
-      (bg-main          "#ffffff")
-      (bg-dim           "#f2f2f2")
+      (bg-main          "#fbf7f0")
+      (bg-dim           "#efe9dd")
       (fg-main          "#000000")
       (fg-dim           "#595959")
       (fg-alt           "#193668")
-      (bg-active        "#c4c4c4")
-      (bg-inactive      "#e0e0e0")
-      (border           "#9f9f9f")
+      (bg-active        "#c9b9b0")
+      (bg-inactive      "#dfd5cf")
+      (border           "#9f9690")
 
 ;;; Common accent foregrounds
 
@@ -158,31 +158,31 @@ standard)."
 
 ;;; Special purpose
 
-      (bg-completion       "#afdfef")
-      (bg-hover            "#ffafbc")
-      (bg-hover-secondary  "#9fdfff")
-      (bg-hl-line          "#dfeaec")
-      (bg-region           "#bdbdbd")
+      (bg-completion       "#f0c1cf")
+      (bg-hover            "#b2e4dc")
+      (bg-hover-secondary  "#f5d0a0")
+      (bg-hl-line          "#f1d5d0")
+      (bg-region           "#c2bcb5")
       (fg-region           "#000000")
 
-      (bg-char-0 "#ff908f")
-      (bg-char-1 "#bfbfff")
-      (bg-char-2 "#5fcfdf")
+      (bg-char-0 "#7feaff")
+      (bg-char-1 "#ffaaff")
+      (bg-char-2 "#dff000")
 
-      (bg-mode-line-active        "#afe0f2")
-      (fg-mode-line-active        "#0f0f0f")
-      (border-mode-line-active    "#2f4f44")
-      (bg-mode-line-inactive      "#e6e6e6")
+      (bg-mode-line-active        "#cab9b2")
+      (fg-mode-line-active        "#000000")
+      (border-mode-line-active    "#545454")
+      (bg-mode-line-inactive      "#dfd9cf")
       (fg-mode-line-inactive      "#585858")
-      (border-mode-line-inactive  "#a3a3a3")
+      (border-mode-line-inactive  "#a59a94")
 
-      (modeline-err     "#8f0000")
-      (modeline-warning "#6f306f")
-      (modeline-info    "#00445f")
+      (modeline-err     "#7f0000")
+      (modeline-warning "#5f0070")
+      (modeline-info    "#002580")
 
-      (bg-tab-bar      "#dfdfdf")
-      (bg-tab-current  "#ffffff")
-      (bg-tab-other    "#c2c2c2")
+      (bg-tab-bar      "#e0d4ce")
+      (bg-tab-current  "#fbf7f0")
+      (bg-tab-other    "#c8b8b2")
 
 ;;; Diffs
 
