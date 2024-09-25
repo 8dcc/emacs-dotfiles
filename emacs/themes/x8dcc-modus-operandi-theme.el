@@ -161,7 +161,7 @@ standard)."
       (bg-completion       "#f0c1cf")
       (bg-hover            "#b2e4dc")
       (bg-hover-secondary  "#f5d0a0")
-      (bg-hl-line          "#f1d5d0")
+      (bg-hl-line          "#efe8dc")
       (bg-region           "#c2bcb5")
       (fg-region           "#000000")
 
