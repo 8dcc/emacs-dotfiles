@@ -646,6 +646,7 @@ See also `shell-command'."
   "h v" '(describe-variable       :wk "Describe variable")
   ;; Insert
   "i"   '(:ignore t               :wk "Insert")
+  "i c" '(insert-char             :wk "Character")
   "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Jump
   "j"   '(:ignore t             :wk "Jump")
