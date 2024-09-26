@@ -339,14 +339,17 @@
 
 (use-package htmlize)
 
-(defmacro x8dcc/fringe-helper-rect (name alignment w h)
+(defun x8dcc/fringe-helper-rect (name alignment w h)
   "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
 and ALIGNMENT as parameters."
-  `(define-fringe-bitmap ,name
-     (apply #'vector
-            (make-list ,h
-                       (- (ash 1 ,w) 1)))
-     nil nil ,alignment))
+  (defun set-lower-bits (n)
+    "Return an integer with the N lower bits set."
+    (- (ash 1 n) 1))
+
+  (define-fringe-bitmap name
+    (apply #'vector
+           (make-list h (set-lower-bits w))
+    nil nil alignment)))
 
 (use-package git-gutter-fringe
   :diminish git-gutter-mode

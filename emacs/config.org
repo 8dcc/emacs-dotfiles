@@ -678,21 +678,23 @@ Required by =org-html-export-to-html=.
 
 Show git changes in the fringe.
 
-First of all, we create a macro for defining a fringe bitmap from a width and a
-height. This macro will calculate the number needed for each row of the bitmap
-from the width, make a list of =h= elements, and turn it into a vector. It will
-pass that, with the =name= and =alignment= to =define-fringe-bitmap=. For more
-information, see [[https://github.com/8dcc/lisp-stuff/blob/main/src/bitmap-rect.org][8dcc/lisp-stuff]].
+First of all, we create a helper function for defining a fringe bitmap from a
+width and a height. It will calculate the number needed for each row of the
+bitmap from the /width/, make a list of /height/ elements, and turn it into a
+vector. It will pass that, with the =name= and =alignment= to =define-fringe-bitmap=.
 
 #+begin_src emacs-lisp
-(defmacro x8dcc/fringe-helper-rect (name alignment w h)
+(defun x8dcc/fringe-helper-rect (name alignment w h)
   "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
 and ALIGNMENT as parameters."
-  `(define-fringe-bitmap ,name
-     (apply #'vector
-            (make-list ,h
-                       (- (ash 1 ,w) 1)))
-     nil nil ,alignment))
+  (defun set-lower-bits (n)
+    "Return an integer with the N lower bits set."
+    (- (ash 1 n) 1))
+
+  (define-fringe-bitmap name
+    (apply #'vector
+           (make-list h (set-lower-bits w))
+    nil nil alignment)))
 #+end_src
 
 We then use our new =my-fringe-helper-rect= to specify the width and height of the
