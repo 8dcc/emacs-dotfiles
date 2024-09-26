@@ -348,12 +348,12 @@ standard)."
 
       (rainbow-0 red)
       (rainbow-1 yellow-warmer)
-      (rainbow-2 yellow)
+      (rainbow-2 yellow-intense)
       (rainbow-3 green)
       (rainbow-4 cyan)
       (rainbow-5 blue-intense)
-      (rainbow-6 magenta-intense)
-      (rainbow-7 magenta)
+      (rainbow-6 magenta-cooler)
+      (rainbow-7 maroon)
       (rainbow-8 "#a31746")
 
 ;;;; Space mappings
