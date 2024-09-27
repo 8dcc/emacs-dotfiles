@@ -1167,9 +1167,10 @@ different rules in `display-buffer-alist'."
 
 (setq org-startup-folded "nofold")
 
+(setq org-link-descriptive t)
+
 (add-hook 'org-mode-hook (lambda ()
                            (org-indent-mode 1)
-                           (setq org-link-descriptive 1)
                            (setq-local
                             electric-pair-inhibit-predicate
                             (lambda (c)

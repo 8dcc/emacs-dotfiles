@@ -2274,10 +2274,15 @@ Set the default folding levels for org buffers.
 (setq org-startup-folded "nofold")
 #+end_src
 
-Enable =org-indent-mode=, which hides leading '*' from titles.
-
 Set =org-link-descriptive= to hide org links. This is changed by the
 =org-toggle-link-display= function.
+
+#+begin_src emacs-lisp
+(setq org-link-descriptive t)
+#+end_src
+
+Enable =org-indent-mode=, which indents sections and hides leading '*' from titles
+(=org-hide-leading-stars=).
 
 Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
 completion.
@@ -2285,7 +2290,6 @@ completion.
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook (lambda ()
                            (org-indent-mode 1)
-                           (setq org-link-descriptive 1)
                            (setq-local
                             electric-pair-inhibit-predicate
                             (lambda (c)
