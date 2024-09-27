@@ -2792,17 +2792,13 @@ variables.
                         (other . "x8dcc/c-style")))
 #+end_src
 
-*** COMMENT Highlight extra constants
+*** Highlight extra constants
 
-Add some keywords to the buffer-local =c-constant-key= variable.
-
-FIXME: This doesn't work as expected, even though the variable is being set to
-the right value.
+Highlight more constants in =c-mode=.
 
 #+begin_src emacs-lisp
 (defconst x8dcc/c-constant-list
-  '("NULL" "true" "false"
-    ;; <limits.h>
+  '(;; <limits.h>
     "CHAR_BIT" "MB_LEN_MAX" "MB_CUR_MAX"
     "UCHAR_MAX" "UINT_MAX" "ULONG_MAX" "USHRT_MAX"
     "CHAR_MIN" "INT_MIN" "LONG_MIN" "SHRT_MIN"
@@ -2856,22 +2852,21 @@ the right value.
     "__func__"
     "__VA_ARGS__")
   "List of (non-regexp) strings for building `x8dcc/c-constant-regexp' with
-`regexp-opt'
+`regexp-opt'.
 
-Got most of these constant names from \"$VIMRUNTIME/syntax/c.vim\".")
+Got most of these constant names from \"$VIMRUNTIME/syntax/c.vim\".
+
+Not included: NULL, true, false")
 
 (defconst x8dcc/c-constant-regexp
-  (concat (regexp-opt x8dcc/c-constant-list)
-          "\\([^[:alnum:]_$]\\|$\\)")
-  "Regular expression for overwritting `c-constant-key' in `c-mode-hook'.
+  (concat (regexp-opt x8dcc/c-constant-list 'symbols))
+  "Regular expression matching all constants in `x8dcc/c-constant-list'.
 
-Based on the original value of `c-constant-key' at the time of writing
-this (cc-mode 5.33.1):
-\"\\(\\(?:NULL\\|\\(?:fals\\|tru\\)e\\)\\)\\([^[:alnum:]_$]\\|$\\)\"")
+Used for highlighting more constants with `font-lock-constant-face' in
+`c-mode'.")
 
-(add-hook 'c-mode-hook
-          (lambda ()
-            (setq-local c-constant-key x8dcc/c-constant-regexp)))
+(font-lock-add-keywords 'c-mode
+  (list (cons x8dcc/c-constant-regexp 'font-lock-constant-face)))
 #+end_src
 
 *** C skeletons

@@ -1552,6 +1552,77 @@ environments."
                         (awk-mode . "awk")
                         (other . "x8dcc/c-style")))
 
+(defconst x8dcc/c-constant-list
+  '(;; <limits.h>
+    "CHAR_BIT" "MB_LEN_MAX" "MB_CUR_MAX"
+    "UCHAR_MAX" "UINT_MAX" "ULONG_MAX" "USHRT_MAX"
+    "CHAR_MIN" "INT_MIN" "LONG_MIN" "SHRT_MIN"
+    "CHAR_MAX" "INT_MAX" "LONG_MAX" "SHRT_MAX"
+    "SCHAR_MIN" "SINT_MIN" "SLONG_MIN" "SSHRT_MIN"
+    "SCHAR_MAX" "SINT_MAX" "SLONG_MAX" "SSHRT_MAX"
+    "LLONG_MIN" "LLONG_MAX" "ULLONG_MAX"
+    "INT8_MIN" "INT16_MIN" "INT32_MIN" "INT64_MIN"
+    "INT8_MAX" "INT16_MAX" "INT32_MAX" "INT64_MAX"
+    "UINT8_MAX" "UINT16_MAX" "UINT32_MAX" "UINT64_MAX"
+    "INT_LEAST8_MIN" "INT_LEAST16_MIN" "INT_LEAST32_MIN" "INT_LEAST64_MIN"
+    "INT_LEAST8_MAX" "INT_LEAST16_MAX" "INT_LEAST32_MAX" "INT_LEAST64_MAX"
+    "UINT_LEAST8_MAX" "UINT_LEAST16_MAX" "UINT_LEAST32_MAX" "UINT_LEAST64_MAX"
+    "INT_FAST8_MIN" "INT_FAST16_MIN" "INT_FAST32_MIN" "INT_FAST64_MIN"
+    "INT_FAST8_MAX" "INT_FAST16_MAX" "INT_FAST32_MAX" "INT_FAST64_MAX"
+    "UINT_FAST8_MAX" "UINT_FAST16_MAX" "UINT_FAST32_MAX" "UINT_FAST64_MAX"
+    "INTPTR_MIN" "INTPTR_MAX" "UINTPTR_MAX"
+    "INTMAX_MIN" "INTMAX_MAX" "UINTMAX_MAX"
+    "PTRDIFF_MIN" "PTRDIFF_MAX" "SIG_ATOMIC_MIN" "SIG_ATOMIC_MAX"
+    "SIZE_MAX" "WCHAR_MIN" "WCHAR_MAX" "WINT_MIN" "WINT_MAX"
+    ;; <float.h>
+    "FLT_RADIX" "FLT_ROUNDS"
+    "FLT_DIG" "FLT_MANT_DIG" "FLT_EPSILON"
+    "DBL_DIG" "DBL_MANT_DIG" "DBL_EPSILON"
+    "LDBL_DIG" "LDBL_MANT_DIG" "LDBL_EPSILON"
+    "FLT_MIN" "FLT_MAX" "FLT_MIN_EXP" "FLT_MAX_EXP"
+    "DBL_MIN" "DBL_MAX" "DBL_MIN_EXP" "DBL_MAX_EXP"
+    "LDBL_MIN" "LDBL_MAX" "LDBL_MIN_EXP" "LDBL_MAX_EXP"
+    "FLT_MIN_10_EXP" "FLT_MAX_10_EXP"
+    "DBL_MIN_10_EXP" "DBL_MAX_10_EXP"
+    ;; <stdio.h>
+    "_IOFBF" "_IOLBF" "_IONBF" "BUFSIZ" "FOPEN_MAX" "FILENAME_MAX" "L_tmpnam"
+    "SEEK_CUR" "SEEK_END" "SEEK_SET" "TMP_MAX"
+    "stdin" "stdout" "stderr" "EOF" "WEOF"
+    ;; <stdlib.h>
+    "EXIT_FAILURE" "EXIT_SUCCESS" "RAND_MAX"
+    ;; <math.h>
+    "HUGE_VAL" "HUGE_VALF" "HUGE_VALL"
+    ;; <time.h>
+    "CLOCKS_PER_SEC"
+    ;; <locale.h>
+    "LC_ALL" "LC_COLLATE" "LC_CTYPE" "LC_MONETARY" "LC_NUMERIC" "LC_TIME"
+    ;; <assert.h>
+    "NDEBUG"
+    ;; POSIX signals
+    "SIG_ERR" "SIG_IGN" "SIGABRT" "SIGFPE" "SIGILL" "SIGHUP" "SIGINT" "SIGSEGV"
+    "SIGTERM" "SIGABRT" "SIGALRM" "SIGCHLD" "SIGCONT" "SIGFPE" "SIGHUP" "SIGILL"
+    "SIGINT" "SIGKILL" "SIGPIPE" "SIGQUIT" "SIGSEGV" "SIGSTOP" "SIGTERM"
+    "SIGTRAP" "SIGTSTP" "SIGTTIN" "SIGTTOU" "SIGUSR1" "SIGUSR2"
+    ;; Misc
+    "__func__"
+    "__VA_ARGS__")
+  "List of (non-regexp) strings for building `x8dcc/c-constant-regexp' with
+`regexp-opt'.
+
+Got most of these constant names from \"$VIMRUNTIME/syntax/c.vim\".
+
+Not included: NULL, true, false")
+
+(defconst x8dcc/c-constant-regexp
+  (concat (regexp-opt x8dcc/c-constant-list 'symbols))
+  "Regular expression matching all constants in `x8dcc/c-constant-list'.
+
+Used for highlighting more constants with `font-lock-constant-face' in
+`c-mode'.")
+
+(font-lock-add-keywords 'c-mode
+  (list (cons x8dcc/c-constant-regexp 'font-lock-constant-face)))
+
 (define-skeleton x8dcc/skeleton-c-source
   "Insert a basic C source skeleton with a main function."
   nil
