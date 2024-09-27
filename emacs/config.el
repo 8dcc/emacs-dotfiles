@@ -106,7 +106,7 @@
     :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/def-keys-latex
     :states '(normal insert visual emacs)
-    :keymaps 'TeX-mode-map
+    :keymaps 'LaTeX-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/def-keys-lisp
@@ -765,7 +765,7 @@ See also `shell-command'."
 
 (x8dcc/def-keys-latex
   ;; Mode (LaTeX)
-  "m c"   '(x8dcc/latex-compile       :wk "Compile to PDF")
+  "m c"   '(x8dcc/latex-compile       :wk "Compile to PDF (LaTeX)")
   "m b"   '(latex-insert-block        :wk "Open block")
   "m B"   '(latex-close-block         :wk "Close block")
   "m j"   '(LaTeX-find-matching-begin :wk "Jump to block start")
