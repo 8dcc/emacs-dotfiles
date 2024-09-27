@@ -236,12 +236,15 @@
 
 (unless (member system-type '(ms-dos windows-nt cygwin))
   (use-package spell-fu
-    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode) . spell-fu-mode)
+    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode)
+           . spell-fu-mode)
     :config
     (add-hook 'spell-fu-mode-hook
               (lambda ()
-                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
-                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+                (spell-fu-dictionary-add
+                 (spell-fu-get-ispell-dictionary "en_US"))
+                (spell-fu-dictionary-add
+                 (spell-fu-get-ispell-dictionary "es"))))
     (add-hook 'LaTeX-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
@@ -867,8 +870,10 @@ of characters, followed by the number of lines."
 
 (with-eval-after-load 'battery
   (if (not (null battery-status-function))
-      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
-            (power-status (battery-format "%B" (funcall battery-status-function))))
+      (let ((power-source (battery-format
+                           "%L" (funcall battery-status-function)))
+            (power-status (battery-format
+                           "%B" (funcall battery-status-function))))
         (if (or (string= "N/A" power-source)
                 (string= "unknown" power-source)
                 (string= "N/A" power-status)
@@ -967,7 +972,8 @@ the save hooks.")
   "Print the current buffer using `lpr-buffer' from page START to END. The page
 numbers start at 1."
   (interactive "nStarting page: \nnEnd page: ")
-  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d" (max start 1) (max end 1)))))
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
+                                         (max start 1) (max end 1)))))
     (lpr-buffer)))
 
 (global-auto-revert-mode 1)
@@ -1031,7 +1037,8 @@ different rules in `display-buffer-alist'."
              '("\\*eshell-popup\\*"
                (display-buffer-in-side-window (side . bottom))))
 
-(setq dired-listing-switches "-l --all --sort=version --group-directories-first --human-readable")
+(setq dired-listing-switches
+      "-l --all --sort=version --group-directories-first --human-readable")
 
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
@@ -1195,7 +1202,8 @@ to the overlay."
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward regex nil t)
-      (let ((invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num))))
+      (let ((invisible-overlay (make-overlay (match-beginning group-num)
+                                             (match-end group-num))))
         (overlay-put invisible-overlay 'invisible t)))))
 
 ;; NOTE: For hiding org commas, use:

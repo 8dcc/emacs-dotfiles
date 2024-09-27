@@ -1,7 +1,7 @@
-#+TITLE: Vanilla emacs configuration
+#+TITLE: GNU Emacs Configuration
+#+AUTHOR: 8dcc
 #+OPTIONS: toc:nil
 #+PROPERTY: header-args:emacs-lisp :tangle config.el
-#+AUTHOR: 8dcc
 
 #+TOC: headlines 2
 
@@ -455,7 +455,8 @@ with =SPC t C=, see [[*Space keybinds][Space keybinds]].
 
 #+begin_src emacs-lisp
 (straight-use-package
- '(highlight-indent-guides :type git :host github :repo "getong/highlight-indent-guides"))
+ '(highlight-indent-guides
+   :type git :host github :repo "getong/highlight-indent-guides"))
 #+end_src
 
 Use the same character as the fill column, and ignore the first indentation
@@ -476,7 +477,8 @@ This is the function for not highlighting the first level.
   (if (> level 0)
       (highlight-indent-guides--highlighter-default level responsive display)))
 
-(setq highlight-indent-guides-highlighter-function 'x8dcc/indent-guide-highlighter)
+(setq highlight-indent-guides-highlighter-function
+      'x8dcc/indent-guide-highlighter)
 #+end_src
 
 ** EMMS
@@ -521,12 +523,15 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
 #+begin_src emacs-lisp
 (unless (member system-type '(ms-dos windows-nt cygwin))
   (use-package spell-fu
-    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode) . spell-fu-mode)
+    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode)
+           . spell-fu-mode)
     :config
     (add-hook 'spell-fu-mode-hook
               (lambda ()
-                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en_US"))
-                (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "es"))))
+                (spell-fu-dictionary-add
+                 (spell-fu-get-ispell-dictionary "en_US"))
+                (spell-fu-dictionary-add
+                 (spell-fu-get-ispell-dictionary "es"))))
     (add-hook 'LaTeX-mode-hook
               (lambda ()
                 (setq spell-fu-faces-exclude
@@ -658,7 +663,8 @@ For highlighting numeric literals.
 
 ** Clang format
 
-For formatting C files. You can find my =.clang-format= in my [[https://github.com/8dcc/linux-dotfiles/tree/main/dotfiles/clang-format][8dcc/linux-dotfiles]] repo.
+For formatting C files. You can find my =.clang-format= in my [[https://github.com/8dcc/linux-dotfiles/tree/main/dotfiles/clang-format][8dcc/linux-dotfiles]]
+repo.
 
 #+begin_src emacs-lisp
 (use-package clang-format
@@ -1030,7 +1036,8 @@ See [[*Org mode keybinds][Org mode keybinds]].
   (funcall-interactively #'org-insert-link))
 #+end_src
 
-Alternative to =kill-buffer-and-window= that uses =evil-window-delete=. Bound to =SPC w C=.
+Alternative to =kill-buffer-and-window= that uses =evil-window-delete=. Bound to
+=SPC w C=.
 
 #+begin_src emacs-lisp
 (defun x8dcc/evil-kill-buffer-and-window ()
@@ -1097,7 +1104,8 @@ See also `shell-command'."
 1. Scroll smoothly when cursor moves out of the screen (1 line at a time).
 2. Don't accelerate scrolling.
 3. Scroll window under mouse.
-4. Scroll 2 lines at a time with mouse wheel, and scroll horizontally with shift.
+4. Scroll 2 lines at a time with mouse wheel, and scroll horizontally with
+   shift.
 
 #+begin_src emacs-lisp
 (setq scroll-step 1
@@ -1570,8 +1578,10 @@ display.
 #+begin_src emacs-lisp
 (with-eval-after-load 'battery
   (if (not (null battery-status-function))
-      (let ((power-source (battery-format "%L" (funcall battery-status-function)))
-            (power-status (battery-format "%B" (funcall battery-status-function))))
+      (let ((power-source (battery-format
+                           "%L" (funcall battery-status-function)))
+            (power-status (battery-format
+                           "%B" (funcall battery-status-function))))
         (if (or (string= "N/A" power-source)
                 (string= "unknown" power-source)
                 (string= "N/A" power-status)
@@ -1842,11 +1852,13 @@ Wrapper for printing only the specified pages of a buffer using =lpr-buffer=. Se
   "Print the current buffer using `lpr-buffer' from page START to END. The page
 numbers start at 1."
   (interactive "nStarting page: \nnEnd page: ")
-  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d" (max start 1) (max end 1)))))
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
+                                         (max start 1) (max end 1)))))
     (lpr-buffer)))
 #+end_src
 
-TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other settings.
+TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other
+settings.
 
 ** Misc
 
@@ -1983,10 +1995,12 @@ taking over the current window.
 Change the =ls= flags used by dired.
 
 #+begin_src emacs-lisp
-(setq dired-listing-switches "-l --all --sort=version --group-directories-first --human-readable")
+(setq dired-listing-switches
+      "-l --all --sort=version --group-directories-first --human-readable")
 #+end_src
 
-Allow dired to recursively copy and delete folders, after asking for confirmation.
+Allow dired to recursively copy and delete folders, after asking for
+confirmation.
 
 #+begin_src emacs-lisp
 (setq dired-recursive-copies  'top
@@ -2327,7 +2341,8 @@ to the overlay."
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward regex nil t)
-      (let ((invisible-overlay (make-overlay (match-beginning group-num) (match-end group-num))))
+      (let ((invisible-overlay (make-overlay (match-beginning group-num)
+                                             (match-end group-num))))
         (overlay-put invisible-overlay 'invisible t)))))
 
 ;; NOTE: For hiding org commas, use:
