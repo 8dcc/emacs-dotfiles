@@ -745,11 +745,12 @@ See also `shell-command'."
   "m d d" '(org-deadline :wk "Deadline")
   "m d s" '(org-schedule :wk "Schedule")
   ;; Mode -> Export
-  "m e"   '(:ignore t                 :wk "Export")
-  "m e a" '(org-ascii-export-to-ascii :wk "ASCII (text)")
-  "m e h" '(org-html-export-to-html   :wk "HTML")
-  "m e l" '(org-latex-export-to-latex :wk "LaTeX")
-  "m e p" '(org-latex-export-to-pdf   :wk "PDF")
+  "m e"   '(:ignore t                     :wk "Export")
+  "m e a" '(org-ascii-export-to-ascii     :wk "ASCII (text)")
+  "m e h" '(org-html-export-to-html       :wk "HTML")
+  "m e l" '(org-latex-export-to-latex     :wk "LaTeX")
+  "m e p" '(org-latex-export-to-pdf       :wk "PDF")
+  "m e t" '(org-texinfo-export-to-texinfo :wk "Texinfo")
   ;; Mode -> Insert
   "m i"   '(:ignore t                 :wk "Insert")
   "m i h" '(x8dcc/skeleton-org-header :wk "Default header")
