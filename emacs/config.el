@@ -1268,7 +1268,11 @@ already have one. See `x8dcc/org-custom-id-get'."
 
 (defun x8dcc/latex-compile ()
   (interactive)
-  (TeX-command "LaTeX" 'TeX-master-file))
+  (TeX-command "LaTeX" #'TeX-master-file))
+
+(defun x8dcc/tex-compile ()
+  (interactive)
+  (TeX-command "TeX" #'TeX-master-file))
 
 (defun x8dcc/tex-get-font-key (key &optional font-list)
   "Find the font key in FONT-LIST for the font whose LaTeX command contains

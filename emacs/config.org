@@ -2454,15 +2454,19 @@ Unfold around active region.
 (setq TeX-fold-unfold-around-mark t)
 #+end_src
 
-Run the =LaTeX= command on the master file. Similar to =TeX-command-master=, but
-doesn't prompt for a command.
+Run the =LaTeX= or =TeX= command on the master file. Similar to =TeX-command-master=,
+but doesn't prompt for a command.
 
-Note that =LaTeX= has to be in =TeX-command-list= or the command will fail.
+Note that the string has to be in =TeX-command-list= or the command will fail.
 
 #+begin_src emacs-lisp
 (defun x8dcc/latex-compile ()
   (interactive)
-  (TeX-command "LaTeX" 'TeX-master-file))
+  (TeX-command "LaTeX" #'TeX-master-file))
+
+(defun x8dcc/tex-compile ()
+  (interactive)
+  (TeX-command "TeX" #'TeX-master-file))
 #+end_src
 
 *** Font functions
