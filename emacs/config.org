@@ -2629,9 +2629,6 @@ Generic skeleton for LaTeX articles.
   "\\end{document}" \n)
 #+end_src
 
-#+RESULTS:
-: x8dcc/skeleton-latex-article
-
 Skeleton for =amsart= LaTeX documents.
 
 #+begin_src emacs-lisp
@@ -2697,9 +2694,6 @@ Skeleton for =amsart= LaTeX documents.
   "% ------------------------------------------------------------------------------\n\n\n\n"
   "\\end{document}" \n)
 #+end_src
-
-#+RESULTS:
-: x8dcc/skeleton-latex-math
 
 ** C mode
 *** Basic C settings
