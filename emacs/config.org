@@ -2169,6 +2169,20 @@ Enable "<s TAB" completion.
 (require 'org-tempo)
 #+end_src
 
+Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
+completion.
+
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local
+             electric-pair-inhibit-predicate
+             (lambda (c)
+               (if (char-equal c ?<)
+                   t
+                 (electric-pair-default-inhibit c))))))
+#+end_src
+
 Org agenda location.
 
 #+begin_src emacs-lisp
@@ -2213,11 +2227,11 @@ Use smart quotes when exporting to HTML or LaTeX.
 (setq org-export-with-smart-quotes t)
 #+end_src
 
-Prefer user labels when exporting to LaTeX or HTML.
+Prefer user labels when exporting to HTML or LaTeX.
 
 #+begin_src emacs-lisp
-(setq org-latex-prefer-user-labels t
-      org-html-prefer-user-labels t)
+(setq org-html-prefer-user-labels t
+      org-latex-prefer-user-labels t)
 #+end_src
 
 Use different pages for the title and TOC in LaTeX.
@@ -2284,18 +2298,10 @@ Set =org-link-descriptive= to hide org links. This is changed by the
 Enable =org-indent-mode=, which indents sections and hides leading '*' from titles
 (=org-hide-leading-stars=).
 
-Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
-completion.
-
 #+begin_src emacs-lisp
-(add-hook 'org-mode-hook (lambda ()
-                           (org-indent-mode 1)
-                           (setq-local
-                            electric-pair-inhibit-predicate
-                            (lambda (c)
-                              (if (char-equal c ?<)
-                                  t
-                                (electric-pair-default-inhibit c))))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-indent-mode 1)))
 #+end_src
 
 Show LaTeX entities and expressions in a different face.

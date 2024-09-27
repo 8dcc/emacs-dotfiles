@@ -1124,6 +1124,15 @@ different rules in `display-buffer-alist'."
 
 (require 'org-tempo)
 
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local
+             electric-pair-inhibit-predicate
+             (lambda (c)
+               (if (char-equal c ?<)
+                   t
+                 (electric-pair-default-inhibit c))))))
+
 (let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
@@ -1143,8 +1152,8 @@ different rules in `display-buffer-alist'."
 
 (setq org-export-with-smart-quotes t)
 
-(setq org-latex-prefer-user-labels t
-      org-html-prefer-user-labels t)
+(setq org-html-prefer-user-labels t
+      org-latex-prefer-user-labels t)
 
 (setq org-latex-title-command "\\maketitle\n\\clearpage"
       org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
@@ -1169,14 +1178,9 @@ different rules in `display-buffer-alist'."
 
 (setq org-link-descriptive t)
 
-(add-hook 'org-mode-hook (lambda ()
-                           (org-indent-mode 1)
-                           (setq-local
-                            electric-pair-inhibit-predicate
-                            (lambda (c)
-                              (if (char-equal c ?<)
-                                  t
-                                (electric-pair-default-inhibit c))))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-indent-mode 1)))
 
 (setq org-highlight-latex-and-related '(latex entities))
 
