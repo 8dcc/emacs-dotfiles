@@ -1616,8 +1616,8 @@ environments."
     "SIGINT" "SIGKILL" "SIGPIPE" "SIGQUIT" "SIGSEGV" "SIGSTOP" "SIGTERM"
     "SIGTRAP" "SIGTSTP" "SIGTTIN" "SIGTTOU" "SIGUSR1" "SIGUSR2"
     ;; Misc
-    "__func__"
-    "__VA_ARGS__")
+    "__func__" "__LINE__" "__FILE__" "__DATE__" "__TIME__" "__STDC__"
+    "__STDC_VERSION__" "__STDC_HOSTED__" "__VA_ARGS__")
   "List of (non-regexp) strings for building `x8dcc/c-constant-regexp' with
 `regexp-opt'.
 
