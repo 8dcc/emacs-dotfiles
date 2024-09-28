@@ -151,7 +151,7 @@ standard)."
       (bg-completion       bg-dim)
       (bg-hover            "#8e3e3b")
       (bg-hover-secondary  "#00405f")
-      (bg-hl-line          bg-dim)
+      (bg-hl-line          "#171717")
       (bg-region           "#333333")
       (fg-region           unspecified)
 
@@ -290,7 +290,7 @@ standard)."
       (fg-line-number-inactive fg-dim)
       (fg-line-number-active fg-main)
       (bg-line-number-inactive "#101010")
-      (bg-line-number-active bg-dim)
+      (bg-line-number-active "#242424")
 
 ;;;; Link mappings
 
