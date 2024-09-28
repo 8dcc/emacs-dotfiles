@@ -347,14 +347,14 @@ standard)."
 ;;;; Rainbow mappings
 
       (rainbow-0 red)
-      (rainbow-1 yellow-warmer)
-      (rainbow-2 yellow-intense)
-      (rainbow-3 green)
-      (rainbow-4 cyan)
-      (rainbow-5 blue-intense)
-      (rainbow-6 magenta-cooler)
-      (rainbow-7 maroon)
-      (rainbow-8 "#a31746")
+      (rainbow-1 yellow)
+      (rainbow-2 green)
+      (rainbow-3 cyan-intense)
+      (rainbow-4 blue-intense)
+      (rainbow-5 magenta-intense)
+      (rainbow-6 unspecified)
+      (rainbow-7 unspecified)
+      (rainbow-8 unspecified)
 
 ;;;; Space mappings
 

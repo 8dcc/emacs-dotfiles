@@ -336,7 +336,9 @@
           common-lisp-mode
           lisp-mode
           LaTeX-mode)
-         . rainbow-delimiters-mode))
+         . rainbow-delimiters-mode)
+  :config
+  (setq rainbow-delimiters-max-face-count 6))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))

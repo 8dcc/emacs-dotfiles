@@ -654,7 +654,9 @@ Add rainbow colors to parentheses.
           common-lisp-mode
           lisp-mode
           LaTeX-mode)
-         . rainbow-delimiters-mode))
+         . rainbow-delimiters-mode)
+  :config
+  (setq rainbow-delimiters-max-face-count 6))
 #+end_src
 
 ** Highlight numbers
