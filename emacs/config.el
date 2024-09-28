@@ -109,6 +109,11 @@
     :keymaps 'LaTeX-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/def-keys-texinfo
+    :states '(normal insert visual emacs)
+    :keymaps 'Texinfo-mode-map
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/def-keys-lisp
     :states '(normal insert visual emacs)
     :keymaps '(lisp-mode-map
@@ -788,6 +793,14 @@ See also `shell-command'."
   "m F f" '(TeX-fold-dwim            :wk "DWIM")
   "m F b" '(TeX-fold-buffer          :wk "Fold buffer")
   "m F B" '(TeX-fold-clearout-buffer :wk "Unfold buffer"))
+
+(x8dcc/def-keys-texinfo
+  ;; Mode (Texinfo)
+  "m c"   '(x8dcc/tex-compile      :wk "Compile to PDF (TeX)")
+  "m b"   '(Texinfo-environment    :wk "Open block")
+  "m B"   '(texinfo-insert-@end    :wk "Close block")
+  "m j"   '(Texinfo-find-env-start :wk "Jump to block start")
+  "m J"   '(Texinfo-find-env-end   :wk "Jump to block end"))
 
 (x8dcc/def-keys-lisp
   ;; Evaluate
