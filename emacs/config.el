@@ -757,8 +757,9 @@ See also `shell-command'."
   "m e p" '(org-latex-export-to-pdf       :wk "PDF")
   "m e t" '(org-texinfo-export-to-texinfo :wk "Texinfo")
   ;; Mode -> Insert
-  "m i"   '(:ignore t                 :wk "Insert")
-  "m i h" '(x8dcc/skeleton-org-header :wk "Default header")
+  "m i"   '(:ignore t                  :wk "Insert")
+  "m i d" '(x8dcc/skeleton-org-default :wk "Default header")
+  "m i b" '(x8dcc/skeleton-org-blog    :wk "Blog header")
   ;; Mode -> Link
   "m l"   '(:ignore t             :wk "Link")
   "m l l" '(x8dcc/org-insert-link :wk "Insert")
@@ -1259,7 +1260,7 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 
-(define-skeleton x8dcc/skeleton-org-header
+(define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
   '(setq str (skeleton-read "Header name: "))
@@ -1271,6 +1272,26 @@ already have one. See `x8dcc/org-custom-id-get'."
   "#+AUTHOR: " user-full-name "\n"
   "#+OPTIONS: toc:2\n"
   "#+STARTUP: nofold\n\n"
+  _ \n)
+
+(define-skeleton x8dcc/skeleton-org-blog
+  "Insert an Org skeleton for blog articles."
+  nil
+  '(setq str (skeleton-read "Header name: "))
+  '(setq v1 (if (or (null str)
+                    (string-empty-p str))
+                (capitalize (file-name-base buffer-file-name))
+              str))
+  "#+TITLE: " v1 "\n"
+  "#+AUTHOR: " user-full-name "\n"
+  "#+OPTIONS: toc:nil\n"
+  "#+STARTUP: nofold\n"
+  "#+HTML_HEAD: <link rel=\"icon\" type=\"image/x-icon\" href=\"../img/favicon.png\">\n"
+  "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">\n\n"
+  "[[file:../index.org][Index]] | [[file:index.org][Up]]\n\n"
+  "-----\n\n"
+  "#+TOC: headlines 2\n\n"
+  "* Introduction\n\n"
   _ \n)
 
 (setq TeX-parse-self t)
