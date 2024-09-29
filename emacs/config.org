@@ -1249,6 +1249,14 @@ normal modes, or =M-SPC= on non-normal modes.
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
   ";"   '(comment-dwim         :wk "Comment (DWIM)")
+  ;; Tab
+  "TAB"         '(:ignore t    :wk "Tab")
+  "TAB TAB"     '(tab-switch   :wk "Switch to")
+  "TAB n"       '(tab-new      :wk "New")
+  "TAB c"       '(tab-close    :wk "Close")
+  "TAB r"       '(tab-rename   :wk "Rename")
+  "TAB <left>"  '(tab-previous :wk "Switch to previous")
+  "TAB <right>" '(tab-next     :wk "Switch to next")
   ;; Buffer
   "b"   '(:ignore t                        :wk "Buffer")
   "b b" '(previous-buffer                  :wk "Switch to previous")
@@ -1351,6 +1359,7 @@ normal modes, or =M-SPC= on non-normal modes.
   "t r" '(read-only-mode                     :wk "Read only")
   "t s" '(spell-fu-mode                      :wk "Spell checking")
   "t S" '(whitespace-mode                    :wk "Whitespace visualization")
+  "t t" '(tab-bar-mode                       :wk "Tab bar mode")
   "t v" '(visible-mode                       :wk "Visible")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
@@ -1791,6 +1800,14 @@ perfect for me. For more information on these Transient Mark mode "exceptions"
 
 #+begin_src emacs-lisp
 (transient-mark-mode 0)
+#+end_src
+
+** Tabs
+
+Only show the tab bar if there are more than one tabs open.
+
+#+begin_src emacs-lisp
+(setq tab-bar-show 1)
 #+end_src
 
 ** On buffer save

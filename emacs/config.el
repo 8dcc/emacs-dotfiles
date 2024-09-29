@@ -613,6 +613,14 @@ See also `shell-command'."
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
   ";"   '(comment-dwim         :wk "Comment (DWIM)")
+  ;; Tab
+  "TAB"         '(:ignore t    :wk "Tab")
+  "TAB TAB"     '(tab-switch   :wk "Switch to")
+  "TAB n"       '(tab-new      :wk "New")
+  "TAB c"       '(tab-close    :wk "Close")
+  "TAB r"       '(tab-rename   :wk "Rename")
+  "TAB <left>"  '(tab-previous :wk "Switch to previous")
+  "TAB <right>" '(tab-next     :wk "Switch to next")
   ;; Buffer
   "b"   '(:ignore t                        :wk "Buffer")
   "b b" '(previous-buffer                  :wk "Switch to previous")
@@ -715,6 +723,7 @@ See also `shell-command'."
   "t r" '(read-only-mode                     :wk "Read only")
   "t s" '(spell-fu-mode                      :wk "Spell checking")
   "t S" '(whitespace-mode                    :wk "Whitespace visualization")
+  "t t" '(tab-bar-mode                       :wk "Tab bar mode")
   "t v" '(visible-mode                       :wk "Visible")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
@@ -965,6 +974,8 @@ of characters, followed by the number of lines."
 (setq tab-always-indent nil)
 
 (transient-mark-mode 0)
+
+(setq tab-bar-show 1)
 
 (defvar x8dcc/allow-modify-on-save t
   "If non-nil, allow the calling of functions that modify the buffer contents on
