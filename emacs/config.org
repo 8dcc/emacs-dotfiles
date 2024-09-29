@@ -1244,7 +1244,7 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 ** Space keybinds
 
 For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Custom input functions][Custom input
-  functions]].
+functions]].
 
 *** Global keybinds
 
