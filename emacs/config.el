@@ -1277,7 +1277,7 @@ already have one. See `x8dcc/org-custom-id-get'."
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
-  '(setq str (skeleton-read "Header name: "))
+  '(setq str (skeleton-read "Title: "))
   '(setq v1 (if (or (null str)
                     (string-empty-p str))
                 (capitalize (file-name-base buffer-file-name))
@@ -1291,7 +1291,7 @@ already have one. See `x8dcc/org-custom-id-get'."
 (define-skeleton x8dcc/skeleton-org-blog
   "Insert an Org skeleton for blog articles."
   nil
-  '(setq str (skeleton-read "Header name: "))
+  '(setq str (skeleton-read "Title: "))
   '(setq v1 (if (or (null str)
                     (string-empty-p str))
                 (capitalize (file-name-base buffer-file-name))
