@@ -977,6 +977,17 @@ of characters, followed by the number of lines."
 
 (transient-mark-mode 0)
 
+(setq lazy-highlight-cleanup t
+      lazy-highlight-initial-delay 2
+      lazy-highlight-max-at-a-time nil)
+
+(setq isearch-allow-scroll t
+      search-whitespace-regexp ".{,10}")
+
+(setq isearch-lazy-count t
+      lazy-count-prefix-format "(%s/%s) "
+      lazy-count-subfix-format nil)
+
 (setq tab-bar-show 1)
 
 (defvar x8dcc/allow-modify-on-save t
@@ -1075,17 +1086,6 @@ different rules in `display-buffer-alist'."
 
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
-
-(setq lazy-highlight-cleanup t
-      lazy-highlight-initial-delay 2
-      lazy-highlight-max-at-a-time nil)
-
-(setq isearch-allow-scroll t
-      search-whitespace-regexp ".{,10}")
-
-(setq isearch-lazy-count t
-      lazy-count-prefix-format "(%s/%s) "
-      lazy-count-subfix-format nil)
 
 (require 'erc)
 (require 'erc-log)

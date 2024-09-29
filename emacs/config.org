@@ -1804,6 +1804,34 @@ perfect for me. For more information on these Transient Mark mode "exceptions"
 (transient-mark-mode 0)
 #+end_src
 
+** Search and replace
+
+See also [[*Evil & Evil collection][Evil & Evil collection]].
+
+You can set these to =nil= to enable permanent highlighting of the search.
+
+#+begin_src emacs-lisp
+(setq lazy-highlight-cleanup t
+      lazy-highlight-initial-delay 2
+      lazy-highlight-max-at-a-time nil)
+#+end_src
+
+We will allow scroll, and we will use whitespaces as a wildcard when searching,
+similar to [[*Orderless][Orderless]].
+
+#+begin_src emacs-lisp
+(setq isearch-allow-scroll t
+      search-whitespace-regexp ".{,10}")
+#+end_src
+
+We will display the match number out of the total I-search matches.
+
+#+begin_src emacs-lisp
+(setq isearch-lazy-count t
+      lazy-count-prefix-format "(%s/%s) "
+      lazy-count-subfix-format nil)
+#+end_src
+
 ** Tabs
 
 Only show the tab bar if there are more than one tabs open.
@@ -2054,34 +2082,6 @@ Don't open a new frame for the =ediff= control panel.
 #+begin_src emacs-lisp
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
-#+end_src
-
-** Search and replace
-
-See also [[*Evil & Evil collection][Evil & Evil collection]].
-
-You can set these to =nil= to enable permanent highlighting of the search.
-
-#+begin_src emacs-lisp
-(setq lazy-highlight-cleanup t
-      lazy-highlight-initial-delay 2
-      lazy-highlight-max-at-a-time nil)
-#+end_src
-
-We will allow scroll, and we will use whitespaces as a wildcard when searching,
-similar to [[*Orderless][Orderless]].
-
-#+begin_src emacs-lisp
-(setq isearch-allow-scroll t
-      search-whitespace-regexp ".{,10}")
-#+end_src
-
-We will display the match number out of the total I-search matches.
-
-#+begin_src emacs-lisp
-(setq isearch-lazy-count t
-      lazy-count-prefix-format "(%s/%s) "
-      lazy-count-subfix-format nil)
 #+end_src
 
 ** ERC
