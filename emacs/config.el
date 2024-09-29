@@ -615,9 +615,10 @@ See also `shell-command'."
   ";"   '(comment-dwim         :wk "Comment (DWIM)")
   ;; Tab
   "TAB"         '(:ignore t    :wk "Tab")
-  "TAB TAB"     '(tab-switch   :wk "Switch to")
-  "TAB n"       '(tab-new      :wk "New")
+  "TAB TAB"     '(tab-recent   :wk "Switch to recent")
   "TAB c"       '(tab-close    :wk "Close")
+  "TAB l"       '(tab-switch   :wk "Switch to")
+  "TAB n"       '(tab-new      :wk "New")
   "TAB r"       '(tab-rename   :wk "Rename")
   "TAB <left>"  '(tab-previous :wk "Switch to previous")
   "TAB <right>" '(tab-next     :wk "Switch to next")
