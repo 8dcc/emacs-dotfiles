@@ -37,7 +37,7 @@
 (add-hook! 'prog-mode-hook
   (setq display-fill-column-indicator-character ?\u00A6))
 
-;; Split to the right and bellow
+;; Split to the right and below
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
 

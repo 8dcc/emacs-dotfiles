@@ -350,7 +350,7 @@ A nice dashboard with recent files, recent projects, and org agenda.
 Vertical completion for =M-x=, =find-file=, etc.
 
 Use =vertico-reverse-mode= to show completion on top of minibuffer, and
-not bellow it.
+not below it.
 
 #+begin_src emacs-lisp
 (use-package vertico
@@ -1562,7 +1562,7 @@ respectively."
             right)))
 #+end_src
 
-This function will be used bellow to display the number of selected characters
+This function will be used below to display the number of selected characters
 and lines in the modeline in the following format: =(Sel 51 L4)=.
 
 #+begin_src emacs-lisp
