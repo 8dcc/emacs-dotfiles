@@ -715,7 +715,6 @@ See also `shell-command'."
   "t"   '(:ignore t                          :wk "Toggle")
   "t b" '(big-font-mode                      :wk "Big font")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
-  "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
   "t i" '(toggle-case-fold-search            :wk "Case-sensitive searches")
   "t l" '(display-line-numbers-mode          :wk "Line numbers")
@@ -729,7 +728,6 @@ See also `shell-command'."
   "t v" '(visible-mode                       :wk "Visible mode")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
-  "t z" '(writeroom-mode                     :wk "Zen mode")
   ;; Window
   "w"   '(:ignore t                         :wk "Window")
   "w c" '(evil-window-delete                :wk "Close")

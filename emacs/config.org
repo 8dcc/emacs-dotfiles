@@ -486,6 +486,12 @@ This is the function for not highlighting the first level.
       'x8dcc/indent-guide-highlighter)
 #+end_src
 
+Set a global keybind.
+
+#+begin_src emacs-lisp
+(x8dcc/def-keys "t C" '(highlight-indent-guides-mode :wk "Indent guides"))
+#+end_src
+
 ** EMMS
 
 Enable the /Emacs Multi-Media System/ (EMMS).
@@ -760,7 +766,8 @@ these lambdas.
   (add-hook 'writeroom-mode-enable-hook (lambda ()
                                           (fringe-mode 0)))
   (add-hook 'writeroom-mode-disable-hook (lambda ()
-                                           (fringe-mode nil))))
+                                           (fringe-mode nil)))
+  (x8dcc/def-keys "t z" '(writeroom-mode :wk "Zen mode")))
 #+end_src
 
 ** Evil lion (alignment)
@@ -1244,6 +1251,9 @@ For more information on the =x8dcc/*= functions, see [[*General][General]] and [
 These are the common keybinds between most major modes, the leader key is =SPC= in
 normal modes, or =M-SPC= on non-normal modes.
 
+NOTE: If packages are commented (as they should be, instead of removed), their
+keybinds should be *moved* to their commented sub-sections.
+
 #+begin_src emacs-lisp
 (x8dcc/def-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
@@ -1351,7 +1361,6 @@ normal modes, or =M-SPC= on non-normal modes.
   "t"   '(:ignore t                          :wk "Toggle")
   "t b" '(big-font-mode                      :wk "Big font")
   "t c" '(display-fill-column-indicator-mode :wk "Fill column line")
-  "t C" '(highlight-indent-guides-mode       :wk "Indent guides")
   "t f" '(variable-pitch-mode                :wk "Variable pitch font")
   "t i" '(toggle-case-fold-search            :wk "Case-sensitive searches")
   "t l" '(display-line-numbers-mode          :wk "Line numbers")
@@ -1365,7 +1374,6 @@ normal modes, or =M-SPC= on non-normal modes.
   "t v" '(visible-mode                       :wk "Visible mode")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
-  "t z" '(writeroom-mode                     :wk "Zen mode")
   ;; Window
   "w"   '(:ignore t                         :wk "Window")
   "w c" '(evil-window-delete                :wk "Close")
