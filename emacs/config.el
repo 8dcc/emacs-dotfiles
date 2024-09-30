@@ -620,6 +620,7 @@ See also `shell-command'."
   "TAB l"       '(tab-switch   :wk "Switch to")
   "TAB n"       '(tab-new      :wk "New")
   "TAB r"       '(tab-rename   :wk "Rename")
+  "TAB t"       '(tab-bar-mode :wk "Toggle bar display")
   "TAB <left>"  '(tab-previous :wk "Switch to previous")
   "TAB <right>" '(tab-next     :wk "Switch to next")
   ;; Buffer
@@ -725,7 +726,6 @@ See also `shell-command'."
   "t r" '(read-only-mode                     :wk "Read only mode")
   "t s" '(spell-fu-mode                      :wk "Spell checking")
   "t S" '(whitespace-mode                    :wk "Whitespace visualization")
-  "t t" '(tab-bar-mode                       :wk "Tab bar mode")
   "t v" '(visible-mode                       :wk "Visible mode")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
