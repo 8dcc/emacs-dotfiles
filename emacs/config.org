@@ -1715,13 +1715,6 @@ with =SPC t c=.
    LaTeX-mode-hook))
 #+end_src
 
-Set monday as the first day of the week.
-
-#+begin_src emacs-lisp
-(setq calendar-week-start-day 1
-      calendar-weekend-days '(6 0))
-#+end_src
-
 * General settings
 
 ** Codification
@@ -1957,6 +1950,13 @@ Enable auto-closing of brackets with =electric-pair-mode=.
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
+#+end_src
+
+Set monday as the first day of the week.
+
+#+begin_src emacs-lisp
+(setq calendar-week-start-day 1
+      calendar-weekend-days '(6 0))
 #+end_src
 
 * Mode-specific settings

@@ -944,9 +944,6 @@ of characters, followed by the number of lines."
  '(prog-mode-hook
    LaTeX-mode-hook))
 
-(setq calendar-week-start-day 1
-      calendar-weekend-days '(6 0))
-
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8-unix)
@@ -1023,6 +1020,9 @@ numbers start at 1."
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
+
+(setq calendar-week-start-day 1
+      calendar-weekend-days '(6 0))
 
 (setq eshell-hist-ignoredups t)
 
