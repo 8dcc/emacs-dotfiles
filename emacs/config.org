@@ -867,6 +867,17 @@ Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x8
 
 The volume 2 of the Intel SDM is included in this repository.
 
+** Webpaste
+
+Paste whole buffers or parts of buffers to several pastebin-like services.
+
+#+begin_src emacs-lisp
+(use-package webpaste
+  :config
+  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
+        webpaste-paste-confirmation t))
+#+end_src
+
 * Custom functions and macros
 ** Auxiliary functions for Elisp
 

@@ -401,6 +401,11 @@ and ALIGNMENT as parameters."
           (start-process "firefox" nil "firefox"
                          (format "file://%s#page=%d" pdf page)))))
 
+(use-package webpaste
+  :config
+  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
+        webpaste-paste-confirmation t))
+
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
   (dolist (func functions)
