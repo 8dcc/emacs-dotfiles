@@ -3046,6 +3046,12 @@ Restore previous windows when GDB stops.
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
 #+end_src
 
+Don't ask for =debuginfod= stuff.
+
+#+begin_src emacs-lisp
+(setq gdb-debuginfod-enable-setting nil)
+#+end_src
+
 ** Compilation
 
 Automatically scroll the output of compilation buffers, unless an error is

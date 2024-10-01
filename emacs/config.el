@@ -1736,6 +1736,8 @@ Used for highlighting more constants with `font-lock-constant-face' in
 
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
 
+(setq gdb-debuginfod-enable-setting nil)
+
 (setq compilation-scroll-output 'first-error)
 
 (setq compilation-always-kill t)
