@@ -930,11 +930,6 @@ of characters, followed by the number of lines."
 
 (setq hl-line-sticky-flag nil)
 
-(setq-default truncate-lines t)
-(global-visual-line-mode 0)
-
-(blink-cursor-mode 0)
-
 (setq-default display-fill-column-indicator-character ?\u00A6
               fill-column 80)
 
@@ -943,6 +938,11 @@ of characters, followed by the number of lines."
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
    TeX-mode-hook))
+
+(setq-default truncate-lines t)
+(global-visual-line-mode 0)
+
+(blink-cursor-mode 0)
 
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)

@@ -1676,23 +1676,7 @@ We only want one active highlight line in the current window.
 (setq hl-line-sticky-flag nil)
 #+end_src
 
-** Misc visual settings
-
-By default, don't wrap lines, truncate them (=truncate-lines=). This can be
-toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
-
-Don't wrap lines using words by default (=global-visual-line-mode=).
-
-#+begin_src emacs-lisp
-(setq-default truncate-lines t)
-(global-visual-line-mode 0)
-#+end_src
-
-Don't blink the cursor.
-
-#+begin_src emacs-lisp
-(blink-cursor-mode 0)
-#+end_src
+** Fill column
 
 Set 80 as the column line, with the specified character.
 
@@ -1713,6 +1697,24 @@ with =SPC t c=.
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
    TeX-mode-hook))
+#+end_src
+
+** Misc visual settings
+
+By default, don't wrap lines, truncate them (=truncate-lines=). This can be
+toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
+
+Don't wrap lines using words by default (=global-visual-line-mode=).
+
+#+begin_src emacs-lisp
+(setq-default truncate-lines t)
+(global-visual-line-mode 0)
+#+end_src
+
+Don't blink the cursor.
+
+#+begin_src emacs-lisp
+(blink-cursor-mode 0)
 #+end_src
 
 * General settings
