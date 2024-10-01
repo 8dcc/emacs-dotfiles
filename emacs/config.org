@@ -1717,6 +1717,24 @@ Don't blink the cursor.
 (blink-cursor-mode 0)
 #+end_src
 
+Show buffer boundaries.
+
+#+begin_src emacs-lisp
+(x8dcc/hook-to-targets
+ (lambda ()
+   (setq indicate-buffer-boundaries 'left))
+ '(text-mode-hook
+   prog-mode-hook))
+#+end_src
+
+Show trailing whitespaces.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace t)))
+#+end_src
+
 * General settings
 
 ** Codification

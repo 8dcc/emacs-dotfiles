@@ -944,6 +944,16 @@ of characters, followed by the number of lines."
 
 (blink-cursor-mode 0)
 
+(x8dcc/hook-to-targets
+ (lambda ()
+   (setq indicate-buffer-boundaries 'left))
+ '(text-mode-hook
+   prog-mode-hook))
+
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace t)))
+
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8-unix)
