@@ -202,10 +202,7 @@
 
 (use-package dumb-jump
   :config
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq xref-show-definitions-function #'consult-xref
-        xref-show-xrefs-function #'consult-xref
-        xref-prompt-for-identifier nil))
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 (use-package popper
   :config
@@ -1095,6 +1092,11 @@ different rules in `display-buffer-alist'."
 
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
+
+(setq xref-show-definitions-function #'consult-xref
+      xref-show-xrefs-function #'consult-xref)
+
+(setq xref-prompt-for-identifier nil)
 
 (require 'erc)
 (require 'erc-log)
