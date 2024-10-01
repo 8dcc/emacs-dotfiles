@@ -1967,6 +1967,12 @@ Follow git symlinks by default.
 (setq vc-follow-symlinks t)
 #+end_src
 
+Set default browser.
+
+#+begin_src emacs-lisp
+(setq browse-url-generic-program "firefox")
+#+end_src
+
 Enable auto-closing of brackets with =electric-pair-mode=.
 
 #+begin_src emacs-lisp

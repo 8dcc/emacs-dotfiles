@@ -1030,6 +1030,8 @@ numbers start at 1."
 
 (setq vc-follow-symlinks t)
 
+(setq browse-url-generic-program "firefox")
+
 (add-hook 'prog-mode-hook
           (lambda ()
             (electric-pair-mode 1)))
