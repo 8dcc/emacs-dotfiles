@@ -942,7 +942,7 @@ of characters, followed by the number of lines."
  (lambda ()
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
-   LaTeX-mode-hook))
+   TeX-mode-hook))
 
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)

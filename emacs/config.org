@@ -1712,7 +1712,7 @@ with =SPC t c=.
  (lambda ()
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
-   LaTeX-mode-hook))
+   TeX-mode-hook))
 #+end_src
 
 * General settings
