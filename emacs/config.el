@@ -1100,6 +1100,10 @@ different rules in `display-buffer-alist'."
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
 
+(setq dired-kill-when-opening-new-dired-buffer t)
+
+(setq dired-auto-revert-buffer t)
+
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
 

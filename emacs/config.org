@@ -1955,7 +1955,7 @@ numbers start at 1."
 TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other
 settings.
 
-** Misc
+** Misc general settings
 
 Automatically update buffer if the file has changed on disk.
 
@@ -2100,19 +2100,34 @@ taking over the current window.
 
 ** Dired
 
-Change the =ls= flags used by dired.
+Change the =ls= flags used by Dired.
 
 #+begin_src emacs-lisp
 (setq dired-listing-switches
       "-l --all --sort=version --group-directories-first --human-readable")
 #+end_src
 
-Allow dired to recursively copy and delete folders, after asking for
+Allow Dired to recursively copy and delete folders, after asking for
 confirmation.
 
 #+begin_src emacs-lisp
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
+#+end_src
+
+Don't create a new Dired buffer for each directory. Note that if you have a
+Dired buffer in two windows and you change directory in one window, the other
+will /not/ change.
+
+#+begin_src emacs-lisp
+(setq dired-kill-when-opening-new-dired-buffer t)
+#+end_src
+
+Auto-revert Dired buffers when the contents change. Also enabled for buffers in
+[[*Misc general settings][Misc general settings]].
+
+#+begin_src emacs-lisp
+(setq dired-auto-revert-buffer t)
 #+end_src
 
 ** Ediff
