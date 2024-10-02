@@ -2254,6 +2254,8 @@ When sending mail, try to sign it with the sender's PGP key.
 (setq mml-secure-openpgp-sign-with-sender t)
 #+end_src
 
+*** Storing SMTP credentials
+
 The following is needed so Emacs asks for GPG password in the minibuffer. I
 needed it to avoid a =gpg= error when running [[*ERC][ERC]].
 
@@ -2285,6 +2287,16 @@ gpg -c ~/.authinfo
 You can then delete the original =~/.authinfo= file.
 
 For more information, see [[https://www.emacswiki.org/emacs/GnusAuthinfo][EmacsWiki]].
+
+*** Authinfo priority
+
+Change the priority of the auth sources. This is important because Emacs will
+try to save your credentials (e.g. SSH) to the /encrypted/ =.gpg= version, instead
+of the plain text one.
+
+#+begin_src emacs-lisp
+(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+#+end_src
 
 ** Org mode
 *** Basic org settings

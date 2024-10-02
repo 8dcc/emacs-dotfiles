@@ -1184,6 +1184,8 @@ different rules in `display-buffer-alist'."
 
 (setq epg-pinentry-mode 'loopback)
 
+(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+
 (require 'org-tempo)
 
 (add-hook 'org-mode-hook
