@@ -630,6 +630,7 @@ See also `shell-command'."
   "b"         '(:ignore t                        :wk "Buffer")
   "b b"       '(previous-buffer                  :wk "Switch to previous")
   "b B"       '(next-buffer                      :wk "Switch to next")
+  "b c"       '(revert-buffer-with-coding-system :wk "Revert with coding system")
   "b i"       '(x8dcc/indent-buffer              :wk "Indent")
   "b k"       '(kill-current-buffer              :wk "Kill current")
   "b l"       '(switch-to-buffer                 :wk "Switch to")
@@ -637,7 +638,7 @@ See also `shell-command'."
   "b s"       '(basic-save-buffer                :wk "Save")
   "b S"       '(write-file                       :wk "Save as")
   "b r"       '(revert-buffer                    :wk "Revert (discard)")
-  "b R"       '(revert-buffer-with-coding-system :wk "Revert with coding system")
+  "b R"       '(rename-buffer                    :wk "Rename")
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
   ;; File
