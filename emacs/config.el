@@ -958,7 +958,7 @@ of characters, followed by the number of lines."
           (lambda ()
             (setq indicate-buffer-boundaries
                   '((top    . left)
-                    (bottom . nil)
+                    (bottom . nil) ; Don't show bottom
                     (up     . left)
                     (down   . left)))))
 
@@ -1762,6 +1762,9 @@ Used for highlighting more constants with `font-lock-constant-face' in
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)
 
 (setq gdb-debuginfod-enable-setting nil)
+
+(setq gdb-window-configuration-directory
+      (concat user-emacs-directory "gdb-layouts/"))
 
 (setq compilation-scroll-output 'first-error)
 

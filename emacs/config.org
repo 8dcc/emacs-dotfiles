@@ -3114,6 +3114,14 @@ Don't ask for =debuginfod= stuff.
 (setq gdb-debuginfod-enable-setting nil)
 #+end_src
 
+Directory where the window configurations are saved. See the
+=gdb-save-window-configuration= and =gdb-load-window-configuration= functions.
+
+#+begin_src emacs-lisp
+(setq gdb-window-configuration-directory
+      (concat user-emacs-directory "gdb-layouts/"))
+#+end_src
+
 ** Compilation
 
 Automatically scroll the output of compilation buffers, unless an error is
