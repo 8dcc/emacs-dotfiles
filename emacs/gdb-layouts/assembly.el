@@ -112,7 +112,7 @@
            (total-height . 20)
            (normal-height . 1.0)
            (normal-width . 0.5)
-           (parameters (gdb-buffer-type . gdb-stack-buffer))
+           (parameters (gdb-buffer-type . gdb-memory-buffer))
            (buffer " *gdb-placeholder*" (selected)
                    (hscroll . 0)
                    (fringes 8 8 nil nil)
