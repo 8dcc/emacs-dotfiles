@@ -952,7 +952,8 @@ of characters, followed by the number of lines."
  (lambda ()
    (setq indicate-buffer-boundaries 'left))
  '(text-mode-hook
-   prog-mode-hook))
+   prog-mode-hook
+   eshell-mode-hook))
 
 (add-hook 'prog-mode-hook
           (lambda ()

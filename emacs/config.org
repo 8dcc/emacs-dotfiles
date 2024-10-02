@@ -1728,7 +1728,8 @@ Show buffer boundaries.
  (lambda ()
    (setq indicate-buffer-boundaries 'left))
  '(text-mode-hook
-   prog-mode-hook))
+   prog-mode-hook
+   eshell-mode-hook))
 #+end_src
 
 Show trailing whitespaces.
