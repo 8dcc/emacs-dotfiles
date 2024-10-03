@@ -1577,6 +1577,9 @@ environments."
                (c-basic-offset . ,tab-width)
                (c-comment-only-line-offset . 0)
                (c-doc-comment-style . doxygen)
+               (c-hanging-braces-alist
+                (defun-open after)
+                (substatement-open after))
                (c-offsets-alist
                 (c . c-lineup-C-comments)
                 (string . -1000)
