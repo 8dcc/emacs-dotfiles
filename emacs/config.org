@@ -1741,11 +1741,12 @@ Show buffer boundaries.
 
 Show trailing whitespaces.
 
-#+begin_src emacs-lisp
+#+begin_comment emacs-lisp
+;; NOTE: Commented
 (add-hook 'prog-mode-hook
           (lambda ()
             (setq show-trailing-whitespace t)))
-#+end_src
+#+end_comment
 
 * General settings
 

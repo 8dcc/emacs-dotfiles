@@ -962,10 +962,6 @@ of characters, followed by the number of lines."
                     (up     . left)
                     (down   . left)))))
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))
-
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8-unix)
