@@ -2354,7 +2354,7 @@ Set the first day of the week. See [[*Misc visual settings][Misc visual settings
 Specify the sound for timers.
 
 #+begin_src emacs-lisp
-(setq org-clock-sound (concat org-directory "my-media/notification.wav"))
+(setq org-clock-sound (concat user-emacs-directory "my-media/notification.wav"))
 #+end_src
 
 Enable code block evaluation for the specified languages. Capitalization

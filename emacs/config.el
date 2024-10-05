@@ -1210,7 +1210,7 @@ different rules in `display-buffer-alist'."
 (setq org-agenda-start-on-weekday calendar-week-start-day
       org-agenda-weekend-days calendar-weekend-days)
 
-(setq org-clock-sound (concat org-directory "my-media/notification.wav"))
+(setq org-clock-sound (concat user-emacs-directory "my-media/notification.wav"))
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
