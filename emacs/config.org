@@ -1971,6 +1971,12 @@ Automatically update buffer if the file has changed on disk.
 (global-auto-revert-mode 1)
 #+end_src
 
+Also automatically update Version Control info.
+
+#+begin_src emacs-lisp
+(setq auto-revert-check-vc-info t)
+#+end_src
+
 Follow git symlinks by default.
 
 #+begin_src emacs-lisp

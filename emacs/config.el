@@ -1033,6 +1033,8 @@ numbers start at 1."
 
 (global-auto-revert-mode 1)
 
+(setq auto-revert-check-vc-info t)
+
 (setq vc-follow-symlinks t)
 
 (setq browse-url-generic-program "firefox")
