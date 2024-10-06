@@ -2254,20 +2254,20 @@ Set prompt to buffer name.
 #+end_src
 
 ** Mail
+*** General mail settings
 
-Set SMTP encryption, server and port.
+General mail folder, used in many variables below.
 
 #+begin_src emacs-lisp
-(setq smtpmail-stream-type 'ssl
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 465
-      send-mail-function 'smtpmail-send-it)
+(defvar x8dcc/mail-directory
+  (expand-file-name "~/Mail/"))
 #+end_src
 
-When sending mail, try to sign it with the sender's PGP key.
+Default email client for reading and writing email.
 
 #+begin_src emacs-lisp
-(setq mml-secure-openpgp-sign-with-sender t)
+(setq read-mail-command #'rmail
+      mail-user-agent 'message-user-agent)
 #+end_src
 
 *** Storing SMTP credentials
@@ -2310,8 +2310,72 @@ Change the priority of the auth sources. This is important because Emacs will
 try to save your credentials (e.g. SSH) to the /encrypted/ =.gpg= version, instead
 of the plain text one.
 
+See the [[*Storing SMTP credentials][previous section]] on how to store SMTP credentials and the format
+expected by =.authinfo= files.
+
 #+begin_src emacs-lisp
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+#+end_src
+
+*** Sending mail (Message)
+
+Set SMTP encryption, server and port.
+
+#+begin_src emacs-lisp
+(setq smtpmail-stream-type 'ssl
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 465
+      send-mail-function 'smtpmail-send-it)
+#+end_src
+
+When sending mail, try to sign it with the sender's PGP key.
+
+#+begin_src emacs-lisp
+(setq mml-secure-openpgp-sign-with-sender t)
+#+end_src
+
+Copy sent mail to the "sent" file.
+
+#+begin_src emacs-lisp
+(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
+#+end_src
+
+*** Receiving mail (Rmail)
+
+Basic Rmail settings (See Section 30 /Reading Mail with Rmail/, of the Emacs
+Manual).
+
+#+begin_src emacs-lisp
+(setq rmail-file-name (concat x8dcc/mail-directory "inbox")
+      rmail-secondary-file-directory x8dcc/mail-directory)
+#+end_src
+
+Specify the inbox files.
+
+TODO: It would be good to use "pops://..." URIS directly here, but I am not sure
+if emacs can use Mailutil's =movemail=, so for now I have to run it manually with
+my TODO script.
+
+#+begin_src emacs-lisp
+(setq rmail-primary-inbox-list
+      (list (concat "/var/mail/" user-login-name)))
+#+end_src
+
+Choose whether or not Rmail should delete mail from the inbox (set in
+=rmail-primary-inbox-list=).
+
+NOTE: Since we are currently reading from a file, and not directly
+from the server, we can delete the mail from there. If we were reading
+from a server, we might want to preserve them.
+
+#+begin_src emacs-lisp
+(setq rmail-preserve-inbox nil)
+#+end_src
+
+Prefer plaintext when possible.
+
+#+begin_src emacs-lisp
+(setq rmail-mime-prefer-html nil)
 #+end_src
 
 ** Org mode

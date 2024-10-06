@@ -1182,6 +1182,16 @@ different rules in `display-buffer-alist'."
 (setq erc-prompt (lambda ()
                    (concat "[" (buffer-name) "]:")))
 
+(defvar x8dcc/mail-directory
+  (expand-file-name "~/Mail/"))
+
+(setq read-mail-command #'rmail
+      mail-user-agent 'message-user-agent)
+
+(setq epg-pinentry-mode 'loopback)
+
+(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465
@@ -1189,9 +1199,17 @@ different rules in `display-buffer-alist'."
 
 (setq mml-secure-openpgp-sign-with-sender t)
 
-(setq epg-pinentry-mode 'loopback)
+(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 
-(setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+(setq rmail-file-name (concat x8dcc/mail-directory "inbox")
+      rmail-secondary-file-directory x8dcc/mail-directory)
+
+(setq rmail-primary-inbox-list
+      (list (concat "/var/mail/" user-login-name)))
+
+(setq rmail-preserve-inbox nil)
+
+(setq rmail-mime-prefer-html nil)
 
 (require 'org-tempo)
 
