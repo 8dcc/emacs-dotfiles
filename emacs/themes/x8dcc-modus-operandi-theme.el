@@ -249,10 +249,10 @@ standard)."
 
 ;;;; Accent mappings
 
-      (accent-0 cyan)
-      (accent-1 red-warmer)
-      (accent-2 cyan-cooler)
-      (accent-3 magenta)
+      (accent-0 blue)
+      (accent-1 magenta-warmer)
+      (accent-2 cyan)
+      (accent-3 red)
 
 ;;;; Button mappings
 
@@ -274,14 +274,14 @@ standard)."
 
 ;;;; Date mappings
 
-      (date-common cyan-cooler)
+      (date-common cyan)
       (date-deadline red)
       (date-event fg-alt)
-      (date-holiday red)
-      (date-holiday-other cyan)
+      (date-holiday red-cooler)
+      (date-holiday-other blue)
       (date-now fg-main)
       (date-range fg-alt)
-      (date-scheduled magenta)
+      (date-scheduled yellow-warmer)
       (date-weekday cyan)
       (date-weekend red-faint)
 
@@ -294,13 +294,13 @@ standard)."
 
 ;;;; Link mappings
 
-      (fg-link cyan)
+      (fg-link blue-warmer)
       (bg-link unspecified)
-      (underline-link cyan)
+      (underline-link blue-warmer)
 
-      (fg-link-symbolic cyan-cooler)
+      (fg-link-symbolic cyan)
       (bg-link-symbolic unspecified)
-      (underline-link-symbolic cyan-cooler)
+      (underline-link-symbolic cyan)
 
       (fg-link-visited magenta)
       (bg-link-visited unspecified)
@@ -308,14 +308,14 @@ standard)."
 
 ;;;; Mail mappings
 
-      (mail-cite-0 cyan-faint)
-      (mail-cite-1 red-faint)
-      (mail-cite-2 magenta-warmer)
-      (mail-cite-3 cyan-warmer)
-      (mail-part cyan-cooler)
-      (mail-recipient cyan)
-      (mail-subject red-cooler)
-      (mail-other cyan)
+      (mail-cite-0 blue-faint)
+      (mail-cite-1 yellow-warmer)
+      (mail-cite-2 cyan-cooler)
+      (mail-cite-3 red-cooler)
+      (mail-part cyan)
+      (mail-recipient magenta-cooler)
+      (mail-subject magenta-warmer)
+      (mail-other magenta-faint)
 
 ;;;; Mark mappings
 
@@ -323,8 +323,8 @@ standard)."
       (fg-mark-delete red)
       (bg-mark-select bg-cyan-subtle)
       (fg-mark-select cyan)
-      (bg-mark-other bg-magenta-subtle)
-      (fg-mark-other magenta)
+      (bg-mark-other bg-yellow-subtle)
+      (fg-mark-other yellow)
 
 ;;;; Prompt mappings
 
@@ -334,9 +334,9 @@ standard)."
 ;;;; Prose mappings
 
       (prose-block fg-dim)
-      (prose-code cyan)
+      (prose-code green-cooler)
       (prose-done fg-dim)
-      (prose-macro red-warmer)
+      (prose-macro magenta-cooler)
       (prose-metadata fg-dim)
       (prose-metadata-value fg-alt)
       (prose-table fg-alt)
