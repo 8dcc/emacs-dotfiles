@@ -61,9 +61,9 @@ standard)."
 ;;; Common accent foregrounds
 
       (red             "#a60000")
-      (red-warmer      "#b21100")
+      (red-warmer      "#972500")
       (red-cooler      "#a0132f")
-      (red-faint       "#702000")
+      (red-faint       "#7f0000")
       (red-intense     "#d00000")
       (green           "#006800")
       (green-warmer    "#316500")
@@ -84,11 +84,11 @@ standard)."
       (magenta-warmer  "#8f0075")
       (magenta-cooler  "#531ab6")
       (magenta-faint   "#7c318f")
-      (magenta-intense "#cd22bd")
+      (magenta-intense "#dd22dd")
       (cyan            "#005e8b")
       (cyan-warmer     "#3f578f")
       (cyan-cooler     "#005f5f")
-      (cyan-faint      "#004f5f")
+      (cyan-faint      "#005077")
       (cyan-intense    "#008899")
 
 ;;; Uncommon accent foregrounds
@@ -117,12 +117,12 @@ standard)."
       (bg-magenta-subtle  "#ffddff")
       (bg-cyan-subtle     "#bfefff")
 
-      (bg-red-nuanced     "#ffe8e8")
-      (bg-green-nuanced   "#e0f6e0")
-      (bg-yellow-nuanced  "#f8f0d0")
-      (bg-blue-nuanced    "#ecedff")
-      (bg-magenta-nuanced "#f8e6f5")
-      (bg-cyan-nuanced    "#e0f2fa")
+      (bg-red-nuanced     "#ffe8f0")
+      (bg-green-nuanced   "#e0f5e0")
+      (bg-yellow-nuanced  "#f9ead0")
+      (bg-blue-nuanced    "#ebebff")
+      (bg-magenta-nuanced "#f6e7ff")
+      (bg-cyan-nuanced    "#e1f3fc")
 
 ;;; Uncommon accent backgrounds
 
@@ -134,15 +134,15 @@ standard)."
 
       (bg-graph-red-0     "#ef7969")
       (bg-graph-red-1     "#ffaab4")
-      (bg-graph-green-0   "#68c0a0")
-      (bg-graph-green-1   "#a5dfd0")
-      (bg-graph-yellow-0  "#d99f9f")
-      (bg-graph-yellow-1  "#ffb58f")
-      (bg-graph-blue-0    "#80a0df")
-      (bg-graph-blue-1    "#a8cfff")
-      (bg-graph-magenta-0 "#efafcf")
-      (bg-graph-magenta-1 "#ffdaef")
-      (bg-graph-cyan-0    "#7fd3ed")
+      (bg-graph-green-0   "#2fe029")
+      (bg-graph-green-1   "#75ef30")
+      (bg-graph-yellow-0  "#ffcf00")
+      (bg-graph-yellow-1  "#f9ff00")
+      (bg-graph-blue-0    "#7f90ff")
+      (bg-graph-blue-1    "#9fc6ff")
+      (bg-graph-magenta-0 "#e07fff")
+      (bg-graph-magenta-1 "#fad0ff")
+      (bg-graph-cyan-0    "#70d3f0")
       (bg-graph-cyan-1    "#afefff")
 
 ;;; Special purpose
@@ -196,7 +196,7 @@ standard)."
       (fg-removed         "#8f1313")
       (fg-removed-intense "#aa2222")
 
-      (bg-diff-context    "#f3f3f3")
+      (bg-diff-context    "#efe9df")
 
 ;;; Paren match
 
