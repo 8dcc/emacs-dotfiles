@@ -645,6 +645,8 @@ See also `shell-command'."
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
   "f C" '(recompile          :wk "Re-compile")
+  "f d" '(diff               :wk "Diff")
+  "f D" '(ediff              :wk "Ediff")
   "f f" '(find-file          :wk "Find file")
   "f F" '(find-name-dired    :wk "Find wildcard recursively")
   "f o" '(ff-find-other-file :wk "Find other file")
