@@ -844,7 +844,8 @@ See also `shell-command'."
   "m i s" '(x8dcc/skeleton-c-source :wk "Source skeleton"))
 
 (x8dcc/def-keys-message
-  ;; Mode (C)
+  ;; Mode (Message)
+  "m a" '(mml-attach-file                 :wk "Attach file")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
   "m s" '(mml-secure-message-sign         :wk "Sign")
