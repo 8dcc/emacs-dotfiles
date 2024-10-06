@@ -238,8 +238,7 @@
 
 (unless (member system-type '(ms-dos windows-nt cygwin))
   (use-package spell-fu
-    :hook ((org-mode markdown-mode erc-mode mail-mode text-mode)
-           . spell-fu-mode)
+    :hook ((text-mode erc-mode) . spell-fu-mode)
     :config
     (add-hook 'spell-fu-mode-hook
               (lambda ()
