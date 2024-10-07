@@ -126,6 +126,16 @@
     :states '(normal insert visual emacs)
     :keymaps 'message-mode-map
     :prefix "SPC"
+    :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/def-keys-rmail
+    :states '(normal insert visual emacs)
+    :keymaps 'rmail-mode-map
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
+  (general-create-definer x8dcc/def-keys-rmail-summary
+    :states '(normal insert visual emacs)
+    :keymaps 'rmail-summary-mode-map
+    :prefix "SPC"
     :non-normal-prefix "M-SPC"))
 
 (use-package which-key
@@ -851,6 +861,30 @@ See also `shell-command'."
   "m p" '(mml-preview                     :wk "Preview")
   "m s" '(mml-secure-message-sign         :wk "Sign")
   "m S" '(message-send                    :wk "Send"))
+
+(x8dcc/def-keys-rmail
+  ;; Mode (Rmail)
+  "m d" '(rmail-delete-forward             :wk "Delete and move forward")
+  "m g" '(rmail-get-new-mail               :wk "Get new mail")
+  "m m" '(rmail-summary                    :wk "Summary")
+  "m n" '(rmail-next-undeleted-message     :wk "Next non-deleted")
+  "m N" '(rmail-next-message               :wk "Next")
+  "m o" '(rmail-output                     :wk "Output to file")
+  "m O" '(rmail-output-as-seen             :wk "Output to file (as seen)")
+  "m p" '(rmail-previous-undeleted-message :wk "Previous non-deleted")
+  "m P" '(rmail-previous-message           :wk "Previous")
+  "m s" '(rmail-expunge-and-save           :wk "Expunge and save")
+  "m u" '(rmail-undelete-previous-message  :wk "Undelete current or previous"))
+
+(x8dcc/def-keys-rmail-summary
+  ;; Mode (Rmail summary)
+  "m d" '(rmail-summary-delete-forward   :wk "Delete and move forward")
+  "m g" '(rmail-summary-get-new-mail     :wk "Get new mail")
+  "m o" '(rmail-summary-output           :wk "Output to file")
+  "m O" '(rmail-summary-output-as-seen   :wk "Output to file (as seen)")
+  "m s" '(rmail-summary-expunge-and-save :wk "Expunge and save")
+  "m u" '(rmail-summary-undelete         :wk "Undelete")
+  "m U" '(rmail-summary-undelete-many    :wk "Undelete all"))
 
 (column-number-mode 1)
 
