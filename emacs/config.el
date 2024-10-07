@@ -1468,12 +1468,12 @@ environments."
   :group 'LaTeX-indentation
   :type 'integer)
 
-(eval-after-load "latex"
-  '(setq LaTeX-indent-environment-list
-         (nconc '(("itemize" LaTeX-indent-item)
-                  ("enumerate" LaTeX-indent-item)
-                  ("description" LaTeX-indent-item))
-                LaTeX-indent-environment-list)))
+(with-eval-after-load 'latex
+  (setq LaTeX-indent-environment-list
+        (nconc '(("itemize" LaTeX-indent-item)
+                 ("enumerate" LaTeX-indent-item)
+                 ("description" LaTeX-indent-item))
+               LaTeX-indent-environment-list)))
 
 (define-skeleton x8dcc/skeleton-latex-article
   "Insert a generic LaTeX article skeleton."
