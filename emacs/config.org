@@ -2343,7 +2343,7 @@ Specify the inbox files.
 
 TODO: It would be good to use "pops://..." URIS directly here, but I am not sure
 if emacs can use Mailutil's =movemail=, so for now I have to run it manually with
-my TODO script.
+my [[https://github.com/8dcc/linux-dotfiles/blob/main/scripts/util/mail-fetch][mail-fetch]] script.
 
 #+begin_src emacs-lisp
 (setq rmail-primary-inbox-list
