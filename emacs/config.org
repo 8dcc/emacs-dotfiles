@@ -1210,9 +1210,11 @@ Better function for clearing than =recenter-top-bottom=.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'eshell
-  (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
-                                      (eshell/clear-scrollback)
-                                      (eshell-emit-prompt))))
+  (keymap-set eshell-mode-map
+              "C-l"
+              (lambda () (interactive)
+                (eshell/clear-scrollback)
+                (eshell-emit-prompt))))
 #+end_src
 
 *** Ediff
@@ -1224,7 +1226,9 @@ since =ediff-mode-map= is a buffer-local variable.
 (with-eval-after-load 'ediff-util
   (add-hook 'ediff-startup-hook
             (lambda ()
-              (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
+              (keymap-set ediff-mode-map
+                          "<remap> <evil-quit>"
+                          #'ediff-quit))))
 #+end_src
 
 *** C mode
@@ -1234,9 +1238,9 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'cc-mode
-  (add-hook 'c-mode-hook
-            (lambda ()
-              (keymap-set c-mode-map "RET" #'c-context-line-break))))
+  (keymap-set c-mode-map
+              "RET"
+              #'c-context-line-break))
 #+end_src
 
 ** Space keybinds

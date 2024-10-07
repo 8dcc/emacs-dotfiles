@@ -598,19 +598,23 @@ See also `shell-command'."
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 
 (with-eval-after-load 'eshell
-  (keymap-set eshell-mode-map "C-l" (lambda () (interactive)
-                                      (eshell/clear-scrollback)
-                                      (eshell-emit-prompt))))
+  (keymap-set eshell-mode-map
+              "C-l"
+              (lambda () (interactive)
+                (eshell/clear-scrollback)
+                (eshell-emit-prompt))))
 
 (with-eval-after-load 'ediff-util
   (add-hook 'ediff-startup-hook
             (lambda ()
-              (keymap-set ediff-mode-map "<remap> <evil-quit>" #'ediff-quit))))
+              (keymap-set ediff-mode-map
+                          "<remap> <evil-quit>"
+                          #'ediff-quit))))
 
 (with-eval-after-load 'cc-mode
-  (add-hook 'c-mode-hook
-            (lambda ()
-              (keymap-set c-mode-map "RET" #'c-context-line-break))))
+  (keymap-set c-mode-map
+              "RET"
+              #'c-context-line-break))
 
 (x8dcc/def-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
