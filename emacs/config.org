@@ -947,6 +947,8 @@ Insert a separator comment that fills up to the line column.
 
 #+begin_src emacs-lisp
 (defun x8dcc/separator-comment (&optional max-width)
+  "Insert a separator comment in the next line based on `comment-start' and
+`comment-end'."
   (interactive)
   (unless max-width
     (setq max-width fill-column))
@@ -1018,29 +1020,10 @@ Indent the whole buffer. Bound to =SPC b i=.
 
 #+begin_src emacs-lisp
 (defun x8dcc/indent-buffer ()
+  "Indent the current buffer using `indent-region'."
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max))))
-#+end_src
-
-It's common for me to use =org-insert-link= after typing a sentence ended in a
-space, but when exiting evil's insert mode, the cursor moves on top of that last
-space, inserting the link right after the last word. To fix this, this function
-checks if there is a space/BOL before the point, and if there isn't, it inserts
-a space before inserting the link. We need to use =funcall-interactively= so the
-=org-insert-link= function prompts us for a link description. Bound to =SPC m l l=.
-
-TODO: Move to [[*Org mode][Org mode]]? Organize all =x8dcc/...= functions.
-
-See [[*Org mode keybinds][Org mode keybinds]].
-
-#+begin_src emacs-lisp
-(defun x8dcc/org-insert-link ()
-  "Inserts a space in the current position, and calls `org-insert-link'."
-  (interactive)
-  (if (not (looking-back "^\\|[ \t]"))
-      (insert " "))
-  (funcall-interactively #'org-insert-link))
 #+end_src
 
 Alternative to =kill-buffer-and-window= that uses =evil-window-delete=. Bound to
@@ -1070,6 +1053,29 @@ the indentation of the first line as reference. Bound to =g W=.
       (indent-region beg end 0)
       (evil-fill beg end)
       (evil-indent beg end))))
+#+end_src
+
+** Visual functions
+
+Create an overlay for hiding the specified regular expression. Originally meant
+to hide Org's escape commas. Credits to [[https://emacs.stackexchange.com/a/70127/40363][StackOverlow answer]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/make-invisible (regex &optional group-num)
+  "Make all ocurrences of REGEX invisible.
+
+Searches all ocurrences of REGEX and adds them to an invisible overlay. If
+GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
+to the overlay."
+  (interactive "sRegex: ")
+  (unless group-num (setq group-num 0))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward regex nil t)
+      (let ((invisible-overlay (make-overlay (match-beginning group-num)
+                                             (match-end group-num))))
+        (overlay-put invisible-overlay 'invisible t)))))
+
 #+end_src
 
 ** New features
@@ -2511,30 +2517,34 @@ Show LaTeX entities and expressions in a different face.
 (setq org-highlight-latex-and-related '(latex entities))
 #+end_src
 
-Create an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][overlay]] for setting as invisible the commas that are used to escape
-asterisks in org buffers. Credits to [[https://emacs.stackexchange.com/a/70127/40363][StackOverlow answer]].
+*** Custom Org functions
 
-NOTE: This is currently not called in any hook to avoid a performance impact.
+It's common for me to use =org-insert-link= after typing a sentence ended in a
+space, but when exiting evil's insert mode, the cursor moves on top of that last
+space, inserting the link right after the last word. To fix this, this function
+checks if there is a space/BOL before the point, and if there isn't, it inserts
+a space before inserting the link. We need to use =funcall-interactively= so the
+=org-insert-link= function prompts us for a link description. Bound to =SPC m l l=.
+
+See [[*Org mode keybinds][Org mode keybinds]].
 
 #+begin_src emacs-lisp
-(defun x8dcc/make-invisible (regex &optional group-num)
-  "Make all ocurrences of REGEX invisible.
-
-Searches all ocurrences of REGEX and adds them to an invisible overlay. If
-GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
-to the overlay."
-  (interactive "sRegex: ")
-  (unless group-num (setq group-num 0))
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward regex nil t)
-      (let ((invisible-overlay (make-overlay (match-beginning group-num)
-                                             (match-end group-num))))
-        (overlay-put invisible-overlay 'invisible t)))))
-
-;; NOTE: For hiding org commas, use:
-;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
+(defun x8dcc/org-insert-link ()
+  "Insert a space in the current position if there isn't one, and call
+`org-insert-link'."
+  (interactive)
+  (if (not (looking-back "^\\|[ \t]"))
+      (insert " "))
+  (funcall-interactively #'org-insert-link))
 #+end_src
+
+Create an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][overlay]] for setting as invisible the commas that are used to escape
+asterisks in org buffers.
+
+#+begin_comment emacs-lisp
+;; NOTE: Commented to avoid a performance impact
+(x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
+#+end_comment
 
 *** Custom heading IDs
 
@@ -2672,10 +2682,12 @@ Note that the string has to be in =TeX-command-list= or the command will fail.
 
 #+begin_src emacs-lisp
 (defun x8dcc/latex-compile ()
+  "Compile the current master file using the \"LaTeX\" command."
   (interactive)
   (TeX-command "LaTeX" #'TeX-master-file))
 
 (defun x8dcc/tex-compile ()
+  "Compile the current master file using the \"TeX\" command."
   (interactive)
   (TeX-command "TeX" #'TeX-master-file))
 #+end_src
@@ -2699,6 +2711,7 @@ to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
            (x8dcc/tex-get-font-key key (cdr font-list)))
           (t nil))))
 
+;; TODO: Use macro
 (defun x8dcc/latex-font-bold ()
   (interactive)
   (let ((key (x8dcc/tex-get-font-key "bf{")))
@@ -3148,6 +3161,7 @@ This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =bea
 
 #+begin_src emacs-lisp
 (defun x8dcc/beardbolt-disassemble ()
+  "Enable `beardbolt-mode' and call `beardbolt-compile'."
   (interactive)
   (beardbolt-mode 1)
   (call-interactively #'beardbolt-compile))

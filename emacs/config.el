@@ -438,6 +438,8 @@ or too many lines (>10000)."
   (string-match-p git-commit-filename-regexp filename))
 
 (defun x8dcc/separator-comment (&optional max-width)
+  "Insert a separator comment in the next line based on `comment-start' and
+`comment-end'."
   (interactive)
   (unless max-width
     (setq max-width fill-column))
@@ -494,16 +496,10 @@ With argument ARG, do this that many times."
   (delete-region (point) (progn (backward-word arg) (point))))
 
 (defun x8dcc/indent-buffer ()
+  "Indent the current buffer using `indent-region'."
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max))))
-
-(defun x8dcc/org-insert-link ()
-  "Inserts a space in the current position, and calls `org-insert-link'."
-  (interactive)
-  (if (not (looking-back "^\\|[ \t]"))
-      (insert " "))
-  (funcall-interactively #'org-insert-link))
 
 (defun x8dcc/evil-kill-buffer-and-window ()
   "Kill the current buffer with `kill-current-buffer' and delete the current
@@ -523,6 +519,21 @@ window with `evil-delete-window'."
       (indent-region beg end 0)
       (evil-fill beg end)
       (evil-indent beg end))))
+
+(defun x8dcc/make-invisible (regex &optional group-num)
+  "Make all ocurrences of REGEX invisible.
+
+Searches all ocurrences of REGEX and adds them to an invisible overlay. If
+GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
+to the overlay."
+  (interactive "sRegex: ")
+  (unless group-num (setq group-num 0))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward regex nil t)
+      (let ((invisible-overlay (make-overlay (match-beginning group-num)
+                                             (match-end group-num))))
+        (overlay-put invisible-overlay 'invisible t)))))
 
 (defun x8dcc/toggle-final-newline ()
   "Toggle newline insertion when saving the current buffer. See
@@ -1263,23 +1274,13 @@ different rules in `display-buffer-alist'."
 
 (setq org-highlight-latex-and-related '(latex entities))
 
-(defun x8dcc/make-invisible (regex &optional group-num)
-  "Make all ocurrences of REGEX invisible.
-
-Searches all ocurrences of REGEX and adds them to an invisible overlay. If
-GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
-to the overlay."
-  (interactive "sRegex: ")
-  (unless group-num (setq group-num 0))
-  (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward regex nil t)
-      (let ((invisible-overlay (make-overlay (match-beginning group-num)
-                                             (match-end group-num))))
-        (overlay-put invisible-overlay 'invisible t)))))
-
-;; NOTE: For hiding org commas, use:
-;; (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
+(defun x8dcc/org-insert-link ()
+  "Insert a space in the current position if there isn't one, and call
+`org-insert-link'."
+  (interactive)
+  (if (not (looking-back "^\\|[ \t]"))
+      (insert " "))
+  (funcall-interactively #'org-insert-link))
 
 (defun x8dcc/org-headline-to-id (headline)
   "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
@@ -1359,10 +1360,12 @@ already have one. See `x8dcc/org-custom-id-get'."
 (setq TeX-fold-unfold-around-mark t)
 
 (defun x8dcc/latex-compile ()
+  "Compile the current master file using the \"LaTeX\" command."
   (interactive)
   (TeX-command "LaTeX" #'TeX-master-file))
 
 (defun x8dcc/tex-compile ()
+  "Compile the current master file using the \"TeX\" command."
   (interactive)
   (TeX-command "TeX" #'TeX-master-file))
 
@@ -1378,6 +1381,7 @@ to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
            (x8dcc/tex-get-font-key key (cdr font-list)))
           (t nil))))
 
+;; TODO: Use macro
 (defun x8dcc/latex-font-bold ()
   (interactive)
   (let ((key (x8dcc/tex-get-font-key "bf{")))
@@ -1764,6 +1768,7 @@ Used for highlighting more constants with `font-lock-constant-face' in
   "#endif /* " v1 " */" \n)
 
 (defun x8dcc/beardbolt-disassemble ()
+  "Enable `beardbolt-mode' and call `beardbolt-compile'."
   (interactive)
   (beardbolt-mode 1)
   (call-interactively #'beardbolt-compile))
