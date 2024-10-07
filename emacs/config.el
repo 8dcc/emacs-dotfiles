@@ -90,53 +90,42 @@
           x8dcc/is-git-commit-filename
           file-remote-p)))
 
+(defmacro x8dcc/general-create-definer (name keymaps)
+  "Create a general definer named NAME for the specified KEYMAPS.
+
+Used in normal, insert, visual and emacs states. The normal prefix is \"SPC\"
+and the non-normal prefix is \"M-SPC\"."
+  `(general-create-definer ,name
+     :states '(normal insert visual emacs)
+     :keymaps ,keymaps
+     :prefix "SPC"
+     :non-normal-prefix "M-SPC"))
+
+(defun x8dcc/general-create-definers (alist)
+  "Create definers for all elements of ALIST, using
+`x8dcc/general-create-definer'."
+  (dolist (element alist)
+    ;; We need to use `eval' because macro arguments are not evaluated.
+    ;; FIXME: Use a better approach than `eval' and `backquote'.
+    (eval `(x8dcc/general-create-definer ,(car element)
+                                         (quote ,(cdr element))))))
+
 (use-package general
   :after evil
   :config
   (general-evil-setup t)
-  (general-create-definer x8dcc/def-keys
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-org
-    :states '(normal insert visual emacs)
-    :keymaps 'org-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-latex
-    :states '(normal insert visual emacs)
-    :keymaps 'LaTeX-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-texinfo
-    :states '(normal insert visual emacs)
-    :keymaps 'Texinfo-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-c
-    :states '(normal insert visual emacs)
-    :keymaps '(c-mode-map
-               c++-mode-map
-               java-mode-map
-               js-mode-map)
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-message
-    :states '(normal insert visual emacs)
-    :keymaps 'message-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-rmail
-    :states '(normal insert visual emacs)
-    :keymaps 'rmail-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-rmail-summary
-    :states '(normal insert visual emacs)
-    :keymaps 'rmail-summary-mode-map
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC"))
+  (x8dcc/general-create-definers
+   '((x8dcc/def-keys . override)
+     (x8dcc/def-keys-org . org-mode-map)
+     (x8dcc/def-keys-latex . LaTeX-mode-map)
+     (x8dcc/def-keys-texinfo . Texinfo-mode-map)
+     (x8dcc/def-keys-c . (c-mode-map
+                          c++-mode-map
+                          java-mode-map
+                          js-mode-map))
+     (x8dcc/def-keys-message . message-mode-map)
+     (x8dcc/def-keys-rmail . rmail-mode-map)
+     (x8dcc/def-keys-rmail-summary . rmail-summary-mode-map))))
 
 (use-package which-key
   :diminish
