@@ -114,14 +114,6 @@
     :keymaps 'Texinfo-mode-map
     :prefix "SPC"
     :non-normal-prefix "M-SPC")
-  (general-create-definer x8dcc/def-keys-lisp
-    :states '(normal insert visual emacs)
-    :keymaps '(lisp-mode-map
-               emacs-lisp-mode-map
-               lisp-interaction-mode-map
-               lisp-data-mode-map)
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC")
   (general-create-definer x8dcc/def-keys-c
     :states '(normal insert visual emacs)
     :keymaps '(c-mode-map
@@ -640,6 +632,12 @@ See also `shell-command'."
   "b R"       '(rename-buffer                    :wk "Rename")
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
+  ;; Evaluate
+  "e"   '(:ignore t            :wk "Evaluate")
+  "e e" '(eval-last-sexp       :wk "Last sexp")
+  "e E" '(eval-print-last-sexp :wk "Print last sexp")
+  "e b" '(eval-buffer          :wk "Current buffer")
+  "e r" '(eval-region          :wk "Region")
   ;; File
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
@@ -819,14 +817,6 @@ See also `shell-command'."
   "m B"   '(texinfo-insert-@end    :wk "Close block")
   "m j"   '(Texinfo-find-env-start :wk "Jump to block start")
   "m J"   '(Texinfo-find-env-end   :wk "Jump to block end"))
-
-(x8dcc/def-keys-lisp
-  ;; Evaluate
-  "e"   '(:ignore t            :wk "Evaluate")
-  "e e" '(eval-last-sexp       :wk "Last sexp")
-  "e E" '(eval-print-last-sexp :wk "Print last sexp")
-  "e b" '(eval-buffer          :wk "Current buffer")
-  "e r" '(eval-region          :wk "Region"))
 
 (x8dcc/def-keys-c
   ;; Buffer
