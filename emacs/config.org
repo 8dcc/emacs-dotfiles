@@ -2569,7 +2569,7 @@ See [[*Org mode keybinds][Org mode keybinds]].
   "Insert a space in the current position if there isn't one, and call
 `org-insert-link'."
   (interactive)
-  (if (not (looking-back "^\\|[ \t]"))
+  (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
   (funcall-interactively #'org-insert-link))
 #+end_src

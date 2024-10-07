@@ -1301,7 +1301,7 @@ different rules in `display-buffer-alist'."
   "Insert a space in the current position if there isn't one, and call
 `org-insert-link'."
   (interactive)
-  (if (not (looking-back "^\\|[ \t]"))
+  (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
   (funcall-interactively #'org-insert-link))
 
