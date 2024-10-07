@@ -1369,47 +1369,35 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (TeX-command "TeX" #'TeX-master-file))
 
-(defun x8dcc/tex-get-font-key (key &optional font-list)
+(defun x8dcc/tex-get-font-key (command-string &optional font-list)
   "Find the font key in FONT-LIST for the font whose LaTeX command contains
-KEY. Returns nil if the KEY is not found, or a valid font key that can be passed
-to `TeX-font'. If FONT-LIST is nil, `TeX-font-list' is used."
+COMMAND-STRING. Returns a valid font key that can be passed to `TeX-font', or
+nil if COMMAND-STRING is not found. If FONT-LIST is nil, `TeX-font-list' is
+used."
+  ;; TODO: Check if `TeX-font-list' is bound.
   (unless font-list (setq font-list TeX-font-list))
   (let ((item (car font-list)))
-    (cond ((string-match-p (regexp-quote key) (cadr item))
+    (cond ((string-match-p (regexp-quote command-string) (cadr item))
            (car item))
           ((cdr font-list)
-           (x8dcc/tex-get-font-key key (cdr font-list)))
+           (x8dcc/tex-get-font-key command-string (cdr font-list)))
           (t nil))))
 
-;; TODO: Use macro
-(defun x8dcc/latex-font-bold ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "bf{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-emphasized ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "emph{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-italics ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "it{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-roman ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "rm{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-smallcaps ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "sc{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-slanted ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "sl{")))
-    (if key (TeX-font nil key))))
-(defun x8dcc/latex-font-typewriter ()
-  (interactive)
-  (let ((key (x8dcc/tex-get-font-key "tt{")))
-    (if key (TeX-font nil key))))
+(defmacro x8dcc/tex-defun-font (func-name command-string &optional font-list)
+  "Define a function named FUNC-NAME that searches for a COMMAND-STRING in
+FONT-LIST using `x8dcc/tex-get-font-key'."
+  `(defun ,func-name ()
+     (interactive)
+     (let ((key (x8dcc/tex-get-font-key ,command-string ,font-list)))
+       (if key (TeX-font nil key)))))
+
+(x8dcc/tex-defun-font x8dcc/latex-font-bold       "bf{")
+(x8dcc/tex-defun-font x8dcc/latex-font-emphasized "emph{")
+(x8dcc/tex-defun-font x8dcc/latex-font-italics    "it{")
+(x8dcc/tex-defun-font x8dcc/latex-font-roman      "rm{")
+(x8dcc/tex-defun-font x8dcc/latex-font-smallcaps  "sc{")
+(x8dcc/tex-defun-font x8dcc/latex-font-slanted    "sl{")
+(x8dcc/tex-defun-font x8dcc/latex-font-typewriter "tt{")
 
 (defun LaTeX-indent-item ()
   "Provide proper indentation for LaTeX \"itemize\",\"enumerate\", and
