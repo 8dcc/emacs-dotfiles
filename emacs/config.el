@@ -850,6 +850,7 @@ See also `shell-command'."
 (x8dcc/def-keys-message
   ;; Mode (Message)
   "m a" '(mml-attach-file                 :wk "Attach file")
+  "m c" '(message-yank-original           :wk "Cite original")
   "m e" '(mml-secure-message-sign-encrypt :wk "Sign and encrypt")
   "m p" '(mml-preview                     :wk "Preview")
   "m s" '(mml-secure-message-sign         :wk "Sign")
