@@ -1733,7 +1733,8 @@ with =SPC t c=.
  (lambda ()
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
-   TeX-mode-hook))
+   TeX-mode-hook
+   message-mode))
 #+end_src
 
 ** Misc visual settings
