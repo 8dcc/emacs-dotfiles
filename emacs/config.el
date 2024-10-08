@@ -866,6 +866,7 @@ See also `shell-command'."
   "m O" '(rmail-output-as-seen             :wk "Output to file (as seen)")
   "m p" '(rmail-previous-undeleted-message :wk "Previous non-deleted")
   "m P" '(rmail-previous-message           :wk "Previous")
+  "m r" '(rmail-reply                      :wk "Reply")
   "m s" '(rmail-expunge-and-save           :wk "Expunge and save")
   "m u" '(rmail-undelete-previous-message  :wk "Undelete current or previous"))
 
@@ -875,6 +876,7 @@ See also `shell-command'."
   "m g" '(rmail-summary-get-new-mail     :wk "Get new mail")
   "m o" '(rmail-summary-output           :wk "Output to file")
   "m O" '(rmail-summary-output-as-seen   :wk "Output to file (as seen)")
+  "m r" '(rmail-summary-reply            :wk "Reply")
   "m s" '(rmail-summary-expunge-and-save :wk "Expunge and save")
   "m u" '(rmail-summary-undelete         :wk "Undelete")
   "m U" '(rmail-summary-undelete-many    :wk "Undelete all"))
