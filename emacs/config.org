@@ -1002,7 +1002,7 @@ Increment number at point in decimal and hexadecimal format. Credits: [[https://
                                  answer)))))))
 #+end_src
 
-** Input related
+** Input-related functions
 
 Delete the last /N/ words backwards, without adding it to the kill-ring (copying
 it). Bound to =C-<backspace>=.
@@ -1152,7 +1152,7 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 (keymap-global-set "C-S-v" #'yank)
 #+end_src
 
-Don't copy the last word with =C-<backspace>=, just delete them. See [[*Custom input functions][Custom input
+Don't copy the last word with =C-<backspace>=, just delete them. See [[*Input-related functions][Input-related
 functions]].
 
 #+begin_src emacs-lisp
@@ -1245,7 +1245,7 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 
 ** Space keybinds
 
-For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Custom input functions][Custom input
+For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Input-related functions][Input-related
 functions]].
 
 *** Global keybinds
