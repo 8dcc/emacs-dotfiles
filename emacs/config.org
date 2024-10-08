@@ -2393,6 +2393,13 @@ my [[https://github.com/8dcc/linux-dotfiles/blob/main/scripts/util/mail-fetch][m
       (list (concat "/var/mail/" user-login-name)))
 #+end_src
 
+Specify the default file for =rmail-output= and =rmail-output-body-file=.
+
+#+begin_src emacs-lisp
+(setq rmail-default-file (concat x8dcc/mail-directory "saved")
+      rmail-default-body-file (concat x8dcc/mail-directory "saved-body"))
+#+end_src
+
 Choose whether or not Rmail should delete mail from the inbox (set in
 =rmail-primary-inbox-list=).
 

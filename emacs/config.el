@@ -1238,6 +1238,9 @@ different rules in `display-buffer-alist'."
 (setq rmail-primary-inbox-list
       (list (concat "/var/mail/" user-login-name)))
 
+(setq rmail-default-file (concat x8dcc/mail-directory "saved")
+      rmail-default-body-file (concat x8dcc/mail-directory "saved-body"))
+
 (setq rmail-preserve-inbox nil)
 
 (setq rmail-mime-prefer-html nil)
