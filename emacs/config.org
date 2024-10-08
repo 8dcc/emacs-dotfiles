@@ -2417,7 +2417,7 @@ Prefer plaintext when possible.
 #+end_src
 
 ** Org mode
-*** Basic org settings
+*** Basic Org settings
 
 Enable "<s TAB" completion.
 
@@ -2521,7 +2521,7 @@ sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaing
 sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
 #+end_src
 
-*** Visual org settings
+*** Visual Org settings
 
 Org visual settings.
 
@@ -2595,7 +2595,7 @@ asterisks in org buffers.
 (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 #+end_comment
 
-*** Custom heading IDs
+*** Custom Org heading IDs
 
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to
 [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Lee Hinman]] and [[https://protesilaos.com/][Protesilaos Stavrou]].
@@ -2741,7 +2741,7 @@ Note that the string has to be in =TeX-command-list= or the command will fail.
   (TeX-command "TeX" #'TeX-master-file))
 #+end_src
 
-*** Font functions
+*** LaTeX Font functions
 
 These functions are used for formatting text with =SPC m f=. You will probably
 need the [[*AucTex][AucTex]] package, although you can just change the strings being passed
@@ -2779,7 +2779,7 @@ FONT-LIST using `x8dcc/tex-get-font-key'."
 (x8dcc/tex-defun-font x8dcc/latex-font-typewriter "tt{")
 #+end_src
 
-*** Indentation functions
+*** LaTeX Indentation functions
 
 This function, written by [[https://emacs.stackexchange.com/users/253/dan][Dan]] in [[https://emacs.stackexchange.com/a/3100/40363][this StackExchange answer]], indents =\item=
 lines in =itemize=, =enumerate= and =description= environments in LaTeX. This is
@@ -3075,7 +3075,7 @@ variables.
                         (other . "x8dcc/c-style")))
 #+end_src
 
-*** Highlight extra constants
+*** Highlight extra C constants
 
 Highlight more constants in =c-mode=.
 
