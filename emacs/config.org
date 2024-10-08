@@ -1538,8 +1538,7 @@ Keybinds for =message-mode=.
 
 Keybinds for =rmail-mode=. See also [[*Receiving mail (Rmail)][Receiving mail]].
 
-TODO: [[https://www.gnu.org/savannah-checkouts/gnu/emacs/manual/html_node/emacs/Rmail-Labels.html][Label management]], if used.
-TODO: Continue from Section 30.10, /Sending Replies/.
+TODO: [[https://www.gnu.org/savannah-checkouts/gnu/emacs/manual/html_node/emacs/Rmail-Labels.html][Label management]] and [[https://www.gnu.org/software/emacs//manual/html_node/emacs/Rmail-Reply.html][forwarding]] if used.
 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-rmail
