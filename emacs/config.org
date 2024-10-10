@@ -807,6 +807,16 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
       '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
 #+end_src
 
+** COMMENT Graphviz dot mode
+
+For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
+
+#+begin_src emacs-lisp
+(use-package graphviz-dot-mode
+  :config
+  (setq graphviz-dot-indent-width 4))
+#+end_src
+
 ** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
