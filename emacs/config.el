@@ -977,7 +977,7 @@ of characters, followed by the number of lines."
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
    TeX-mode-hook
-   message-mode))
+   message-mode-hook))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
