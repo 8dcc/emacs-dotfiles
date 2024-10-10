@@ -1229,7 +1229,8 @@ different rules in `display-buffer-alist'."
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465
-      send-mail-function 'smtpmail-send-it)
+      send-mail-function         #'smtpmail-send-it
+      message-send-mail-function #'smtpmail-send-it)
 
 (setq mml-secure-openpgp-sign-with-sender t)
 
