@@ -771,8 +771,6 @@ See also `shell-command'."
 
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m I"   '(org-toggle-inline-images :wk "Toggle inline images")
-  "m t"   '(org-todo                 :wk "Toggle todo")
   "m T"   '(org-babel-tangle         :wk "Tangle current file")
   ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
@@ -797,7 +795,12 @@ See also `shell-command'."
   "m p"   '(:ignore t         :wk "Priority")
   "m p d" '(org-priority-down :wk "Decrease")
   "m p p" '(org-priority      :wk "Insert")
-  "m p u" '(org-priority-up   :wk "Increase"))
+  "m p u" '(org-priority-up   :wk "Increase")
+  ;; Mode -> Toggle
+  "m t"   '(:ignore t                :wk "Toggle")
+  "m t i" '(org-indent-mode          :wk "Indent mode")
+  "m t I" '(org-toggle-inline-images :wk "Inline images")
+  "m t t" '(org-todo                 :wk "Todo"))
 
 (x8dcc/def-keys-latex
   ;; Mode (LaTeX)
