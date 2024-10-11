@@ -417,6 +417,20 @@ and ALIGNMENT as parameters."
     (keymap-set (eval-keymap keymap) key func))
   func)
 
+(defun x8dcc/keymap-set-alist (keymap key-alist)
+  "Define the specified KEY-ALIST in a specific KEYMAP.
+
+Each element in the KEY-ALIST list have the format (KEY . FUNC), and they
+represent the first and second arguments of `keymap-set', respectively."
+  (defun eval-function (symbol-or-function)
+    (if (functionp symbol-or-function)
+        symbol-or-function
+      (function symbol-or-function)))
+  (dolist (key-pair key-alist)
+    (keymap-set keymap
+                (car key-pair)
+                (eval-function (cdr key-pair)))))
+
 (defun x8dcc/count-matching-buffers (regexp)
   "Return the number of buffers whose name matches REGEXP."
   (length
@@ -599,11 +613,12 @@ See also `shell-command'."
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 
 (with-eval-after-load 'eshell
-  (keymap-set eshell-mode-map
-              "C-l"
-              (lambda () (interactive)
+  (x8dcc/keymap-set-alist
+   eshell-mode-map
+   '(("C-l" . (lambda () (interactive)
                 (eshell/clear-scrollback)
-                (eshell-emit-prompt))))
+                (eshell-emit-prompt)))
+     ("<home>" . eshell-bol))))
 
 (with-eval-after-load 'ediff-util
   (add-hook 'ediff-startup-hook

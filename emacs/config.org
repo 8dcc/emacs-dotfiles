@@ -917,6 +917,24 @@ keymaps.
   func)
 #+end_src
 
+Define the specified keys in a specific keymap.
+
+#+begin_src emacs-lisp
+(defun x8dcc/keymap-set-alist (keymap key-alist)
+  "Define the specified KEY-ALIST in a specific KEYMAP.
+
+Each element in the KEY-ALIST list have the format (KEY . FUNC), and they
+represent the first and second arguments of `keymap-set', respectively."
+  (defun eval-function (symbol-or-function)
+    (if (functionp symbol-or-function)
+        symbol-or-function
+      (function symbol-or-function)))
+  (dolist (key-pair key-alist)
+    (keymap-set keymap
+                (car key-pair)
+                (eval-function (cdr key-pair)))))
+#+end_src
+
 Count the number of buffers whose name matches the specified regular expression.
 
 #+begin_src emacs-lisp
@@ -1217,15 +1235,19 @@ Bind my =x8dcc/evil-fill-indent= function to =g W=.
 
 *** Eshell
 
-Better function for clearing than =recenter-top-bottom=.
+Some keybind changes for =eshell-mode=.
+
+- =C-l= :: Better function for clearing than =recenter-top-bottom=.
+- =<home>= :: Go to the beginning of the line, but don't go past the prompt.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'eshell
-  (keymap-set eshell-mode-map
-              "C-l"
-              (lambda () (interactive)
+  (x8dcc/keymap-set-alist
+   eshell-mode-map
+   '(("C-l" . (lambda () (interactive)
                 (eshell/clear-scrollback)
-                (eshell-emit-prompt))))
+                (eshell-emit-prompt)))
+     ("<home>" . eshell-bol))))
 #+end_src
 
 *** Ediff
