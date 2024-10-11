@@ -2994,6 +2994,20 @@ When using the =SPC z i= keybind, also call =hide-ifdefs=.
       hide-ifdef-lines t)
 #+end_src
 
+Enable =cwarn-mode=. I tried using =global-cwarn-mode= but it seemed to enable in
+other buffers as well (probably a bug). See also the =cwarn-configuration=
+variable.
+
+#+begin_src emacs-lisp
+(add-hook 'c-mode-hook
+          (lambda ()
+            (cwarn-mode 1)))
+
+;; Can't diminish before <cwarn.el> is loaded.
+(with-eval-after-load 'cwarn
+  (diminish 'cwarn-mode))
+#+end_src
+
 For using =ff-find-other-file=, search also in the specified include folders.
 
 #+begin_src emacs-lisp

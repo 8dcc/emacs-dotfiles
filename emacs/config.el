@@ -1608,6 +1608,14 @@ environments."
 (setq hide-ifdef-initially t
       hide-ifdef-lines t)
 
+(add-hook 'c-mode-hook
+          (lambda ()
+            (cwarn-mode 1)))
+
+;; Can't diminish before <cwarn.el> is loaded.
+(with-eval-after-load 'cwarn
+  (diminish 'cwarn-mode))
+
 (with-eval-after-load 'find-file
   (setq-default ff-quiet-mode t)
   (dolist (path '("./include" ".."))
