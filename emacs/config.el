@@ -733,7 +733,7 @@ See also `shell-command'."
   "p C" '(projectile-repeat-last-command :wk "Re-compile")
   "p f" '(projectile-find-file           :wk "Find file")
   "p p" '(projectile-switch-project      :wk "Recent projects")
-  "p r" '(projectile-recentf             :wk "Recent files")
+  "p r" '(project-query-replace-regexp   :wk "Replace regex (query)")
   ;; Search
   "s"   '(:ignore t                    :wk "Search")
   "s e" '(spell-fu-goto-next-error     :wk "Next spelling error")
@@ -742,8 +742,8 @@ See also `shell-command'."
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
   "s o" '(occur                        :wk "Occurrences")
-  "s r" '(query-replace                :wk "Replace interactively")
-  "s R" '(query-replace-regexp         :wk "Replace regex")
+  "s r" '(query-replace                :wk "Replace (query)")
+  "s R" '(query-replace-regexp         :wk "Replace regex (query)")
   "s s" '(isearch-forward              :wk "I-search")
   "s S" '(isearch-forward-regexp       :wk "I-search regex")
   ;; Toggle
