@@ -1,22 +1,21 @@
-;;; x8dcc-modus-vivendi-theme.el --- Tritanopia-optimized theme with a black background -*- lexical-binding:t -*-
+;;; modux-vivendi-theme.el --- Tritanopia-optimized theme with a black background -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2019-2023  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Modus-Themes Development <~protesilaos/modus-themes@lists.sr.ht>
-;; URL: https://git.sr.ht/~protesilaos/modus-themes
-;; Mailing-List: https://lists.sr.ht/~protesilaos/modus-themes
+;; Author: Protesilaos Stavrou, 8dcc
+;; Maintainer: 8dcc
+;; URL: https://github.com/8dcc/emacs-dotfiles
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
 
 ;;; Commentary:
 ;;
-;; The Modus themes conform with the highest standard for
+;; The Modux themes conform with the highest standard for
 ;; color-contrast accessibility between background and foreground
 ;; values (WCAG AAA).  Please refer to the official Info manual for
 ;; further documentation (distributed with the themes, or available
-;; at: <https://protesilaos.com/emacs/modus-themes>).
+;; at: <https://protesilaos.com/emacs/modux-themes>).
 ;;
 ;; This file was modified by 8dcc from version 4.3.0.
 
@@ -27,14 +26,14 @@
 ;               load-file-name
 ;               (equal (file-name-directory load-file-name)
 ;                      (expand-file-name "themes/" data-directory))
-;               (require-theme 'modus-themes t))
-;    (require 'modus-themes))
+;               (require-theme 'modux-themes t))
+;    (require 'modux-themes))
 
 (eval-and-compile
-  (load (concat user-emacs-directory "themes/modus-themes.el"))
+  (load (concat user-emacs-directory "themes/modux-themes.el"))
 
 ;;;###theme-autoload
-  (deftheme x8dcc-modus-vivendi
+  (deftheme modux-vivendi
     "Tritanopia-optimized theme with a black background.
 This variant is optimized for users with blue-yellow color
 deficiency (tritanopia).  It conforms with the highest
@@ -44,9 +43,9 @@ minimum contrast in relative luminance of 7:1 (WCAG AAA
 standard)."
     :background-mode 'dark
     :kind 'color-scheme
-    :family 'modus)
+    :family 'modux)
 
-  (defconst x8dcc-modus-vivendi-palette
+  (defconst modux-vivendi-palette
     '(
 ;;; Basic values
 
@@ -440,7 +439,7 @@ standard)."
       (overline-heading-6 unspecified)
       (overline-heading-7 unspecified)
       (overline-heading-8 unspecified))
-    "The entire palette of the `x8dcc-modus-vivendi' theme.
+    "The entire palette of the `modux-vivendi' theme.
 
 Named colors have the form (COLOR-NAME HEX-VALUE) with the former
 as a symbol and the latter as a string.
@@ -449,14 +448,14 @@ Semantic color mappings have the form (MAPPING-NAME COLOR-NAME)
 with both as symbols.  The latter is a named color that already
 exists in the palette and is associated with a HEX-VALUE.")
 
-  (defcustom x8dcc-modus-vivendi-palette-overrides nil
-    "Overrides for `x8dcc-modus-vivendi-palette'.
+  (defcustom modux-vivendi-palette-overrides nil
+    "Overrides for `modux-vivendi-palette'.
 
 Mirror the elements of the aforementioned palette, overriding
 their value.
 
-For overrides that are shared across all of the Modus themes,
-refer to `modus-themes-common-palette-overrides'.
+For overrides that are shared across all of the Modux themes,
+refer to `modux-themes-common-palette-overrides'.
 
 Theme-specific overrides take precedence over shared overrides.
 The idea of common overrides is to change semantic color
@@ -464,18 +463,18 @@ mappings, such as to make the cursor red.  Wherea theme-specific
 overrides can also be used to change the value of a named color,
 such as what hexadecimal RGB value the red-warmer symbol
 represents."
-    :group 'modus-themes
-    :package-version '(modus-themes . "4.0.0")
+    :group 'modux-themes
+    :package-version '(modux-themes . "4.0.0")
     :version "30.1"
     :type '(repeat (list symbol (choice symbol string)))
-    :set #'modus-themes--set-option
+    :set #'modux-themes--set-option
     :initialize #'custom-initialize-default
-    :link '(info-link "(modus-themes) Palette overrides"))
+    :link '(info-link "(modux-themes) Palette overrides"))
 
-  (modus-themes-theme x8dcc-modus-vivendi
-                      x8dcc-modus-vivendi-palette
-                      x8dcc-modus-vivendi-palette-overrides)
+  (modux-themes-theme modux-vivendi
+                      modux-vivendi-palette
+                      modux-vivendi-palette-overrides)
 
-  (provide-theme 'x8dcc-modus-vivendi))
+  (provide-theme 'modux-vivendi))
 
-;;; x8dcc-modus-vivendi-theme.el ends here
+;;; modux-vivendi-theme.el ends here

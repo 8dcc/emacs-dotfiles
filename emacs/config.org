@@ -34,11 +34,11 @@ information, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sav
 (load custom-file)
 #+end_src
 
-Load my custom theme from =~/.emacs.d/themes/x8dcc-modus-vivendi-theme.el=.
+Load my custom theme from =~/.emacs.d/themes/modux-vivendi-theme.el=.
 
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-(load-theme 'x8dcc-modus-vivendi)
+(setq custom-theme-directory (concat user-emacs-directory "themes/"))
+(load-theme 'modux-vivendi)
 #+end_src
 
 Disable emacs' startup message.

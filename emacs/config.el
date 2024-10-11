@@ -8,8 +8,8 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/"))
-(load-theme 'x8dcc-modus-vivendi)
+(setq custom-theme-directory (concat user-emacs-directory "themes/"))
+(load-theme 'modux-vivendi)
 
 (setq inhibit-startup-message t)
 

@@ -1,11 +1,10 @@
-;;; modus-themes.el --- Elegant, highly legible and customizable themes -*- lexical-binding:t -*-
+;;; modux-themes.el --- Elegant, highly legible and customizable themes -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2019-2023  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Modus-Themes Development <~protesilaos/modus-themes@lists.sr.ht>
-;; URL: https://git.sr.ht/~protesilaos/modus-themes
-;; Mailing-List: https://lists.sr.ht/~protesilaos/modus-themes
+;; Author: Protesilaos Stavrou, 8dcc
+;; Maintainer: 8dcc
+;; URL: https://github.com/8dcc/emacs-dotfiles
 ;; Version: 4.3.0
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: faces, theme, accessibility
@@ -14,11 +13,11 @@
 
 ;;; Commentary:
 ;;
-;; The Modus themes conform with the highest standard for
+;; The Modux themes conform with the highest standard for
 ;; color-contrast accessibility between background and foreground
 ;; values (WCAG AAA).  Please refer to the official Info manual for
 ;; further documentation (distributed with the themes, or available
-;; at: <https://protesilaos.com/emacs/modus-themes>).
+;; at: <https://protesilaos.com/emacs/modux-themes>).
 ;;
 ;; This file was modified by 8dcc from version 4.3.0.
 
@@ -30,35 +29,35 @@
   (require 'cl-lib)
   (require 'subr-x))
 
-(defgroup modus-themes ()
-  "User options for the Modus themes.
-The Modus themes conform with the WCAG AAA standard for color
+(defgroup modux-themes ()
+  "User options for the Modux themes.
+The Modux themes conform with the WCAG AAA standard for color
 contrast between background and foreground combinations (a
 minimum contrast of 7:1---the highest standard of its kind).
 
-The Modus themes collection includes themes that are optimized
+The Modux themes collection includes themes that are optimized
 for people with red-green or blue-yellow color
 deficiency (deuteranopia or tritanopia, respectively)."
   :group 'faces
-  :link '(info-link "(modus-themes) Top")
-  :link '(url-link :tag "Homepage" "https://protesilaos.com/emacs/modus-themes")
-  :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/modus-themes-pictures")
-  :prefix "modus-themes-"
-  :tag "Modus Themes")
+  :link '(info-link "(modux-themes) Top")
+  :link '(url-link :tag "Homepage" "https://protesilaos.com/emacs/modux-themes")
+  :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/modux-themes-pictures")
+  :prefix "modux-themes-"
+  :tag "Modux Themes")
 
-(defgroup modus-themes-faces ()
-  "Faces defined by the Modus themes."
-  :group 'modus-themes
-  :link '(info-link "(modus-themes) Top")
-  :link '(url-link :tag "Homepage" "https://protesilaos.com/emacs/modus-themes")
-  :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/modus-themes-pictures")
-  :prefix "modus-themes-"
-  :tag "Modus Themes Faces")
+(defgroup modux-themes-faces ()
+  "Faces defined by the Modux themes."
+  :group 'modux-themes
+  :link '(info-link "(modux-themes) Top")
+  :link '(url-link :tag "Homepage" "https://protesilaos.com/emacs/modux-themes")
+  :link '(url-link :tag "Sample pictures" "https://protesilaos.com/emacs/modux-themes-pictures")
+  :prefix "modux-themes-"
+  :tag "Modux Themes Faces")
 
-(make-obsolete-variable 'modus-themes-operandi-colors nil "4.0.0")
-(make-obsolete-variable 'modus-themes-vivendi-colors nil "4.0.0")
-(make-obsolete-variable 'modus-themes-version nil "4.0.0")
-(make-obsolete 'modus-themes-report-bug nil "4.0.0")
+(make-obsolete-variable 'modux-themes-operandi-colors nil "4.0.0")
+(make-obsolete-variable 'modux-themes-vivendi-colors nil "4.0.0")
+(make-obsolete-variable 'modux-themes-version nil "4.0.0")
+(make-obsolete 'modux-themes-report-bug nil "4.0.0")
 
 
 
@@ -74,235 +73,235 @@ deficiency (deuteranopia or tritanopia, respectively)."
                   red-faint green-faint blue-faint yellow-faint magenta-faint cyan-faint
                   red-intense green-intense blue-intense yellow-intense magenta-intense cyan-intense))
   (custom-declare-face
-   (intern (format "modus-themes-fg-%s" color))
+   (intern (format "modux-themes-fg-%s" color))
    nil (format "Face with %s foreground." color)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (color '(red green yellow blue magenta cyan))
   (custom-declare-face
-   (intern (format "modus-themes-nuanced-%s" color))
+   (intern (format "modux-themes-nuanced-%s" color))
    nil (format "Nuanced %s background." color)
-   :package-version '(modus-themes . "4.1.0")
+   :package-version '(modux-themes . "4.1.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (color '(red green yellow blue magenta cyan))
   (custom-declare-face
-   (intern (format "modus-themes-subtle-%s" color))
+   (intern (format "modux-themes-subtle-%s" color))
    nil (format "Subtle %s background." color)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (color '(red green yellow blue magenta cyan))
   (custom-declare-face
-   (intern (format "modus-themes-intense-%s" color))
+   (intern (format "modux-themes-intense-%s" color))
    nil (format "Intense %s background." color)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (scope '(alt del sel))
   (custom-declare-face
-   (intern (format "modus-themes-mark-%s" scope))
+   (intern (format "modux-themes-mark-%s" scope))
    nil (format "Mark of type %s." scope)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (scope '(note warning error))
   (custom-declare-face
-   (intern (format "modus-themes-lang-%s" scope))
+   (intern (format "modux-themes-lang-%s" scope))
    nil (format "Linter or spell check of type %s." scope)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (scope '(note warning error))
   (custom-declare-face
-   (intern (format "modus-themes-prominent-%s" scope))
+   (intern (format "modux-themes-prominent-%s" scope))
    nil (format "Prominent notification of type %s." scope)
-   :package-version '(modus-themes . "4.2.0")
+   :package-version '(modux-themes . "4.2.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (dolist (scope '(current lazy))
   (custom-declare-face
-   (intern (format "modus-themes-search-%s" scope))
+   (intern (format "modux-themes-search-%s" scope))
    nil (format "Search of type %s." scope)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (define-obsolete-variable-alias
-  'modus-themes-search-success
-  'modus-themes-search-current
+  'modux-themes-search-success
+  'modux-themes-search-current
   "4.0.0")
 
 (define-obsolete-variable-alias
-  'modus-themes-search-success-lazy
-  'modus-themes-search-lazy
+  'modux-themes-search-success-lazy
+  'modux-themes-search-lazy
   "4.0.0")
 
 (dolist (scope '(code macro verbatim))
   (custom-declare-face
-   (intern (format "modus-themes-prose-%s" scope))
+   (intern (format "modux-themes-prose-%s" scope))
    nil (format "Construct of type %s for prose." scope)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
 (define-obsolete-variable-alias
-  'modus-themes-markup-code
-  'modus-themes-prose-code
+  'modux-themes-markup-code
+  'modux-themes-prose-code
   "4.0.0")
 
 (define-obsolete-variable-alias
-  'modus-themes-markup-macro
-  'modus-themes-prose-macro
+  'modux-themes-markup-macro
+  'modux-themes-prose-macro
   "4.0.0")
 
 (define-obsolete-variable-alias
-  'modus-themes-markup-verbatim
-  'modus-themes-prose-verbatim
+  'modux-themes-markup-verbatim
+  'modux-themes-prose-verbatim
   "4.0.0")
 
 (dotimes (n 9)
   (custom-declare-face
-   (intern (format "modus-themes-heading-%d" n))
+   (intern (format "modux-themes-heading-%d" n))
    nil (format "Level %d heading." n)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
-(defface modus-themes-bold nil
+(defface modux-themes-bold nil
   "Generic face for applying a conditional bold weight.
-This behaves in accordance with `modus-themes-bold-constructs'."
-  :package-version '(modus-themes . "4.0.0")
+This behaves in accordance with `modux-themes-bold-constructs'."
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-slant nil
+(defface modux-themes-slant nil
   "Generic face for applying a conditional slant (italics).
-This behaves in accordance with `modus-themes-italic-constructs'."
-  :package-version '(modus-themes . "4.0.0")
+This behaves in accordance with `modux-themes-italic-constructs'."
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-key-binding nil
+(defface modux-themes-key-binding nil
   "Face for key bindings."
-  :package-version '(modus-themes . "4.0.0")
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-fixed-pitch nil
-  "Face for `fixed-pitch' if `modus-themes-mixed-fonts' is non-nil."
-  :package-version '(modus-themes . "4.0.0")
+(defface modux-themes-fixed-pitch nil
+  "Face for `fixed-pitch' if `modux-themes-mixed-fonts' is non-nil."
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-ui-variable-pitch nil
-  "Face for `variable-pitch' if `modus-themes-variable-pitch-ui' is non-nil."
-  :package-version '(modus-themes . "4.0.0")
+(defface modux-themes-ui-variable-pitch nil
+  "Face for `variable-pitch' if `modux-themes-variable-pitch-ui' is non-nil."
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-reset-soft nil
+(defface modux-themes-reset-soft nil
   "Generic face to set most face properties to nil.
 
 This is intended to be inherited by faces that should not retain
 properties from their context (e.g. an overlay over an underlined
 text should not be underlined as well) yet still blend in."
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-prompt nil
+(defface modux-themes-prompt nil
   "Generic face for command prompts."
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-completion-selected nil
+(defface modux-themes-completion-selected nil
   "Face for current selection in completion UIs."
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
-(defface modus-themes-button nil
+(defface modux-themes-button nil
   "Face for graphical buttons."
-  :group 'modus-themes-faces)
+  :group 'modux-themes-faces)
 
 (dotimes (n 4)
   (custom-declare-face
-   (intern (format "modus-themes-completion-match-%d" n))
+   (intern (format "modux-themes-completion-match-%d" n))
    nil (format "Completions match level %d." n)
-   :package-version '(modus-themes . "4.0.0")
+   :package-version '(modux-themes . "4.0.0")
    :version "30.1"
-   :group 'modus-themes-faces))
+   :group 'modux-themes-faces))
 
-(make-obsolete-variable 'modus-themes-reset-hard nil "4.0.0")
-(make-obsolete-variable 'modus-themes-subtle-neutral nil "4.0.0")
-(make-obsolete-variable 'modus-themes-intense-neutral nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-red nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-green nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-yellow nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-blue nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-magenta nil "4.0.0")
-(make-obsolete-variable 'modus-themes-refine-cyan nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-red nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-green nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-yellow nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-blue nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-magenta nil "4.0.0")
-(make-obsolete-variable 'modus-themes-active-cyan nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-red nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-green nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-yellow nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-blue nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-magenta nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringe-cyan nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-red-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-green-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-yellow-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-blue-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-magenta-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-cyan-nuanced nil "4.0.0")
-(make-obsolete-variable 'modus-themes-special-calm nil "4.0.0")
-(make-obsolete-variable 'modus-themes-special-cold nil "4.0.0")
-(make-obsolete-variable 'modus-themes-special-mild nil "4.0.0")
-(make-obsolete-variable 'modus-themes-special-warm nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-added nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-changed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-removed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-refine-added nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-refine-changed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-refine-removed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-focus-added nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-focus-changed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-focus-removed nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diff-heading nil "4.0.0")
-(make-obsolete-variable 'modus-themes-pseudo-header nil "4.0.0")
-(make-obsolete-variable 'modus-themes-mark-symbol nil "4.0.0")
-(make-obsolete-variable 'modus-themes-hl-line nil "4.0.0")
-(make-obsolete-variable 'modus-themes-search-success-modeline nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-active nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-background-active nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-background-intense nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-background-subtle nil "4.0.0")
-(make-obsolete-variable 'modus-themes-grue-background-refine nil "4.0.0")
-(make-obsolete-variable 'modus-themes-link-broken nil "4.0.0")
-(make-obsolete-variable 'modus-themes-link-symlink nil "4.0.0")
-(make-obsolete-variable 'modus-themes-tab-backdrop nil "4.0.0")
-(make-obsolete-variable 'modus-themes-tab-active nil "4.0.0")
-(make-obsolete-variable 'modus-themes-tab-inactive nil "4.0.0")
-(make-obsolete-variable 'modus-themes-completion-selected-popup nil "4.0.0")
-(make-obsolete-variable 'modus-themes-box-button nil "4.0.0")
-(make-obsolete-variable 'modus-themes-box-button-pressed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-reset-hard nil "4.0.0")
+(make-obsolete-variable 'modux-themes-subtle-neutral nil "4.0.0")
+(make-obsolete-variable 'modux-themes-intense-neutral nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-red nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-green nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-yellow nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-blue nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-magenta nil "4.0.0")
+(make-obsolete-variable 'modux-themes-refine-cyan nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-red nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-green nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-yellow nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-blue nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-magenta nil "4.0.0")
+(make-obsolete-variable 'modux-themes-active-cyan nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-red nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-green nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-yellow nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-blue nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-magenta nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringe-cyan nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-red-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-green-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-yellow-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-blue-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-magenta-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-cyan-nuanced nil "4.0.0")
+(make-obsolete-variable 'modux-themes-special-calm nil "4.0.0")
+(make-obsolete-variable 'modux-themes-special-cold nil "4.0.0")
+(make-obsolete-variable 'modux-themes-special-mild nil "4.0.0")
+(make-obsolete-variable 'modux-themes-special-warm nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-added nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-changed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-removed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-refine-added nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-refine-changed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-refine-removed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-focus-added nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-focus-changed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-focus-removed nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diff-heading nil "4.0.0")
+(make-obsolete-variable 'modux-themes-pseudo-header nil "4.0.0")
+(make-obsolete-variable 'modux-themes-mark-symbol nil "4.0.0")
+(make-obsolete-variable 'modux-themes-hl-line nil "4.0.0")
+(make-obsolete-variable 'modux-themes-search-success-modeline nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-active nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-background-active nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-background-intense nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-background-subtle nil "4.0.0")
+(make-obsolete-variable 'modux-themes-grue-background-refine nil "4.0.0")
+(make-obsolete-variable 'modux-themes-link-broken nil "4.0.0")
+(make-obsolete-variable 'modux-themes-link-symlink nil "4.0.0")
+(make-obsolete-variable 'modux-themes-tab-backdrop nil "4.0.0")
+(make-obsolete-variable 'modux-themes-tab-active nil "4.0.0")
+(make-obsolete-variable 'modux-themes-tab-inactive nil "4.0.0")
+(make-obsolete-variable 'modux-themes-completion-selected-popup nil "4.0.0")
+(make-obsolete-variable 'modux-themes-box-button nil "4.0.0")
+(make-obsolete-variable 'modux-themes-box-button-pressed nil "4.0.0")
 
 
 
 ;;;; Customization variables
 
-(defcustom modus-themes-custom-auto-reload t
+(defcustom modux-themes-custom-auto-reload t
   "Automatically reload theme after setting options with Customize.
 
 All theme user options take effect when a theme is loaded.  Any
@@ -314,141 +313,137 @@ and `setopt' (Emacs 29), will trigger a reload automatically.
 
 With a nil value, changes to user options have no further
 consequences.  The user must manually reload the theme."
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type 'boolean
-  :link '(info-link "(modus-themes) Custom reload theme"))
+  :link '(info-link "(modux-themes) Custom reload theme"))
 
-(make-obsolete-variable 'modus-themes-inhibit-reload 'modus-themes-custom-auto-reload "4.0.0")
+(make-obsolete-variable 'modux-themes-inhibit-reload 'modux-themes-custom-auto-reload "4.0.0")
 
-(defun modus-themes--set-option (sym val)
+(defun modux-themes--set-option (sym val)
   "Custom setter for theme related user options.
 Will set SYM to VAL, and reload the current theme, unless
-`modus-themes-custom-auto-reload' is nil."
+`modux-themes-custom-auto-reload' is nil."
   (set-default sym val)
-  (when (and modus-themes-custom-auto-reload
+  (when (and modux-themes-custom-auto-reload
              ;; Check if a theme is being loaded, in which case we
              ;; don't want to reload a theme if the setter is
              ;; invoked. `custom--inhibit-theme-enable' is set to nil
              ;; by `enable-theme'.
              (bound-and-true-p custom--inhibit-theme-enable))
-    (when-let* ((modus-themes-custom-auto-reload t)
-                (theme (modus-themes--current-theme)))
-      (modus-themes-load-theme theme))))
+    (when-let* ((modux-themes-custom-auto-reload t)
+                (theme (modux-themes--current-theme)))
+      (modux-themes-load-theme theme))))
 
-(defcustom modus-themes-disable-other-themes t
-  "Disable all other themes when loading a Modus theme.
+(defcustom modux-themes-disable-other-themes t
+  "Disable all other themes when loading a Modux theme.
 
-When the value is non-nil, the commands `modus-themes-toggle' and
-`modus-themes-select', as well as the `modus-themes-load-theme'
+When the value is non-nil, the commands `modux-themes-toggle' and
+`modux-themes-select', as well as the `modux-themes-load-theme'
 function, will disable all other themes while loading the
-specified Modus theme.  This is done to ensure that Emacs does
+specified Modux theme.  This is done to ensure that Emacs does
 not blend two or more themes: such blends lead to awkward results
 that undermine the work of the designer.
 
 When the value is nil, the aforementioned commands and function
-will only disable other themes within the Modus collection.
+will only disable other themes within the Modux collection.
 
 This option is provided because Emacs themes are not necessarily
 limited to colors/faces: they can consist of an arbitrary set of
 customizations.  Users who use such customization bundles must
 set this variable to a nil value."
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.1.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.1.0")
   :version "30.1"
   :type 'boolean
-  :link '(info-link "(modus-themes) Disable other themes"))
+  :link '(info-link "(modux-themes) Disable other themes"))
 
-(defvaralias 'modus-themes-collection 'modus-themes-items
-  "Alias of `modus-themes-items'.")
+(defvaralias 'modux-themes-collection 'modux-themes-items
+  "Alias of `modux-themes-items'.")
 
-(defconst modus-themes-items
-  '( x8dcc-modus-operandi x8dcc-modus-vivendi
-     modus-operandi modus-vivendi
-     modus-operandi-tinted modus-vivendi-tinted
-     modus-operandi-deuteranopia modus-vivendi-deuteranopia
-     modus-operandi-tritanopia modus-vivendi-tritanopia)
-  "Symbols of the Modus themes.")
+(defconst modux-themes-items
+  '(modux-operandi modux-vivendi)
+  "Symbols of the Modux themes.")
 
-(defcustom modus-themes-to-toggle '(x8dcc-modus-operandi x8dcc-modus-vivendi)
-  "Specify two Modus themes for `modus-themes-toggle' command.
-The variable `modus-themes-items' contains the symbols of all
+(defcustom modux-themes-to-toggle '(modux-operandi modux-vivendi)
+  "Specify two Modux themes for `modux-themes-toggle' command.
+The variable `modux-themes-items' contains the symbols of all
 official themes that form part of this collection.
 
 The default value of this user option includes the original
-themes: `modus-operandi' (light) and `modus-vivendi' (dark).
+themes: `modux-operandi' (light) and `modux-vivendi' (dark).
 
-If the value is nil or otherwise does not specify two valid Modus
-themes, the command `modus-themes-toggle' reverts to selecting a
-theme from the list of available Modus themes.  In effect, it is
-the same as using the command `modus-themes-select'."
+If the value is nil or otherwise does not specify two valid Modux
+themes, the command `modux-themes-toggle' reverts to selecting a
+theme from the list of available Modux themes.  In effect, it is
+the same as using the command `modux-themes-select'."
   :type `(choice
           (const :tag "No toggle" nil)
           (list :tag "Pick two themes to toggle between"
                 (choice :tag "Theme one of two"
                         ,@(mapcar (lambda (theme)
                                     (list 'const theme))
-                                  modus-themes-items))
+                                  modux-themes-items))
                 (choice :tag "Theme two of two"
                         ,@(mapcar (lambda (theme)
                                     (list 'const theme))
-                                  modus-themes-items))))
-  :package-version '(modus-themes . "4.0.0")
+                                  modux-themes-items))))
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :group 'modus-themes)
+  :group 'modux-themes)
 
-(defvaralias 'modus-themes-post-load-hook 'modus-themes-after-load-theme-hook)
+(defvaralias 'modux-themes-post-load-hook 'modux-themes-after-load-theme-hook)
 
-(defcustom modus-themes-after-load-theme-hook nil
-  "Hook that runs after loading a Modus theme.
-This is used by the command `modus-themes-toggle'."
+(defcustom modux-themes-after-load-theme-hook nil
+  "Hook that runs after loading a Modux theme.
+This is used by the command `modux-themes-toggle'."
   :type 'hook
-  :package-version '(modus-themes . "4.0.0")
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :group 'modus-themes)
+  :group 'modux-themes)
 
-(make-obsolete-variable 'modus-themes-operandi-color-overrides nil "4.0.0")
-(make-obsolete-variable 'modus-themes-vivendi-color-overrides nil "4.0.0")
+(make-obsolete-variable 'modux-themes-operandi-color-overrides nil "4.0.0")
+(make-obsolete-variable 'modux-themes-vivendi-color-overrides nil "4.0.0")
 
-(defvaralias 'modus-themes-slanted-constructs 'modus-themes-italic-constructs)
+(defvaralias 'modux-themes-slanted-constructs 'modux-themes-italic-constructs)
 
-(defcustom modus-themes-italic-constructs nil
+(defcustom modux-themes-italic-constructs nil
   "Use italic font forms in more code constructs."
-  :group 'modus-themes
-  :package-version '(modus-themes . "1.5.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "1.5.0")
   :version "28.1"
   :type 'boolean
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Italic constructs"))
+  :link '(info-link "(modux-themes) Italic constructs"))
 
-(defcustom modus-themes-bold-constructs nil
+(defcustom modux-themes-bold-constructs nil
   "Use bold text in more code constructs."
-  :group 'modus-themes
-  :package-version '(modus-themes . "1.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "1.0.0")
   :version "28.1"
   :type 'boolean
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Bold constructs"))
+  :link '(info-link "(modux-themes) Bold constructs"))
 
-(defcustom modus-themes-variable-pitch-ui nil
+(defcustom modux-themes-variable-pitch-ui nil
   "Use proportional fonts (variable-pitch) in UI elements.
 This includes the mode line, header line, tab bar, and tab line."
-  :group 'modus-themes
-  :package-version '(modus-themes . "1.1.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "1.1.0")
   :version "28.1"
   :type 'boolean
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) UI typeface"))
+  :link '(info-link "(modux-themes) UI typeface"))
 
-(defcustom modus-themes-mixed-fonts nil
+(defcustom modux-themes-mixed-fonts nil
   "Non-nil to enable inheritance from `fixed-pitch' in some faces.
 
 This is done to allow spacing-sensitive constructs, such as Org
@@ -459,17 +454,17 @@ Users may need to explicitly configure the font family of
 `fixed-pitch' in order to get a consistent experience with their
 typography (also check the `fontaine' package on GNU ELPA (by
 Protesilaos))."
-  :group 'modus-themes
-  :package-version '(modus-themes . "1.7.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "1.7.0")
   :version "29.1"
   :type 'boolean
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Mixed fonts"))
+  :link '(info-link "(modux-themes) Mixed fonts"))
 
-(make-obsolete-variable 'modus-themes-intense-mouseovers nil "4.0.0")
+(make-obsolete-variable 'modux-themes-intense-mouseovers nil "4.0.0")
 
-(defconst modus-themes--weight-widget
+(defconst modux-themes--weight-widget
   '(choice :tag "Font weight (must be supported by the typeface)"
            (const :tag "Unspecified (use whatever the default is)" nil)
            (const :tag "Thin" thin)
@@ -485,19 +480,19 @@ Protesilaos))."
            (const :tag "Ultra-bold" ultrabold))
   "List of supported font weights used by `defcustom' forms.")
 
-(defconst modus-themes--headings-widget
+(defconst modux-themes--headings-widget
   `(set :tag "Properties" :greedy t
         (const :tag "Proportionately spaced font (variable-pitch)" variable-pitch)
-        ,modus-themes--weight-widget
+        ,modux-themes--weight-widget
         (radio :tag "Height"
                (float :tag "Floating point to adjust height by")
                (cons :tag "Cons cell of `(height . FLOAT)'"
                      (const :tag "The `height' key (constant)" height)
                      (float :tag "Floating point"))))
-  "Refer to the doc string of `modus-themes-headings'.
+  "Refer to the doc string of `modux-themes-headings'.
 This is a helper variable intended for internal use.")
 
-(defcustom modus-themes-headings nil
+(defcustom modux-themes-headings nil
   "Heading styles with optional list of values per heading level.
 
 This is an alist that accepts a (KEY . LIST-OF-VALUES)
@@ -515,7 +510,7 @@ described below.  Here is a complete sample with various
 stylistic combinations, followed by a presentation of all
 available properties:
 
-    (setq modus-themes-headings
+    (setq modux-themes-headings
           (quote ((1 . (variable-pitch 1.5))
                   (2 . (1.3))
                   (agenda-date . (1.3))
@@ -534,7 +529,7 @@ proportionately spaced typeface).
 
 The symbol of a weight attribute adjusts the font of the heading
 accordingly, such as `light', `semibold', etc.  Valid symbols are
-defined in the variable `modus-themes-weights'.  The absence of a
+defined in the variable `modux-themes-weights'.  The absence of a
 weight means that bold will be used by virtue of inheriting the
 `bold' face (check the manual for tweaking bold and italic
 faces).
@@ -558,7 +553,7 @@ The order in which the properties are set is not significant.
 
 In user configuration files the form may look like this:
 
-    (setq modus-themes-headings
+    (setq modux-themes-headings
           (quote ((1 . (variable-pitch 1.5))
                   (2 . (1.3))
                   (agenda-date . (1.3))
@@ -569,12 +564,12 @@ When defining the styles per heading level, it is possible to
 pass a non-nil value (t) instead of a list of properties.  This
 will retain the original aesthetic for that level.  For example:
 
-    (setq modus-themes-headings
+    (setq modux-themes-headings
           (quote ((1 . t)           ; keep the default style
                   (2 . (semibold 1.2))
                   (t . (variable-pitch))))) ; style for all other headings
 
-    (setq modus-themes-headings
+    (setq modux-themes-headings
           (quote ((1 . (variable-pitch extrabold 1.5))
                   (2 . (semibold))
                   (t . t)))) ; default style for all other levels
@@ -584,28 +579,28 @@ overline can all be set via the overrides.  It is possible to
 have any color combination for any heading level (something that
 could not be done in older versions of the themes).
 
-Read Info node `(modus-themes) Option for palette overrides' as
-well as Info node `(modus-themes) Make headings more or less
-colorful'.  Else check `modus-themes-common-palette-overrides'
+Read Info node `(modux-themes) Option for palette overrides' as
+well as Info node `(modux-themes) Make headings more or less
+colorful'.  Else check `modux-themes-common-palette-overrides'
 and related user options."
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type `(alist
           :options ,(mapcar (lambda (el)
-                              (list el modus-themes--headings-widget))
+                              (list el modux-themes--headings-widget))
                             '(0 1 2 3 4 5 6 7 8 t agenda-date agenda-structure))
           :key-type symbol
-          :value-type ,modus-themes--headings-widget)
-  :set #'modus-themes--set-option
+          :value-type ,modux-themes--headings-widget)
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Heading styles"))
+  :link '(info-link "(modux-themes) Heading styles"))
 
-(make-obsolete-variable 'modus-themes-org-agenda nil "4.0.0")
-(make-obsolete-variable 'modus-themes-fringes nil "4.0.0")
-(make-obsolete-variable 'modus-themes-lang-checkers nil "4.0.0")
+(make-obsolete-variable 'modux-themes-org-agenda nil "4.0.0")
+(make-obsolete-variable 'modux-themes-fringes nil "4.0.0")
+(make-obsolete-variable 'modux-themes-lang-checkers nil "4.0.0")
 
-(defcustom modus-themes-org-blocks 'gray-background
+(defcustom modux-themes-org-blocks 'gray-background
   "Set the overall style of Org code blocks, quotes, and the like.
 
 Nil (the default) means that the block has no background of its
@@ -633,21 +628,21 @@ Code blocks use their major mode's fontification (syntax
 highlighting) only when the variable `org-src-fontify-natively'
 is non-nil.  While quote/verse blocks require setting
 `org-fontify-quote-and-verse-blocks' to a non-nil value."
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type '(choice
           (const :format "[%v] %t\n" :tag "No Org block background (default)" nil)
           (const :format "[%v] %t\n" :tag "Subtle gray block background" gray-background)
           (const :format "[%v] %t\n" :tag "Color-coded background per programming language" tinted-background))
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Org mode blocks"))
+  :link '(info-link "(modux-themes) Org mode blocks"))
 
-(make-obsolete-variable 'modus-themes-mode-line nil "4.0.0")
-(make-obsolete-variable 'modus-themes-diffs nil "4.0.0")
+(make-obsolete-variable 'modux-themes-mode-line nil "4.0.0")
+(make-obsolete-variable 'modux-themes-diffs nil "4.0.0")
 
-(defcustom modus-themes-completions nil
+(defcustom modux-themes-completions nil
   "Control the style of completion user interfaces.
 
 This affects Company, Corfu, Flx, Icomplete/Fido, Ido, Ivy,
@@ -657,7 +652,7 @@ of (KEY . LIST-OF-PROPERTIES).  KEY is a symbol, while PROPERTIES
 is a list.  Here is a sample, followed by a description of the
 particularities:
 
-    (setq modus-themes-completions
+    (setq modux-themes-completions
           (quote ((matches . (extrabold underline))
                   (selection . (semibold italic)))))
 
@@ -674,7 +669,7 @@ the order they may appear in:
 
 - The symbol of a font weight attribute such as `light',
   `semibold', et cetera.  Valid symbols are defined in the
-  variable `modus-themes-weights'.  The absence of a weight means
+  variable `modux-themes-weights'.  The absence of a weight means
   that bold will be used.
 
 The `selection' key applies to the current line or currently
@@ -690,7 +685,7 @@ follows (order is not significant):
 
 - The symbol of a font weight attribute such as `light',
   `semibold', et cetera.  Valid symbols are defined in the
-  variable `modus-themes-weights'.  The absence of a weight means
+  variable `modux-themes-weights'.  The absence of a weight means
   that bold will be used.
 
 Apart from specifying each key separately, a catch-all list is
@@ -698,41 +693,41 @@ accepted.  This is only useful when the desired aesthetic is the
 same across all keys that are not explicitly referenced.  For
 example, this:
 
-    (setq modus-themes-completions
+    (setq modux-themes-completions
           (quote ((t . (extrabold underline)))))
 
 Is the same as:
 
-    (setq modus-themes-completions
+    (setq modux-themes-completions
           (quote ((matches . (extrabold underline))
                   (selection . (extrabold underline)))))"
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type `(set
           (cons :tag "Matches"
                 (const matches)
                 (set :tag "Style of matches" :greedy t
-                     ,modus-themes--weight-widget
+                     ,modux-themes--weight-widget
                      (const :tag "Italic font (oblique or slanted forms)" italic)
                      (const :tag "Underline" underline)))
           (cons :tag "Selection"
                 (const selection)
                 (set :tag "Style of selection" :greedy t
-                     ,modus-themes--weight-widget
+                     ,modux-themes--weight-widget
                      (const :tag "Italic font (oblique or slanted forms)" italic)
                      (const :tag "Underline" underline)))
           (cons :tag "Fallback for both matches and selection"
                 (const t)
                 (set :tag "Style of both matches and selection" :greedy t
-                     ,modus-themes--weight-widget
+                     ,modux-themes--weight-widget
                      (const :tag "Italic font (oblique or slanted forms)" italic)
                      (const :tag "Underline" underline))))
-  :set #'modus-themes--set-option
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Completion UIs"))
+  :link '(info-link "(modux-themes) Completion UIs"))
 
-(defcustom modus-themes-prompts nil
+(defcustom modux-themes-prompts nil
   "Use subtle or intense styles for minibuffer and REPL prompts.
 
 The value is a list of properties, each designated by a symbol.
@@ -744,7 +739,7 @@ oblique forms, depending on the typeface).
 
 The symbol of a font weight attribute such as `light', `semibold',
 et cetera, adds the given weight to links.  Valid symbols are
-defined in the variable `modus-themes-weights'.  The absence of a
+defined in the variable `modux-themes-weights'.  The absence of a
 weight means that the one of the underlying text will be used.
 
 Combinations of any of those properties are expressed as a list,
@@ -757,39 +752,39 @@ The order in which the properties are set is not significant.
 
 In user configuration files the form may look like this:
 
-    (setq modus-themes-prompts (quote (extrabold italic)))"
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+    (setq modux-themes-prompts (quote (extrabold italic)))"
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type `(set :tag "Properties" :greedy t
               (const :tag "Italic font slant" italic)
-              ,modus-themes--weight-widget)
-  :set #'modus-themes--set-option
+              ,modux-themes--weight-widget)
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Command prompts"))
+  :link '(info-link "(modux-themes) Command prompts"))
 
-(make-obsolete-variable 'modus-themes-subtle-line-numbers nil "4.0.0")
-(make-obsolete-variable 'modus-themes-markup nil "4.0.0")
-(make-obsolete-variable 'modus-themes-paren-match nil "4.0.0")
-(make-obsolete-variable 'modus-themes-syntax nil "4.0.0")
-(make-obsolete-variable 'modus-themes-links nil "4.0.0")
-(make-obsolete-variable 'modus-themes-region nil "4.0.0")
-(make-obsolete-variable 'modus-themes-deuteranopia nil "4.0.0")
-(make-obsolete-variable 'modus-themes-mail-citations nil "4.0.0")
-(make-obsolete-variable 'modus-themes-tabs-accented nil "4.0.0")
-(make-obsolete-variable 'modus-themes-box-buttons nil "4.0.0")
+(make-obsolete-variable 'modux-themes-subtle-line-numbers nil "4.0.0")
+(make-obsolete-variable 'modux-themes-markup nil "4.0.0")
+(make-obsolete-variable 'modux-themes-paren-match nil "4.0.0")
+(make-obsolete-variable 'modux-themes-syntax nil "4.0.0")
+(make-obsolete-variable 'modux-themes-links nil "4.0.0")
+(make-obsolete-variable 'modux-themes-region nil "4.0.0")
+(make-obsolete-variable 'modux-themes-deuteranopia nil "4.0.0")
+(make-obsolete-variable 'modux-themes-mail-citations nil "4.0.0")
+(make-obsolete-variable 'modux-themes-tabs-accented nil "4.0.0")
+(make-obsolete-variable 'modux-themes-box-buttons nil "4.0.0")
 
-(defcustom modus-themes-common-palette-overrides nil
-  "Set palette overrides for all the Modus themes.
+(defcustom modux-themes-common-palette-overrides nil
+  "Set palette overrides for all the Modux themes.
 
 Mirror the elements of a theme's palette, overriding their value.
 The palette variables are named THEME-NAME-palette, while
 individual theme overrides are THEME-NAME-palette-overrides.  The
-THEME-NAME is one of the symbols in `modus-themes-items'.  For
+THEME-NAME is one of the symbols in `modux-themes-items'.  For
 example:
 
-- `modus-operandi-palette'
-- `modus-operandi-palette-overrides'
+- `modux-operandi-palette'
+- `modux-operandi-palette-overrides'
 
 Individual theme overrides take precedence over these common
 overrides.
@@ -799,8 +794,8 @@ mappings, such as to make the cursor red.  Wherea theme-specific
 overrides can also be used to change the value of a named color,
 such as what hexadecimal RGB value the red-warmer symbol
 represents."
-  :group 'modus-themes
-  :package-version '(modus-themes . "4.0.0")
+  :group 'modux-themes
+  :package-version '(modux-themes . "4.0.0")
   :version "30.1"
   :type '(repeat (list symbol (choice symbol string)))
   ;; ;; NOTE 2023-01-07: The following is a functioning version of the
@@ -812,7 +807,7 @@ represents."
   ;; :type `(repeat (list (radio :tag "Palette key to override"
   ;;                             ,@(mapcar (lambda (x)
   ;;                                         (list 'const x))
-  ;;                                       (mapcar #'car (modus-themes--current-theme-palette))))
+  ;;                                       (mapcar #'car (modux-themes--current-theme-palette))))
   ;;                      (choice :tag "Value to assign" :value unspecified
   ;;                              (const :tag "`unspecified' (remove the original color)" unspecified)
   ;;                              (string :tag "String with color name (e.g. \"gray50\") or hex RGB (e.g. \"#123456\")"
@@ -820,16 +815,16 @@ represents."
   ;;                              (radio :tag "Palette key to map to"
   ;;                                     ,@(mapcar (lambda (x)
   ;;                                                 (list 'const x))
-  ;;                                               (mapcar #'car (modus-themes--current-theme-palette)))))))
-  :set #'modus-themes--set-option
+  ;;                                               (mapcar #'car (modux-themes--current-theme-palette)))))))
+  :set #'modux-themes--set-option
   :initialize #'custom-initialize-default
-  :link '(info-link "(modus-themes) Palette overrides"))
+  :link '(info-link "(modux-themes) Palette overrides"))
 
 
 
 ;;;; Presets of palette overrides
 
-(defvar modus-themes-preset-overrides-faint
+(defvar modux-themes-preset-overrides-faint
   '((bg-completion       bg-inactive)
     (bg-hl-line          bg-dim)
     (bg-paren-match      bg-cyan-subtle)
@@ -933,19 +928,19 @@ desaturated.
 
 All the preset overrides the themes provide (including this one):
 
-- `modus-themes-preset-overrides-faint'
-- `modus-themes-preset-overrides-intense'
-- `modus-themes-preset-overrides-cooler'
-- `modus-themes-preset-overrides-warmer'
+- `modux-themes-preset-overrides-faint'
+- `modux-themes-preset-overrides-intense'
+- `modux-themes-preset-overrides-cooler'
+- `modux-themes-preset-overrides-warmer'
 
 To set a preset, assign its symbol without a quote as the value
-of the `modus-themes-common-palette-overrides' or as the value of
-theme-specific options such as `modus-operandi-palette-overrides'.
+of the `modux-themes-common-palette-overrides' or as the value of
+theme-specific options such as `modux-operandi-palette-overrides'.
 
 For overriding named colors and/or semantic color mappings read
-Info node `(modus-themes) Option for palette overrides'.")
+Info node `(modux-themes) Option for palette overrides'.")
 
-(defvar modus-themes-preset-overrides-intense
+(defvar modux-themes-preset-overrides-intense
   '((bg-region bg-cyan-intense)
 
     (bg-completion       bg-cyan-subtle)
@@ -1027,19 +1022,19 @@ coloration is increased to pop out more.
 
 All the preset overrides the themes provide (including this one):
 
-- `modus-themes-preset-overrides-faint'
-- `modus-themes-preset-overrides-intense'
-- `modus-themes-preset-overrides-cooler'
-- `modus-themes-preset-overrides-warmer'
+- `modux-themes-preset-overrides-faint'
+- `modux-themes-preset-overrides-intense'
+- `modux-themes-preset-overrides-cooler'
+- `modux-themes-preset-overrides-warmer'
 
 To set a preset, assign its symbol without a quote as the value
-of the `modus-themes-common-palette-overrides' or as the value of
-theme-specific options such as `modus-operandi-palette-overrides'.
+of the `modux-themes-common-palette-overrides' or as the value of
+theme-specific options such as `modux-operandi-palette-overrides'.
 
 For overriding named colors and/or semantic color mappings read
-Info node `(modus-themes) Option for palette overrides'.")
+Info node `(modux-themes) Option for palette overrides'.")
 
-(defvar modus-themes-preset-overrides-cooler
+(defvar modux-themes-preset-overrides-cooler
   '((fg-prompt blue-cooler)
 
     (builtin magenta-faint)
@@ -1079,19 +1074,19 @@ blue-tinted colors.
 
 All the preset overrides the themes provide (including this one):
 
-- `modus-themes-preset-overrides-faint'
-- `modus-themes-preset-overrides-intense'
-- `modus-themes-preset-overrides-cooler'
-- `modus-themes-preset-overrides-warmer'
+- `modux-themes-preset-overrides-faint'
+- `modux-themes-preset-overrides-intense'
+- `modux-themes-preset-overrides-cooler'
+- `modux-themes-preset-overrides-warmer'
 
 To set a preset, assign its symbol without a quote as the value
-of the `modus-themes-common-palette-overrides' or as the value of
-theme-specific options such as `modus-operandi-palette-overrides'.
+of the `modux-themes-common-palette-overrides' or as the value of
+theme-specific options such as `modux-operandi-palette-overrides'.
 
 For overriding named colors and/or semantic color mappings read
-Info node `(modus-themes) Option for palette overrides'.")
+Info node `(modux-themes) Option for palette overrides'.")
 
-(defvar modus-themes-preset-overrides-warmer
+(defvar modux-themes-preset-overrides-warmer
   '((fg-prompt magenta-warmer)
 
     (builtin magenta)
@@ -1135,24 +1130,24 @@ including green and yellow.
 
 All the preset overrides the themes provide (including this one):
 
-- `modus-themes-preset-overrides-faint'
-- `modus-themes-preset-overrides-intense'
-- `modus-themes-preset-overrides-cooler'
-- `modus-themes-preset-overrides-warmer'
+- `modux-themes-preset-overrides-faint'
+- `modux-themes-preset-overrides-intense'
+- `modux-themes-preset-overrides-cooler'
+- `modux-themes-preset-overrides-warmer'
 
 To set a preset, assign its symbol without a quote as the value
-of the `modus-themes-common-palette-overrides' or as the value of
-theme-specific options such as `modus-operandi-palette-overrides'.
+of the `modux-themes-common-palette-overrides' or as the value of
+theme-specific options such as `modux-operandi-palette-overrides'.
 
 For overriding named colors and/or semantic color mappings read
-Info node `(modus-themes) Option for palette overrides'.")
+Info node `(modux-themes) Option for palette overrides'.")
 
 
 
 ;;;; Helper functions for theme setup
 
 ;; This is the WCAG formula: https://www.w3.org/TR/WCAG20-TECHS/G18.html
-(defun modus-themes-wcag-formula (hex)
+(defun modux-themes-wcag-formula (hex)
   "Get WCAG value of color value HEX.
 The value is defined in hexadecimal RGB notation, such #123456."
   (cl-loop for k in '(0.2126 0.7152 0.0722)
@@ -1162,46 +1157,46 @@ The value is defined in hexadecimal RGB notation, such #123456."
                       (expt (/ (+ x 0.055) 1.055) 2.4)))))
 
 ;;;###autoload
-(defun modus-themes-contrast (c1 c2)
+(defun modux-themes-contrast (c1 c2)
   "Measure WCAG contrast ratio between C1 and C2.
 C1 and C2 are color values written in hexadecimal RGB."
-  (let ((ct (/ (+ (modus-themes-wcag-formula c1) 0.05)
-               (+ (modus-themes-wcag-formula c2) 0.05))))
+  (let ((ct (/ (+ (modux-themes-wcag-formula c1) 0.05)
+               (+ (modux-themes-wcag-formula c2) 0.05))))
     (max ct (/ ct))))
 
-(make-obsolete 'modus-themes-color nil "4.0.0")
-(make-obsolete 'modus-themes-color-alts nil "4.0.0")
+(make-obsolete 'modux-themes-color nil "4.0.0")
+(make-obsolete 'modux-themes-color-alts nil "4.0.0")
 
 (declare-function cl-remove-if-not "cl-seq" (cl-pred cl-list &rest cl-keys))
 
-(defun modus-themes--list-enabled-themes ()
-  "Return list of `custom-enabled-themes' with modus- prefix."
+(defun modux-themes--list-enabled-themes ()
+  "Return list of `custom-enabled-themes' with modux- prefix."
   (cl-remove-if-not
    (lambda (theme)
-     (string-prefix-p "modus-" (symbol-name theme)))
+     (string-prefix-p "modux-" (symbol-name theme)))
    custom-enabled-themes))
 
-(defun modus-themes--enable-themes ()
-  "Enable the Modus themes."
+(defun modux-themes--enable-themes ()
+  "Enable the Modux themes."
   (mapc (lambda (theme)
           (unless (memq theme custom-known-themes)
             (load-theme theme :no-confirm :no-enable)))
-        modus-themes-items))
+        modux-themes-items))
 
-(defun modus-themes--list-known-themes ()
-  "Return list of `custom-known-themes' with modus- prefix."
-  (modus-themes--enable-themes)
+(defun modux-themes--list-known-themes ()
+  "Return list of `custom-known-themes' with modux- prefix."
+  (modux-themes--enable-themes)
   (cl-remove-if-not
    (lambda (theme)
-     (string-prefix-p "modus-" (symbol-name theme)))
+     (string-prefix-p "modux-" (symbol-name theme)))
    custom-known-themes))
 
-(defun modus-themes--current-theme ()
-  "Return first enabled Modus theme."
-  (car (or (modus-themes--list-enabled-themes)
-           (modus-themes--list-known-themes))))
+(defun modux-themes--current-theme ()
+  "Return first enabled Modux theme."
+  (car (or (modux-themes--list-enabled-themes)
+           (modux-themes--list-known-themes))))
 
-(defun modus-themes--palette-symbol (theme &optional overrides)
+(defun modux-themes--palette-symbol (theme &optional overrides)
   "Return THEME palette as a symbol.
 With optional OVERRIDES, return THEME palette overrides as a
 symbol."
@@ -1212,48 +1207,48 @@ symbol."
                        "palette"))))
     (intern (format "%s-%s" theme suffix))))
 
-(defun modus-themes--palette-value (theme &optional overrides)
+(defun modux-themes--palette-value (theme &optional overrides)
   "Return palette value of THEME with optional OVERRIDES."
-  (let ((base-value (symbol-value (modus-themes--palette-symbol theme))))
+  (let ((base-value (symbol-value (modux-themes--palette-symbol theme))))
     (if overrides
-        (append (symbol-value (modus-themes--palette-symbol theme :overrides))
-                modus-themes-common-palette-overrides
+        (append (symbol-value (modux-themes--palette-symbol theme :overrides))
+                modux-themes-common-palette-overrides
                 base-value)
       base-value)))
 
-(defun modus-themes--current-theme-palette (&optional overrides)
-  "Return palette value of active Modus theme, else produce `user-error'.
+(defun modux-themes--current-theme-palette (&optional overrides)
+  "Return palette value of active Modux theme, else produce `user-error'.
 With optional OVERRIDES return palette value plus whatever
 overrides."
-  (if-let ((theme (modus-themes--current-theme)))
+  (if-let ((theme (modux-themes--current-theme)))
       (if overrides
-          (modus-themes--palette-value theme :overrides)
-        (modus-themes--palette-value theme))
-    (user-error "No enabled Modus theme could be found")))
+          (modux-themes--palette-value theme :overrides)
+        (modux-themes--palette-value theme))
+    (user-error "No enabled Modux theme could be found")))
 
-(defun modus-themes--disable-themes ()
-  "Disable themes per `modus-themes-disable-other-themes'."
+(defun modux-themes--disable-themes ()
+  "Disable themes per `modux-themes-disable-other-themes'."
   (mapc #'disable-theme
-        (if modus-themes-disable-other-themes
+        (if modux-themes-disable-other-themes
             custom-enabled-themes
-          (modus-themes--list-known-themes))))
+          (modux-themes--list-known-themes))))
 
-(defun modus-themes-load-theme (theme)
+(defun modux-themes-load-theme (theme)
   "Load THEME while disabling other themes.
 
 Which themes are disabled is determined by the user option
-`modus-themes-disable-other-themes'.
+`modux-themes-disable-other-themes'.
 
-Run the `modus-themes-after-load-theme-hook' as the final step
+Run the `modux-themes-after-load-theme-hook' as the final step
 after loading the THEME.
 
 Return THEME."
-  (modus-themes--disable-themes)
+  (modux-themes--disable-themes)
   (load-theme theme :no-confirm)
-  (run-hooks 'modus-themes-after-load-theme-hook)
+  (run-hooks 'modux-themes-after-load-theme-hook)
   theme)
 
-(defun modus-themes--retrieve-palette-value (color palette)
+(defun modux-themes--retrieve-palette-value (color palette)
   "Return COLOR from PALETTE.
 Use recursion until COLOR is retrieved as a string.  Refrain from
 doing so if the value of COLOR is not a key in the PALETTE.
@@ -1261,8 +1256,8 @@ doing so if the value of COLOR is not a key in the PALETTE.
 Return `unspecified' if the value of COLOR cannot be determined.
 This symbol is accepted by faces and is thus harmless.
 
-This function is used in the macros `modus-themes-theme',
-`modus-themes-with-colors'."
+This function is used in the macros `modux-themes-theme',
+`modux-themes-with-colors'."
   (let ((value (car (alist-get color palette))))
     (cond
      ((or (stringp value)
@@ -1270,12 +1265,12 @@ This function is used in the macros `modus-themes-theme',
       value)
      ((and (symbolp value)
            (memq value (mapcar #'car palette)))
-      (modus-themes--retrieve-palette-value value palette))
+      (modux-themes--retrieve-palette-value value palette))
      (t
       'unspecified))))
 
-(defun modus-themes-get-color-value (color &optional overrides theme)
-  "Return color value of named COLOR for current Modus theme.
+(defun modux-themes-get-color-value (color &optional overrides theme)
+  "Return color value of named COLOR for current Modux theme.
 
 COLOR is a symbol that represents a named color entry in the
 palette.
@@ -1287,93 +1282,93 @@ value.
 With optional OVERRIDES as a non-nil value, account for palette
 overrides.  Else use the default palette.
 
-With optional THEME as a symbol among `modus-themes-items', use
-the palette of that item.  Else use the current Modus theme.
+With optional THEME as a symbol among `modux-themes-items', use
+the palette of that item.  Else use the current Modux theme.
 
 If COLOR is not present in the palette, return the `unspecified'
 symbol, which is safe when used as a face attribute's value."
   (if-let* ((palette (if theme
-                         (modus-themes--palette-value theme overrides)
-                       (modus-themes--current-theme-palette overrides)))
-            (value (modus-themes--retrieve-palette-value color palette)))
+                         (modux-themes--palette-value theme overrides)
+                       (modux-themes--current-theme-palette overrides)))
+            (value (modux-themes--retrieve-palette-value color palette)))
       value
     'unspecified))
 
 ;;;; Commands
 
-(make-obsolete 'modus-themes-load-themes nil "4.0.0")
-(make-obsolete 'modus-themes-load-operandi nil "4.0.0; Check `modus-themes-load-theme'")
-(make-obsolete 'modus-themes-load-vivendi nil "4.0.0; Check `modus-themes-load-theme'")
+(make-obsolete 'modux-themes-load-themes nil "4.0.0")
+(make-obsolete 'modux-themes-load-operandi nil "4.0.0; Check `modux-themes-load-theme'")
+(make-obsolete 'modux-themes-load-vivendi nil "4.0.0; Check `modux-themes-load-theme'")
 
-(defvar modus-themes--select-theme-history nil
-  "Minibuffer history of `modus-themes--select-prompt'.")
+(defvar modux-themes--select-theme-history nil
+  "Minibuffer history of `modux-themes--select-prompt'.")
 
-(defun modus-themes--annotate-theme (theme)
+(defun modux-themes--annotate-theme (theme)
   "Return completion annotation for THEME."
   (when-let ((symbol (intern-soft theme))
              (doc-string (get symbol 'theme-documentation)))
     (format " -- %s" (car (split-string doc-string "\\.")))))
 
-(defun modus-themes--completion-table (category candidates)
+(defun modux-themes--completion-table (category candidates)
   "Pass appropriate metadata CATEGORY to completion CANDIDATES."
   (lambda (string pred action)
     (if (eq action 'metadata)
         `(metadata (category . ,category))
       (complete-with-action action candidates string pred))))
 
-(defun modus-themes--completion-table-candidates ()
-  "Render `modus-themes--list-known-themes' as completion with theme category."
-  (modus-themes--completion-table 'theme (modus-themes--list-known-themes)))
+(defun modux-themes--completion-table-candidates ()
+  "Render `modux-themes--list-known-themes' as completion with theme category."
+  (modux-themes--completion-table 'theme (modux-themes--list-known-themes)))
 
-(defun modus-themes--select-prompt ()
-  "Minibuffer prompt to select a Modus theme."
-  (let ((completion-extra-properties `(:annotation-function ,#'modus-themes--annotate-theme)))
+(defun modux-themes--select-prompt ()
+  "Minibuffer prompt to select a Modux theme."
+  (let ((completion-extra-properties `(:annotation-function ,#'modux-themes--annotate-theme)))
     (intern
      (completing-read
-      "Select Modus theme: "
-      (modus-themes--completion-table-candidates)
+      "Select Modux theme: "
+      (modux-themes--completion-table-candidates)
       nil t nil
-      'modus-themes--select-theme-history))))
+      'modux-themes--select-theme-history))))
 
 ;;;###autoload
-(defun modus-themes-select (theme)
-  "Load a Modus THEME using minibuffer completion.
-Run `modus-themes-after-load-theme-hook' after loading the theme.
-Disable other themes per `modus-themes-disable-other-themes'."
-  (interactive (list (modus-themes--select-prompt)))
-  (modus-themes-load-theme theme))
+(defun modux-themes-select (theme)
+  "Load a Modux THEME using minibuffer completion.
+Run `modux-themes-after-load-theme-hook' after loading the theme.
+Disable other themes per `modux-themes-disable-other-themes'."
+  (interactive (list (modux-themes--select-prompt)))
+  (modux-themes-load-theme theme))
 
-(defun modus-themes--toggle-theme-p ()
-  "Return non-nil if `modus-themes-to-toggle' are valid."
+(defun modux-themes--toggle-theme-p ()
+  "Return non-nil if `modux-themes-to-toggle' are valid."
   (mapc
    (lambda (theme)
-     (if (or (memq theme modus-themes-items)
-             (memq theme (modus-themes--list-known-themes)))
+     (if (or (memq theme modux-themes-items)
+             (memq theme (modux-themes--list-known-themes)))
          theme
-       (user-error "`%s' is not part of `modus-themes-items'" theme)))
-   modus-themes-to-toggle))
+       (user-error "`%s' is not part of `modux-themes-items'" theme)))
+   modux-themes-to-toggle))
 
 ;;;###autoload
-(defun modus-themes-toggle ()
-  "Toggle between the two `modus-themes-to-toggle'.
-If `modus-themes-to-toggle' does not specify two Modus themes,
+(defun modux-themes-toggle ()
+  "Toggle between the two `modux-themes-to-toggle'.
+If `modux-themes-to-toggle' does not specify two Modux themes,
 prompt with completion for a theme among our collection (this is
-practically the same as the `modus-themes-select' command).
+practically the same as the `modux-themes-select' command).
 
-Run `modus-themes-after-load-theme-hook' after loading the theme.
-Disable other themes per `modus-themes-disable-other-themes'."
+Run `modux-themes-after-load-theme-hook' after loading the theme.
+Disable other themes per `modux-themes-disable-other-themes'."
   (interactive)
-  (if-let* ((themes (modus-themes--toggle-theme-p))
+  (if-let* ((themes (modux-themes--toggle-theme-p))
             (one (car themes))
             (two (cadr themes)))
-      (modus-themes-load-theme (if (eq (car custom-enabled-themes) one) two one))
-    (modus-themes-load-theme (modus-themes--select-prompt))))
+      (modux-themes-load-theme (if (eq (car custom-enabled-themes) one) two one))
+    (modux-themes-load-theme (modux-themes--select-prompt))))
 
-(defun modus-themes--list-colors-render (buffer theme &optional mappings &rest _)
-  "Render colors in BUFFER from THEME for `modus-themes-list-colors'.
+(defun modux-themes--list-colors-render (buffer theme &optional mappings &rest _)
+  "Render colors in BUFFER from THEME for `modux-themes-list-colors'.
 Optional MAPPINGS changes the output to only list the semantic
 color mappings of the palette, instead of its named colors."
-  (let* ((current-palette (modus-themes--palette-value theme mappings))
+  (let* ((current-palette (modux-themes--palette-value theme mappings))
          (palette (if mappings
                       (seq-remove (lambda (cell)
                                     (stringp (cadr cell)))
@@ -1392,11 +1387,11 @@ color mappings of the palette, instead of its named colors."
         (insert " ")
         (dolist (cell palette)
           (let* ((name (car cell))
-                 (color (modus-themes-get-color-value name mappings theme))
+                 (color (modux-themes-get-color-value name mappings theme))
                  (pad (make-string 10 ?\s))
                  (fg (if (eq color 'unspecified)
                          (progn
-                           (readable-foreground-color (modus-themes-get-color-value 'bg-main nil theme))
+                           (readable-foreground-color (modux-themes-get-color-value 'bg-main nil theme))
                            (setq pad (make-string 6 ?\s)))
                        (readable-foreground-color color))))
             (let ((old-point (point)))
@@ -1412,65 +1407,65 @@ color mappings of the palette, instead of its named colors."
             (insert " ")))
         (setq-local revert-buffer-function
                     (lambda (_ignore-auto _noconfirm)
-                      (modus-themes--list-colors-render current-buffer current-theme mappings)))))))
+                      (modux-themes--list-colors-render current-buffer current-theme mappings)))))))
 
-(defvar modus-themes--list-colors-prompt-history '()
-  "Minibuffer history for `modus-themes--list-colors-prompt'.")
+(defvar modux-themes--list-colors-prompt-history '()
+  "Minibuffer history for `modux-themes--list-colors-prompt'.")
 
-(defun modus-themes--list-colors-prompt ()
-  "Prompt for Modus theme.
-Helper function for `modus-themes-list-colors'."
-  (let ((def (format "%s" (modus-themes--current-theme)))
-        (completion-extra-properties `(:annotation-function ,#'modus-themes--annotate-theme)))
+(defun modux-themes--list-colors-prompt ()
+  "Prompt for Modux theme.
+Helper function for `modux-themes-list-colors'."
+  (let ((def (format "%s" (modux-themes--current-theme)))
+        (completion-extra-properties `(:annotation-function ,#'modux-themes--annotate-theme)))
     (completing-read
      (format "Use palette from theme [%s]: " def)
-     (modus-themes--completion-table-candidates)
+     (modux-themes--completion-table-candidates)
      nil t nil
-     'modus-themes--list-colors-prompt-history def)))
+     'modux-themes--list-colors-prompt-history def)))
 
-(defun modus-themes-list-colors (theme &optional mappings)
-  "Preview named colors of the Modus THEME of choice.
+(defun modux-themes-list-colors (theme &optional mappings)
+  "Preview named colors of the Modux THEME of choice.
 With optional prefix argument for MAPPINGS preview the semantic
 color mappings instead of the named colors."
-  (interactive (list (intern (modus-themes--list-colors-prompt)) current-prefix-arg))
-  (modus-themes--list-colors-render
+  (interactive (list (intern (modux-themes--list-colors-prompt)) current-prefix-arg))
+  (modux-themes--list-colors-render
    (format (if mappings "*%s-list-mappings*" "*%s-list-colors*") theme)
    theme
    mappings))
 
-(defalias 'modus-themes-preview-colors 'modus-themes-list-colors
-  "Alias of `modus-themes-list-colors'.")
+(defalias 'modux-themes-preview-colors 'modux-themes-list-colors
+  "Alias of `modux-themes-list-colors'.")
 
-(defun modus-themes-list-colors-current (&optional mappings)
-  "Call `modus-themes-list-colors' for the current Modus theme.
+(defun modux-themes-list-colors-current (&optional mappings)
+  "Call `modux-themes-list-colors' for the current Modux theme.
 Optional prefix argument MAPPINGS has the same meaning as for
-`modus-themes-list-colors'."
+`modux-themes-list-colors'."
   (interactive "P")
-  (modus-themes-list-colors (modus-themes--current-theme) mappings))
+  (modux-themes-list-colors (modux-themes--current-theme) mappings))
 
-(defalias 'modus-themes-preview-colors-current 'modus-themes-list-colors-current
-  "Alias of `modus-themes-list-colors-current'.")
+(defalias 'modux-themes-preview-colors-current 'modux-themes-list-colors-current
+  "Alias of `modux-themes-list-colors-current'.")
 
 
 
 ;;;; Internal functions
 
-(defun modus-themes--warn (option)
+(defun modux-themes--warn (option)
   "Warn that OPTION has changed."
   (prog1 nil
     (display-warning
-     'modus-themes
+     'modux-themes
      (format "`%s' has changed; please read the updated documentation" option)
      :warning)))
 
-(defun modus-themes--list-or-warn (option)
-  "Return list or nil value of OPTION, else `modus-themes--warn'."
+(defun modux-themes--list-or-warn (option)
+  "Return list or nil value of OPTION, else `modux-themes--warn'."
   (let* ((value (symbol-value option)))
     (if (or (null value) (listp value))
         value
-      (modus-themes--warn option))))
+      (modux-themes--warn option))))
 
-(defun modus-themes--property-lookup (properties alist-key list-pred default)
+(defun modux-themes--property-lookup (properties alist-key list-pred default)
   "Return value from property alist or list.
 Check PROPERTIES for an alist value that corresponds to
 ALIST-KEY.  If no alist is present, search the PROPERTIES
@@ -1485,32 +1480,32 @@ list given LIST-PRED, using DEFAULT as a fallback."
 
 ;; Helper functions that are meant to ease the implementation of the
 ;; above customization variables.
-(defun modus-themes--bold-weight ()
+(defun modux-themes--bold-weight ()
   "Conditional use of a heavier text weight."
-  (when modus-themes-bold-constructs
+  (when modux-themes-bold-constructs
     (list :inherit 'bold)))
 
-(defun modus-themes--slant ()
+(defun modux-themes--slant ()
   "Conditional use of italics for slant attribute."
-  (when modus-themes-italic-constructs
+  (when modux-themes-italic-constructs
     (list :inherit 'italic)))
 
-(defun modus-themes--fixed-pitch ()
+(defun modux-themes--fixed-pitch ()
   "Conditional application of `fixed-pitch' inheritance."
-  (when modus-themes-mixed-fonts
+  (when modux-themes-mixed-fonts
     (list :inherit 'fixed-pitch)))
 
-(defun modus-themes--variable-pitch-ui ()
+(defun modux-themes--variable-pitch-ui ()
   "Conditional use of `variable-pitch' in UI elements."
-  (when modus-themes-variable-pitch-ui
+  (when modux-themes-variable-pitch-ui
     (list :inherit 'variable-pitch)))
 
-(defun modus-themes--prompt (fg bg)
+(defun modux-themes--prompt (fg bg)
   "Conditional use of colors for text prompt faces.
 FG is the prompt's standard foreground.  BG is a background
 color that is combined with FG-FOR-BG."
-  (let* ((properties (modus-themes--list-or-warn 'modus-themes-prompts))
-         (weight (modus-themes--weight properties)))
+  (let* ((properties (modux-themes--list-or-warn 'modux-themes-prompts))
+         (weight (modux-themes--weight properties)))
     (list :inherit
           (cond
            ((and (memq 'bold properties)
@@ -1531,30 +1526,30 @@ color that is combined with FG-FOR-BG."
               weight
             'unspecified))))
 
-(defconst modus-themes-weights
+(defconst modux-themes-weights
   '( thin ultralight extralight light semilight regular medium
      semibold bold heavy extrabold ultrabold)
   "List of font weights.")
 
-(defun modus-themes--weight (list)
-  "Search for `modus-themes-weights' weight in LIST."
+(defun modux-themes--weight (list)
+  "Search for `modux-themes-weights' weight in LIST."
   (catch 'found
     (dolist (elt list)
-      (when (memq elt modus-themes-weights)
+      (when (memq elt modux-themes-weights)
         (throw 'found elt)))))
 
-(defun modus-themes--heading (level fg &optional bg ol)
-  "Conditional styles for `modus-themes-headings'.
+(defun modux-themes--heading (level fg &optional bg ol)
+  "Conditional styles for `modux-themes-headings'.
 
 LEVEL is the heading's position in their order.  FG is the
 default text color.  Optional BG is an appropriate background.
 Optional OL is the color of an overline."
-  (let* ((key (alist-get level modus-themes-headings))
-         (style (or key (alist-get t modus-themes-headings)))
+  (let* ((key (alist-get level modux-themes-headings))
+         (style (or key (alist-get t modux-themes-headings)))
          (style-listp (listp style))
          (properties style)
          (var (when (and style-listp (memq 'variable-pitch properties)) 'variable-pitch))
-         (weight (when style-listp (modus-themes--weight style))))
+         (weight (when style-listp (modux-themes--weight style))))
     (list :inherit (cond
                     ((not style-listp) 'bold)
                     ;; `no-bold' is for backward compatibility because we cannot
@@ -1567,26 +1562,26 @@ Optional OL is the color of an overline."
           :foreground fg
           :overline (or ol 'unspecified)
           :height (if style-listp
-                      (modus-themes--property-lookup properties 'height #'floatp 'unspecified)
+                      (modux-themes--property-lookup properties 'height #'floatp 'unspecified)
                     'unspecified)
           :weight (or weight 'unspecified))))
 
-(defun modus-themes--org-block (fg bg)
+(defun modux-themes--org-block (fg bg)
   "Conditionally set the FG and BG of Org blocks."
-  (let ((gray (or (eq modus-themes-org-blocks 'gray-background)
-                  (eq modus-themes-org-blocks 'grayscale) ; for backward compatibility
-                  (eq modus-themes-org-blocks 'greyscale))))
-    (list :inherit 'modus-themes-fixed-pitch
+  (let ((gray (or (eq modux-themes-org-blocks 'gray-background)
+                  (eq modux-themes-org-blocks 'grayscale) ; for backward compatibility
+                  (eq modux-themes-org-blocks 'greyscale))))
+    (list :inherit 'modux-themes-fixed-pitch
           :background (if gray bg 'unspecified)
           :foreground fg
           :extend (if gray t 'unspecified))))
 
-(defun modus-themes--completion-line (bg)
-  "Styles for `modus-themes-completions' with BG as the background."
-  (let* ((var (modus-themes--list-or-warn 'modus-themes-completions))
+(defun modux-themes--completion-line (bg)
+  "Styles for `modux-themes-completions' with BG as the background."
+  (let* ((var (modux-themes--list-or-warn 'modux-themes-completions))
          (properties (or (alist-get 'selection var) (alist-get t var)))
          (italic (memq 'italic properties))
-         (weight (modus-themes--weight properties))
+         (weight (modux-themes--weight properties))
          (bold (when (and weight (eq weight 'bold)) 'bold)))
     (list
      :inherit
@@ -1604,13 +1599,13 @@ Optional OL is the color of an overline."
      :weight
      (if (and weight (null bold)) weight 'unspecified))))
 
-(defun modus-themes--completion-match (fg bg)
-  "Styles for `modus-themes-completions'.
+(defun modux-themes--completion-match (fg bg)
+  "Styles for `modux-themes-completions'.
 FG and BG are the main colors."
-  (let* ((var (modus-themes--list-or-warn 'modus-themes-completions))
+  (let* ((var (modux-themes--list-or-warn 'modux-themes-completions))
          (properties (or (alist-get 'matches var) (alist-get t var)))
          (italic (memq 'italic properties))
-         (weight (modus-themes--weight properties))
+         (weight (modux-themes--weight properties))
          (bold (when (and weight (eq weight 'bold)) 'bold)))
     (list
      :inherit
@@ -1632,112 +1627,112 @@ FG and BG are the main colors."
 
 ;;;; Face specifications
 
-(defconst modus-themes-faces
+(defconst modux-themes-faces
   '(
 ;;;; custom faces
     ;; these bespoke faces are inherited by other constructs below
 ;;;;; just the foregrounds
-    `(modus-themes-fg-red ((,c :foreground ,red)))
-    `(modus-themes-fg-red-warmer ((,c :foreground ,red-warmer)))
-    `(modus-themes-fg-red-cooler ((,c :foreground ,red-cooler)))
-    `(modus-themes-fg-red-faint ((,c :foreground ,red-faint)))
-    `(modus-themes-fg-red-intense ((,c :foreground ,red-intense)))
-    `(modus-themes-fg-green ((,c :foreground ,green)))
-    `(modus-themes-fg-green-warmer ((,c :foreground ,green-warmer)))
-    `(modus-themes-fg-green-cooler ((,c :foreground ,green-cooler)))
-    `(modus-themes-fg-green-faint ((,c :foreground ,green-faint)))
-    `(modus-themes-fg-green-intense ((,c :foreground ,green-intense)))
-    `(modus-themes-fg-yellow ((,c :foreground ,yellow)))
-    `(modus-themes-fg-yellow-warmer ((,c :foreground ,yellow-warmer)))
-    `(modus-themes-fg-yellow-cooler ((,c :foreground ,yellow-cooler)))
-    `(modus-themes-fg-yellow-faint ((,c :foreground ,yellow-faint)))
-    `(modus-themes-fg-yellow-intense ((,c :foreground ,yellow-intense)))
-    `(modus-themes-fg-blue ((,c :foreground ,blue)))
-    `(modus-themes-fg-blue-warmer ((,c :foreground ,blue-warmer)))
-    `(modus-themes-fg-blue-cooler ((,c :foreground ,blue-cooler)))
-    `(modus-themes-fg-blue-faint ((,c :foreground ,blue-faint)))
-    `(modus-themes-fg-blue-intense ((,c :foreground ,blue-intense)))
-    `(modus-themes-fg-magenta ((,c :foreground ,magenta)))
-    `(modus-themes-fg-magenta-warmer ((,c :foreground ,magenta-warmer)))
-    `(modus-themes-fg-magenta-cooler ((,c :foreground ,magenta-cooler)))
-    `(modus-themes-fg-magenta-faint ((,c :foreground ,magenta-faint)))
-    `(modus-themes-fg-magenta-intense ((,c :foreground ,magenta-intense)))
-    `(modus-themes-fg-cyan ((,c :foreground ,cyan)))
-    `(modus-themes-fg-cyan-warmer ((,c :foreground ,cyan-warmer)))
-    `(modus-themes-fg-cyan-cooler ((,c :foreground ,cyan-cooler)))
-    `(modus-themes-fg-cyan-faint ((,c :foreground ,cyan-faint)))
-    `(modus-themes-fg-cyan-intense ((,c :foreground ,cyan-intense)))
+    `(modux-themes-fg-red ((,c :foreground ,red)))
+    `(modux-themes-fg-red-warmer ((,c :foreground ,red-warmer)))
+    `(modux-themes-fg-red-cooler ((,c :foreground ,red-cooler)))
+    `(modux-themes-fg-red-faint ((,c :foreground ,red-faint)))
+    `(modux-themes-fg-red-intense ((,c :foreground ,red-intense)))
+    `(modux-themes-fg-green ((,c :foreground ,green)))
+    `(modux-themes-fg-green-warmer ((,c :foreground ,green-warmer)))
+    `(modux-themes-fg-green-cooler ((,c :foreground ,green-cooler)))
+    `(modux-themes-fg-green-faint ((,c :foreground ,green-faint)))
+    `(modux-themes-fg-green-intense ((,c :foreground ,green-intense)))
+    `(modux-themes-fg-yellow ((,c :foreground ,yellow)))
+    `(modux-themes-fg-yellow-warmer ((,c :foreground ,yellow-warmer)))
+    `(modux-themes-fg-yellow-cooler ((,c :foreground ,yellow-cooler)))
+    `(modux-themes-fg-yellow-faint ((,c :foreground ,yellow-faint)))
+    `(modux-themes-fg-yellow-intense ((,c :foreground ,yellow-intense)))
+    `(modux-themes-fg-blue ((,c :foreground ,blue)))
+    `(modux-themes-fg-blue-warmer ((,c :foreground ,blue-warmer)))
+    `(modux-themes-fg-blue-cooler ((,c :foreground ,blue-cooler)))
+    `(modux-themes-fg-blue-faint ((,c :foreground ,blue-faint)))
+    `(modux-themes-fg-blue-intense ((,c :foreground ,blue-intense)))
+    `(modux-themes-fg-magenta ((,c :foreground ,magenta)))
+    `(modux-themes-fg-magenta-warmer ((,c :foreground ,magenta-warmer)))
+    `(modux-themes-fg-magenta-cooler ((,c :foreground ,magenta-cooler)))
+    `(modux-themes-fg-magenta-faint ((,c :foreground ,magenta-faint)))
+    `(modux-themes-fg-magenta-intense ((,c :foreground ,magenta-intense)))
+    `(modux-themes-fg-cyan ((,c :foreground ,cyan)))
+    `(modux-themes-fg-cyan-warmer ((,c :foreground ,cyan-warmer)))
+    `(modux-themes-fg-cyan-cooler ((,c :foreground ,cyan-cooler)))
+    `(modux-themes-fg-cyan-faint ((,c :foreground ,cyan-faint)))
+    `(modux-themes-fg-cyan-intense ((,c :foreground ,cyan-intense)))
 ;;;;; nuanced colored backgrounds
-    `(modus-themes-nuanced-red ((,c :background ,bg-red-nuanced :extend t)))
-    `(modus-themes-nuanced-green ((,c :background ,bg-green-nuanced :extend t)))
-    `(modus-themes-nuanced-yellow ((,c :background ,bg-yellow-nuanced :extend t)))
-    `(modus-themes-nuanced-blue ((,c :background ,bg-blue-nuanced :extend t)))
-    `(modus-themes-nuanced-magenta ((,c :background ,bg-magenta-nuanced :extend t)))
-    `(modus-themes-nuanced-cyan ((,c :background ,bg-cyan-nuanced :extend t)))
+    `(modux-themes-nuanced-red ((,c :background ,bg-red-nuanced :extend t)))
+    `(modux-themes-nuanced-green ((,c :background ,bg-green-nuanced :extend t)))
+    `(modux-themes-nuanced-yellow ((,c :background ,bg-yellow-nuanced :extend t)))
+    `(modux-themes-nuanced-blue ((,c :background ,bg-blue-nuanced :extend t)))
+    `(modux-themes-nuanced-magenta ((,c :background ,bg-magenta-nuanced :extend t)))
+    `(modux-themes-nuanced-cyan ((,c :background ,bg-cyan-nuanced :extend t)))
 ;;;;; subtle colored backgrounds
-    `(modus-themes-subtle-red ((,c :background ,bg-red-subtle :foreground ,fg-main)))
-    `(modus-themes-subtle-green ((,c :background ,bg-green-subtle :foreground ,fg-main)))
-    `(modus-themes-subtle-yellow ((,c :background ,bg-yellow-subtle :foreground ,fg-main)))
-    `(modus-themes-subtle-blue ((,c :background ,bg-blue-subtle :foreground ,fg-main)))
-    `(modus-themes-subtle-magenta ((,c :background ,bg-magenta-subtle :foreground ,fg-main)))
-    `(modus-themes-subtle-cyan ((,c :background ,bg-cyan-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-red ((,c :background ,bg-red-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-green ((,c :background ,bg-green-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-yellow ((,c :background ,bg-yellow-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-blue ((,c :background ,bg-blue-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-magenta ((,c :background ,bg-magenta-subtle :foreground ,fg-main)))
+    `(modux-themes-subtle-cyan ((,c :background ,bg-cyan-subtle :foreground ,fg-main)))
 ;;;;; intense colored backgrounds
-    `(modus-themes-intense-red ((,c :background ,bg-red-intense :foreground ,fg-main)))
-    `(modus-themes-intense-green ((,c :background ,bg-green-intense :foreground ,fg-main)))
-    `(modus-themes-intense-yellow ((,c :background ,bg-yellow-intense :foreground ,fg-main)))
-    `(modus-themes-intense-blue ((,c :background ,bg-blue-intense :foreground ,fg-main)))
-    `(modus-themes-intense-magenta ((,c :background ,bg-magenta-intense :foreground ,fg-main)))
-    `(modus-themes-intense-cyan ((,c :background ,bg-cyan-intense :foreground ,fg-main)))
+    `(modux-themes-intense-red ((,c :background ,bg-red-intense :foreground ,fg-main)))
+    `(modux-themes-intense-green ((,c :background ,bg-green-intense :foreground ,fg-main)))
+    `(modux-themes-intense-yellow ((,c :background ,bg-yellow-intense :foreground ,fg-main)))
+    `(modux-themes-intense-blue ((,c :background ,bg-blue-intense :foreground ,fg-main)))
+    `(modux-themes-intense-magenta ((,c :background ,bg-magenta-intense :foreground ,fg-main)))
+    `(modux-themes-intense-cyan ((,c :background ,bg-cyan-intense :foreground ,fg-main)))
 ;;;;; mark indicators
     ;; color combinations intended for Dired, Ibuffer, or equivalent
-    `(modus-themes-mark-alt ((,c :inherit bold :background ,bg-mark-other :foreground ,fg-mark-other)))
-    `(modus-themes-mark-del ((,c :inherit bold :background ,bg-mark-delete :foreground ,fg-mark-delete)))
-    `(modus-themes-mark-sel ((,c :inherit bold :background ,bg-mark-select :foreground ,fg-mark-select)))
+    `(modux-themes-mark-alt ((,c :inherit bold :background ,bg-mark-other :foreground ,fg-mark-other)))
+    `(modux-themes-mark-del ((,c :inherit bold :background ,bg-mark-delete :foreground ,fg-mark-delete)))
+    `(modux-themes-mark-sel ((,c :inherit bold :background ,bg-mark-select :foreground ,fg-mark-select)))
 ;;;;; heading levels
     ;; styles for regular headings used in Org, Markdown, Info, etc.
-    `(modus-themes-heading-0 ((,c ,@(modus-themes--heading 0 fg-heading-0 bg-heading-0 overline-heading-0))))
-    `(modus-themes-heading-1 ((,c ,@(modus-themes--heading 1 fg-heading-1 bg-heading-1 overline-heading-1))))
-    `(modus-themes-heading-2 ((,c ,@(modus-themes--heading 2 fg-heading-2 bg-heading-2 overline-heading-2))))
-    `(modus-themes-heading-3 ((,c ,@(modus-themes--heading 3 fg-heading-3 bg-heading-3 overline-heading-3))))
-    `(modus-themes-heading-4 ((,c ,@(modus-themes--heading 4 fg-heading-4 bg-heading-4 overline-heading-4))))
-    `(modus-themes-heading-5 ((,c ,@(modus-themes--heading 5 fg-heading-5 bg-heading-5 overline-heading-5))))
-    `(modus-themes-heading-6 ((,c ,@(modus-themes--heading 6 fg-heading-6 bg-heading-6 overline-heading-6))))
-    `(modus-themes-heading-7 ((,c ,@(modus-themes--heading 7 fg-heading-7 bg-heading-7 overline-heading-7))))
-    `(modus-themes-heading-8 ((,c ,@(modus-themes--heading 8 fg-heading-8 bg-heading-8 overline-heading-8))))
+    `(modux-themes-heading-0 ((,c ,@(modux-themes--heading 0 fg-heading-0 bg-heading-0 overline-heading-0))))
+    `(modux-themes-heading-1 ((,c ,@(modux-themes--heading 1 fg-heading-1 bg-heading-1 overline-heading-1))))
+    `(modux-themes-heading-2 ((,c ,@(modux-themes--heading 2 fg-heading-2 bg-heading-2 overline-heading-2))))
+    `(modux-themes-heading-3 ((,c ,@(modux-themes--heading 3 fg-heading-3 bg-heading-3 overline-heading-3))))
+    `(modux-themes-heading-4 ((,c ,@(modux-themes--heading 4 fg-heading-4 bg-heading-4 overline-heading-4))))
+    `(modux-themes-heading-5 ((,c ,@(modux-themes--heading 5 fg-heading-5 bg-heading-5 overline-heading-5))))
+    `(modux-themes-heading-6 ((,c ,@(modux-themes--heading 6 fg-heading-6 bg-heading-6 overline-heading-6))))
+    `(modux-themes-heading-7 ((,c ,@(modux-themes--heading 7 fg-heading-7 bg-heading-7 overline-heading-7))))
+    `(modux-themes-heading-8 ((,c ,@(modux-themes--heading 8 fg-heading-8 bg-heading-8 overline-heading-8))))
 ;;;;; language checkers
-    `(modus-themes-lang-error ((,c :underline (:style wave :color ,underline-err))))
-    `(modus-themes-lang-note ((,c :underline (:style wave :color ,underline-note))))
-    `(modus-themes-lang-warning ((,c :underline (:style wave :color ,underline-warning))))
+    `(modux-themes-lang-error ((,c :underline (:style wave :color ,underline-err))))
+    `(modux-themes-lang-note ((,c :underline (:style wave :color ,underline-note))))
+    `(modux-themes-lang-warning ((,c :underline (:style wave :color ,underline-warning))))
 ;;;;; prominent semantic notes
-    `(modus-themes-prominent-error ((,c :background ,bg-prominent-err :foreground ,fg-prominent-err)))
-    `(modus-themes-prominent-note ((,c :background ,bg-prominent-note :foreground ,fg-prominent-note)))
-    `(modus-themes-prominent-warning ((,c :background ,bg-prominent-warning :foreground ,fg-prominent-warning)))
+    `(modux-themes-prominent-error ((,c :background ,bg-prominent-err :foreground ,fg-prominent-err)))
+    `(modux-themes-prominent-note ((,c :background ,bg-prominent-note :foreground ,fg-prominent-note)))
+    `(modux-themes-prominent-warning ((,c :background ,bg-prominent-warning :foreground ,fg-prominent-warning)))
 ;;;;; markup
-    `(modus-themes-prose-code ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-code)))
-    `(modus-themes-prose-macro ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-macro)))
-    `(modus-themes-prose-verbatim ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-verbatim)))
+    `(modux-themes-prose-code ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-code)))
+    `(modux-themes-prose-macro ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-macro)))
+    `(modux-themes-prose-verbatim ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-verbatim)))
 ;;;;; search
-    `(modus-themes-search-current ((,c :background ,bg-yellow-intense :foreground ,fg-main)))
-    `(modus-themes-search-lazy ((,c :background ,bg-cyan-intense :foreground ,fg-main)))
+    `(modux-themes-search-current ((,c :background ,bg-yellow-intense :foreground ,fg-main)))
+    `(modux-themes-search-lazy ((,c :background ,bg-cyan-intense :foreground ,fg-main)))
 ;;;;; completion frameworks
-    `(modus-themes-completion-match-0 ((,c ,@(modus-themes--completion-match fg-completion-match-0 bg-completion-match-0))))
-    `(modus-themes-completion-match-1 ((,c ,@(modus-themes--completion-match fg-completion-match-1 bg-completion-match-1))))
-    `(modus-themes-completion-match-2 ((,c ,@(modus-themes--completion-match fg-completion-match-2 bg-completion-match-2))))
-    `(modus-themes-completion-match-3 ((,c ,@(modus-themes--completion-match fg-completion-match-3 bg-completion-match-3))))
-    `(modus-themes-completion-selected ((,c ,@(modus-themes--completion-line bg-completion))))
+    `(modux-themes-completion-match-0 ((,c ,@(modux-themes--completion-match fg-completion-match-0 bg-completion-match-0))))
+    `(modux-themes-completion-match-1 ((,c ,@(modux-themes--completion-match fg-completion-match-1 bg-completion-match-1))))
+    `(modux-themes-completion-match-2 ((,c ,@(modux-themes--completion-match fg-completion-match-2 bg-completion-match-2))))
+    `(modux-themes-completion-match-3 ((,c ,@(modux-themes--completion-match fg-completion-match-3 bg-completion-match-3))))
+    `(modux-themes-completion-selected ((,c ,@(modux-themes--completion-line bg-completion))))
 ;;;;; typography
-    `(modus-themes-bold ((,c ,@(modus-themes--bold-weight))))
-    `(modus-themes-fixed-pitch ((,c ,@(modus-themes--fixed-pitch))))
-    `(modus-themes-slant ((,c ,@(modus-themes--slant))))
-    `(modus-themes-ui-variable-pitch ((,c ,@(modus-themes--variable-pitch-ui))))
+    `(modux-themes-bold ((,c ,@(modux-themes--bold-weight))))
+    `(modux-themes-fixed-pitch ((,c ,@(modux-themes--fixed-pitch))))
+    `(modux-themes-slant ((,c ,@(modux-themes--slant))))
+    `(modux-themes-ui-variable-pitch ((,c ,@(modux-themes--variable-pitch-ui))))
 ;;;;; other custom faces
-    `(modus-themes-button ((,c :inherit variable-pitch
+    `(modux-themes-button ((,c :inherit variable-pitch
                                :box (:line-width 1 :color ,border :style released-button)
                                :background ,bg-button-active
                                :foreground ,fg-button-active)))
-    `(modus-themes-key-binding ((,c :inherit (bold modus-themes-fixed-pitch) :foreground ,keybind)))
-    `(modus-themes-prompt ((,c ,@(modus-themes--prompt fg-prompt bg-prompt))))
-    `(modus-themes-reset-soft ((,c :background ,bg-main :foreground ,fg-main
+    `(modux-themes-key-binding ((,c :inherit (bold modux-themes-fixed-pitch) :foreground ,keybind)))
+    `(modux-themes-prompt ((,c ,@(modux-themes--prompt fg-prompt bg-prompt))))
+    `(modux-themes-reset-soft ((,c :background ,bg-main :foreground ,fg-main
                                    :weight normal :slant normal :strike-through nil
                                    :box nil :underline nil :overline nil :extend nil)))
 ;;;; standard faces
@@ -1758,31 +1753,31 @@ FG and BG are the main colors."
     `(buffer-menu-buffer ((,c :inherit bold)))
     `(child-frame-border ((,c :background ,border)))
     `(comint-highlight-input ((,c :inherit bold)))
-    `(comint-highlight-prompt ((,c :inherit modus-themes-prompt)))
-    `(confusingly-reordered ((,c :inherit modus-themes-lang-error)))
+    `(comint-highlight-prompt ((,c :inherit modux-themes-prompt)))
+    `(confusingly-reordered ((,c :inherit modux-themes-lang-error)))
     `(edmacro-label ((,c :inherit bold :foreground ,accent-0)))
     `(elisp-shorthand-font-lock-face ((,c :inherit font-lock-variable-name-face)))
     `(error ((,c :inherit bold :foreground ,err)))
     `(escape-glyph ((,c :foreground ,err)))
     `(file-name-shadow ((,c :inherit shadow)))
-    `(header-line ((,c :inherit modus-themes-ui-variable-pitch :background ,bg-dim)))
+    `(header-line ((,c :inherit modux-themes-ui-variable-pitch :background ,bg-dim)))
     `(header-line-highlight ((,c :inherit highlight)))
-    `(help-argument-name ((,c :inherit modus-themes-slant :foreground ,variable)))
-    `(help-key-binding ((,c :inherit modus-themes-key-binding)))
+    `(help-argument-name ((,c :inherit modux-themes-slant :foreground ,variable)))
+    `(help-key-binding ((,c :inherit modux-themes-key-binding)))
     `(highlight ((,c :background ,bg-hover :foreground ,fg-main)))
     `(homoglyph ((,c :foreground ,warning)))
     `(ibuffer-locked-buffer ((,c :foreground ,warning)))
-    `(icon-button ((,c :inherit modus-themes-button)))
+    `(icon-button ((,c :inherit modux-themes-button)))
     `(italic ((,c :slant italic)))
     `(nobreak-hyphen ((,c :foreground ,err)))
     `(nobreak-space ((,c :foreground ,err :underline t)))
     `(menu ((,c :inverse-video unspecified :background ,bg-active :foreground ,fg-main)))
-    `(minibuffer-prompt ((,c :inherit modus-themes-prompt)))
+    `(minibuffer-prompt ((,c :inherit modux-themes-prompt)))
     `(mm-command-output ((,c :foreground ,mail-part)))
     `(mm-uu-extract ((,c :foreground ,mail-part)))
-    `(next-error ((,c :inherit modus-themes-prominent-error :extend t)))
-    `(pgtk-im-0 ((,c :inherit modus-themes-prominent-note)))
-    `(read-multiple-choice-face ((,c :inherit (bold modus-themes-mark-alt))))
+    `(next-error ((,c :inherit modux-themes-prominent-error :extend t)))
+    `(pgtk-im-0 ((,c :inherit modux-themes-prominent-note)))
+    `(read-multiple-choice-face ((,c :inherit (bold modux-themes-mark-alt))))
     `(rectangle-preview ((,c :inherit secondary-selection)))
     `(region ((,c :background ,bg-region :foreground ,fg-region)))
     `(secondary-selection ((,c :background ,bg-hover-secondary :foreground ,fg-main)))
@@ -1800,22 +1795,22 @@ FG and BG are the main colors."
     `(agda2-highlight-bound-variable-face ((,c :inherit font-lock-variable-name-face)))
     `(agda2-highlight-catchall-clause-face ((,c :background ,bg-inactive)))
     `(agda2-highlight-coinductive-constructor-face ((,c :inherit font-lock-type-face)))
-    `(agda2-highlight-coverage-problem-face ((,c :inherit modus-themes-lang-error)))
+    `(agda2-highlight-coverage-problem-face ((,c :inherit modux-themes-lang-error)))
     `(agda2-highlight-datatype-face ((,c :inherit font-lock-type-face)))
     `(agda2-highlight-deadcode-face ((,c :background ,bg-active)))
     `(agda2-highlight-dotted-face ((,c :inherit font-lock-variable-name-face)))
-    `(agda2-highlight-error-face ((,c :inherit modus-themes-lang-error)))
+    `(agda2-highlight-error-face ((,c :inherit modux-themes-lang-error)))
     `(agda2-highlight-field-face ((,c :inherit font-lock-type-face)))
     `(agda2-highlight-function-face ((,c :inherit font-lock-function-name-face)))
     `(agda2-highlight-generalizable-variable-face ((,c :inherit font-lock-variable-name-face)))
-    `(agda2-highlight-incomplete-pattern-face ((,c :inherit modus-themes-lang-warning)))
+    `(agda2-highlight-incomplete-pattern-face ((,c :inherit modux-themes-lang-warning)))
     `(agda2-highlight-inductive-constructor-face ((,c :inherit font-lock-type-face)))
     `(agda2-highlight-keyword-face ((,c :inherit font-lock-keyword-face)))
     `(agda2-highlight-macro-face ((,c :inherit font-lock-keyword-face)))
     `(agda2-highlight-module-face ((,c :inherit font-lock-variable-name-face)))
     `(agda2-highlight-number-face ((,c :inherit shadow)))
     `(agda2-highlight-operator-face ((,c :inherit font-lock-variable-name-face)))
-    `(agda2-highlight-positivity-problem-face ((,c :inherit modus-themes-lang-warning)))
+    `(agda2-highlight-positivity-problem-face ((,c :inherit modux-themes-lang-warning)))
     `(agda2-highlight-postulate-face ((,c :inherit font-lock-type-face)))
     `(agda2-highlight-pragma-face ((,c :inherit font-lock-preprocessor-face)))
     `(agda2-highlight-primitive-face ((,c :inherit font-lock-type-face)))
@@ -1823,10 +1818,10 @@ FG and BG are the main colors."
     `(agda2-highlight-record-face ((,c :inherit font-lock-type-face)))
     `(agda2-highlight-string-face ((,c :inherit font-lock-string-face)))
     `(agda2-highlight-symbol-face ((,c :inherit font-lock-constant-face)))
-    `(agda2-highlight-termination-problem-face ((,c :inherit modus-themes-lang-warning)))
+    `(agda2-highlight-termination-problem-face ((,c :inherit modux-themes-lang-warning)))
     `(agda2-highlight-typechecks-face ((,c :inherit font-lock-warning-face)))
-    `(agda2-highlight-unsolved-constraint-face ((,c :inherit modus-themes-lang-warning)))
-    `(agda2-highlight-unsolved-meta-face ((,c :inherit modus-themes-lang-warning)))
+    `(agda2-highlight-unsolved-constraint-face ((,c :inherit modux-themes-lang-warning)))
+    `(agda2-highlight-unsolved-meta-face ((,c :inherit modux-themes-lang-warning)))
 ;;;;; all-the-icons
     `(all-the-icons-blue ((,c :foreground ,blue-cooler)))
     `(all-the-icons-blue-alt ((,c :foreground ,blue-warmer)))
@@ -1870,8 +1865,8 @@ FG and BG are the main colors."
     `(all-the-icons-ibuffer-mode-face ((,c :foreground ,cyan)))
     `(all-the-icons-ibuffer-size-face ((,c :foreground ,cyan-cooler)))
 ;;;;; annotate
-    `(annotate-annotation ((,c :inherit modus-themes-subtle-blue)))
-    `(annotate-annotation-secondary ((,c :inherit modus-themes-subtle-magenta)))
+    `(annotate-annotation ((,c :inherit modux-themes-subtle-blue)))
+    `(annotate-annotation-secondary ((,c :inherit modux-themes-subtle-magenta)))
     `(annotate-highlight ((,c :background ,bg-blue-subtle :underline ,blue-intense)))
     `(annotate-highlight-secondary ((,c :background ,bg-magenta-subtle :underline ,magenta-intense)))
 ;;;;; ansi-color
@@ -1894,13 +1889,13 @@ FG and BG are the main colors."
     `(ansi-color-white ((,c :background ,bg-term-white :foreground ,fg-term-white)))
     `(ansi-color-yellow ((,c :background ,bg-term-yellow :foreground ,fg-term-yellow)))
 ;;;;; anzu
-    `(anzu-match-1 ((,c :inherit modus-themes-subtle-cyan)))
-    `(anzu-match-2 ((,c :inherit modus-themes-search-current)))
-    `(anzu-match-3 ((,c :inherit modus-themes-subtle-yellow)))
+    `(anzu-match-1 ((,c :inherit modux-themes-subtle-cyan)))
+    `(anzu-match-2 ((,c :inherit modux-themes-search-current)))
+    `(anzu-match-3 ((,c :inherit modux-themes-subtle-yellow)))
     `(anzu-mode-line ((,c :inherit bold)))
     `(anzu-mode-line-no-match ((,c :inherit error)))
-    `(anzu-replace-highlight ((,c :inherit modus-themes-prominent-error :underline t)))
-    `(anzu-replace-to ((,c :inherit modus-themes-search-current)))
+    `(anzu-replace-highlight ((,c :inherit modux-themes-prominent-error :underline t)))
+    `(anzu-replace-to ((,c :inherit modux-themes-search-current)))
 ;;;;; auctex and Tex
     `(font-latex-bold-face ((,c :inherit bold)))
     `(font-latex-doctex-documentation-face ((,c :inherit font-lock-doc-face)))
@@ -1908,16 +1903,16 @@ FG and BG are the main colors."
     `(font-latex-italic-face ((,c :inherit italic)))
     `(font-latex-math-face ((,c :inherit font-lock-constant-face)))
     `(font-latex-script-char-face ((,c :inherit font-lock-builtin-face)))
-    `(font-latex-sectioning-5-face ((,c :inherit (bold modus-themes-variable-pitch) :foreground ,fg-alt)))
+    `(font-latex-sectioning-5-face ((,c :inherit (bold modux-themes-variable-pitch) :foreground ,fg-alt)))
     `(font-latex-sedate-face ((,c :inherit font-lock-keyword-face)))
-    `(font-latex-slide-title-face ((,c :inherit modus-themes-heading-1)))
+    `(font-latex-slide-title-face ((,c :inherit modux-themes-heading-1)))
     `(font-latex-string-face ((,c :inherit font-lock-string-face)))
     `(font-latex-subscript-face ((,c :height 0.95)))
     `(font-latex-superscript-face ((,c :height 0.95)))
     `(font-latex-underline-face ((,c :inherit underline)))
-    `(font-latex-verbatim-face ((,c :inherit modus-themes-prose-verbatim)))
+    `(font-latex-verbatim-face ((,c :inherit modux-themes-prose-verbatim)))
     `(font-latex-warning-face ((,c :inherit font-lock-warning-face)))
-    `(tex-verbatim ((,c :inherit modus-themes-prose-verbatim)))
+    `(tex-verbatim ((,c :inherit modux-themes-prose-verbatim)))
     ;; `(texinfo-heading ((,c :foreground ,magenta)))
     `(TeX-error-description-error ((,c :inherit error)))
     `(TeX-error-description-help ((,c :inherit success)))
@@ -1928,20 +1923,20 @@ FG and BG are the main colors."
 ;;;;; avy
     `(avy-background-face ((,c :background ,bg-dim :foreground ,fg-dim :extend t)))
     `(avy-goto-char-timer-face ((,c :inherit bold :background ,bg-active)))
-    `(avy-lead-face ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-0)))
-    `(avy-lead-face-0 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-1)))
-    `(avy-lead-face-1 ((,c :inherit modus-themes-reset-soft :background ,bg-inactive)))
-    `(avy-lead-face-2 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-2)))
+    `(avy-lead-face ((,c :inherit (bold modux-themes-reset-soft) :background ,bg-char-0)))
+    `(avy-lead-face-0 ((,c :inherit (bold modux-themes-reset-soft) :background ,bg-char-1)))
+    `(avy-lead-face-1 ((,c :inherit modux-themes-reset-soft :background ,bg-inactive)))
+    `(avy-lead-face-2 ((,c :inherit (bold modux-themes-reset-soft) :background ,bg-char-2)))
 ;;;;; aw (ace-window)
     `(aw-background-face ((,c :foreground "gray50")))
-    `(aw-key-face ((,c :inherit modus-themes-key-binding)))
-    `(aw-leading-char-face ((,c :inherit (bold modus-themes-reset-soft) :height 1.5 :foreground ,red-intense)))
-    `(aw-minibuffer-leading-char-face ((,c :inherit modus-themes-key-binding)))
+    `(aw-key-face ((,c :inherit modux-themes-key-binding)))
+    `(aw-leading-char-face ((,c :inherit (bold modux-themes-reset-soft) :height 1.5 :foreground ,red-intense)))
+    `(aw-minibuffer-leading-char-face ((,c :inherit modux-themes-key-binding)))
     `(aw-mode-line-face ((,c :inherit bold)))
 ;;;;; binder
-    `(binder-sidebar-highlight ((,c :inherit modus-themes-hl-line)))
-    `(binder-sidebar-marked ((,c :inherit modus-themes-mark-sel)))
-    `(binder-sidebar-missing ((,c :inherit modus-themes-mark-del)))
+    `(binder-sidebar-highlight ((,c :inherit modux-themes-hl-line)))
+    `(binder-sidebar-marked ((,c :inherit modux-themes-mark-sel)))
+    `(binder-sidebar-missing ((,c :inherit modux-themes-mark-del)))
     `(binder-sidebar-tags ((,c :foreground ,variable)))
 ;;;;; breadcrumb
     `(breadcrumb-face ((,c :foreground ,fg-alt)))
@@ -1953,17 +1948,17 @@ FG and BG are the main colors."
     `(bongo-currently-playing-track ((,c :inherit bold)))
     `(bongo-elapsed-track-part ((,c :background ,bg-inactive :underline t)))
     `(bongo-filled-seek-bar ((,c :background ,bg-hover)))
-    `(bongo-marked-track ((,c :inherit modus-themes-mark-alt)))
+    `(bongo-marked-track ((,c :inherit modux-themes-mark-alt)))
     `(bongo-marked-track-line ((,c :background ,bg-dim)))
     `(bongo-played-track ((,c :inherit shadow :strike-through t)))
     `(bongo-track-length ((,c :inherit shadow)))
     `(bongo-track-title ((,c :foreground ,accent-1)))
     `(bongo-unfilled-seek-bar ((,c :background ,bg-dim)))
 ;;;;; boon
-    `(boon-modeline-cmd ((,c :inherit modus-themes-intense-blue)))
-    `(boon-modeline-ins ((,c :inherit modus-themes-intense-red)))
-    `(boon-modeline-off ((,c :inherit modus-themes-intense-yellow)))
-    `(boon-modeline-spc ((,c :inherit modus-themes-intense-green)))
+    `(boon-modeline-cmd ((,c :inherit modux-themes-intense-blue)))
+    `(boon-modeline-ins ((,c :inherit modux-themes-intense-red)))
+    `(boon-modeline-off ((,c :inherit modux-themes-intense-yellow)))
+    `(boon-modeline-spc ((,c :inherit modux-themes-intense-green)))
 ;;;;; bookmark
     `(bookmark-face ((,c :inherit success)))
     `(bookmark-menu-bookmark ((,c :inherit bold)))
@@ -1979,7 +1974,7 @@ FG and BG are the main colors."
 ;;;;; calibredb
     ;; NOTE 2022-12-27: Calibredb needs to be reviewed.  I had to
     ;; change the applicable colors for the transition to
-    ;; modus-themes version 4, but I cannot test this currently (it
+    ;; modux-themes version 4, but I cannot test this currently (it
     ;; depends on an external program).
     `(calibredb-archive-face ((,c :foreground ,accent-3)))
     `(calibredb-author-face ((,c :foreground ,name)))
@@ -1998,7 +1993,7 @@ FG and BG are the main colors."
     `(calibredb-search-header-sort-face ((,c :inherit bold :foreground ,accent-1)))
     `(calibredb-search-header-total-face ((,c :inherit bold :foreground ,accent-0)))
     `(calibredb-search-header-filter-face ((,c :inherit bold)))
-    `(calibredb-mark-face ((,c :inherit modus-themes-mark-sel)))
+    `(calibredb-mark-face ((,c :inherit modux-themes-mark-sel)))
     `(calibredb-size-face (( )))
     `(calibredb-tag-face ((,c :foreground ,fg-alt)))
 ;;;;; centaur-tabs
@@ -2033,18 +2028,18 @@ FG and BG are the main colors."
     `(cider-deprecated-face ((,c :inherit warning)))
     `(cider-enlightened-face ((,c :box ,warning)))
     `(cider-enlightened-local-face ((,c :inherit warning)))
-    `(cider-error-highlight-face ((,c :inherit modus-themes-lang-error)))
+    `(cider-error-highlight-face ((,c :inherit modux-themes-lang-error)))
     `(cider-fringe-good-face ((,c :foreground ,info)))
     `(cider-instrumented-face ((,c :box ,err)))
     `(cider-reader-conditional-face ((,c :inherit font-lock-type-face)))
     `(cider-repl-prompt-face ((,c :inherit minibuffer-prompt)))
     `(cider-repl-stderr-face ((,c :foreground ,err)))
     `(cider-repl-stdout-face (( )))
-    `(cider-warning-highlight-face ((,c :inherit modus-themes-lang-warning)))
+    `(cider-warning-highlight-face ((,c :inherit modux-themes-lang-warning)))
 ;;;;; circe (and lui)
     `(circe-fool-face ((,c :inherit shadow)))
     `(circe-highlight-nick-face ((,c :inherit error)))
-    `(circe-prompt-face ((,c :inherit modus-themes-prompt)))
+    `(circe-prompt-face ((,c :inherit modux-themes-prompt)))
     `(circe-server-face ((,c :inherit shadow)))
     `(lui-button-face ((,c :inherit button)))
     `(lui-highlight-face ((,c :inherit error)))
@@ -2055,9 +2050,9 @@ FG and BG are the main colors."
 ;;;;; clojure-mode
     `(clojure-keyword-face ((,c :inherit font-lock-builtin-face)))
 ;;;;; column-enforce-mode
-    `(column-enforce-face ((,c :inherit modus-themes-prominent-error)))
+    `(column-enforce-face ((,c :inherit modux-themes-prominent-error)))
 ;;;;; company-mode
-    `(company-echo-common ((,c :inherit modus-themes-completion-match-0)))
+    `(company-echo-common ((,c :inherit modux-themes-completion-match-0)))
     `(company-preview ((,c :background ,bg-dim :foreground ,fg-dim)))
     `(company-preview-common ((,c :inherit company-echo-common)))
     `(company-preview-search ((,c :background ,bg-yellow-intense)))
@@ -2073,29 +2068,29 @@ FG and BG are the main colors."
     `(company-tooltip-scrollbar-track ((,c :background ,bg-inactive)))
     `(company-tooltip-search ((,c :inherit secondary-selection)))
     `(company-tooltip-search-selection ((,c :inherit secondary-selection :underline t)))
-    `(company-tooltip-selection ((,c :inherit modus-themes-completion-selected)))
+    `(company-tooltip-selection ((,c :inherit modux-themes-completion-selected)))
 ;;;;; compilation
     `(compilation-column-number ((,c :inherit compilation-line-number)))
-    `(compilation-error ((,c :inherit modus-themes-bold :foreground ,err)))
-    `(compilation-info ((,c :inherit modus-themes-bold :foreground ,info)))
+    `(compilation-error ((,c :inherit modux-themes-bold :foreground ,err)))
+    `(compilation-info ((,c :inherit modux-themes-bold :foreground ,info)))
     `(compilation-line-number ((,c :inherit shadow)))
     `(compilation-mode-line-exit ((,c :inherit bold)))
     `(compilation-mode-line-fail ((,c :inherit bold :foreground ,modeline-err)))
     `(compilation-mode-line-run ((,c :inherit bold :foreground ,modeline-warning)))
-    `(compilation-warning ((,c :inherit modus-themes-bold :foreground ,warning)))
+    `(compilation-warning ((,c :inherit modux-themes-bold :foreground ,warning)))
 ;;;;; completions
-    `(completions-annotations ((,c :inherit modus-themes-slant :foreground ,docstring)))
-    `(completions-common-part ((,c :inherit modus-themes-completion-match-0)))
-    `(completions-first-difference ((,c :inherit modus-themes-completion-match-1)))
+    `(completions-annotations ((,c :inherit modux-themes-slant :foreground ,docstring)))
+    `(completions-common-part ((,c :inherit modux-themes-completion-match-0)))
+    `(completions-first-difference ((,c :inherit modux-themes-completion-match-1)))
 ;;;;; consult
     `(consult-async-split ((,c :inherit error)))
-    `(consult-file ((,c :inherit modus-themes-bold :foreground ,info)))
-    `(consult-key ((,c :inherit modus-themes-key-binding)))
+    `(consult-file ((,c :inherit modux-themes-bold :foreground ,info)))
+    `(consult-key ((,c :inherit modux-themes-key-binding)))
     `(consult-imenu-prefix ((,c :inherit shadow)))
     `(consult-line-number ((,c :inherit shadow)))
     `(consult-line-number-prefix ((,c :inherit shadow)))
 ;;;;; corfu
-    `(corfu-current ((,c :inherit modus-themes-completion-selected)))
+    `(corfu-current ((,c :inherit modux-themes-completion-selected)))
     `(corfu-bar ((,c :background ,fg-dim)))
     `(corfu-border ((,c :background ,bg-active)))
     `(corfu-default ((,c :background ,bg-dim)))
@@ -2107,7 +2102,7 @@ FG and BG are the main colors."
 ;;;;; counsel
     `(counsel-active-mode ((,c :foreground ,keyword)))
     `(counsel-application-name ((,c :foreground ,name)))
-    `(counsel-key-binding ((,c :inherit modus-themes-key-binding)))
+    `(counsel-key-binding ((,c :inherit modux-themes-key-binding)))
     `(counsel-outline-default ((,c :foreground ,fg-main)))
     `(counsel-variable-documentation ((,c :inherit font-lock-doc-face)))
 ;;;;; cperl-mode
@@ -2124,11 +2119,11 @@ FG and BG are the main colors."
 ;;;;; csv-mode
     `(csv-separator-face ((,c :foreground ,red-intense)))
 ;;;;; ctrlf
-    `(ctrlf-highlight-active ((,c :inherit modus-themes-search-current)))
+    `(ctrlf-highlight-active ((,c :inherit modux-themes-search-current)))
     `(ctrlf-highlight-line ((,c :background ,bg-hl-line :extend t)))
-    `(ctrlf-highlight-passive ((,c :inherit modus-themes-search-lazy)))
+    `(ctrlf-highlight-passive ((,c :inherit modux-themes-search-lazy)))
 ;;;;; custom (M-x customize)
-    `(custom-button ((,c :inherit modus-themes-button)))
+    `(custom-button ((,c :inherit modux-themes-button)))
     `(custom-button-mouse ((,c :inherit (highlight custom-button))))
     `(custom-button-pressed ((,c :inherit (secondary-selection custom-button))))
     `(custom-changed ((,c :background ,bg-changed)))
@@ -2158,11 +2153,11 @@ FG and BG are the main colors."
     `(deft-filter-string-face ((,c :inherit success)))
     `(deft-header-face ((,c :inherit shadow)))
     `(deft-separator-face ((,c :foreground "gray50")))
-    `(deft-summary-face ((,c :inherit (shadow modus-themes-slant))))
+    `(deft-summary-face ((,c :inherit (shadow modux-themes-slant))))
     `(deft-time-face ((,c :foreground ,date-common)))
     `(deft-title-face ((,c :inherit bold)))
 ;;;;; devdocs
-    `(devdocs-code-block ((,c :inherit modus-themes-fixed-pitch :background ,bg-dim :extend t)))
+    `(devdocs-code-block ((,c :inherit modux-themes-fixed-pitch :background ,bg-dim :extend t)))
 ;;;;; dictionary
     `(dictionary-button-face ((,c :inherit bold)))
     `(dictionary-reference-face ((,c :inherit link)))
@@ -2197,11 +2192,11 @@ FG and BG are the main colors."
 ;;;;; dired
     `(dired-broken-symlink ((,c :inherit button :foreground ,err)))
     `(dired-directory ((,c :foreground ,accent-0)))
-    `(dired-flagged ((,c :inherit modus-themes-mark-del)))
+    `(dired-flagged ((,c :inherit modux-themes-mark-del)))
     `(dired-header ((,c :inherit bold)))
     `(dired-ignored ((,c :inherit shadow)))
     `(dired-mark ((,c :inherit bold)))
-    `(dired-marked ((,c :inherit modus-themes-mark-sel)))
+    `(dired-marked ((,c :inherit modux-themes-mark-sel)))
     `(dired-perm-write ((,c :inherit shadow)))
     `(dired-symlink ((,c :inherit button :background ,bg-link-symbolic :foreground ,fg-link-symbolic :underline ,underline-link-symbolic)))
     `(dired-warning ((,c :inherit warning)))
@@ -2215,7 +2210,7 @@ FG and BG are the main colors."
 ;;;;; dired-git-info
     `(dgi-commit-message-face ((,c :foreground ,docstring)))
 ;;;;; dired-narrow
-    `(dired-narrow-blink ((,c :inherit (modus-themes-prominent-warning bold))))
+    `(dired-narrow-blink ((,c :inherit (modux-themes-prominent-warning bold))))
 ;;;;; dired-subtree
     ;; remove backgrounds from dired-subtree faces, else they break
     ;; dired-{flagged,marked} and any other face that sets a background
@@ -2306,7 +2301,7 @@ FG and BG are the main colors."
     `(ediff-even-diff-B ((,c :background ,bg-diff-context)))
     `(ediff-even-diff-C ((,c :background ,bg-diff-context)))
     `(ediff-fine-diff-A ((,c :background ,bg-removed-refine :foreground ,fg-removed)))
-    `(ediff-fine-diff-Ancestor ((,c :inherit modus-themes-subtle-cyan)))
+    `(ediff-fine-diff-Ancestor ((,c :inherit modux-themes-subtle-cyan)))
     `(ediff-fine-diff-B ((,c :background ,bg-added-refine :foreground ,fg-added)))
     `(ediff-fine-diff-C ((,c :background ,bg-changed-refine :foreground ,fg-changed)))
     `(ediff-odd-diff-A ((,c :inherit ediff-even-diff-A)))
@@ -2321,16 +2316,16 @@ FG and BG are the main colors."
     `(ein:markdowncell-input-area-face (( )))
     `(ein:notification-tab-normal ((,c :underline t)))
 ;;;;; eglot
-    `(eglot-mode-line ((,c :inherit modus-themes-bold :foreground ,modeline-info)))
-    `(eglot-diagnostic-tag-unnecessary-face ((,c :inherit modus-themes-lang-note)))
+    `(eglot-mode-line ((,c :inherit modux-themes-bold :foreground ,modeline-info)))
+    `(eglot-diagnostic-tag-unnecessary-face ((,c :inherit modux-themes-lang-note)))
 ;;;;; el-search
     `(el-search-highlight-in-prompt-face ((,c :inherit italic)))
-    `(el-search-match ((,c :inherit modus-themes-search-current)))
-    `(el-search-other-match ((,c :inherit modus-themes-search-lazy)))
+    `(el-search-match ((,c :inherit modux-themes-search-current)))
+    `(el-search-other-match ((,c :inherit modux-themes-search-lazy)))
     `(el-search-occur-match ((,c :inherit match)))
 ;;;;; eldoc
     ;; NOTE: see https://github.com/purcell/package-lint/issues/187
-    (list 'eldoc-highlight-function-argument `((,c :inherit modus-themes-mark-alt)))
+    (list 'eldoc-highlight-function-argument `((,c :inherit modux-themes-mark-alt)))
 ;;;;; eldoc-box
     `(eldoc-box-body ((,c :background ,bg-dim :foreground ,fg-main)))
     `(eldoc-box-border ((,c :background ,border)))
@@ -2355,12 +2350,12 @@ FG and BG are the main colors."
     `(elfeed-score-info-level-face ((,c :inherit success)))
     `(elfeed-score-warn-level-face ((,c :inherit warning)))
 ;;;;; elpher
-    `(elpher-gemini-heading1 ((,c :inherit modus-themes-heading-1)))
-    `(elpher-gemini-heading2 ((,c :inherit modus-themes-heading-2)))
-    `(elpher-gemini-heading3 ((,c :inherit modus-themes-heading-3)))
+    `(elpher-gemini-heading1 ((,c :inherit modux-themes-heading-1)))
+    `(elpher-gemini-heading2 ((,c :inherit modux-themes-heading-2)))
+    `(elpher-gemini-heading3 ((,c :inherit modux-themes-heading-3)))
 ;;;;; embark
-    `(embark-keybinding ((,c :inherit modus-themes-key-binding)))
-    `(embark-collect-marked ((,c :inherit modus-themes-mark-sel)))
+    `(embark-keybinding ((,c :inherit modux-themes-key-binding)))
+    `(embark-collect-marked ((,c :inherit modux-themes-mark-sel)))
 ;;;;; ement (ement.el)
     `(ement-room-fully-read-marker ((,c :inherit success)))
     `(ement-room-membership ((,c :inherit shadow)))
@@ -2390,8 +2385,8 @@ FG and BG are the main colors."
     `(enh-ruby-regexp-delimiter-face ((,c :inherit font-lock-regexp-grouping-construct)))
     `(enh-ruby-regexp-face ((,c :inherit font-lock-string-face)))
     `(enh-ruby-string-delimiter-face ((,c :inherit font-lock-string-face)))
-    `(erm-syn-errline ((,c :inherit modus-themes-lang-error)))
-    `(erm-syn-warnline ((,c :inherit modus-themes-lang-warning)))
+    `(erm-syn-errline ((,c :inherit modux-themes-lang-error)))
+    `(erm-syn-warnline ((,c :inherit modux-themes-lang-warning)))
 ;;;;; epa
     `(epa-field-body (( )))
     `(epa-field-name ((,c :inherit bold :foreground ,fg-dim)))
@@ -2421,12 +2416,12 @@ FG and BG are the main colors."
     `(erc-nick-prefix-face ((,c :inherit erc-nick-default-face)))
     `(erc-notice-face ((,c :inherit font-lock-comment-face)))
     `(erc-pal-face ((,c :inherit bold :foreground ,accent-1)))
-    `(erc-prompt-face ((,c :inherit modus-themes-prompt)))
+    `(erc-prompt-face ((,c :inherit modux-themes-prompt)))
     `(erc-timestamp-face ((,c :foreground ,date-common)))
     `(erc-underline-face ((,c :underline t)))
 ;;;;; ert
-    `(ert-test-result-expected ((,c :inherit modus-themes-prominent-note)))
-    `(ert-test-result-unexpected ((,c :inherit modus-themes-prominent-error)))
+    `(ert-test-result-expected ((,c :inherit modux-themes-prominent-note)))
+    `(ert-test-result-unexpected ((,c :inherit modux-themes-prominent-error)))
 ;;;;; erts-mode
     `(erts-mode-end-test ((,c :inherit error)))
     `(erts-mode-specification-name ((,c :inherit bold)))
@@ -2444,86 +2439,86 @@ FG and BG are the main colors."
     `(eshell-ls-special ((,c :foreground ,accent-3)))
     `(eshell-ls-symlink ((,c :inherit link)))
     `(eshell-ls-unreadable ((,c :inherit shadow)))
-    `(eshell-prompt ((,c :inherit modus-themes-prompt)))
+    `(eshell-prompt ((,c :inherit modux-themes-prompt)))
 ;;;;; eshell-fringe-status
     `(eshell-fringe-status-failure ((,c :inherit error)))
     `(eshell-fringe-status-success ((,c :inherit success)))
 ;;;;; evil-mode
     `(evil-ex-commands ((,c :inherit font-lock-keyword-face)))
     `(evil-ex-info ((,c :inherit font-lock-type-face)))
-    `(evil-ex-lazy-highlight ((,c :inherit modus-themes-search-lazy)))
-    `(evil-ex-search ((,c :inherit modus-themes-search-current)))
-    `(evil-ex-substitute-matches ((,c :inherit modus-themes-prominent-error :underline t)))
-    `(evil-ex-substitute-replacement ((,c :inherit modus-themes-search-current)))
+    `(evil-ex-lazy-highlight ((,c :inherit modux-themes-search-lazy)))
+    `(evil-ex-search ((,c :inherit modux-themes-search-current)))
+    `(evil-ex-substitute-matches ((,c :inherit modux-themes-prominent-error :underline t)))
+    `(evil-ex-substitute-replacement ((,c :inherit modux-themes-search-current)))
 ;;;;; eww
     `(eww-invalid-certificate ((,c :foreground ,err)))
     `(eww-valid-certificate ((,c :foreground ,info)))
     `(eww-form-checkbox ((,c :inherit eww-form-text)))
     `(eww-form-file ((,c :inherit eww-form-submit)))
     `(eww-form-select ((,c :inherit eww-form-submit)))
-    `(eww-form-submit ((,c :inherit modus-themes-button)))
+    `(eww-form-submit ((,c :inherit modux-themes-button)))
     `(eww-form-text ((,c :inherit widget-field)))
     `(eww-form-textarea ((,c :inherit eww-form-text)))
 ;;;;; eyebrowse
     `(eyebrowse-mode-line-active ((,c :inherit mode-line-emphasis)))
 ;;;;; flycheck
-    `(flycheck-error ((,c :inherit modus-themes-lang-error)))
-    `(flycheck-fringe-error ((,c :inherit modus-themes-prominent-error)))
-    `(flycheck-fringe-info ((,c :inherit modus-themes-prominent-note)))
-    `(flycheck-fringe-warning ((,c :inherit modus-themes-prominent-warning)))
-    `(flycheck-info ((,c :inherit modus-themes-lang-note)))
-    `(flycheck-warning ((,c :inherit modus-themes-lang-warning)))
+    `(flycheck-error ((,c :inherit modux-themes-lang-error)))
+    `(flycheck-fringe-error ((,c :inherit modux-themes-prominent-error)))
+    `(flycheck-fringe-info ((,c :inherit modux-themes-prominent-note)))
+    `(flycheck-fringe-warning ((,c :inherit modux-themes-prominent-warning)))
+    `(flycheck-info ((,c :inherit modux-themes-lang-note)))
+    `(flycheck-warning ((,c :inherit modux-themes-lang-warning)))
 ;;;;; flycheck-color-mode-line
     `(flycheck-color-mode-line-error-face ((,c :inherit flycheck-fringe-error)))
     `(flycheck-color-mode-line-info-face ((,c :inherit flycheck-fringe-info)))
     `(flycheck-color-mode-line-running-face ((,c :inherit italic)))
     `(flycheck-color-mode-line-info-face ((,c :inherit flycheck-fringe-warning)))
 ;;;;; flycheck-indicator
-    `(flycheck-indicator-disabled ((,c :inherit modus-themes-slant :foreground ,fg-dim)))
+    `(flycheck-indicator-disabled ((,c :inherit modux-themes-slant :foreground ,fg-dim)))
     `(flycheck-indicator-error ((,c :inherit error)))
     `(flycheck-indicator-info ((,c :inherit bold)))
-    `(flycheck-indicator-running ((,c :inherit modus-themes-slant)))
+    `(flycheck-indicator-running ((,c :inherit modux-themes-slant)))
     `(flycheck-indicator-success ((,c :inherit success)))
     `(flycheck-indicator-warning ((,c :inherit warning)))
 ;;;;; flymake
-    `(flymake-end-of-line-diagnostics-face ((,c :inherit modus-themes-slant :height 0.85 :box ,border)))
-    `(flymake-error ((,c :inherit modus-themes-lang-error)))
+    `(flymake-end-of-line-diagnostics-face ((,c :inherit modux-themes-slant :height 0.85 :box ,border)))
+    `(flymake-error ((,c :inherit modux-themes-lang-error)))
     `(flymake-error-echo ((,c :inherit error)))
     `(flymake-error-echo-at-eol ((,c :inherit flymake-end-of-line-diagnostics-face :foreground ,err)))
-    `(flymake-note ((,c :inherit modus-themes-lang-note)))
+    `(flymake-note ((,c :inherit modux-themes-lang-note)))
     `(flymake-note-echo ((,c :inherit success)))
     `(flymake-note-echo-at-eol ((,c :inherit flymake-end-of-line-diagnostics-face :foreground ,info)))
-    `(flymake-warning ((,c :inherit modus-themes-lang-warning)))
+    `(flymake-warning ((,c :inherit modux-themes-lang-warning)))
     `(flymake-warning-echo ((,c :inherit warning)))
     `(flymake-note-echo-at-eol ((,c :inherit flymake-end-of-line-diagnostics-face :foreground ,warning)))
 ;;;;; flyspell
-    `(flyspell-duplicate ((,c :inherit modus-themes-lang-warning)))
-    `(flyspell-incorrect ((,c :inherit modus-themes-lang-error)))
+    `(flyspell-duplicate ((,c :inherit modux-themes-lang-warning)))
+    `(flyspell-incorrect ((,c :inherit modux-themes-lang-error)))
 ;;;;; flx
-    `(flx-highlight-face ((,c :inherit modus-themes-completion-match-0)))
+    `(flx-highlight-face ((,c :inherit modux-themes-completion-match-0)))
 ;;;;; focus
     `(focus-unfocused ((,c :foreground "gray50")))
 ;;;;; fold-this
     `(fold-this-overlay ((,c :background ,bg-inactive)))
 ;;;;; font-lock
-    `(font-lock-builtin-face ((,c :inherit modus-themes-bold :foreground ,builtin)))
+    `(font-lock-builtin-face ((,c :inherit modux-themes-bold :foreground ,builtin)))
     `(font-lock-comment-delimiter-face ((,c :inherit font-lock-comment-face)))
-    `(font-lock-comment-face ((,c :inherit modus-themes-slant :foreground ,comment)))
+    `(font-lock-comment-face ((,c :inherit modux-themes-slant :foreground ,comment)))
     `(font-lock-constant-face ((,c :foreground ,constant)))
-    `(font-lock-doc-face ((,c :inherit modus-themes-slant :foreground ,docstring)))
-    `(font-lock-doc-markup-face ((,c :inherit modus-themes-slant :foreground ,docmarkup)))
+    `(font-lock-doc-face ((,c :inherit modux-themes-slant :foreground ,docstring)))
+    `(font-lock-doc-markup-face ((,c :inherit modux-themes-slant :foreground ,docmarkup)))
     `(font-lock-function-name-face ((,c :foreground ,fnname)))
-    `(font-lock-keyword-face ((,c :inherit modus-themes-bold :foreground ,keyword)))
+    `(font-lock-keyword-face ((,c :inherit modux-themes-bold :foreground ,keyword)))
     `(font-lock-negation-char-face ((,c :inherit error)))
     `(font-lock-preprocessor-face ((,c :foreground ,preprocessor)))
-    `(font-lock-regexp-grouping-backslash ((,c :inherit modus-themes-bold :foreground ,rx-backslash)))
-    `(font-lock-regexp-grouping-construct ((,c :inherit modus-themes-bold :foreground ,rx-construct)))
+    `(font-lock-regexp-grouping-backslash ((,c :inherit modux-themes-bold :foreground ,rx-backslash)))
+    `(font-lock-regexp-grouping-construct ((,c :inherit modux-themes-bold :foreground ,rx-construct)))
     `(font-lock-string-face ((,c :foreground ,string)))
-    `(font-lock-type-face ((,c :inherit modus-themes-bold :foreground ,type)))
+    `(font-lock-type-face ((,c :inherit modux-themes-bold :foreground ,type)))
     `(font-lock-variable-name-face ((,c :foreground ,variable)))
-    `(font-lock-warning-face ((,c :inherit modus-themes-bold :foreground ,warning)))
+    `(font-lock-warning-face ((,c :inherit modux-themes-bold :foreground ,warning)))
 ;;;;; geiser
-    `(geiser-font-lock-autodoc-current-arg ((,c :inherit modus-themes-mark-alt)))
+    `(geiser-font-lock-autodoc-current-arg ((,c :inherit modux-themes-mark-alt)))
     `(geiser-font-lock-autodoc-identifier ((,c :foreground ,docstring)))
     `(geiser-font-lock-doc-button ((,c :inherit button)))
     `(geiser-font-lock-doc-link ((,c :inherit button)))
@@ -2531,7 +2526,7 @@ FG and BG are the main colors."
     `(geiser-font-lock-image-button ((,c :inherit button :foreground ,info)))
     `(geiser-font-lock-repl-input ((,c :inherit bold)))
     `(geiser-font-lock-repl-output ((,c :inherit font-lock-keyword-face)))
-    `(geiser-font-lock-repl-prompt ((,c :inherit modus-themes-prompt)))
+    `(geiser-font-lock-repl-prompt ((,c :inherit modux-themes-prompt)))
     `(geiser-font-lock-xref-header ((,c :inherit bold)))
     `(geiser-font-lock-xref-link ((,c :inherit button)))
 ;;;;; git-commit
@@ -2548,8 +2543,8 @@ FG and BG are the main colors."
     `(git-gutter:added ((,c :background ,bg-added-fringe)))
     `(git-gutter:deleted ((,c :background ,bg-removed-fringe)))
     `(git-gutter:modified ((,c :background ,bg-changed-fringe)))
-    `(git-gutter:separator ((,c :inherit modus-themes-intense-cyan)))
-    `(git-gutter:unchanged ((,c :inherit modus-themes-intense-magenta)))
+    `(git-gutter:separator ((,c :inherit modux-themes-intense-cyan)))
+    `(git-gutter:unchanged ((,c :inherit modux-themes-intense-magenta)))
 ;;;;; git-gutter-fr
     `(git-gutter-fr:added ((,c :foreground ,bg-added-fringe :inherit fringe)))
     `(git-gutter-fr:deleted ((,c :foreground ,bg-removed-fringe :inherit fringe)))
@@ -2644,7 +2639,7 @@ FG and BG are the main colors."
 ;;;;; golden-ratio-scroll-screen
     `(golden-ratio-scroll-highlight-line-face ((,c :background ,bg-cyan-subtle :foreground ,fg-main)))
 ;;;;; helpful
-    `(helpful-heading ((,c :inherit modus-themes-heading-1)))
+    `(helpful-heading ((,c :inherit modux-themes-heading-1)))
 ;;;;; highlight region or ad-hoc regexp
     ;; HACK 2022-06-23: The :inverse-video prevents hl-line-mode from
     ;; overriding the background.  Such an override really defeats the
@@ -2704,26 +2699,26 @@ FG and BG are the main colors."
     `(hydra-face-red ((,c :inherit bold :foreground ,red-faint)))
     `(hydra-face-teal ((,c :inherit bold :foreground ,cyan-cooler)))
 ;;;;; icomplete
-    `(icomplete-first-match ((,c :inherit modus-themes-completion-match-0)))
-    `(icomplete-selected-match ((,c :inherit modus-themes-completion-selected)))
+    `(icomplete-first-match ((,c :inherit modux-themes-completion-match-0)))
+    `(icomplete-selected-match ((,c :inherit modux-themes-completion-selected)))
 ;;;;; ido-mode
-    `(ido-first-match ((,c :inherit modus-themes-completion-match-0)))
+    `(ido-first-match ((,c :inherit modux-themes-completion-match-0)))
     `(ido-incomplete-regexp ((,c :inherit error)))
     `(ido-indicator ((,c :inherit bold)))
     `(ido-only-match ((,c :inherit ido-first-match)))
     `(ido-subdir ((,c :foreground ,accent-0)))
     `(ido-virtual ((,c :foreground ,accent-1)))
 ;;;;; iedit
-    `(iedit-occurrence ((,c :inherit modus-themes-search-lazy)))
-    `(iedit-read-only-occurrence ((,c :inherit modus-themes-search-current)))
+    `(iedit-occurrence ((,c :inherit modux-themes-search-lazy)))
+    `(iedit-read-only-occurrence ((,c :inherit modux-themes-search-current)))
 ;;;;; iflipb
     `(iflipb-current-buffer-face ((,c :inherit bold :foreground ,name)))
     `(iflipb-other-buffer-face ((,c :inherit shadow)))
 ;;;;; image-dired
-    `(image-dired-thumb-flagged ((,c :inherit modus-themes-mark-del :box (:line-width -3))))
+    `(image-dired-thumb-flagged ((,c :inherit modux-themes-mark-del :box (:line-width -3))))
     `(image-dired-thumb-header-file-name ((,c :inherit bold)))
     `(image-dired-thumb-header-file-size ((,c :foreground ,constant)))
-    `(image-dired-thumb-mark ((,c :inherit modus-themes-mark-sel :box (:line-width -3))))
+    `(image-dired-thumb-mark ((,c :inherit modux-themes-mark-sel :box (:line-width -3))))
 ;;;;; imenu-list
     `(imenu-list-entry-face-0 ((,c :foreground ,fg-heading-0)))
     `(imenu-list-entry-face-1 ((,c :foreground ,fg-heading-1)))
@@ -2737,44 +2732,44 @@ FG and BG are the main colors."
     `(indium-breakpoint-face ((,c :foreground ,err)))
     `(indium-frame-url-face ((,c :inherit (shadow button))))
     `(indium-keyword-face ((,c :inherit font-lock-keyword-face)))
-    `(indium-litable-face ((,c :inherit modus-themes-slant)))
+    `(indium-litable-face ((,c :inherit modux-themes-slant)))
     `(indium-repl-error-face ((,c :inherit error)))
-    `(indium-repl-prompt-face ((,c :inherit modus-themes-prompt)))
+    `(indium-repl-prompt-face ((,c :inherit modux-themes-prompt)))
     `(indium-repl-stdout-face (( )))
 ;;;;; info
-    `(Info-quoted ((,c :inherit modus-themes-prose-verbatim))) ; the capitalization is canonical
+    `(Info-quoted ((,c :inherit modux-themes-prose-verbatim))) ; the capitalization is canonical
     `(info-header-node ((,c :inherit (shadow bold))))
     `(info-header-xref ((,c :foreground ,fg-link)))
     `(info-index-match ((,c :inherit match)))
     `(info-menu-header ((,c :inherit bold)))
     `(info-menu-star ((,c :inherit error)))
     `(info-node ((,c :inherit bold)))
-    `(info-title-1 ((,c :inherit modus-themes-heading-1)))
-    `(info-title-2 ((,c :inherit modus-themes-heading-2)))
-    `(info-title-3 ((,c :inherit modus-themes-heading-3)))
-    `(info-title-4 ((,c :inherit modus-themes-heading-4)))
+    `(info-title-1 ((,c :inherit modux-themes-heading-1)))
+    `(info-title-2 ((,c :inherit modux-themes-heading-2)))
+    `(info-title-3 ((,c :inherit modux-themes-heading-3)))
+    `(info-title-4 ((,c :inherit modux-themes-heading-4)))
 ;;;;; info+ (info-plus)
     `(info-command-ref-item ((,c :inherit font-lock-function-name-face)))
     `(info-constant-ref-item ((,c :inherit font-lock-constant-face)))
-    `(info-custom-delimited ((,c :inherit modus-themes-prose-verbatim)))
+    `(info-custom-delimited ((,c :inherit modux-themes-prose-verbatim)))
     `(info-double-quoted-name ((,c :inherit font-lock-string-face)))
     `(info-file (( )))
     `(info-function-ref-item ((,c :inherit font-lock-function-name-face)))
-    `(info-glossary-word ((,c :inherit modus-themes-button)))
+    `(info-glossary-word ((,c :inherit modux-themes-button)))
     `(info-indented-text (( )))
     `(info-isolated-backquote (( )))
     `(info-isolated-quote (( )))
     `(info-macro-ref-item ((,c :inherit font-lock-keyword-face)))
     `(info-menu ((,c :inherit bold)))
-    `(info-quoted-name ((,c :inherit modus-themes-prose-verbatim)))
+    `(info-quoted-name ((,c :inherit modux-themes-prose-verbatim)))
     `(info-reference-item ((,c :inherit bold)))
     `(info-special-form-ref-item ((,c :inherit warning)))
     `(info-string ((,c :inherit font-lock-string-face)))
-    `(info-syntax-class-item ((,c :inherit modus-themes-prose-code)))
+    `(info-syntax-class-item ((,c :inherit modux-themes-prose-code)))
     `(info-user-option-ref-item ((,c :inherit font-lock-variable-name-face)))
     `(info-variable-ref-item ((,c :inherit font-lock-variable-name-face)))
 ;;;;; info-colors
-    `(info-colors-lisp-code-block ((,c :inherit modus-themes-fixed-pitch)))
+    `(info-colors-lisp-code-block ((,c :inherit modux-themes-fixed-pitch)))
     `(info-colors-ref-item-command ((,c :inherit font-lock-function-name-face)))
     `(info-colors-ref-item-constant ((,c :inherit font-lock-constant-face)))
     `(info-colors-ref-item-function ((,c :inherit font-lock-function-name-face)))
@@ -2792,25 +2787,25 @@ FG and BG are the main colors."
     `(ioccur-match-overlay-face ((,c :background ,bg-inactive :extend t)))
     `(ioccur-num-line-face ((,c :inherit shadow)))
     `(ioccur-overlay-face ((,c :background ,bg-hl-line :extend t)))
-    `(ioccur-regexp-face ((,c :inherit (modus-themes-search-current bold))))
+    `(ioccur-regexp-face ((,c :inherit (modux-themes-search-current bold))))
     `(ioccur-title-face ((,c :inherit bold :foreground ,name)))
 ;;;;; isearch, occur, and the like
-    `(isearch ((,c :inherit modus-themes-search-current)))
-    `(isearch-fail ((,c :inherit modus-themes-prominent-error)))
-    `(isearch-group-1 ((,c :inherit modus-themes-intense-blue)))
-    `(isearch-group-2 ((,c :inherit modus-themes-intense-magenta)))
-    `(lazy-highlight ((,c :inherit modus-themes-search-lazy)))
+    `(isearch ((,c :inherit modux-themes-search-current)))
+    `(isearch-fail ((,c :inherit modux-themes-prominent-error)))
+    `(isearch-group-1 ((,c :inherit modux-themes-intense-blue)))
+    `(isearch-group-2 ((,c :inherit modux-themes-intense-magenta)))
+    `(lazy-highlight ((,c :inherit modux-themes-search-lazy)))
     `(match ((,c :background ,bg-magenta-subtle :foreground ,fg-main)))
-    `(query-replace ((,c :inherit modus-themes-prominent-error)))
+    `(query-replace ((,c :inherit modux-themes-prominent-error)))
 ;;;;; ivy
-    `(ivy-action ((,c :inherit modus-themes-key-binding)))
+    `(ivy-action ((,c :inherit modux-themes-key-binding)))
     `(ivy-confirm-face ((,c :inherit success)))
-    `(ivy-current-match ((,c :inherit modus-themes-completion-selected)))
+    `(ivy-current-match ((,c :inherit modux-themes-completion-selected)))
     `(ivy-match-required-face ((,c :inherit error)))
     `(ivy-minibuffer-match-face-1 (( )))
-    `(ivy-minibuffer-match-face-2 ((,c :inherit modus-themes-completion-match-0)))
-    `(ivy-minibuffer-match-face-3 ((,c :inherit modus-themes-completion-match-1)))
-    `(ivy-minibuffer-match-face-4 ((,c :inherit modus-themes-completion-match-2)))
+    `(ivy-minibuffer-match-face-2 ((,c :inherit modux-themes-completion-match-0)))
+    `(ivy-minibuffer-match-face-3 ((,c :inherit modux-themes-completion-match-1)))
+    `(ivy-minibuffer-match-face-4 ((,c :inherit modux-themes-completion-match-2)))
     `(ivy-remote ((,c :inherit italic)))
     `(ivy-separator ((,c :inherit shadow)))
     `(ivy-subdir ((,c :foreground ,accent-0)))
@@ -2830,9 +2825,9 @@ FG and BG are the main colors."
     `(jiralib-link-issue-face ((,c :underline t)))
     `(jiralib-link-project-face ((,c :underline t)))
 ;;;;; jit-spell
-    `(jit-spell-misspelling ((,c :inherit modus-themes-lang-error)))
+    `(jit-spell-misspelling ((,c :inherit modux-themes-lang-error)))
 ;;;;; jinx
-    `(jinx-misspelled ((,c :inherit modus-themes-lang-warning)))
+    `(jinx-misspelled ((,c :inherit modux-themes-lang-warning)))
 ;;;;; journalctl-mode
     `(journalctl-error-face ((,c :inherit error)))
     `(journalctl-finished-face ((,c :inherit success)))
@@ -2842,7 +2837,7 @@ FG and BG are the main colors."
     `(journalctl-timestamp-face ((,c :foreground ,date-common)))
     `(journalctl-warning-face ((,c :inherit warning)))
 ;;;;; js2-mode
-    `(js2-error ((,c :inherit modus-themes-lang-error)))
+    `(js2-error ((,c :inherit modux-themes-lang-error)))
     `(js2-external-variable ((,c :inherit font-lock-variable-name-face)))
     `(js2-function-call ((,c :inherit font-lock-function-name-face)))
     `(js2-function-param ((,c :inherit font-lock-constant-face)))
@@ -2856,7 +2851,7 @@ FG and BG are the main colors."
     `(js2-object-property-access ((,c :foreground ,fg-main)))
     `(js2-private-function-call ((,c :inherit font-lock-preprocessor-face)))
     `(js2-private-member ((,c :inherit font-lock-warning-face)))
-    `(js2-warning ((,c :inherit modus-themes-lang-warning)))
+    `(js2-warning ((,c :inherit modux-themes-lang-warning)))
 ;;;;; julia
     `(julia-macro-face ((,c :inherit font-lock-builtin-face)))
     `(julia-quoted-symbol-face ((,c :inherit font-lock-constant-face)))
@@ -2871,7 +2866,7 @@ FG and BG are the main colors."
     `(ledger-font-auto-xact-face ((,c :inherit font-lock-builtin-face)))
     `(ledger-font-account-name-face ((,c :foreground ,name)))
     `(ledger-font-directive-face ((,c :inherit font-lock-keyword-face)))
-    `(ledger-font-posting-date-face ((,c :inherit modus-themes-bold :foreground ,date-common)))
+    `(ledger-font-posting-date-face ((,c :inherit modux-themes-bold :foreground ,date-common)))
     `(ledger-font-periodic-xact-face ((,c :inherit font-lock-variable-name-face)))
     `(ledger-font-posting-amount-face ((,c :inherit font-lock-constant-face)))
     `(ledger-font-payee-cleared-face ((,c :inherit success)))
@@ -2881,10 +2876,10 @@ FG and BG are the main colors."
 ;;;;; leerzeichen
     `(leerzeichen ((,c :background ,bg-inactive)))
 ;;;;; line numbers (display-line-numbers-mode and global variant)
-    ;; Here we cannot inherit `modus-themes-fixed-pitch'.  We need to
+    ;; Here we cannot inherit `modux-themes-fixed-pitch'.  We need to
     ;; fall back to `default' otherwise line numbers do not scale when
     ;; using `text-scale-adjust'.
-    `(line-number ((,c :inherit ,(if modus-themes-mixed-fonts '(fixed-pitch default) 'default) :background ,bg-line-number-inactive :foreground ,fg-line-number-inactive)))
+    `(line-number ((,c :inherit ,(if modux-themes-mixed-fonts '(fixed-pitch default) 'default) :background ,bg-line-number-inactive :foreground ,fg-line-number-inactive)))
     `(line-number-current-line ((,c :inherit (bold line-number) :background ,bg-line-number-active :foreground ,fg-line-number-active)))
     `(line-number-major-tick ((,c :inherit line-number :foreground ,err)))
     `(line-number-minor-tick ((,c :inherit line-number :foreground ,fg-alt)))
@@ -2928,7 +2923,7 @@ FG and BG are the main colors."
     `(magit-hash ((,c :foreground ,identifier)))
     `(magit-head ((,c :inherit magit-branch-local)))
     `(magit-header-line ((,c :inherit bold)))
-    `(magit-header-line-key ((,c :inherit modus-themes-key-binding)))
+    `(magit-header-line-key ((,c :inherit modux-themes-key-binding)))
     `(magit-header-line-log-select ((,c :inherit bold)))
     `(magit-keyword ((,c :foreground ,keyword)))
     `(magit-keyword-squash ((,c :inherit bold :foreground ,warning)))
@@ -2982,7 +2977,7 @@ FG and BG are the main colors."
     `(marginalia-archive ((,c :foreground ,accent-0)))
     `(marginalia-char ((,c :foreground ,accent-2)))
     `(marginalia-date ((,c :foreground ,date-common)))
-    `(marginalia-documentation ((,c :inherit modus-themes-slant :foreground ,docstring)))
+    `(marginalia-documentation ((,c :inherit modux-themes-slant :foreground ,docstring)))
     `(marginalia-file-name (( )))
     `(marginalia-file-owner ((,c :inherit shadow)))
     `(marginalia-file-priv-dir ((,c :foreground ,accent-0)))
@@ -2994,7 +2989,7 @@ FG and BG are the main colors."
     `(marginalia-file-priv-read ((,c :foreground ,fg-main)))
     `(marginalia-file-priv-write ((,c :foreground ,accent-0)))
     `(marginalia-function ((,c :foreground ,fnname)))
-    `(marginalia-key ((,c :inherit modus-themes-key-binding)))
+    `(marginalia-key ((,c :inherit modux-themes-key-binding)))
     `(marginalia-lighter ((,c :inherit shadow)))
     `(marginalia-liqst ((,c :inherit shadow)))
     `(marginalia-mode ((,c :foreground ,constant)))
@@ -3011,19 +3006,19 @@ FG and BG are the main colors."
 ;;;;; markdown-mode
     `(markdown-blockquote-face ((,c :inherit font-lock-doc-face)))
     `(markdown-bold-face ((,c :inherit bold)))
-    `(markdown-code-face ((,c :inherit modus-themes-fixed-pitch :background ,bg-dim :extend t)))
+    `(markdown-code-face ((,c :inherit modux-themes-fixed-pitch :background ,bg-dim :extend t)))
     `(markdown-gfm-checkbox-face ((,c :foreground ,warning)))
     `(markdown-header-face (( )))
-    `(markdown-header-face-1 ((,c :inherit modus-themes-heading-1)))
-    `(markdown-header-face-2 ((,c :inherit modus-themes-heading-2)))
-    `(markdown-header-face-3 ((,c :inherit modus-themes-heading-3)))
-    `(markdown-header-face-4 ((,c :inherit modus-themes-heading-4)))
-    `(markdown-header-face-5 ((,c :inherit modus-themes-heading-5)))
-    `(markdown-header-face-6 ((,c :inherit modus-themes-heading-6)))
+    `(markdown-header-face-1 ((,c :inherit modux-themes-heading-1)))
+    `(markdown-header-face-2 ((,c :inherit modux-themes-heading-2)))
+    `(markdown-header-face-3 ((,c :inherit modux-themes-heading-3)))
+    `(markdown-header-face-4 ((,c :inherit modux-themes-heading-4)))
+    `(markdown-header-face-5 ((,c :inherit modux-themes-heading-5)))
+    `(markdown-header-face-6 ((,c :inherit modux-themes-heading-6)))
     `(markdown-highlighting-face ((,c :inherit secondary-selection)))
-    `(markdown-inline-code-face ((,c :inherit modus-themes-prose-code)))
+    `(markdown-inline-code-face ((,c :inherit modux-themes-prose-code)))
     `(markdown-italic-face ((,c :inherit italic)))
-    `(markdown-language-keyword-face ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-block)))
+    `(markdown-language-keyword-face ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-block)))
     `(markdown-line-break-face ((,c :inherit nobreak-space)))
     `(markdown-link-face ((,c :inherit link)))
     `(markdown-markup-face ((,c :inherit shadow)))
@@ -3031,10 +3026,10 @@ FG and BG are the main colors."
     `(markdown-metadata-value-face ((,c :foreground ,string)))
     `(markdown-missing-link-face ((,c :inherit warning)))
     `(markdown-pre-face ((,c :inherit markdown-code-face)))
-    `(markdown-table-face ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-table)))
+    `(markdown-table-face ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-table)))
     `(markdown-url-face ((,c :foreground ,fg-alt)))
 ;;;;; markup-faces (`adoc-mode')
-    `(markup-attribute-face ((,c :inherit (modus-themes-slant markup-meta-face))))
+    `(markup-attribute-face ((,c :inherit (modux-themes-slant markup-meta-face))))
     `(markup-bold-face ((,c :inherit bold)))
     `(markup-code-face ((,c :foreground ,prose-code)))
     `(markup-comment-face ((,c :inherit font-lock-comment-face)))
@@ -3042,13 +3037,13 @@ FG and BG are the main colors."
     `(markup-emphasis-face ((,c :inherit markup-italic-face)))
     `(markup-error-face ((,c :inherit error)))
     `(markup-gen-face ((,c :foreground ,prose-verbatim)))
-    `(markup-internal-reference-face ((,c :inherit (shadow modus-themes-slant))))
+    `(markup-internal-reference-face ((,c :inherit (shadow modux-themes-slant))))
     `(markup-italic-face ((,c :inherit italic)))
     `(markup-list-face ((,c :background ,bg-inactive)))
-    `(markup-meta-face ((,c :inherit (modus-themes-fixed-pitch shadow))))
+    `(markup-meta-face ((,c :inherit (modux-themes-fixed-pitch shadow))))
     `(markup-meta-hide-face ((,c :foreground "gray50")))
-    `(markup-reference-face ((,c :inherit modus-themes-slant :foreground ,fg-alt)))
-    `(markup-replacement-face ((,c :inherit modus-themes-fixed-pitch :foreground ,err)))
+    `(markup-reference-face ((,c :inherit modux-themes-slant :foreground ,fg-alt)))
+    `(markup-replacement-face ((,c :inherit modux-themes-fixed-pitch :foreground ,err)))
     `(markup-secondary-text-face ((,c :height 0.9 :foreground ,fg-alt)))
     `(markup-small-face ((,c :inherit markup-gen-face :height 0.9)))
     `(markup-strong-face ((,c :inherit markup-bold-face)))
@@ -3057,13 +3052,13 @@ FG and BG are the main colors."
     `(markup-table-cell-face (( )))
     `(markup-table-face ((,c :foreground ,prose-table)))
     `(markup-table-row-face (( )))
-    `(markup-title-0-face ((,c :inherit modus-themes-heading-1)))
-    `(markup-title-1-face ((,c :inherit modus-themes-heading-2)))
-    `(markup-title-2-face ((,c :inherit modus-themes-heading-3)))
-    `(markup-title-3-face ((,c :inherit modus-themes-heading-4)))
-    `(markup-title-4-face ((,c :inherit modus-themes-heading-5)))
-    `(markup-title-5-face ((,c :inherit modus-themes-heading-6)))
-    `(markup-verbatim-face ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-verbatim)))
+    `(markup-title-0-face ((,c :inherit modux-themes-heading-1)))
+    `(markup-title-1-face ((,c :inherit modux-themes-heading-2)))
+    `(markup-title-2-face ((,c :inherit modux-themes-heading-3)))
+    `(markup-title-3-face ((,c :inherit modux-themes-heading-4)))
+    `(markup-title-4-face ((,c :inherit modux-themes-heading-5)))
+    `(markup-title-5-face ((,c :inherit modux-themes-heading-6)))
+    `(markup-verbatim-face ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-verbatim)))
 ;;;;; messages
     `(message-cited-text-1 ((,c :foreground ,mail-cite-0)))
     `(message-cited-text-2 ((,c :foreground ,mail-cite-1)))
@@ -3082,7 +3077,7 @@ FG and BG are the main colors."
     `(minimap-active-region-background ((,c :background ,bg-active)))
     `(minimap-current-line-face ((,c :background ,bg-cyan-intense :foreground ,fg-main)))
 ;;;;; mode-line
-    `(mode-line ((,c :inherit modus-themes-ui-variable-pitch
+    `(mode-line ((,c :inherit modux-themes-ui-variable-pitch
                      :box ,border-mode-line-active
                      :background ,bg-mode-line-active
                      :foreground ,fg-mode-line-active)))
@@ -3090,7 +3085,7 @@ FG and BG are the main colors."
     `(mode-line-buffer-id ((,c :inherit bold)))
     `(mode-line-emphasis ((,c :inherit bold :foreground ,modeline-info)))
     `(mode-line-highlight ((,c :background ,bg-dim :foreground ,fg-main)))
-    `(mode-line-inactive ((,c :inherit modus-themes-ui-variable-pitch
+    `(mode-line-inactive ((,c :inherit modux-themes-ui-variable-pitch
                               :box ,border-mode-line-inactive
                               :background ,bg-mode-line-inactive
                               :foreground ,fg-mode-line-inactive)))
@@ -3128,7 +3123,7 @@ FG and BG are the main colors."
     `(mu4e-header-marks-face ((,c :inherit mu4e-special-header-value-face)))
     `(mu4e-header-title-face ((,c :foreground ,fg-alt)))
     `(mu4e-header-value-face ((,c :inherit message-header-other)))
-    `(mu4e-highlight-face ((,c :inherit modus-themes-key-binding)))
+    `(mu4e-highlight-face ((,c :inherit modux-themes-key-binding)))
     `(mu4e-link-face ((,c :inherit link)))
     `(mu4e-modeline-face (( )))
     `(mu4e-moved-face ((,c :inherit italic :foreground ,warning)))
@@ -3219,7 +3214,7 @@ FG and BG are the main colors."
     `(notmuch-crypto-signature-good ((,c :inherit success)))
     `(notmuch-crypto-signature-good-key ((,c :inherit success)))
     `(notmuch-crypto-signature-unknown ((,c :inherit warning)))
-    `(notmuch-jump-key ((,c :inherit modus-themes-key-binding)))
+    `(notmuch-jump-key ((,c :inherit modux-themes-key-binding)))
     `(notmuch-message-summary-face ((,c :inherit bold :background ,bg-inactive)))
     `(notmuch-search-count ((,c :foreground ,fg-dim)))
     `(notmuch-search-date ((,c :foreground ,date-common)))
@@ -3251,14 +3246,14 @@ FG and BG are the main colors."
     `(nxml-cdata-section-CDATA ((,c :inherit error)))
     `(nxml-cdata-section-delimiter ((,c :inherit error)))
     `(nxml-char-ref-delimiter ((,c :inherit shadow)))
-    `(nxml-char-ref-number ((,c :inherit (shadow modus-themes-bold))))
-    `(nxml-delimited-data ((,c :inherit (shadow modus-themes-slant))))
+    `(nxml-char-ref-number ((,c :inherit (shadow modux-themes-bold))))
+    `(nxml-delimited-data ((,c :inherit (shadow modux-themes-slant))))
     `(nxml-delimiter ((,c :foreground ,fg-dim)))
     `(nxml-element-colon ((,c :foreground ,fg-main)))
     `(nxml-element-local-name ((,c :inherit font-lock-function-name-face)))
     `(nxml-element-prefix ((,c :inherit font-lock-builtin-face)))
     `(nxml-entity-ref-delimiter ((,c :inherit shadow)))
-    `(nxml-entity-ref-name ((,c :inherit (shadow modus-themes-bold))))
+    `(nxml-entity-ref-name ((,c :inherit (shadow modux-themes-bold))))
     `(nxml-glyph ((,c :background ,bg-active :foreground ,fg-main)))
     `(nxml-hash ((,c :inherit (bold font-lock-string-face))))
     `(nxml-heading ((,c :inherit bold)))
@@ -3267,23 +3262,23 @@ FG and BG are the main colors."
     `(nxml-namespace-attribute-prefix ((,c :inherit font-lock-variable-name-face)))
     `(nxml-processing-instruction-target ((,c :inherit font-lock-keyword-face)))
     `(nxml-prolog-keyword ((,c :inherit font-lock-keyword-face)))
-    `(nxml-ref ((,c :inherit (shadow modus-themes-bold))))
+    `(nxml-ref ((,c :inherit (shadow modux-themes-bold))))
     `(rng-error ((,c :inherit error)))
 ;;;;; olivetti
     `(olivetti-fringe ((,c :background ,bg-main)))
 ;;;;; orderless
-    `(orderless-match-face-0 ((,c :inherit modus-themes-completion-match-0)))
-    `(orderless-match-face-1 ((,c :inherit modus-themes-completion-match-1)))
-    `(orderless-match-face-2 ((,c :inherit modus-themes-completion-match-2)))
-    `(orderless-match-face-3 ((,c :inherit modus-themes-completion-match-3)))
+    `(orderless-match-face-0 ((,c :inherit modux-themes-completion-match-0)))
+    `(orderless-match-face-1 ((,c :inherit modux-themes-completion-match-1)))
+    `(orderless-match-face-2 ((,c :inherit modux-themes-completion-match-2)))
+    `(orderless-match-face-3 ((,c :inherit modux-themes-completion-match-3)))
 ;;;;; org
     `(org-agenda-calendar-daterange ((,c :foreground ,date-range)))
     `(org-agenda-calendar-event ((,c :foreground ,date-event)))
-    `(org-agenda-calendar-sexp ((,c :inherit (modus-themes-slant org-agenda-calendar-event))))
-    `(org-agenda-clocking ((,c :inherit modus-themes-mark-alt)))
+    `(org-agenda-calendar-sexp ((,c :inherit (modux-themes-slant org-agenda-calendar-event))))
+    `(org-agenda-clocking ((,c :inherit modux-themes-mark-alt)))
     `(org-agenda-column-dateline ((,c :background ,bg-inactive)))
     `(org-agenda-current-time ((,c :foreground ,date-now)))
-    `(org-agenda-date ((,c ,@(modus-themes--heading 'agenda-date date-weekday))))
+    `(org-agenda-date ((,c ,@(modux-themes--heading 'agenda-date date-weekday))))
     `(org-agenda-date-today ((,c :inherit org-agenda-date :underline t)))
     `(org-agenda-date-weekend ((,c :inherit org-agenda-date :foreground ,date-weekend)))
     `(org-agenda-date-weekend-today ((,c :inherit org-agenda-date-today :foreground ,date-weekend)))
@@ -3295,59 +3290,59 @@ FG and BG are the main colors."
     `(org-agenda-filter-regexp ((,c :inherit bold :foreground ,modeline-err)))
     `(org-agenda-filter-tags ((,c :inherit bold :foreground ,modeline-err)))
     `(org-agenda-restriction-lock ((,c :background ,bg-dim :foreground ,fg-dim)))
-    `(org-agenda-structure ((,c ,@(modus-themes--heading 'agenda-structure fg-alt))))
+    `(org-agenda-structure ((,c ,@(modux-themes--heading 'agenda-structure fg-alt))))
     `(org-agenda-structure-filter ((,c :inherit org-agenda-structure :foreground ,warning)))
     `(org-agenda-structure-secondary ((,c :inherit font-lock-doc-face)))
     `(org-archived ((,c :background ,bg-inactive :foreground ,fg-main)))
-    `(org-block ((,c ,@(modus-themes--org-block fg-main org-src-block-bg))))
-    `(org-block-begin-line ((,c ,@(modus-themes--org-block prose-block bg-dim))))
+    `(org-block ((,c ,@(modux-themes--org-block fg-main org-src-block-bg))))
+    `(org-block-begin-line ((,c ,@(modux-themes--org-block prose-block bg-dim))))
     `(org-block-end-line ((,c :inherit org-block-begin-line)))
     `(org-checkbox ((,c :foreground ,warning)))
     `(org-checkbox-statistics-done ((,c :inherit org-done)))
     `(org-checkbox-statistics-todo ((,c :inherit org-todo)))
     `(org-clock-overlay ((,c :inherit secondary-selection)))
-    `(org-code ((,c :inherit modus-themes-prose-code)))
+    `(org-code ((,c :inherit modux-themes-prose-code)))
     `(org-column ((,c :inherit default :background ,bg-dim)))
     `(org-column-title ((,c :inherit (bold default) :underline t :background ,bg-dim)))
-    `(org-date ((,c :inherit modus-themes-fixed-pitch :foreground ,date-common)))
+    `(org-date ((,c :inherit modux-themes-fixed-pitch :foreground ,date-common)))
     `(org-date-selected ((,c :foreground ,date-common :inverse-video t)))
     `(org-document-info ((,c :foreground ,prose-metadata-value)))
-    `(org-document-info-keyword ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-metadata)))
-    `(org-document-title ((,c :inherit modus-themes-heading-0)))
+    `(org-document-info-keyword ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-metadata)))
+    `(org-document-title ((,c :inherit modux-themes-heading-0)))
     `(org-done ((,c :foreground ,prose-done)))
-    `(org-drawer ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-metadata)))
+    `(org-drawer ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-metadata)))
     `(org-ellipsis (( ))) ; inherits from the heading's color
     `(org-footnote ((,c :inherit link)))
-    `(org-formula ((,c :inherit modus-themes-fixed-pitch :foreground ,fnname)))
+    `(org-formula ((,c :inherit modux-themes-fixed-pitch :foreground ,fnname)))
     `(org-headline-done ((,c :inherit org-done)))
     `(org-headline-todo ((,c :inherit org-todo)))
     `(org-hide ((,c :foreground ,bg-main)))
     `(org-indent ((,c :inherit (fixed-pitch org-hide))))
-    `(org-imminent-deadline ((,c :inherit modus-themes-bold :foreground ,date-deadline)))
+    `(org-imminent-deadline ((,c :inherit modux-themes-bold :foreground ,date-deadline)))
     `(org-latex-and-related ((,c :foreground ,type)))
-    `(org-level-1 ((,c :inherit modus-themes-heading-1)))
-    `(org-level-2 ((,c :inherit modus-themes-heading-2)))
-    `(org-level-3 ((,c :inherit modus-themes-heading-3)))
-    `(org-level-4 ((,c :inherit modus-themes-heading-4)))
-    `(org-level-5 ((,c :inherit modus-themes-heading-5)))
-    `(org-level-6 ((,c :inherit modus-themes-heading-6)))
-    `(org-level-7 ((,c :inherit modus-themes-heading-7)))
-    `(org-level-8 ((,c :inherit modus-themes-heading-8)))
+    `(org-level-1 ((,c :inherit modux-themes-heading-1)))
+    `(org-level-2 ((,c :inherit modux-themes-heading-2)))
+    `(org-level-3 ((,c :inherit modux-themes-heading-3)))
+    `(org-level-4 ((,c :inherit modux-themes-heading-4)))
+    `(org-level-5 ((,c :inherit modux-themes-heading-5)))
+    `(org-level-6 ((,c :inherit modux-themes-heading-6)))
+    `(org-level-7 ((,c :inherit modux-themes-heading-7)))
+    `(org-level-8 ((,c :inherit modux-themes-heading-8)))
     `(org-link ((,c :inherit link)))
     `(org-list-dt ((,c :inherit bold)))
-    `(org-macro ((,c :inherit modus-themes-prose-macro)))
-    `(org-meta-line ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-metadata)))
+    `(org-macro ((,c :inherit modux-themes-prose-macro)))
+    `(org-meta-line ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-metadata)))
     `(org-mode-line-clock (( )))
     `(org-mode-line-clock-overrun ((,c :inherit bold :foreground ,modeline-err)))
     `(org-priority ((,c :foreground ,prose-tag)))
-    `(org-property-value ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-metadata-value)))
+    `(org-property-value ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-metadata-value)))
     `(org-quote ((,c :inherit org-block)))
     `(org-scheduled ((,c :foreground ,date-scheduled)))
     `(org-scheduled-previously ((,c :inherit org-scheduled)))
-    `(org-scheduled-today ((,c :inherit (modus-themes-bold org-scheduled))))
+    `(org-scheduled-today ((,c :inherit (modux-themes-bold org-scheduled))))
     `(org-sexp-date ((,c :foreground ,date-common)))
     `(org-special-keyword ((,c :inherit org-drawer)))
-    `(org-table ((,c :inherit modus-themes-fixed-pitch :foreground ,prose-table)))
+    `(org-table ((,c :inherit modux-themes-fixed-pitch :foreground ,prose-table)))
     `(org-table-header ((,c :inherit (bold org-table))))
     `(org-tag ((,c :foreground ,prose-tag)))
     `(org-tag-group ((,c :inherit (bold org-tag))))
@@ -3356,7 +3351,7 @@ FG and BG are the main colors."
     `(org-todo ((,c :foreground ,prose-todo)))
     `(org-upcoming-deadline ((,c :foreground ,date-deadline)))
     `(org-upcoming-distant-deadline ((,c :inherit org-upcoming-deadline)))
-    `(org-verbatim ((,c :inherit modus-themes-prose-verbatim)))
+    `(org-verbatim ((,c :inherit modux-themes-prose-verbatim)))
     `(org-verse ((,c :inherit org-block)))
     `(org-warning ((,c :inherit warning)))
 ;;;;; org-habit
@@ -3369,8 +3364,8 @@ FG and BG are the main colors."
     `(org-habit-ready-face ((,c :background ,bg-graph-green-0 :foreground "black"))) ; fg is special case
     `(org-habit-ready-future-face ((,c :background ,bg-graph-green-1)))
 ;;;;; org-journal
-    `(org-journal-calendar-entry-face ((,c :inherit modus-themes-slant :foreground ,date-common)))
-    `(org-journal-calendar-scheduled-face ((,c :inherit (modus-themes-slant org-scheduled))))
+    `(org-journal-calendar-entry-face ((,c :inherit modux-themes-slant :foreground ,date-common)))
+    `(org-journal-calendar-scheduled-face ((,c :inherit (modux-themes-slant org-scheduled))))
     `(org-journal-highlight ((,c :foreground ,err)))
 ;;;;; org-noter
     `(org-noter-no-notes-exist-face ((,c :inherit error)))
@@ -3396,14 +3391,14 @@ FG and BG are the main colors."
     `(origami-fold-header-face ((,c :background ,bg-dim :foreground ,fg-dim :box t)))
     `(origami-fold-replacement-face ((,c :background ,bg-inactive :foreground ,fg-dim)))
 ;;;;; outline-mode
-    `(outline-1 ((,c :inherit modus-themes-heading-1)))
-    `(outline-2 ((,c :inherit modus-themes-heading-2)))
-    `(outline-3 ((,c :inherit modus-themes-heading-3)))
-    `(outline-4 ((,c :inherit modus-themes-heading-4)))
-    `(outline-5 ((,c :inherit modus-themes-heading-5)))
-    `(outline-6 ((,c :inherit modus-themes-heading-6)))
-    `(outline-7 ((,c :inherit modus-themes-heading-7)))
-    `(outline-8 ((,c :inherit modus-themes-heading-8)))
+    `(outline-1 ((,c :inherit modux-themes-heading-1)))
+    `(outline-2 ((,c :inherit modux-themes-heading-2)))
+    `(outline-3 ((,c :inherit modux-themes-heading-3)))
+    `(outline-4 ((,c :inherit modux-themes-heading-4)))
+    `(outline-5 ((,c :inherit modux-themes-heading-5)))
+    `(outline-6 ((,c :inherit modux-themes-heading-6)))
+    `(outline-7 ((,c :inherit modux-themes-heading-7)))
+    `(outline-8 ((,c :inherit modux-themes-heading-8)))
 ;;;;; outline-minor-faces
     `(outline-minor-0 (()))
 ;;;;; package (M-x list-packages)
@@ -3465,13 +3460,13 @@ FG and BG are the main colors."
     `(proced-user (( )))
 ;;;;; popup
     `(popup-face ((,c :background ,bg-inactive :foreground ,fg-main)))
-    `(popup-isearch-match ((,c :inherit modus-themes-search-current)))
+    `(popup-isearch-match ((,c :inherit modux-themes-search-current)))
     `(popup-menu-mouse-face ((,c :inherit highlight)))
-    `(popup-menu-selection-face ((,c :inherit modus-themes-completion-selected)))
+    `(popup-menu-selection-face ((,c :inherit modux-themes-completion-selected)))
     `(popup-scroll-bar-background-face ((,c :background ,bg-active)))
     `(popup-scroll-bar-foreground-face (( )))
     `(popup-summary-face ((,c :background ,bg-active :foreground ,fg-dim)))
-    `(popup-tip-face ((,c :inherit modus-themes-intense-yellow)))
+    `(popup-tip-face ((,c :inherit modux-themes-intense-yellow)))
 ;;;;; powerline
     `(powerline-active0 ((,c :background ,fg-dim :foreground ,bg-main)))
     `(powerline-active1 ((,c :inherit mode-line)))
@@ -3489,11 +3484,11 @@ FG and BG are the main colors."
     `(powerline-evil-replace-face ((,c :inherit error :background ,bg-main)))
     `(powerline-evil-visual-face ((,c :inherit bold :background ,bg-main)))
 ;;;;; prescient
-    `(prescient-primary-highlight ((,c :inherit modus-themes-completion-match-0)))
-    `(prescient-secondary-highlight ((,c :inherit modus-themes-completion-match-1)))
+    `(prescient-primary-highlight ((,c :inherit modux-themes-completion-match-0)))
+    `(prescient-secondary-highlight ((,c :inherit modux-themes-completion-match-1)))
 ;;;;; proced
     `(proced-mark ((,c :inherit bold)))
-    `(proced-marked ((,c :inherit modus-themes-mark-alt)))
+    `(proced-marked ((,c :inherit modux-themes-mark-alt)))
     `(proced-sort-header ((,c :inherit bold :underline t)))
 ;;;;; prodigy
     `(prodigy-green-face ((,c :inherit success)))
@@ -3510,7 +3505,7 @@ FG and BG are the main colors."
     `(quick-peek-border-face ((,c :background ,border :height 1)))
     `(quick-peek-padding-face ((,c :background ,bg-inactive :height 0.15)))
 ;;;;; rainbow-delimiters
-    `(rainbow-delimiters-base-error-face ((,c :inherit modus-themes-prominent-error)))
+    `(rainbow-delimiters-base-error-face ((,c :inherit modux-themes-prominent-error)))
     `(rainbow-delimiters-base-face ((,c :foreground ,fg-main)))
     `(rainbow-delimiters-depth-1-face ((,c :foreground ,rainbow-0)))
     `(rainbow-delimiters-depth-2-face ((,c :foreground ,rainbow-1)))
@@ -3521,8 +3516,8 @@ FG and BG are the main colors."
     `(rainbow-delimiters-depth-7-face ((,c :foreground ,rainbow-6)))
     `(rainbow-delimiters-depth-8-face ((,c :foreground ,rainbow-7)))
     `(rainbow-delimiters-depth-9-face ((,c :foreground ,rainbow-8)))
-    `(rainbow-delimiters-mismatched-face ((,c :inherit (bold modus-themes-prominent-warning))))
-    `(rainbow-delimiters-unmatched-face ((,c :inherit (bold modus-themes-prominent-error))))
+    `(rainbow-delimiters-mismatched-face ((,c :inherit (bold modux-themes-prominent-warning))))
+    `(rainbow-delimiters-unmatched-face ((,c :inherit (bold modux-themes-prominent-error))))
 ;;;;; rcirc
     `(rcirc-bright-nick ((,c :inherit bold :foreground ,accent-2)))
     `(rcirc-dim-nick ((,c :inherit shadow)))
@@ -3541,10 +3536,10 @@ FG and BG are the main colors."
     `(recursion-indicator-general ((,c :foreground ,modeline-err)))
     `(recursion-indicator-minibuffer ((,c :foreground ,modeline-info)))
 ;;;;; regexp-builder (re-builder)
-    `(reb-match-0 ((,c :inherit modus-themes-intense-cyan)))
-    `(reb-match-1 ((,c :inherit modus-themes-subtle-magenta)))
-    `(reb-match-2 ((,c :inherit modus-themes-subtle-green)))
-    `(reb-match-3 ((,c :inherit modus-themes-intense-yellow)))
+    `(reb-match-0 ((,c :inherit modux-themes-intense-cyan)))
+    `(reb-match-1 ((,c :inherit modux-themes-subtle-magenta)))
+    `(reb-match-2 ((,c :inherit modux-themes-subtle-green)))
+    `(reb-match-3 ((,c :inherit modux-themes-intense-yellow)))
     `(reb-regexp-grouping-backslash ((,c :inherit font-lock-regexp-grouping-backslash)))
     `(reb-regexp-grouping-construct ((,c :inherit font-lock-regexp-grouping-construct)))
 ;;;;; rg (rg.el)
@@ -3569,12 +3564,12 @@ FG and BG are the main colors."
     `(rmail-header-name ((,c :inherit bold)))
     `(rmail-highlight ((,c :inherit bold :foreground ,mail-other)))
 ;;;;; rst-mode
-    `(rst-level-1 ((,c :inherit modus-themes-heading-1)))
-    `(rst-level-2 ((,c :inherit modus-themes-heading-2)))
-    `(rst-level-3 ((,c :inherit modus-themes-heading-3)))
-    `(rst-level-4 ((,c :inherit modus-themes-heading-4)))
-    `(rst-level-5 ((,c :inherit modus-themes-heading-5)))
-    `(rst-level-6 ((,c :inherit modus-themes-heading-6)))
+    `(rst-level-1 ((,c :inherit modux-themes-heading-1)))
+    `(rst-level-2 ((,c :inherit modux-themes-heading-2)))
+    `(rst-level-3 ((,c :inherit modux-themes-heading-3)))
+    `(rst-level-4 ((,c :inherit modux-themes-heading-4)))
+    `(rst-level-5 ((,c :inherit modux-themes-heading-5)))
+    `(rst-level-6 ((,c :inherit modux-themes-heading-6)))
 ;;;;; ruler-mode
     `(ruler-mode-column-number ((,c :inherit ruler-mode-default)))
     `(ruler-mode-comment-column ((,c :inherit ruler-mode-default :foreground ,red)))
@@ -3601,17 +3596,17 @@ FG and BG are the main colors."
 ;;;;; show-paren-mode
     `(show-paren-match ((,c :background ,bg-paren-match :bold ,bold-paren-match)))
     `(show-paren-match-expression ((,c :background ,bg-paren-expression)))
-    `(show-paren-mismatch ((,c :inherit modus-themes-prominent-error)))
+    `(show-paren-mismatch ((,c :inherit modux-themes-prominent-error)))
 ;;;;; shr
-    `(shr-abbreviation ((,c :inherit modus-themes-lang-note)))
-    `(shr-code ((,c :inherit modus-themes-prose-verbatim)))
-    `(shr-h1 ((,c :inherit modus-themes-heading-1)))
-    `(shr-h2 ((,c :inherit modus-themes-heading-2)))
-    `(shr-h3 ((,c :inherit modus-themes-heading-3)))
-    `(shr-h4 ((,c :inherit modus-themes-heading-4)))
-    `(shr-h5 ((,c :inherit modus-themes-heading-5)))
-    `(shr-h6 ((,c :inherit modus-themes-heading-6)))
-    `(shr-selected-link ((,c :inherit modus-themes-mark-sel)))
+    `(shr-abbreviation ((,c :inherit modux-themes-lang-note)))
+    `(shr-code ((,c :inherit modux-themes-prose-verbatim)))
+    `(shr-h1 ((,c :inherit modux-themes-heading-1)))
+    `(shr-h2 ((,c :inherit modux-themes-heading-2)))
+    `(shr-h3 ((,c :inherit modux-themes-heading-3)))
+    `(shr-h4 ((,c :inherit modux-themes-heading-4)))
+    `(shr-h5 ((,c :inherit modux-themes-heading-5)))
+    `(shr-h6 ((,c :inherit modux-themes-heading-6)))
+    `(shr-selected-link ((,c :inherit modux-themes-mark-sel)))
 ;;;;; side-notes
     `(side-notes ((,c :background ,bg-dim :foreground ,fg-dim)))
 ;;;;; sieve-mode
@@ -3620,34 +3615,34 @@ FG and BG are the main colors."
     `(sieve-tagged-arguments ((,c :inherit font-lock-type-face)))
     `(sieve-test-commands ((,c :inherit font-lock-function-name-face)))
 ;;;;; skewer-mode
-    `(skewer-error-face ((,c :inherit modus-themes-lang-error)))
+    `(skewer-error-face ((,c :inherit modux-themes-lang-error)))
 ;;;;; slime (sldb)
     `(sldb-condition-face ((,c :inherit font-lock-preprocessor-face)))
     `(sldb-restart-number-face ((,c :inherit bold)))
     `(sldb-restart-type-face ((,c :inherit font-lock-type-face)))
     `(sldb-restartable-frame-line-face ((,c :inherit success)))
     `(sldb-section-face ((,c :inherit bold)))
-    `(slime-error-face ((,c :inherit modus-themes-lang-error)))
+    `(slime-error-face ((,c :inherit modux-themes-lang-error)))
     `(slime-note-face ((,c :underline t)))
     `(slime-repl-input-face ((,c :inherit bold)))
     `(slime-repl-inputed-output-face ((,c :inherit font-lock-string-face)))
     `(slime-repl-output-mouseover-face ((,c :inherit highlight)))
-    `(slime-repl-prompt-face ((,c :inherit modus-themes-prompt)))
-    `(slime-style-warning-face ((,c :inherit modus-themes-lang-note)))
-    `(slime-warning-face ((,c :inherit modus-themes-lang-warning)))
+    `(slime-repl-prompt-face ((,c :inherit modux-themes-prompt)))
+    `(slime-style-warning-face ((,c :inherit modux-themes-lang-note)))
+    `(slime-warning-face ((,c :inherit modux-themes-lang-warning)))
 ;;;;; sly
     `(sly-action-face ((,c :inherit font-lock-type-face)))
     `(sly-db-condition-face ((,c :inherit font-lock-preprocessor-face)))
     `(sly-db-restartable-frame-line-face ((,c :inherit success)))
-    `(sly-error-face ((,c :inherit modus-themes-lang-error)))
+    `(sly-error-face ((,c :inherit modux-themes-lang-error)))
     `(sly-mode-line ((,c :inherit mode-line-emphasis)))
     `(sly-mrepl-output-face ((,c :inherit font-lock-string-face)))
     `(sly-mrepl-output-face ((,c :inherit font-lock-string-face)))
-    `(sly-mrepl-prompt-face ((,c :inherit modus-themes-prompt)))
-    `(sly-note-face ((,c :inherit modus-themes-lang-note)))
+    `(sly-mrepl-prompt-face ((,c :inherit modux-themes-prompt)))
+    `(sly-note-face ((,c :inherit modux-themes-lang-note)))
     `(sly-stickers-placed-face ((,c :background ,bg-inactive)))
-    `(sly-style-warning-face ((,c :inherit modus-themes-lang-note)))
-    `(sly-warning-face ((,c :inherit modus-themes-lang-warning)))
+    `(sly-style-warning-face ((,c :inherit modux-themes-lang-note)))
+    `(sly-warning-face ((,c :inherit modux-themes-lang-warning)))
 ;;;;; smart-mode-line
     `(sml/charging ((,c :foreground ,info)))
     `(sml/discharging ((,c :foreground ,err)))
@@ -3663,7 +3658,7 @@ FG and BG are the main colors."
     `(sml/name-filling ((,c :inherit warning)))
     `(sml/not-modified ((,c :inherit sml/global)))
     `(sml/numbers-separator ((,c :inherit sml/global)))
-    `(sml/outside-modified ((,c :inherit modus-themes-prominent-error)))
+    `(sml/outside-modified ((,c :inherit modux-themes-prominent-error)))
     `(sml/position-percentage ((,c :inherit sml/global)))
     `(sml/prefix ((,c :foreground ,fg-alt)))
     `(sml/process ((,c :inherit sml/prefix)))
@@ -3687,11 +3682,11 @@ FG and BG are the main colors."
     `(speedbar-directory-face ((,c :inherit bold :foreground ,accent-0)))
     `(speedbar-file-face ((,c :foreground ,fg-main)))
     `(speedbar-highlight-face ((,c :inherit highlight)))
-    `(speedbar-selected-face ((,c :inherit modus-themes-mark-sel)))
+    `(speedbar-selected-face ((,c :inherit modux-themes-mark-sel)))
     `(speedbar-separator-face ((,c :background ,bg-active :foreground ,fg-main)))
     `(speedbar-tag-face ((,c :foreground ,accent-1)))
 ;;;;; spell-fu
-    `(spell-fu-incorrect-face ((,c :inherit modus-themes-lang-error)))
+    `(spell-fu-incorrect-face ((,c :inherit modux-themes-lang-error)))
 ;;;;; stripes
     `(stripes ((,c :background ,bg-inactive)))
 ;;;;; suggest
@@ -3701,24 +3696,24 @@ FG and BG are the main colors."
     `(switch-window-label ((,c :height 3.0 :foreground ,red-intense)))
 ;;;;; swiper
     `(swiper-background-match-face-1 (( )))
-    `(swiper-background-match-face-2 ((,c :inherit modus-themes-completion-match-0)))
-    `(swiper-background-match-face-3 ((,c :inherit modus-themes-completion-match-1)))
-    `(swiper-background-match-face-4 ((,c :inherit modus-themes-completion-match-2)))
+    `(swiper-background-match-face-2 ((,c :inherit modux-themes-completion-match-0)))
+    `(swiper-background-match-face-3 ((,c :inherit modux-themes-completion-match-1)))
+    `(swiper-background-match-face-4 ((,c :inherit modux-themes-completion-match-2)))
     `(swiper-line-face ((,c :background ,bg-hl-line :extend t)))
     `(swiper-match-face-1 (( )))
-    `(swiper-match-face-2 ((,c :inherit modus-themes-completion-match-0)))
-    `(swiper-match-face-3 ((,c :inherit modus-themes-completion-match-1)))
-    `(swiper-match-face-4 ((,c :inherit modus-themes-completion-match-2)))
+    `(swiper-match-face-2 ((,c :inherit modux-themes-completion-match-0)))
+    `(swiper-match-face-3 ((,c :inherit modux-themes-completion-match-1)))
+    `(swiper-match-face-4 ((,c :inherit modux-themes-completion-match-2)))
 ;;;;; symbol-overlay
     `(symbol-overlay-default-face ((,c :background ,bg-inactive)))
-    `(symbol-overlay-face-1 ((,c :inherit modus-themes-intense-blue)))
-    `(symbol-overlay-face-2 ((,c :inherit modus-themes-intense-magenta)))
-    `(symbol-overlay-face-3 ((,c :inherit modus-themes-intense-yellow)))
-    `(symbol-overlay-face-4 ((,c :inherit modus-themes-intense-magenta)))
-    `(symbol-overlay-face-5 ((,c :inherit modus-themes-intense-red)))
-    `(symbol-overlay-face-6 ((,c :inherit modus-themes-intense-red)))
-    `(symbol-overlay-face-7 ((,c :inherit modus-themes-intense-cyan)))
-    `(symbol-overlay-face-8 ((,c :inherit modus-themes-intense-cyan)))
+    `(symbol-overlay-face-1 ((,c :inherit modux-themes-intense-blue)))
+    `(symbol-overlay-face-2 ((,c :inherit modux-themes-intense-magenta)))
+    `(symbol-overlay-face-3 ((,c :inherit modux-themes-intense-yellow)))
+    `(symbol-overlay-face-4 ((,c :inherit modux-themes-intense-magenta)))
+    `(symbol-overlay-face-5 ((,c :inherit modux-themes-intense-red)))
+    `(symbol-overlay-face-6 ((,c :inherit modux-themes-intense-red)))
+    `(symbol-overlay-face-7 ((,c :inherit modux-themes-intense-cyan)))
+    `(symbol-overlay-face-8 ((,c :inherit modux-themes-intense-cyan)))
 ;;;;; syslog-mode
     `(syslog-debug ((,c :inherit italic)))
     `(syslog-error ((,c :inherit error)))
@@ -3730,14 +3725,14 @@ FG and BG are the main colors."
     `(syslog-su ((,c :inherit error :underline t)))
     `(syslog-warn ((,c :inherit warning)))
 ;;;;; tab-bar-mode
-    `(tab-bar ((,c :inherit modus-themes-ui-variable-pitch :background ,bg-tab-bar)))
+    `(tab-bar ((,c :inherit modux-themes-ui-variable-pitch :background ,bg-tab-bar)))
     `(tab-bar-tab-group-current ((,c :inherit bold :background ,bg-tab-current :box (:line-width -2 :color ,bg-tab-current) :foreground ,fg-alt)))
     `(tab-bar-tab-group-inactive ((,c :background ,bg-tab-bar :box (:line-width -2 :color ,bg-tab-bar) :foreground ,fg-alt)))
     `(tab-bar-tab ((,c :inherit bold :box (:line-width -2 :color ,bg-tab-current) :background ,bg-tab-current)))
     `(tab-bar-tab-inactive ((,c :box (:line-width -2 :color ,bg-tab-other) :background ,bg-tab-other)))
     `(tab-bar-tab-ungrouped ((,c :inherit tab-bar-tab-inactive)))
 ;;;;; tab-line-mode
-    `(tab-line ((,c :inherit modus-themes-ui-variable-pitch :background ,bg-tab-bar :height 0.95)))
+    `(tab-line ((,c :inherit modux-themes-ui-variable-pitch :background ,bg-tab-bar :height 0.95)))
     `(tab-line-close-highlight ((,c :foreground ,err)))
     `(tab-line-highlight ((,c :inherit highlight)))
     `(tab-line-tab (( )))
@@ -3751,10 +3746,10 @@ FG and BG are the main colors."
     `(telega-button ((,c :box t :foreground ,fg-link)))
     `(telega-button-active ((,c :box ,fg-link :background ,fg-link :foreground ,bg-main)))
     `(telega-button-highlight ((,c :inherit secondary-selection)))
-    `(telega-chat-prompt ((,c :inherit modus-themes-prompt)))
-    `(telega-entity-type-code ((,c :inherit modus-themes-prose-verbatim)))
+    `(telega-chat-prompt ((,c :inherit modux-themes-prompt)))
+    `(telega-entity-type-code ((,c :inherit modux-themes-prose-verbatim)))
     `(telega-entity-type-mention ((,c :foreground ,cyan)))
-    `(telega-entity-type-pre ((,c :inherit modus-themes-prose-code)))
+    `(telega-entity-type-pre ((,c :inherit modux-themes-prose-code)))
     `(telega-entity-type-spoiler ((,c :background ,fg-main :foreground ,fg-main)))
     `(telega-msg-heading ((,c :background ,bg-inactive)))
     `(telega-msg-self-title ((,c :inherit bold)))
@@ -3764,10 +3759,10 @@ FG and BG are the main colors."
     `(telega-user-online-status ((,c :foreground ,cyan)))
     `(telega-username ((,c :foreground ,cyan-cooler)))
     `(telega-webpage-chat-link ((,c :background ,bg-inactive)))
-    `(telega-webpage-fixed ((,c :inherit modus-themes-fixed-pitch :height 0.85)))
-    `(telega-webpage-header ((,c :inherit modus-themes-variable-pitch :height 1.3)))
-    `(telega-webpage-preformatted ((,c :inherit modus-themes-fixed-pitch :background ,bg-inactive)))
-    `(telega-webpage-subheader ((,c :inherit modus-themes-variable-pitch :height 1.15)))
+    `(telega-webpage-fixed ((,c :inherit modux-themes-fixed-pitch :height 0.85)))
+    `(telega-webpage-header ((,c :inherit modux-themes-variable-pitch :height 1.3)))
+    `(telega-webpage-preformatted ((,c :inherit modux-themes-fixed-pitch :background ,bg-inactive)))
+    `(telega-webpage-subheader ((,c :inherit modux-themes-variable-pitch :height 1.15)))
 ;;;;; terraform-mode
     `(terraform--resource-name-face ((,c :foreground ,keyword)))
     `(terraform--resource-type-face ((,c :foreground ,type)))
@@ -3793,14 +3788,14 @@ FG and BG are the main colors."
     `(transient-amaranth ((,c :inherit bold :foreground ,yellow-warmer)))
     ;; Placate the compiler for what is a spurious warning.  We also
     ;; have to do this with `eldoc-highlight-function-argument'.
-    (list 'transient-argument `((,c :inherit (bold modus-themes-mark-alt))))
+    (list 'transient-argument `((,c :inherit (bold modux-themes-mark-alt))))
     `(transient-blue ((,c :inherit bold :foreground ,blue)))
-    `(transient-disabled-suffix ((,c :inherit modus-themes-mark-del)))
-    `(transient-enabled-suffix ((,c :inherit modus-themes-subtle-cyan)))
+    `(transient-disabled-suffix ((,c :inherit modux-themes-mark-del)))
+    `(transient-enabled-suffix ((,c :inherit modux-themes-subtle-cyan)))
     `(transient-heading ((,c :inherit bold :foreground ,fg-main)))
     `(transient-inactive-argument ((,c :inherit shadow)))
     `(transient-inactive-value ((,c :inherit shadow)))
-    `(transient-key ((,c :inherit modus-themes-key-binding)))
+    `(transient-key ((,c :inherit modux-themes-key-binding)))
     `(transient-mismatched-key ((,c :underline t)))
     `(transient-nonstandard-key ((,c :underline t)))
     `(transient-pink ((,c :inherit bold :foreground ,magenta)))
@@ -3809,13 +3804,13 @@ FG and BG are the main colors."
     `(transient-teal ((,c :inherit bold :foreground ,cyan-cooler)))
     `(transient-unreachable ((,c :inherit shadow)))
     `(transient-unreachable-key ((,c :inherit shadow)))
-    `(transient-value ((,c :inherit (bold modus-themes-mark-sel))))
+    `(transient-value ((,c :inherit (bold modux-themes-mark-sel))))
 ;;;;; trashed
-    `(trashed-deleted ((,c :inherit modus-themes-mark-del)))
+    `(trashed-deleted ((,c :inherit modux-themes-mark-del)))
     `(trashed-directory ((,c :foreground ,accent-0)))
     `(trashed-mark ((,c :inherit bold)))
-    `(trashed-marked ((,c :inherit modus-themes-mark-alt)))
-    `(trashed-restored ((,c :inherit modus-themes-mark-sel)))
+    `(trashed-marked ((,c :inherit modux-themes-mark-alt)))
+    `(trashed-restored ((,c :inherit modux-themes-mark-sel)))
 ;;;;; tree-sitter
     `(tree-sitter-hl-face:attribute ((,c :inherit font-lock-variable-name-face)))
     `(tree-sitter-hl-face:constant.builtin ((,c :inherit tree-sitter-hl-face:constant)))
@@ -3824,7 +3819,7 @@ FG and BG are the main colors."
     `(tree-sitter-hl-face:function.call ((,c :inherit tree-sitter-hl-face:function)))
     `(tree-sitter-hl-face:label (( )))
     `(tree-sitter-hl-face:method.call (( )))
-    `(tree-sitter-hl-face:operator ((,c :inherit modus-themes-bold)))
+    `(tree-sitter-hl-face:operator ((,c :inherit modux-themes-bold)))
     `(tree-sitter-hl-face:property (( )))
     `(tree-sitter-hl-face:property.definition ((,c :inherit font-lock-variable-name-face)))
     `(tree-sitter-hl-face:punctuation (( )))
@@ -3837,17 +3832,17 @@ FG and BG are the main colors."
 ;;;;; tty-menu
     `(tty-menu-disabled-face ((,c :background ,bg-inactive :foreground ,fg-dim)))
     `(tty-menu-enabled-face ((,c :inherit bold :background ,bg-inactive :foreground ,fg-main)))
-    `(tty-menu-selected-face ((,c :inherit modus-themes-intense-blue)))
+    `(tty-menu-selected-face ((,c :inherit modux-themes-intense-blue)))
 ;;;;; tuareg
-    `(caml-types-def-face ((,c :inherit modus-themes-subtle-red)))
-    `(caml-types-expr-face ((,c :inherit modus-themes-subtle-green)))
-    `(caml-types-occ-face ((,c :inherit modus-themes-subtle-green)))
-    `(caml-types-scope-face ((,c :inherit modus-themes-subtle-blue)))
-    `(caml-types-typed-face ((,c :inherit modus-themes-subtle-magenta)))
+    `(caml-types-def-face ((,c :inherit modux-themes-subtle-red)))
+    `(caml-types-expr-face ((,c :inherit modux-themes-subtle-green)))
+    `(caml-types-occ-face ((,c :inherit modux-themes-subtle-green)))
+    `(caml-types-scope-face ((,c :inherit modux-themes-subtle-blue)))
+    `(caml-types-typed-face ((,c :inherit modux-themes-subtle-magenta)))
     `(tuareg-font-double-semicolon-face ((,c :inherit font-lock-preprocessor-face)))
     `(tuareg-font-lock-attribute-face ((,c :inherit font-lock-function-name-face)))
     `(tuareg-font-lock-constructor-face ((,c :foreground ,fg-main)))
-    `(tuareg-font-lock-error-face ((,c :inherit (modus-themes-intense-red bold))))
+    `(tuareg-font-lock-error-face ((,c :inherit (modux-themes-intense-red bold))))
     ;; `(tuareg-font-lock-extension-node-face ((,c :background ,bg-inactive :foreground ,magenta)))
     `(tuareg-font-lock-governing-face ((,c :inherit bold :foreground ,fg-main)))
     `(tuareg-font-lock-infix-extension-node-face ((,c :inherit font-lock-function-name-face)))
@@ -3893,13 +3888,13 @@ FG and BG are the main colors."
     `(vc-state-base (( )))
     `(vc-up-to-date-state (( )))
 ;;;;; vertico
-    `(vertico-current ((,c :inherit modus-themes-completion-selected)))
+    `(vertico-current ((,c :inherit modux-themes-completion-selected)))
 ;;;;; vertico-quick
     `(vertico-quick1 ((,c :inherit bold :background ,bg-char-0)))
     `(vertico-quick2 ((,c :inherit bold :background ,bg-char-1)))
 ;;;;; vimish-fold
     `(vimish-fold-fringe ((,c :foreground ,cyan)))
-    `(vimish-fold-mouse-face ((,c :inherit modus-themes-intense-blue)))
+    `(vimish-fold-mouse-face ((,c :inherit modux-themes-intense-blue)))
     `(vimish-fold-overlay ((,c :background ,bg-inactive)))
 ;;;;; visible-mark
     `(visible-mark-active ((,c :background ,bg-blue-intense)))
@@ -3908,11 +3903,11 @@ FG and BG are the main colors."
     `(visible-mark-forward-face1 ((,c :background ,bg-magenta-intense)))
     `(visible-mark-forward-face2 ((,c :background ,bg-green-intense)))
 ;;;;; visual-regexp
-    `(vr/group-0 ((,c :inherit modus-themes-intense-blue)))
-    `(vr/group-1 ((,c :inherit modus-themes-intense-magenta)))
-    `(vr/group-2 ((,c :inherit modus-themes-intense-green)))
-    `(vr/match-0 ((,c :inherit modus-themes-intense-yellow)))
-    `(vr/match-1 ((,c :inherit modus-themes-intense-yellow)))
+    `(vr/group-0 ((,c :inherit modux-themes-intense-blue)))
+    `(vr/group-1 ((,c :inherit modux-themes-intense-magenta)))
+    `(vr/group-2 ((,c :inherit modux-themes-intense-green)))
+    `(vr/match-0 ((,c :inherit modux-themes-intense-yellow)))
+    `(vr/match-1 ((,c :inherit modux-themes-intense-yellow)))
     `(vr/match-separator-face ((,c :inherit bold :background ,bg-active)))
 ;;;;; vterm
     ;; NOTE 2023-08-10: `vterm-color-black' and `vterm-color-white'
@@ -3963,7 +3958,7 @@ FG and BG are the main colors."
     `(web-mode-css-string-face ((,c :inherit web-mode-string-face)))
     `(web-mode-css-variable-face ((,c :inherit font-lock-variable-name-face)))
     `(web-mode-current-column-highlight-face ((,c :background ,bg-inactive)))
-    `(web-mode-current-element-highlight-face ((,c :inherit modus-themes-cyan-subtle)))
+    `(web-mode-current-element-highlight-face ((,c :inherit modux-themes-cyan-subtle)))
     `(web-mode-doctype-face ((,c :inherit font-lock-doc-face)))
     `(web-mode-error-face ((,c :inherit error)))
     `(web-mode-filter-face ((,c :inherit font-lock-function-name-face)))
@@ -4017,21 +4012,21 @@ FG and BG are the main colors."
     `(which-key-command-description-face ((,c :foreground ,fg-main)))
     `(which-key-group-description-face ((,c :foreground ,keyword)))
     `(which-key-highlighted-command-face ((,c :foreground ,warning :underline t)))
-    `(which-key-key-face ((,c :inherit modus-themes-key-binding)))
+    `(which-key-key-face ((,c :inherit modux-themes-key-binding)))
     `(which-key-local-map-description-face ((,c :foreground ,fg-main)))
     `(which-key-note-face ((,c :inherit shadow)))
     `(which-key-separator-face ((,c :inherit shadow)))
     `(which-key-special-key-face ((,c :inherit error)))
 ;;;;; whitespace-mode
     `(whitespace-big-indent ((,c :background ,bg-space-err)))
-    `(whitespace-empty ((,c :inherit modus-themes-intense-magenta)))
+    `(whitespace-empty ((,c :inherit modux-themes-intense-magenta)))
     `(whitespace-hspace ((,c :background ,bg-space :foreground ,fg-space)))
     `(whitespace-indentation ((,c :background ,bg-space :foreground ,fg-space)))
     `(whitespace-line ((,c :background ,bg-space :foreground ,warning)))
     `(whitespace-newline ((,c :background ,bg-space :foreground ,fg-space)))
     `(whitespace-space ((,c :background ,bg-space :foreground ,fg-space)))
-    `(whitespace-space-after-tab ((,c :inherit modus-themes-subtle-magenta)))
-    `(whitespace-space-before-tab ((,c :inherit modus-themes-subtle-cyan)))
+    `(whitespace-space-after-tab ((,c :inherit modux-themes-subtle-magenta)))
+    `(whitespace-space-before-tab ((,c :inherit modux-themes-subtle-cyan)))
     `(whitespace-tab ((,c :background ,bg-space :foreground ,fg-space)))
     `(whitespace-trailing ((,c :background ,bg-space-err)))
 ;;;;; highlight-indent-guides
@@ -4048,9 +4043,9 @@ FG and BG are the main colors."
     `(widget-inactive ((,c :background ,bg-button-inactive :foreground ,fg-button-inactive)))
     `(widget-single-line-field ((,c :inherit widget-field)))
 ;;;;; writegood-mode
-    `(writegood-duplicates-face ((,c :inherit modus-themes-lang-error)))
-    `(writegood-passive-voice-face ((,c :inherit modus-themes-lang-warning)))
-    `(writegood-weasels-face ((,c :inherit modus-themes-lang-warning)))
+    `(writegood-duplicates-face ((,c :inherit modux-themes-lang-error)))
+    `(writegood-passive-voice-face ((,c :inherit modux-themes-lang-warning)))
+    `(writegood-weasels-face ((,c :inherit modux-themes-lang-warning)))
 ;;;;; woman
     `(woman-addition ((,c :foreground ,accent-2)))
     `(woman-bold ((,c :inherit bold :foreground ,accent-0)))
@@ -4065,9 +4060,9 @@ FG and BG are the main colors."
     `(yaml-tab-face ((,c :background ,bg-space-err)))
 ;;;;; yasnippet
     `(yas-field-highlight-face ((,c :inherit highlight))))
-  "Face specs for use with `modus-themes-theme'.")
+  "Face specs for use with `modux-themes-theme'.")
 
-(defconst modus-themes-custom-variables
+(defconst modux-themes-custom-variables
   '(
 ;;;; ansi-colors
     `(ansi-color-faces-vector [default bold shadow italic underline success warning error])
@@ -4079,16 +4074,16 @@ FG and BG are the main colors."
 ;;;; exwm
     `(exwm-floating-border-color ,border)
 ;;;; flymake fringe indicators
-    `(flymake-error-bitmap '(flymake-double-exclamation-mark modus-themes-prominent-error))
-    `(flymake-warning-bitmap '(exclamation-mark modus-themes-prominent-warning))
-    `(flymake-note-bitmap '(exclamation-mark modus-themes-prominent-note))
+    `(flymake-error-bitmap '(flymake-double-exclamation-mark modux-themes-prominent-error))
+    `(flymake-warning-bitmap '(exclamation-mark modux-themes-prominent-warning))
+    `(flymake-note-bitmap '(exclamation-mark modux-themes-prominent-note))
 ;;;; highlight-changes
     `(highlight-changes-colors nil)
     `(highlight-changes-face-list '(success warning error bold bold-italic))
 ;;;; ibuffer
-    `(ibuffer-deletion-face 'modus-themes-mark-del)
+    `(ibuffer-deletion-face 'modux-themes-mark-del)
     `(ibuffer-filter-group-name-face 'bold)
-    `(ibuffer-marked-face 'modus-themes-mark-sel)
+    `(ibuffer-marked-face 'modux-themes-mark-sel)
     `(ibuffer-title-face 'default)
 ;;;; hl-todo
     `(hl-todo-keyword-faces
@@ -4107,72 +4102,72 @@ FG and BG are the main colors."
     `(pdf-view-midnight-colors '(,fg-main . ,bg-dim))
 ;;;; rcirc-color
     `(rcirc-colors
-      '(modus-themes-fg-red
-        modus-themes-fg-green
-        modus-themes-fg-blue
-        modus-themes-fg-yellow
-        modus-themes-fg-magenta
-        modus-themes-fg-cyan
-        modus-themes-fg-red-warmer
-        modus-themes-fg-green-warmer
-        modus-themes-fg-blue-warmer
-        modus-themes-fg-yellow-warmer
-        modus-themes-fg-magenta-warmer
-        modus-themes-fg-cyan-warmer
-        modus-themes-fg-red-cooler
-        modus-themes-fg-green-cooler
-        modus-themes-fg-blue-cooler
-        modus-themes-fg-yellow-cooler
-        modus-themes-fg-magenta-cooler
-        modus-themes-fg-cyan-cooler
-        modus-themes-fg-red-faint
-        modus-themes-fg-green-faint
-        modus-themes-fg-blue-faint
-        modus-themes-fg-yellow-faint
-        modus-themes-fg-magenta-faint
-        modus-themes-fg-cyan-faint
-        modus-themes-fg-red-intense
-        modus-themes-fg-green-intense
-        modus-themes-fg-blue-intense
-        modus-themes-fg-yellow-intense
-        modus-themes-fg-magenta-intense
-        modus-themes-fg-cyan-intense))
+      '(modux-themes-fg-red
+        modux-themes-fg-green
+        modux-themes-fg-blue
+        modux-themes-fg-yellow
+        modux-themes-fg-magenta
+        modux-themes-fg-cyan
+        modux-themes-fg-red-warmer
+        modux-themes-fg-green-warmer
+        modux-themes-fg-blue-warmer
+        modux-themes-fg-yellow-warmer
+        modux-themes-fg-magenta-warmer
+        modux-themes-fg-cyan-warmer
+        modux-themes-fg-red-cooler
+        modux-themes-fg-green-cooler
+        modux-themes-fg-blue-cooler
+        modux-themes-fg-yellow-cooler
+        modux-themes-fg-magenta-cooler
+        modux-themes-fg-cyan-cooler
+        modux-themes-fg-red-faint
+        modux-themes-fg-green-faint
+        modux-themes-fg-blue-faint
+        modux-themes-fg-yellow-faint
+        modux-themes-fg-magenta-faint
+        modux-themes-fg-cyan-faint
+        modux-themes-fg-red-intense
+        modux-themes-fg-green-intense
+        modux-themes-fg-blue-intense
+        modux-themes-fg-yellow-intense
+        modux-themes-fg-magenta-intense
+        modux-themes-fg-cyan-intense))
 ;;;; org-src-block-faces
-    (if (or (eq modus-themes-org-blocks 'tinted-background)
-            (eq modus-themes-org-blocks 'rainbow))
+    (if (or (eq modux-themes-org-blocks 'tinted-background)
+            (eq modux-themes-org-blocks 'rainbow))
         `(org-src-block-faces
-          `(("emacs-lisp" modus-themes-nuanced-magenta)
-            ("elisp" modus-themes-nuanced-magenta)
-            ("clojure" modus-themes-nuanced-magenta)
-            ("clojurescript" modus-themes-nuanced-magenta)
-            ("c" modus-themes-nuanced-blue)
-            ("c++" modus-themes-nuanced-blue)
-            ("sh" modus-themes-nuanced-green)
-            ("shell" modus-themes-nuanced-green)
-            ("html" modus-themes-nuanced-yellow)
-            ("xml" modus-themes-nuanced-yellow)
-            ("css" modus-themes-nuanced-red)
-            ("scss" modus-themes-nuanced-red)
-            ("python" modus-themes-nuanced-green)
-            ("ipython" modus-themes-nuanced-magenta)
-            ("r" modus-themes-nuanced-cyan)
-            ("yaml" modus-themes-nuanced-cyan)
-            ("conf" modus-themes-nuanced-cyan)
-            ("docker" modus-themes-nuanced-cyan)))
+          `(("emacs-lisp" modux-themes-nuanced-magenta)
+            ("elisp" modux-themes-nuanced-magenta)
+            ("clojure" modux-themes-nuanced-magenta)
+            ("clojurescript" modux-themes-nuanced-magenta)
+            ("c" modux-themes-nuanced-blue)
+            ("c++" modux-themes-nuanced-blue)
+            ("sh" modux-themes-nuanced-green)
+            ("shell" modux-themes-nuanced-green)
+            ("html" modux-themes-nuanced-yellow)
+            ("xml" modux-themes-nuanced-yellow)
+            ("css" modux-themes-nuanced-red)
+            ("scss" modux-themes-nuanced-red)
+            ("python" modux-themes-nuanced-green)
+            ("ipython" modux-themes-nuanced-magenta)
+            ("r" modux-themes-nuanced-cyan)
+            ("yaml" modux-themes-nuanced-cyan)
+            ("conf" modux-themes-nuanced-cyan)
+            ("docker" modux-themes-nuanced-cyan)))
       `(org-src-block-faces '())))
-  "Custom variables for `modus-themes-theme'.")
+  "Custom variables for `modux-themes-theme'.")
 
 ;;; Theme macros
 
-;;;; Instantiate a Modus theme
+;;;; Instantiate a Modux theme
 
 ;;;###autoload
-(defmacro modus-themes-theme (name palette &optional overrides)
+(defmacro modux-themes-theme (name palette &optional overrides)
   "Bind NAME's color PALETTE around face specs and variables.
 Face specifications are passed to `custom-theme-set-faces'.
 While variables are handled by `custom-theme-set-variables'.
-Those are stored in `modus-themes-faces' and
-`modus-themes-custom-variables' respectively.
+Those are stored in `modux-themes-faces' and
+`modux-themes-custom-variables' respectively.
 
 Optional OVERRIDES are appended to PALETTE, overriding
 corresponding entries."
@@ -4180,18 +4175,18 @@ corresponding entries."
   (let ((sym (gensym))
         (colors (mapcar #'car (symbol-value palette))))
     `(let* ((c '((class color) (min-colors 256)))
-            (,sym (modus-themes--palette-value ',name ',overrides))
+            (,sym (modux-themes--palette-value ',name ',overrides))
             ,@(mapcar (lambda (color)
                         (list color
-                              `(modus-themes--retrieve-palette-value ',color ,sym)))
+                              `(modux-themes--retrieve-palette-value ',color ,sym)))
                       colors))
        (ignore c ,@colors)            ; Silence unused variable warnings
-       (custom-theme-set-faces ',name ,@modus-themes-faces)
-       (custom-theme-set-variables ',name ,@modus-themes-custom-variables))))
+       (custom-theme-set-faces ',name ,@modux-themes-faces)
+       (custom-theme-set-variables ',name ,@modux-themes-custom-variables))))
 
 ;;;; Use theme colors
 
-(defmacro modus-themes-with-colors (&rest body)
+(defmacro modux-themes-with-colors (&rest body)
   "Evaluate BODY with colors from current palette bound."
   (declare (indent 0))
   (let* ((sym (gensym))
@@ -4200,12 +4195,12 @@ corresponding entries."
          ;; instantiate the actual theme's palette.  We have to do this
          ;; otherwise the macro does not work properly when called from
          ;; inside a function.
-         (colors (mapcar #'car (modus-themes--current-theme-palette))))
+         (colors (mapcar #'car (modux-themes--current-theme-palette))))
     `(let* ((c '((class color) (min-colors 256)))
-            (,sym (modus-themes--current-theme-palette :overrides))
+            (,sym (modux-themes--current-theme-palette :overrides))
             ,@(mapcar (lambda (color)
                         (list color
-                              `(modus-themes--retrieve-palette-value ',color ,sym)))
+                              `(modux-themes--retrieve-palette-value ',color ,sym)))
                       colors))
        (ignore c ,@colors)            ; Silence unused variable warnings
        ,@body)))
@@ -4218,5 +4213,5 @@ corresponding entries."
     (unless (equal dir (expand-file-name "themes/" data-directory))
       (add-to-list 'custom-theme-load-path dir))))
 
-(provide 'modus-themes)
-;;; modus-themes.el ends here
+(provide 'modux-themes)
+;;; modux-themes.el ends here
