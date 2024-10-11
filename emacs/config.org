@@ -135,8 +135,9 @@ in a lot of =(use-package)= expressions, to hide those minor modes.
 #+begin_src emacs-lisp
 (use-package diminish
   :config
-  (diminish 'abbrev-mode)
-  (diminish 'visual-line-mode))
+  (dolist (mode '(abbrev-mode
+                  visual-line-mode))
+    (diminish mode)))
 #+end_src
 
 ** Evil & Evil collection

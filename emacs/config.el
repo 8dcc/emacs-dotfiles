@@ -53,8 +53,9 @@
 
 (use-package diminish
   :config
-  (diminish 'abbrev-mode)
-  (diminish 'visual-line-mode))
+  (dolist (mode '(abbrev-mode
+                  visual-line-mode))
+    (diminish mode)))
 
 (use-package evil
   :init
