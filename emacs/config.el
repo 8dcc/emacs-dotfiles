@@ -637,7 +637,6 @@ See also `shell-command'."
 (x8dcc/def-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
-  ";"   '(comment-dwim         :wk "Comment (DWIM)")
   ;; Tab
   "TAB"           '(:ignore t    :wk "Tab")
   "TAB TAB"       '(tab-recent   :wk "Switch to recent")
@@ -664,6 +663,13 @@ See also `shell-command'."
   "b R"       '(rename-buffer                    :wk "Rename")
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
+  ;; Comment
+  "c"   '(:ignore t      :wk "Comment")
+  "c b" '(comment-box    :wk "Box")
+  "c c" '(comment-dwim   :wk "DWIM")
+  "c i" '(comment-indent :wk "Indent")
+  "c l" '(comment-line   :wk "Line")
+  "c r" '(comment-region :wk "Region")
   ;; Evaluate
   "e"   '(:ignore t            :wk "Evaluate")
   "e e" '(eval-last-sexp       :wk "Last sexp")
