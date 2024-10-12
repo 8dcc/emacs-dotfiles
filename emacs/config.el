@@ -372,6 +372,8 @@ and ALIGNMENT as parameters."
 
 (use-package auctex)
 
+(use-package geiser-guile)
+
 (straight-use-package
  '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 

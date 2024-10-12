@@ -818,6 +818,14 @@ For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
   (setq graphviz-dot-indent-width 4))
 #+end_src
 
+** Guile Scheme
+
+Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme implementation for [[https://www.nongnu.org/geiser/][Geiser]].
+
+#+begin_src emacs-lisp
+(use-package geiser-guile)
+#+end_src
+
 ** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
