@@ -370,6 +370,9 @@ and ALIGNMENT as parameters."
       big-font-family-alist '((default     . "Iosevka Comfy Fixed")
                               (fixed-pitch . "Iosevka Comfy Fixed")))
 
+(straight-use-package
+ '(plumber :type git :host github :repo "8dcc/plumber.el"))
+
 (use-package auctex)
 
 (use-package geiser-guile)
