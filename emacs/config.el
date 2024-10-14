@@ -677,12 +677,13 @@ See also `shell-command'."
   "c l" '(comment-line   :wk "Line")
   "c r" '(comment-region :wk "Region")
   ;; Evaluate
-  "e"   '(:ignore t            :wk "Evaluate")
-  "e b" '(eval-buffer          :wk "Current buffer")
-  "e e" '(eval-last-sexp       :wk "Last sexp")
-  "e E" '(eval-expression      :wk "Expression")
-  "e p" '(eval-print-last-sexp :wk "Print last sexp")
-  "e r" '(eval-region          :wk "Region")
+  "e"   '(:ignore t        :wk "Evaluate")
+  "e b" '(eval-buffer      :wk "Current buffer")
+  "e e" '(eval-last-sexp   :wk "Last sexp")
+  "e E" '(eval-expression  :wk "Expression")
+  "e p" '(plumber-plumb    :wk "Plumb")
+  "e P" '(plumber-plumb-as :wk "Plumb as")
+  "e r" '(eval-region      :wk "Region")
   ;; File
   "f"   '(:ignore t          :wk "File")
   "f c" '(compile            :wk "Compile")
@@ -802,7 +803,7 @@ See also `shell-command'."
 
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m T"   '(org-babel-tangle         :wk "Tangle current file")
+  "m T"   '(org-babel-tangle :wk "Tangle current file")
   ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
