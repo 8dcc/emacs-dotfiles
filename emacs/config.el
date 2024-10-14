@@ -304,15 +304,7 @@ and the non-normal prefix is \"M-SPC\"."
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
-  (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(("TODO"       warning bold)
-          ("FIXME"      error bold)
-          ("DELME"      error bold)
-          ("HACK"       font-lock-constant-face bold)
-          ("REVIEW"     font-lock-keyword-face bold)
-          ("NOTE"       success bold)
-          ("DEPRECATED" font-lock-doc-face bold))))
+  (setq hl-todo-highlight-punctuation ":"))
 
 (use-package rainbow-mode
   :diminish

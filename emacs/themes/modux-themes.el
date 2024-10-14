@@ -4087,17 +4087,15 @@ FG and BG are the main colors."
     `(ibuffer-title-face 'default)
 ;;;; hl-todo
     `(hl-todo-keyword-faces
-      '(("TODO" . ,warning)
-        ("BUG" . ,err)
-        ("DONE" . ,info)
-        ("NOTE" . ,info)
+      '(("NOTE" . ,info)
+        ("TODO" . ,warning)
         ("HACK" . ,warning)
-        ("TEMP" . ,err)
-        ("DELME" . ,err)
+        ("REVIEW" . ,warning)
+        ("DEPRECATED" . ,warning)
         ("FIXME" . ,err)
-        ("XXX+" . ,err)
-        ("REVIEW" . ,info)
-        ("DEPRECATED" . ,info)))
+        ("DELME" . ,err)
+        ("DEBUG" . ,err)
+        ("XXXX*" . ,err)))
 ;;;; pdf-tools
     `(pdf-view-midnight-colors '(,fg-main . ,bg-dim))
 ;;;; rcirc-color
