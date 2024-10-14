@@ -678,9 +678,10 @@ See also `shell-command'."
   "c r" '(comment-region :wk "Region")
   ;; Evaluate
   "e"   '(:ignore t            :wk "Evaluate")
-  "e e" '(eval-last-sexp       :wk "Last sexp")
-  "e E" '(eval-print-last-sexp :wk "Print last sexp")
   "e b" '(eval-buffer          :wk "Current buffer")
+  "e e" '(eval-last-sexp       :wk "Last sexp")
+  "e E" '(eval-expression      :wk "Expression")
+  "e p" '(eval-print-last-sexp :wk "Print last sexp")
   "e r" '(eval-region          :wk "Region")
   ;; File
   "f"   '(:ignore t          :wk "File")
