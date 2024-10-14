@@ -85,13 +85,6 @@ Variable pitch and fixed pitch fonts.
                       :family "Dina"))
 #+end_src
 
-Change =org-done= faces.
-
-#+begin_src emacs-lisp
-(set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
-(set-face-attribute 'org-headline-done nil :inherit 'shadow)
-#+end_src
-
 * Packages
 ** Package managers
 
@@ -2619,6 +2612,13 @@ Enable =org-indent-mode=, which indents sections and hides leading '*' from titl
 (add-hook 'org-mode-hook
           (lambda ()
             (org-indent-mode 1)))
+#+end_src
+
+Change =org-done= faces.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
+(set-face-attribute 'org-headline-done nil :inherit 'shadow)
 #+end_src
 
 Show LaTeX entities and expressions in a different face.

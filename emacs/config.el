@@ -31,9 +31,6 @@
   (set-face-attribute 'fixed-pitch nil
                       :family "Dina"))
 
-(set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
-(set-face-attribute 'org-headline-done nil :inherit 'shadow)
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
         (expand-file-name "straight/repos/straight.el/bootstrap.el"
@@ -1335,6 +1332,9 @@ different rules in `display-buffer-alist'."
 (add-hook 'org-mode-hook
           (lambda ()
             (org-indent-mode 1)))
+
+(set-face-attribute 'org-done          nil :inherit 'shadow :bold t)
+(set-face-attribute 'org-headline-done nil :inherit 'shadow)
 
 (setq org-highlight-latex-and-related '(latex entities))
 
