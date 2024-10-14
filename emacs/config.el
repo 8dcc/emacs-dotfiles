@@ -21,10 +21,10 @@
 (when (member "Cozette" (font-family-list))
   (set-fontset-font t 'unicode "Cozette"))
 
-(when (member "Fira Sans" (font-family-list))
+(when (member "FreeSerif" (font-family-list))
   (set-face-attribute 'variable-pitch nil
-                      :family "Fira Sans"
-                      :height 100
+                      :family "FreeSerif"
+                      :height 110
                       :weight 'regular))
 
 (when (member "Dina" (font-family-list))
