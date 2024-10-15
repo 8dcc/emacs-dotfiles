@@ -3,3 +3,5 @@ alias ls ls --color=auto -l --sort=version --group-directories-first --human-rea
 alias grep grep --color=auto $*
 alias fgrep fgrep --color=auto $*
 alias egrep egrep --color=auto $*
+alias ff find-file $*
+alias ffo find-file-other-window $*
