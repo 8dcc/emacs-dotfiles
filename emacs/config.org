@@ -2368,6 +2368,30 @@ ERC buffer settings:
       erc-kill-server-buffer-on-quit t)
 #+end_src
 
+Don't ask for ERC passwords unless necessary. Uses a custom function for
+authenticating to ERC, which tries to look in =auth-sources= or prompts the user
+for a password. For more information, see the [[https://www.gnu.org/software/emacs/manual/html_node/erc/auth_002dsource.html][auth-source node]] of the ERC
+manual.
+
+#+begin_src emacs-lisp
+(defun x8dcc/erc-get-password (&rest plist)
+  "Custom replacement for `erc-auth-source-search' that prompts for a password
+if necessary."
+  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
+    (or auth-source-password
+        (let ((username (plist-get plist :user)))
+          (read-passwd (or (and username
+                                (format "Password for `%s': " username))
+                           "Password: "))))))
+
+;; NOTE: Could be used for other `erc-auth-source-*' functions
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password)
+
+;; The password prompt will be managed by `x8dcc/erc-get-password', if
+;; necessary; not by `erc-tls'.
+(setq erc-prompt-for-password nil)
+#+end_src
+
 Set prompt to buffer name.
 
 #+begin_src emacs-lisp

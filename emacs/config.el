@@ -1226,6 +1226,23 @@ different rules in `display-buffer-alist'."
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t)
 
+(defun x8dcc/erc-get-password (&rest plist)
+  "Custom replacement for `erc-auth-source-search' that prompts for a password
+if necessary."
+  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
+    (or auth-source-password
+        (let ((username (plist-get plist :user)))
+          (read-passwd (or (and username
+                                (format "Password for `%s': " username))
+                           "Password: "))))))
+
+;; NOTE: Could be used for other `erc-auth-source-*' functions
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password)
+
+;; The password prompt will be managed by `x8dcc/erc-get-password', if
+;; necessary; not by `erc-tls'.
+(setq erc-prompt-for-password nil)
+
 (setq erc-prompt (lambda ()
                    (concat "[" (buffer-name) "]:")))
 
