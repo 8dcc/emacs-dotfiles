@@ -2330,14 +2330,14 @@ Hide joins/leaves/quits.
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 #+end_src
 
-Fill messages to specific function.
+Fill messages to specific column.
 
 #+begin_src emacs-lisp
 (setq erc-fill-column 80)
 
-;; Align usernames to col 15
+;; Align usernames to col 10
 (setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 15)
+      erc-fill-static-center 10)
 #+end_src
 
 Prompt at the bottom of the screen.

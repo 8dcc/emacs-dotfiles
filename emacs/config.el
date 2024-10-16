@@ -1211,9 +1211,9 @@ different rules in `display-buffer-alist'."
 
 (setq erc-fill-column 80)
 
-;; Align usernames to col 15
+;; Align usernames to col 10
 (setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 15)
+      erc-fill-static-center 10)
 
 (setq erc-scrolltobottom-mode t
       erc-input-line-position -1)
