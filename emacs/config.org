@@ -2258,19 +2258,20 @@ choice.
 
 ** ERC
 
+TODO: Change order of this section.
+
 Enable ERC features.
+
+- [[https://www.emacswiki.org/emacs/ErcLogging][Log]] is used for logging messages to files, configured below.
+- [[https://www.emacswiki.org/emacs/ErcStamp][Stamp]] is used for showing timestamps, configured below.
+- [[https://www.emacswiki.org/emacs/ErcChannelTracking][Track]] is used for keeping track of non-visible channels (e.g. modeline
+  notifications).
 
 #+begin_src emacs-lisp
 (require 'erc)
-(require 'erc-log)
-(require 'erc-stamp)
-(require 'erc-track)
-;(require 'erc-spelling)
-
-(erc-log-enable)
-(erc-stamp-enable)
-(erc-track-enable)
-;(erc-spelling-enable)
+(add-to-list 'erc-modules 'log)
+(add-to-list 'erc-modules 'stamp)
+(add-to-list 'erc-modules 'track)
 #+end_src
 
 Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][advice]] so =erc-tls= is called instead of =erc=.
@@ -2279,54 +2280,91 @@ Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Func
 (advice-add 'erc :override #'erc-tls)
 #+end_src
 
-General ERC settings.
+Identification settings. Need to add an =x= because names can't start with a
+digit.
 
 #+begin_src emacs-lisp
 (setq erc-nick           "x8dcc"
       erc-system-name    "x8dcc"
-      erc-user-full-name "x8dcc"
+      erc-user-full-name "x8dcc")
+#+end_src
 
-      ;; Don't give away machine name
-      erc-anonymous-login t
-      ;; Don't reply to CTCP
+Privacy settings.
+
+- Don't give away the machine name.
+- Don't reply to CTCP.
+- Notify CTCP requests.
+
+#+begin_src emacs-lisp
+(setq erc-anonymous-login t
       erc-disable-ctcp-replies t
-      ;; Notify CTCP requests
-      erc-paranoid t
-      ;; Warn blank lines
-      erc-warn-about-blank-lines t
+      erc-paranoid t)
+#+end_src
 
-      ;; Enable logging
-      erc-enable-logging t
-      ;; Directory for logs
-      erc-log-channels-directory (concat user-emacs-directory "erc-log")
-      ;; When to write logs
-      erc-log-write-after-send t
-      erc-log-write-after-insert t
-      ;; Timestamps
-      erc-stamp-mode t
-      erc-hide-timestamps t
+Warn about blank lines.
 
-      ;; Hide joins/leaves/quits
-      erc-hide-list '("JOIN" "PART" "QUIT")
-      ;; Max line width
-      erc-fill-column 100
-      ;; Align usernames to col 20
-      erc-fill-function 'erc-fill-static
-      erc-fill-static-center 15
-      ;; Prompt at the bottom of the screen
-      erc-scrolltobottom-mode t
-      erc-input-line-position -1
-      ;; Messages to mode-line
-      erc-track-showcount t
-      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
+#+begin_src emacs-lisp
+(setq erc-warn-about-blank-lines t)
+#+end_src
 
-      ;; Don't bury ERC buffers by default
-      erc-join-buffer 'buffer
-      ;; Kill buffers for channels after /part
+Enable logging. Also enable timestamps, but only for logs.
+
+#+begin_src emacs-lisp
+(setq erc-enable-logging t)
+
+;; Directory for logs
+(setq erc-log-channels-directory (concat user-emacs-directory "erc-log"))
+
+;; When to write logs
+(setq erc-log-write-after-send t
+      erc-log-write-after-insert t)
+
+;; Timestamps (only in logs)
+(setq erc-stamp-mode t
+      erc-hide-timestamps t)
+#+end_src
+
+Hide joins/leaves/quits.
+
+#+begin_src emacs-lisp
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+#+end_src
+
+Fill messages to specific function.
+
+#+begin_src emacs-lisp
+(setq erc-fill-column 80)
+
+;; Align usernames to col 15
+(setq erc-fill-function 'erc-fill-static
+      erc-fill-static-center 15)
+#+end_src
+
+Prompt at the bottom of the screen.
+
+#+begin_src emacs-lisp
+(setq erc-scrolltobottom-mode t
+      erc-input-line-position -1)
+#+end_src
+
+Show the message count in the mode line.
+
+#+begin_src emacs-lisp
+(setq erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
+#+end_src
+
+ERC buffer settings:
+
+- Don't bury ERC buffers by default.
+- Kill buffers for channels after /part.
+- Kill buffers for private queries after quitting the server.
+- Kill buffers for server messages after quitting the server.
+
+#+begin_src emacs-lisp
+(setq erc-join-buffer 'buffer
       erc-kill-buffer-on-part t
-      ;; Kill buffers for private queries after quitting the server
       erc-kill-queries-on-quit t
-      ;; Kill buffers for server messages after quitting the server
       erc-kill-server-buffer-on-quit t)
 #+end_src
 

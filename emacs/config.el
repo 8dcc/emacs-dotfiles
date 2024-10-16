@@ -1178,63 +1178,52 @@ different rules in `display-buffer-alist'."
 (setq xref-prompt-for-identifier nil)
 
 (require 'erc)
-(require 'erc-log)
-(require 'erc-stamp)
-(require 'erc-track)
-;(require 'erc-spelling)
-
-(erc-log-enable)
-(erc-stamp-enable)
-(erc-track-enable)
-;(erc-spelling-enable)
+(add-to-list 'erc-modules 'log)
+(add-to-list 'erc-modules 'stamp)
+(add-to-list 'erc-modules 'track)
 
 (advice-add 'erc :override #'erc-tls)
 
 (setq erc-nick           "x8dcc"
       erc-system-name    "x8dcc"
-      erc-user-full-name "x8dcc"
+      erc-user-full-name "x8dcc")
 
-      ;; Don't give away machine name
-      erc-anonymous-login t
-      ;; Don't reply to CTCP
+(setq erc-anonymous-login t
       erc-disable-ctcp-replies t
-      ;; Notify CTCP requests
-      erc-paranoid t
-      ;; Warn blank lines
-      erc-warn-about-blank-lines t
+      erc-paranoid t)
 
-      ;; Enable logging
-      erc-enable-logging t
-      ;; Directory for logs
-      erc-log-channels-directory (concat user-emacs-directory "erc-log")
-      ;; When to write logs
-      erc-log-write-after-send t
-      erc-log-write-after-insert t
-      ;; Timestamps
-      erc-stamp-mode t
-      erc-hide-timestamps t
+(setq erc-warn-about-blank-lines t)
 
-      ;; Hide joins/leaves/quits
-      erc-hide-list '("JOIN" "PART" "QUIT")
-      ;; Max line width
-      erc-fill-column 100
-      ;; Align usernames to col 20
-      erc-fill-function 'erc-fill-static
-      erc-fill-static-center 15
-      ;; Prompt at the bottom of the screen
-      erc-scrolltobottom-mode t
-      erc-input-line-position -1
-      ;; Messages to mode-line
-      erc-track-showcount t
-      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353")
+(setq erc-enable-logging t)
 
-      ;; Don't bury ERC buffers by default
-      erc-join-buffer 'buffer
-      ;; Kill buffers for channels after /part
+;; Directory for logs
+(setq erc-log-channels-directory (concat user-emacs-directory "erc-log"))
+
+;; When to write logs
+(setq erc-log-write-after-send t
+      erc-log-write-after-insert t)
+
+;; Timestamps (only in logs)
+(setq erc-stamp-mode t
+      erc-hide-timestamps t)
+
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
+(setq erc-fill-column 80)
+
+;; Align usernames to col 15
+(setq erc-fill-function 'erc-fill-static
+      erc-fill-static-center 15)
+
+(setq erc-scrolltobottom-mode t
+      erc-input-line-position -1)
+
+(setq erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
+
+(setq erc-join-buffer 'buffer
       erc-kill-buffer-on-part t
-      ;; Kill buffers for private queries after quitting the server
       erc-kill-queries-on-quit t
-      ;; Kill buffers for server messages after quitting the server
       erc-kill-server-buffer-on-quit t)
 
 (setq erc-prompt (lambda ()
