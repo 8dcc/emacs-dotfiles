@@ -883,6 +883,7 @@ See also `shell-command'."
 (x8dcc/def-keys-rmail
   ;; Mode (Rmail)
   "m d" '(rmail-delete-forward             :wk "Delete and move forward")
+  "m D" '(rmail-epa-decrypt                :wk "Decrypt")
   "m g" '(rmail-get-new-mail               :wk "Get new mail")
   "m i" '(rmail-input                      :wk "Input file")
   "m m" '(rmail-summary                    :wk "Summary")
