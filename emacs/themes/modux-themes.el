@@ -1738,7 +1738,7 @@ FG and BG are the main colors."
 ;;;; standard faces
 ;;;;; absolute essentials
     `(default ((,c :background ,bg-main :foreground ,fg-main)))
-    `(cursor ((,c :background ,cursor)))
+    `(cursor ((,c :background ,bg-cursor :foreground ,fg-cursor)))
     `(fringe ((,c :background ,fringe :foreground ,fg-dim)))
     `(menu ((,c :background ,bg-dim :foreground ,fg-main)))
     `(scroll-bar ((,c :background ,bg-dim :foreground ,fg-dim)))

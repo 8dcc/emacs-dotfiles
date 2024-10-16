@@ -209,7 +209,8 @@ standard)."
 ;;;; General mappings
 
       (fringe bg-line-number-inactive)
-      (cursor fg-main)
+      (fg-cursor bg-main)
+      (bg-cursor fg-main)
 
       (keybind red)
       (name red-cooler)

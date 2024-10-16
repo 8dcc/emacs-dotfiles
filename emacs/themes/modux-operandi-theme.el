@@ -210,7 +210,8 @@ standard)."
 ;;;; General mappings
 
       (fringe bg-dim)
-      (cursor fg-main)
+      (fg-cursor bg-main)
+      (bg-cursor fg-main)
 
       (keybind red)
       (name red-cooler)
