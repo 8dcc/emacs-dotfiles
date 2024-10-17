@@ -860,12 +860,14 @@ See also `shell-command'."
   ;; Buffer
   "b f"   '(clang-format-buffer :wk "Format")
   ;; Mode (C)
-  "m a"   '(c-toggle-auto-newline       :wk "Toggle auto-newline")
   "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
-  "m h"   '(c-toggle-hungry-state       :wk "Toggle hungry-delete-key")
-  "m I"   '(hide-ifdef-mode             :wk "Hide unused ifdefs")
-  "m l"   '(c-toggle-electric-state     :wk "Toggle electric indentation")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
+  ;; Mode -> Toggle
+  "m t"   '(:ignore t               :wk "Toggle")
+  "m t a" '(c-toggle-auto-newline   :wk "Auto-newline")
+  "m t h" '(c-toggle-hungry-state   :wk "Hungry-delete-key")
+  "m t I" '(hide-ifdef-mode         :wk "Unused ifdefs")
+  "m t l" '(c-toggle-electric-state :wk "Electric indentation")
   ;; Mode -> Insert
   "m i"   '(:ignore t                        :wk "Insert")
   "m i h" '(x8dcc/skeleton-c-header          :wk "Header skeleton")
