@@ -1839,7 +1839,11 @@ Used for highlighting more constants with `font-lock-constant-face' in
 
 (define-skeleton x8dcc/skeleton-c-license-comment
   "Insert a basic C header skeleton with include guards."
-  "Program name: "
+  nil
+  '(setq str
+         (let ((project (project-current)))
+           (skeleton-read "Project name: "
+                          (and project (project-name project)))))
   "/*\n"
   " * Copyright " (format-time-string "%Y") " 8dcc\n"
   " *\n"
