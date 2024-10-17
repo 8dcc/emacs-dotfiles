@@ -1560,13 +1560,14 @@ See also [[*C mode][C mode]].
   "m a"   '(c-toggle-auto-newline       :wk "Toggle auto-newline")
   "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m h"   '(c-toggle-hungry-state       :wk "Toggle hungry-delete-key")
-  "m I"   '(hide-ifdef-mode             :wk "Toggle visibility of unused ifdefs")
+  "m I"   '(hide-ifdef-mode             :wk "Hide unused ifdefs")
   "m l"   '(c-toggle-electric-state     :wk "Toggle electric indentation")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
   ;; Mode -> Insert
-  "m i"   '(:ignore t :wk "Insert")
-  "m i h" '(x8dcc/skeleton-c-header :wk "Header skeleton")
-  "m i s" '(x8dcc/skeleton-c-source :wk "Source skeleton"))
+  "m i"   '(:ignore t                        :wk "Insert")
+  "m i h" '(x8dcc/skeleton-c-header          :wk "Header skeleton")
+  "m i l" '(x8dcc/skeleton-c-license-comment :wk "License comment (GPL-3.0)")
+  "m i s" '(x8dcc/skeleton-c-source          :wk "Source skeleton"))
 #+end_src
 
 *** Message mode keybinds
@@ -3328,6 +3329,31 @@ can be found at commit [[https://github.com/8dcc/emacs-dotfiles/blob/0b03b1f3033
   "#define " v1 " 1\n\n"
   _ "\n\n"
   "#endif /* " v1 " */" \n)
+#+end_src
+
+Insert GPL-3.0 (or later) comment.
+
+#+begin_src emacs-lisp
+(define-skeleton x8dcc/skeleton-c-license-comment
+  "Insert a basic C header skeleton with include guards."
+  "Program name: "
+  "/*\n"
+  " * Copyright " (format-time-string "%Y") " 8dcc\n"
+  " *\n"
+  " * This file is part of " str ".\n"
+  " *\n"
+  " * This program is free software: you can redistribute it and/or modify it under\n"
+  " * the terms of the GNU General Public License as published by the Free Software\n"
+  " * Foundation, either version 3 of the License, or any later version.\n"
+  " *\n"
+  " * This program is distributed in the hope that it will be useful, but WITHOUT\n"
+  " * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS\n"
+  " * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more\n"
+  " * details.\n"
+  " *\n"
+  " * You should have received a copy of the GNU General Public License along with\n"
+  " * " str ". If not, see <https://www.gnu.org/licenses/>.\n"
+  " */\n" \n)
 #+end_src
 
 *** Misc C functions
