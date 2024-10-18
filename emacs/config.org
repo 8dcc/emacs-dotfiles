@@ -2270,12 +2270,15 @@ Enable ERC features.
 - [[https://www.emacswiki.org/emacs/ErcStamp][Stamp]] is used for showing timestamps, configured below.
 - [[https://www.emacswiki.org/emacs/ErcChannelTracking][Track]] is used for keeping track of non-visible channels (e.g. modeline
   notifications).
+- [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]] will be used for logging into /some/ servers. It's enabled when necessary
+  from =x8dcc/erc-launch=, defined below.
 
 #+begin_src emacs-lisp
 (require 'erc)
 (add-to-list 'erc-modules 'log)
 (add-to-list 'erc-modules 'stamp)
 (add-to-list 'erc-modules 'track)
+(erc-update-modules)
 #+end_src
 
 Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][advice]] so =erc-tls= is called instead of =erc=.
@@ -2375,7 +2378,8 @@ ERC buffer settings:
 Don't ask for ERC passwords unless necessary. Uses a custom function for
 authenticating to ERC, which tries to look in =auth-sources= or prompts the user
 for a password. For more information, see the [[https://www.gnu.org/software/emacs/manual/html_node/erc/auth_002dsource.html][auth-source node]] of the ERC
-manual.
+manual. This function will be used both when connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] and when
+connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]].
 
 #+begin_src emacs-lisp
 (defun x8dcc/erc-get-password (&rest plist)
@@ -2388,15 +2392,61 @@ if necessary."
                                 (format "Password for `%s': " username))
                            "Password: "))))))
 
+;; Use for authenticating in TLS and SASL.
 ;; NOTE: Could be used for other `erc-auth-source-*' functions
-(setq erc-auth-source-server-function #'x8dcc/erc-get-password)
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password
+      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
 
 ;; The password prompt will be managed by `x8dcc/erc-get-password', if
 ;; necessary; not by `erc-tls'.
 (setq erc-prompt-for-password nil)
 #+end_src
 
-Set prompt to buffer name.
+Custom function for launching ERC. It will check if it should connect to the
+specified server through [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] or [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]].
+
+When called interactively, uses 6697 as the port and the value of =erc-nick= as
+the user.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/erc-sasl-servers
+  '("irc.libera.chat")
+  "List of servers that should be connected through SASL when using
+`x8dcc/erc-launch'.")
+
+(defun x8dcc/erc-launch (server port user)
+  "Launch ERC through TLS or SASL, depending on `x8dcc/erc-sasl-servers'.
+
+When called interactively, uses 6697 as the port and the value of `erc-nick' as
+the user."
+  (interactive
+   (list (read-string (format-prompt "Server" erc-default-server)
+                      nil 'erc-server-history-list erc-default-server)
+         6697
+         erc-nick))
+  ;; Enable `erc-sasl-mode' if the specified server is in the
+  ;; `x8dcc/erc-sasl-servers' list.
+  (cond ((member server x8dcc/erc-sasl-servers)
+         (add-to-list 'erc-modules 'sasl)
+         (erc-update-modules)
+         (message "Logging in with SASL to `%s'" server))
+        (t
+         (setq erc-modules (delete 'sasl erc-modules))
+         (erc-update-modules)
+         (message "Logging in with TLS to `%s'" server)))
+  ;; We don't need to specify the password, since `x8dcc/erc-get-password' will
+  ;; be used.
+  (erc-tls :server server :port port :user user))
+#+end_src
+
+When authenticating with SASL, use a password, not a certificate file. See
+=x8dcc/erc-get-password=.
+
+#+begin_src emacs-lisp
+(setq erc-sasl-mechanism 'plain)
+#+end_src
+
+Set prompt of ERC to buffer name.
 
 #+begin_src emacs-lisp
 (setq erc-prompt (lambda ()

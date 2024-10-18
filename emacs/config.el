@@ -1185,6 +1185,7 @@ different rules in `display-buffer-alist'."
 (add-to-list 'erc-modules 'log)
 (add-to-list 'erc-modules 'stamp)
 (add-to-list 'erc-modules 'track)
+(erc-update-modules)
 
 (advice-add 'erc :override #'erc-tls)
 
@@ -1240,12 +1241,45 @@ if necessary."
                                 (format "Password for `%s': " username))
                            "Password: "))))))
 
+;; Use for authenticating in TLS and SASL.
 ;; NOTE: Could be used for other `erc-auth-source-*' functions
-(setq erc-auth-source-server-function #'x8dcc/erc-get-password)
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password
+      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
 
 ;; The password prompt will be managed by `x8dcc/erc-get-password', if
 ;; necessary; not by `erc-tls'.
 (setq erc-prompt-for-password nil)
+
+(defconst x8dcc/erc-sasl-servers
+  '("irc.libera.chat")
+  "List of servers that should be connected through SASL when using
+`x8dcc/erc-launch'.")
+
+(defun x8dcc/erc-launch (server port user)
+  "Launch ERC through TLS or SASL, depending on `x8dcc/erc-sasl-servers'.
+
+When called interactively, uses 6697 as the port and the value of `erc-nick' as
+the user."
+  (interactive
+   (list (read-string (format-prompt "Server" erc-default-server)
+                      nil 'erc-server-history-list erc-default-server)
+         6697
+         erc-nick))
+  ;; Enable `erc-sasl-mode' if the specified server is in the
+  ;; `x8dcc/erc-sasl-servers' list.
+  (cond ((member server x8dcc/erc-sasl-servers)
+         (add-to-list 'erc-modules 'sasl)
+         (erc-update-modules)
+         (message "Logging in with SASL to `%s'" server))
+        (t
+         (setq erc-modules (delete 'sasl erc-modules))
+         (erc-update-modules)
+         (message "Logging in with TLS to `%s'" server)))
+  ;; We don't need to specify the password, since `x8dcc/erc-get-password' will
+  ;; be used.
+  (erc-tls :server server :port port :user user))
+
+(setq erc-sasl-mechanism 'plain)
 
 (setq erc-prompt (lambda ()
                    (concat "[" (buffer-name) "]:")))
