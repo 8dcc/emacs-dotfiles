@@ -2467,7 +2467,7 @@ Set prompt of ERC to the buffer name (current channel).
 #+end_src
 
 ** Mail
-*** General mail settings
+*** Mail general settings
 
 General mail folder, used in many variables below.
 
@@ -2600,7 +2600,7 @@ Prefer plaintext when possible.
 #+end_src
 
 ** Org mode
-*** Basic Org settings
+*** Org basic settings
 
 Enable "<s TAB" completion.
 
@@ -2704,7 +2704,7 @@ sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaing
 sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
 #+end_src
 
-*** Visual Org settings
+*** Org visual settings
 
 Org visual settings.
 
@@ -2756,7 +2756,7 @@ Show LaTeX entities and expressions in a different face.
 (setq org-highlight-latex-and-related '(latex entities))
 #+end_src
 
-*** Custom Org functions
+*** Org custom functions
 
 It's common for me to use =org-insert-link= after typing a sentence ended in a
 space, but when exiting evil's insert mode, the cursor moves on top of that last
@@ -2785,7 +2785,7 @@ asterisks in org buffers.
 (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 #+end_comment
 
-*** Custom Org heading IDs
+*** Org custom heading IDs
 
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to
 [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Lee Hinman]] and [[https://protesilaos.com/][Protesilaos Stavrou]].
@@ -2890,7 +2890,7 @@ Skeleton for [[https://8dcc.github.io/][my blog]] articles.
 #+end_src
 
 ** LaTeX mode
-*** Basic LaTeX settings
+*** LaTeX basic settings
 
 For more information about AUCTeX, see the [[https://www.gnu.org/software/auctex/manual/auctex.pdf][manual]].
 
@@ -2931,7 +2931,7 @@ Note that the string has to be in =TeX-command-list= or the command will fail.
   (TeX-command "TeX" #'TeX-master-file))
 #+end_src
 
-*** LaTeX Font functions
+*** LaTeX font functions
 
 These functions are used for formatting text with =SPC m f=. You will probably
 need the [[*AucTex][AucTex]] package, although you can just change the strings being passed
@@ -2969,7 +2969,7 @@ FONT-LIST using `x8dcc/tex-get-font-key'."
 (x8dcc/tex-defun-font x8dcc/latex-font-typewriter "tt{")
 #+end_src
 
-*** LaTeX Indentation functions
+*** LaTeX indentation functions
 
 This function, written by [[https://emacs.stackexchange.com/users/253/dan][Dan]] in [[https://emacs.stackexchange.com/a/3100/40363][this StackExchange answer]], indents =\item=
 lines in =itemize=, =enumerate= and =description= environments in LaTeX. This is
@@ -3151,7 +3151,7 @@ Skeleton for =amsart= LaTeX documents.
 #+end_src
 
 ** C mode
-*** Basic C settings
+*** C basic settings
 
 Enable explicit tabs for C code (if not on beginning of line).
 
@@ -3189,7 +3189,7 @@ For using =ff-find-other-file=, search also in the specified include folders.
     (add-to-list 'cc-search-directories path)))
 #+end_src
 
-*** Custom C style
+*** C custom style
 
 Specify my personal C style. See the =c-default-style= and =c-offsets-alist=
 variables.
@@ -3279,7 +3279,7 @@ variables.
                         (other . "x8dcc/c-style")))
 #+end_src
 
-*** Highlight extra C constants
+*** C highlight extra constants
 
 Highlight more constants in =c-mode=.
 
@@ -3425,7 +3425,7 @@ Insert GPL-3.0 (or later) comment.
   " */\n" \n)
 #+end_src
 
-*** Misc C functions
+*** C misc functions
 
 This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =beardbolt-compile=.
 
