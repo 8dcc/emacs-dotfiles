@@ -1265,9 +1265,9 @@ if necessary."
 
 (setq erc-fill-column 80)
 
-;; Align usernames to col 10
+;; Align usernames to col 12
 (setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 10)
+      erc-fill-static-center 12)
 
 (setq erc-scrolltobottom-mode t
       erc-input-line-position -1)
