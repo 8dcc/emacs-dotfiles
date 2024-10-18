@@ -5,6 +5,19 @@
 
 #+TOC: headlines 2
 
+#+begin_comment emacs-lisp
+;; Wrap all `emacs-lisp' source blocks in:
+;;   (benchmark-run ...)
+;; For profiling the configuration.
+(replace-regexp (rx (group-n 1
+                      "#+begin_src emacs-lisp"
+                      (*? anything)
+                      "\n")
+                    (group-n 2 (*? anything))
+                    (group-n 3 "\n#+end_src"))
+                "\\1(benchmark-run\n\\2\n)\\3")
+#+end_comment
+
 * Identification
 
 Identification for GPG configuration, email, templates, etc.
