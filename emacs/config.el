@@ -1187,69 +1187,6 @@ different rules in `display-buffer-alist'."
 (add-to-list 'erc-modules 'track)
 (erc-update-modules)
 
-(advice-add 'erc :override #'erc-tls)
-
-(setq erc-nick           "x8dcc"
-      erc-system-name    "x8dcc"
-      erc-user-full-name "x8dcc")
-
-(setq erc-anonymous-login t
-      erc-disable-ctcp-replies t
-      erc-paranoid t)
-
-(setq erc-warn-about-blank-lines t)
-
-(setq erc-enable-logging t)
-
-;; Directory for logs
-(setq erc-log-channels-directory (concat user-emacs-directory "erc-log"))
-
-;; When to write logs
-(setq erc-log-write-after-send t
-      erc-log-write-after-insert t)
-
-;; Timestamps (only in logs)
-(setq erc-stamp-mode t
-      erc-hide-timestamps t)
-
-(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-
-(setq erc-fill-column 80)
-
-;; Align usernames to col 10
-(setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 10)
-
-(setq erc-scrolltobottom-mode t
-      erc-input-line-position -1)
-
-(setq erc-track-showcount t
-      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
-
-(setq erc-join-buffer 'buffer
-      erc-kill-buffer-on-part t
-      erc-kill-queries-on-quit t
-      erc-kill-server-buffer-on-quit t)
-
-(defun x8dcc/erc-get-password (&rest plist)
-  "Custom replacement for `erc-auth-source-search' that prompts for a password
-if necessary."
-  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
-    (or auth-source-password
-        (let ((username (plist-get plist :user)))
-          (read-passwd (or (and username
-                                (format "Password for `%s': " username))
-                           "Password: "))))))
-
-;; Use for authenticating in TLS and SASL.
-;; NOTE: Could be used for other `erc-auth-source-*' functions
-(setq erc-auth-source-server-function #'x8dcc/erc-get-password
-      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
-
-;; The password prompt will be managed by `x8dcc/erc-get-password', if
-;; necessary; not by `erc-tls'.
-(setq erc-prompt-for-password nil)
-
 (defconst x8dcc/erc-sasl-servers
   '("irc.libera.chat")
   "List of servers that should be connected through SASL when using
@@ -1279,10 +1216,75 @@ the user."
   ;; be used.
   (erc-tls :server server :port port :user user))
 
+(advice-add 'erc :override #'x8dcc/erc-launch)
+
 (setq erc-sasl-mechanism 'plain)
 
-(setq erc-prompt (lambda ()
-                   (concat "[" (buffer-name) "]:")))
+(defun x8dcc/erc-get-password (&rest plist)
+  "Custom replacement for `erc-auth-source-search' that prompts for a password
+if necessary."
+  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
+    (or auth-source-password
+        (let ((username (plist-get plist :user)))
+          (read-passwd (or (and username
+                                (format "Password for `%s': " username))
+                           "Password: "))))))
+
+;; Use for authenticating in TLS and SASL.
+;; NOTE: Could be used for other `erc-auth-source-*' functions
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password
+      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
+
+;; The password prompt will be managed by `x8dcc/erc-get-password', if
+;; necessary; not by `erc-tls'.
+(setq erc-prompt-for-password nil)
+
+(setq erc-anonymous-login t
+      erc-disable-ctcp-replies t
+      erc-paranoid t)
+
+(setq erc-nick           "x8dcc"
+      erc-system-name    "x8dcc"
+      erc-user-full-name "x8dcc")
+
+(setq erc-enable-logging t)
+
+;; Directory for logs
+(setq erc-log-channels-directory
+      (concat user-emacs-directory "erc-log"))
+
+;; When to write logs
+(setq erc-log-write-after-send t
+      erc-log-write-after-insert t)
+
+;; Timestamps (only in logs)
+(setq erc-stamp-mode t
+      erc-hide-timestamps t)
+
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
+(setq erc-fill-column 80)
+
+;; Align usernames to col 10
+(setq erc-fill-function 'erc-fill-static
+      erc-fill-static-center 10)
+
+(setq erc-scrolltobottom-mode t
+      erc-input-line-position -1)
+
+(setq erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
+
+(setq erc-warn-about-blank-lines t)
+
+(setq erc-join-buffer 'buffer
+      erc-kill-buffer-on-part t
+      erc-kill-queries-on-quit t
+      erc-kill-server-buffer-on-quit t)
+
+(setq erc-prompt
+      (lambda ()
+        (concat "[" (buffer-name) "]:")))
 
 (defvar x8dcc/mail-directory
   (expand-file-name "~/Mail/"))

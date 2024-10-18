@@ -2261,11 +2261,9 @@ choice.
 #+end_src
 
 ** ERC
+*** ERC modules
 
-TODO: Change order of this section.
-
-Enable ERC features.
-
+Enable ERC features:
 - [[https://www.emacswiki.org/emacs/ErcLogging][Log]] is used for logging messages to files, configured below.
 - [[https://www.emacswiki.org/emacs/ErcStamp][Stamp]] is used for showing timestamps, configured below.
 - [[https://www.emacswiki.org/emacs/ErcChannelTracking][Track]] is used for keeping track of non-visible channels (e.g. modeline
@@ -2281,132 +2279,11 @@ Enable ERC features.
 (erc-update-modules)
 #+end_src
 
-Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][advice]] so =erc-tls= is called instead of =erc=.
-
-#+begin_src emacs-lisp
-(advice-add 'erc :override #'erc-tls)
-#+end_src
-
-Identification settings. Need to add an =x= because names can't start with a
-digit.
-
-#+begin_src emacs-lisp
-(setq erc-nick           "x8dcc"
-      erc-system-name    "x8dcc"
-      erc-user-full-name "x8dcc")
-#+end_src
-
-Privacy settings.
-
-- Don't give away the machine name.
-- Don't reply to CTCP.
-- Notify CTCP requests.
-
-#+begin_src emacs-lisp
-(setq erc-anonymous-login t
-      erc-disable-ctcp-replies t
-      erc-paranoid t)
-#+end_src
-
-Warn about blank lines.
-
-#+begin_src emacs-lisp
-(setq erc-warn-about-blank-lines t)
-#+end_src
-
-Enable logging. Also enable timestamps, but only for logs.
-
-#+begin_src emacs-lisp
-(setq erc-enable-logging t)
-
-;; Directory for logs
-(setq erc-log-channels-directory (concat user-emacs-directory "erc-log"))
-
-;; When to write logs
-(setq erc-log-write-after-send t
-      erc-log-write-after-insert t)
-
-;; Timestamps (only in logs)
-(setq erc-stamp-mode t
-      erc-hide-timestamps t)
-#+end_src
-
-Hide joins/leaves/quits.
-
-#+begin_src emacs-lisp
-(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-#+end_src
-
-Fill messages to specific column.
-
-#+begin_src emacs-lisp
-(setq erc-fill-column 80)
-
-;; Align usernames to col 10
-(setq erc-fill-function 'erc-fill-static
-      erc-fill-static-center 10)
-#+end_src
-
-Prompt at the bottom of the screen.
-
-#+begin_src emacs-lisp
-(setq erc-scrolltobottom-mode t
-      erc-input-line-position -1)
-#+end_src
-
-Show the message count in the mode line.
-
-#+begin_src emacs-lisp
-(setq erc-track-showcount t
-      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
-#+end_src
-
-ERC buffer settings:
-
-- Don't bury ERC buffers by default.
-- Kill buffers for channels after /part.
-- Kill buffers for private queries after quitting the server.
-- Kill buffers for server messages after quitting the server.
-
-#+begin_src emacs-lisp
-(setq erc-join-buffer 'buffer
-      erc-kill-buffer-on-part t
-      erc-kill-queries-on-quit t
-      erc-kill-server-buffer-on-quit t)
-#+end_src
-
-Don't ask for ERC passwords unless necessary. Uses a custom function for
-authenticating to ERC, which tries to look in =auth-sources= or prompts the user
-for a password. For more information, see the [[https://www.gnu.org/software/emacs/manual/html_node/erc/auth_002dsource.html][auth-source node]] of the ERC
-manual. This function will be used both when connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] and when
-connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]].
-
-#+begin_src emacs-lisp
-(defun x8dcc/erc-get-password (&rest plist)
-  "Custom replacement for `erc-auth-source-search' that prompts for a password
-if necessary."
-  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
-    (or auth-source-password
-        (let ((username (plist-get plist :user)))
-          (read-passwd (or (and username
-                                (format "Password for `%s': " username))
-                           "Password: "))))))
-
-;; Use for authenticating in TLS and SASL.
-;; NOTE: Could be used for other `erc-auth-source-*' functions
-(setq erc-auth-source-server-function #'x8dcc/erc-get-password
-      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
-
-;; The password prompt will be managed by `x8dcc/erc-get-password', if
-;; necessary; not by `erc-tls'.
-(setq erc-prompt-for-password nil)
-#+end_src
+*** ERC security settings (TLS/SASL)
 
 Custom function for launching ERC. It will check if it should connect to the
-specified server through [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] or [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]].
-
-When called interactively, uses 6697 as the port and the value of =erc-nick= as
-the user.
+specified server using [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] or [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]]. When called interactively, uses 6697 as the
+port and the value of =erc-nick= as the user.
 
 #+begin_src emacs-lisp
 (defconst x8dcc/erc-sasl-servers
@@ -2439,6 +2316,12 @@ the user."
   (erc-tls :server server :port port :user user))
 #+end_src
 
+Add an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][advice]] so =x8dcc/erc-launch= is called instead of =erc=.
+
+#+begin_src emacs-lisp
+(advice-add 'erc :override #'x8dcc/erc-launch)
+#+end_src
+
 When authenticating with SASL, use a password, not a certificate file. See
 =x8dcc/erc-get-password=.
 
@@ -2446,11 +2329,141 @@ When authenticating with SASL, use a password, not a certificate file. See
 (setq erc-sasl-mechanism 'plain)
 #+end_src
 
-Set prompt of ERC to buffer name.
+Don't ask for ERC passwords unless necessary. Uses a custom function for
+authenticating to ERC, which tries to look in =auth-sources= or prompts the user
+for a password. For more information, see the [[https://www.gnu.org/software/emacs/manual/html_node/erc/auth_002dsource.html][auth-source node]] of the ERC
+manual. This function will be used both when connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] and when
+connecting through [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]].
 
 #+begin_src emacs-lisp
-(setq erc-prompt (lambda ()
-                   (concat "[" (buffer-name) "]:")))
+(defun x8dcc/erc-get-password (&rest plist)
+  "Custom replacement for `erc-auth-source-search' that prompts for a password
+if necessary."
+  (let ((auth-source-password (apply #'erc-auth-source-search plist)))
+    (or auth-source-password
+        (let ((username (plist-get plist :user)))
+          (read-passwd (or (and username
+                                (format "Password for `%s': " username))
+                           "Password: "))))))
+
+;; Use for authenticating in TLS and SASL.
+;; NOTE: Could be used for other `erc-auth-source-*' functions
+(setq erc-auth-source-server-function #'x8dcc/erc-get-password
+      erc-sasl-auth-source-function #'x8dcc/erc-get-password)
+
+;; The password prompt will be managed by `x8dcc/erc-get-password', if
+;; necessary; not by `erc-tls'.
+(setq erc-prompt-for-password nil)
+#+end_src
+
+Other privacy settings:
+- Don't give away the machine name.
+- Don't reply to CTCP.
+- Notify CTCP requests.
+
+#+begin_src emacs-lisp
+(setq erc-anonymous-login t
+      erc-disable-ctcp-replies t
+      erc-paranoid t)
+#+end_src
+
+*** ERC identification settings
+
+Identification settings. Need to add an =x= because names can't start with a
+digit.
+
+#+begin_src emacs-lisp
+(setq erc-nick           "x8dcc"
+      erc-system-name    "x8dcc"
+      erc-user-full-name "x8dcc")
+#+end_src
+
+*** ERC logging settings
+
+Enable logging.
+
+#+begin_src emacs-lisp
+(setq erc-enable-logging t)
+
+;; Directory for logs
+(setq erc-log-channels-directory
+      (concat user-emacs-directory "erc-log"))
+
+;; When to write logs
+(setq erc-log-write-after-send t
+      erc-log-write-after-insert t)
+#+end_src
+
+Enable timestamps, but only for logs.
+
+#+begin_src emacs-lisp
+;; Timestamps (only in logs)
+(setq erc-stamp-mode t
+      erc-hide-timestamps t)
+#+end_src
+
+*** ERC visual settings
+
+Hide joins/leaves/quits.
+
+#+begin_src emacs-lisp
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+#+end_src
+
+Fill messages to specific column.
+
+TODO: Sometimes, depending on the line width, a blank line is printed. Not sure
+what specific setting is responsible for this.
+
+#+begin_src emacs-lisp
+(setq erc-fill-column 80)
+
+;; Align usernames to col 10
+(setq erc-fill-function 'erc-fill-static
+      erc-fill-static-center 10)
+#+end_src
+
+Prompt at the bottom of the screen.
+
+#+begin_src emacs-lisp
+(setq erc-scrolltobottom-mode t
+      erc-input-line-position -1)
+#+end_src
+
+Show the message count in the mode line.
+
+#+begin_src emacs-lisp
+(setq erc-track-showcount t
+      erc-track-exclude-list '("NICK" "JOIN" "PART" "QUIT" "333" "353"))
+#+end_src
+
+*** ERC misc settings
+
+Warn about blank lines.
+
+#+begin_src emacs-lisp
+(setq erc-warn-about-blank-lines t)
+#+end_src
+
+ERC buffer settings:
+- Don't bury ERC buffers by default.
+- Kill buffers for channels after /part.
+- Kill buffers for private queries after quitting the server.
+- Kill buffers for server messages after quitting the server.
+
+#+begin_src emacs-lisp
+(setq erc-join-buffer 'buffer
+      erc-kill-buffer-on-part t
+      erc-kill-queries-on-quit t
+      erc-kill-server-buffer-on-quit t)
+#+end_src
+
+Set prompt of ERC to the buffer name (current channel).
+
+#+begin_src emacs-lisp
+(setq erc-prompt
+      (lambda ()
+        (concat "[" (buffer-name) "]:")))
 #+end_src
 
 ** Mail
