@@ -567,6 +567,15 @@ See also `shell-command'."
                          " | sudo -S "
                          command)))
 
+(defun x8dcc/reb-change-syntax (new-syntax)
+  "Set `reb-re-syntax' to the specified value. When called interactively, switch
+between `read' and `rx'."
+  (interactive (list (if (equal reb-re-syntax 'read)
+                         'rx
+                       'read)))
+  (message "Changed re-builder syntax to `%s'" new-syntax)
+  (reb-change-syntax new-syntax))
+
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t

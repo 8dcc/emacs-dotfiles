@@ -1145,6 +1145,19 @@ See also `shell-command'."
                          command)))
 #+end_src
 
+Switch between ='read= and ='rx= syntax for =re-builder=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/reb-change-syntax (new-syntax)
+  "Set `reb-re-syntax' to the specified value. When called interactively, switch
+between `read' and `rx'."
+  (interactive (list (if (equal reb-re-syntax 'read)
+                         'rx
+                       'read)))
+  (message "Changed re-builder syntax to `%s'" new-syntax)
+  (reb-change-syntax new-syntax))
+#+end_src
+
 * Input
 ** Scrolling and motion
 
