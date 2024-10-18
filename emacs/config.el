@@ -1211,19 +1211,21 @@ the user."
                       nil 'erc-server-history-list erc-default-server)
          6697
          erc-nick))
-  ;; Enable `erc-sasl-mode' if the specified server is in the
+  (if (member 'sasl erc-modules)
+      (progn
+        (message "Why was the SASL module enabled globally? Disabling.")
+        (setq erc-modules (delete 'sasl erc-modules))))
+  ;; Enable the SASL module if the specified server is in the
   ;; `x8dcc/erc-sasl-servers' list.
   (cond ((member server x8dcc/erc-sasl-servers)
-         (add-to-list 'erc-modules 'sasl)
-         (erc-update-modules)
-         (message "Logging in with SASL to `%s'" server))
+         (message "Logging in with SASL to `%s'" server)
+         (let ((erc-modules (cons 'sasl erc-modules)))
+           (erc-tls :server server :port port :user user)))
         (t
-         (setq erc-modules (delete 'sasl erc-modules))
-         (erc-update-modules)
-         (message "Logging in with TLS to `%s'" server)))
-  ;; We don't need to specify the password, since `x8dcc/erc-get-password' will
-  ;; be used.
-  (erc-tls :server server :port port :user user))
+         (message "Logging in with TLS to `%s'" server)
+         ;; We don't need to specify the password, since
+         ;; `x8dcc/erc-get-password' will be used.
+         (erc-tls :server server :port port :user user))))
 
 (advice-add 'erc :override #'x8dcc/erc-launch)
 
