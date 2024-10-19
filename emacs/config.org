@@ -1864,6 +1864,15 @@ Show trailing whitespaces.
             (setq show-trailing-whitespace t)))
 #+end_comment
 
+Don't allow commands like =grep= (that use =display-buffer=) to create new windows
+for their output, while still allowing the user to use functions that create
+windows explicitly (like =find-file-other-window=).
+
+#+begin_src emacs-lisp
+(setq display-buffer-base-action
+      '(display-buffer-same-window))
+#+end_src
+
 * General settings
 
 ** Codification
