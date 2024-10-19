@@ -453,10 +453,21 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
-(require 'git-commit)
+(defconst x8dcc/git-commit-filename-regexp
+  (rx "/"
+      (or (seq (or (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
+                        "_EDIT")
+                   "MERGE_" "")
+               "MSG")
+          (seq (or "BRANCH" "EDIT")
+               "_DESCRIPTION"))
+      string-end)
+  "Regexp for matching git commit filenames. Obtained from git-commit.el,
+version 3.3.0.50.")
+
 (defun x8dcc/is-git-commit-filename (filename)
-  "Returns t if FILENAME matches `git-commit-filename-regexp'."
-  (string-match-p git-commit-filename-regexp filename))
+  "Returns t if FILENAME matches `x8dcc/git-commit-filename-regexp'."
+  (string-match-p x8dcc/git-commit-filename-regexp filename))
 
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line based on `comment-start' and
