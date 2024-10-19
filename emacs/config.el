@@ -1377,7 +1377,8 @@ if necessary."
 
 (setq rmail-mime-prefer-html nil)
 
-(require 'org-tempo)
+(with-eval-after-load 'org
+  (require 'org-tempo))
 
 (add-hook 'org-mode-hook
           (lambda ()

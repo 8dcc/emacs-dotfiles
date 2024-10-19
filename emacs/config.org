@@ -2699,7 +2699,8 @@ Prefer plaintext when possible.
 Enable "<s TAB" completion.
 
 #+begin_src emacs-lisp
-(require 'org-tempo)
+(with-eval-after-load 'org
+  (require 'org-tempo))
 #+end_src
 
 Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
