@@ -425,6 +425,19 @@ represent the first and second arguments of `keymap-set', respectively."
                 (car key-pair)
                 (eval-function (cdr key-pair)))))
 
+(defun x8dcc/replace-regexps-in-string (alist string)
+  "Return a copy of STRING with all the regexps in ALIST replaced.
+
+Each element in the ALIST is a replacement with the form (REGEXP . REP), that
+will be used for replacing with the `replace-regexp-in-string' function."
+  (if (null alist)
+      string
+    (x8dcc/replace-regexps-in-string
+     (cdr alist)
+     (replace-regexp-in-string (caar alist)
+                               (cdar alist)
+                               string))))
+
 (defun x8dcc/count-matching-buffers (regexp)
   "Return the number of buffers whose name matches REGEXP."
   (length
@@ -575,6 +588,26 @@ between `read' and `rx'."
                        'read)))
   (message "Changed re-builder syntax to `%s'" new-syntax)
   (reb-change-syntax new-syntax))
+
+(defconst x8dcc/quick-calc-replacements
+  `((,(rx (or line-start space) "0x" (group not-newline)) . "16#\\1")
+    (,(rx (or line-start space) "0o" (group not-newline)) . "8#\\1")
+    (,(rx (or line-start space) "0b" (group not-newline)) . "2#\\1"))
+  "Alist of regexp replacements that should be applied to the input when calling
+`x8dcc/quick-calc'.")
+
+(defun x8dcc/quick-calc (input)
+  "Replace input according to `x8dcc/quick-calc-replacements', and call
+`calc-do-quick-calc'."
+  (interactive
+   (list (read-string "Quick calc: " nil
+                      'calc-quick-calc-history)))
+  ;; TODO: Show different bases, like `quick-calc' does.
+  (message
+   (format "Result: %s"
+           (calc-eval
+            (x8dcc/replace-regexps-in-string x8dcc/quick-calc-replacements
+                                             input)))))
 
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil

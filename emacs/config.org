@@ -951,6 +951,23 @@ represent the first and second arguments of `keymap-set', respectively."
                 (eval-function (cdr key-pair)))))
 #+end_src
 
+Replace an alist of regexps in a string.
+
+#+begin_src emacs-lisp
+(defun x8dcc/replace-regexps-in-string (alist string)
+  "Return a copy of STRING with all the regexps in ALIST replaced.
+
+Each element in the ALIST is a replacement with the form (REGEXP . REP), that
+will be used for replacing with the `replace-regexp-in-string' function."
+  (if (null alist)
+      string
+    (x8dcc/replace-regexps-in-string
+     (cdr alist)
+     (replace-regexp-in-string (caar alist)
+                               (cdar alist)
+                               string))))
+#+end_src
+
 Count the number of buffers whose name matches the specified regular expression.
 
 #+begin_src emacs-lisp
@@ -1170,6 +1187,34 @@ between `read' and `rx'."
   (message "Changed re-builder syntax to `%s'" new-syntax)
   (reb-change-syntax new-syntax))
 #+end_src
+
+Simple command for replacing base prefixes (=0x__=, =0o__= and =0b__=) before running
+=quick-calc=.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/quick-calc-replacements
+  `((,(rx (or line-start space) "0x" (group not-newline)) . "16#\\1")
+    (,(rx (or line-start space) "0o" (group not-newline)) . "8#\\1")
+    (,(rx (or line-start space) "0b" (group not-newline)) . "2#\\1"))
+  "Alist of regexp replacements that should be applied to the input when calling
+`x8dcc/quick-calc'.")
+
+(defun x8dcc/quick-calc (input)
+  "Replace input according to `x8dcc/quick-calc-replacements', and call
+`calc-do-quick-calc'."
+  (interactive
+   (list (read-string "Quick calc: " nil
+                      'calc-quick-calc-history)))
+  ;; TODO: Show different bases, like `quick-calc' does.
+  (message
+   (format "Result: %s"
+           (calc-eval
+            (x8dcc/replace-regexps-in-string x8dcc/quick-calc-replacements
+                                             input)))))
+#+end_src
+
+#+RESULTS:
+: x8dcc/quick-calc
 
 * Input
 ** Scrolling and motion
