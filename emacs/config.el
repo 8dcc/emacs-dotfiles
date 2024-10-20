@@ -1955,7 +1955,7 @@ Used for highlighting more constants with `font-lock-constant-face' in
   " * details.\n"
   " *\n"
   " * You should have received a copy of the GNU General Public License along with\n"
-  " * " str ". If not, see <https://www.gnu.org/licenses/>.\n"
+  " * this program. If not, see <https://www.gnu.org/licenses/>.\n"
   " */\n" \n)
 
 (defun x8dcc/beardbolt-disassemble ()
