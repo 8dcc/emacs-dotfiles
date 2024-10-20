@@ -784,6 +784,7 @@ between `read' and `rx'."
   "o e" '(x8dcc/eshell-popup    :wk "Eshell popup")
   "o E" '(x8dcc/eshell-numbered :wk "Eshell")
   "o m" '(man                   :wk "Manpage")
+  "o M" '(compose-mail          :wk "Compose mail")
   "o x" '(scratch-buffer        :wk "Scratch buffer")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
