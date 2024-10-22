@@ -1341,6 +1341,9 @@ if necessary."
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t)
 
+(setq erc-server-reconnect-attempts 5
+      erc-server-reconnect-timeout 3)
+
 (setq erc-prompt
       (lambda ()
         (concat "[" (buffer-name) "]:")))

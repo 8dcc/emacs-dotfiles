@@ -2553,6 +2553,13 @@ ERC buffer settings:
       erc-kill-server-buffer-on-quit t)
 #+end_src
 
+Wait a bit more before reconnecting, and increase the number of tries.
+
+#+begin_src emacs-lisp
+(setq erc-server-reconnect-attempts 5
+      erc-server-reconnect-timeout 3)
+#+end_src
+
 Set prompt of ERC to the buffer name (current channel).
 
 #+begin_src emacs-lisp
