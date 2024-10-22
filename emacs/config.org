@@ -5,10 +5,12 @@
 
 #+TOC: headlines 2
 
-#+begin_comment emacs-lisp
-;; Wrap all `emacs-lisp' source blocks in:
-;;   (benchmark-run ...)
-;; For profiling the configuration.
+* COMMENT Meta
+
+Wrap all =emacs-lisp= source blocks in =(benchmark-run ...)= for profiling the
+configuration.
+
+#+begin_src emacs-lisp
 (replace-regexp (rx (group-n 1
                       "#+begin_src emacs-lisp"
                       (*? anything)
@@ -16,7 +18,7 @@
                     (group-n 2 (*? anything))
                     (group-n 3 "\n#+end_src"))
                 "\\1(benchmark-run\n\\2\n)\\3")
-#+end_comment
+#+end_src
 
 * Identification
 
