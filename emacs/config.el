@@ -1091,6 +1091,8 @@ of characters, followed by the number of lines."
 
 (savehist-mode 1)
 
+(add-to-list 'savehist-additional-variables 'erc-ignore-list)
+
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "trash"))))
 

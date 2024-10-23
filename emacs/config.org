@@ -1958,6 +1958,12 @@ Remember minibuffer history across sessions.
 (savehist-mode 1)
 #+end_src
 
+Save =erc-ignore-list= across sessions.
+
+#+begin_src emacs-lisp
+(add-to-list 'savehist-additional-variables 'erc-ignore-list)
+#+end_src
+
 ** Backups
 
 Emacs uses =file.txt~= files for backups, and =#file.txt#= for temporary
