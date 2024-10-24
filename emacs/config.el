@@ -1300,6 +1300,8 @@ if necessary."
 ;; necessary; not by `erc-tls'.
 (setq erc-prompt-for-password nil)
 
+(setq erc-try-new-nick-p nil)
+
 (setq erc-anonymous-login t
       erc-disable-ctcp-replies t
       erc-paranoid t)
@@ -1318,7 +1320,6 @@ if necessary."
 (setq erc-log-write-after-send t
       erc-log-write-after-insert t)
 
-;; Timestamps (only in logs)
 (setq erc-stamp-mode t
       erc-hide-timestamps t)
 

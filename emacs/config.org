@@ -2379,7 +2379,7 @@ Enable ERC features:
 (erc-update-modules)
 #+end_src
 
-*** ERC security settings (TLS/SASL)
+*** ERC log-in security settings (TLS/SASL)
 
 Custom function for launching ERC. It will check if it should connect to the
 specified server using [[https://www.gnu.org/software/emacs/manual/html_node/erc/Connecting.html#index-erc_002dtls][TLS]] or [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]]. When called interactively, uses 6697 as the
@@ -2459,6 +2459,14 @@ if necessary."
 (setq erc-prompt-for-password nil)
 #+end_src
 
+*** ERC privacy settings
+
+Don't attempt to connect with another nickname if nickname unavailable.
+
+#+begin_src emacs-lisp
+(setq erc-try-new-nick-p nil)
+#+end_src
+
 Other privacy settings:
 - Don't give away the machine name.
 - Don't reply to CTCP.
@@ -2481,7 +2489,7 @@ digit.
       erc-user-full-name "x8dcc")
 #+end_src
 
-*** ERC logging settings
+*** ERC log file settings
 
 Enable logging.
 
@@ -2500,7 +2508,6 @@ Enable logging.
 Enable timestamps, but only for logs.
 
 #+begin_src emacs-lisp
-;; Timestamps (only in logs)
 (setq erc-stamp-mode t
       erc-hide-timestamps t)
 #+end_src
