@@ -370,6 +370,9 @@ and ALIGNMENT as parameters."
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
+(use-package c-eldoc
+  :hook ((c-mode-hook . c-turn-on-eldoc-mode)))
+
 (use-package x86-lookup
   :config
   (setq x86-lookup-pdf
@@ -918,6 +921,7 @@ between `read' and `rx'."
   ;; Mode -> Toggle
   "m t"   '(:ignore t               :wk "Toggle")
   "m t a" '(c-toggle-auto-newline   :wk "Auto-newline")
+  "m t e" '(eldoc-mode              :wk "ElDoc mode")
   "m t h" '(c-toggle-hungry-state   :wk "Hungry-delete-key")
   "m t I" '(hide-ifdef-mode         :wk "Unused ifdefs")
   "m t l" '(c-toggle-electric-state :wk "Electric indentation")

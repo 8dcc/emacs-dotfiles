@@ -849,6 +849,15 @@ Use it as the default mode for =.asm= files. For more information on
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
+** C ElDoc
+
+Display description of the function under the cursor. See =eldoc-mode=.
+
+#+begin_src emacs-lisp
+(use-package c-eldoc
+  :hook ((c-mode-hook . c-turn-on-eldoc-mode)))
+#+end_src
+
 ** x86-lookup
 
 Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x86-lookup][skeeto/x86-lookup]].
@@ -1644,6 +1653,7 @@ See also [[*C mode][C mode]].
   ;; Mode -> Toggle
   "m t"   '(:ignore t               :wk "Toggle")
   "m t a" '(c-toggle-auto-newline   :wk "Auto-newline")
+  "m t e" '(eldoc-mode              :wk "ElDoc mode")
   "m t h" '(c-toggle-hungry-state   :wk "Hungry-delete-key")
   "m t I" '(hide-ifdef-mode         :wk "Unused ifdefs")
   "m t l" '(c-toggle-electric-state :wk "Electric indentation")
