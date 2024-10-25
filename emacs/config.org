@@ -1252,7 +1252,7 @@ Simple command for replacing base prefixes (=0x__=, =0o__= and =0b__=) before ru
 #+end_src
 
 ** Misc remaps and tweaks
-*** Global
+*** Global remaps
 
 Zoom keybinds.
 
@@ -1329,7 +1329,7 @@ Bind my =x8dcc/evil-fill-indent= function to =g W=.
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 #+end_src
 
-*** Eshell
+*** Eshell remaps
 
 Some keybind changes for =eshell-mode=.
 
@@ -1346,7 +1346,7 @@ Some keybind changes for =eshell-mode=.
      ("<home>" . eshell-bol))))
 #+end_src
 
-*** Ediff
+*** Ediff remaps
 
 In the =ediff-control-buffer=, remap evil's =:q= to =ediff-quit=. We need to hook it
 since =ediff-mode-map= is a buffer-local variable.
@@ -1360,7 +1360,7 @@ since =ediff-mode-map= is a buffer-local variable.
                           #'ediff-quit))))
 #+end_src
 
-*** C mode
+*** C mode remaps
 
 More "contextual" newlines in C mode. Inserts =comment-continue= when pressing =RET=
 in comments, adds backslashes when pressing =RET= on macros, etc.
@@ -2102,7 +2102,7 @@ buffer.
 #+end_src
 
 ** Printing
-*** System configuration
+*** System printing configuration
 
 These are the necessary Gentoo packages for printing.
 
@@ -2129,7 +2129,7 @@ You can configure the printer(s) from the web interface at [[http://localhost:63
 
 For more information, see [[https://wiki.gentoo.org/wiki/Printing][the printing page of the Gentoo wiki]].
 
-*** Emacs configuration
+*** Emacs printing configuration
 
 Name of the default printer. Will be used for =lpr='s =-P= parameter.
 
