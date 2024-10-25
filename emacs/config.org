@@ -159,6 +159,9 @@ For vi-like keybinds. Some notes about the configuration:
 - Configure split direction so new splits are opened to the bottom and to the
   right.
 - We set the undo system to =undo-redo=.
+- We disable evil's =C-i= jump, since it messes with Org's =TAB=. See
+  [[https://github.com/Somelauw/evil-org-mode][evil-org-mode]]'s README, but note that the =org-tab= function is now called
+  =org-cycle=.
 - We set =evil-jumps-cross-buffers= to =t= to allow =evil-jump-forward= and
   =evil-jump-backward= to change the buffer.
 - We set =evil-mode-line-format= for displaying the evil mode before the buffer
@@ -178,6 +181,7 @@ For vi-like keybinds. Some notes about the configuration:
         evil-split-window-below t
         evil-vsplit-window-right t
         evil-undo-system #'undo-redo
+        evil-want-C-i-jump nil
         evil-jumps-cross-buffers t
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
