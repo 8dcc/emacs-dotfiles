@@ -370,12 +370,6 @@ and ALIGNMENT as parameters."
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
-(straight-use-package
- '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
-
-(setq beardbolt-shuffle-rainbow t
-      beardbolt-compile-delay nil)
-
 (use-package x86-lookup
   :config
   (setq x86-lookup-pdf
@@ -384,6 +378,12 @@ and ALIGNMENT as parameters."
         (lambda (pdf page)
           (start-process "firefox" nil "firefox"
                          (format "file://%s#page=%d" pdf page)))))
+
+(straight-use-package
+ '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
+
+(setq beardbolt-shuffle-rainbow t
+      beardbolt-compile-delay nil)
 
 (use-package webpaste
   :config

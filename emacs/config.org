@@ -849,23 +849,6 @@ Use it as the default mode for =.asm= files. For more information on
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
-** Beardbolt
-
-Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
-
-- We set =beardbolt-shuffle-rainbow= to =t= increase contrast between blocks.
-- We set =beardbolt-compile-delay= to =nil= to disable automatic recompilation on
-  buffer change. Just call =x8dcc/beardbolt-disassemble= whenever needed with
-  =SPC m d=.
-
-#+begin_src emacs-lisp
-(straight-use-package
- '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
-
-(setq beardbolt-shuffle-rainbow t
-      beardbolt-compile-delay nil)
-#+end_src
-
 ** x86-lookup
 
 Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x86-lookup][skeeto/x86-lookup]].
@@ -882,6 +865,23 @@ Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x8
 #+end_src
 
 The volume 2 of the Intel SDM is included in this repository.
+
+** Beardbolt
+
+Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
+
+- We set =beardbolt-shuffle-rainbow= to =t= increase contrast between blocks.
+- We set =beardbolt-compile-delay= to =nil= to disable automatic recompilation on
+  buffer change. Just call =x8dcc/beardbolt-disassemble= whenever needed with
+  =SPC m d=.
+
+#+begin_src emacs-lisp
+(straight-use-package
+ '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
+
+(setq beardbolt-shuffle-rainbow t
+      beardbolt-compile-delay nil)
+#+end_src
 
 ** Webpaste
 
