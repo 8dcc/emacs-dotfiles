@@ -859,7 +859,7 @@ Display description of the function under the cursor. See =eldoc-mode=.
 
 #+begin_src emacs-lisp
 (use-package c-eldoc
-  :hook ((c-mode-hook . c-turn-on-eldoc-mode)))
+  :hook ((c-mode . c-turn-on-eldoc-mode)))
 #+end_src
 
 ** x86-lookup
