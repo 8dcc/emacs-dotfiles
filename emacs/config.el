@@ -560,16 +560,12 @@ window with `evil-delete-window'."
 
 (defun x8dcc/tab-move-left (&optional arg)
   "Move the current tab ARG positions to the left."
-  (interactive "P")
-  (unless (numberp arg)
-    (setq arg 1))
+  (interactive "p")
   (tab-bar-move-tab (- arg)))
 
 (defun x8dcc/tab-move-right (&optional arg)
   "Move the current tab ARG positions to the left."
-  (interactive "P")
-  (unless (numberp arg)
-    (setq arg 1))
+  (interactive "p")
   (tab-bar-move-tab arg))
 
 (defun x8dcc/make-invisible (regex &optional group-num)

@@ -1147,16 +1147,12 @@ Move tabs left or right. Bound to =SPC TAB S-<left>= and =SPC TAB S-<right>=.
 #+begin_src emacs-lisp
 (defun x8dcc/tab-move-left (&optional arg)
   "Move the current tab ARG positions to the left."
-  (interactive "P")
-  (unless (numberp arg)
-    (setq arg 1))
+  (interactive "p")
   (tab-bar-move-tab (- arg)))
 
 (defun x8dcc/tab-move-right (&optional arg)
   "Move the current tab ARG positions to the left."
-  (interactive "P")
-  (unless (numberp arg)
-    (setq arg 1))
+  (interactive "p")
   (tab-bar-move-tab arg))
 #+end_src
 
