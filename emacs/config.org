@@ -159,9 +159,9 @@ For vi-like keybinds. Some notes about the configuration:
 - Configure split direction so new splits are opened to the bottom and to the
   right.
 - We set the undo system to =undo-redo=.
-- We disable evil's =C-i= jump, since it messes with Org's =TAB=. See
-  [[https://github.com/Somelauw/evil-org-mode][evil-org-mode]]'s README, but note that the =org-tab= function is now called
-  =org-cycle=.
+- We disable evil's =C-i= jump, since it messes with Org's =TAB=. We will actually
+  overwrite it below, in [[*Evil remaps][Evil remaps]]. See [[https://github.com/Somelauw/evil-org-mode][evil-org-mode]]'s README, but note that
+  the =org-tab= function is now called =org-cycle=.
 - We set =evil-jumps-cross-buffers= to =t= to allow =evil-jump-forward= and
   =evil-jump-backward= to change the buffer.
 - We set =evil-mode-line-format= for displaying the evil mode before the buffer
@@ -1301,6 +1301,8 @@ more settings related to indentation and =<tab>=, see [[*Indentation][Indentatio
 		               (evil-shift-left-line 1))))
 #+end_src
 
+*** Evil remaps
+
 Remap evil's =:q= to =SPC b k.=
 
 #+begin_src emacs-lisp
@@ -1331,6 +1333,23 @@ Bind my =x8dcc/evil-fill-indent= function to =g W=.
 #+begin_src emacs-lisp
 (dolist (state '(normal visual motion))
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
+#+end_src
+
+By default, the =TAB= and =C-i= keys are the same. We make them independent so we
+can set =evil-want-C-i-jump= to =t= without overwriting the =TAB= key. See [[*Evil & Evil collection][Evil & Evil
+collection]]. Credits to wasamasa's [[https://depp.brause.cc/dotemacs/][dotemacs]].
+
+#+begin_src emacs-lisp
+(define-key input-decode-map [?\C-i]
+            (lambda (prompt)
+              (if (and (= (length (this-single-command-raw-keys)) 1)
+                       (eql (aref (this-single-command-raw-keys) 0) ?\C-i)
+                       (bound-and-true-p evil-mode)
+                       (eq evil-state 'normal))
+                  (kbd "<C-i>")
+                (kbd "TAB"))))
+
+(evil-global-set-key 'normal (kbd "<C-i>") #'evil-jump-forward)
 #+end_src
 
 *** Eshell remaps

@@ -665,6 +665,17 @@ between `read' and `rx'."
 (dolist (state '(normal visual motion))
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 
+(define-key input-decode-map [?\C-i]
+            (lambda (prompt)
+              (if (and (= (length (this-single-command-raw-keys)) 1)
+                       (eql (aref (this-single-command-raw-keys) 0) ?\C-i)
+                       (bound-and-true-p evil-mode)
+                       (eq evil-state 'normal))
+                  (kbd "<C-i>")
+                (kbd "TAB"))))
+
+(evil-global-set-key 'normal (kbd "<C-i>") #'evil-jump-forward)
+
 (with-eval-after-load 'eshell
   (x8dcc/keymap-set-alist
    eshell-mode-map
