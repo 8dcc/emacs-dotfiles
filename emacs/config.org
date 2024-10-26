@@ -814,9 +814,8 @@ Mainstream version is out of date.
 Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
 
 #+begin_src emacs-lisp
-(mapc (lambda (element)
-        (add-to-list 'auto-mode-alist (cons element 'ada-mode)))
-      '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
+(dolist (extension '("\\.gpr\\'" "\\.ada\\'" "\\.ads\\'" "\\.adb\\'"))
+  (add-to-list 'auto-mode-alist (cons extension 'ada-mode)))
 #+end_src
 
 ** COMMENT Graphviz dot mode
