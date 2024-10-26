@@ -558,6 +558,20 @@ window with `evil-delete-window'."
       (evil-fill beg end)
       (evil-indent beg end))))
 
+(defun x8dcc/tab-move-left (&optional arg)
+  "Move the current tab ARG positions to the left."
+  (interactive "P")
+  (unless (numberp arg)
+    (setq arg 1))
+  (tab-bar-move-tab (- arg)))
+
+(defun x8dcc/tab-move-right (&optional arg)
+  "Move the current tab ARG positions to the left."
+  (interactive "P")
+  (unless (numberp arg)
+    (setq arg 1))
+  (tab-bar-move-tab arg))
+
 (defun x8dcc/make-invisible (regex &optional group-num)
   "Make all ocurrences of REGEX invisible.
 
@@ -700,16 +714,17 @@ between `read' and `rx'."
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
   ;; Tab
-  "TAB"           '(:ignore t    :wk "Tab")
-  "TAB TAB"       '(tab-recent   :wk "Switch to recent")
-  "TAB c"         '(tab-close    :wk "Close")
-  "TAB l"         '(tab-switch   :wk "Switch to")
-  "TAB n"         '(tab-new      :wk "New")
-  "TAB r"         '(tab-rename   :wk "Rename")
-  "TAB t"         '(tab-bar-mode :wk "Toggle bar display")
-  "TAB <left>"    '(tab-previous :wk "Switch to previous")
-  "TAB <right>"   '(tab-next     :wk "Switch to next")
-  "TAB S-<right>" '(tab-move     :wk "Move right")
+  "TAB"           '(                     :ignore t :wk "Tab")
+  "TAB TAB"       '(tab-recent           :wk "Switch to recent")
+  "TAB c"         '(tab-close            :wk "Close")
+  "TAB l"         '(tab-switch           :wk "Switch to")
+  "TAB n"         '(tab-new              :wk "New")
+  "TAB r"         '(tab-rename           :wk "Rename")
+  "TAB t"         '(tab-bar-mode         :wk "Toggle bar display")
+  "TAB <left>"    '(tab-previous         :wk "Switch to previous")
+  "TAB <right>"   '(tab-next             :wk "Switch to next")
+  "TAB S-<left>"  '(x8dcc/tab-move-left  :wk "Move left")
+  "TAB S-<right>" '(x8dcc/tab-move-right :wk "Move right")
   ;; Buffer
   "b"         '(:ignore t                        :wk "Buffer")
   "b b"       '(previous-buffer                  :wk "Switch to previous")
