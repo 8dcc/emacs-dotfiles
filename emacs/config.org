@@ -815,7 +815,7 @@ Essential package for LaTeX editing, comes with a useful preview mode.
 (use-package auctex)
 #+end_src
 
-** Ada mode
+** COMMENT Ada mode
 
 Major mode for programming in Ada.
 
@@ -832,6 +832,14 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
 (dolist (extension '("gpr" "ada" "ads" "adb"))
   (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'")
                                       'ada-mode)))
+#+end_src
+
+** Ada TS mode
+
+Major mode for programming in Ada (with Tree-Sitter).
+
+#+begin_src emacs-lisp
+(use-package ada-ts-mode)
 #+end_src
 
 ** COMMENT Graphviz dot mode
