@@ -476,7 +476,7 @@ version 3.3.0.50.")
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line based on `comment-start' and
 `comment-end'."
-  (interactive "p")
+  (interactive "P")
   (unless max-width
     (setq max-width fill-column))
   (let* ((start (string-trim comment-start))
