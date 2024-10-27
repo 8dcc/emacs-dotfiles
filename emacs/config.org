@@ -164,6 +164,7 @@ For vi-like keybinds. Some notes about the configuration:
   the =org-tab= function is now called =org-cycle=.
 - We set =evil-jumps-cross-buffers= to =t= to allow =evil-jump-forward= and
   =evil-jump-backward= to change the buffer.
+- We use =man= for evil's =K=.
 - We set =evil-mode-line-format= for displaying the evil mode before the buffer
   name. See also [[*Modeline][Modeline]].
 - We will use I-search as evil's search module so it's consistent when using
@@ -183,6 +184,7 @@ For vi-like keybinds. Some notes about the configuration:
         evil-undo-system #'undo-redo
         evil-want-C-i-jump nil
         evil-jumps-cross-buffers t
+        evil-lookup-func (lambda () (call-interactively #'man))
         evil-mode-line-format '(after . mode-line-frame-identification))
   :config
   (evil-select-search-module 'evil-search-module 'isearch)
