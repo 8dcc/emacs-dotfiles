@@ -152,6 +152,9 @@ and the non-normal prefix is \"M-SPC\"."
         magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package with-editor
+  :hook (eshell-mode . with-editor-export-git-editor))
+
 (use-package dashboard
   :init
   (setq dashboard-banner-logo-title "8dcc's Emacs"

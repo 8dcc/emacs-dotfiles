@@ -314,7 +314,8 @@ For managing projects.
 
 ** Magit
 
-You should not need a description for magit.
+Magit is an interface to the version control system Git, implemented as an Emacs
+package.
 
 We change =magit-display-buffer-function= so the status window doesn't open as a
 popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
@@ -326,6 +327,17 @@ popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
   (setq magit-diff-refine-hunk t
         magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))
+#+end_src
+
+** With editor
+
+Use the Emacsclient as the ~$EDITOR~ of child processes.
+
+Specifically, for setting ~$GIT_EDITOR~ in eshell buffers.
+
+#+begin_src emacs-lisp
+(use-package with-editor
+  :hook (eshell-mode . with-editor-export-git-editor))
 #+end_src
 
 ** Dashboard
