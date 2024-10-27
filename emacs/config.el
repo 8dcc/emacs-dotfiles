@@ -638,6 +638,12 @@ between `read' and `rx'."
             (x8dcc/replace-regexps-in-string x8dcc/quick-calc-replacements
                                              input)))))
 
+(defun x8dcc/git-add-edit (&optional files)
+  "Stage the specified files with Git using \"git add --edit\"."
+  (interactive)
+  (with-editor* "GIT_EDITOR"
+    (vc-git-command nil 'async files "add" "--edit")))
+
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t

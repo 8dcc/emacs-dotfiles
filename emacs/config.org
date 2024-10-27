@@ -1265,6 +1265,16 @@ Simple command for replacing base prefixes (=0x__=, =0o__= and =0b__=) before ru
                                              input)))))
 #+end_src
 
+Simple function for running =git add --edit= within Emacs.
+
+#+begin_src emacs-lisp
+(defun x8dcc/git-add-edit (&optional files)
+  "Stage the specified files with Git using \"git add --edit\"."
+  (interactive)
+  (with-editor* "GIT_EDITOR"
+    (vc-git-command nil 'async files "add" "--edit")))
+#+end_src
+
 * Input
 ** Scrolling and motion
 
