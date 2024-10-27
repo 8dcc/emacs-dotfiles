@@ -368,6 +368,13 @@ and ALIGNMENT as parameters."
 
 (use-package auctex)
 
+(straight-use-package
+ '(ada-mode :type git :host github :repo "8dcc/ada-mode"))
+
+(dolist (extension '("gpr" "ada" "ads" "adb"))
+  (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'")
+                                      'ada-mode)))
+
 (use-package geiser-guile)
 
 (straight-use-package
