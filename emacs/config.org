@@ -1265,9 +1265,6 @@ Simple command for replacing base prefixes (=0x__=, =0o__= and =0b__=) before ru
                                              input)))))
 #+end_src
 
-#+RESULTS:
-: x8dcc/quick-calc
-
 * Input
 ** Scrolling and motion
 
