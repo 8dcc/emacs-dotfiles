@@ -462,15 +462,16 @@ or too many lines (>10000)."
 
 (defconst x8dcc/git-commit-filename-regexp
   (rx "/"
-      (or (seq (or (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
-                        "_EDIT")
-                   "MERGE_" "")
+      (or "addp-hunk-edit.diff"
+          (seq (or "" "MERGE_"
+                   (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
+                        "_EDIT"))
                "MSG")
           (seq (or "BRANCH" "EDIT")
                "_DESCRIPTION"))
       string-end)
   "Regexp for matching git commit filenames. Obtained from git-commit.el,
-version 3.3.0.50.")
+version 3.3.0.50, modified by 8dcc.")
 
 (defun x8dcc/is-git-commit-filename (filename)
   "Returns t if FILENAME matches `x8dcc/git-commit-filename-regexp'."
