@@ -1137,6 +1137,17 @@ Indent the whole buffer. Bound to =SPC b i=.
     (indent-region (point-min) (point-max))))
 #+end_src
 
+Opposite of =fill-region=. Credits to [[https://www.emacswiki.org/emacs/UnfillRegion][EmacsWiki]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/unfill-region (beg end)
+  "Unfill the region, joining text paragraphs into a single logical line.
+Opposite of `fill-region'."
+  (interactive "*r")
+  (let ((fill-column (point-max)))
+    (fill-region beg end)))
+#+end_src
+
 Alternative to =kill-buffer-and-window= that uses =evil-window-delete=. Bound to
 =SPC w C=.
 

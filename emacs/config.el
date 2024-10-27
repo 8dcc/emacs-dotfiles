@@ -546,6 +546,13 @@ With argument ARG, do this that many times."
   (save-excursion
     (indent-region (point-min) (point-max))))
 
+(defun x8dcc/unfill-region (beg end)
+  "Unfill the region, joining text paragraphs into a single logical line.
+Opposite of `fill-region'."
+  (interactive "*r")
+  (let ((fill-column (point-max)))
+    (fill-region beg end)))
+
 (defun x8dcc/evil-kill-buffer-and-window ()
   "Kill the current buffer with `kill-current-buffer' and delete the current
 window with `evil-delete-window'."
