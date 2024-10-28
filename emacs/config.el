@@ -1166,6 +1166,8 @@ of characters, followed by the number of lines."
    TeX-mode-hook
    message-mode-hook))
 
+(setq tab-bar-show 1)
+
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
 
@@ -1230,8 +1232,6 @@ of characters, followed by the number of lines."
       lazy-count-prefix-format "(%s/%s) "
       lazy-count-subfix-format nil)
 
-(setq tab-bar-show 1)
-
 (defvar x8dcc/allow-modify-on-save t
   "If non-nil, allow the calling of functions that modify the buffer contents on
 the save hooks.")
@@ -1248,16 +1248,6 @@ the save hooks.")
           (lambda ()
             (if x8dcc/allow-modify-on-save
                 (delete-trailing-whitespace))))
-
-(setq printer-name "MainPrinter")
-
-(defun x8dcc/lpr-buffer-pages (start end)
-  "Print the current buffer using `lpr-buffer' from page START to END. The page
-numbers start at 1."
-  (interactive "nStarting page: \nnEnd page: ")
-  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
-                                         (max start 1) (max end 1)))))
-    (lpr-buffer)))
 
 (global-auto-revert-mode 1)
 
@@ -1287,6 +1277,21 @@ numbers start at 1."
                                          ,x8dcc/audio-file-regexp
                                          emms-play-file)
                                        "File")))
+
+(setq xref-show-definitions-function #'consult-xref
+      xref-show-xrefs-function #'consult-xref)
+
+(setq xref-prompt-for-identifier nil)
+
+(setq printer-name "MainPrinter")
+
+(defun x8dcc/lpr-buffer-pages (start end)
+  "Print the current buffer using `lpr-buffer' from page START to END. The page
+numbers start at 1."
+  (interactive "nStarting page: \nnEnd page: ")
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
+                                         (max start 1) (max end 1)))))
+    (lpr-buffer)))
 
 (setq eshell-hist-ignoredups t)
 
@@ -1353,11 +1358,6 @@ different rules in `display-buffer-alist'."
 
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
-
-(setq xref-show-definitions-function #'consult-xref
-      xref-show-xrefs-function #'consult-xref)
-
-(setq xref-prompt-for-identifier nil)
 
 (require 'erc)
 (add-to-list 'erc-modules 'log)

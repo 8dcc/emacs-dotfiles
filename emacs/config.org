@@ -2036,6 +2036,14 @@ with =SPC t c=.
    message-mode-hook))
 #+end_src
 
+** Tab bar
+
+Only show the tab bar if there are more than one tabs open.
+
+#+begin_src emacs-lisp
+(setq tab-bar-show 1)
+#+end_src
+
 ** Misc visual settings
 
 By default, don't wrap lines, truncate them (=truncate-lines=). This can be
@@ -2215,14 +2223,6 @@ We will display the match number out of the total I-search matches.
       lazy-count-subfix-format nil)
 #+end_src
 
-** Tabs
-
-Only show the tab bar if there are more than one tabs open.
-
-#+begin_src emacs-lisp
-(setq tab-bar-show 1)
-#+end_src
-
 ** On buffer save
 
 These variables and functions control whether or not my functions are allowed to
@@ -2251,65 +2251,6 @@ buffer.
             (if x8dcc/allow-modify-on-save
                 (delete-trailing-whitespace))))
 #+end_src
-
-** Printing
-*** System printing configuration
-
-These are the necessary Gentoo packages for printing.
-
-#+begin_src bash
-# For the `lpr' command
-emerge net-print/cups net-print/cups-filters
-
-# For HP printers
-PYTHON_TARGETS="python3_11" PYTHON_SINGLE_TARGET="python3_11" emerge net-print/hplip
-#+end_src
-
-The =cupsd= service has to be running for printing. These commands are for Gentoo,
-which uses OpenRC as its init system.
-
-#+begin_src bash
-# Start it for this session
-rc-service cupsd start
-
-# Add to the default group (auto-start on boot)
-rc-update add cupsd default
-#+end_src
-
-You can configure the printer(s) from the web interface at [[http://localhost:631/]]
-
-For more information, see [[https://wiki.gentoo.org/wiki/Printing][the printing page of the Gentoo wiki]].
-
-*** Emacs printing configuration
-
-Name of the default printer. Will be used for =lpr='s =-P= parameter.
-
-#+begin_src emacs-lisp
-(setq printer-name "MainPrinter")
-#+end_src
-
-You don't need to set the default printer from Emacs, you can just set the
-default printer system-wise with =lpoptions=.
-
-#+begin_src bash
-lpoptions -d "MY_PRINTER_NAME"
-#+end_src
-
-Wrapper for printing only the specified pages of a buffer using =lpr-buffer=. See
-[[http://localhost:631/help/options.html?TOPIC=Getting+Started&QUERY=#PAGERANGES][localhost CUPS help]] on the =page-ranges= option.
-
-#+begin_src emacs-lisp
-(defun x8dcc/lpr-buffer-pages (start end)
-  "Print the current buffer using `lpr-buffer' from page START to END. The page
-numbers start at 1."
-  (interactive "nStarting page: \nnEnd page: ")
-  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
-                                         (max start 1) (max end 1)))))
-    (lpr-buffer)))
-#+end_src
-
-TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other
-settings.
 
 ** Misc general settings
 
@@ -2372,6 +2313,82 @@ Insert a new plumber rule for audio files, right before the "File" rentry.
                                          emms-play-file)
                                        "File")))
 #+end_src
+
+** Xref
+
+Show a [[*Consult][consult]] popup in functions like =xref-find-definitions= and
+=xref-find-references=, instead of creating their own =*xref*= buffers.
+
+#+begin_src emacs-lisp
+(setq xref-show-definitions-function #'consult-xref
+      xref-show-xrefs-function #'consult-xref)
+#+end_src
+
+Don't ask for the symbol we are looking for every time, only when it has no
+choice.
+
+#+begin_src emacs-lisp
+(setq xref-prompt-for-identifier nil)
+#+end_src
+
+** Printing
+*** System printing configuration
+
+These are the necessary Gentoo packages for printing.
+
+#+begin_src bash
+# For the `lpr' command
+emerge net-print/cups net-print/cups-filters
+
+# For HP printers
+PYTHON_TARGETS="python3_11" PYTHON_SINGLE_TARGET="python3_11" emerge net-print/hplip
+#+end_src
+
+The =cupsd= service has to be running for printing. These commands are for Gentoo,
+which uses OpenRC as its init system.
+
+#+begin_src bash
+# Start it for this session
+rc-service cupsd start
+
+# Add to the default group (auto-start on boot)
+rc-update add cupsd default
+#+end_src
+
+You can configure the printer(s) from the web interface at [[http://localhost:631/]]
+
+For more information, see [[https://wiki.gentoo.org/wiki/Printing][the printing page of the Gentoo wiki]].
+
+*** Emacs printing configuration
+
+Name of the default printer. Will be used for =lpr='s =-P= parameter.
+
+#+begin_src emacs-lisp
+(setq printer-name "MainPrinter")
+#+end_src
+
+You don't need to set the default printer from Emacs, you can just set the
+default printer system-wise with =lpoptions=.
+
+#+begin_src bash
+lpoptions -d "MY_PRINTER_NAME"
+#+end_src
+
+Wrapper for printing only the specified pages of a buffer using =lpr-buffer=. See
+[[http://localhost:631/help/options.html?TOPIC=Getting+Started&QUERY=#PAGERANGES][localhost CUPS help]] on the =page-ranges= option.
+
+#+begin_src emacs-lisp
+(defun x8dcc/lpr-buffer-pages (start end)
+  "Print the current buffer using `lpr-buffer' from page START to END. The page
+numbers start at 1."
+  (interactive "nStarting page: \nnEnd page: ")
+  (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
+                                         (max start 1) (max end 1)))))
+    (lpr-buffer)))
+#+end_src
+
+TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other
+settings.
 
 * Mode-specific settings
 ** Eshell
@@ -2520,23 +2537,6 @@ Don't open a new frame for the =ediff= control panel.
 #+begin_src emacs-lisp
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
-#+end_src
-
-** Xref
-
-Show a [[*Consult][consult]] popup in functions like =xref-find-definitions= and
-=xref-find-references=, instead of creating their own =*xref*= buffers.
-
-#+begin_src emacs-lisp
-(setq xref-show-definitions-function #'consult-xref
-      xref-show-xrefs-function #'consult-xref)
-#+end_src
-
-Don't ask for the symbol we are looking for every time, only when it has no
-choice.
-
-#+begin_src emacs-lisp
-(setq xref-prompt-for-identifier nil)
 #+end_src
 
 ** ERC
