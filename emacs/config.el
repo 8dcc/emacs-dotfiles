@@ -713,6 +713,9 @@ between `read' and `rx'."
                      (interactive)
                      (message "Ignoring quit keybind...")))
 
+(evil-global-set-key 'normal (kbd "x") #'delete-forward-char)
+(evil-global-set-key 'normal (kbd "X") #'delete-backward-char)
+
 (dolist (state '(normal visual motion))
   (evil-global-set-key state (kbd "g W") #'x8dcc/evil-fill-indent))
 

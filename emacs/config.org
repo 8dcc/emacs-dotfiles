@@ -1404,6 +1404,14 @@ Disable evil's =Z Z=.
                      (message "Ignoring quit keybind...")))
 #+end_src
 
+Don't yank text when using evil's =x= or =X=. This is very useful, and I should
+change it in my vim dotfiles (rather than overwriting =d=). Credits to [[https://emacs.stackexchange.com/a/53536/40363][SO answer]].
+
+#+begin_src emacs-lisp
+(evil-global-set-key 'normal (kbd "x") #'delete-forward-char)
+(evil-global-set-key 'normal (kbd "X") #'delete-backward-char)
+#+end_src
+
 Bind my =x8dcc/evil-fill-indent= function to =g W=.
 
 #+begin_src emacs-lisp
