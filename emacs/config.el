@@ -122,6 +122,7 @@ and the non-normal prefix is \"M-SPC\"."
                           c++-mode-map
                           java-mode-map
                           js-mode-map))
+     (x8dcc/def-keys-diff . diff-mode-map)
      (x8dcc/def-keys-message . message-mode-map)
      (x8dcc/def-keys-rmail . rmail-mode-map)
      (x8dcc/def-keys-rmail-summary . rmail-summary-mode-map))))
@@ -995,6 +996,17 @@ between `read' and `rx'."
   "m i h" '(x8dcc/skeleton-c-header          :wk "Header skeleton")
   "m i l" '(x8dcc/skeleton-c-license-comment :wk "License comment (GPL-3.0)")
   "m i s" '(x8dcc/skeleton-c-source          :wk "Source skeleton"))
+
+(general-auto-unbind-keys)
+(x8dcc/def-keys-diff
+  ;; Mode (Diff)
+  "m a" '(diff-apply-hunk  :wk "Apply hunk to file")
+  "m d" '(diff-hunk-kill   :wk "Delete hunk")
+  "m e" '(diff-ediff-patch :wk "Go to ediff session")
+  "m n" '(diff-hunk-next   :wk "Next hunk")
+  "m p" '(diff-hunk-prev   :wk "Prev hunk")
+  "m s" '(diff-split-hunk  :wk "Split hunk"))
+(general-auto-unbind-keys 'disable)
 
 (x8dcc/def-keys-message
   ;; Mode (Message)
