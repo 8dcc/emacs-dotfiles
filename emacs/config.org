@@ -467,9 +467,9 @@ We will enable indentation guides in C mode by default. It can also be toggled
 with =SPC t C=, see [[*Space keybinds][Space keybinds]].
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(highlight-indent-guides
-   :type git :host github :repo "getong/highlight-indent-guides"))
+(use-package highlight-indent-guides
+  :straight (highlight-indent-guides
+             :type git :host github :repo "getong/highlight-indent-guides"))
 #+end_src
 
 Use the same character as the fill column, and ignore the first indentation
@@ -610,20 +610,17 @@ For dragging lines with =M-<down>= and =M-<up>=. I started using [[https://githu
 the code is full of errors that generate warnings and hasn't been updated in a
 long time.
 
-#+begin_src emacs-lisp
-(straight-use-package
- '(move-text :type git :host github :repo "8dcc/move-text"))
-
-(move-text-default-bindings)
-(add-hook 'text-mode-hook #'move-text-mode)
-(add-hook 'prog-mode-hook #'move-text-mode)
-#+end_src
-
-Drag stuff with =M-j= and =M-k=, not just with =M-<down>= and =M-<up>=.
+We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
+=M-<down>= and =M-<up>=.
 
 #+begin_src emacs-lisp
-(keymap-set move-text-mode-map "M-j" 'move-text-down)
-(keymap-set move-text-mode-map "M-k" 'move-text-up)
+(use-package move-text
+  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :hook ((text-mode prog-mode) . move-text-mode)
+  :config
+  (move-text-default-bindings)
+  (keymap-set move-text-mode-map "M-j" 'move-text-down)
+  (keymap-set move-text-mode-map "M-k" 'move-text-up))
 #+end_src
 
 ** Highlight TODOs
@@ -786,16 +783,12 @@ Evil align operator, port of vim-lion by Tom McDonald.
 Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(big-font :type git :host github :repo "8dcc/big-font.el"))
-#+end_src
-
-And the settings.
-
-#+begin_src emacs-lisp
-(setq big-font-height 120
-      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
-                              (fixed-pitch . "Iosevka Comfy Fixed")))
+(use-package big-font
+  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
+  :config
+  (setq big-font-height 120
+        big-font-family-alist '((default     . "Iosevka Comfy Fixed")
+                                (fixed-pitch . "Iosevka Comfy Fixed"))))
 #+end_src
 
 ** Plumber
@@ -804,8 +797,8 @@ Personal package for plumbing text, similar to Plan9. See the [[https://github.c
 for more information.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(plumber :type git :host github :repo "8dcc/plumber.el"))
+(use-package plumber
+  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
 #+end_src
 
 ** AucTex
@@ -823,8 +816,8 @@ Major mode for programming in Ada.
 Mainstream version is out of date.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(ada-mode :type git :host github :repo "8dcc/ada-mode"))
+(use-package ada-mode
+  :straight (ada-mode :type git :host github :repo "8dcc/ada-mode"))
 #+end_src
 
 Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
@@ -866,8 +859,8 @@ Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme impleme
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+(use-package nasm-mode
+  :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 #+end_src
 
 Use it as the default mode for =.asm= files. For more information on
@@ -913,11 +906,11 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
   =SPC m d=.
 
 #+begin_src emacs-lisp
-(straight-use-package
- '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
-
-(setq beardbolt-shuffle-rainbow t
-      beardbolt-compile-delay nil)
+(use-package beardbolt
+  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
+  :config
+  (setq beardbolt-shuffle-rainbow t
+        beardbolt-compile-delay nil))
 #+end_src
 
 ** Webpaste

@@ -293,15 +293,13 @@ and the non-normal prefix is \"M-SPC\"."
                         org-todo-keyword-wait
                         org-verbatim))))))
 
-(straight-use-package
- '(move-text :type git :host github :repo "8dcc/move-text"))
-
-(move-text-default-bindings)
-(add-hook 'text-mode-hook #'move-text-mode)
-(add-hook 'prog-mode-hook #'move-text-mode)
-
-(keymap-set move-text-mode-map "M-j" 'move-text-down)
-(keymap-set move-text-mode-map "M-k" 'move-text-up)
+(use-package move-text
+  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :hook ((text-mode prog-mode) . move-text-mode)
+  :config
+  (move-text-default-bindings)
+  (keymap-set move-text-mode-map "M-j" 'move-text-down)
+  (keymap-set move-text-mode-map "M-k" 'move-text-up))
 
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
@@ -357,15 +355,15 @@ and ALIGNMENT as parameters."
   (setq evil-lion-right-align-key (kbd "g A"))
   (evil-lion-mode))
 
-(straight-use-package
- '(big-font :type git :host github :repo "8dcc/big-font.el"))
+(use-package big-font
+  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
+  :config
+  (setq big-font-height 120
+        big-font-family-alist '((default     . "Iosevka Comfy Fixed")
+                                (fixed-pitch . "Iosevka Comfy Fixed"))))
 
-(setq big-font-height 120
-      big-font-family-alist '((default     . "Iosevka Comfy Fixed")
-                              (fixed-pitch . "Iosevka Comfy Fixed")))
-
-(straight-use-package
- '(plumber :type git :host github :repo "8dcc/plumber.el"))
+(use-package plumber
+  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
 
 (use-package auctex)
 
@@ -373,8 +371,8 @@ and ALIGNMENT as parameters."
 
 (use-package geiser-guile)
 
-(straight-use-package
- '(nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
+(use-package nasm-mode
+  :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
@@ -390,11 +388,11 @@ and ALIGNMENT as parameters."
           (start-process "firefox" nil "firefox"
                          (format "file://%s#page=%d" pdf page)))))
 
-(straight-use-package
- '(beardbolt :type git :host github :repo "8dcc/beardbolt"))
-
-(setq beardbolt-shuffle-rainbow t
-      beardbolt-compile-delay nil)
+(use-package beardbolt
+  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
+  :config
+  (setq beardbolt-shuffle-rainbow t
+        beardbolt-compile-delay nil))
 
 (use-package webpaste
   :config
