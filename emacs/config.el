@@ -1037,6 +1037,7 @@ between `read' and `rx'."
 (x8dcc/def-keys-rmail-summary
   ;; Mode (Rmail summary)
   "m d" '(rmail-summary-delete-forward   :wk "Delete and move forward")
+  "m D" '(rmail-summary-epa-decrypt      :wk "Decrypt")
   "m g" '(rmail-summary-get-new-mail     :wk "Get new mail")
   "m i" '(rmail-summary-input            :wk "Input file")
   "m o" '(rmail-summary-output           :wk "Output to file")
