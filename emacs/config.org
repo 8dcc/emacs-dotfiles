@@ -2352,6 +2352,27 @@ Set monday as the first day of the week.
       calendar-weekend-days '(6 0))
 #+end_src
 
+* Feature-specific settings
+** Plumber
+
+Insert a new plumber rule for audio files, right before the "File" rentry.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/audio-file-regexp
+  (rx (seq (one-or-more (any alnum blank ?\\ ?/ ?~ ?. ?_ ?- ?\( ?\)))
+           "."
+           (or "flac" "mp3" "wav")))
+  "Regexp for matching an audio file.")
+
+(with-eval-after-load 'plumber
+  (setq plumber-rules
+        (x8dcc/alist-insert-before-key plumber-rules
+                                       `("Audio file"
+                                         ,x8dcc/audio-file-regexp
+                                         emms-play-file)
+                                       "File")))
+#+end_src
+
 * Mode-specific settings
 ** Eshell
 

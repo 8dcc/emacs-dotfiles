@@ -1274,6 +1274,20 @@ numbers start at 1."
 (setq calendar-week-start-day 1
       calendar-weekend-days '(6 0))
 
+(defconst x8dcc/audio-file-regexp
+  (rx (seq (one-or-more (any alnum blank ?\\ ?/ ?~ ?. ?_ ?- ?\( ?\)))
+           "."
+           (or "flac" "mp3" "wav")))
+  "Regexp for matching an audio file.")
+
+(with-eval-after-load 'plumber
+  (setq plumber-rules
+        (x8dcc/alist-insert-before-key plumber-rules
+                                       `("Audio file"
+                                         ,x8dcc/audio-file-regexp
+                                         emms-play-file)
+                                       "File")))
+
 (setq eshell-hist-ignoredups t)
 
 (add-hook 'eshell-mode-hook
