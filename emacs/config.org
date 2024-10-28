@@ -809,15 +809,17 @@ Essential package for LaTeX editing, comes with a useful preview mode.
 (use-package auctex)
 #+end_src
 
-** COMMENT Ada mode
+** Ada mode
 
-Major mode for programming in Ada.
-
-Mainstream version is out of date.
+Major mode for programming in Ada. Mainstream version is out of date.
 
 #+begin_src emacs-lisp
 (use-package ada-mode
-  :straight (ada-mode :type git :host github :repo "8dcc/ada-mode"))
+  :straight (ada-mode :type git :host github :repo "8dcc/ada-mode")
+  :config
+  (dolist (var '(ada-indent ada-use-indent ada-when-indent
+                 ada-broken-indent ada-continuation-indent))
+    (eval `(setq ,var 4))))
 #+end_src
 
 Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
@@ -828,7 +830,7 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
                                       'ada-mode)))
 #+end_src
 
-** Ada TS mode
+** COMMENT Ada TS mode
 
 Major mode for programming in Ada (with Tree-Sitter).
 
