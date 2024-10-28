@@ -433,6 +433,28 @@ represent the first and second arguments of `keymap-set', respectively."
                 (car key-pair)
                 (eval-function (cdr key-pair)))))
 
+(defun x8dcc/alist-insert-before-key (alist new-element key &optional compare-fn)
+  "Insert NEW-ELEMENT to ALIST before KEY is found.
+
+If none of the elements of ALIST contains KEY, NEW-ELEMENT is appended to the
+end of the ALIST.
+
+The optional argument COMPARE-FN specifies a function with arguments (ELT LIST)
+that will be used to check if the KEY matches each element of ALIST. If
+COMPARE-FN is nil, the function checks if the `car' of each element of ALIST is
+equal to KEY."
+  (unless compare-fn
+    (setq compare-fn (lambda (elt list)
+                       (equal elt (car list)))))
+  (cond ((null alist)
+         (list new-element))
+        ((funcall compare-fn key (car alist))
+         (cons new-element alist))
+        (t
+         (cons (car alist)
+               (x8dcc/alist-insert-before-key
+                (cdr alist) new-element key compare-fn)))))
+
 (defun x8dcc/replace-regexps-in-string (alist string)
   "Return a copy of STRING with all the regexps in ALIST replaced.
 
