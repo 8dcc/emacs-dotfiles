@@ -1452,6 +1452,16 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
               #'c-context-line-break))
 #+end_src
 
+*** Rmail mode remaps
+
+Use =RET= for visiting the message on summary buffers.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'rmailsum
+  (evil-define-key 'normal rmail-summary-mode-map
+    (kbd "RET") #'rmail-summary-goto-msg))
+#+end_src
+
 ** Space keybinds
 
 For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Input-related functions][Input-related

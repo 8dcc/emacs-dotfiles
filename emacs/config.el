@@ -727,6 +727,10 @@ between `read' and `rx'."
               "RET"
               #'c-context-line-break))
 
+(with-eval-after-load 'rmailsum
+  (evil-define-key 'normal rmail-summary-mode-map
+    (kbd "RET") #'rmail-summary-goto-msg))
+
 (x8dcc/def-keys
   "SPC" '(projectile-find-file :wk "Find file in project") ; Same as "SPC p f"
   "."   '(find-file            :wk "Find file")            ; Same as "SPC f f"
