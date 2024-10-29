@@ -1238,6 +1238,19 @@ to the overlay."
 
 ** Simple wrapper functions
 
+Clear an eshell buffer, an alternative to =recenter-top-bottom=.
+
+TODO: Preserve prompt contents.
+
+#+begin_src emacs-lisp
+(defun x8dcc/eshell-clear ()
+  "Clear an eshell buffer, and print the prompt.
+Alternative to `recenter-top-bottom'."
+  (interactive)
+  (eshell/clear-scrollback)
+  (eshell-emit-prompt))
+#+end_src
+
 Toggle newline insertion when saving a file.
 
 #+begin_src emacs-lisp
@@ -1444,16 +1457,14 @@ collection]]. Credits to wasamasa's [[https://depp.brause.cc/dotemacs/][dotemacs
 
 Some keybind changes for =eshell-mode=.
 
-- =C-l= :: Better function for clearing than =recenter-top-bottom=.
+- =C-l= :: Clear buffer (similar to bash). Alternative to =recenter-top-bottom=.
 - =<home>= :: Go to the beginning of the line, but don't go past the prompt.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'eshell
   (x8dcc/keymap-set-alist
    eshell-mode-map
-   '(("C-l" . (lambda () (interactive)
-                (eshell/clear-scrollback)
-                (eshell-emit-prompt)))
+   '(("C-l" . x8dcc/eshell-clear)
      ("<home>" . eshell-bol))))
 #+end_src
 

@@ -627,6 +627,13 @@ to the overlay."
                                              (match-end group-num))))
         (overlay-put invisible-overlay 'invisible t)))))
 
+(defun x8dcc/eshell-clear ()
+  "Clear an eshell buffer, and print the prompt.
+Alternative to `recenter-top-bottom'."
+  (interactive)
+  (eshell/clear-scrollback)
+  (eshell-emit-prompt))
+
 (defun x8dcc/toggle-final-newline ()
   "Toggle newline insertion when saving the current buffer. See
 `require-final-newline'."
@@ -742,9 +749,7 @@ between `read' and `rx'."
 (with-eval-after-load 'eshell
   (x8dcc/keymap-set-alist
    eshell-mode-map
-   '(("C-l" . (lambda () (interactive)
-                (eshell/clear-scrollback)
-                (eshell-emit-prompt)))
+   '(("C-l" . x8dcc/eshell-clear)
      ("<home>" . eshell-bol))))
 
 (with-eval-after-load 'ediff-util
