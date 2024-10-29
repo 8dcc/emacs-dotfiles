@@ -1647,9 +1647,9 @@ keybinds should be *moved* to their commented sub-sections.
   "v V" '(vc-refresh-state         :wk "Refresh state")
   ;; Version control -> Branch
   "v b"   '(:ignore t           :wk "Branch")
+  "v b b" '(vc-switch-branch    :wk "Switch to")
   "v b c" '(vc-create-branch    :wk "Create")
   "v b l" '(vc-print-branch-log :wk "Log")
-  "v b s" '(vc-switch-branch    :wk "Switch to")
   ;; Version control -> Stash
   "v z"   '(:ignore t          :wk "Git stash")
   "v z a" '(vc-git-stash-apply :wk "Apply")
