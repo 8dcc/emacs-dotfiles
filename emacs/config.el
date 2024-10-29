@@ -490,23 +490,6 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
-(defconst x8dcc/git-commit-filename-regexp
-  (rx "/"
-      (or "addp-hunk-edit.diff"
-          (seq (or "" "MERGE_"
-                   (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
-                        "_EDIT"))
-               "MSG")
-          (seq (or "BRANCH" "EDIT")
-               "_DESCRIPTION"))
-      string-end)
-  "Regexp for matching git commit filenames. Obtained from git-commit.el,
-version 3.3.0.50, modified by 8dcc.")
-
-(defun x8dcc/is-git-commit-filename (filename)
-  "Returns t if FILENAME matches `x8dcc/git-commit-filename-regexp'."
-  (string-match-p x8dcc/git-commit-filename-regexp filename))
-
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line based on `comment-start' and
 `comment-end'."
@@ -1214,6 +1197,22 @@ of characters, followed by the number of lines."
 (savehist-mode 1)
 
 (add-to-list 'savehist-additional-variables 'erc-ignore-list)
+
+(defconst x8dcc/git-commit-filename-regexp
+  (rx "/"
+      (or "addp-hunk-edit.diff"
+          "ADD_EDIT.patch"
+          (seq (or "" "MERGE_"
+                   (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
+                        "_EDIT"))
+               "MSG")
+          (seq (or "BRANCH" "EDIT")
+               "_DESCRIPTION"))
+      string-end)
+  "Regexp for matching git commit filenames. Obtained from git-commit.el,
+version 3.3.0.50, modified by 8dcc.")
+
+(add-to-list 'undo-fu-session-incompatible-files x8dcc/git-commit-filename-regexp)
 
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "trash"))))

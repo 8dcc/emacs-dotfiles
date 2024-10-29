@@ -1047,28 +1047,6 @@ or too many lines (>10000)."
            (> (car (buffer-line-statistics)) 10000))))
 #+end_src
 
-Check if the provided filename matches the regex for git commit filenames
-(e.g. =COMMIT_EDITMSG=).
-
-#+begin_src emacs-lisp
-(defconst x8dcc/git-commit-filename-regexp
-  (rx "/"
-      (or "addp-hunk-edit.diff"
-          (seq (or "" "MERGE_"
-                   (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
-                        "_EDIT"))
-               "MSG")
-          (seq (or "BRANCH" "EDIT")
-               "_DESCRIPTION"))
-      string-end)
-  "Regexp for matching git commit filenames. Obtained from git-commit.el,
-version 3.3.0.50, modified by 8dcc.")
-
-(defun x8dcc/is-git-commit-filename (filename)
-  "Returns t if FILENAME matches `x8dcc/git-commit-filename-regexp'."
-  (string-match-p x8dcc/git-commit-filename-regexp filename))
-#+end_src
-
 ** Text manipulation
 
 Insert a separator comment that fills up to the line column.
@@ -2149,6 +2127,26 @@ Save =erc-ignore-list= across sessions.
 
 #+begin_src emacs-lisp
 (add-to-list 'savehist-additional-variables 'erc-ignore-list)
+#+end_src
+
+Ignore git-related files for =undo-fu-session=.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/git-commit-filename-regexp
+  (rx "/"
+      (or "addp-hunk-edit.diff"
+          "ADD_EDIT.patch"
+          (seq (or "" "MERGE_"
+                   (seq (or "COMMIT" "NOTES" "PULLREQ" "MERGEREQ" "TAG")
+                        "_EDIT"))
+               "MSG")
+          (seq (or "BRANCH" "EDIT")
+               "_DESCRIPTION"))
+      string-end)
+  "Regexp for matching git commit filenames. Obtained from git-commit.el,
+version 3.3.0.50, modified by 8dcc.")
+
+(add-to-list 'undo-fu-session-incompatible-files x8dcc/git-commit-filename-regexp)
 #+end_src
 
 ** Backups
