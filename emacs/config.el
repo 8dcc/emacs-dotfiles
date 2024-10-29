@@ -1305,18 +1305,13 @@ numbers start at 1."
                                          (max start 1) (max end 1)))))
     (lpr-buffer)))
 
-(setq eshell-hist-ignoredups t)
-
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq-local tab-width 4)))
-
 (setq eshell-prompt-function (lambda ()
                                (concat
                                 (abbreviate-file-name (eshell/pwd))
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
-                                (propertize " " 'face '(:inherit default))))
-      eshell-prompt-regexp "^[^#λ]* [#λ] ")
+                                (propertize " " 'face '(:inherit default)))))
+
+(setq eshell-prompt-regexp "^[^#λ]* [#λ] ")
 
 (defun x8dcc/eshell-project-or-current (&optional eshell-func)
   "Run ESHELL-FUNC in the project's root whenever possible."
@@ -1357,6 +1352,12 @@ different rules in `display-buffer-alist'."
 (add-to-list 'display-buffer-alist
              '("\\*eshell-popup\\*"
                (display-buffer-in-side-window (side . bottom))))
+
+(setq eshell-hist-ignoredups t)
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq-local tab-width 4)))
 
 (setq dired-listing-switches
       "-l --all --sort=version --group-directories-first --human-readable")

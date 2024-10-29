@@ -2402,23 +2402,7 @@ settings.
 
 * Mode-specific settings
 ** Eshell
-
-Don't show duplicated entries in the eshell history.
-
-#+begin_src emacs-lisp
-(setq eshell-hist-ignoredups t)
-#+end_src
-
-The default =tab-width= is overwritten in =esh-mode.el=.
-
-TODO: Instead of hardcoding "4" again, set it to the global value directly,
-somehow.
-
-#+begin_src emacs-lisp
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq-local tab-width 4)))
-#+end_src
+*** Eshell prompt settings
 
 Change the eshell prompt.
 
@@ -2427,18 +2411,25 @@ The third parameter of =concat= is used to reset the font face after changing th
 color as the lambda. I don't really like this method, but I don't know any other
 way of "resetting" the face.
 
-We also need to set =eshell-prompt-regexp= to match our new prompt. This is
-important so eshell knows what part of the line was the user input when
-executing a previous command.
+TODO: Add version control information to prompt, similar to my =.bashrc=.
 
 #+begin_src emacs-lisp
 (setq eshell-prompt-function (lambda ()
                                (concat
                                 (abbreviate-file-name (eshell/pwd))
                                 (propertize " λ" 'face '(:foreground "#8490B3"))
-                                (propertize " " 'face '(:inherit default))))
-      eshell-prompt-regexp "^[^#λ]* [#λ] ")
+                                (propertize " " 'face '(:inherit default)))))
 #+end_src
+
+We also need to set =eshell-prompt-regexp= to match our new prompt. This is
+important so eshell knows what part of the line was the user input when
+executing a previous command.
+
+#+begin_src emacs-lisp
+(setq eshell-prompt-regexp "^[^#λ]* [#λ] ")
+#+end_src
+
+*** Eshell buffer settings
 
 This function is basically the same from =projectile-run-eshell= in
 [[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]]. If we are in a project, it will open the shell in the project's
@@ -2506,6 +2497,25 @@ taking over the current window.
 (add-to-list 'display-buffer-alist
              '("\\*eshell-popup\\*"
                (display-buffer-in-side-window (side . bottom))))
+#+end_src
+
+*** Misc eshell settings
+
+Don't show duplicated entries in the eshell history.
+
+#+begin_src emacs-lisp
+(setq eshell-hist-ignoredups t)
+#+end_src
+
+The default =tab-width= is overwritten in =esh-mode.el=.
+
+TODO: Instead of hardcoding "4" again, set it to the global value directly,
+somehow.
+
+#+begin_src emacs-lisp
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (setq-local tab-width 4)))
 #+end_src
 
 ** Dired
