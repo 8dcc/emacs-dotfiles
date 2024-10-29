@@ -80,14 +80,12 @@
 
 (use-package vundo)
 
-(use-package undohist
+(use-package undo-fu-session
   :init
-  (undohist-initialize)
+  (undo-fu-session-global-mode)
   :config
-  (setq undohist-ignored-files
-        '("\\.gpg\\'"
-          x8dcc/is-git-commit-filename
-          file-remote-p)))
+  (setq undo-fu-session-ignore-encrypted-files t
+        undo-fu-session-ignore-temp-files t))
 
 (defmacro x8dcc/general-create-definer (name keymaps)
   "Create a general definer named NAME for the specified KEYMAPS.
