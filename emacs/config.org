@@ -2889,11 +2889,9 @@ Manual).
       rmail-secondary-file-directory x8dcc/mail-directory)
 #+end_src
 
-Specify the inbox files.
-
-TODO: It would be good to use "pops://..." URIS directly here, but I am not sure
-if emacs can use Mailutil's =movemail=, so for now I have to run it manually with
-my [[https://github.com/8dcc/linux-dotfiles/blob/main/scripts/util/mail-fetch][mail-fetch]] script.
+Specify the inbox files. I manually pull my mail from the server whenever
+necessary using Mailutil's =movemail= through my [[https://github.com/8dcc/linux-dotfiles/blob/main/scripts/util/mail-fetch][mail-fetch]] script. In my case,
+Emacs' =movemail= only reads a file. About the two =movemail='s, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Movemail.html][Emacs Manual]].
 
 #+begin_src emacs-lisp
 (setq rmail-primary-inbox-list
