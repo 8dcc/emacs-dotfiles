@@ -1054,7 +1054,14 @@ between `read' and `rx'."
   "m P" '(rmail-previous-message           :wk "Previous")
   "m r" '(rmail-reply                      :wk "Reply")
   "m s" '(rmail-expunge-and-save           :wk "Expunge and save")
-  "m u" '(rmail-undelete-previous-message  :wk "Undelete current or previous"))
+  "m u" '(rmail-undelete-previous-message  :wk "Undelete current or previous")
+  ;; Mode -> Label
+  "m l"   '(:ignore t                      :wk "Label")
+  "m l a" '(rmail-add-label                :wk "Add")
+  "m l d" '(rmail-kill-label               :wk "Delete")
+  "m l m" '(rmail-summary-by-labels        :wk "Summary of labeled")
+  "m l n" '(rmail-next-labeled-message     :wk "Next labeled with")
+  "m l p" '(rmail-previous-labeled-message :wk "Previous labeled with"))
 
 (x8dcc/def-keys-rmail-summary
   ;; Mode (Rmail summary)
@@ -1067,7 +1074,13 @@ between `read' and `rx'."
   "m r" '(rmail-summary-reply            :wk "Reply")
   "m s" '(rmail-summary-expunge-and-save :wk "Expunge and save")
   "m u" '(rmail-summary-undelete         :wk "Undelete")
-  "m U" '(rmail-summary-undelete-many    :wk "Undelete all"))
+  "m U" '(rmail-summary-undelete-many    :wk "Undelete all")
+  ;; Mode -> Label
+  "m l"   '(:ignore t                              :wk "Label")
+  "m l a" '(rmail-summary-add-label                :wk "Add")
+  "m l d" '(rmail-summary-kill-label               :wk "Delete")
+  "m l n" '(rmail-summary-next-labeled-message     :wk "Next labeled with")
+  "m l p" '(rmail-summary-previous-labeled-message :wk "Previous labeled with"))
 
 (column-number-mode 1)
 
