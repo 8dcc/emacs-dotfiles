@@ -478,9 +478,8 @@ will be used for replacing with the `replace-regexp-in-string' function."
 (defun x8dcc/count-matching-buffers (regexp)
   "Return the number of buffers whose name matches REGEXP."
   (length
-   (seq-remove (lambda (buffer)
-                 (not (string-match-p regexp
-                                      (buffer-name buffer))))
+   (seq-filter (lambda (buffer)
+                 (string-match-p regexp (buffer-name buffer)))
                (buffer-list))))
 
 (defun x8dcc/is-huge-file ()
