@@ -199,7 +199,7 @@ and the non-normal prefix is \"M-SPC\"."
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile
-        popper-reference-buffers '(compilation-mode
+        popper-reference-buffers `(compilation-mode
                                    messages-buffer-mode
                                    help-mode
                                    occur-mode
@@ -211,7 +211,8 @@ and the non-normal prefix is \"M-SPC\"."
                                    "^\\*Apropos\\*"
                                    "^\\*scratch\\*"
                                    "^\\*Macroexpansion\\*"
-                                   "^\\*xref\\*"))
+                                   "^\\*xref\\*"
+                                   ,(regexp-quote shell-command-buffer-name-async)))
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
