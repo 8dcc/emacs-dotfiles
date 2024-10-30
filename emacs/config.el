@@ -916,6 +916,7 @@ between `read' and `rx'."
   "v L" '(vc-print-log             :wk "Log (current file)")
   "v O" '(vc-log-outgoing          :wk "Outgoing log")
   "v o" '(vc-revision-other-window :wk "Show other revision")
+  "v p" '(vc-update                :wk "Pull changes")
   "v P" '(vc-push                  :wk "Push changes")
   "v V" '(vc-refresh-state         :wk "Refresh state")
   ;; Version control -> Branch
