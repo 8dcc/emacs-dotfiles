@@ -485,14 +485,18 @@ The REGEXP is wrapped in \"^...$\"."
                (buffer-list))))
 
 (defun x8dcc/suffixed-buffer-name (name)
-  "Append suffix to the NAME string when necessary.
+  "Append suffix to NAME if there is a buffer with that name.
+The suffix is a number wrapped in square brackets.
 
-That is, if there is one or more buffers with that name according to
-`x8dcc/count-matching-buffers'. The suffix is a number wrapped in square
-brackets. If there are no buffers with that name, NAME is returned.
+The `x8dcc/count-matching-buffers' function is used to count the number of
+buffers with that NAME and, optionally, a suffix. That is, both \"foo\" and
+\"foo [4]\" are counted. If there are no buffers with that name, NAME is
+returned.
 
 Note that NAME is a normal string, not a regexp."
-  (let ((count (x8dcc/count-matching-buffers (regexp-quote name))))
+  (let ((count (x8dcc/count-matching-buffers
+                (concat (regexp-quote name)
+                        "\\(?: \\[[[:digit:]]+\\]\\)?"))))
     (if (> count 0)
         (concat name " [" (number-to-string count) "]")
       name)))
