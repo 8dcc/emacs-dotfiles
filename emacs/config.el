@@ -863,7 +863,7 @@ between `read' and `rx'."
   "o"   '(:ignore t             :wk "Open")
   "o ." '(dired-jump            :wk "Dired")
   "o !" '(shell-command         :wk "Shell command")
-  "o $" '(async-shell-command   :wk "Async shell command")
+  "o &" '(async-shell-command   :wk "Async shell command")
   "o a" '(org-agenda            :wk "Org agenda")
   "o c" '(calc                  :wk "Calculator")
   "o C" '(quick-calc            :wk "Quick calculator")
