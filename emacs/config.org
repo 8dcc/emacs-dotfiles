@@ -2105,9 +2105,24 @@ Don't allow commands like =grep= (that use =display-buffer=) to create new windo
 for their output, while still allowing the user to use functions that create
 windows explicitly (like =find-file-other-window=).
 
-#+begin_src emacs-lisp
+I used to set this, but I prefer a blacklist approach. This breaks, for example,
+=rmail-summary=.
+
+#+begin_comment emacs-lisp
+;; NOTE: Commented.
 (setq display-buffer-base-action
       '(display-buffer-same-window))
+#+end_comment
+
+Try to reuse the same window for =*grep*= buffers. If it's not possible, display
+it in an existing window or in a side window.
+
+#+begin_src emacs-lisp
+(add-to-list 'display-buffer-alist
+             '("\\*grep\\*"
+               (display-buffer-same-window
+                display-buffer-reuse-window
+                display-buffer-in-side-window)))
 #+end_src
 
 * General settings

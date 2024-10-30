@@ -1198,8 +1198,11 @@ of characters, followed by the number of lines."
                     (up     . left)
                     (down   . left)))))
 
-(setq display-buffer-base-action
-      '(display-buffer-same-window))
+(add-to-list 'display-buffer-alist
+             '("\\*grep\\*"
+               (display-buffer-same-window
+                display-buffer-reuse-window
+                display-buffer-in-side-window)))
 
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
