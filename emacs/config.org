@@ -2538,6 +2538,13 @@ This function will be used to create an =eshell= buffer named =*eshell-popup*=. 
 will be used for making different rules for normal and popup eshell buffers on
 =display-buffer-alist=.
 
+TODO: Don't depend on =display-buffer-alist=. Perhaps create a buffer
+without showing it, and then display it with something like
+~(display-buffer-pop-up-window (eshell) nil)~.
+
+TODO: Instead of only allowing a single eshell popup, allow one per project by
+appending the project name to the buffer name.
+
 #+begin_src emacs-lisp
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
