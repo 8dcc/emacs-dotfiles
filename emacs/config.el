@@ -1216,11 +1216,18 @@ of characters, followed by the number of lines."
                     (up     . left)
                     (down   . left)))))
 
-(add-to-list 'display-buffer-alist
-             '("\\*grep\\*"
-               (display-buffer-same-window
-                display-buffer-reuse-window
-                display-buffer-in-side-window)))
+(defun x8dcc/set-display-same-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed on the same window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               `(,regexp
+                 (display-buffer-same-window
+                  display-buffer-reuse-window
+                  display-buffer-in-side-window))))
+
+(dolist (regexp '("\\*grep\\*"
+                  "\\*vc-.+\\*"))
+  (x8dcc/set-display-same-window regexp))
 
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)

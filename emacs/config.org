@@ -2141,15 +2141,22 @@ I used to set this, but I prefer a blacklist approach. This breaks, for example,
       '(display-buffer-same-window))
 #+end_comment
 
-Try to reuse the same window for =*grep*= buffers. If it's not possible, display
-it in an existing window or in a side window.
+Try to reuse the same window for some buffers (e.g. =*grep*= or =*vc*=). If it's not
+possible, then display it in an existing window or in a side window.
 
 #+begin_src emacs-lisp
-(add-to-list 'display-buffer-alist
-             '("\\*grep\\*"
-               (display-buffer-same-window
-                display-buffer-reuse-window
-                display-buffer-in-side-window)))
+(defun x8dcc/set-display-same-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed on the same window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               `(,regexp
+                 (display-buffer-same-window
+                  display-buffer-reuse-window
+                  display-buffer-in-side-window))))
+
+(dolist (regexp '("\\*grep\\*"
+                  "\\*vc-.+\\*"))
+  (x8dcc/set-display-same-window regexp))
 #+end_src
 
 * General settings
