@@ -484,6 +484,19 @@ The REGEXP is wrapped in \"^...$\"."
                                  (buffer-name buffer)))
                (buffer-list))))
 
+(defun x8dcc/suffixed-buffer-name (name)
+  "Append suffix to the NAME string when necessary.
+
+That is, if there is one or more buffers with that name according to
+`x8dcc/count-matching-buffers'. The suffix is a number wrapped in square
+brackets. If there are no buffers with that name, NAME is returned.
+
+Note that NAME is a normal string, not a regexp."
+  (let ((count (x8dcc/count-matching-buffers (regexp-quote name))))
+    (if (> count 0)
+        (concat name " [" (number-to-string count) "]")
+      name)))
+
 (defun x8dcc/is-huge-file ()
   "Returns `t' if the current buffer has either too many characters (>500000),
 or too many lines (>10000)."

@@ -1036,6 +1036,31 @@ The REGEXP is wrapped in \"^...$\"."
                (buffer-list))))
 #+end_src
 
+Append suffix to =name= if there is a buffer with that name according to
+=x8dcc/count-matching-buffers=.
+
+TODO: Rather than suffixing the number of buffers that match =name=, we should
+suffix the next available number. For example, user opens 3 buffers, then closes
+the second one; this function should return =name [1]= instead =name [2]= again.
+
+TODO: Also count buffer names ending with =[N]=. Don't change
+=x8dcc/count-matching-buffers=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/suffixed-buffer-name (name)
+  "Append suffix to NAME if there is a buffer with that name.
+
+That is, according to `x8dcc/count-matching-buffers'. The suffix is a number
+wrapped in square brackets. If there are no buffers with that name, NAME is
+returned.
+
+Note that NAME is a normal string, not a regexp."
+  (let ((count (x8dcc/count-matching-buffers (regexp-quote name))))
+    (if (> count 0)
+        (concat name " [" (number-to-string count) "]")
+      name)))
+#+end_src
+
 Is this file really big? It will be used for disabling some modes. Credits
 [[https://github.com/seagle0128/.emacs.d/blob/19efe194cabc2f2984e6463a8d9730d8163acd8f/lisp/init-funcs.el#L267-L271][seagle0128]].
 
