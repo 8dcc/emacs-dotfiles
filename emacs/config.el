@@ -198,21 +198,27 @@ and the non-normal prefix is \"M-SPC\"."
 
 (use-package popper
   :config
-  (setq popper-group-function #'popper-group-by-projectile
-        popper-reference-buffers `(compilation-mode
-                                   messages-buffer-mode
-                                   help-mode
-                                   occur-mode
-								   man-mode
-                                   "^\\*Warnings\\*"
-                                   "^\\*Compile-Log\\*"
-                                   "^\\*Backtrace\\*"
-                                   "^\\*evil-registers\\*"
-                                   "^\\*Apropos\\*"
-                                   "^\\*scratch\\*"
-                                   "^\\*Macroexpansion\\*"
-                                   "^\\*xref\\*"
-                                   ,(regexp-quote shell-command-buffer-name-async)))
+  (setq popper-group-function #'popper-group-by-projectile)
+
+  (setq popper-reference-buffers nil)
+  (dolist (element `(compilation-mode
+                     messages-buffer-mode
+                     help-mode
+                     occur-mode
+                     man-mode
+                     "*Warnings*"
+                     "*Compile-Log*"
+                     "*Backtrace*"
+                     "*evil-registers*"
+                     "*Apropos*"
+                     "*scratch*"
+                     "*Macroexpansion*"
+                     "*xref*"
+                     ,shell-command-buffer-name-async))
+    (if (stringp element)
+        (setq element (concat "^" (regexp-quote element) "$")))
+    (add-to-list 'popper-reference-buffers element 'append))
+
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
