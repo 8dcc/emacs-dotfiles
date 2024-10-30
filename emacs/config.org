@@ -2527,12 +2527,7 @@ first *eshell* buffer, append the count to the buffer name.
 Uses `x8dcc/count-matching-buffers' for getting the number of eshell buffers."
   (interactive)
   (unless eshell-func (setq eshell-func #'eshell))
-  (let* ((eshell-buffer-num (x8dcc/count-matching-buffers "\\*eshell\\*"))
-         (eshell-buffer-name (if (> eshell-buffer-num 0)
-                                 (concat "*eshell* ["
-                                         (number-to-string eshell-buffer-num)
-                                         "]")
-                               "*eshell*")))
+  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name "*eshell*")))
     (x8dcc/eshell-project-or-current eshell-func)))
 #+end_src
 
