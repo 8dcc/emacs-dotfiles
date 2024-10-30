@@ -2516,19 +2516,22 @@ It will be used for =x8dcc/eshell-popup= and =x8dcc/eshell-numbered=.
 This function will be used to open an eshell buffer by calling
 =x8dcc/eshell-project-or-current=, but will append a counter to the buffer name
 depending on the number of existing eshell buffers. This will /only/ be used when
-opening eshell in the current frame (with =SPC o E=), since we only want to allow
+opening eshell in the current window (with =SPC o E=), since we only want to allow
 one =*eshell-popup*=.
 
 #+begin_src emacs-lisp
-(defun x8dcc/eshell-numbered (&optional eshell-func)
-  "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
-first *eshell* buffer, append the count to the buffer name.
+(defun x8dcc/eshell-numbered (&optional buffer-name)
+  "Open an eshell buffer, adding a number suffix when necessary.
 
-Uses `x8dcc/count-matching-buffers' for getting the number of eshell buffers."
+That is, append a count to the buffer name if this was not the first buffer
+named BUFFER-NAME. If BUFFER-NAME is nil, \"*eshell*\" is used.
+
+It uses `x8dcc/eshell-project-or-current' for calling `eshell', and
+`x8dcc/suffixed-buffer-name' for obtaining the buffer name."
   (interactive)
-  (unless eshell-func (setq eshell-func #'eshell))
-  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name "*eshell*")))
-    (x8dcc/eshell-project-or-current eshell-func)))
+  (unless buffer-name (setq buffer-name "*eshell*"))
+  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
+    (x8dcc/eshell-project-or-current)))
 #+end_src
 
 This function will be used to create an =eshell= buffer named =*eshell-popup*=. This

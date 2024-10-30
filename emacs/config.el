@@ -1358,15 +1358,18 @@ numbers start at 1."
         (funcall eshell-func))
     (funcall eshell-func)))
 
-(defun x8dcc/eshell-numbered (&optional eshell-func)
-  "Call `x8dcc/eshell-project-or-current' with ESHELL-FUNC. If this was not the
-first *eshell* buffer, append the count to the buffer name.
+(defun x8dcc/eshell-numbered (&optional buffer-name)
+  "Open an eshell buffer, adding a number suffix when necessary.
 
-Uses `x8dcc/count-matching-buffers' for getting the number of eshell buffers."
+That is, append a count to the buffer name if this was not the first buffer
+named BUFFER-NAME. If BUFFER-NAME is nil, \"*eshell*\" is used.
+
+It uses `x8dcc/eshell-project-or-current' for calling `eshell', and
+`x8dcc/suffixed-buffer-name' for obtaining the buffer name."
   (interactive)
-  (unless eshell-func (setq eshell-func #'eshell))
-  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name "*eshell*")))
-    (x8dcc/eshell-project-or-current eshell-func)))
+  (unless buffer-name (setq buffer-name "*eshell*"))
+  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
+    (x8dcc/eshell-project-or-current)))
 
 (defun x8dcc/eshell-popup (&optional buffer-name)
   "Create or open a popup eshell buffer.
