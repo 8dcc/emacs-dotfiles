@@ -1027,10 +1027,12 @@ Count the number of buffers whose name matches the specified regular expression.
 
 #+begin_src emacs-lisp
 (defun x8dcc/count-matching-buffers (regexp)
-  "Return the number of buffers whose name matches REGEXP."
+  "Return the number of buffers whose whole name matches REGEXP.
+The REGEXP is wrapped in \"^...$\"."
   (length
    (seq-filter (lambda (buffer)
-                 (string-match-p regexp (buffer-name buffer)))
+                 (string-match-p (concat "^" regexp "$")
+                                 (buffer-name buffer)))
                (buffer-list))))
 #+end_src
 

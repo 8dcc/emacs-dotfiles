@@ -476,10 +476,12 @@ will be used for replacing with the `replace-regexp-in-string' function."
                                string))))
 
 (defun x8dcc/count-matching-buffers (regexp)
-  "Return the number of buffers whose name matches REGEXP."
+  "Return the number of buffers whose whole name matches REGEXP.
+The REGEXP is wrapped in \"^...$\"."
   (length
    (seq-filter (lambda (buffer)
-                 (string-match-p regexp (buffer-name buffer)))
+                 (string-match-p (concat "^" regexp "$")
+                                 (buffer-name buffer)))
                (buffer-list))))
 
 (defun x8dcc/is-huge-file ()
