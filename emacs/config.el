@@ -375,8 +375,8 @@ and ALIGNMENT as parameters."
 (use-package ada-mode
   :straight (ada-mode :type git :host github :repo "8dcc/ada-mode")
   :config
-  (dolist (var '(ada-indent ada-use-indent ada-when-indent
-                 ada-broken-indent ada-continuation-indent))
+  (dolist (var '(ada-indent ada-use-indent ada-when-indent ada-broken-indent
+                 ada-continuation-indent ada-indent-record-rel-type))
     (eval `(setq ,var 4))))
 
 (dolist (extension '("gpr" "ada" "ads" "adb"))
