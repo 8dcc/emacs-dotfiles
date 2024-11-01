@@ -796,6 +796,7 @@ between `read' and `rx'."
   "b c"       '(revert-buffer-with-coding-system :wk "Revert with coding system")
   "b i"       '(x8dcc/indent-buffer              :wk "Indent")
   "b k"       '(kill-current-buffer              :wk "Kill current")
+  "b K"       '(kill-buffer                      :wk "Kill other")
   "b l"       '(switch-to-buffer                 :wk "Switch to")
   "b L"       '(buffer-menu                      :wk "List")
   "b s"       '(basic-save-buffer                :wk "Save")
