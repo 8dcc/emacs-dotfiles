@@ -368,9 +368,9 @@ and ALIGNMENT as parameters."
 (use-package big-font
   :straight (big-font :type git :host github :repo "8dcc/big-font.el")
   :config
-  (setq big-font-height 120
-        big-font-family-alist '((default     . "Source Code Pro")
-                                (fixed-pitch . "Source Code Pro"))))
+  (setq big-font-faces '((default        120 "Source Code Pro")
+                         (fixed-pitch    120 "Source Code Pro")
+                         (variable-pitch 150 "FreeSerif"))))
 
 (use-package plumber
   :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
