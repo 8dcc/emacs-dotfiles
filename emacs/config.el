@@ -388,6 +388,24 @@ and ALIGNMENT as parameters."
   (add-to-list 'auto-mode-alist (cons (concat "\\." extension "\\'")
                                       'ada-mode)))
 
+(defun x8dcc/ada-filename-to-proc (filename)
+  (thread-last
+    filename
+    (replace-regexp-in-string "-" "_")
+    (replace-regexp-in-string "\\..\\{,3\\}" "")))
+
+(ada-define-skeleton x8dcc/skeleton-ada-source
+    "Insert a basic Ada source skeleton."
+    nil
+    '(setq str (skeleton-read "Procedure name: "
+                              (x8dcc/ada-filename-to-proc
+                               (buffer-name))))
+    "with Ada.Text_IO; use Ada.Text_IO;\n\n"
+    "procedure " str " is\n"
+    "begin\n"
+    > _ "\n"
+    "end " str ";" \n)
+
 (use-package geiser-guile)
 
 (use-package nasm-mode

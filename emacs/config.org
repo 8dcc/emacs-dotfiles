@@ -855,6 +855,28 @@ Since emacs 28, you need to manually add the mode to =auto-mode-alist=.
                                       'ada-mode)))
 #+end_src
 
+Some useful skeletons for Ada:
+
+#+begin_src emacs-lisp
+(defun x8dcc/ada-filename-to-proc (filename)
+  (thread-last
+    filename
+    (replace-regexp-in-string "-" "_")
+    (replace-regexp-in-string "\\..\\{,3\\}" "")))
+
+(ada-define-skeleton x8dcc/skeleton-ada-source
+    "Insert a basic Ada source skeleton."
+    nil
+    '(setq str (skeleton-read "Procedure name: "
+                              (x8dcc/ada-filename-to-proc
+                               (buffer-name))))
+    "with Ada.Text_IO; use Ada.Text_IO;\n\n"
+    "procedure " str " is\n"
+    "begin\n"
+    > _ "\n"
+    "end " str ";" \n)
+#+end_src
+
 ** COMMENT Ada TS mode
 
 Major mode for programming in Ada (with Tree-Sitter).
