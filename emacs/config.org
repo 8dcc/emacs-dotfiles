@@ -3219,6 +3219,8 @@ lowercase, then it removes the quotes, it replaces non-alphanumerical characters
 with a single dash, and then removes any extra dashes from the start and enf of
 the ID.
 
+FIXME: Use =thread-last=.
+
 #+begin_src emacs-lisp
 (defun x8dcc/org-headline-to-id (headline)
   "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
