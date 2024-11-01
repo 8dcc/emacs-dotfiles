@@ -766,6 +766,8 @@ these lambdas.
 
 #+begin_src emacs-lisp
 (use-package writeroom-mode
+  :hook ((writeroom-mode-enable . (lambda () (fringe-mode 0)))
+         (writeroom-mode-disable . (lambda () (fringe-mode nil))))
   :config
   (setq writeroom-mode-line nil
         writeroom-restore-window-config t
@@ -775,10 +777,6 @@ these lambdas.
                                    writeroom-set-tool-bar-lines
                                    writeroom-set-vertical-scroll-bars
                                    writeroom-set-bottom-divider-width))
-  (add-hook 'writeroom-mode-enable-hook (lambda ()
-                                          (fringe-mode 0)))
-  (add-hook 'writeroom-mode-disable-hook (lambda ()
-                                           (fringe-mode nil)))
   (x8dcc/def-keys "t z" '(writeroom-mode :wk "Zen mode")))
 #+end_src
 
