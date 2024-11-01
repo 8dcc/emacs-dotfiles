@@ -694,6 +694,17 @@ Required by =org-html-export-to-html=.
 (use-package htmlize)
 #+end_src
 
+** PDF tools
+
+Better PDF navigation.
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (pdf-tools-install))
+#+end_src
+
 ** Git gutter fringe
 
 Show git changes in the fringe.

@@ -334,6 +334,11 @@ and the non-normal prefix is \"M-SPC\"."
 
 (use-package htmlize)
 
+(use-package pdf-tools
+  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (pdf-tools-install))
+
 (defun x8dcc/set-lower-bits (n)
   "Return an integer with the N lower bits set."
   (- (ash 1 n) 1))
