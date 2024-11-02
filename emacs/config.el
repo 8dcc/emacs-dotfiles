@@ -432,6 +432,7 @@ and ALIGNMENT as parameters."
         beardbolt-compile-delay nil))
 
 (use-package webpaste
+  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
   :config
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))

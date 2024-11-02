@@ -968,6 +968,7 @@ Paste whole buffers or parts of buffers to several pastebin-like services.
 
 #+begin_src emacs-lisp
 (use-package webpaste
+  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
   :config
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))
