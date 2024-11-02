@@ -1668,15 +1668,13 @@ if necessary."
   (funcall-interactively #'org-insert-link))
 
 (defun x8dcc/org-headline-to-id (headline)
-  "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string. For example:
-\"My test... =heading=\" would turn into \"my-test-heading\"."
-  (replace-regexp-in-string
-   "\\(^-+\\|-+$\\)" ""
-   (replace-regexp-in-string
-    "[^[:alnum:]]+" "-"
-    (replace-regexp-in-string
-     "\\(\"+\\|'+\\)" ""
-     (downcase headline)))))
+  "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string.
+For example: \"My test... =heading=\" becomes \"my-test-heading\"."
+  (thread-last
+    (downcase headline)
+    (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
+    (replace-regexp-in-string "[^[:alnum:]]+" "-")
+    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
 
 (defun x8dcc/org-custom-id-get (&optional pom create)
   "Get the CUSTOM_ID property of the entry at point-or-marker POM.  If POM is
