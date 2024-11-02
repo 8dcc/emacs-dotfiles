@@ -392,7 +392,7 @@ and ALIGNMENT as parameters."
   (thread-last
     filename
     (replace-regexp-in-string "-" "_")
-    (replace-regexp-in-string "\\..\\{,3\\}" "")))
+    (replace-regexp-in-string "\\..\\{,3\\}\\'" "")))
 
 (ada-define-skeleton x8dcc/skeleton-ada-source
     "Insert a basic Ada source skeleton."
