@@ -2113,10 +2113,13 @@ Hide line numbers in the specified modes. For more information on
                          tetris-mode-hook))
 #+end_src
 
-We will also highlight the current line in programming modes.
+We will also highlight the current line in programming modes (and Dired).
 
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook 'hl-line-mode)
+(x8dcc/hook-to-targets (lambda ()
+                         (hl-line-mode 1))
+                       '(prog-mode-hook
+                         dired-mode-hook))
 #+end_src
 
 We only want one active highlight line in the current window.

@@ -1227,7 +1227,10 @@ of characters, followed by the number of lines."
                          snake-mode-hook
                          tetris-mode-hook))
 
-(add-hook 'prog-mode-hook 'hl-line-mode)
+(x8dcc/hook-to-targets (lambda ()
+                         (hl-line-mode 1))
+                       '(prog-mode-hook
+                         dired-mode-hook))
 
 (setq hl-line-sticky-flag nil)
 
