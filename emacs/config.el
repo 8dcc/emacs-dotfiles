@@ -902,7 +902,6 @@ between `read' and `rx'."
   "o ." '(dired-jump            :wk "Dired")
   "o !" '(shell-command         :wk "Shell command")
   "o &" '(async-shell-command   :wk "Async shell command")
-  "o a" '(org-agenda            :wk "Org agenda")
   "o c" '(calc                  :wk "Calculator")
   "o C" '(quick-calc            :wk "Quick calculator")
   "o d" '(projectile-run-gdb    :wk "Debugger")
@@ -911,6 +910,10 @@ between `read' and `rx'."
   "o m" '(man                   :wk "Manpage")
   "o M" '(compose-mail          :wk "Compose mail")
   "o x" '(scratch-buffer        :wk "Scratch buffer")
+  ;; Open -> Org
+  "o o"   '(:ignore t   :wk "Org")
+  "o o a" '(org-agenda  :wk "Agenda")
+  "o o c" '(org-capture :wk "Capture")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
