@@ -1615,7 +1615,9 @@ if necessary."
 (let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
-            org-agenda-files (list (concat org-directory "agenda.org")))))
+            org-agenda-files (mapcar (lambda (filename)
+                                       (concat org-directory filename))
+                                     '("agenda.org" "notes.org")))))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day
       org-agenda-weekend-days calendar-weekend-days)
@@ -1665,6 +1667,19 @@ if necessary."
 (set-face-attribute 'org-headline-done nil :inherit 'shadow)
 
 (setq org-highlight-latex-and-related '(latex entities))
+
+(setq org-default-notes-file (concat org-directory "notes.org"))
+
+(setq org-capture-templates
+      '(("n" "Note" entry
+         (file+headline "notes.org" "Notes")
+         "* NOTE %?\nCaptured on: %T")
+        ("N" "Note (for review)" entry
+         (file+headline "notes.org" "Notes")
+         "* REVIEW %?\nSCHEDULED: <%(x8dcc/date-tomorrow)>\nCaptured on: %T")
+        ("s" "Selection" entry
+         (file+headline "notes.org" "Selections")
+         "* Selection from [[%F][%f]]\nCaptured on: %T\n%?\n#+begin_quote\n%i\n#+end_quote")))
 
 (defun x8dcc/org-insert-link ()
   "Insert a space in the current position if there isn't one, and call
