@@ -540,6 +540,12 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
+(defun x8dcc/date-tomorrow ()
+  "Return a string representing the date for tomorrow."
+  (format-time-string "%Y-%m-%d %a"
+                      (time-add (current-time)
+                                (* 24 60 60))))
+
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line based on `comment-start' and
 `comment-end'."

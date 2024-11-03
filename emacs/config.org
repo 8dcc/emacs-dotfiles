@@ -1128,6 +1128,18 @@ or too many lines (>10000)."
            (> (car (buffer-line-statistics)) 10000))))
 #+end_src
 
+Return a string representing the date for tomorrow. Used by [[*Org capture][Org capture]].
+
+TODO: We could add some inputs to this function.
+
+#+begin_src emacs-lisp
+(defun x8dcc/date-tomorrow ()
+  "Return a string representing the date for tomorrow."
+  (format-time-string "%Y-%m-%d %a"
+                      (time-add (current-time)
+                                (* 24 60 60))))
+#+end_src
+
 ** Text manipulation
 
 Insert a separator comment that fills up to the line column.
