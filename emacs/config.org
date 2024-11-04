@@ -1446,6 +1446,8 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 Don't copy the last word with =C-<backspace>=, just delete them. See [[*Input-related functions][Input-related
 functions]].
 
+TODO: Also overwrite =C-<delete>=.
+
 #+begin_src emacs-lisp
 (keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
 #+end_src
