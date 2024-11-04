@@ -338,7 +338,11 @@ and the non-normal prefix is \"M-SPC\"."
   :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
   :config
   (pdf-tools-install)
-  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore))
+  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore)
+  (keymap-set pdf-view-mode-map "<remap> <evil-beginning-of-line>"
+              (lambda ()
+                (interactive)
+                (goto-char 0))))
 
 (defun x8dcc/set-lower-bits (n)
   "Return an integer with the N lower bits set."
