@@ -1976,7 +1976,7 @@ environments."
 (define-skeleton x8dcc/skeleton-python-main
   "Insert a basic Python skeleton with a main function."
   nil
-  "\n"
+  "#!/usr/bin/python3\n\n"
   "def main():\n"
   > "pass" _ "\n\n"
   "if __name__ == \"__main__\":\n"
