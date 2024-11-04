@@ -1548,7 +1548,8 @@ Use =LaTeX-fill-region= instead of =evil-fill= in =LaTeX-mode=. In fact, I wrote
 =x8dcc/evil-fill-indent= because of LaTeX.
 
 #+begin_src emacs-lisp
-(keymap-set LaTeX-mode-map "<remap> <evil-fill>" #'LaTeX-fill-region)
+(with-eval-after-load 'latex
+  (keymap-set LaTeX-mode-map "<remap> <evil-fill>" #'LaTeX-fill-region))
 #+end_src
 
 *** Eshell remaps

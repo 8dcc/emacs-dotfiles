@@ -797,7 +797,8 @@ between `read' and `rx'."
 
 (evil-global-set-key 'normal (kbd "<C-i>") #'evil-jump-forward)
 
-(keymap-set LaTeX-mode-map "<remap> <evil-fill>" #'LaTeX-fill-region)
+(with-eval-after-load 'latex
+  (keymap-set LaTeX-mode-map "<remap> <evil-fill>" #'LaTeX-fill-region))
 
 (with-eval-after-load 'eshell
   (x8dcc/keymap-set-alist
