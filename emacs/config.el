@@ -1973,6 +1973,15 @@ environments."
   "% ------------------------------------------------------------------------------\n\n\n\n"
   "\\end{document}" \n)
 
+(define-skeleton x8dcc/skeleton-python-main
+  "Insert a basic Python skeleton with a main function."
+  nil
+  "\n"
+  "def main():\n"
+  > "pass" _ "\n\n"
+  "if __name__ == \"__main__\":\n"
+  > "main()" \n)
+
 (setq c-tab-always-indent nil)
 
 (setq hide-ifdef-initially t

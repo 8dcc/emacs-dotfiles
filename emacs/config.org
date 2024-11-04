@@ -3644,6 +3644,22 @@ Skeleton for =amsart= LaTeX documents.
   "\\end{document}" \n)
 #+end_src
 
+** Python mode
+*** Python skeletons
+
+Define a skeleton for simple Python files.
+
+#+begin_src emacs-lisp
+(define-skeleton x8dcc/skeleton-python-main
+  "Insert a basic Python skeleton with a main function."
+  nil
+  "\n"
+  "def main():\n"
+  > "pass" _ "\n\n"
+  "if __name__ == \"__main__\":\n"
+  > "main()" \n)
+#+end_src
+
 ** C mode
 *** C basic settings
 
