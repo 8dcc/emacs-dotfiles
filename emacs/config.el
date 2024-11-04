@@ -740,8 +740,10 @@ between `read' and `rx'."
 (keymap-global-set "C--"            #'text-scale-decrease)
 (keymap-global-set "C-<wheel-up>"   #'text-scale-increase)
 (keymap-global-set "C-<wheel-down>" #'text-scale-decrease)
-(keymap-global-set "C-<home>" (lambda () (interactive)
-                                (text-scale-adjust 0)))
+(keymap-global-set "C-<home>"
+                   (lambda ()
+                     (interactive)
+                     (text-scale-adjust 0)))
 
 (keymap-global-set "<escape>" #'keyboard-escape-quit)
 
@@ -750,12 +752,13 @@ between `read' and `rx'."
 (keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
 
 (keymap-global-set "<backtab>"
-		           (lambda () (interactive)
-		             ;; If there is a region active, use `evil-shift-left',
-		             ;; otherwise shift the current line.
-		             (if (use-region-p)
-			             (evil-shift-left (region-beginning) (region-end))
-		               (evil-shift-left-line 1))))
+                   (lambda ()
+                     (interactive)
+                     ;; If there is a region active, use `evil-shift-left',
+                     ;; otherwise shift the current line.
+                     (if (use-region-p)
+                         (evil-shift-left (region-beginning) (region-end))
+                       (evil-shift-left-line 1))))
 
 (keymap-global-set "<remap> <evil-quit>" #'kill-current-buffer)
 
