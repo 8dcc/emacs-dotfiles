@@ -3138,7 +3138,8 @@ matters.
 #+begin_src emacs-lisp
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
-                             (scheme . t)))
+                             (scheme . t)
+                             (shell . t)))
 #+end_src
 
 Disable footers in HTML exports.

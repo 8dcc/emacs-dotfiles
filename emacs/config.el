@@ -1641,7 +1641,8 @@ if necessary."
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
-                             (scheme . t)))
+                             (scheme . t)
+                             (shell . t)))
 
 (setq org-html-postamble nil
       org-export-time-stamp-file nil)
