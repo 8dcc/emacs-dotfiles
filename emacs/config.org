@@ -2732,6 +2732,13 @@ Auto-revert Dired buffers when the contents change. Also enabled for buffers in
 (setq dired-auto-revert-buffer t)
 #+end_src
 
+Set the default format for compressing files and directories.
+
+#+begin_src emacs-lisp
+(setq dired-compress-file-default-suffix ".gz"
+      dired-compress-directory-default-suffix ".zip")
+#+end_src
+
 ** Ediff
 
 Don't open a new frame for the =ediff= control panel.

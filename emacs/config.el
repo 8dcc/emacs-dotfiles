@@ -1475,6 +1475,9 @@ different rules in `display-buffer-alist'."
 
 (setq dired-auto-revert-buffer t)
 
+(setq dired-compress-file-default-suffix ".gz"
+      dired-compress-directory-default-suffix ".zip")
+
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
 
