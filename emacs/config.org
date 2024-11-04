@@ -985,6 +985,17 @@ Paste whole buffers or parts of buffers to several pastebin-like services.
 * Custom functions and macros
 ** Auxiliary functions for Elisp
 
+Run some commands that operate on the body of a file, in the background.
+
+#+begin_src emacs-lisp
+(defmacro x8dcc/with-current-file (file &rest body)
+  "Open FILE in the background, run BODY, and save the file."
+  `(with-temp-buffer
+     (insert-file-contents ,file)
+     ,@body
+     (write-region (point-min) (point-max) ,file)))
+#+end_src
+
 This function will be used for hooking a list of =functions= into the specified
 =target=.
 

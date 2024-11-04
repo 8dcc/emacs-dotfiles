@@ -442,6 +442,13 @@ and ALIGNMENT as parameters."
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))
 
+(defmacro x8dcc/with-current-file (file &rest body)
+  "Open FILE in the background, run BODY, and save the file."
+  `(with-temp-buffer
+     (insert-file-contents ,file)
+     ,@body
+     (write-region (point-min) (point-max) ,file)))
+
 (defun x8dcc/hook-funcs (target functions)
   "Hook each function in FUNCTIONS to TARGET using `add-hook'."
   (dolist (func functions)
