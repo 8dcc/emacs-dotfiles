@@ -1746,9 +1746,7 @@ keybinds should be *moved* to their commented sub-sections.
   "p r" '(project-query-replace-regexp   :wk "Replace regex (query)")
   ;; Search
   "s"   '(:ignore t                    :wk "Search")
-  "s e" '(spell-fu-goto-next-error     :wk "Next spelling error")
-  "s E" '(spell-fu-goto-previous-error :wk "Previous spelling error")
-  "s g" '(rgrep                        :wk "Recursive grep")
+  "s g" '(rgrep                        :wk "Grep (recursive)")
   "s h" '(highlight-regexp             :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
   "s o" '(occur                        :wk "Occurrences")
@@ -1756,6 +1754,14 @@ keybinds should be *moved* to their commented sub-sections.
   "s R" '(query-replace-regexp         :wk "Replace regex (query)")
   "s s" '(isearch-forward              :wk "I-search")
   "s S" '(isearch-forward-regexp       :wk "I-search regex")
+  ;; Search -> Next
+  "s n"   '(:ignore t                :wk "Next")
+  "s n n" '(next-error               :wk "Error/match")
+  "s n s" '(spell-fu-goto-next-error :wk "Spelling error")
+  ;; Search -> Previous
+  "s p"   '(:ignore t                    :wk "Previous")
+  "s p p" '(previous-error               :wk "Error/match")
+  "s p s" '(spell-fu-goto-previous-error :wk "Spelling error")
   ;; Toggle
   "t"   '(:ignore t                          :wk "Toggle")
   "t b" '(big-font-mode                      :wk "Big font")
