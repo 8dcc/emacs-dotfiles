@@ -442,6 +442,9 @@ and ALIGNMENT as parameters."
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))
 
+(defun x8dcc/non-empty-string-p (str)
+  (and str (not (string-empty-p str))))
+
 (defmacro x8dcc/with-current-file (file &rest body)
   "Open FILE in the background, run BODY, and save the file."
   `(with-temp-buffer

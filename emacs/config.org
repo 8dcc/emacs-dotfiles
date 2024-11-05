@@ -996,6 +996,13 @@ Paste whole buffers or parts of buffers to several pastebin-like services.
 * Custom functions and macros
 ** Auxiliary functions for Elisp
 
+Is the specified string non-empty?
+
+#+begin_src emacs-lisp
+(defun x8dcc/non-empty-string-p (str)
+  (and str (not (string-empty-p str))))
+#+end_src
+
 Run some commands that operate on the body of a file, in the background.
 
 #+begin_src emacs-lisp
