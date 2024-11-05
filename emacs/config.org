@@ -2207,6 +2207,39 @@ Only show the tab bar if there are more than one tabs open.
 (setq tab-bar-show 1)
 #+end_src
 
+** Window settings
+
+Don't allow commands like =grep= (that use =display-buffer=) to create new windows
+for their output, while still allowing the user to use functions that create
+windows explicitly (like =find-file-other-window=).
+
+I used to set this, but I prefer a blacklist approach. This breaks, for example,
+=rmail-summary=.
+
+#+begin_comment emacs-lisp
+;; NOTE: Commented.
+(setq display-buffer-base-action
+      '(display-buffer-same-window))
+#+end_comment
+
+Try to reuse the same window for some buffers (e.g. =*grep*= or =*vc*=). If it's not
+possible, then display it in an existing window or in a side window.
+
+#+begin_src emacs-lisp
+(defun x8dcc/set-display-same-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed on the same window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               `(,regexp
+                 (display-buffer-same-window
+                  display-buffer-reuse-window
+                  display-buffer-in-side-window))))
+
+(dolist (regexp '("\\*grep\\*"
+                  "\\*vc-.+\\*"))
+  (x8dcc/set-display-same-window regexp))
+#+end_src
+
 ** Misc visual settings
 
 By default, don't wrap lines, truncate them (=truncate-lines=). This can be
@@ -2251,37 +2284,6 @@ Show trailing whitespaces.
           (lambda ()
             (setq show-trailing-whitespace t)))
 #+end_comment
-
-Don't allow commands like =grep= (that use =display-buffer=) to create new windows
-for their output, while still allowing the user to use functions that create
-windows explicitly (like =find-file-other-window=).
-
-I used to set this, but I prefer a blacklist approach. This breaks, for example,
-=rmail-summary=.
-
-#+begin_comment emacs-lisp
-;; NOTE: Commented.
-(setq display-buffer-base-action
-      '(display-buffer-same-window))
-#+end_comment
-
-Try to reuse the same window for some buffers (e.g. =*grep*= or =*vc*=). If it's not
-possible, then display it in an existing window or in a side window.
-
-#+begin_src emacs-lisp
-(defun x8dcc/set-display-same-window (regexp)
-  "Specify that buffers matching REGEXP should be displayed on the same window.
-Adds an entry to `display-buffer-alist'."
-  (add-to-list 'display-buffer-alist
-               `(,regexp
-                 (display-buffer-same-window
-                  display-buffer-reuse-window
-                  display-buffer-in-side-window))))
-
-(dolist (regexp '("\\*grep\\*"
-                  "\\*vc-.+\\*"))
-  (x8dcc/set-display-same-window regexp))
-#+end_src
 
 * General settings
 
