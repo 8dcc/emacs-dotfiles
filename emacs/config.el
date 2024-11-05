@@ -581,19 +581,28 @@ or too many lines (>10000)."
                                 (* 24 60 60))))
 
 (defun x8dcc/separator-comment (&optional max-width)
-  "Insert a separator comment in the next line based on `comment-start' and
-`comment-end'."
+  "Insert a separator comment in the next line.
+Depending on `comment-start', `comment-padding' and `comment-end'."
   (interactive "P")
-  (unless max-width
-    (setq max-width fill-column))
-  (let* ((start (string-trim comment-start))
-         (end   (string-trim comment-end))
-         (remaining (- max-width (+ (length start)
-                                    (length end)))))
+  (unless max-width (setq max-width fill-column))
+  (let* ((padding
+          ;; Only use `comment-padding' if there is no `comment-end'.
+          (and (or (not comment-end)
+                   (string-empty-p comment-end))
+               comment-padding))
+         (start
+          (if (x8dcc/non-empty-string-p comment-start)
+              (concat (string-trim comment-start) padding)))
+         (end
+          (if (x8dcc/non-empty-string-p comment-end)
+              (concat padding (string-trim comment-end))))
+         (separator-len
+          (- max-width (+ (length start)
+                          (length end)))))
     (save-excursion
       (end-of-line)
       (insert "\n" start)
-      (insert-char ?- remaining)
+      (insert-char ?- separator-len)
       (insert end))))
 
 (defun x8dcc/comment-and-fill-region (beg end)
