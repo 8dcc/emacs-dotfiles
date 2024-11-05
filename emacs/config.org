@@ -2652,6 +2652,56 @@ numbers start at 1."
 TODO: The [[https://man.cx/a2ps][a2ps]] command might be worth checking for font sizes and other
 settings.
 
+** Misc skeletons
+
+Generic "skeleton" for inserting a GPL-v3-or-later comment.
+
+FIXME: Move auxiliary functions to another section.
+
+#+begin_src emacs-lisp
+(defun x8dcc/gpl3-license (&optional project fill-col)
+  "Return a GPL-v3-or-later license header.
+
+If PROJECT is non-nil, it will include the project name in the second
+paragraph. If it's nil, that paragraph is omited.
+
+If FILL-COL is non-nil, it the resulting string will be filled to that column
+using `string-fill'. If it's nil, it's filled to `fill-column'."
+  (string-fill
+   (concat
+    "Copyright " (format-time-string "%Y") " " user-full-name ". All Rights Reserved.\n\n"
+    (if project (concat "This file is part of " project ".\n\n"))
+    "This program is free software: you can redistribute it and/or modify it under\n"
+    "the terms of the GNU General Public License as published by the Free Software\n"
+    "Foundation, either version 3 of the License, or (at your option) any later\n"
+    "version.\n\n"
+    "This program is distributed in the hope that it will be useful, but WITHOUT ANY\n"
+    "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A\n"
+    "PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n\n"
+    "You should have received a copy of the GNU General Public License along with\n"
+    "this program.  If not, see <https://www.gnu.org/licenses/>.\n")
+   (or fill-col
+       fill-column)))
+
+(defun x8dcc/count-comment-characters ()
+  "Return the number of characters reserved for comments."
+  (length
+   (concat (string-trim comment-start)
+           comment-padding
+           (if (x8dcc/non-empty-string-p comment-end)
+               (concat comment-padding
+                       (string-trim comment-end))))))
+
+(defun x8dcc/skeleton-generic-license-comment (&optional project)
+  "Insert a generic GPL-v3-or-later license comment."
+  (interactive)
+  (let ((start (point))
+        (real-fill-column
+         (- fill-column (x8dcc/count-comment-characters))))
+    (insert (x8dcc/gpl3-license project real-fill-column))
+    (x8dcc/comment-and-fill-region start (point))))
+#+end_src
+
 * Mode-specific settings
 ** Eshell
 *** Eshell prompt settings
