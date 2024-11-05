@@ -483,6 +483,26 @@ represent the first and second arguments of `keymap-set', respectively."
                 (car key-pair)
                 (eval-function (cdr key-pair)))))
 
+(defun x8dcc/set-display-bottom-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed in a bottom window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               (cons regexp
+                     (cons '(display-buffer-in-side-window
+                             display-buffer-at-bottom
+                             display-buffer-pop-up-window)
+                           '((side . bottom))))))
+
+(defun x8dcc/set-display-same-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed on the same window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               (cons regexp
+                     (cons '(display-buffer-same-window
+                             display-buffer-reuse-window
+                             display-buffer-in-side-window)
+                           nil))))
+
 (defun x8dcc/alist-insert-before-key (alist new-element key &optional compare-fn)
   "Insert NEW-ELEMENT to ALIST before KEY is found.
 
@@ -1269,18 +1289,11 @@ of characters, followed by the number of lines."
 
 (setq tab-bar-show 1)
 
-(defun x8dcc/set-display-same-window (regexp)
-  "Specify that buffers matching REGEXP should be displayed on the same window.
-Adds an entry to `display-buffer-alist'."
-  (add-to-list 'display-buffer-alist
-               `(,regexp
-                 (display-buffer-same-window
-                  display-buffer-reuse-window
-                  display-buffer-in-side-window))))
-
-(dolist (regexp '("\\*grep\\*"
-                  "\\*vc-.+\\*"))
+(dolist (regexp '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window regexp))
+
+(dolist (regexp '("\\*grep\\*"))
+  (x8dcc/set-display-bottom-window regexp))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
@@ -1462,9 +1475,7 @@ different rules in `display-buffer-alist'."
   (let ((eshell-buffer-name buffer-name))
     (x8dcc/eshell-project-or-current)))
 
-(add-to-list 'display-buffer-alist
-             '("\\*eshell-popup\\*"
-               (display-buffer-in-side-window (side . bottom))))
+(x8dcc/set-display-bottom-window "\\*eshell-popup\\*")
 
 (setq eshell-hist-ignoredups t)
 

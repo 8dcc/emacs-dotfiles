@@ -1060,6 +1060,31 @@ represent the first and second arguments of `keymap-set', respectively."
                 (eval-function (cdr key-pair)))))
 #+end_src
 
+Specify that all buffers matching a =regexp= should be displayed on the same
+window, on in a bottom window. Used in [[*Window settings][Window settings]].
+
+#+begin_src emacs-lisp
+(defun x8dcc/set-display-bottom-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed in a bottom window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               (cons regexp
+                     (cons '(display-buffer-in-side-window
+                             display-buffer-at-bottom
+                             display-buffer-pop-up-window)
+                           '((side . bottom))))))
+
+(defun x8dcc/set-display-same-window (regexp)
+  "Specify that buffers matching REGEXP should be displayed on the same window.
+Adds an entry to `display-buffer-alist'."
+  (add-to-list 'display-buffer-alist
+               (cons regexp
+                     (cons '(display-buffer-same-window
+                             display-buffer-reuse-window
+                             display-buffer-in-side-window)
+                           nil))))
+#+end_src
+
 Insert an element into an alist after a key.
 
 #+begin_src emacs-lisp
@@ -2222,22 +2247,21 @@ I used to set this, but I prefer a blacklist approach. This breaks, for example,
       '(display-buffer-same-window))
 #+end_comment
 
-Try to reuse the same window for some buffers (e.g. =*grep*= or =*vc*=). If it's not
+Try to reuse the same window for some buffers (e.g. =*vc*=). If it's not
 possible, then display it in an existing window or in a side window.
 
 #+begin_src emacs-lisp
-(defun x8dcc/set-display-same-window (regexp)
-  "Specify that buffers matching REGEXP should be displayed on the same window.
-Adds an entry to `display-buffer-alist'."
-  (add-to-list 'display-buffer-alist
-               `(,regexp
-                 (display-buffer-same-window
-                  display-buffer-reuse-window
-                  display-buffer-in-side-window))))
-
-(dolist (regexp '("\\*grep\\*"
-                  "\\*vc-.+\\*"))
+(dolist (regexp '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window regexp))
+#+end_src
+
+Specify that some buffers should be displayed as a pop-up window. We don't
+display =*grep*= in the same window because it messes with the =SPC s n n= keybinds
+(=next-error=).
+
+#+begin_src emacs-lisp
+(dolist (regexp '("\\*grep\\*"))
+  (x8dcc/set-display-bottom-window regexp))
 #+end_src
 
 ** Misc visual settings
@@ -2696,9 +2720,7 @@ If the buffer is called =*eshell-popup*=, open it in a side window, instead of
 taking over the current window.
 
 #+begin_src emacs-lisp
-(add-to-list 'display-buffer-alist
-             '("\\*eshell-popup\\*"
-               (display-buffer-in-side-window (side . bottom))))
+(x8dcc/set-display-bottom-window "\\*eshell-popup\\*")
 #+end_src
 
 *** Misc eshell settings
