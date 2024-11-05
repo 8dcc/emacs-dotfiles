@@ -1406,6 +1406,8 @@ the save hooks.")
           (lambda ()
             (electric-pair-mode 1)))
 
+(setq comment-empty-lines 'eol)
+
 (setq calendar-week-start-day 1
       calendar-weekend-days '(6 0))
 

@@ -2526,6 +2526,12 @@ Enable auto-closing of brackets with =electric-pair-mode=.
             (electric-pair-mode 1)))
 #+end_src
 
+Comment empty lines.
+
+#+begin_src emacs-lisp
+(setq comment-empty-lines 'eol)
+#+end_src
+
 Set monday as the first day of the week.
 
 #+begin_src emacs-lisp
