@@ -135,6 +135,17 @@ install packages (instead of emacs' package.el), even without specifying
 See also [[file:./straight/versions/default.el][versions/default.el]], the resulting [[https://github.com/radian-software/straight.el#configuration-reproducibility][lockfile]] of
 =M-x straight-freeze-versions=.
 
+** COMMENT Benchmarking
+
+For benchmarking this configuration.
+
+#+begin_src emacs-lisp
+(use-package benchmark-init
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
+
 ** Diminish
 
 For hiding minor modes from the modeline. We will be using =:diminish=
