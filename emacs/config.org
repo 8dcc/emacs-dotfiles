@@ -1213,6 +1213,15 @@ Insert a separator comment that fills up to the line column.
       (insert end))))
 #+end_src
 
+Comment region, and fill it.
+
+#+begin_src emacs-lisp
+(defun x8dcc/comment-and-fill-region (beg end)
+  (interactive "r")
+  (comment-region beg end)
+  (fill-region beg end))
+#+end_src
+
 Increment number at point in decimal and hexadecimal format. Credits: [[https://www.emacswiki.org/emacs/IncrementNumber][EmacsWiki]].
 
 #+begin_src emacs-lisp

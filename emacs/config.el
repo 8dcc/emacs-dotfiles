@@ -593,6 +593,11 @@ or too many lines (>10000)."
       (insert-char ?- remaining)
       (insert end))))
 
+(defun x8dcc/comment-and-fill-region (beg end)
+  (interactive "r")
+  (comment-region beg end)
+  (fill-region beg end))
+
 (defun x8dcc/increment-number-at-point (&optional increment)
   "Increment the number at point by INCREMENT."
   (interactive "*p")
