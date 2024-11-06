@@ -116,6 +116,7 @@ and the non-normal prefix is \"M-SPC\"."
      (x8dcc/def-keys-org . org-mode-map)
      (x8dcc/def-keys-latex . LaTeX-mode-map)
      (x8dcc/def-keys-texinfo . Texinfo-mode-map)
+     (x8dcc/def-keys-pdf-view . pdf-view-mode-map)
      (x8dcc/def-keys-c . (c-mode-map
                           c++-mode-map
                           java-mode-map
@@ -1123,6 +1124,23 @@ between `read' and `rx'."
   "m B"   '(texinfo-insert-@end    :wk "Close block")
   "m j"   '(Texinfo-find-env-start :wk "Jump to block start")
   "m J"   '(Texinfo-find-env-end   :wk "Jump to block end"))
+
+(general-auto-unbind-keys)
+(x8dcc/def-keys-pdf-view
+  ;; Mode (PDF View)
+  "m c" '(pdf-view-center-in-window :wk "Center in window")
+  "m o" '(pdf-outline               :wk "Outline")
+  ;; Mode -> Fit
+  "m f"   '(:ignore t                            :wk "Fit")
+  "m f h" '(pdf-view-fit-height-to-window        :wk "To height")
+  "m f m" '(pdf-view-set-slice-from-bounding-box :wk "Remove margins")
+  "m f M" '(pdf-view-reset-slice                 :wk "Reset margins")
+  "m f p" '(pdf-view-fit-page-to-window          :wk "To page")
+  "m f w" '(pdf-view-fit-width-to-window         :wk "To width")
+  ;; Mode -> Toggle
+  "m t"   '(:ignore t                  :wk "Toggle")
+  "m t t" '(pdf-view-themed-minor-mode :wk "Themed view"))
+(general-auto-unbind-keys 'disable)
 
 (x8dcc/def-keys-c
   ;; Buffer
