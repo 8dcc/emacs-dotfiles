@@ -1603,10 +1603,9 @@ the user."
                       nil 'erc-server-history-list erc-default-server)
          6697
          erc-nick))
-  (if (member 'sasl erc-modules)
-      (progn
-        (message "Why was the SASL module enabled globally? Disabling.")
-        (setq erc-modules (delete 'sasl erc-modules))))
+  (when (member 'sasl erc-modules)
+    (message "Why was the SASL module enabled globally? Disabling.")
+    (setq erc-modules (delete 'sasl erc-modules)))
   ;; Enable the SASL module if the specified server is in the
   ;; `x8dcc/erc-sasl-servers' list.
   (cond ((member server x8dcc/erc-sasl-servers)
