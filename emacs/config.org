@@ -1657,12 +1657,20 @@ in comments, adds backslashes when pressing =RET= on macros, etc.
 
 *** Rmail mode remaps
 
-Use =RET= for visiting the message on summary buffers.
+Use =q= for *burying* the =rmail= window. See Emacs Manual, [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Quitting-Windows.html][Quitting Windows]].
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'rmail
+  (evil-define-key 'normal rmail-mode-map
+    (kbd "q") #'quit-window))
+#+end_src
+
+Use =q= for closing the =rmail-summary= window, not just burying the buffer.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'rmailsum
   (evil-define-key 'normal rmail-summary-mode-map
-    (kbd "RET") #'rmail-summary-goto-msg))
+    (kbd "q") #'rmail-summary-wipe))
 #+end_src
 
 ** Space keybinds
