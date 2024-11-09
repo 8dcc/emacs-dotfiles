@@ -649,13 +649,22 @@ Depending on `comment-start', `comment-padding' and `comment-end'."
                                          hex-format)
                                  answer)))))))
 
-(defun x8dcc/backward-delete-word (arg)
+(defun x8dcc/delete-word-backward (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point)
                  (save-excursion
                    (backward-word arg)
+                   (point))))
+
+(defun x8dcc/delete-word-forward (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point)
+                 (save-excursion
+                   (forward-word arg)
                    (point))))
 
 (defun x8dcc/indent-buffer ()
@@ -796,7 +805,8 @@ between `read' and `rx'."
 
 (keymap-global-set "C-S-v" #'yank)
 
-(keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
+(keymap-global-set "C-<backspace>" #'x8dcc/delete-word-backward)
+(keymap-global-set "C-<delete>"    #'x8dcc/delete-word-forward)
 
 (keymap-global-set "<backtab>"
                    (lambda ()

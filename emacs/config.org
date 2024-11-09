@@ -1281,17 +1281,27 @@ Increment number at point in decimal and hexadecimal format. Credits: [[https://
 
 ** Input-related functions
 
-Delete the last /N/ words backwards, without adding it to the kill-ring (copying
-it). Bound to =C-<backspace>=.
+Functions for deleting the last /N/ words backwards or forwards, without adding
+them to the kill-ring (copying them). Bound to =C-<backspace>= and =C-<delete>=,
+respectively. See [[*Global remaps][Global remaps]].
 
 #+begin_src emacs-lisp
-(defun x8dcc/backward-delete-word (arg)
+(defun x8dcc/delete-word-backward (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point)
                  (save-excursion
                    (backward-word arg)
+                   (point))))
+
+(defun x8dcc/delete-word-forward (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point)
+                 (save-excursion
+                   (forward-word arg)
                    (point))))
 #+end_src
 
@@ -1522,13 +1532,12 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 (keymap-global-set "C-S-v" #'yank)
 #+end_src
 
-Don't copy the last word with =C-<backspace>=, just delete them. See [[*Input-related functions][Input-related
-functions]].
-
-TODO: Also overwrite =C-<delete>=.
+Don't copy the last/next words with =C-<backspace>= and =C-<delete>,= just delete
+them. See [[*Input-related functions][Input-related functions]].
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-<backspace>" #'x8dcc/backward-delete-word)
+(keymap-global-set "C-<backspace>" #'x8dcc/delete-word-backward)
+(keymap-global-set "C-<delete>"    #'x8dcc/delete-word-forward)
 #+end_src
 
 Map =S-<tab>= to vim's =<=. Could also use something like =indent-rigidly -4=. For
