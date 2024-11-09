@@ -1326,7 +1326,8 @@ of characters, followed by the number of lines."
 (x8dcc/hook-to-targets (lambda ()
                          (hl-line-mode 1))
                        '(prog-mode-hook
-                         dired-mode-hook))
+                         dired-mode-hook
+                         Buffer-menu-mode-hook))
 
 (setq hl-line-sticky-flag nil)
 
