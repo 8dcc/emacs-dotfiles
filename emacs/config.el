@@ -575,11 +575,13 @@ or too many lines (>10000)."
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
 
-(defun x8dcc/date-tomorrow ()
-  "Return a string representing the date for tomorrow."
+(defun x8dcc/future-date (&optional seconds)
+  "Return a string representing a date in the future.
+The optional argument SECONDS indicates how much to add to the current date, and
+defaults to the number of seconds in a day."
+  (unless seconds (setq seconds (* 24 60 60)))
   (format-time-string "%Y-%m-%d %a"
-                      (time-add (current-time)
-                                (* 24 60 60))))
+                      (time-add (current-time) seconds)))
 
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line.
@@ -1802,7 +1804,7 @@ if necessary."
          "* NOTE %?\nCaptured on: %T")
         ("N" "Note (for review)" entry
          (file+headline "notes.org" "Notes")
-         "* REVIEW %?\nSCHEDULED: <%(x8dcc/date-tomorrow)>\nCaptured on: %T")
+         "* REVIEW %?\nSCHEDULED: <%(x8dcc/future-date)>\nCaptured on: %T")
         ("s" "Selection" entry
          (file+headline "notes.org" "Selections")
          "* Selection from [[%F][%f]]\nCaptured on: %T\n%?\n#+begin_quote\n%i\n#+end_quote")))

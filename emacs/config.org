@@ -1187,16 +1187,16 @@ or too many lines (>10000)."
            (> (car (buffer-line-statistics)) 10000))))
 #+end_src
 
-Return a string representing the date for tomorrow. Used by [[*Org capture][Org capture]].
-
-TODO: We could add some inputs to this function.
+Return a string representing a date in the future. Used by [[*Org capture][Org capture]].
 
 #+begin_src emacs-lisp
-(defun x8dcc/date-tomorrow ()
-  "Return a string representing the date for tomorrow."
+(defun x8dcc/future-date (&optional seconds)
+  "Return a string representing a date in the future.
+The optional argument SECONDS indicates how much to add to the current date, and
+defaults to the number of seconds in a day."
+  (unless seconds (setq seconds (* 24 60 60)))
   (format-time-string "%Y-%m-%d %a"
-                      (time-add (current-time)
-                                (* 24 60 60))))
+                      (time-add (current-time) seconds)))
 #+end_src
 
 ** Text manipulation
@@ -3435,7 +3435,7 @@ Template expansion]] of the org manual for more information.
          "* NOTE %?\nCaptured on: %T")
         ("N" "Note (for review)" entry
          (file+headline "notes.org" "Notes")
-         "* REVIEW %?\nSCHEDULED: <%(x8dcc/date-tomorrow)>\nCaptured on: %T")
+         "* REVIEW %?\nSCHEDULED: <%(x8dcc/future-date)>\nCaptured on: %T")
         ("s" "Selection" entry
          (file+headline "notes.org" "Selections")
          "* Selection from [[%F][%f]]\nCaptured on: %T\n%?\n#+begin_quote\n%i\n#+end_quote")))
