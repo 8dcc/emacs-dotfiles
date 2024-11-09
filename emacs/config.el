@@ -1004,10 +1004,12 @@ between `read' and `rx'."
   "s S" '(isearch-forward-regexp       :wk "I-search regex")
   ;; Search -> Next
   "s n"   '(:ignore t                :wk "Next")
+  "s n d" '(git-gutter:next-hunk     :wk "Git gutter hunk")
   "s n n" '(next-error               :wk "Error/match")
   "s n s" '(spell-fu-goto-next-error :wk "Spelling error")
   ;; Search -> Previous
   "s p"   '(:ignore t                    :wk "Previous")
+  "s p d" '(git-gutter:previous-hunk     :wk "Git gutter hunk")
   "s p p" '(previous-error               :wk "Error/match")
   "s p s" '(spell-fu-goto-previous-error :wk "Spelling error")
   ;; Toggle
