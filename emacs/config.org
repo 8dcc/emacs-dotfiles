@@ -2888,6 +2888,14 @@ will /not/ change.
 (setq dired-kill-when-opening-new-dired-buffer t)
 #+end_src
 
+Try to guess a default directory for Dired operations. This means: if there is a
+Dired buffer displayed in the next window, use its current directory, instead of
+this Dired buffer's current directory.
+
+#+begin_src emacs-lisp
+(setq dired-dwim-target t)
+#+end_src
+
 Auto-revert Dired buffers when the contents change. Also enabled for buffers in
 [[*Misc general settings][Misc general settings]].
 

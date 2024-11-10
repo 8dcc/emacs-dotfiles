@@ -1589,6 +1589,8 @@ different rules in `display-buffer-alist'."
 
 (setq dired-kill-when-opening-new-dired-buffer t)
 
+(setq dired-dwim-target t)
+
 (setq dired-auto-revert-buffer t)
 
 (setq dired-compress-file-default-suffix ".gz"
