@@ -487,21 +487,25 @@ represent the first and second arguments of `keymap-set', respectively."
                 (car key-pair)
                 (eval-function (cdr key-pair)))))
 
-(defun x8dcc/set-display-bottom-window (regexp)
-  "Specify that buffers matching REGEXP should be displayed in a bottom window.
-Adds an entry to `display-buffer-alist'."
+(defun x8dcc/set-display-bottom-window (condition)
+  "Specify that a buffer should be displayed in a bottom window.
+
+Adds an entry to `display-buffer-alist' using the specified CONDITION as the
+alist key. See `buffer-match-p', for a list of possible values for CONDITION."
   (add-to-list 'display-buffer-alist
-               (cons regexp
+               (cons condition
                      (cons '(display-buffer-in-side-window
                              display-buffer-at-bottom
                              display-buffer-pop-up-window)
                            '((side . bottom))))))
 
-(defun x8dcc/set-display-same-window (regexp)
-  "Specify that buffers matching REGEXP should be displayed on the same window.
-Adds an entry to `display-buffer-alist'."
+(defun x8dcc/set-display-same-window (condition)
+  "Specify that a buffer should be displayed in the same window.
+
+Adds an entry to `display-buffer-alist' using the specified CONDITION as the
+alist key. See `buffer-match-p', for a list of possible values for CONDITION."
   (add-to-list 'display-buffer-alist
-               (cons regexp
+               (cons condition
                      (cons '(display-buffer-same-window
                              display-buffer-reuse-window
                              display-buffer-in-side-window)
@@ -1343,11 +1347,11 @@ of characters, followed by the number of lines."
 
 (setq tab-bar-show 1)
 
-(dolist (regexp '("\\*vc-.+\\*"))
-  (x8dcc/set-display-same-window regexp))
+(dolist (condition '("\\*vc-.+\\*"))
+  (x8dcc/set-display-same-window condition))
 
-(dolist (regexp '("\\*grep\\*"))
-  (x8dcc/set-display-bottom-window regexp))
+(dolist (condition '("\\*grep\\*"))
+  (x8dcc/set-display-bottom-window condition))
 
 (setq-default truncate-lines t)
 (global-visual-line-mode 0)
