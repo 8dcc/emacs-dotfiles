@@ -2334,8 +2334,10 @@ Used for highlighting more constants with `font-lock-constant-face' in
   "/*\n"
   " * Copyright " (format-time-string "%Y") " 8dcc\n"
   " *\n"
-  " * This file is part of " str ".\n"
-  " *\n"
+  (and (x8dcc/non-empty-string-p str)
+       (concat
+        " * This file is part of " str ".\n"
+        " *\n"))
   " * This program is free software: you can redistribute it and/or modify it under\n"
   " * the terms of the GNU General Public License as published by the Free Software\n"
   " * Foundation, either version 3 of the License, or any later version.\n"
