@@ -1028,6 +1028,8 @@ This function will be used for hooking a list of =functions= into the specified
 This function is similar to =x8dcc/hook-funcs=, but it will be used for hooking a
 *single function* to *each target* of the list.
 
+FIXME: Use the same parameter order as =x8dcc/hook-funcs=.
+
 #+begin_src emacs-lisp
 (defun x8dcc/hook-to-targets (function targets)
   "Hook FUNCTION to each target in TARGETS using `add-hook'."
@@ -1658,14 +1660,14 @@ since =ediff-mode-map= is a buffer-local variable.
 
 *** C mode remaps
 
-More "contextual" newlines in C mode. Inserts =comment-continue= when pressing =RET=
-in comments, adds backslashes when pressing =RET= on macros, etc.
+More "contextual" newlines in C and C++ modes. Inserts =comment-continue= when
+pressing =RET= in comments, adds backslashes when pressing =RET= on macros, etc.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'cc-mode
-  (keymap-set c-mode-map
-              "RET"
-              #'c-context-line-break))
+  (x8dcc/keymaps-set '(c-mode-map c++-mode-map)
+                     "RET"
+                     #'c-context-line-break))
 #+end_src
 
 *** Rmail mode remaps
@@ -3892,9 +3894,9 @@ other buffers as well (probably a bug). See also the =cwarn-configuration=
 variable.
 
 #+begin_src emacs-lisp
-(add-hook 'c-mode-hook
-          (lambda ()
-            (cwarn-mode 1)))
+(x8dcc/hook-to-targets (lambda ()
+                         (cwarn-mode 1))
+                       '(c-mode-hook c++-mode-hook))
 
 ;; Can't diminish before <cwarn.el> is loaded.
 (with-eval-after-load 'cwarn

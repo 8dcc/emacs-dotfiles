@@ -868,9 +868,9 @@ between `read' and `rx'."
                           #'ediff-quit))))
 
 (with-eval-after-load 'cc-mode
-  (keymap-set c-mode-map
-              "RET"
-              #'c-context-line-break))
+  (x8dcc/keymaps-set '(c-mode-map c++-mode-map)
+                     "RET"
+                     #'c-context-line-break))
 
 (with-eval-after-load 'rmail
   (evil-define-key 'normal rmail-mode-map
@@ -2128,9 +2128,9 @@ environments."
 (setq hide-ifdef-initially t
       hide-ifdef-lines t)
 
-(add-hook 'c-mode-hook
-          (lambda ()
-            (cwarn-mode 1)))
+(x8dcc/hook-to-targets (lambda ()
+                         (cwarn-mode 1))
+                       '(c-mode-hook c++-mode-hook))
 
 ;; Can't diminish before <cwarn.el> is loaded.
 (with-eval-after-load 'cwarn
