@@ -996,6 +996,13 @@ between `read' and `rx'."
   "p f" '(projectile-find-file           :wk "Find file")
   "p p" '(projectile-switch-project      :wk "Recent projects")
   "p r" '(project-query-replace-regexp   :wk "Replace regex (query)")
+  ;; Region (Region cmds that don't fit in other categories)
+  "r"   '(:ignore t           :wk "Region")
+  "r c" '(center-region       :wk "Center")
+  "r u" '(capitalize-region   :wk "Capitalize")
+  "r U" '(upcase-region       :wk "Upcase")
+  "r w" '(fill-region         :wk "Fill")
+  "r W" '(x8dcc/unfill-region :wk "Unfill")
   ;; Search
   "s"   '(:ignore t                    :wk "Search")
   "s g" '(rgrep                        :wk "Grep (recursive)")
@@ -1167,6 +1174,8 @@ between `read' and `rx'."
 (x8dcc/def-keys-c
   ;; Buffer
   "b f"   '(clang-format-buffer :wk "Format")
+  ;; Region
+  "r f"   '(clang-format-region :wk "Format")
   ;; Mode (C)
   "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
