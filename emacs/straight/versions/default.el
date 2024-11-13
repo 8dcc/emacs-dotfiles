@@ -1,6 +1,6 @@
 (("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("auctex" . "3378974cfb99ab3e94aabfab5fe5caab8e68146b")
- ("clang-format" . "bce0bb4ca17ecb6e6927074920945cef2a78f5b6")
+ ("clang-format" . "f01d16be89a4421169c421d25cfdddb3ad62460f")
  ("compat" . "4e0d508ee16efbe1d26f859254ae63ec43b55281")
  ("consult" . "fe4852280006e61be7f1374d021ee06155ce5a26")
  ("dash.el" . "6db80c711ce947f6c6fa11e5c2257fff2c79d139")
