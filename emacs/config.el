@@ -419,9 +419,6 @@ and ALIGNMENT as parameters."
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
-(use-package c-eldoc
-  :hook ((c-mode . c-turn-on-eldoc-mode)))
-
 (use-package x86-lookup
   :config
   (setq x86-lookup-pdf
