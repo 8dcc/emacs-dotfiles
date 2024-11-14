@@ -846,6 +846,14 @@ for more information.
   :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
 #+end_src
 
+** Markdown mode
+
+Syntax highlighting and supporting commands for editing Markdown files.
+
+#+begin_src emacs-lisp
+(use-package markdown-mode)
+#+end_src
+
 ** AucTex
 
 Essential package for LaTeX editing, comes with a useful preview mode.

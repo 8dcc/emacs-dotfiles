@@ -381,6 +381,8 @@ and ALIGNMENT as parameters."
 (use-package plumber
   :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
 
+(use-package markdown-mode)
+
 (use-package auctex)
 
 (use-package ada-mode
