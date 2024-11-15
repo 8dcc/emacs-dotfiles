@@ -554,22 +554,25 @@ The REGEXP is wrapped in \"^...$\"."
                                  (buffer-name buffer)))
                (buffer-list))))
 
-(defun x8dcc/suffixed-buffer-name (name)
+(defun x8dcc/suffixed-buffer-name (name &optional suffix-count)
   "Append suffix to NAME if there is a buffer with that name.
 The suffix is a number wrapped in square brackets.
 
-The `x8dcc/count-matching-buffers' function is used to count the number of
-buffers with that NAME and, optionally, a suffix. That is, both \"foo\" and
-\"foo [4]\" are counted. If there are no buffers with that name, NAME is
-returned.
+First, this function checks if there is a buffer with the specified NAME. If
+there isn't, NAME is returned. If there is a collision, however, a suffix with
+the form \"name [N]\" is appended to NAME, where N is the suffix count. The new
+name is checked again until a non-existing buffer is found. The initial suffix
+count can be specified by setting the SUFFIX-COUNT argument to a positive integer.
 
 Note that NAME is a normal string, not a regexp."
-  (let ((count (x8dcc/count-matching-buffers
-                (concat (regexp-quote name)
-                        "\\(?: \\[[[:digit:]]+\\]\\)?"))))
-    (if (> count 0)
-        (concat name " [" (number-to-string count) "]")
-      name)))
+  (unless suffix-count (setq suffix-count 0))
+  (let ((full-name
+         (if (> suffix-count 0)
+             (concat name " [" (number-to-string suffix-count) "]")
+           name)))
+    (if (not (get-buffer full-name))
+        full-name
+      (x8dcc/suffixed-buffer-name name (1+ suffix-count)))))
 
 (defun x8dcc/is-huge-file ()
   "Returns `t' if the current buffer has either too many characters (>500000),
