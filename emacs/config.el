@@ -907,10 +907,11 @@ between `read' and `rx'."
   "b K"       '(kill-buffer                      :wk "Kill other")
   "b l"       '(switch-to-buffer                 :wk "Switch to")
   "b L"       '(buffer-menu                      :wk "List")
-  "b s"       '(basic-save-buffer                :wk "Save")
-  "b S"       '(write-file                       :wk "Save as")
+  "b q"       '(bury-buffer                      :wk "Quit (bury)")
   "b r"       '(revert-buffer                    :wk "Revert (discard)")
   "b R"       '(rename-buffer                    :wk "Rename")
+  "b s"       '(basic-save-buffer                :wk "Save")
+  "b S"       '(write-file                       :wk "Save as")
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
   ;; Comment
