@@ -3466,6 +3466,12 @@ Set =org-link-descriptive= to hide org links. This is changed by the
 (setq org-link-descriptive t)
 #+end_src
 
+Hide macro braces (e.g. ={{{my-macro}}}=).
+
+#+begin_src emacs-lisp
+(setq org-hide-macro-markers t)
+#+end_src
+
 Limit the width of huge images when using =org-toggle-inline-images=. The number
 (in pixels) is put in a list so Org tries to get the width from keywords like
 =#+ATTR_HTML: :width 300px=.

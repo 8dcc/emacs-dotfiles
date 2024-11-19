@@ -1833,6 +1833,8 @@ if necessary."
 
 (setq org-link-descriptive t)
 
+(setq org-hide-macro-markers t)
+
 (setq org-image-actual-width '(500))
 
 (add-hook 'org-mode-hook
