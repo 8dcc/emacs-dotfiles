@@ -350,23 +350,25 @@ and the non-normal prefix is \"M-SPC\"."
                 (goto-char 0))))
 
 (defun x8dcc/set-lower-bits (n)
-  "Return an integer with the N lower bits set."
+  "Return an integer with the N lower (rightmost) bits set."
   (- (ash 1 n) 1))
 
-(defun x8dcc/fringe-helper-rect (name alignment w h)
-  "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
-and ALIGNMENT as parameters."
+(defun x8dcc/define-fringe-rect (name width height &optional align)
+  "Define a fringe bitmap called NAME with the specified WIDTH and HEIGHT.
+
+Uses `define-fringe-bitmap' for defining the bitmap with the specified
+ALIGNMENT."
   (define-fringe-bitmap name
     (apply #'vector
-           (make-list h (x8dcc/set-lower-bits w)))
-    nil nil alignment))
+           (make-list height (x8dcc/set-lower-bits width)))
+    height width align))
 
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:added nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:deleted nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
+  (x8dcc/define-fringe-rect 'git-gutter-fr:added    3 1 '(center periodic))
+  (x8dcc/define-fringe-rect 'git-gutter-fr:deleted  3 1 '(center periodic))
+  (x8dcc/define-fringe-rect 'git-gutter-fr:modified 3 1 '(center periodic))
   (global-git-gutter-mode 1))
 
 (use-package whisper

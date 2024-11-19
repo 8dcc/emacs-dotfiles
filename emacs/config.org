@@ -739,24 +739,28 @@ Show git changes in the fringe.
 First of all, we create a helper function for defining a fringe bitmap from a
 width and a height. It will calculate the number needed for each row of the
 bitmap from the /width/, make a list of /height/ elements, and turn it into a
-vector. It will pass that, with the =name= and =alignment= to =define-fringe-bitmap=.
+vector. It will pass that, along with the =name=, to =define-fringe-bitmap=.
 
 #+begin_src emacs-lisp
 (defun x8dcc/set-lower-bits (n)
-  "Return an integer with the N lower bits set."
+  "Return an integer with the N lower (rightmost) bits set."
   (- (ash 1 n) 1))
 
-(defun x8dcc/fringe-helper-rect (name alignment w h)
-  "Convert W and H to a bitmap array, and call `define-fringe-bitmap' with NAME
-and ALIGNMENT as parameters."
+(defun x8dcc/define-fringe-rect (name width height &optional align)
+  "Define a fringe bitmap called NAME with the specified WIDTH and HEIGHT.
+
+Uses `define-fringe-bitmap' for defining the bitmap with the specified
+ALIGNMENT."
   (define-fringe-bitmap name
     (apply #'vector
-           (make-list h (x8dcc/set-lower-bits w)))
-    nil nil alignment))
+           (make-list height (x8dcc/set-lower-bits width)))
+    height width align))
 #+end_src
 
-We then use our new =my-fringe-helper-rect= to specify the width and height of the
-bitmap used in the fringe. It will be drawn with my theme's
+We then use our new =x8dcc/define-fringe-rect= to specify the width and height of
+the bitmap used in the fringe. We use 1 as the height, along with =(center
+periodic)= as the alignment, because we want a single row to repeat along the
+line's height (see =define-fringe-bitmap=). It will be drawn with my theme's
 =bg-[added/changed/removed]= faces, and with the default fringe background.
 
 NOTE: For more information on creating the bitmaps easily with strings, see the
@@ -766,9 +770,9 @@ NOTE: For more information on creating the bitmaps easily with strings, see the
 (use-package git-gutter-fringe
   :diminish git-gutter-mode
   :config
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:added nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:deleted nil 3 30)
-  (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
+  (x8dcc/define-fringe-rect 'git-gutter-fr:added    3 1 '(center periodic))
+  (x8dcc/define-fringe-rect 'git-gutter-fr:deleted  3 1 '(center periodic))
+  (x8dcc/define-fringe-rect 'git-gutter-fr:modified 3 1 '(center periodic))
   (global-git-gutter-mode 1))
 #+end_src
 
