@@ -73,11 +73,16 @@ it's overwritten by dashboard.
 
 Default font. Most of the =.bdf= files are in my [[https://github.com/8dcc/linux-dotfiles][linux-dotfiles]] repo.
 
+We also set the weight of the /italic/ face to =medium= (instead of =regular=) to fix
+problems with my font (Dina).
+
 #+begin_src emacs-lisp
 (when (member "Dina" (font-family-list))
   (set-face-attribute 'default nil
                       :family "Dina"
-                      :height 80))
+                      :height 80)
+  (set-face-attribute 'italic nil
+                      :weight 'medium))
 #+end_src
 
 Fallback font for unicode. You can't specify =nil= there, it needs to be

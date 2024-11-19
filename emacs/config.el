@@ -18,7 +18,9 @@
 (when (member "Dina" (font-family-list))
   (set-face-attribute 'default nil
                       :family "Dina"
-                      :height 80))
+                      :height 80)
+  (set-face-attribute 'italic nil
+                      :weight 'medium))
 
 (when (member "Cozette" (font-family-list))
   (set-fontset-font t 'unicode "Cozette"))
