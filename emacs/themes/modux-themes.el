@@ -1768,7 +1768,7 @@ FG and BG are the main colors."
     `(homoglyph ((,c :foreground ,warning)))
     `(ibuffer-locked-buffer ((,c :foreground ,warning)))
     `(icon-button ((,c :inherit modux-themes-button)))
-    `(italic ((,c :slant italic)))
+    `(italic ((,c :slant italic :weight medium)))
     `(nobreak-hyphen ((,c :foreground ,err)))
     `(nobreak-space ((,c :foreground ,err :underline t)))
     `(menu ((,c :inverse-video unspecified :background ,bg-active :foreground ,fg-main)))
