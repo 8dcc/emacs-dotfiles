@@ -1831,6 +1831,8 @@ if necessary."
 
 (setq org-link-descriptive t)
 
+(setq org-image-actual-width '(500))
+
 (add-hook 'org-mode-hook
           (lambda ()
             (org-indent-mode 1)))
