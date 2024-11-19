@@ -75,7 +75,9 @@ Default font. Most of the =.bdf= files are in my [[https://github.com/8dcc/linux
 
 #+begin_src emacs-lisp
 (when (member "Dina" (font-family-list))
-    (set-frame-font "Dina 8" t nil))
+  (set-face-attribute 'default nil
+                      :family "Dina"
+                      :height 80))
 #+end_src
 
 Fallback font for unicode. You can't specify =nil= there, it needs to be

@@ -16,7 +16,9 @@
 (setq fancy-splash-image (concat user-emacs-directory "my-media/splash.png"))
 
 (when (member "Dina" (font-family-list))
-    (set-frame-font "Dina 8" t nil))
+  (set-face-attribute 'default nil
+                      :family "Dina"
+                      :height 80))
 
 (when (member "Cozette" (font-family-list))
   (set-fontset-font t 'unicode "Cozette"))
