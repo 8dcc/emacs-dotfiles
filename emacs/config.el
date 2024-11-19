@@ -369,6 +369,15 @@ and ALIGNMENT as parameters."
   (x8dcc/fringe-helper-rect 'git-gutter-fr:modified nil 3 30)
   (global-git-gutter-mode 1))
 
+(use-package whisper
+  :straight (whisper :type git :host github :repo "natrys/whisper.el")
+  :config
+  (setq whisper-install-directory "~/.cache"
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        whisper-use-threads (/ (num-processors) 2)))
+
 (use-package evil-lion
   :config
   (setq evil-lion-left-align-key (kbd "g a"))

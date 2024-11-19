@@ -818,6 +818,24 @@ Major mode for reading EPUBs in Emacs.
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 #+end_src
 
+** Whisper
+
+Speech-to-Text interface for Emacs. I am personally impressed about this being
+possible.
+
+The installation is ~200 MiB.
+
+#+begin_src emacs-lisp
+(use-package whisper
+  :straight (whisper :type git :host github :repo "natrys/whisper.el")
+  :config
+  (setq whisper-install-directory "~/.cache"
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        whisper-use-threads (/ (num-processors) 2)))
+#+end_src
+
 ** Evil lion (alignment)
 
 Evil align operator, port of vim-lion by Tom McDonald.
