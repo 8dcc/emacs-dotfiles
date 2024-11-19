@@ -1899,6 +1899,10 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
 
+(defun x8dcc/org-custom-id-delete-all ()
+  (interactive)
+  (org-delete-property-globally "CUSTOM_ID"))
+
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil

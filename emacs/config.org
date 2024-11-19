@@ -3601,8 +3601,8 @@ In any case, the CUSTOM_ID of the entry is returned."
         id)))))
 #+end_src
 
-And add an interactive helper function for adding custom ids to all headlines in
-the buffer if they don't already have one.
+And add an interactive helper function for adding (and removing) custom IDs to
+all headlines in the buffer, if they don't already have one.
 
 #+begin_src emacs-lisp
 (defun x8dcc/org-custom-id-add-all ()
@@ -3610,6 +3610,10 @@ the buffer if they don't already have one.
 already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
+
+(defun x8dcc/org-custom-id-delete-all ()
+  (interactive)
+  (org-delete-property-globally "CUSTOM_ID"))
 #+end_src
 
 *** Org skeletons
