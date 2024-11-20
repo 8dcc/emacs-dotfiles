@@ -1876,8 +1876,25 @@ For example: \"My test... =heading=\" becomes \"my-test-heading\"."
     (replace-regexp-in-string "[^[:alnum:]]+" "-")
     (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
 
+(defun x8dcc/org-custom-id-exists-p (custom-id)
+  "Is there an element in the current document with the specified CUSTOM-ID?
+Uses `org-find-property'."
+  (not (null (org-find-property "CUSTOM_ID" custom-id))))
+
+(defun x8dcc/org-custom-id-make-unique (custom-id &optional suffix-count)
+  "Add a numeric suffix to CUSTOM-ID if it exists.
+Similar to `x8dcc/suffixed-buffer-name'."
+  (let ((final-id (concat custom-id
+                          (and suffix-count
+                               (number-to-string suffix-count)))))
+    (if (not (x8dcc/org-custom-id-exists-p final-id))
+        final-id
+      (x8dcc/org-custom-id-make-unique
+       custom-id
+       (if suffix-count (1+ suffix-count) 1)))))
+
 (defun x8dcc/org-custom-id-get (&optional pom create)
-  "Get the CUSTOM_ID property of the entry at point-or-marker POM.  If POM is
+  "Get the CUSTOM_ID property of the entry at point-or-marker POM. If POM is
 nil, refer to the entry at point. If the entry does not have a CUSTOM_ID, the
 function returns nil. However, when CREATE is non nil, create a CUSTOM_ID if
 none is present already.
@@ -1891,7 +1908,9 @@ In any case, the CUSTOM_ID of the entry is returned."
        ((and id (stringp id) (string-match "\\S-" id))
         id)
        (create
-        (setq id (x8dcc/org-headline-to-id headline))
+        (setq id (x8dcc/org-custom-id-make-unique
+                  (x8dcc/org-headline-to-id
+                   headline)))
         (org-entry-put pom "CUSTOM_ID" id)
         id)))))
 
@@ -1899,7 +1918,9 @@ In any case, the CUSTOM_ID of the entry is returned."
   "Add CUSTOM_ID properties to all headlines in the current file which do not
 already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
-  (org-map-entries (lambda () (x8dcc/org-custom-id-get (point) 'create))))
+  (org-map-entries
+   (lambda ()
+     (x8dcc/org-custom-id-get (point) 'create))))
 
 (defun x8dcc/org-custom-id-delete-all ()
   (interactive)
