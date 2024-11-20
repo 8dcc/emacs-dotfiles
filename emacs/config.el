@@ -1627,6 +1627,21 @@ different rules in `display-buffer-alist'."
 (setq dired-compress-file-default-suffix ".gz"
       dired-compress-directory-default-suffix ".zip")
 
+(defun x8dcc/md5sum (filename)
+  (shell-command-to-string
+   (concat "md5sum " (shell-quote-argument filename))))
+
+(defun x8dcc/md5sums (filenames)
+  (apply #'concat
+         (mapcar #'x8dcc/md5sum filenames)))
+
+(defun x8dcc/dired-md5sum (filenames)
+  (interactive
+   (list (dired-get-marked-files)))
+  (message
+   (replace-regexp-in-string (rx "\n" string-end) ""
+                             (x8dcc/md5sums filenames))))
+
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
 

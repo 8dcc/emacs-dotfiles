@@ -2965,6 +2965,27 @@ Set the default format for compressing files and directories.
       dired-compress-directory-default-suffix ".zip")
 #+end_src
 
+Small function for showing the MD5 hash of a file.
+
+FIXME: Move auxiliary functions to another section.
+
+#+begin_src emacs-lisp
+(defun x8dcc/md5sum (filename)
+  (shell-command-to-string
+   (concat "md5sum " (shell-quote-argument filename))))
+
+(defun x8dcc/md5sums (filenames)
+  (apply #'concat
+         (mapcar #'x8dcc/md5sum filenames)))
+
+(defun x8dcc/dired-md5sum (filenames)
+  (interactive
+   (list (dired-get-marked-files)))
+  (message
+   (replace-regexp-in-string (rx "\n" string-end) ""
+                             (x8dcc/md5sums filenames))))
+#+end_src
+
 ** Ediff
 
 Don't open a new frame for the =ediff= control panel.
