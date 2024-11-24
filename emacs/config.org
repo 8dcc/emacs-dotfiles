@@ -1439,17 +1439,29 @@ to the overlay."
 
 ** Simple wrapper functions
 
-Clear an eshell buffer, an alternative to =recenter-top-bottom=.
-
-TODO: Preserve prompt contents.
+Clear an eshell buffer, an alternative to =recenter-top-bottom=. Partial credits
+for getting the eshell prompt contents: [[https://stackoverflow.com/a/11952315/11715554][StackOverflow answer]].
 
 #+begin_src emacs-lisp
+(defun x8dcc/eshell-prompt-contents ()
+  "Get the user text from the last prompt in the current *eshell* buffer."
+  (save-excursion
+    (save-match-data
+      (goto-char (point-max))
+      (let ((line (buffer-substring-no-properties (point-at-bol)
+                                                  (point-at-eol))))
+        (if (string-match eshell-prompt-regexp line)
+            (substring line (match-end 0))
+          line)))))
+
 (defun x8dcc/eshell-clear ()
   "Clear an eshell buffer, and print the prompt.
 Alternative to `recenter-top-bottom'."
   (interactive)
-  (eshell/clear-scrollback)
-  (eshell-emit-prompt))
+  (let ((prompt-contents (x8dcc/eshell-prompt-contents)))
+    (eshell/clear-scrollback)
+    (eshell-emit-prompt)
+    (insert prompt-contents)))
 #+end_src
 
 Toggle newline insertion when saving a file.
