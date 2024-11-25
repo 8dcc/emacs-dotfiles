@@ -745,12 +745,25 @@ to the overlay."
                                              (match-end group-num))))
         (overlay-put invisible-overlay 'invisible t)))))
 
+(defun x8dcc/eshell-prompt-contents ()
+  "Get the user text from the last prompt in the current *eshell* buffer."
+  (save-excursion
+    (save-match-data
+      (goto-char (point-max))
+      (let ((line (buffer-substring-no-properties (point-at-bol)
+                                                  (point-at-eol))))
+        (if (string-match eshell-prompt-regexp line)
+            (substring line (match-end 0))
+          line)))))
+
 (defun x8dcc/eshell-clear ()
   "Clear an eshell buffer, and print the prompt.
 Alternative to `recenter-top-bottom'."
   (interactive)
-  (eshell/clear-scrollback)
-  (eshell-emit-prompt))
+  (let ((prompt-contents (x8dcc/eshell-prompt-contents)))
+    (eshell/clear-scrollback)
+    (eshell-emit-prompt)
+    (insert prompt-contents)))
 
 (defun x8dcc/toggle-final-newline ()
   "Toggle newline insertion when saving the current buffer. See
@@ -1626,6 +1639,21 @@ different rules in `display-buffer-alist'."
 
 (setq dired-compress-file-default-suffix ".gz"
       dired-compress-directory-default-suffix ".zip")
+
+(defun x8dcc/md5sum (filename)
+  (shell-command-to-string
+   (concat "md5sum " (shell-quote-argument filename))))
+
+(defun x8dcc/md5sums (filenames)
+  (apply #'concat
+         (mapcar #'x8dcc/md5sum filenames)))
+
+(defun x8dcc/dired-md5sum (filenames)
+  (interactive
+   (list (dired-get-marked-files)))
+  (message
+   (replace-regexp-in-string (rx "\n" string-end) ""
+                             (x8dcc/md5sums filenames))))
 
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)

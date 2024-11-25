@@ -1440,17 +1440,29 @@ to the overlay."
 
 ** Simple wrapper functions
 
-Clear an eshell buffer, an alternative to =recenter-top-bottom=.
-
-TODO: Preserve prompt contents.
+Clear an eshell buffer, an alternative to =recenter-top-bottom=. Partial credits
+for getting the eshell prompt contents: [[https://stackoverflow.com/a/11952315/11715554][StackOverflow answer]].
 
 #+begin_src emacs-lisp
+(defun x8dcc/eshell-prompt-contents ()
+  "Get the user text from the last prompt in the current *eshell* buffer."
+  (save-excursion
+    (save-match-data
+      (goto-char (point-max))
+      (let ((line (buffer-substring-no-properties (point-at-bol)
+                                                  (point-at-eol))))
+        (if (string-match eshell-prompt-regexp line)
+            (substring line (match-end 0))
+          line)))))
+
 (defun x8dcc/eshell-clear ()
   "Clear an eshell buffer, and print the prompt.
 Alternative to `recenter-top-bottom'."
   (interactive)
-  (eshell/clear-scrollback)
-  (eshell-emit-prompt))
+  (let ((prompt-contents (x8dcc/eshell-prompt-contents)))
+    (eshell/clear-scrollback)
+    (eshell-emit-prompt)
+    (insert prompt-contents)))
 #+end_src
 
 Toggle newline insertion when saving a file.
@@ -2964,6 +2976,27 @@ Set the default format for compressing files and directories.
 #+begin_src emacs-lisp
 (setq dired-compress-file-default-suffix ".gz"
       dired-compress-directory-default-suffix ".zip")
+#+end_src
+
+Small function for showing the MD5 hash of a file.
+
+FIXME: Move auxiliary functions to another section.
+
+#+begin_src emacs-lisp
+(defun x8dcc/md5sum (filename)
+  (shell-command-to-string
+   (concat "md5sum " (shell-quote-argument filename))))
+
+(defun x8dcc/md5sums (filenames)
+  (apply #'concat
+         (mapcar #'x8dcc/md5sum filenames)))
+
+(defun x8dcc/dired-md5sum (filenames)
+  (interactive
+   (list (dired-get-marked-files)))
+  (message
+   (replace-regexp-in-string (rx "\n" string-end) ""
+                             (x8dcc/md5sums filenames))))
 #+end_src
 
 ** Ediff
