@@ -2418,6 +2418,13 @@ Don't blink the cursor.
 (blink-cursor-mode 0)
 #+end_src
 
+Disable the bell entirely.
+
+#+begin_src emacs-lisp
+(setq ring-bell-function #'ignore
+      visible-bell nil)
+#+end_src
+
 Show buffer boundaries.
 
 #+begin_src emacs-lisp

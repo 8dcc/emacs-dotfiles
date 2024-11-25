@@ -1399,6 +1399,9 @@ of characters, followed by the number of lines."
 
 (blink-cursor-mode 0)
 
+(setq ring-bell-function #'ignore
+      visible-bell nil)
+
 (x8dcc/hook-to-targets
  (lambda ()
    (setq indicate-buffer-boundaries 'left))
