@@ -240,7 +240,8 @@ and the non-normal prefix is \"M-SPC\"."
                                      "--volume=50"))
   (emms-mode-line-mode 0))
 
-(unless (member system-type '(ms-dos windows-nt cygwin))
+(unless (or (member system-type '(ms-dos windows-nt cygwin))
+            (null (executable-find "aspell")))
   (use-package spell-fu
     :hook ((text-mode erc-mode) . spell-fu-mode)
     :config
