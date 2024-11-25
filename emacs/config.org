@@ -564,7 +564,8 @@ We also exclude a list of faces when using to avoid highlighting source code
 blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/doomemacs/blob/a89d4b7df556bb8b309d1c23e0b60404e750f156/modules/checkers/spell/config.el#L85][doom emacs]] repository.
 
 #+begin_src emacs-lisp
-(unless (member system-type '(ms-dos windows-nt cygwin))
+(unless (or (member system-type '(ms-dos windows-nt cygwin))
+            (null (executable-find "aspell")))
   (use-package spell-fu
     :hook ((text-mode erc-mode) . spell-fu-mode)
     :config
