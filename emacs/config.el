@@ -944,12 +944,13 @@ between `read' and `rx'."
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
   ;; Comment
-  "c"   '(:ignore t      :wk "Comment")
-  "c b" '(comment-box    :wk "Box")
-  "c c" '(comment-dwim   :wk "DWIM")
-  "c i" '(comment-indent :wk "Indent")
-  "c l" '(comment-line   :wk "Line")
-  "c r" '(comment-region :wk "Region")
+  "c"   '(:ignore t               :wk "Comment")
+  "c b" '(comment-box             :wk "Box")
+  "c c" '(comment-dwim            :wk "DWIM")
+  "c i" '(comment-indent          :wk "Indent")
+  "c l" '(comment-line            :wk "Line")
+  "c r" '(comment-region          :wk "Region")
+  "c s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Evaluate
   "e"   '(:ignore t        :wk "Evaluate")
   "e b" '(eval-buffer      :wk "Current buffer")
@@ -994,7 +995,6 @@ between `read' and `rx'."
   ;; Insert
   "i"   '(:ignore t               :wk "Insert")
   "i c" '(insert-char             :wk "Character")
-  "i s" '(x8dcc/separator-comment :wk "Separator comment")
   ;; Jump
   "j"   '(:ignore t             :wk "Jump")
   "j i" '(consult-imenu         :wk "Imenu")
