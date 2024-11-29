@@ -605,6 +605,20 @@ defaults to the number of seconds in a day."
   (format-time-string "%Y-%m-%d %a"
                       (time-add (current-time) seconds)))
 
+(defun x8dcc/insert-line-below (text &optional line-num)
+  "Insert TEXT as its own line, right below point.
+If LINE-NUM is non-nil, insert TEXT that many lines below (if positive) or above
+(if negative)."
+  (unless line-num (setq line-num 1))
+  (if (< line-num 0)
+      (beginning-of-line)
+    (end-of-line))
+  (insert "\n")
+  (if (< line-num 0)
+      (forward-line line-num)
+    (forward-line (- line-num 1)))
+  (insert text))
+
 (defun x8dcc/separator-comment (&optional max-width)
   "Insert a separator comment in the next line.
 Depending on `comment-start', `comment-padding' and `comment-end'."

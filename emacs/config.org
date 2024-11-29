@@ -1247,6 +1247,24 @@ defaults to the number of seconds in a day."
 
 ** Text manipulation
 
+Move forward N lines, and insert some text in its own line. N can be negative.
+
+#+begin_src emacs-lisp
+(defun x8dcc/insert-line-below (text &optional line-num)
+  "Insert TEXT as its own line, right below point.
+If LINE-NUM is non-nil, insert TEXT that many lines below (if positive) or above
+(if negative)."
+  (unless line-num (setq line-num 1))
+  (if (< line-num 0)
+      (beginning-of-line)
+    (end-of-line))
+  (insert "\n")
+  (if (< line-num 0)
+      (forward-line line-num)
+    (forward-line (- line-num 1)))
+  (insert text))
+#+end_src
+
 Insert a separator comment that fills up to the line column.
 
 #+begin_src emacs-lisp
