@@ -3734,6 +3734,40 @@ already have one. See `x8dcc/org-custom-id-get'."
   (org-delete-property-globally "CUSTOM_ID"))
 #+end_src
 
+*** Org custom figure IDs
+
+Same as the [[*Org custom heading IDs][Org custom heading IDs]] section, but for images.
+
+First, define a regexp used to match images in Org buffers.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/org-figure-re
+  (rx "[["
+      (or "file:"
+          "attachment:")
+      (group-n 1 (minimal-match (one-or-more print)))
+      "]]")
+  "Regular expression used to match figures (images) in Org buffers.")
+#+end_src
+
+Weep searching for that regexp until we are done.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-ids-add-figures ()
+  (interactive)
+  (let ((fig-count 1))
+    (org-with-point-at (point-min)
+      (while (re-search-forward x8dcc/org-figure-re (point-max) t)
+        (when (x8dcc/is-image (match-string 1))
+          (org-with-point-at (match-beginning 0)
+            (x8dcc/insert-line-below
+             (concat "#+NAME: fig" (number-to-string fig-count))
+             -1))
+          (setq fig-count (1+ fig-count)))))))
+#+end_src
+
+TODO: Add IDs to examples.
+
 *** Org skeletons
 
 Simple skeleton for Org files.

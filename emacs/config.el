@@ -1986,6 +1986,26 @@ already have one. See `x8dcc/org-custom-id-get'."
   (interactive)
   (org-delete-property-globally "CUSTOM_ID"))
 
+(defconst x8dcc/org-figure-re
+  (rx "[["
+      (or "file:"
+          "attachment:")
+      (group-n 1 (minimal-match (one-or-more print)))
+      "]]")
+  "Regular expression used to match figures (images) in Org buffers.")
+
+(defun x8dcc/org-ids-add-figures ()
+  (interactive)
+  (let ((fig-count 1))
+    (org-with-point-at (point-min)
+      (while (re-search-forward x8dcc/org-figure-re (point-max) t)
+        (when (x8dcc/is-image (match-string 1))
+          (org-with-point-at (match-beginning 0)
+            (x8dcc/insert-line-below
+             (concat "#+NAME: fig" (number-to-string fig-count))
+             -1))
+          (setq fig-count (1+ fig-count)))))))
+
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
