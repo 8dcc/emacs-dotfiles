@@ -1042,6 +1042,17 @@ Is the specified string non-empty?
   (and str (not (string-empty-p str))))
 #+end_src
 
+Does the specified string match any of the specified regexps?
+
+#+begin_src emacs-lisp
+(defun x8dcc/string-match-list-p (str &optional regexps)
+  "Check if the specified STR matches any item in REGEXPS.
+Using `string-match-p'."
+  (cond ((null regexps) nil)
+        ((string-match-p (car regexps) str) t)
+        (t (x8dcc/string-match-list-p str (cdr regexps)))))
+#+end_src
+
 Run some commands that operate on the body of a file, in the background.
 
 #+begin_src emacs-lisp
@@ -1231,6 +1242,17 @@ or too many lines (>10000)."
   (or (> (buffer-size) 500000)
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
+#+end_src
+
+Is the specified path a valid image?
+
+#+begin_src emacs-lisp
+(defun x8dcc/is-image (path)
+  "Check if the specified PATH is an image.
+According to `image-type-file-name-regexps'."
+  (x8dcc/string-match-list-p
+   path
+   (mapcar #'car image-type-file-name-regexps)))
 #+end_src
 
 Return a string representing a date in the future. Used by [[*Org capture][Org capture]].

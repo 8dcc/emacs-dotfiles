@@ -461,6 +461,13 @@ ALIGNMENT."
 (defun x8dcc/non-empty-string-p (str)
   (and str (not (string-empty-p str))))
 
+(defun x8dcc/string-match-list-p (str &optional regexps)
+  "Check if the specified STR matches any item in REGEXPS.
+Using `string-match-p'."
+  (cond ((null regexps) nil)
+        ((string-match-p (car regexps) str) t)
+        (t (x8dcc/string-match-list-p str (cdr regexps)))))
+
 (defmacro x8dcc/with-current-file (file &rest body)
   "Open FILE in the background, run BODY, and save the file."
   `(with-temp-buffer
@@ -596,6 +603,13 @@ or too many lines (>10000)."
   (or (> (buffer-size) 500000)
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
+
+(defun x8dcc/is-image (path)
+  "Check if the specified PATH is an image.
+According to `image-type-file-name-regexps'."
+  (x8dcc/string-match-list-p
+   path
+   (mapcar #'car image-type-file-name-regexps)))
 
 (defun x8dcc/future-date (&optional seconds)
   "Return a string representing a date in the future.
