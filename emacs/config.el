@@ -1665,7 +1665,7 @@ different rules in `display-buffer-alist'."
             (setq-local tab-width 4)))
 
 (setq dired-listing-switches
-      "-l --all --sort=version --group-directories-first --human-readable")
+      "-l --almost-all --sort=version --group-directories-first --human-readable")
 
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)

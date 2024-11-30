@@ -2997,7 +2997,7 @@ Change the =ls= flags used by Dired.
 
 #+begin_src emacs-lisp
 (setq dired-listing-switches
-      "-l --all --sort=version --group-directories-first --human-readable")
+      "-l --almost-all --sort=version --group-directories-first --human-readable")
 #+end_src
 
 Allow Dired to recursively copy and delete folders, after asking for
