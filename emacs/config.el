@@ -1609,11 +1609,16 @@ using `string-fill'. If it's nil, it's filled to `fill-column'."
     (insert (x8dcc/gpl3-license project real-fill-column))
     (x8dcc/comment-and-fill-region start (point))))
 
-(setq eshell-prompt-function (lambda ()
-                               (concat
-                                (abbreviate-file-name (eshell/pwd))
-                                (propertize " λ" 'face '(:foreground "#8490B3"))
-                                (propertize " " 'face '(:inherit default)))))
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         (abbreviate-file-name (eshell/pwd))
+         (propertize " " 'face '(:inherit default))
+         (propertize "λ" 'face `(:foreground
+                                 ,(if (= (user-uid) 0)
+                                      "#B38484"
+                                    "#8490B3")))
+         (propertize " " 'face '(:inherit default)))))
 
 (setq eshell-prompt-regexp "^[^#λ]* [#λ] ")
 

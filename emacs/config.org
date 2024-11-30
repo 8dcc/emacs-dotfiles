@@ -2879,11 +2879,16 @@ way of "resetting" the face.
 TODO: Add version control information to prompt, similar to my =.bashrc=.
 
 #+begin_src emacs-lisp
-(setq eshell-prompt-function (lambda ()
-                               (concat
-                                (abbreviate-file-name (eshell/pwd))
-                                (propertize " λ" 'face '(:foreground "#8490B3"))
-                                (propertize " " 'face '(:inherit default)))))
+(setq eshell-prompt-function
+      (lambda ()
+        (concat
+         (abbreviate-file-name (eshell/pwd))
+         (propertize " " 'face '(:inherit default))
+         (propertize "λ" 'face `(:foreground
+                                 ,(if (= (user-uid) 0)
+                                      "#B38484"
+                                    "#8490B3")))
+         (propertize " " 'face '(:inherit default)))))
 #+end_src
 
 We also need to set =eshell-prompt-regexp= to match our new prompt. This is
