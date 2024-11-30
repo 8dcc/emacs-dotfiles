@@ -2680,12 +2680,6 @@ Also automatically update Version Control info.
 (setq auto-revert-check-vc-info t)
 #+end_src
 
-Follow git symlinks by default.
-
-#+begin_src emacs-lisp
-(setq vc-follow-symlinks t)
-#+end_src
-
 Set default browser.
 
 #+begin_src emacs-lisp
@@ -2749,6 +2743,20 @@ choice.
 
 #+begin_src emacs-lisp
 (setq xref-prompt-for-identifier nil)
+#+end_src
+
+** Version Control
+
+Follow git symlinks by default.
+
+#+begin_src emacs-lisp
+(setq vc-follow-symlinks t)
+#+end_src
+
+Don't write the buffers created by =vc-find-revision= to disk.
+
+#+begin_src emacs-lisp
+(setq vc-find-revision-no-save t)
 #+end_src
 
 ** Printing

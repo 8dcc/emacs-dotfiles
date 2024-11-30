@@ -1523,8 +1523,6 @@ the save hooks.")
 
 (setq auto-revert-check-vc-info t)
 
-(setq vc-follow-symlinks t)
-
 (setq browse-url-generic-program "firefox")
 
 (add-hook 'prog-mode-hook
@@ -1554,6 +1552,10 @@ the save hooks.")
       xref-show-xrefs-function #'consult-xref)
 
 (setq xref-prompt-for-identifier nil)
+
+(setq vc-follow-symlinks t)
+
+(setq vc-find-revision-no-save t)
 
 (setq printer-name "MainPrinter")
 
