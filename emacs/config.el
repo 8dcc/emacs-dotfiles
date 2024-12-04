@@ -658,7 +658,7 @@ If LINE-NUM is non-nil, insert TEXT that many lines below (if positive) or above
     (forward-line (- line-num 1)))
   (insert text))
 
-(defun x8dcc/separator-comment (&optional max-width)
+(defun x8dcc/comment-separator (&optional max-width)
   "Insert a separator comment in the next line.
 Depending on `comment-start', `comment-padding' and `comment-end'."
   (interactive "P")
@@ -1005,7 +1005,7 @@ between `read' and `rx'."
   "c i" '(comment-indent          :wk "Indent")
   "c l" '(comment-line            :wk "Line")
   "c r" '(comment-region          :wk "Region")
-  "c s" '(x8dcc/separator-comment :wk "Separator comment")
+  "c s" '(x8dcc/comment-separator :wk "Insert separator")
   ;; Evaluate
   "e"   '(:ignore t        :wk "Evaluate")
   "e b" '(eval-buffer      :wk "Current buffer")
