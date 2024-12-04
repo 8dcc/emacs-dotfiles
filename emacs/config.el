@@ -1636,21 +1636,32 @@ using `string-fill'. If it's nil, it's filled to `fill-column'."
 
 (setq eshell-prompt-function
       (lambda ()
-        (concat
-         (abbreviate-file-name (eshell/pwd))
-         (propertize " " 'face '(:inherit default))
-         (let ((branch-name (x8dcc/vc-branch-name)))
-           (when branch-name
-             (concat
-              (propertize (concat "(" branch-name ")")
-                          'face '(:foreground "#84B38D"))
-              (propertize " " 'face '(:inherit default)))))
-         (propertize "λ" 'face
-                     `(:foreground
-                       ,(if (= (user-uid) 0)
-                            "#B38484"
-                          "#8490B3")))
-         (propertize " " 'face '(:inherit default)))))
+        (let ((default '(:inherit default))
+              (gray '(:foreground "#7F7F7F"))
+              (blue
+               (list :foreground
+                     (face-attribute 'term-color-blue :foreground)))
+              (green
+               (list :foreground
+                     (face-attribute 'term-color-green :foreground)))
+              (red
+               (list :foreground
+                     (face-attribute 'term-color-red :foreground))))
+          (concat
+           ;; Current path
+           (propertize (abbreviate-file-name (eshell/pwd)) 'face blue)
+           (propertize " " 'face default)
+
+           ;; Version Control branch (optional)
+           (let ((branch-name (x8dcc/vc-branch-name)))
+             (when branch-name
+               (concat
+                (propertize (concat "(" branch-name ")") 'face green)
+                (propertize " " 'face default))))
+
+           ;; Final lambda symbol
+           (propertize "λ" 'face (if (= (user-uid) 0) red gray))
+           (propertize " " 'face default)))))
 
 (setq eshell-prompt-regexp "^[^#λ]* [#λ] ")
 
