@@ -597,6 +597,31 @@ Note that NAME is a normal string, not a regexp."
         full-name
       (x8dcc/suffixed-buffer-name name (1+ suffix-count)))))
 
+(defun x8dcc/vc-branch-name (&optional backend directory)
+  "Obtains the Version Control branch name.
+
+The optional arguments BACKEND and DIRECTORY should be valid for
+`vc-call-backend'."
+
+  (unless directory
+    (setq directory default-directory))
+  (unless backend
+    (setq backend
+          (ignore-errors (vc-responsible-backend directory))))
+  (when (and directory backend)
+    (let ((the-dir-headers
+           (vc-call-backend backend 'dir-extra-headers directory)))
+      (save-match-data
+        (string-match (rx line-start
+                          "Branch"
+                          (zero-or-more blank)
+                          ":"
+                          (zero-or-more blank)
+                          (group-n 1 (one-or-more graph))
+                          line-end)
+                      the-dir-headers)
+        (match-string-no-properties 1 the-dir-headers)))))
+
 (defun x8dcc/is-huge-file ()
   "Returns `t' if the current buffer has either too many characters (>500000),
 or too many lines (>10000)."

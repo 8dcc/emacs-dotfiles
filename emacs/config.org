@@ -1232,6 +1232,35 @@ Note that NAME is a normal string, not a regexp."
       (x8dcc/suffixed-buffer-name name (1+ suffix-count)))))
 #+end_src
 
+Get the current branch name, independently of the VC backend.
+
+#+begin_src emacs-lisp
+(defun x8dcc/vc-branch-name (&optional backend directory)
+  "Obtains the Version Control branch name.
+
+The optional arguments BACKEND and DIRECTORY should be valid for
+`vc-call-backend'."
+
+  (unless directory
+    (setq directory default-directory))
+  (unless backend
+    (setq backend
+          (ignore-errors (vc-responsible-backend directory))))
+  (when (and directory backend)
+    (let ((the-dir-headers
+           (vc-call-backend backend 'dir-extra-headers directory)))
+      (save-match-data
+        (string-match (rx line-start
+                          "Branch"
+                          (zero-or-more blank)
+                          ":"
+                          (zero-or-more blank)
+                          (group-n 1 (one-or-more graph))
+                          line-end)
+                      the-dir-headers)
+        (match-string-no-properties 1 the-dir-headers)))))
+#+end_src
+
 Is this file really big? It will be used for disabling some modes. Credits
 [[https://github.com/seagle0128/.emacs.d/blob/19efe194cabc2f2984e6463a8d9730d8163acd8f/lisp/init-funcs.el#L267-L271][seagle0128]].
 
