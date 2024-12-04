@@ -1639,10 +1639,17 @@ using `string-fill'. If it's nil, it's filled to `fill-column'."
         (concat
          (abbreviate-file-name (eshell/pwd))
          (propertize " " 'face '(:inherit default))
-         (propertize "λ" 'face `(:foreground
-                                 ,(if (= (user-uid) 0)
-                                      "#B38484"
-                                    "#8490B3")))
+         (let ((branch-name (x8dcc/vc-branch-name)))
+           (when branch-name
+             (concat
+              (propertize (concat "(" branch-name ")")
+                          'face '(:foreground "#84B38D"))
+              (propertize " " 'face '(:inherit default)))))
+         (propertize "λ" 'face
+                     `(:foreground
+                       ,(if (= (user-uid) 0)
+                            "#B38484"
+                          "#8490B3")))
          (propertize " " 'face '(:inherit default)))))
 
 (setq eshell-prompt-regexp "^[^#λ]* [#λ] ")

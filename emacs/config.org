@@ -2905,7 +2905,7 @@ The third parameter of =concat= is used to reset the font face after changing th
 color as the lambda. I don't really like this method, but I don't know any other
 way of "resetting" the face.
 
-TODO: Add version control information to prompt, similar to my =.bashrc=.
+TODO: Change VC branch color depending on remote status, similar to my =.bashrc=.
 
 #+begin_src emacs-lisp
 (setq eshell-prompt-function
@@ -2913,10 +2913,17 @@ TODO: Add version control information to prompt, similar to my =.bashrc=.
         (concat
          (abbreviate-file-name (eshell/pwd))
          (propertize " " 'face '(:inherit default))
-         (propertize "λ" 'face `(:foreground
-                                 ,(if (= (user-uid) 0)
-                                      "#B38484"
-                                    "#8490B3")))
+         (let ((branch-name (x8dcc/vc-branch-name)))
+           (when branch-name
+             (concat
+              (propertize (concat "(" branch-name ")")
+                          'face '(:foreground "#84B38D"))
+              (propertize " " 'face '(:inherit default)))))
+         (propertize "λ" 'face
+                     `(:foreground
+                       ,(if (= (user-uid) 0)
+                            "#B38484"
+                          "#8490B3")))
          (propertize " " 'face '(:inherit default)))))
 #+end_src
 
