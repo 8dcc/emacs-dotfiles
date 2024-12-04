@@ -670,10 +670,12 @@ Depending on `comment-start', `comment-padding' and `comment-end'."
                comment-padding))
          (start
           (if (x8dcc/non-empty-string-p comment-start)
-              (concat (string-trim comment-start) padding)))
+              (concat (string-trim comment-start) padding)
+            ""))
          (end
           (if (x8dcc/non-empty-string-p comment-end)
-              (concat padding (string-trim comment-end))))
+              (concat padding (string-trim comment-end))
+            ""))
          (separator-len
           (- max-width (+ (length start)
                           (length end)))))
