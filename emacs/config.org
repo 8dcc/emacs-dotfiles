@@ -1607,6 +1607,15 @@ Simple command for replacing base prefixes (=0x__=, =0o__= and =0b__=) before ru
 
 ** New features
 
+Remove text properties from region.
+
+#+begin_src emacs-lisp
+(defun x8dcc/remove-text-properties (start end)
+  "Remote all text properties from START to END."
+  (interactive "r")
+  (set-text-properties start end nil))
+#+end_src
+
 Simple function for running =git add --edit= within Emacs.
 
 #+begin_src emacs-lisp

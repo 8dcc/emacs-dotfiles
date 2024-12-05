@@ -871,6 +871,11 @@ between `read' and `rx'."
             (x8dcc/replace-regexps-in-string x8dcc/quick-calc-replacements
                                              input)))))
 
+(defun x8dcc/remove-text-properties (start end)
+  "Remote all text properties from START to END."
+  (interactive "r")
+  (set-text-properties start end nil))
+
 (defun x8dcc/git-add-edit (&optional files)
   "Stage the specified files with Git using \"git add --edit\"."
   (interactive)
