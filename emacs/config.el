@@ -1454,8 +1454,9 @@ of characters, followed by the number of lines."
 (dolist (condition '("\\*grep\\*"))
   (x8dcc/set-display-bottom-window condition))
 
-(setq-default truncate-lines t)
 (global-visual-line-mode 0)
+(setq-default truncate-lines t
+              word-wrap t)
 
 (blink-cursor-mode 0)
 

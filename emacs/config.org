@@ -2482,14 +2482,18 @@ display =*grep*= in the same window because it messes with the =SPC s n n= keybi
 
 ** Misc visual settings
 
-By default, don't wrap lines, truncate them (=truncate-lines=). This can be
-toggled with =SPC t w=, see [[Space keybinds][Space keybinds]].
-
-Don't wrap lines using words by default (=global-visual-line-mode=).
+By default:
+- Don't wrap lines, truncate them (=truncate-lines=). This can be toggled with
+  =SPC t w=, see [[Space keybinds][Space keybinds]].
+- If we are wrapping lines, wrap them by words (=word-wrap=). This can be toggled
+  with the =toggle-word-wrap= command.
+- However, keep =visual-line-mode= /disabled/ globally, since it implies other
+  behavior (like different line movement).
 
 #+begin_src emacs-lisp
-(setq-default truncate-lines t)
 (global-visual-line-mode 0)
+(setq-default truncate-lines t
+              word-wrap t)
 #+end_src
 
 Don't blink the cursor.
