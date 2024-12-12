@@ -1,5 +1,4 @@
-(("ada-mode" . "5a1ebf9d637ace58d97d76bb89781de4f33359a6")
- ("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
+(("annalist.el" . "134fa3f0fb91a636a1c005c483516d4b64905a6d")
  ("auctex" . "3378974cfb99ab3e94aabfab5fe5caab8e68146b")
  ("clang-format" . "f01d16be89a4421169c421d25cfdddb3ad62460f")
  ("compat" . "4e0d508ee16efbe1d26f859254ae63ec43b55281")
