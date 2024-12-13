@@ -842,6 +842,19 @@ See also `shell-command'."
                          " | sudo -S "
                          command)))
 
+(defconst x8dcc/grep-todos-regexp
+  (regexp-opt '("TODO" "HACK" "REVIEW" "FIXME" "DELME" "DEBUG"))
+  "Regular expression used by `x8dcc/grep-todos'.
+Alternatively, you could use `hl-todo--regexp'.")
+
+(defun x8dcc/grep-todos (&optional files dir)
+  ;; Interactive contents obtained from `rgrep' (Emacs 29.4).
+  (interactive
+   (list
+    (grep-read-files "...")
+    (read-directory-name "Base directory: " nil default-directory t)))
+  (rgrep x8dcc/grep-todos-regexp files dir))
+
 (defun x8dcc/reb-change-syntax (new-syntax)
   "Set `reb-re-syntax' to the specified value. When called interactively, switch
 between `read' and `rx'."
