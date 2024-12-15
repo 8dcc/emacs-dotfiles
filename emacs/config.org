@@ -242,7 +242,7 @@ Remember buffer undo history across sessions.
         undo-fu-session-ignore-temp-files t))
 #+end_src
 
-** General
+** General keybinds
 
 Define our own =SPC= keybinds.
 
@@ -1837,8 +1837,8 @@ Use =q= for closing the =rmail-summary= window, not just burying the buffer.
 
 ** Space keybinds
 
-For more information on the =x8dcc/*= functions, see [[*General][General]] and [[*Input-related functions][Input-related
-functions]].
+For more information on the =x8dcc/*= functions, see [[*General keybinds][General keybinds]] and
+[[*Input-related functions][Input-related functions]].
 
 *** Global keybinds
 
