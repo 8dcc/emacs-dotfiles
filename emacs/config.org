@@ -650,8 +650,8 @@ We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
 
 ** Highlight TODOs
 
-Highlight common keywords inside =org-mode= and =prog-mode=. Added =DELME=
-since I use that often.
+Highlight common keywords inside =org-mode= and =prog-mode=. The keywords themselves
+are defined in [[file:themes/modux-themes.el][modux-themes.el]].
 
 #+begin_src emacs-lisp
 (use-package hl-todo
