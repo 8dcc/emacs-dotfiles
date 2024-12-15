@@ -82,14 +82,11 @@
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
 
-(use-package vundo)
-
-(use-package undo-fu-session
-  :init
-  (undo-fu-session-global-mode)
+(use-package evil-lion
   :config
-  (setq undo-fu-session-ignore-encrypted-files t
-        undo-fu-session-ignore-temp-files t))
+  (setq evil-lion-left-align-key (kbd "g a"))
+  (setq evil-lion-right-align-key (kbd "g A"))
+  (evil-lion-mode))
 
 (defmacro x8dcc/general-create-definer (name keymaps)
   "Create a general definer named NAME for the specified KEYMAPS.
@@ -144,6 +141,15 @@ and the non-normal prefix is \"M-SPC\"."
         which-key-allow-imprecise-window-fit t)
   (which-key-mode 1))
 
+(use-package vundo)
+
+(use-package undo-fu-session
+  :init
+  (undo-fu-session-global-mode)
+  :config
+  (setq undo-fu-session-ignore-encrypted-files t
+        undo-fu-session-ignore-temp-files t))
+
 (use-package projectile
   :diminish
   :config
@@ -158,21 +164,6 @@ and the non-normal prefix is \"M-SPC\"."
 
 (use-package with-editor
   :hook (eshell-mode . with-editor-export-git-editor))
-
-(use-package dashboard
-  :init
-  (setq dashboard-banner-logo-title "8dcc's Emacs"
-        dashboard-startup-banner (concat user-emacs-directory
-                                        "my-media/splash.png")
-        dashboard-center-content t
-        dashboard-show-shortcuts nil
-        dashboard-set-footer nil
-        dashboard-page-separator "\n\n"
-        dashboard-items '((recents . 10)
-                          (projects . 5)
-                          (agenda . 10)))
-  :config
-  (dashboard-setup-startup-hook))
 
 (use-package vertico
   :config
@@ -228,17 +219,61 @@ and the non-normal prefix is \"M-SPC\"."
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
 
-(use-package emms
+(use-package htmlize)
+
+(use-package dashboard
+  :init
+  (setq dashboard-banner-logo-title "8dcc's Emacs"
+        dashboard-startup-banner (concat user-emacs-directory
+                                        "my-media/splash.png")
+        dashboard-center-content t
+        dashboard-show-shortcuts nil
+        dashboard-set-footer nil
+        dashboard-page-separator "\n\n"
+        dashboard-items '((recents . 10)
+                          (projects . 5)
+                          (agenda . 10)))
   :config
-  (emms-all)
-  (setq emms-player-list '(emms-player-mpv
-                           emms-player-vlc)
-        emms-player-mpv-parameters '("--quiet"
-                                     "--really-quiet"
-                                     "--no-audio-display"
-                                     "--no-video"
-                                     "--volume=50"))
-  (emms-mode-line-mode 0))
+  (dashboard-setup-startup-hook))
+
+(use-package webpaste
+  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
+  :config
+  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
+        webpaste-paste-confirmation t))
+
+(use-package clang-format
+  :config
+  (setq clang-format-style "file"))
+
+(use-package move-text
+  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :hook ((text-mode prog-mode) . move-text-mode)
+  :config
+  (move-text-default-bindings)
+  (keymap-set move-text-mode-map "M-j" 'move-text-down)
+  (keymap-set move-text-mode-map "M-k" 'move-text-up))
+
+(use-package plumber
+  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
+
+(use-package x86-lookup
+  :config
+  (setq x86-lookup-pdf
+        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
+        x86-lookup-browse-pdf-function
+        (lambda (pdf page)
+          (start-process "firefox" nil "firefox"
+                         (format "file://%s#page=%d" pdf page)))))
+
+(use-package whisper
+  :straight (whisper :type git :host github :repo "natrys/whisper.el")
+  :config
+  (setq whisper-install-directory "~/.cache"
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        whisper-use-threads (/ (num-processors) 2)))
 
 (unless (or (member system-type '(ms-dos windows-nt cygwin))
             (null (executable-find "aspell")))
@@ -304,22 +339,8 @@ and the non-normal prefix is \"M-SPC\"."
                         org-todo-keyword-wait
                         org-verbatim))))))
 
-(use-package move-text
-  :straight (move-text :type git :host github :repo "8dcc/move-text")
-  :hook ((text-mode prog-mode) . move-text-mode)
-  :config
-  (move-text-default-bindings)
-  (keymap-set move-text-mode-map "M-j" 'move-text-down)
-  (keymap-set move-text-mode-map "M-k" 'move-text-up))
-
-(use-package hl-todo
-  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
-  :config
-  (setq hl-todo-highlight-punctuation ":"))
-
-(use-package rainbow-mode
-  :diminish
-  :hook ((html-mode css-mode js-mode)  . rainbow-mode))
+(use-package highlight-numbers
+  :hook ((prog-mode . highlight-numbers-mode)))
 
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode
@@ -331,24 +352,14 @@ and the non-normal prefix is \"M-SPC\"."
   :config
   (setq rainbow-delimiters-max-face-count 6))
 
-(use-package highlight-numbers
-  :hook ((prog-mode . highlight-numbers-mode)))
+(use-package rainbow-mode
+  :diminish
+  :hook ((html-mode css-mode js-mode)  . rainbow-mode))
 
-(use-package clang-format
+(use-package hl-todo
+  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
-  (setq clang-format-style "file"))
-
-(use-package htmlize)
-
-(use-package pdf-tools
-  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
-  :config
-  (pdf-tools-install)
-  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore)
-  (keymap-set pdf-view-mode-map "<remap> <evil-beginning-of-line>"
-              (lambda ()
-                (interactive)
-                (goto-char 0))))
+  (setq hl-todo-highlight-punctuation ":"))
 
 (defun x8dcc/set-lower-bits (n)
   "Return an integer with the N lower (rightmost) bits set."
@@ -372,21 +383,6 @@ ALIGNMENT."
   (x8dcc/define-fringe-rect 'git-gutter-fr:modified 3 1 '(center periodic))
   (global-git-gutter-mode 1))
 
-(use-package whisper
-  :straight (whisper :type git :host github :repo "natrys/whisper.el")
-  :config
-  (setq whisper-install-directory "~/.cache"
-        whisper-model "base"
-        whisper-language "en"
-        whisper-translate nil
-        whisper-use-threads (/ (num-processors) 2)))
-
-(use-package evil-lion
-  :config
-  (setq evil-lion-left-align-key (kbd "g a"))
-  (setq evil-lion-right-align-key (kbd "g A"))
-  (evil-lion-mode))
-
 (use-package big-font
   :straight (big-font :type git :host github :repo "8dcc/big-font.el")
   :config
@@ -394,12 +390,31 @@ ALIGNMENT."
                          (fixed-pitch    120 "Source Code Pro")
                          (variable-pitch 150 "FreeSerif"))))
 
-(use-package plumber
-  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
-
 (use-package markdown-mode)
 
 (use-package auctex)
+
+(use-package pdf-tools
+  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (pdf-tools-install)
+  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore)
+  (keymap-set pdf-view-mode-map "<remap> <evil-beginning-of-line>"
+              (lambda ()
+                (interactive)
+                (goto-char 0))))
+
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv
+                           emms-player-vlc)
+        emms-player-mpv-parameters '("--quiet"
+                                     "--really-quiet"
+                                     "--no-audio-display"
+                                     "--no-video"
+                                     "--volume=50"))
+  (emms-mode-line-mode 0))
 
 (use-package ada-mode
   :straight (ada-mode :type git :host github :repo "8dcc/ada-mode")
@@ -436,27 +451,6 @@ ALIGNMENT."
   :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode"))
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
-
-(use-package x86-lookup
-  :config
-  (setq x86-lookup-pdf
-        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
-        x86-lookup-browse-pdf-function
-        (lambda (pdf page)
-          (start-process "firefox" nil "firefox"
-                         (format "file://%s#page=%d" pdf page)))))
-
-(use-package beardbolt
-  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
-  :config
-  (setq beardbolt-shuffle-rainbow t
-        beardbolt-compile-delay nil))
-
-(use-package webpaste
-  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
-  :config
-  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
-        webpaste-paste-confirmation t))
 
 (defun x8dcc/non-empty-string-p (str)
   (and str (not (string-empty-p str))))

@@ -129,7 +129,7 @@ more information, see: [[https://web.archive.org/web/20230522053703/https://jeff
 
 Install [[https://github.com/jwiegley/use-package][use-package]] (through =straight.el=) for more convenience. Setting
 =straight-use-package-by-default= tells use-package to always use straight.el to
-install packages (instead of emacs' package.el), even without specifying
+install packages (instead of emacs' =package.el=), even without specifying
 =:straight t=.
 
 #+begin_src emacs-lisp
@@ -140,7 +140,8 @@ install packages (instead of emacs' package.el), even without specifying
 See also [[file:./straight/versions/default.el][versions/default.el]], the resulting [[https://github.com/radian-software/straight.el#configuration-reproducibility][lockfile]] of
 =M-x straight-freeze-versions=.
 
-** COMMENT Benchmarking
+** Misc
+*** COMMENT Benchmarking
 
 For benchmarking this configuration.
 
@@ -151,7 +152,7 @@ For benchmarking this configuration.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 #+end_src
 
-** Diminish
+*** Diminish
 
 For hiding minor modes from the modeline. We will be using =:diminish=
 in a lot of =(use-package)= expressions, to hide those minor modes.
@@ -164,7 +165,7 @@ in a lot of =(use-package)= expressions, to hide those minor modes.
     (diminish mode)))
 #+end_src
 
-** Evil & Evil collection
+*** Evil & Evil collection
 
 For vi-like keybinds. Some notes about the configuration:
 
@@ -221,28 +222,19 @@ For using vi-like keybinds in other buffer types.
   (evil-collection-init))
 #+end_src
 
-** Vundo & Undo history
+*** Evil lion (alignment)
 
-Instead of treating undo/redo as a linear sequence of changes, emacs treats undo
-history as a branching tree of changes. This package allows you to visualize and
-navigate this tree easily.
+Evil align operator, port of vim-lion by Tom McDonald.
 
 #+begin_src emacs-lisp
-(use-package vundo)
-#+end_src
-
-Remember buffer undo history across sessions.
-
-#+begin_src emacs-lisp
-(use-package undo-fu-session
-  :init
-  (undo-fu-session-global-mode)
+(use-package evil-lion
   :config
-  (setq undo-fu-session-ignore-encrypted-files t
-        undo-fu-session-ignore-temp-files t))
+  (setq evil-lion-left-align-key (kbd "g a"))
+  (setq evil-lion-right-align-key (kbd "g A"))
+  (evil-lion-mode))
 #+end_src
 
-** General keybinds
+*** General keybinds
 
 Define our own =SPC= keybinds.
 
@@ -296,7 +288,7 @@ and the non-normal prefix is \"M-SPC\"."
      (x8dcc/def-keys-rmail-summary . rmail-summary-mode-map))))
 #+end_src
 
-** Which key
+*** Which key
 
 For the keybind completion menu. Press =C-x= and wait for about 1 second to
 display a list of available keybinds.
@@ -317,7 +309,28 @@ display a list of available keybinds.
   (which-key-mode 1))
 #+end_src
 
-** Projectile
+*** Vundo & Undo history
+
+Instead of treating undo/redo as a linear sequence of changes, emacs treats undo
+history as a branching tree of changes. This package allows you to visualize and
+navigate this tree easily.
+
+#+begin_src emacs-lisp
+(use-package vundo)
+#+end_src
+
+Remember buffer undo history across sessions.
+
+#+begin_src emacs-lisp
+(use-package undo-fu-session
+  :init
+  (undo-fu-session-global-mode)
+  :config
+  (setq undo-fu-session-ignore-encrypted-files t
+        undo-fu-session-ignore-temp-files t))
+#+end_src
+
+*** Projectile
 
 For managing projects.
 
@@ -328,7 +341,7 @@ For managing projects.
   (projectile-mode 1))
 #+end_src
 
-** Magit
+*** Magit
 
 Magit is an interface to the version control system Git, implemented as an Emacs
 package.
@@ -345,7 +358,7 @@ popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
         #'magit-display-buffer-same-window-except-diff-v1))
 #+end_src
 
-** With editor
+*** With editor
 
 Use the Emacsclient as the ~$EDITOR~ of child processes.
 
@@ -356,28 +369,7 @@ Specifically, for setting ~$GIT_EDITOR~ in eshell buffers.
   :hook (eshell-mode . with-editor-export-git-editor))
 #+end_src
 
-** Dashboard
-
-A nice dashboard with recent files, recent projects, and org agenda.
-
-#+begin_src emacs-lisp
-(use-package dashboard
-  :init
-  (setq dashboard-banner-logo-title "8dcc's Emacs"
-        dashboard-startup-banner (concat user-emacs-directory
-                                        "my-media/splash.png")
-        dashboard-center-content t
-        dashboard-show-shortcuts nil
-        dashboard-set-footer nil
-        dashboard-page-separator "\n\n"
-        dashboard-items '((recents . 10)
-                          (projects . 5)
-                          (agenda . 10)))
-  :config
-  (dashboard-setup-startup-hook))
-#+end_src
-
-** Vertico
+*** Vertico
 
 Vertical completion for =M-x=, =find-file=, etc.
 
@@ -391,7 +383,7 @@ not below it.
   (vertico-reverse-mode 1))
 #+end_src
 
-** Marginalia
+*** Marginalia
 
 For extra information on the minibuffer when using [[Vertico][vertico]].
 
@@ -401,7 +393,7 @@ For extra information on the minibuffer when using [[Vertico][vertico]].
   (marginalia-mode 1))
 #+end_src
 
-** Consult
+*** Consult
 
 For providing better completion buffers similar to [[Vertico][vertico]] (same author). This
 doesn't just add the =consult-*= commands, but also replaces the vanilla
@@ -425,7 +417,7 @@ better completion in buffers like eshell. See [[https://github.com/minad/vertico
 				 args))))
 #+end_src
 
-** Orderless
+*** Orderless
 
 Adds a better search completion to =completion-styles= (Used in =M-x=,
 =find-file=, etc.)
@@ -436,7 +428,7 @@ Adds a better search completion to =completion-styles= (Used in =M-x=,
   (setq completion-styles '(orderless basic)))
 #+end_src
 
-** Dumb jump
+*** Dumb jump
 
 Dumb jump is a backend for the =xref= Emacs command. It doesn't use a TAGS file or
 any background processes. Instead, it uses grep-like tools. See also [[*Xref][Xref]].
@@ -449,7 +441,7 @@ Depends on =s=, =dash= and =popup= packages.
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 #+end_src
 
-** Popper
+*** Popper
 
 For converting less-important buffers into popups. They can be toggled
 with =SPC t p=. See [[Space keybinds][Space keybinds]].
@@ -483,7 +475,141 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
   (popper-mode 1))
 #+end_src
 
-** COMMENT Highlight indentation
+*** Htmlize
+
+Required by =org-html-export-to-html=.
+
+#+begin_src emacs-lisp
+(use-package htmlize)
+#+end_src
+
+*** Dashboard
+
+A nice dashboard with recent files, recent projects, and org agenda.
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :init
+  (setq dashboard-banner-logo-title "8dcc's Emacs"
+        dashboard-startup-banner (concat user-emacs-directory
+                                        "my-media/splash.png")
+        dashboard-center-content t
+        dashboard-show-shortcuts nil
+        dashboard-set-footer nil
+        dashboard-page-separator "\n\n"
+        dashboard-items '((recents . 10)
+                          (projects . 5)
+                          (agenda . 10)))
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+
+*** Webpaste
+
+Paste whole buffers or parts of buffers to several pastebin-like services.
+
+#+begin_src emacs-lisp
+(use-package webpaste
+  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
+  :config
+  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
+        webpaste-paste-confirmation t))
+#+end_src
+
+*** Clang format
+
+For formatting C files. You can find my =.clang-format= in my [[https://github.com/8dcc/linux-dotfiles/tree/main/dotfiles/clang-format][8dcc/linux-dotfiles]]
+repo.
+
+#+begin_src emacs-lisp
+(use-package clang-format
+  :config
+  (setq clang-format-style "file"))
+#+end_src
+
+*** Move text
+
+For dragging lines with =M-<down>= and =M-<up>=. I started using [[https://github.com/rejeep/drag-stuff.el][drag-stuff.el]], but
+the code is full of errors that generate warnings and hasn't been updated in a
+long time.
+
+We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
+=M-<down>= and =M-<up>=.
+
+#+begin_src emacs-lisp
+(use-package move-text
+  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :hook ((text-mode prog-mode) . move-text-mode)
+  :config
+  (move-text-default-bindings)
+  (keymap-set move-text-mode-map "M-j" 'move-text-down)
+  (keymap-set move-text-mode-map "M-k" 'move-text-up))
+#+end_src
+
+*** Plumber
+
+Personal package for plumbing text, similar to Plan9. See the [[https://github.com/8dcc/plumber.el][repository README]]
+for more information.
+
+#+begin_src emacs-lisp
+(use-package plumber
+  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
+#+end_src
+
+*** x86-lookup
+
+Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x86-lookup][skeeto/x86-lookup]].
+
+#+begin_src emacs-lisp
+(use-package x86-lookup
+  :config
+  (setq x86-lookup-pdf
+        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
+        x86-lookup-browse-pdf-function
+        (lambda (pdf page)
+          (start-process "firefox" nil "firefox"
+                         (format "file://%s#page=%d" pdf page)))))
+#+end_src
+
+The volume 2 of the Intel SDM is included in this repository.
+
+*** COMMENT Beardbolt
+
+Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
+
+- We set =beardbolt-shuffle-rainbow= to =t= increase contrast between blocks.
+- We set =beardbolt-compile-delay= to =nil= to disable automatic recompilation on
+  buffer change. Just call =x8dcc/beardbolt-disassemble= whenever needed with
+  =SPC m d=.
+
+#+begin_src emacs-lisp
+(use-package beardbolt
+  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
+  :config
+  (setq beardbolt-shuffle-rainbow t
+        beardbolt-compile-delay nil))
+#+end_src
+
+*** Whisper
+
+Speech-to-Text interface for Emacs. I am personally impressed about this being
+possible.
+
+The installation is ~200 MiB.
+
+#+begin_src emacs-lisp
+(use-package whisper
+  :straight (whisper :type git :host github :repo "natrys/whisper.el")
+  :config
+  (setq whisper-install-directory "~/.cache"
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        whisper-use-threads (/ (num-processors) 2)))
+#+end_src
+
+** Minor modes
+*** COMMENT Highlight indentation
 
 We will enable indentation guides in C mode by default. It can also be toggled
 with =SPC t C=, see [[*Space keybinds][Space keybinds]].
@@ -522,33 +648,7 @@ Set a global keybind.
 (x8dcc/def-keys "t C" '(highlight-indent-guides-mode :wk "Indent guides"))
 #+end_src
 
-** EMMS
-
-Enable the /Emacs Multi-Media System/ (EMMS).
-
-We add =--no-video= parameter for =mpv= so we can listen to YouTube videos.
-
-Since =emms-volume-*= changes the volume of the whole system, I added =--volume=X=
-to the =mpv= parameters, since it's always a bit loud by default.
-
-We set =emms-mode-line-mode= to zero so it displays only the time instead of the
-filename.
-
-#+begin_src emacs-lisp
-(use-package emms
-  :config
-  (emms-all)
-  (setq emms-player-list '(emms-player-mpv
-                           emms-player-vlc)
-        emms-player-mpv-parameters '("--quiet"
-                                     "--really-quiet"
-                                     "--no-audio-display"
-                                     "--no-video"
-                                     "--volume=50"))
-  (emms-mode-line-mode 0))
-#+end_src
-
-** Spelling
+*** Spelling
 
 We will use the =spell-fu= package for basic spelling. I don't use any packages
 for code completion or code syntax.
@@ -627,48 +727,16 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                         org-verbatim))))))
 #+end_src
 
-** Move text
+*** Highlight numbers
 
-For dragging lines with =M-<down>= and =M-<up>=. I started using [[https://github.com/rejeep/drag-stuff.el][drag-stuff.el]], but
-the code is full of errors that generate warnings and hasn't been updated in a
-long time.
-
-We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
-=M-<down>= and =M-<up>=.
+For highlighting numeric literals.
 
 #+begin_src emacs-lisp
-(use-package move-text
-  :straight (move-text :type git :host github :repo "8dcc/move-text")
-  :hook ((text-mode prog-mode) . move-text-mode)
-  :config
-  (move-text-default-bindings)
-  (keymap-set move-text-mode-map "M-j" 'move-text-down)
-  (keymap-set move-text-mode-map "M-k" 'move-text-up))
+(use-package highlight-numbers
+  :hook ((prog-mode . highlight-numbers-mode)))
 #+end_src
 
-** Highlight TODOs
-
-Highlight common keywords inside =org-mode= and =prog-mode=. The keywords themselves
-are defined in [[file:themes/modux-themes.el][modux-themes.el]].
-
-#+begin_src emacs-lisp
-(use-package hl-todo
-  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
-  :config
-  (setq hl-todo-highlight-punctuation ":"))
-#+end_src
-
-** Rainbow mode
-
-For displaying colors in the background of RGB strings.
-
-#+begin_src emacs-lisp
-(use-package rainbow-mode
-  :diminish
-  :hook ((html-mode css-mode js-mode)  . rainbow-mode))
-#+end_src
-
-** Rainbow delimiters
+*** Rainbow delimiters
 
 Add rainbow colors to parentheses.
 
@@ -684,54 +752,29 @@ Add rainbow colors to parentheses.
   (setq rainbow-delimiters-max-face-count 6))
 #+end_src
 
-** Highlight numbers
+*** Rainbow mode
 
-For highlighting numeric literals.
+For displaying colors in the background of RGB strings.
 
 #+begin_src emacs-lisp
-(use-package highlight-numbers
-  :hook ((prog-mode . highlight-numbers-mode)))
+(use-package rainbow-mode
+  :diminish
+  :hook ((html-mode css-mode js-mode)  . rainbow-mode))
 #+end_src
 
-** Clang format
+*** Highlight TODOs
 
-For formatting C files. You can find my =.clang-format= in my [[https://github.com/8dcc/linux-dotfiles/tree/main/dotfiles/clang-format][8dcc/linux-dotfiles]]
-repo.
+Highlight common keywords inside =org-mode= and =prog-mode=. The keywords themselves
+are defined in [[file:themes/modux-themes.el][modux-themes.el]].
 
 #+begin_src emacs-lisp
-(use-package clang-format
+(use-package hl-todo
+  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
-  (setq clang-format-style "file"))
+  (setq hl-todo-highlight-punctuation ":"))
 #+end_src
 
-** Htmlize
-
-Required by =org-html-export-to-html=.
-
-#+begin_src emacs-lisp
-(use-package htmlize)
-#+end_src
-
-** PDF tools
-
-Better PDF navigation.
-
-We remap evil's end-of-line function, since it moves the cursor, breaking
-navigation.
-
-#+begin_src emacs-lisp
-(use-package pdf-tools
-  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
-  :config
-  (pdf-tools-install)
-  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore)
-  (keymap-set pdf-view-mode-map "<remap> <evil-beginning-of-line>"
-              (lambda ()
-                (interactive)
-                (goto-char 0))))
-#+end_src
-
-** Git gutter fringe
+*** Git gutter fringe
 
 Show git changes in the fringe.
 
@@ -775,7 +818,29 @@ NOTE: For more information on creating the bitmaps easily with strings, see the
   (global-git-gutter-mode 1))
 #+end_src
 
-** COMMENT Whiteroom mode
+*** Big font
+
+Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
+
+#+begin_src emacs-lisp
+(use-package big-font
+  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
+  :config
+  (setq big-font-faces '((default        120 "Source Code Pro")
+                         (fixed-pitch    120 "Source Code Pro")
+                         (variable-pitch 150 "FreeSerif"))))
+#+end_src
+
+*** COMMENT C ElDoc
+
+Display description of the function under the cursor. See =eldoc-mode=.
+
+#+begin_src emacs-lisp
+(use-package c-eldoc
+  :hook ((c-mode . c-turn-on-eldoc-mode)))
+#+end_src
+
+*** COMMENT Whiteroom mode
 
 Great mode for distraction-free editing.
 
@@ -810,71 +875,8 @@ these lambdas.
   (x8dcc/def-keys "t z" '(writeroom-mode :wk "Zen mode")))
 #+end_src
 
-** COMMENT Nov.el
-
-Major mode for reading EPUBs in Emacs.
-
-#+begin_src emacs-lisp
-(use-package nov
-  :hook (nov-mode . (lambda () (display-line-numbers-mode 0)))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-#+end_src
-
-** Whisper
-
-Speech-to-Text interface for Emacs. I am personally impressed about this being
-possible.
-
-The installation is ~200 MiB.
-
-#+begin_src emacs-lisp
-(use-package whisper
-  :straight (whisper :type git :host github :repo "natrys/whisper.el")
-  :config
-  (setq whisper-install-directory "~/.cache"
-        whisper-model "base"
-        whisper-language "en"
-        whisper-translate nil
-        whisper-use-threads (/ (num-processors) 2)))
-#+end_src
-
-** Evil lion (alignment)
-
-Evil align operator, port of vim-lion by Tom McDonald.
-
-#+begin_src emacs-lisp
-(use-package evil-lion
-  :config
-  (setq evil-lion-left-align-key (kbd "g a"))
-  (setq evil-lion-right-align-key (kbd "g A"))
-  (evil-lion-mode))
-#+end_src
-
-** Big font
-
-Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
-
-#+begin_src emacs-lisp
-(use-package big-font
-  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
-  :config
-  (setq big-font-faces '((default        120 "Source Code Pro")
-                         (fixed-pitch    120 "Source Code Pro")
-                         (variable-pitch 150 "FreeSerif"))))
-#+end_src
-
-** Plumber
-
-Personal package for plumbing text, similar to Plan9. See the [[https://github.com/8dcc/plumber.el][repository README]]
-for more information.
-
-#+begin_src emacs-lisp
-(use-package plumber
-  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
-#+end_src
-
-** Markdown mode
+** Major modes
+*** Markdown mode
 
 Syntax highlighting and supporting commands for editing Markdown files.
 
@@ -882,7 +884,7 @@ Syntax highlighting and supporting commands for editing Markdown files.
 (use-package markdown-mode)
 #+end_src
 
-** AucTex
+*** AucTex
 
 Essential package for LaTeX editing, comes with a useful preview mode.
 
@@ -890,7 +892,52 @@ Essential package for LaTeX editing, comes with a useful preview mode.
 (use-package auctex)
 #+end_src
 
-** Ada mode
+*** PDF tools
+
+Better PDF navigation.
+
+We remap evil's end-of-line function, since it moves the cursor, breaking
+navigation.
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (pdf-tools-install)
+  (keymap-set pdf-view-mode-map "<remap> <evil-end-of-line>" #'ignore)
+  (keymap-set pdf-view-mode-map "<remap> <evil-beginning-of-line>"
+              (lambda ()
+                (interactive)
+                (goto-char 0))))
+#+end_src
+
+*** EMMS
+
+Enable the /Emacs Multi-Media System/ (EMMS).
+
+We add =--no-video= parameter for =mpv= so we can listen to YouTube videos.
+
+Since =emms-volume-*= changes the volume of the whole system, I added =--volume=X=
+to the =mpv= parameters, since it's always a bit loud by default.
+
+We set =emms-mode-line-mode= to zero so it displays only the time instead of the
+filename.
+
+#+begin_src emacs-lisp
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv
+                           emms-player-vlc)
+        emms-player-mpv-parameters '("--quiet"
+                                     "--really-quiet"
+                                     "--no-audio-display"
+                                     "--no-video"
+                                     "--volume=50"))
+  (emms-mode-line-mode 0))
+#+end_src
+
+*** Ada mode
 
 Major mode for programming in Ada. Mainstream version is out of date.
 
@@ -933,7 +980,7 @@ Some useful skeletons for Ada:
     "end " str ";" \n)
 #+end_src
 
-** COMMENT Ada TS mode
+*** COMMENT Ada TS mode
 
 Major mode for programming in Ada (with Tree-Sitter).
 
@@ -941,17 +988,7 @@ Major mode for programming in Ada (with Tree-Sitter).
 (use-package ada-ts-mode)
 #+end_src
 
-** COMMENT Graphviz dot mode
-
-For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
-
-#+begin_src emacs-lisp
-(use-package graphviz-dot-mode
-  :config
-  (setq graphviz-dot-indent-width 4))
-#+end_src
-
-** Guile Scheme
+*** Guile Scheme
 
 Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme implementation for [[https://www.nongnu.org/geiser/][Geiser]].
 
@@ -959,7 +996,7 @@ Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme impleme
 (use-package geiser-guile)
 #+end_src
 
-** Nasm mode
+*** Nasm mode
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
 
@@ -975,59 +1012,25 @@ Use it as the default mode for =.asm= files. For more information on
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
-** COMMENT C ElDoc
+*** COMMENT Nov.el
 
-Display description of the function under the cursor. See =eldoc-mode=.
+Major mode for reading EPUBs in Emacs.
 
 #+begin_src emacs-lisp
-(use-package c-eldoc
-  :hook ((c-mode . c-turn-on-eldoc-mode)))
+(use-package nov
+  :hook (nov-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 #+end_src
 
-** x86-lookup
+*** COMMENT Graphviz dot mode
 
-Quickly jump to x86 documentation from Emacs. See [[https://github.com/skeeto/x86-lookup][skeeto/x86-lookup]].
-
-#+begin_src emacs-lisp
-(use-package x86-lookup
-  :config
-  (setq x86-lookup-pdf
-        (concat user-emacs-directory "my-media/intel-sdm-vol2.pdf")
-        x86-lookup-browse-pdf-function
-        (lambda (pdf page)
-          (start-process "firefox" nil "firefox"
-                         (format "file://%s#page=%d" pdf page)))))
-#+end_src
-
-The volume 2 of the Intel SDM is included in this repository.
-
-** Beardbolt
-
-Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] package for disassembling C/C++ code in Emacs.
-
-- We set =beardbolt-shuffle-rainbow= to =t= increase contrast between blocks.
-- We set =beardbolt-compile-delay= to =nil= to disable automatic recompilation on
-  buffer change. Just call =x8dcc/beardbolt-disassemble= whenever needed with
-  =SPC m d=.
+For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
 
 #+begin_src emacs-lisp
-(use-package beardbolt
-  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
+(use-package graphviz-dot-mode
   :config
-  (setq beardbolt-shuffle-rainbow t
-        beardbolt-compile-delay nil))
-#+end_src
-
-** Webpaste
-
-Paste whole buffers or parts of buffers to several pastebin-like services.
-
-#+begin_src emacs-lisp
-(use-package webpaste
-  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
-  :config
-  (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
-        webpaste-paste-confirmation t))
+  (setq graphviz-dot-indent-width 4))
 #+end_src
 
 * Custom functions and macros
@@ -2286,7 +2289,6 @@ And also for the =rmail-summary-mode=.
 #+end_src
 
 * General visual settings
-
 ** Modeline
 
 Display line and column number on modeline, not just line.
@@ -2552,7 +2554,6 @@ Show trailing whitespaces.
 #+end_comment
 
 * General settings
-
 ** Codification
 
 Use UTF-8 as the default codification.
