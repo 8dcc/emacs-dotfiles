@@ -390,6 +390,10 @@ ALIGNMENT."
                          (fixed-pitch    120 "Source Code Pro")
                          (variable-pitch 150 "FreeSerif"))))
 
+(use-package hl-printf
+  :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
+  :hook ((c-mode-common . hl-printf-mode)))
+
 (use-package markdown-mode)
 
 (use-package auctex)

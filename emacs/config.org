@@ -831,6 +831,18 @@ Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
                          (variable-pitch 150 "FreeSerif"))))
 #+end_src
 
+*** Highlight printf
+
+Minor mode for highlighting =printf= format specifiers.
+
+TODO: Also highlight escaped characters like newlines, tabs, etc?
+
+#+begin_src emacs-lisp
+(use-package hl-printf
+  :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
+  :hook ((c-mode-common . hl-printf-mode)))
+#+end_src
+
 *** COMMENT C ElDoc
 
 Display description of the function under the cursor. See =eldoc-mode=.
