@@ -392,7 +392,16 @@ ALIGNMENT."
 
 (use-package hl-printf
   :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
-  :hook ((c-mode-common . hl-printf-mode)))
+  :hook ((c-mode-common . hl-printf-mode))
+  :config
+  (setq hl-printf-regexp
+        (rx (or (regexp hl-printf-regexp)
+                (seq "\\"
+                     (or "a" "b" "e" "f" "n" "r" "t" "v" "\\" "'" "\"" "?"
+                         (repeat 1 3 digit)
+                         (seq "x" (one-or-more hex-digit))
+                         (seq "u" (repeat 4 hex-digit))
+                         (seq "U" (repeat 8 hex-digit))))))))
 
 (use-package markdown-mode)
 

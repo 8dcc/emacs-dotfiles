@@ -835,12 +835,22 @@ Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
 
 Minor mode for highlighting =printf= format specifiers.
 
-TODO: Also highlight escaped characters like newlines, tabs, etc?
+We modify =hl-printf-regexp= to highlight escaped characters like newlines, tabs,
+etc.
 
 #+begin_src emacs-lisp
 (use-package hl-printf
   :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
-  :hook ((c-mode-common . hl-printf-mode)))
+  :hook ((c-mode-common . hl-printf-mode))
+  :config
+  (setq hl-printf-regexp
+        (rx (or (regexp hl-printf-regexp)
+                (seq "\\"
+                     (or "a" "b" "e" "f" "n" "r" "t" "v" "\\" "'" "\"" "?"
+                         (repeat 1 3 digit)
+                         (seq "x" (one-or-more hex-digit))
+                         (seq "u" (repeat 4 hex-digit))
+                         (seq "U" (repeat 8 hex-digit))))))))
 #+end_src
 
 *** COMMENT C ElDoc
