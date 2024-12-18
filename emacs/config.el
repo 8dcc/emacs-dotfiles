@@ -1898,6 +1898,48 @@ if necessary."
 
 (setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 
+(defconst x8dcc/authinfo-max-host-mails 10
+  "Maximum number of email addresses for a single host.
+Used as the \":max\" value for `auth-source-search' when called from
+`x8dcc/authinfo-get-host-mails'.")
+
+(defun x8dcc/authinfo-get-host-mails (host)
+  "Get a list of email addresses for the specified HOST.
+It will search in any of the `auth-sources' using `auth-source-search'.
+
+The HOST argument should be valid as the \":host\" value for
+`auth-source-search'. The returned list will be smaller or equal than
+`x8dcc/authinfo-max-mails'."
+  (mapcar (lambda (plist)
+            (plist-get plist :user))
+          (auth-source-search
+           :host host
+           :max x8dcc/authinfo-max-host-mails)))
+
+(defconst x8dcc/authinfo-mail-hosts
+  '("smtp.gmail.com")
+  "List of strings representing mail hosts for `x8dcc/authinfo-get-mails'.
+They should be valid as the \":host\" value for `auth-source-search'.")
+
+(defun x8dcc/authinfo-get-mails ()
+  "Get a list of email addresses from one of the `auth-sources'.
+
+This function will search for email addresses whose host matches one of the
+elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
+  (apply #'append
+         (mapcar #'x8dcc/authinfo-get-host-mails
+                 x8dcc/authinfo-mail-hosts)))
+
+(defun x8dcc/compose-mail-as (address)
+  (interactive
+   (list
+    (completing-read "Compose as (email): "
+                     (x8dcc/authinfo-get-mails)
+                     nil
+                     'confirm)))
+  (let ((user-mail-address address))
+    (call-interactively #'compose-mail)))
+
 (setq rmail-file-name (concat x8dcc/mail-directory "inbox")
       rmail-secondary-file-directory x8dcc/mail-directory)
 
