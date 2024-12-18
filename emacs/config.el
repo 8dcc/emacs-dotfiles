@@ -2129,10 +2129,10 @@ already have one. See `x8dcc/org-custom-id-get'."
   "Insert a basic Org header skeleton."
   nil
   '(setq str (skeleton-read "Title: "))
-  '(setq v1 (if (or (null str)
-                    (string-empty-p str))
-                (capitalize (file-name-base buffer-file-name))
-              str))
+  '(setq v1 (or (and (not (string-empty-p str))
+                     str)
+                (and buffer-file-name
+                     (capitalize (file-name-base buffer-file-name)))))
   "#+TITLE: " v1 "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+OPTIONS: toc:2\n"
@@ -2143,10 +2143,10 @@ already have one. See `x8dcc/org-custom-id-get'."
   "Insert an Org skeleton for blog articles."
   nil
   '(setq str (skeleton-read "Title: "))
-  '(setq v1 (if (or (null str)
-                    (string-empty-p str))
-                (capitalize (file-name-base buffer-file-name))
-              str))
+  '(setq v1 (or (and (not (string-empty-p str))
+                     str)
+                (and buffer-file-name
+                     (capitalize (file-name-base buffer-file-name)))))
   "#+TITLE: " v1 "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+OPTIONS: toc:nil\n"
@@ -2567,12 +2567,10 @@ Used for highlighting more constants with `font-lock-constant-face' in
 (define-skeleton x8dcc/skeleton-c-header
   "Insert a basic C header skeleton with include guards."
   nil
-  '(setq str (skeleton-read "Header name: "))
-  '(setq v1 (concat (upcase (if (or (null str)
-                                    (string-empty-p str))
-                                (file-name-base buffer-file-name)
-                              str))
-                    "_H_"))
+  '(setq str (skeleton-read "Header name: "
+                            (when buffer-file-name
+                              (upcase (file-name-base buffer-file-name)))))
+  '(setq v1 (concat (upcase str) "_H_"))
   "\n"
   "#ifndef " v1 "\n"
   "#define " v1 " 1\n\n"
