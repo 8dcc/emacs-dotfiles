@@ -3512,9 +3512,8 @@ They should be valid as the \":host\" value for `auth-source-search'.")
 
 This function will search for email addresses whose host matches one of the
 elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
-  (apply #'append
-         (mapcar #'x8dcc/authinfo-get-host-mails
-                 x8dcc/authinfo-mail-hosts)))
+  (mapcan #'x8dcc/authinfo-get-host-mails
+          x8dcc/authinfo-mail-hosts))
 #+end_src
 
 This function allows the user to chose an address from one of its =auth-sources=,

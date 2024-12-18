@@ -1926,9 +1926,8 @@ They should be valid as the \":host\" value for `auth-source-search'.")
 
 This function will search for email addresses whose host matches one of the
 elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
-  (apply #'append
-         (mapcar #'x8dcc/authinfo-get-host-mails
-                 x8dcc/authinfo-mail-hosts)))
+  (mapcan #'x8dcc/authinfo-get-host-mails
+          x8dcc/authinfo-mail-hosts))
 
 (defun x8dcc/compose-mail-as (address)
   (interactive
