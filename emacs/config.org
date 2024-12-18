@@ -3533,6 +3533,28 @@ TODO: Change =user-full-name= depending on the =address= argument.
     (call-interactively #'compose-mail)))
 #+end_src
 
+We make sure the right mail address is being set for SMTP in
+=message-send-mail-hook=.
+
+FIXME: This doesn't set the values, and setting the values manually in the
+=*mail*= buffer doesn't even affect SMTP.
+
+#+begin_comment emacs-lisp
+;; NOTE: Commented
+(add-hook
+ 'message-send-mail-hook
+ (lambda ()
+   (let ((from (mail-fetch-field "from")))
+     (when from
+       (let* ((components (mail-extract-address-components from))
+              (name (car components))
+              (addr (cadr components)))
+         (when name
+           (setq-local user-full-name name))
+         (when addr
+           (setq-local user-mail-address addr))))))
+#+end_comment
+
 *** Receiving mail (Rmail)
 
 Basic Rmail settings (See Section 30 /Reading Mail with Rmail/, of the Emacs
