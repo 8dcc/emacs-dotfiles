@@ -2104,14 +2104,15 @@ In any case, the CUSTOM_ID of the entry is returned."
         id)))))
 
 (defun x8dcc/org-custom-id-add-all ()
-  "Add CUSTOM_ID properties to all headlines in the current file which do not
-already have one. See `x8dcc/org-custom-id-get'."
+  "Add CUSTOM_ID properties to the necessary headlines in the current buffer.
+See also `x8dcc/org-custom-id-get'."
   (interactive)
   (org-map-entries
    (lambda ()
      (x8dcc/org-custom-id-get (point) 'create))))
 
 (defun x8dcc/org-custom-id-delete-all ()
+  "Delete all CUSTOM_ID properties from the current buffer."
   (interactive)
   (org-delete-property-globally "CUSTOM_ID"))
 
