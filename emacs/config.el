@@ -1473,6 +1473,12 @@ of characters, followed by the number of lines."
 (setq tab-bar-close-button-show nil
       tab-bar-new-button-show nil)
 
+(setq tab-bar-format
+      (thread-last
+        tab-bar-format
+        (remove 'tab-bar-format-history)
+        (remove 'tab-bar-format-add-tab)))
+
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
 

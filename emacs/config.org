@@ -2501,6 +2501,16 @@ Hide "New tab" and "Close tab" buttons.
       tab-bar-new-button-show nil)
 #+end_src
 
+Hide "Back" and "Forward" history buttons from the tab bar.
+
+#+begin_src emacs-lisp
+(setq tab-bar-format
+      (thread-last
+        tab-bar-format
+        (remove 'tab-bar-format-history)
+        (remove 'tab-bar-format-add-tab)))
+#+end_src
+
 ** Window settings
 
 Don't allow commands like =grep= (that use =display-buffer=) to create new windows
