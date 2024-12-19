@@ -1470,6 +1470,9 @@ of characters, followed by the number of lines."
 
 (setq tab-bar-show 1)
 
+(setq tab-bar-close-button-show nil
+      tab-bar-new-button-show nil)
+
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
 

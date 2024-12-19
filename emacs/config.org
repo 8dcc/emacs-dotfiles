@@ -2494,6 +2494,13 @@ Only show the tab bar if there are more than one tabs open.
 (setq tab-bar-show 1)
 #+end_src
 
+Hide "New tab" and "Close tab" buttons.
+
+#+begin_src emacs-lisp
+(setq tab-bar-close-button-show nil
+      tab-bar-new-button-show nil)
+#+end_src
+
 ** Window settings
 
 Don't allow commands like =grep= (that use =display-buffer=) to create new windows
