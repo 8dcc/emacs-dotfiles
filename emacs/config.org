@@ -3916,7 +3916,6 @@ function returns nil. However, when CREATE is non nil, create a CUSTOM_ID if
 none is present already.
 
 In any case, the CUSTOM_ID of the entry is returned."
-  (interactive)
   (org-with-point-at pom
     (let ((id (org-entry-get nil "CUSTOM_ID"))
           (headline (nth 4 (org-heading-components))))
