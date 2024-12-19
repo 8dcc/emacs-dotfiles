@@ -1466,6 +1466,8 @@ of characters, followed by the number of lines."
    TeX-mode-hook
    message-mode-hook))
 
+(tab-bar-history-mode 1)
+
 (setq tab-bar-show 1)
 
 (dolist (condition '("\\*vc-.+\\*"))

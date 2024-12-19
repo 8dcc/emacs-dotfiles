@@ -2481,6 +2481,13 @@ with =SPC t c=.
 
 ** Tab bar
 
+Enable window history. It can be navigated with =tab-bar-history-back= and
+=tab-bar-history-forward=.
+
+#+begin_src emacs-lisp
+(tab-bar-history-mode 1)
+#+end_src
+
 Only show the tab bar if there are more than one tabs open.
 
 #+begin_src emacs-lisp
