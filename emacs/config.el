@@ -2093,15 +2093,17 @@ In any case, the CUSTOM_ID of the entry is returned."
   (org-with-point-at pom
     (let ((id (org-entry-get nil "CUSTOM_ID"))
           (headline (nth 4 (org-heading-components))))
-      (cond
-       ((and id (stringp id) (string-match "\\S-" id))
-        id)
-       (create
+      (when (and (or (null id)
+                     (not (stringp id))
+                     (not (string-match "\\S-" id)))
+                 create)
+        ;; The entry has no ID, and we want to create one.
         (setq id (x8dcc/org-custom-id-make-unique
                   (x8dcc/org-headline-to-id
                    headline)))
-        (org-entry-put pom "CUSTOM_ID" id)
-        id)))))
+        (org-entry-put pom "CUSTOM_ID" id))
+      ;; Either way, return the ID.
+      id)))
 
 (defun x8dcc/org-custom-id-add-all ()
   "Add CUSTOM_ID properties to the necessary headlines in the current buffer.
