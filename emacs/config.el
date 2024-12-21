@@ -2138,6 +2138,41 @@ See also `x8dcc/org-custom-id-get'."
              -1))
           (setq fig-count (1+ fig-count)))))))
 
+(defun x8dcc/org-html-meta-tag-value (tags name)
+  "Get the value of the tag with the specified NAME in the TAGS list.
+
+For more information on the expected format of TAGS, see
+`org-html-meta-tags-default'."
+  (cond ((null tags)
+         nil)
+        ((and (listp (car tags))
+              (cadar tags)
+              (string-match-p name (cadar tags)))
+         (caddar tags))
+        (t
+         (x8dcc/org-html-meta-tag-value (cdr tags) name))))
+
+(defun x8dcc/org-html-extra-meta-tags (info)
+  "Add extra meta tags for generating an HTML file."
+  (let* ((original-tags
+          (org-html-meta-tags-default info))
+         (description
+          (x8dcc/org-html-meta-tag-value original-tags "description"))
+         (raw-title
+          (plist-get info :title))
+         (title
+          (and raw-title (org-element-interpret-data raw-title))))
+    (thread-last
+      original-tags
+      (append
+       (when description
+         (list (list "property" "og:description" description))))
+      (append
+       (when title
+         (list (list "property" "og:title" title)))))))
+
+(setq org-html-meta-tags #'x8dcc/org-html-extra-meta-tags)
+
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
