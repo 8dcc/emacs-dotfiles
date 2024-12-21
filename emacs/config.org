@@ -3984,6 +3984,59 @@ Weep searching for that regexp until we are done.
 
 TODO: Add IDs to examples.
 
+*** Org extra HTML metadata
+
+First, define a function for obtaining the value of a tag from its name.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-html-meta-tag-value (tags name)
+  "Get the value of the tag with the specified NAME in the TAGS list.
+
+For more information on the expected format of TAGS, see
+`org-html-meta-tags-default'."
+  (cond ((null tags)
+         nil)
+        ((and (listp (car tags))
+              (cadar tags)
+              (string-match-p name (cadar tags)))
+         (caddar tags))
+        (t
+         (x8dcc/org-html-meta-tag-value (cdr tags) name))))
+#+end_src
+
+Define a function that adds =og:...= properties to HTML exports, based on the
+original output from =org-html-meta-tags-default=. Tested with Org 9.6.15.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-html-extra-meta-tags (info)
+  "Add extra meta tags for generating an HTML file."
+  (let* ((original-tags
+          (org-html-meta-tags-default info))
+         (description
+          (x8dcc/org-html-meta-tag-value original-tags "description"))
+         (raw-title
+          (plist-get info :title))
+         (title
+          (and raw-title (org-element-interpret-data raw-title))))
+    (thread-last
+      original-tags
+      (append
+       (when description
+         (list (list "property" "og:description" description))))
+      (append
+       (when title
+         (list (list "property" "og:title" title)))))))
+#+end_src
+
+#+RESULTS:
+: x8dcc/org-html-extra-meta-tags
+
+Then, overwrite =org-html-meta-tags= to our function.
+
+#+begin_src emacs-lisp
+(setq org-html-meta-tags #'x8dcc/org-html-extra-meta-tags)
+#+end_src
+
 *** Org skeletons
 
 Simple skeleton for Org files.
