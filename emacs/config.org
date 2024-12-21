@@ -4028,9 +4028,6 @@ original output from =org-html-meta-tags-default=. Tested with Org 9.6.15.
          (list (list "property" "og:title" title)))))))
 #+end_src
 
-#+RESULTS:
-: x8dcc/org-html-extra-meta-tags
-
 Then, overwrite =org-html-meta-tags= to our function.
 
 #+begin_src emacs-lisp
