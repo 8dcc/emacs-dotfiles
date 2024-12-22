@@ -8,7 +8,10 @@ EMACSDIR="${HOME}/.emacs.d"
 REPODIR="$(pwd)/emacs"
 
 symlink_item() {
-    ln -s "${REPODIR}/$1" "${EMACSDIR}/$1"
+    # It's important to use the '--target-directory' option: when trying to
+    # symlink to a directory "foo", if it already exists, a "foo/foo" symlink
+    # is created instead, even with '--force'.
+    ln --symbolic --force "${REPODIR}/$1" --target-directory="$EMACSDIR"
 }
 
 read -p "Symlinking from '$REPODIR' to '$EMACSDIR'. Press any key..."
