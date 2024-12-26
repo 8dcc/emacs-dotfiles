@@ -2113,8 +2113,8 @@ See also `x8dcc/org-custom-id-get'."
    (lambda ()
      (x8dcc/org-custom-id-get (point) 'create))))
 
-(defun x8dcc/org-custom-id-delete-all ()
-  "Delete all CUSTOM_ID properties from the current buffer."
+(defun x8dcc/org-custom-id-remove-all ()
+  "Remove all CUSTOM_ID properties from the current buffer."
   (interactive)
   (org-delete-property-globally "CUSTOM_ID"))
 
