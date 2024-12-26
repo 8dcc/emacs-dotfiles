@@ -897,6 +897,21 @@ these lambdas.
   (x8dcc/def-keys "t z" '(writeroom-mode :wk "Zen mode")))
 #+end_src
 
+*** Replace form feeds
+
+It's not uncommon to see the /form feed/ character (ASCII 0xC) in Emacs Lisp code
+for separating sections. The following package replaces the ugly =^L= display with a
+horizontal line.
+
+#+begin_src emacs-lisp
+(use-package page-break-lines
+  :diminish
+  :hook (emacs-lisp-mode . page-break-lines-mode)
+  :config
+  (setq page-break-lines-max-width fill-column
+        page-break-lines-char ?-))
+#+end_src
+
 ** Major modes
 *** Markdown mode
 

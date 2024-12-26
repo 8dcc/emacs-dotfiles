@@ -403,6 +403,13 @@ ALIGNMENT."
                          (seq "u" (repeat 4 hex-digit))
                          (seq "U" (repeat 8 hex-digit))))))))
 
+(use-package page-break-lines
+  :diminish
+  :hook (emacs-lisp-mode . page-break-lines-mode)
+  :config
+  (setq page-break-lines-max-width fill-column
+        page-break-lines-char ?-))
+
 (use-package markdown-mode)
 
 (use-package auctex)
