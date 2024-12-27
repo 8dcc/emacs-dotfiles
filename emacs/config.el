@@ -2141,17 +2141,43 @@ See also `x8dcc/org-custom-id-get'."
       "]]")
   "Regular expression used to match figures (images) in Org buffers.")
 
+(defconst x8dcc/org-example-re
+  (rx line-start
+      (or "#+BEGIN_EXAMPLE"
+          "#+begin_example"))
+  "Regular expression used to match example blocks in Org buffers.")
+
+(defun x8dcc/org-add-name-to-regexps (regexp prefix &optional extra-predicate)
+  "Add Org IDs to all occurrences of REGEXP in the current buffer.
+The ID will be the PREFIX argument plus a counter.
+
+If the optional argument EXTRA-PREDICATE is non-nil, it should be a function
+that must return non-nil in case of success. This function can operate on the
+match data, for example.
+
+Uses the `x8dcc/insert-line-below' function."
+  (let ((counter 1))
+    (org-with-point-at (point-min)
+      (save-match-data
+        (while (re-search-forward regexp (point-max) t)
+          (when (or (null extra-predicate)
+                    (funcall extra-predicate))
+            (org-with-point-at (match-beginning 0)
+              (x8dcc/insert-line-below
+               (concat "#+NAME: " prefix (number-to-string counter))
+               -1))
+            (setq counter (1+ counter))))))))
+
 (defun x8dcc/org-ids-add-figures ()
   (interactive)
-  (let ((fig-count 1))
-    (org-with-point-at (point-min)
-      (while (re-search-forward x8dcc/org-figure-re (point-max) t)
-        (when (x8dcc/is-image (match-string 1))
-          (org-with-point-at (match-beginning 0)
-            (x8dcc/insert-line-below
-             (concat "#+NAME: fig" (number-to-string fig-count))
-             -1))
-          (setq fig-count (1+ fig-count)))))))
+  (x8dcc/org-add-name-to-regexps x8dcc/org-figure-re
+                                 "fig"
+                                 (lambda ()
+                                   (x8dcc/is-image (match-string 1)))))
+
+(defun x8dcc/org-ids-add-examples ()
+  (interactive)
+  (x8dcc/org-add-name-to-regexps x8dcc/org-example-re "example"))
 
 (defun x8dcc/org-html-meta-tag-value (tags name)
   "Get the value of the tag with the specified NAME in the TAGS list.
