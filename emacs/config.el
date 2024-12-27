@@ -2001,27 +2001,6 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
                              (scheme . t)
                              (shell . t)))
 
-(setq org-html-postamble nil
-      org-export-time-stamp-file nil)
-
-(setq org-export-with-smart-quotes t)
-
-(setq org-html-prefer-user-labels t
-      org-latex-prefer-user-labels t)
-
-(setq org-latex-title-command "\\maketitle\n\\clearpage"
-      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
-
-(setq org-latex-hyperref-template
-      "\\hypersetup{
-          pdfauthor={%a},
-          pdftitle={%t},
-          pdfkeywords={%k},
-          pdfsubject={%d},
-          pdflang={%L},
-          hidelinks
-       }\n")
-
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t
@@ -2044,6 +2023,27 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
 (set-face-attribute 'org-headline-done nil :inherit 'shadow)
 
 (setq org-highlight-latex-and-related '(latex entities))
+
+(setq org-html-postamble nil
+      org-export-time-stamp-file nil)
+
+(setq org-export-with-smart-quotes t)
+
+(setq org-html-prefer-user-labels t
+      org-latex-prefer-user-labels t)
+
+(setq org-latex-title-command "\\maketitle\n\\clearpage"
+      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
+
+(setq org-latex-hyperref-template
+      "\\hypersetup{
+          pdfauthor={%a},
+          pdftitle={%t},
+          pdfkeywords={%k},
+          pdfsubject={%d},
+          pdflang={%L},
+          hidelinks
+       }\n")
 
 (setq org-default-notes-file (concat org-directory "notes.org"))
 

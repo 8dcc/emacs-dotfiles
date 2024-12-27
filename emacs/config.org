@@ -3697,57 +3697,6 @@ matters.
                              (shell . t)))
 #+end_src
 
-Disable footers in HTML exports.
-
-#+begin_src emacs-lisp
-(setq org-html-postamble nil
-      org-export-time-stamp-file nil)
-#+end_src
-
-Use smart quotes when exporting to HTML or LaTeX.
-
-#+begin_src emacs-lisp
-(setq org-export-with-smart-quotes t)
-#+end_src
-
-Prefer user labels when exporting to HTML or LaTeX.
-
-#+begin_src emacs-lisp
-(setq org-html-prefer-user-labels t
-      org-latex-prefer-user-labels t)
-#+end_src
-
-Use different pages for the title and TOC in LaTeX.
-
-#+begin_src emacs-lisp
-(setq org-latex-title-command "\\maketitle\n\\clearpage"
-      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
-#+end_src
-
-Hide link borders in PDF exports.
-
-#+begin_src emacs-lisp
-(setq org-latex-hyperref-template
-      "\\hypersetup{
-          pdfauthor={%a},
-          pdftitle={%t},
-          pdfkeywords={%k},
-          pdfsubject={%d},
-          pdflang={%L},
-          hidelinks
-       }\n")
-#+end_src
-
-NOTE: You will probably need the following packages for exporting PDF files:
-
-#+begin_src bash
-# Arch:
-sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaingeneric
-
-# Gentoo (untested):
-sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
-#+end_src
-
 *** Org visual settings
 
 Org visual settings.
@@ -3815,6 +3764,59 @@ Show LaTeX entities and expressions in a different face.
 
 #+begin_src emacs-lisp
 (setq org-highlight-latex-and-related '(latex entities))
+#+end_src
+
+*** Org export settings
+
+Disable footers in HTML exports.
+
+#+begin_src emacs-lisp
+(setq org-html-postamble nil
+      org-export-time-stamp-file nil)
+#+end_src
+
+Use smart quotes when exporting to HTML or LaTeX.
+
+#+begin_src emacs-lisp
+(setq org-export-with-smart-quotes t)
+#+end_src
+
+Prefer user labels when exporting to HTML or LaTeX.
+
+#+begin_src emacs-lisp
+(setq org-html-prefer-user-labels t
+      org-latex-prefer-user-labels t)
+#+end_src
+
+Use different pages for the title and TOC in LaTeX.
+
+#+begin_src emacs-lisp
+(setq org-latex-title-command "\\maketitle\n\\clearpage"
+      org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
+#+end_src
+
+Hide link borders in PDF exports.
+
+#+begin_src emacs-lisp
+(setq org-latex-hyperref-template
+      "\\hypersetup{
+          pdfauthor={%a},
+          pdftitle={%t},
+          pdfkeywords={%k},
+          pdfsubject={%d},
+          pdflang={%L},
+          hidelinks
+       }\n")
+#+end_src
+
+NOTE: You will probably need the following packages for exporting PDF files:
+
+#+begin_src bash
+# Arch:
+sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaingeneric
+
+# Gentoo (untested):
+sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
 #+end_src
 
 *** Org capture
