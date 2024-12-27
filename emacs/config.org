@@ -3788,6 +3788,16 @@ Prefer user labels when exporting to HTML or LaTeX.
       org-latex-prefer-user-labels t)
 #+end_src
 
+Change the HTML for the "Up | Home" buttons.
+
+#+begin_src emacs-lisp
+(setq
+ org-html-home/up-format
+ "<div id=\"org-div-home-and-up\">
+  <a accesskey=\"u\" href=\"%s\">Up</a> | <a accesskey=\"h\" href=\"%s\">Home</a>
+</div>")
+#+end_src
+
 Use different pages for the title and TOC in LaTeX.
 
 #+begin_src emacs-lisp

@@ -2032,6 +2032,12 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
 (setq org-html-prefer-user-labels t
       org-latex-prefer-user-labels t)
 
+(setq
+ org-html-home/up-format
+ "<div id=\"org-div-home-and-up\">
+  <a accesskey=\"u\" href=\"%s\">Up</a> | <a accesskey=\"h\" href=\"%s\">Home</a>
+</div>")
+
 (setq org-latex-title-command "\\maketitle\n\\clearpage"
       org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
 
