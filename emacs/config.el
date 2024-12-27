@@ -2120,7 +2120,7 @@ In any case, the CUSTOM_ID of the entry is returned."
       ;; Either way, return the ID.
       id)))
 
-(defun x8dcc/org-custom-id-add-all ()
+(defun x8dcc/org-ids-add-headings ()
   "Add CUSTOM_ID properties to the necessary headlines in the current buffer.
 See also `x8dcc/org-custom-id-get'."
   (interactive)
@@ -2128,7 +2128,7 @@ See also `x8dcc/org-custom-id-get'."
    (lambda ()
      (x8dcc/org-custom-id-get (point) 'create))))
 
-(defun x8dcc/org-custom-id-remove-all ()
+(defun x8dcc/org-ids-remove-headings ()
   "Remove all CUSTOM_ID properties from the current buffer."
   (interactive)
   (org-delete-property-globally "CUSTOM_ID"))
