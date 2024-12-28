@@ -2238,13 +2238,11 @@ For more information on the expected format of TAGS, see
                      (capitalize (file-name-base buffer-file-name)))))
   "#+TITLE: " v1 "\n"
   "#+AUTHOR: " user-full-name "\n"
-  "#+OPTIONS: toc:nil\n"
   "#+STARTUP: nofold\n"
   "#+HTML_HEAD: <link rel=\"icon\" type=\"image/x-icon\" href=\"../img/favicon.png\">\n"
-  "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">\n\n"
-  "[[file:../index.org][Index]] | [[file:index.org][Up]]\n\n"
-  "-----\n\n"
-  "#+TOC: headlines 2\n\n"
+  "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">\n"
+  "#+HTML_LINK_UP: index.html\n"
+  "#+HTML_LINK_HOME: ../index.html\n\n"
   "* Introduction\n\n"
   _ \n)
 
