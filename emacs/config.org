@@ -608,6 +608,14 @@ The installation is ~200 MiB.
         whisper-use-threads (/ (num-processors) 2)))
 #+end_src
 
+*** COMMENT Mentor
+
+Emacs frontend for the [[https://github.com/rakshasa/rtorrent][rTorrent]] bittorrent client.
+
+#+begin_src emacs-lisp
+(use-package mentor)
+#+end_src
+
 ** Minor modes
 *** COMMENT Highlight indentation
 
