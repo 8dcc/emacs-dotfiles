@@ -1867,8 +1867,7 @@ if necessary."
 (setq erc-log-write-after-send t
       erc-log-write-after-insert t)
 
-(setq erc-stamp-mode t
-      erc-hide-timestamps t)
+(setq erc-stamp-mode t)
 
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 

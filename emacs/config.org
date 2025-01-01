@@ -3362,11 +3362,10 @@ Enable logging.
       erc-log-write-after-insert t)
 #+end_src
 
-Enable timestamps, but only for logs.
+Enable timestamps.
 
 #+begin_src emacs-lisp
-(setq erc-stamp-mode t
-      erc-hide-timestamps t)
+(setq erc-stamp-mode t)
 #+end_src
 
 *** ERC visual settings
