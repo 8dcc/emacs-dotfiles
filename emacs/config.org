@@ -3378,9 +3378,6 @@ Hide joins/leaves/quits.
 
 Fill messages to specific column.
 
-TODO: Sometimes, depending on the line width, a blank line is printed. Not sure
-what specific setting is responsible for this.
-
 #+begin_src emacs-lisp
 (setq erc-fill-column 80)
 
