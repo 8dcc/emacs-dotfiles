@@ -1057,7 +1057,7 @@ Use it as the default mode for =.asm= files. For more information on
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 #+end_src
 
-*** COMMENT Nov.el
+*** Nov.el
 
 Major mode for reading EPUBs in Emacs.
 

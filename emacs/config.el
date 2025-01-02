@@ -472,6 +472,12 @@ ALIGNMENT."
 
 (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
 
+(use-package nov
+  :hook (nov-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (setq nov-text-width 80)
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+
 (defun x8dcc/non-empty-string-p (str)
   (and str (not (string-empty-p str))))
 
