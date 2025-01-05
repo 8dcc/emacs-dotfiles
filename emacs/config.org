@@ -3227,7 +3227,7 @@ Enable ERC features:
 - [[https://www.emacswiki.org/emacs/ErcChannelTracking][Track]] is used for keeping track of non-visible channels (e.g. modeline
   notifications).
 - [[https://www.gnu.org/software/emacs/manual/html_node/erc/SASL.html][SASL]] will be used for logging into /some/ servers. It's enabled when necessary
-  from =x8dcc/erc-launch=, defined below.
+  from =x8dcc/erc-launch=, defined below. See also [[https://datatracker.ietf.org/doc/html/rfc4422][RFC 4422]] and [[https://datatracker.ietf.org/doc/html/rfc4616][RFC 4616]].
 
 #+begin_src emacs-lisp
 (require 'erc)
