@@ -2625,6 +2625,12 @@ Show trailing whitespaces.
             (setq show-trailing-whitespace t)))
 #+end_comment
 
+Increase indentation for =speedbar=.
+
+#+begin_src emacs-lisp
+(setq speedbar-indentation-width 2)
+#+end_src
+
 * General settings
 ** Codification
 

@@ -1523,6 +1523,8 @@ of characters, followed by the number of lines."
                     (up     . left)
                     (down   . left)))))
 
+(setq speedbar-indentation-width 2)
+
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-keyboard-coding-system 'utf-8-unix)
