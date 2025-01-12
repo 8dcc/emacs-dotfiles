@@ -1759,6 +1759,8 @@ different rules in `display-buffer-alist'."
 
 (setq eshell-hist-ignoredups t)
 
+(setq eshell-history-size 1000)
+
 (add-hook 'eshell-mode-hook
           (lambda ()
             (setq-local tab-width 4)))

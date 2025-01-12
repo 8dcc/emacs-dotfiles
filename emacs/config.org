@@ -3136,6 +3136,12 @@ Don't show duplicated entries in the eshell history.
 (setq eshell-hist-ignoredups t)
 #+end_src
 
+Increase the history size.
+
+#+begin_src emacs-lisp
+(setq eshell-history-size 1000)
+#+end_src
+
 The default =tab-width= is overwritten in =esh-mode.el=.
 
 TODO: Instead of hardcoding "4" again, set it to the global value directly,
