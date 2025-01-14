@@ -359,7 +359,13 @@ and the non-normal prefix is \"M-SPC\"."
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
-  (setq hl-todo-highlight-punctuation ":"))
+  (setq hl-todo-highlight-punctuation ":")
+  (add-hook 'modux-themes-after-load-theme-hook
+            (lambda ()
+              (dolist (buf (buffer-list))
+                (with-current-buffer buf
+                  (when hl-todo-mode
+                    (font-lock-flush)))))))
 
 (defun x8dcc/set-lower-bits (n)
   "Return an integer with the N lower (rightmost) bits set."

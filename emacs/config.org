@@ -775,14 +775,20 @@ For displaying colors in the background of RGB strings.
 Highlight common keywords inside =org-mode= and =prog-mode=. The keywords themselves
 are defined in [[file:themes/modux-themes.el][modux-themes.el]].
 
-TODO: In =modux-themes-after-load-theme-hook=, disable and enable =hl-todo= (if it
-was enabled). See [[https://github.com/tarsius/hl-todo/discussions/85][GitHub discussion]].
+In =modux-themes-after-load-theme-hook=, disable and enable =hl-todo= (if it was
+enabled). See [[https://github.com/tarsius/hl-todo/discussions/85][GitHub discussion]].
 
 #+begin_src emacs-lisp
 (use-package hl-todo
   :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
   :config
-  (setq hl-todo-highlight-punctuation ":"))
+  (setq hl-todo-highlight-punctuation ":")
+  (add-hook 'modux-themes-after-load-theme-hook
+            (lambda ()
+              (dolist (buf (buffer-list))
+                (with-current-buffer buf
+                  (when hl-todo-mode
+                    (font-lock-flush)))))))
 #+end_src
 
 *** Git gutter fringe
