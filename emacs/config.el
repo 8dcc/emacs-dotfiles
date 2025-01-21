@@ -1190,6 +1190,7 @@ between `read' and `rx'."
   "v l f" '(vc-print-log        :wk "Current file")
   "v l l" '(vc-print-root-log   :wk "Root")
   "v l o" '(vc-log-outgoing     :wk "Outgoing")
+  "v l r" '(vc-region-history   :wk "Region")
   ;; Version control -> Stash
   "v z"   '(:ignore t          :wk "Git stash")
   "v z a" '(vc-git-stash-apply :wk "Apply")
