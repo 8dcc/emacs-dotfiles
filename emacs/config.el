@@ -881,6 +881,18 @@ Alternatively, you could use `hl-todo--regexp'.")
     (read-directory-name "Base directory: " nil default-directory t)))
   (rgrep x8dcc/grep-todos-regexp files dir))
 
+(defun x8dcc/highlight-regexp (regexp)
+  "Highlight REGEXP, defaulting to the symbol at point.
+
+It highlights with `highlight-regexp', and finds the symbol at point with
+`find-tag-default-as-symbol-regexp'. See also `highlight-symbol-at-point'."
+  (interactive
+   (list
+    (hi-lock-regexp-okay
+     (read-regexp "Regexp to highlight"
+                  (find-tag-default-as-symbol-regexp)))))
+  (highlight-regexp regexp))
+
 (defun x8dcc/reb-change-syntax (new-syntax)
   "Set `reb-re-syntax' to the specified value. When called interactively, switch
 between `read' and `rx'."
@@ -1137,7 +1149,7 @@ between `read' and `rx'."
   ;; Search
   "s"   '(:ignore t                    :wk "Search")
   "s g" '(rgrep                        :wk "Grep (recursive)")
-  "s h" '(highlight-regexp             :wk "Highlight")
+  "s h" '(x8dcc/highlight-regexp       :wk "Highlight")
   "s H" '(unhighlight-regexp           :wk "Unhighlight")
   "s o" '(occur                        :wk "Occurrences")
   "s r" '(query-replace                :wk "Replace (query)")
