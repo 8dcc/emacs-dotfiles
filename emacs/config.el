@@ -894,6 +894,23 @@ It highlights with `highlight-regexp', and finds the symbol at point with
     (hi-lock-read-face-name)))
   (highlight-regexp regexp face))
 
+(defvar x8dcc/query-replace-symbol-history nil
+  "History for `x8dcc/query-replace-symbol'.")
+
+(defun x8dcc/query-replace-symbol (old new)
+  "Replace the symbol OLD with NEW using `query-replace-regexp'."
+  (interactive
+   (list
+    (let ((at-point (symbol-name (symbol-at-point)))
+          (minibuffer-default-prompt-format " (default ‘%s’)"))
+      (read-string (format-prompt "Old symbol" at-point)
+                   nil 'x8dcc/query-replace-symbol-history at-point))
+    (read-string "New symbol: " nil 'x8dcc/query-replace-symbol-history)))
+  (query-replace-regexp (rx symbol-start
+                            (literal old)
+                            symbol-end)
+                        new))
+
 (defun x8dcc/reb-change-syntax (new-syntax)
   "Set `reb-re-syntax' to the specified value. When called interactively, switch
 between `read' and `rx'."
