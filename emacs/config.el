@@ -881,7 +881,7 @@ Alternatively, you could use `hl-todo--regexp'.")
     (read-directory-name "Base directory: " nil default-directory t)))
   (rgrep x8dcc/grep-todos-regexp files dir))
 
-(defun x8dcc/highlight-regexp (regexp)
+(defun x8dcc/highlight-regexp (regexp &optional face)
   "Highlight REGEXP, defaulting to the symbol at point.
 
 It highlights with `highlight-regexp', and finds the symbol at point with
@@ -890,8 +890,9 @@ It highlights with `highlight-regexp', and finds the symbol at point with
    (list
     (hi-lock-regexp-okay
      (read-regexp "Regexp to highlight"
-                  (find-tag-default-as-symbol-regexp)))))
-  (highlight-regexp regexp))
+                  (find-tag-default-as-symbol-regexp)))
+    (hi-lock-read-face-name)))
+  (highlight-regexp regexp face))
 
 (defun x8dcc/reb-change-syntax (new-syntax)
   "Set `reb-re-syntax' to the specified value. When called interactively, switch

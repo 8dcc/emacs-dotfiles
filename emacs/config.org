@@ -1643,7 +1643,7 @@ Alternatively, you could use `hl-todo--regexp'.")
 Wrapper for =highlight-regexp= that defaults to the symbol at point.
 
 #+begin_src emacs-lisp
-(defun x8dcc/highlight-regexp (regexp)
+(defun x8dcc/highlight-regexp (regexp &optional face)
   "Highlight REGEXP, defaulting to the symbol at point.
 
 It highlights with `highlight-regexp', and finds the symbol at point with
@@ -1652,8 +1652,9 @@ It highlights with `highlight-regexp', and finds the symbol at point with
    (list
     (hi-lock-regexp-okay
      (read-regexp "Regexp to highlight"
-                  (find-tag-default-as-symbol-regexp)))))
-  (highlight-regexp regexp))
+                  (find-tag-default-as-symbol-regexp)))
+    (hi-lock-read-face-name)))
+  (highlight-regexp regexp face))
 #+end_src
 
 Switch between ='read= and ='rx= syntax for =re-builder=.
