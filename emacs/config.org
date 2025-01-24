@@ -1643,6 +1643,8 @@ Alternatively, you could use `hl-todo--regexp'.")
 Wrapper for =highlight-regexp= that defaults to the symbol at point.
 
 #+begin_src emacs-lisp
+(load-library "hi-lock")
+
 (defun x8dcc/highlight-regexp (regexp &optional face)
   "Highlight REGEXP, defaulting to the symbol at point.
 

@@ -881,6 +881,8 @@ Alternatively, you could use `hl-todo--regexp'.")
     (read-directory-name "Base directory: " nil default-directory t)))
   (rgrep x8dcc/grep-todos-regexp files dir))
 
+(load-library "hi-lock")
+
 (defun x8dcc/highlight-regexp (regexp &optional face)
   "Highlight REGEXP, defaulting to the symbol at point.
 
