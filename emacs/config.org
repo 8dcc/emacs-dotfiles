@@ -735,6 +735,15 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                         org-verbatim))))))
 #+end_src
 
+*** Syntax highlighting (flycheck)
+
+For checking for syntax errors in code. The [[https://www.flycheck.org/en/latest/][flycheck]] package is an alternative
+to Emacs' [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Flymake.html][flymake]].
+
+#+begin_src emacs-lisp
+(use-package flycheck)
+#+end_src
+
 *** Highlight numbers
 
 For highlighting numeric literals.

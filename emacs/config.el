@@ -339,6 +339,8 @@ and the non-normal prefix is \"M-SPC\"."
                         org-todo-keyword-wait
                         org-verbatim))))))
 
+(use-package flycheck)
+
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
 
