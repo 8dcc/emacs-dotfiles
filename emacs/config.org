@@ -740,6 +740,9 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
 For checking for syntax errors in code. The [[https://www.flycheck.org/en/latest/][flycheck]] package is an alternative
 to Emacs' [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Flymake.html][flymake]].
 
+We set =flycheck-check-syntax-automatically= so it only checks the syntax when we
+save the buffer, not whenever we type a newline.
+
 We modify =flycheck-mode-line= so it checks if the mode line text is =FlyC-=
 (i.e. if flycheck is not enabled in this buffer), since we can't [[*Diminish][diminish]] /some/
 mode line texts.
@@ -747,6 +750,7 @@ mode line texts.
 #+begin_src emacs-lisp
 (use-package flycheck
   :config
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
   (setq flycheck-mode-line
         '(:eval
           (let ((status-text (flycheck-mode-line-status-text)))

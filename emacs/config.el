@@ -341,6 +341,7 @@ and the non-normal prefix is \"M-SPC\"."
 
 (use-package flycheck
   :config
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
   (setq flycheck-mode-line
         '(:eval
           (let ((status-text (flycheck-mode-line-status-text)))
