@@ -339,7 +339,13 @@ and the non-normal prefix is \"M-SPC\"."
                         org-todo-keyword-wait
                         org-verbatim))))))
 
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (setq flycheck-mode-line
+        '(:eval
+          (let ((status-text (flycheck-mode-line-status-text)))
+            (and (not (string-match-p "-\\'" status-text))
+                 status-text)))))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
