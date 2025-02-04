@@ -9,7 +9,10 @@
 (load custom-file)
 
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
-(load-theme 'modux-vivendi)
+(load-theme
+ (if (<= 9 (nth 2 (decode-time)) 19)
+     'modux-operandi
+   'modux-vivendi))
 
 (setq inhibit-startup-message t)
 

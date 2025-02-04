@@ -47,11 +47,15 @@ information, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sav
 (load custom-file)
 #+end_src
 
-Load my custom theme from =~/.emacs.d/themes/modux-vivendi-theme.el=.
+Load my custom theme from =~/.emacs.d/themes/modux-*-theme.el=. We load a
+different theme depending on the hour of the day when Emacs was started.
 
 #+begin_src emacs-lisp
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
-(load-theme 'modux-vivendi)
+(load-theme
+ (if (<= 9 (nth 2 (decode-time)) 19)
+     'modux-operandi
+   'modux-vivendi))
 #+end_src
 
 Disable emacs' startup message.
