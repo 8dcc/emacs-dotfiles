@@ -213,6 +213,7 @@ and the non-normal prefix is \"M-SPC\"."
                      "*scratch*"
                      "*Macroexpansion*"
                      "*xref*"
+                     "*Flycheck errors*"
                      ,shell-command-buffer-name-async))
     (if (stringp element)
         (setq element (concat "^" (regexp-quote element) "$")))
