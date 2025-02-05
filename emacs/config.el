@@ -1087,14 +1087,15 @@ between `read' and `rx'."
   "b S"       '(write-file                       :wk "Save as")
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
-  ;; Comment
-  "c"   '(:ignore t               :wk "Comment")
-  "c b" '(comment-box             :wk "Box")
-  "c c" '(comment-dwim            :wk "DWIM")
-  "c i" '(comment-indent          :wk "Indent")
-  "c l" '(comment-line            :wk "Line")
-  "c r" '(comment-region          :wk "Region")
-  "c s" '(x8dcc/comment-separator :wk "Insert separator")
+  ;; Code
+  "c"   '(:ignore t               :wk "Code")
+  "c c" '(comment-dwim            :wk "Comment (DWIM)")
+  "c S" '(x8dcc/comment-separator :wk "Separator comment")
+  ;; Code -> Syntax
+  "c s"   '(:ignore t                       :wk "Syntax")
+  "c s ?" '(flycheck-explain-error-at-point :wk "Explain error")
+  "c s s" '(flycheck-buffer                 :wk "Check syntax")
+  "c s l" '(flycheck-list-errors            :wk "List syntax errors")
   ;; Evaluate
   "e"   '(:ignore t        :wk "Evaluate")
   "e b" '(eval-buffer      :wk "Current buffer")
