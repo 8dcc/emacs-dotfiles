@@ -2859,6 +2859,14 @@ You can set these to =nil= to enable permanent highlighting of the search.
       lazy-highlight-max-at-a-time nil)
 #+end_src
 
+Turn =isearch= into =search= (make searches non-incremental). These variables are
+not documented and look sketchy to use, but they work (specially the "new" one).
+
+#+begin_src emacs-lisp
+(setq isearch-nonincremental t
+      isearch-new-nonincremental t)
+#+end_src
+
 We will allow scroll, and we will use whitespaces as a wildcard when searching,
 similar to [[*Orderless][Orderless]].
 

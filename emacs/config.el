@@ -1637,6 +1637,9 @@ Obtained from git-commit.el, version 3.3.0.50, modified by 8dcc.")
       lazy-highlight-initial-delay 2
       lazy-highlight-max-at-a-time nil)
 
+(setq isearch-nonincremental t
+      isearch-new-nonincremental t)
+
 (setq isearch-allow-scroll t
       search-whitespace-regexp ".{,10}")
 
