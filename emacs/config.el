@@ -1320,7 +1320,11 @@ between `read' and `rx'."
   "m F"   '(:ignore t                :wk "Fold")
   "m F f" '(TeX-fold-dwim            :wk "DWIM")
   "m F b" '(TeX-fold-buffer          :wk "Fold buffer")
-  "m F B" '(TeX-fold-clearout-buffer :wk "Unfold buffer"))
+  "m F B" '(TeX-fold-clearout-buffer :wk "Unfold buffer")
+  ;; Insert
+  "m i"   '(:ignore t                    :wk "Insert")
+  "m i d" '(x8dcc/skeleton-latex-article :wk "Default template (article)")
+  "m i m" '(x8dcc/skeleton-latex-math    :wk "Math template"))
 
 (x8dcc/def-keys-texinfo
   ;; Mode (Texinfo)
