@@ -92,9 +92,9 @@
   (evil-lion-mode))
 
 (defmacro x8dcc/general-create-definer (name keymaps)
-  "Create a general definer named NAME for the specified KEYMAPS.
+  "Create a General definer named NAME for the specified KEYMAPS.
 
-Used in normal, insert, visual and emacs states. The normal prefix is \"SPC\"
+Used in normal, insert, visual and emacs states.  The normal prefix is \"SPC\"
 and the non-normal prefix is \"M-SPC\"."
   `(general-create-definer ,name
      :states '(normal insert visual emacs)
@@ -103,8 +103,8 @@ and the non-normal prefix is \"M-SPC\"."
      :non-normal-prefix "M-SPC"))
 
 (defun x8dcc/general-create-definers (alist)
-  "Create definers for all elements of ALIST, using
-`x8dcc/general-create-definer'."
+  "Create General definers for all elements of ALIST.
+Using `x8dcc/general-create-definer'."
   (dolist (element alist)
     ;; We need to use `eval' because macro arguments are not evaluated.
     ;; FIXME: Use a better approach than `eval' and `backquote'.
@@ -387,8 +387,7 @@ and the non-normal prefix is \"M-SPC\"."
 (defun x8dcc/define-fringe-rect (name width height &optional align)
   "Define a fringe bitmap called NAME with the specified WIDTH and HEIGHT.
 
-Uses `define-fringe-bitmap' for defining the bitmap with the specified
-ALIGNMENT."
+Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
   (define-fringe-bitmap name
     (apply #'vector
            (make-list height (x8dcc/set-lower-bits width)))
@@ -498,6 +497,7 @@ ALIGNMENT."
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
 (defun x8dcc/non-empty-string-p (str)
+  "Check if the string is neither nil nor empty."
   (and str (not (string-empty-p str))))
 
 (defun x8dcc/string-match-list-p (str &optional regexps)
@@ -552,7 +552,7 @@ represent the first and second arguments of `keymap-set', respectively."
   "Specify that a buffer should be displayed in a bottom window.
 
 Adds an entry to `display-buffer-alist' using the specified CONDITION as the
-alist key. See `buffer-match-p', for a list of possible values for CONDITION."
+alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
   (add-to-list 'display-buffer-alist
                (cons condition
                      (cons '(display-buffer-in-side-window
@@ -564,7 +564,7 @@ alist key. See `buffer-match-p', for a list of possible values for CONDITION."
   "Specify that a buffer should be displayed in the same window.
 
 Adds an entry to `display-buffer-alist' using the specified CONDITION as the
-alist key. See `buffer-match-p', for a list of possible values for CONDITION."
+alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
   (add-to-list 'display-buffer-alist
                (cons condition
                      (cons '(display-buffer-same-window
@@ -579,7 +579,7 @@ If none of the elements of ALIST contains KEY, NEW-ELEMENT is appended to the
 end of the ALIST.
 
 The optional argument COMPARE-FN specifies a function with arguments (ELT LIST)
-that will be used to check if the KEY matches each element of ALIST. If
+that will be used to check if the KEY matches each element of ALIST.  If
 COMPARE-FN is nil, the function checks if the `car' of each element of ALIST is
 equal to KEY."
   (unless compare-fn
@@ -620,11 +620,12 @@ The REGEXP is wrapped in \"^...$\"."
   "Append suffix to NAME if there is a buffer with that name.
 The suffix is a number wrapped in square brackets.
 
-First, this function checks if there is a buffer with the specified NAME. If
-there isn't, NAME is returned. If there is a collision, however, a suffix with
+First, this function checks if there is a buffer with the specified NAME.  If
+there isn't, NAME is returned.  If there is a collision, however, a suffix with
 the form \"name [N]\" is appended to NAME, where N is the suffix count. The new
 name is checked again until a non-existing buffer is found. The initial suffix
-count can be specified by setting the SUFFIX-COUNT argument to a positive integer.
+count can be specified by setting the SUFFIX-COUNT argument to a positive
+integer.
 
 Note that NAME is a normal string, not a regexp."
   (unless suffix-count (setq suffix-count 0))
@@ -662,8 +663,10 @@ The optional arguments BACKEND and DIRECTORY should be valid for
         (match-string-no-properties 1 the-dir-headers)))))
 
 (defun x8dcc/is-huge-file ()
-  "Returns `t' if the current buffer has either too many characters (>500000),
-or too many lines (>10000)."
+  "Does the current buffer have either too many characters or too many lines?
+
+Too many characters means more than 500000, and too many lines means more than
+10000."
   (or (> (buffer-size) 500000)
       (and (fboundp 'buffer-line-statistics)
            (> (car (buffer-line-statistics)) 10000))))
@@ -677,6 +680,7 @@ According to `image-type-file-name-regexps'."
 
 (defun x8dcc/future-date (&optional seconds)
   "Return a string representing a date in the future.
+
 The optional argument SECONDS indicates how much to add to the current date, and
 defaults to the number of seconds in a day."
   (unless seconds (setq seconds (* 24 60 60)))
@@ -685,8 +689,9 @@ defaults to the number of seconds in a day."
 
 (defun x8dcc/insert-line-below (text &optional line-num)
   "Insert TEXT as its own line, right below point.
-If LINE-NUM is non-nil, insert TEXT that many lines below (if positive) or above
-(if negative)."
+
+If LINE-NUM is non-nil, insert TEXT that many lines below \\(if positive\\) or
+above \\(if negative\\)."
   (unless line-num (setq line-num 1))
   (if (< line-num 0)
       (beginning-of-line)
@@ -699,7 +704,9 @@ If LINE-NUM is non-nil, insert TEXT that many lines below (if positive) or above
 
 (defun x8dcc/comment-separator (&optional max-width)
   "Insert a separator comment in the next line.
-Depending on `comment-start', `comment-padding' and `comment-end'."
+With the specified MAX-WIDTH, which defaults to `fill-column'.
+
+Affected by `comment-start', `comment-padding' and `comment-end'."
   (interactive "P")
   (unless max-width (setq max-width fill-column))
   (let* ((padding
@@ -725,6 +732,7 @@ Depending on `comment-start', `comment-padding' and `comment-end'."
       (insert end))))
 
 (defun x8dcc/comment-and-fill-region (beg end)
+  "Comment from BEG to END, and fill it."
   (interactive "r")
   (comment-region beg end)
   (fill-region beg end))
@@ -790,22 +798,22 @@ With argument ARG, do this that many times."
     (indent-region (point-min) (point-max))))
 
 (defun x8dcc/unfill-region (beg end)
-  "Unfill the region, joining text paragraphs into a single logical line.
+  "Unfill from BEG to END, joining text paragraphs into a single logical line.
 Opposite of `fill-region'."
   (interactive "*r")
   (let ((fill-column (point-max)))
     (fill-region beg end)))
 
 (defun x8dcc/evil-kill-buffer-and-window ()
-  "Kill the current buffer with `kill-current-buffer' and delete the current
-window with `evil-delete-window'."
+  "Kill the current buffer and delete the current window.
+With `kill-current-buffer' and `evil-delete-window'."
   (interactive)
   (kill-current-buffer)
   (evil-window-delete))
 
 (evil-define-operator x8dcc/evil-fill-indent (beg end)
-  "Fill text to `fill-column' using `evil-fill' and indent it with
-`evil-indent'."
+  "Fill text from BEG to END to `fill-column', and indent it.
+With `evil-fill' and `evil-indent'."
   :move-point nil
   :type line
   (save-excursion
@@ -828,7 +836,7 @@ window with `evil-delete-window'."
 (defun x8dcc/make-invisible (regex &optional group-num)
   "Make all ocurrences of REGEX invisible.
 
-Searches all ocurrences of REGEX and adds them to an invisible overlay. If
+Searches all ocurrences of REGEX and adds them to an invisible overlay.  If
 GROUP-NUM is supplied, it will only add the N-th parentheses group of the regex
 to the overlay."
   (interactive "sRegex: ")
@@ -861,8 +869,8 @@ Alternative to `recenter-top-bottom'."
     (insert prompt-contents)))
 
 (defun x8dcc/toggle-final-newline ()
-  "Toggle newline insertion when saving the current buffer. See
-`require-final-newline'."
+  "Toggle newline insertion when saving the current buffer.
+See `require-final-newline'."
   (interactive)
   (setq-local require-final-newline (not require-final-newline))
   (if require-final-newline
@@ -870,8 +878,8 @@ Alternative to `recenter-top-bottom'."
     (message "Final newline disabled in the current buffer.")))
 
 (defun x8dcc/sudo-shell-command (command)
-"Run the specified shell command as root, asking for the sudo password in the
-minibuffer. Only the shell command is saved in the history.
+"Run a shell COMMAND as root, asking for the sudo password in the minibuffer.
+Only the shell command is saved in the history.
 
 See also `shell-command'."
   (interactive
@@ -887,8 +895,10 @@ See also `shell-command'."
 Alternatively, you could use `hl-todo--regexp'.")
 
 (defun x8dcc/grep-todos (&optional files dir)
-  ;; Interactive contents obtained from `rgrep' (Emacs 29.4).
+  "Search for TODO keywords in matching FILES inside DIR.
+Uses `x8dcc/grep-todos-regexp'."
   (interactive
+   ;; Interactive contents obtained from `rgrep' (Emacs 29.4).
    (list
     (grep-read-files "...")
     (read-directory-name "Base directory: " nil default-directory t)))
@@ -897,10 +907,10 @@ Alternatively, you could use `hl-todo--regexp'.")
 (load-library "hi-lock")
 
 (defun x8dcc/highlight-regexp (regexp &optional face)
-  "Highlight REGEXP, defaulting to the symbol at point.
+  "Highlight REGEXP with FACE, defaulting to the symbol at point.
 
 It highlights with `highlight-regexp', and finds the symbol at point with
-`find-tag-default-as-symbol-regexp'. See also `highlight-symbol-at-point'."
+`find-tag-default-as-symbol-regexp'.  See also `highlight-symbol-at-point'."
   (interactive
    (list
     (hi-lock-regexp-okay
@@ -927,8 +937,8 @@ It highlights with `highlight-regexp', and finds the symbol at point with
                         new))
 
 (defun x8dcc/reb-change-syntax (new-syntax)
-  "Set `reb-re-syntax' to the specified value. When called interactively, switch
-between `read' and `rx'."
+  "Set `reb-re-syntax' to a NEW-SYNTAX.
+When called interactively, switch between `read' and `rx'."
   (interactive (list (if (equal reb-re-syntax 'read)
                          'rx
                        'read)))
@@ -939,12 +949,11 @@ between `read' and `rx'."
   `((,(rx (or line-start space) "0x" (group not-newline)) . "16#\\1")
     (,(rx (or line-start space) "0o" (group not-newline)) . "8#\\1")
     (,(rx (or line-start space) "0b" (group not-newline)) . "2#\\1"))
-  "Alist of regexp replacements that should be applied to the input when calling
-`x8dcc/quick-calc'.")
+  "Alist of regexp replacements for the input of `x8dcc/quick-calc'.")
 
 (defun x8dcc/quick-calc (input)
-  "Replace input according to `x8dcc/quick-calc-replacements', and call
-`calc-do-quick-calc'."
+  "Make the necessary replacements in INPUT, and call `calc-do-quick-calc'.
+Replacements are read from `x8dcc/quick-calc-replacements'."
   (interactive
    (list (read-string "Quick calc: " nil
                       'calc-quick-calc-history)))
@@ -961,7 +970,7 @@ between `read' and `rx'."
   (set-text-properties start end nil))
 
 (defun x8dcc/git-add-edit (&optional files)
-  "Stage the specified files with Git using \"git add --edit\"."
+  "Stage FILES with Git using \"git add --edit\"."
   (interactive)
   (with-editor* "GIT_EDITOR"
     (vc-git-command nil 'async files "add" "--edit")))
@@ -1444,21 +1453,11 @@ between `read' and `rx'."
 
 (column-number-mode 1)
 
-(defun x8dcc/mode-line-render (left right)
-  "Return a string of `window-width' length. With LEFT and RIGHT justified
-respectively."
-  (let ((available-width
-         (- (window-total-width)
-            (+ (length (format-mode-line left))
-               (length (format-mode-line right))))))
-    (append left
-            ;; (("%%%ds", 5) "") -> ("%5s", "") -> "     "
-            (list (format (format "%%%ds" available-width) ""))
-            right)))
-
 (defun x8dcc/mode-line-region-chars (prefix middle subfix)
-  "If there are characters in the selection, return a string with the number of
-characters and lines, between the PREFIX and SUBFIX. If the region takes up more
+  "Return a string with region information for the mode line.
+
+If the region is active, return a string with the number of characters and
+lines, wrapped in the strings PREFIX and SUBFIX.  If the region takes up more
 than one line, it will also display the MIDDLE argument right after the number
 of characters, followed by the number of lines."
   (if (use-region-p)
@@ -1608,8 +1607,8 @@ of characters, followed by the number of lines."
           (seq (or "BRANCH" "EDIT")
                "_DESCRIPTION"))
       string-end)
-  "Regexp for matching git commit filenames. Obtained from git-commit.el,
-version 3.3.0.50, modified by 8dcc.")
+  "Regexp for matching git commit filenames.
+Obtained from git-commit.el, version 3.3.0.50, modified by 8dcc.")
 
 (add-to-list 'undo-fu-session-incompatible-files x8dcc/git-commit-filename-regexp)
 
@@ -1646,11 +1645,11 @@ version 3.3.0.50, modified by 8dcc.")
       lazy-count-subfix-format nil)
 
 (defvar x8dcc/allow-modify-on-save t
-  "If non-nil, allow the calling of functions that modify the buffer contents on
-the save hooks.")
+  "Should we allow functions that modify the buffer contents in save hooks?")
 
 (defun x8dcc/toggle-modify-on-save ()
-  "Toggle modifications on buffer save hooks. See `x8dcc/allow-modify-on-save'."
+  "Toggle modifications on buffer save hooks.
+See `x8dcc/allow-modify-on-save'."
   (interactive)
   (setq x8dcc/allow-modify-on-save (not x8dcc/allow-modify-on-save))
   (if x8dcc/allow-modify-on-save
@@ -1703,8 +1702,8 @@ the save hooks.")
 (setq printer-name "MainPrinter")
 
 (defun x8dcc/lpr-buffer-pages (start end)
-  "Print the current buffer using `lpr-buffer' from page START to END. The page
-numbers start at 1."
+  "Print the current buffer using `lpr-buffer' from page START to END.
+The page numbers start at 1."
   (interactive "nStarting page: \nnEnd page: ")
   (let ((lpr-switches (list "-o" (format "page-ranges=%d-%d"
                                          (max start 1) (max end 1)))))
@@ -1714,10 +1713,10 @@ numbers start at 1."
   "Return a GPL-v3-or-later license header.
 
 If PROJECT is non-nil, it will include the project name in the second
-paragraph. If it's nil, that paragraph is omited.
+paragraph.  If it's nil, that paragraph is omited.
 
 If FILL-COL is non-nil, it the resulting string will be filled to that column
-using `string-fill'. If it's nil, it's filled to `fill-column'."
+using `string-fill'.  If it's nil, it's filled to `fill-column'."
   (string-fill
    (concat
     "Copyright " (format-time-string "%Y") " " user-full-name ". All Rights Reserved.\n\n"
@@ -1744,7 +1743,10 @@ using `string-fill'. If it's nil, it's filled to `fill-column'."
                        (string-trim comment-end))))))
 
 (defun x8dcc/skeleton-generic-license-comment (&optional project)
-  "Insert a generic GPL-v3-or-later license comment."
+  "Insert a generic GPL-v3-or-later license comment.
+
+If PROJECT is specified, it will show an extra line with \"This file is part
+of...\"."
   (interactive)
   (let ((start (point))
         (real-fill-column
@@ -1796,7 +1798,7 @@ using `string-fill'. If it's nil, it's filled to `fill-column'."
   "Open an eshell buffer, adding a number suffix when necessary.
 
 That is, append a count to the buffer name if this was not the first buffer
-named BUFFER-NAME. If BUFFER-NAME is nil, \"*eshell*\" is used.
+named BUFFER-NAME.  If BUFFER-NAME is nil, \"*eshell*\" is used.
 
 It uses `x8dcc/eshell-project-or-current' for calling `eshell', and
 `x8dcc/suffixed-buffer-name' for obtaining the buffer name."
@@ -1868,14 +1870,14 @@ different rules in `display-buffer-alist'."
 
 (defconst x8dcc/erc-sasl-servers
   '("irc.libera.chat")
-  "List of servers that should be connected through SASL when using
-`x8dcc/erc-launch'.")
+  "List of servers that we should connect through SASL.
+When using `x8dcc/erc-launch'.")
 
 (defun x8dcc/erc-launch (server port user)
   "Launch ERC through TLS or SASL, depending on `x8dcc/erc-sasl-servers'.
 
-When called interactively, uses 6697 as the port and the value of `erc-nick' as
-the user."
+When called interactively, it asks for the SERVER, uses 6697 as the PORT, and
+the value of `erc-nick' as the USER."
   (interactive
    (list (read-string (format-prompt "Server" erc-default-server)
                       nil 'erc-server-history-list erc-default-server)
@@ -1901,8 +1903,10 @@ the user."
 (setq erc-sasl-mechanism 'plain)
 
 (defun x8dcc/erc-get-password (&rest plist)
-  "Custom replacement for `erc-auth-source-search' that prompts for a password
-if necessary."
+  "Custom replacement for `erc-auth-source-search'.
+
+It searches for PLIST in the auth sources, and if it fails, it prompts for a
+password."
   (let ((auth-source-password (apply #'erc-auth-source-search plist)))
     (or auth-source-password
         (let ((username (plist-get plist :user)))
@@ -2021,6 +2025,7 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
           x8dcc/authinfo-mail-hosts))
 
 (defun x8dcc/compose-mail-as (address)
+  "Start composing a mail as the specified ADDRESS."
   (interactive
    (list
     (completing-read "Compose as (email): "
@@ -2136,15 +2141,14 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
          "* Selection from [[%F][%f]]\nCaptured on: %T\n%?\n#+begin_quote\n%i\n#+end_quote")))
 
 (defun x8dcc/org-insert-link ()
-  "Insert a space in the current position if there isn't one, and call
-`org-insert-link'."
+  "Insert a space at point if there isn't one, and call `org-insert-link'."
   (interactive)
   (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
   (funcall-interactively #'org-insert-link))
 
 (defun x8dcc/org-headline-to-id (headline)
-  "Converts an org-mode HEADLINE to a CUSTOM-ID dashed string.
+  "Convert an Org mode HEADLINE to a CUSTOM-ID dashed string.
 For example: \"My test... =heading=\" becomes \"my-test-heading\"."
   (thread-last
     (downcase headline)
@@ -2159,7 +2163,9 @@ Uses `org-find-property'."
 
 (defun x8dcc/org-custom-id-make-unique (custom-id &optional suffix-count)
   "Add a numeric suffix to CUSTOM-ID if it exists.
-Similar to `x8dcc/suffixed-buffer-name'."
+Similar to `x8dcc/suffixed-buffer-name'.
+
+The SUFFIX-COUNT argument is used when this function calls itself recursively."
   (let ((final-id (concat custom-id
                           (and suffix-count
                                (number-to-string suffix-count)))))
@@ -2170,10 +2176,11 @@ Similar to `x8dcc/suffixed-buffer-name'."
        (if suffix-count (1+ suffix-count) 1)))))
 
 (defun x8dcc/org-custom-id-get (&optional pom create)
-  "Get the CUSTOM_ID property of the entry at point-or-marker POM. If POM is
-nil, refer to the entry at point. If the entry does not have a CUSTOM_ID, the
-function returns nil. However, when CREATE is non nil, create a CUSTOM_ID if
-none is present already.
+  "Get the CUSTOM_ID property of the entry at point-or-marker POM.
+
+If POM is nil, refer to the entry at point.  If the entry does not have a
+CUSTOM_ID, the function returns nil.  However, when CREATE is non nil, create a
+CUSTOM_ID if none is present already.
 
 In any case, the CUSTOM_ID of the entry is returned."
   (org-with-point-at pom
@@ -2223,7 +2230,7 @@ See also `x8dcc/org-custom-id-get'."
 The ID will be the PREFIX argument plus a counter.
 
 If the optional argument EXTRA-PREDICATE is non-nil, it should be a function
-that must return non-nil in case of success. This function can operate on the
+that must return non-nil in case of success.  This function can operate on the
 match data, for example.
 
 Uses the `x8dcc/insert-line-below' function."
@@ -2240,6 +2247,7 @@ Uses the `x8dcc/insert-line-below' function."
             (setq counter (1+ counter))))))))
 
 (defun x8dcc/org-ids-add-figures ()
+  "Add IDs to all figures in the current Org buffer."
   (interactive)
   (x8dcc/org-add-name-to-regexps x8dcc/org-figure-re
                                  "fig"
@@ -2247,6 +2255,7 @@ Uses the `x8dcc/insert-line-below' function."
                                    (x8dcc/is-image (match-string 1)))))
 
 (defun x8dcc/org-ids-add-examples ()
+  "Add IDs to all examples in the current Org buffer."
   (interactive)
   (x8dcc/org-add-name-to-regexps x8dcc/org-example-re "example"))
 
@@ -2265,7 +2274,10 @@ For more information on the expected format of TAGS, see
          (x8dcc/org-html-meta-tag-value (cdr tags) name))))
 
 (defun x8dcc/org-html-extra-meta-tags (info)
-  "Add extra meta tags for generating an HTML file."
+  "Add extra meta tags for generating an HTML file.
+This function is meant to be set as the value of `org-html-meta-tags'.
+
+The INFO argument will be used when calling `org-html-meta-tags-default'."
   (let* ((original-tags
           (org-html-meta-tags-default info))
          (description
@@ -2335,10 +2347,11 @@ For more information on the expected format of TAGS, see
   (TeX-command "TeX" #'TeX-master-file))
 
 (defun x8dcc/tex-get-font-key (command-string &optional font-list)
-  "Find the font key in FONT-LIST for the font whose LaTeX command contains
-COMMAND-STRING. Returns a valid font key that can be passed to `TeX-font', or
-nil if COMMAND-STRING is not found. If FONT-LIST is nil, `TeX-font-list' is
-used."
+  "Find the font key for the font whose LaTeX command contains COMMAND-STRING.
+Searches in FONT-LIST.
+
+Returns a valid font key that can be passed to `TeX-font', or nil if
+COMMAND-STRING is not found.  If FONT-LIST is nil, `TeX-font-list' is used."
   ;; TODO: Check if `TeX-font-list' is bound.
   (unless font-list (setq font-list TeX-font-list))
   (let ((item (car font-list)))
@@ -2349,8 +2362,8 @@ used."
           (t nil))))
 
 (defmacro x8dcc/tex-defun-font (func-name command-string &optional font-list)
-  "Define a function named FUNC-NAME that searches for a COMMAND-STRING in
-FONT-LIST using `x8dcc/tex-get-font-key'."
+  "Define a function FUNC-NAME that searches for a COMMAND-STRING in FONT-LIST.
+Uses `x8dcc/tex-get-font-key'."
   `(defun ,func-name ()
      (interactive)
      (let ((key (x8dcc/tex-get-font-key ,command-string ,font-list)))
@@ -2365,15 +2378,15 @@ FONT-LIST using `x8dcc/tex-get-font-key'."
 (x8dcc/tex-defun-font x8dcc/latex-font-typewriter "tt{")
 
 (defun LaTeX-indent-item ()
-  "Provide proper indentation for LaTeX \"itemize\",\"enumerate\", and
-\"description\" environments.
+  "Provide proper indentation for LaTeX list environments.
 
-  \"\\item\" is indented `LaTeX-indent-level' spaces relative to
-  the the beginning of the environment.
+Specifically: \"itemize\", \"enumerate\" and \"description\" environments.
 
-  Continuation lines are indented either twice
-  `LaTeX-indent-level', or `LaTeX-indent-level-item-continuation'
-  if the latter is bound."
+Each \"\\item\" is indented `LaTeX-indent-level' spaces relative to the the
+beginning of the environment.
+
+Continuation lines are indented either twice `LaTeX-indent-level', or
+`LaTeX-indent-level-item-continuation' if the latter is bound."
   (save-match-data
     (let* ((offset LaTeX-indent-level)
            (contin (or (and (boundp 'LaTeX-indent-level-item-continuation)
@@ -2405,8 +2418,8 @@ FONT-LIST using `x8dcc/tex-get-font-key'."
              (+ contin indent))))))
 
 (defcustom LaTeX-indent-level-item-continuation 4
-  "*Indentation of continuation lines for items in itemize-like
-environments."
+  "Indentation of continuation lines for items in list environments.
+See `LaTeX-indent-item'."
   :group 'LaTeX-indentation
   :type 'integer)
 
@@ -2691,12 +2704,12 @@ environments."
     ;; Misc
     "__func__" "__LINE__" "__FILE__" "__DATE__" "__TIME__" "__STDC__"
     "__STDC_VERSION__" "__STDC_HOSTED__" "__VA_ARGS__")
-  "List of (non-regexp) strings for building `x8dcc/c-constant-regexp' with
-`regexp-opt'.
+  "List of (non-regexp) strings for building `x8dcc/c-constant-regexp'.
+The regexp will be build with `regexp-opt'.
 
-Got most of these constant names from \"$VIMRUNTIME/syntax/c.vim\".
+I got most of these constant names from \"$VIMRUNTIME/syntax/c.vim\".
 
-Not included: NULL, true, false")
+Not included: \"NULL\", \"true\" and \"false\".")
 
 (defconst x8dcc/c-constant-regexp
   (concat (regexp-opt x8dcc/c-constant-list 'symbols))
