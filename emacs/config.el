@@ -345,12 +345,24 @@ Using `x8dcc/general-create-definer'."
 
 (use-package flycheck
   :config
-  (setq flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
+  (setq flycheck-check-syntax-automatically
+        '(mode-enabled save idle-buffer-switch))
   (setq flycheck-mode-line
         '(:eval
           (let ((status-text (flycheck-mode-line-status-text)))
             (and (not (string-match-p "-\\'" status-text))
-                 status-text)))))
+                 status-text))))
+
+  ;; C modes
+  (setq flycheck-clang-pedantic t
+        flycheck-gcc-pedantic t)
+  (mapcar (lambda (sym)
+            (add-to-list sym "no-unused-function" 'append))
+          '(flycheck-clang-warnings flycheck-gcc-warnings))
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (setq flycheck-clang-language-standard "c99"
+                    flycheck-gcc-language-standard "c99"))))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
