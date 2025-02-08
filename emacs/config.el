@@ -343,6 +343,14 @@ Using `x8dcc/general-create-definer'."
                         org-todo-keyword-wait
                         org-verbatim))))))
 
+(use-package languagetool
+  :config
+  (setq languagetool-java-arguments
+        '("-Dfile.encoding=UTF-8"
+          "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*")
+        languagetool-console-command "org.languagetool.commandline.Main"
+        languagetool-server-command "org.languagetool.server.HTTPServer"))
+
 (use-package flycheck
   :config
   (setq flycheck-check-syntax-automatically

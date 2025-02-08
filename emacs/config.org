@@ -740,6 +740,26 @@ blocks, tags, etc. This list was taken from the [[https://github.com/doomemacs/d
                         org-verbatim))))))
 #+end_src
 
+*** Grammar (languagetool)
+
+[[https://languagetool.org/][LanguageTool]] suggestions integrated within Emacs.
+
+The paths for =languagetool-java-arguments= are taken from the [[https://github.com/PillFall/languagetool.el][repository's
+README]], for Arch Linux.
+
+TODO: When using =languagetool-check=, ignore grammar in some faces, like =spell-fu=
+does.
+
+#+begin_src emacs-lisp
+(use-package languagetool
+  :config
+  (setq languagetool-java-arguments
+        '("-Dfile.encoding=UTF-8"
+          "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*")
+        languagetool-console-command "org.languagetool.commandline.Main"
+        languagetool-server-command "org.languagetool.server.HTTPServer"))
+#+end_src
+
 *** Syntax highlighting (flycheck)
 
 For checking for syntax errors in code. The [[https://www.flycheck.org/en/latest/][flycheck]] package is an alternative
