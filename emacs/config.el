@@ -1587,6 +1587,11 @@ of characters, followed by the number of lines."
 
 (blink-cursor-mode 0)
 
+(show-paren-mode 1)
+
+(setq c-<-as-paren-syntax nil
+      c->-as-paren-syntax nil)
+
 (setq ring-bell-function #'ignore
       visible-bell nil)
 

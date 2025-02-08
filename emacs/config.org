@@ -2731,6 +2731,18 @@ Don't blink the cursor.
 (blink-cursor-mode 0)
 #+end_src
 
+Highlight matching parentheses.
+
+We overwrite =c-*-as-paren-syntax= so =c-mode= doesn't interpret those characters as
+parentheses. Note that these variables are not currently documented.
+
+#+begin_src emacs-lisp
+(show-paren-mode 1)
+
+(setq c-<-as-paren-syntax nil
+      c->-as-paren-syntax nil)
+#+end_src
+
 Disable the bell entirely.
 
 #+begin_src emacs-lisp
