@@ -463,12 +463,13 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
                      man-mode
                      "*Warnings*"
                      "*Compile-Log*"
+                     "*grep*"
                      "*Backtrace*"
-                     "*evil-registers*"
                      "*Apropos*"
+                     "*xref*"
                      "*scratch*"
                      "*Macroexpansion*"
-                     "*xref*"
+                     "*evil-registers*"
                      "*Flycheck errors*"
                      ,shell-command-buffer-name-async))
     (if (stringp element)
@@ -2698,15 +2699,6 @@ possible, then display it in an existing window or in a side window.
 #+begin_src emacs-lisp
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
-#+end_src
-
-Specify that some buffers should be displayed as a pop-up window. We don't
-display =*grep*= in the same window because it messes with the =SPC s n n= keybinds
-(=next-error=).
-
-#+begin_src emacs-lisp
-(dolist (condition '("\\*grep\\*"))
-  (x8dcc/set-display-bottom-window condition))
 #+end_src
 
 ** Misc visual settings

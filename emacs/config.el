@@ -207,12 +207,13 @@ Using `x8dcc/general-create-definer'."
                      man-mode
                      "*Warnings*"
                      "*Compile-Log*"
+                     "*grep*"
                      "*Backtrace*"
-                     "*evil-registers*"
                      "*Apropos*"
+                     "*xref*"
                      "*scratch*"
                      "*Macroexpansion*"
-                     "*xref*"
+                     "*evil-registers*"
                      "*Flycheck errors*"
                      ,shell-command-buffer-name-async))
     (if (stringp element)
@@ -1577,9 +1578,6 @@ of characters, followed by the number of lines."
 
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
-
-(dolist (condition '("\\*grep\\*"))
-  (x8dcc/set-display-bottom-window condition))
 
 (global-visual-line-mode 0)
 (setq-default truncate-lines t
