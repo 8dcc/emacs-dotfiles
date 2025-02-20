@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Create symlinks in the Emacs directory that point to the 'emacs' directory in
