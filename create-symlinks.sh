@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 # Create symlinks in the Emacs directory that point to the 'emacs' directory in
@@ -8,10 +8,15 @@ EMACSDIR="${HOME}/.emacs.d"
 REPODIR="$(pwd)/emacs"
 
 symlink_item() {
+    target_dir="${EMACSDIR}/$(dirname "$1")"
+
+    # First, create the destination directory if it doesn't exist.
+    mkdir --parents "$target_dir"
+
     # It's important to use the '--target-directory' option: when trying to
-    # symlink to a directory "foo", if it already exists, a "foo/foo" symlink
+    # symlink to a directory "foo": if it already exists, a "foo/foo" symlink
     # is created instead, even with '--force'.
-    ln --symbolic --force "${REPODIR}/$1" --target-directory="$EMACSDIR"
+    ln --symbolic --force "${REPODIR}/$1" --target-directory="$target_dir"
 }
 
 read -p "Symlinking from '$REPODIR' to '$EMACSDIR'. Press any key..."
