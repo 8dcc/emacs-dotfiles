@@ -1250,6 +1250,10 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   "t v" '(visible-mode                       :wk "Visible mode")
   "t w" '(toggle-truncate-lines              :wk "Line wrapping")
   "t W" '(auto-fill-mode                     :wk "Auto fill mode")
+  ;; Undo
+  "u"   '(:ignore t                :wk "Undo")
+  "u v" '(vundo                    :wk "Visual tree")
+  "u l" '(yank-from-kill-ring      :wk "Paste deleted")
   ;; Version control
   "v"   '(:ignore t                :wk "VC")
   "v d" '(vc-diff                  :wk "Diff")
