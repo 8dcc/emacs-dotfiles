@@ -2806,6 +2806,29 @@ Used for highlighting more constants with `font-lock-constant-face' in
   " * this program. If not, see <https://www.gnu.org/licenses/>.\n"
   " */\n" \n)
 
+(define-skeleton x8dcc/skeleton-make-c
+  "Insert a simple Makefile skeleton for C projects."
+  "Binary name: "
+  "CC=gcc\n"
+  "CFLAGS=-std=c99 -Wall -Wextra -Wpedantic -ggdb3\n"
+  "LDLIBS=\n\n"
+  "# TODO: Add necessary sources\n"
+  "SRC=main.c" _ "\n"
+  "OBJ=$(addprefix obj/, $(addsuffix .o, $(SRC)))\n"
+  "BIN=" str "\n\n"
+  "#-------------------------------------------------------------------------------\n\n"
+  ".PHONY: all clean\n\n"
+  "all: $(BIN)\n\n"
+  "clean:\n"
+  "\trm -f $(OBJ)\n"
+  "\trm -f $(BIN)\n\n"
+  "#-------------------------------------------------------------------------------\n\n"
+  "$(BIN): $(OBJ)\n"
+  "\t$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)\n\n"
+  "obj/%.c.o : src/%.c\n"
+  "\t@mkdir -p $(dir $@)\n"
+  "\t$(CC) $(CFLAGS) -o $@ -c $<\n")
+
 (defun x8dcc/beardbolt-disassemble ()
   "Enable `beardbolt-mode' and call `beardbolt-compile'."
   (interactive)
