@@ -662,7 +662,7 @@ Set a global keybind.
 (x8dcc/def-keys "t C" '(highlight-indent-guides-mode :wk "Indent guides"))
 #+end_src
 
-*** Spelling
+*** Spelling (spell-fu)
 
 We will use the =spell-fu= package for basic spelling. I don't use any packages
 for code completion or code syntax.
@@ -945,7 +945,15 @@ Display description of the function under the cursor. See =eldoc-mode=.
 
 #+begin_src emacs-lisp
 (use-package c-eldoc
-  :hook ((c-mode . c-turn-on-eldoc-mode)))
+  :hook ((c-mode-common . c-turn-on-eldoc-mode)))
+#+end_src
+
+*** Eldoc box
+
+#+begin_src emacs-lisp
+(use-package eldoc-box
+  :diminish eldoc-box-hover-at-point-mode
+  :hook ((c-mode-common . eldoc-box-hover-at-point-mode)))
 #+end_src
 
 *** COMMENT Whiteroom mode

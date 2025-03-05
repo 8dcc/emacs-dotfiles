@@ -443,6 +443,10 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                          (seq "u" (repeat 4 hex-digit))
                          (seq "U" (repeat 8 hex-digit))))))))
 
+(use-package eldoc-box
+  :diminish eldoc-box-hover-at-point-mode
+  :hook ((c-mode-common . eldoc-box-hover-at-point-mode)))
+
 (use-package page-break-lines
   :diminish
   :hook (emacs-lisp-mode . page-break-lines-mode)
