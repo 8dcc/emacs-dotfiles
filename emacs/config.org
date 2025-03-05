@@ -953,7 +953,7 @@ Display description of the function under the cursor. See =eldoc-mode=.
 #+begin_src emacs-lisp
 (use-package eldoc-box
   :diminish eldoc-box-hover-at-point-mode
-  :hook ((c-mode-common . eldoc-box-hover-at-point-mode)))
+  :hook ((eldoc-mode . eldoc-box-hover-at-point-mode)))
 #+end_src
 
 *** COMMENT Whiteroom mode
