@@ -374,6 +374,9 @@ Using `x8dcc/general-create-definer'."
               (setq flycheck-clang-language-standard "c99"
                     flycheck-gcc-language-standard "c99"))))
 
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-stay-out-of 'flymake))
+
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
 

@@ -805,6 +805,22 @@ Some settings for C modes:
                     flycheck-gcc-language-standard "c99"))))
 #+end_src
 
+*** Language server protocol (eglot)
+
+A Language Server Protocol client for Emacs. For more information, see the [[https://joaotavora.github.io/eglot/][Eglot
+manual]].
+
+We don't use =use-package= since it's built into Emacs, and we don't want to
+re-download more dependencies.
+
+NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= once
+per project.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-stay-out-of 'flymake))
+#+end_src
+
 *** Highlight numbers
 
 For highlighting numeric literals.
