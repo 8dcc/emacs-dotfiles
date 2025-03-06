@@ -1,6 +1,5 @@
 #+TITLE: GNU Emacs Configuration
 #+AUTHOR: 8dcc
-#+OPTIONS: toc:2
 #+PROPERTY: header-args:emacs-lisp :tangle config.el
 
 * COMMENT Meta
