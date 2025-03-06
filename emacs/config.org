@@ -807,8 +807,8 @@ Some settings for C modes:
 
 *** Language server protocol (eglot)
 
-A Language Server Protocol client for Emacs. For more information, see the [[https://joaotavora.github.io/eglot/][Eglot
-manual]].
+A [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server Protocol]] (LSP) client for Emacs. For more information, see the
+[[https://joaotavora.github.io/eglot/][Eglot manual]].
 
 We don't use =use-package= since it's built into Emacs, and we don't want to
 re-download more dependencies.
