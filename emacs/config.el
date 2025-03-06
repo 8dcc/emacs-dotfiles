@@ -1128,7 +1128,7 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   ;; Code
   "c"   '(:ignore t               :wk "Code")
   "c c" '(comment-dwim            :wk "Comment (DWIM)")
-  "c S" '(x8dcc/comment-separator :wk "Separator comment")
+  "c C" '(x8dcc/comment-separator :wk "Separator comment")
   ;; Code -> Syntax
   "c s"   '(:ignore t                       :wk "Syntax")
   "c s ?" '(flycheck-explain-error-at-point :wk "Explain error")
