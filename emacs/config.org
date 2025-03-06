@@ -3948,6 +3948,12 @@ matters.
                              (shell . t)))
 #+end_src
 
+Increase the depth of headings that appears in =imenu=.
+
+#+begin_src emacs-lisp
+(setq org-imenu-depth 3)
+#+end_src
+
 *** Org visual settings
 
 Org visual settings.

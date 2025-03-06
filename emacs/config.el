@@ -2151,6 +2151,8 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
                              (scheme . t)
                              (shell . t)))
 
+(setq org-imenu-depth 3)
+
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t
