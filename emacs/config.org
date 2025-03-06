@@ -595,7 +595,7 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
         beardbolt-compile-delay nil))
 #+end_src
 
-*** Whisper
+*** COMMENT Whisper
 
 Speech-to-Text interface for Emacs. I am personally impressed about this being
 possible.

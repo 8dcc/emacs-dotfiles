@@ -271,15 +271,6 @@ Using `x8dcc/general-create-definer'."
           (start-process "firefox" nil "firefox"
                          (format "file://%s#page=%d" pdf page)))))
 
-(use-package whisper
-  :straight (whisper :type git :host github :repo "natrys/whisper.el")
-  :config
-  (setq whisper-install-directory "~/.cache"
-        whisper-model "base"
-        whisper-language "en"
-        whisper-translate nil
-        whisper-use-threads (/ (num-processors) 2)))
-
 (unless (or (member system-type '(ms-dos windows-nt cygwin))
             (null (executable-find "aspell")))
   (use-package spell-fu
