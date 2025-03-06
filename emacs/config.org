@@ -813,8 +813,8 @@ A [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server Prot
 We don't use =use-package= since it's built into Emacs, and we don't want to
 re-download more dependencies.
 
-NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= once
-per project.
+NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= or
+=SPC c l= once per project.
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'eglot
@@ -2086,6 +2086,8 @@ keybinds should be *moved* to their commented sub-sections.
   "c"   '(:ignore t               :wk "Code")
   "c c" '(comment-dwim            :wk "Comment (DWIM)")
   "c C" '(x8dcc/comment-separator :wk "Separator comment")
+  "c l" '(eglot                   :wk "Start LSP")
+  "c L" '(eglot-shutdown          :wk "Stop LSP")
   ;; Code -> Syntax
   "c s"   '(:ignore t                       :wk "Syntax")
   "c s ?" '(flycheck-explain-error-at-point :wk "Explain error")
