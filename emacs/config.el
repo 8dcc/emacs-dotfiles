@@ -824,6 +824,23 @@ See `x8dcc/format-buffer-funcs'."
                           "Configure `x8dcc/format-buffer-funcs'.")
                   major-mode))))
 
+(defun x8dcc/format-region (beg end)
+  "Format from BEG to END according to the buffer's major mode.
+
+See `x8dcc/format-buffer'."
+  (interactive "r")
+  (with-restriction beg end
+    (x8dcc/format-buffer)))
+
+(defun x8dcc/format-buffer-or-region ()
+  "Format the current buffer or region according to the major mode.
+
+See `x8dcc/format-buffer' and `x8dcc/format-region'."
+  (interactive)
+  (if (use-region-p)
+      (x8dcc/format-region (region-beginning) (region-end))
+    (x8dcc/format-buffer)))
+
 (defun x8dcc/delete-word-backward (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."
