@@ -1165,11 +1165,12 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   "b <left>"  '(previous-buffer                  :wk "Switch to previous")
   "b <right>" '(next-buffer                      :wk "Switch to next")
   ;; Code
-  "c"   '(:ignore t               :wk "Code")
-  "c c" '(comment-dwim            :wk "Comment (DWIM)")
-  "c C" '(x8dcc/comment-separator :wk "Separator comment")
-  "c l" '(eglot                   :wk "Start LSP")
-  "c L" '(eglot-shutdown          :wk "Stop LSP")
+  "c"   '(:ignore t                     :wk "Code")
+  "c c" '(comment-dwim                  :wk "Comment (DWIM)")
+  "c C" '(x8dcc/comment-separator       :wk "Separator comment")
+  "c f" '(x8dcc/format-buffer-or-region :wk "Format")
+  "c l" '(eglot                         :wk "Start LSP")
+  "c L" '(eglot-shutdown                :wk "Stop LSP")
   ;; Code -> Syntax
   "c s"   '(:ignore t                       :wk "Syntax")
   "c s ?" '(flycheck-explain-error-at-point :wk "Explain error")
@@ -1440,12 +1441,6 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
 (general-auto-unbind-keys 'disable)
 
 (x8dcc/def-keys-c
-  ;; Buffer
-  ;; TODO: Move to "SPC c f"
-  "b f"   '(clang-format-buffer :wk "Format")
-  ;; Region
-  ;; TODO: Move to "SPC c F"
-  "r f"   '(clang-format-region :wk "Format")
   ;; Mode (C)
   "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
