@@ -802,6 +802,28 @@ Affected by `comment-start', `comment-padding' and `comment-end'."
                                          hex-format)
                                  answer)))))))
 
+(defvar x8dcc/format-buffer-funcs
+  '((c-mode . clang-format-buffer))
+  "Alist with major modes and their formatting functions.
+
+Each element should have the form (MAJOR-MODE . FMT-FUNC).
+
+Note that the major modes will be checked using `derived-mode-p', not `equal'.")
+
+(defun x8dcc/format-buffer ()
+  "Format the current buffer according to its major mode.
+
+See `x8dcc/format-buffer-funcs'."
+  (interactive)
+  (let ((match (seq-find (lambda (elt)
+                           (derived-mode-p (car elt)))
+                         x8dcc/format-buffer-funcs)))
+    (if match
+        (funcall (cdr match))
+      (user-error (concat "No format function for `%s'. "
+                          "Configure `x8dcc/format-buffer-funcs'.")
+                  major-mode))))
+
 (defun x8dcc/delete-word-backward (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times."

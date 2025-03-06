@@ -1554,6 +1554,36 @@ Increment number at point in decimal and hexadecimal format. Credits: [[https://
                                  answer)))))))
 #+end_src
 
+** Text formatting functions
+
+Simple function for formatting the current buffer according to its major mode.
+
+TODO: We could use =x8dcc/indent-buffer= for some major modes.
+
+#+begin_src emacs-lisp
+(defvar x8dcc/format-buffer-funcs
+  '((c-mode . clang-format-buffer))
+  "Alist with major modes and their formatting functions.
+
+Each element should have the form (MAJOR-MODE . FMT-FUNC).
+
+Note that the major modes will be checked using `derived-mode-p', not `equal'.")
+
+(defun x8dcc/format-buffer ()
+  "Format the current buffer according to its major mode.
+
+See `x8dcc/format-buffer-funcs'."
+  (interactive)
+  (let ((match (seq-find (lambda (elt)
+                           (derived-mode-p (car elt)))
+                         x8dcc/format-buffer-funcs)))
+    (if match
+        (funcall (cdr match))
+      (user-error (concat "No format function for `%s'. "
+                          "Configure `x8dcc/format-buffer-funcs'.")
+                  major-mode))))
+#+end_src
+
 ** Input-related functions
 
 Functions for deleting the last /N/ words backwards or forwards, without adding
