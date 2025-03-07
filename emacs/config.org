@@ -775,8 +775,8 @@ mode line texts.
 Some settings for C modes:
 
 1. Enable pedantic warnings with =flycheck-*-pedantic=.
-2. Disable =-Wunused-function= warnings. It would be better to disable them just
-   in header files, though.
+2. Disable =-Wunused-function= warnings. TODO: It would be better to disable them
+   just in header files.
 3. Set =flycheck-*-language-standard= so flycheck uses =-std=c99= when calling the
    compiler in =c-mode= buffers.
 
