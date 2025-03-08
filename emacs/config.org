@@ -810,7 +810,9 @@ A [[https://en.wikipedia.org/wiki/Language_Server_Protocol][Language Server Prot
 [[https://joaotavora.github.io/eglot/][Eglot manual]].
 
 We don't use =use-package= since it's built into Emacs, and we don't want to
-re-download more dependencies.
+re-download more dependencies. The only version I have tried is 1.12.29, the one
+from Emacs 29.4. There is a bug in this version that should be fixed later (see
+[[https://github.com/joaotavora/eglot/issues/1490][eglot#1490]]).
 
 NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= or
 =SPC c l= once per project.
