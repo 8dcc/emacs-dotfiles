@@ -278,6 +278,7 @@ Using `x8dcc/general-create-definer'."
   (x8dcc/general-create-definers
    '((x8dcc/def-keys . override)
      (x8dcc/def-keys-org . org-mode-map)
+     (x8dcc/def-keys-markdown . markdown-mode-map)
      (x8dcc/def-keys-latex . LaTeX-mode-map)
      (x8dcc/def-keys-texinfo . Texinfo-mode-map)
      (x8dcc/def-keys-pdf-view . pdf-view-mode-map)
@@ -2366,6 +2367,37 @@ Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo 
   "m t i" '(org-indent-mode          :wk "Indent mode")
   "m t I" '(org-toggle-inline-images :wk "Inline images")
   "m t t" '(org-todo                 :wk "Todo"))
+#+end_src
+
+*** Markdown mode
+
+Very similar keybinds to [[*Org mode keybinds][Org mode]].
+
+#+begin_src emacs-lisp
+(x8dcc/def-keys-markdown
+  ;; Mode (Org)
+  "m +" '(markdown-promote  :wk "Promote")
+  "m -" '(markdown-demote   :wk "Demote")
+  "m e"   '(markdown-export :wk "Export")
+  ;; Text format
+  "m f"   '(:ignore t                      :wk "Text format")
+  "m f b" '(markdown-insert-bold           :wk "Bold")
+  "m f c" '(markdown-insert-code           :wk "Code (inline)")
+  "m f i" '(markdown-insert-italic         :wk "Italics")
+  "m f q" '(markdown-insert-blockquote     :wk "Quote")
+  "m f s" '(markdown-insert-strike-through :wk "Strikethrough")
+  ;; Insert
+  "m i"   '(:ignore t                      :wk "Insert")
+  "m i -" '(markdown-insert-hr             :wk "Horizontal ruler")
+  "m i c" '(markdown-insert-gfm-code-block :wk "Code block")
+  "m i h" '(markdown-insert-header-dwim    :wk "Heading")
+  "m i l" '(markdown-insert-link           :wk "Link")
+  ;; Toggle
+  "m t"   '(:ignore t                                    :wk "Toggle")
+  "m t i" '(markdown-toggle-inline-images                :wk "Inline images")
+  "m t m" '(markdown-toggle-markup-hiding                :wk "Markup hiding")
+  "m t l" '(markdown-toggle-url-hiding                   :wk "Link hiding")
+  "m t c" '(markdown-toggle-fontify-code-blocks-natively :wk "Code block syntax"))
 #+end_src
 
 *** LaTeX mode keybinds
