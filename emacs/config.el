@@ -448,7 +448,11 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
   (setq page-break-lines-max-width fill-column
         page-break-lines-char ?-))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html")
+        markdown-asymmetric-header t)
+  (markdown-toggle-fontify-code-blocks-natively 1))
 
 (use-package auctex)
 

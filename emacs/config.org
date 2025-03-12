@@ -1029,7 +1029,11 @@ horizontal line.
 Syntax highlighting and supporting commands for editing Markdown files.
 
 #+begin_src emacs-lisp
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html")
+        markdown-asymmetric-header t)
+  (markdown-toggle-fontify-code-blocks-natively 1))
 #+end_src
 
 *** AucTex
