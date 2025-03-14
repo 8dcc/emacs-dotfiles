@@ -37,7 +37,7 @@
  ("let-alist" . "8141e7c941105c92e89bba44e73aae6cdd962b49")
  ("magit" . "2b02bfb0495bf738e006d82f3a233e8f511b90b8")
  ("marginalia" . "e4ff0838da33bf5102ee009ff28d541f0b51c9a3")
- ("markdown-mode" . "6102ac5b7301b4c4fc0262d9c6516693d5a33f2b")
+ ("markdown-mode" . "d2d960bec164e91e1a3315b176e2bcc324e63c95")
  ("melpa" . "d1e2861bb7c39ad2741db8652b7ddfedf93da61e")
  ("nongnu-elpa" . "e5adab3409abfa69ecbaeb07bb88d48f78e03d3f")
  ("old-ada-mode" . "ef07e1b37be5b84f67502f4503d4c715e0b573bb")
