@@ -1923,7 +1923,7 @@ different rules in `display-buffer-alist'."
 
 (add-hook 'eshell-mode-hook
           (lambda ()
-            (setq-local tab-width 4)))
+            (setq-local tab-width (default-value 'tab-width))))
 
 (setq dired-listing-switches
       "-l --almost-all --sort=version --group-directories-first --human-readable")

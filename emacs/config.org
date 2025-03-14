@@ -3414,13 +3414,10 @@ Increase the history size.
 
 The default =tab-width= is overwritten in =esh-mode.el=.
 
-TODO: Instead of hardcoding "4" again, set it to the global value directly,
-somehow.
-
 #+begin_src emacs-lisp
 (add-hook 'eshell-mode-hook
           (lambda ()
-            (setq-local tab-width 4)))
+            (setq-local tab-width (default-value 'tab-width))))
 #+end_src
 
 ** Dired
