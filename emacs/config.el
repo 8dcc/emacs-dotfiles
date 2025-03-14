@@ -513,9 +513,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
 (use-package nasm-mode
   :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode")
   :config
-  (setq nasm-basic-offset 4))
-
-(add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
+  (setq nasm-basic-offset 4)
+  (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode)))
 
 (use-package nov
   :hook (nov-mode . (lambda () (display-line-numbers-mode 0)))

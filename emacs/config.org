@@ -1153,21 +1153,17 @@ Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme impleme
 
 Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with some modified functionality.
 
-TODO: The =nasm-basic-offset= is set to the value of =tab-width= when declared, at
-which point we have not set it to 4. We should not hard-code 4 twice.
+1. The =nasm-basic-offset= is set to the value of =tab-width= when declared, at
+   which point we have not set it to 4. TODO: We should not hard-code 4 twice.
+2. We use =nasm-mode= as the default mode for =.asm= files. For more information on
+   =auto-mode-alist=, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Choosing-Modes.html][Choosing File Modes]].
 
 #+begin_src emacs-lisp
 (use-package nasm-mode
   :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode")
   :config
-  (setq nasm-basic-offset 4))
-#+end_src
-
-Use it as the default mode for =.asm= files. For more information on
-=auto-mode-alist=, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Choosing-Modes.html][Choosing File Modes]].
-
-#+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode))
+  (setq nasm-basic-offset 4)
+  (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode)))
 #+end_src
 
 *** Nov.el
