@@ -1155,7 +1155,9 @@ Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with 
 
 1. The =nasm-basic-offset= is set to the value of =tab-width= when declared, at
    which point we have not set it to 4. TODO: We should not hard-code 4 twice.
-2. We use =nasm-mode= as the default mode for =.asm= files. For more information on
+2. The =indent-line-function= variable is set to =#'tab-to-tab-stop= for better
+   control.
+3. We use =nasm-mode= as the default mode for =.asm= files. For more information on
    =auto-mode-alist=, see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Choosing-Modes.html][Choosing File Modes]].
 
 #+begin_src emacs-lisp
@@ -1163,6 +1165,11 @@ Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with 
   :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode")
   :config
   (setq nasm-basic-offset 4)
+  (add-hook 'nasm-mode-hook
+            (lambda ()
+              (setq-local indent-line-function
+                          (lambda ()
+                            (indent-relative 'first-only)))))
   (add-to-list 'auto-mode-alist '("\\.asm\\'"  . nasm-mode)))
 #+end_src
 
