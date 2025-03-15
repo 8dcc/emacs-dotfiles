@@ -3791,6 +3791,14 @@ TODO: This is not necessarily related to Email. Move to another section?
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
 #+end_src
 
+*** Composing mail (Message)
+
+Copy sent mail to the "sent" file.
+
+#+begin_src emacs-lisp
+(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
+#+end_src
+
 *** Sending mail (Message)
 
 Set SMTP encryption, server and port.
@@ -3807,12 +3815,6 @@ When sending mail, try to sign it with the sender's PGP key.
 
 #+begin_src emacs-lisp
 (setq mml-secure-openpgp-sign-with-sender t)
-#+end_src
-
-Copy sent mail to the "sent" file.
-
-#+begin_src emacs-lisp
-(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 #+end_src
 
 The following function returns a list of email addresses found in one of the

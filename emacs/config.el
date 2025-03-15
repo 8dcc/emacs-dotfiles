@@ -2085,6 +2085,8 @@ password."
 
 (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
 
+(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
+
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465
@@ -2092,8 +2094,6 @@ password."
       message-send-mail-function #'smtpmail-send-it)
 
 (setq mml-secure-openpgp-sign-with-sender t)
-
-(setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 
 (defconst x8dcc/authinfo-max-host-mails 10
   "Maximum number of email addresses for a single host.
