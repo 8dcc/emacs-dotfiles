@@ -2087,6 +2087,9 @@ password."
 
 (setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 
+(with-eval-after-load 'footnote
+  (setq footnote-section-tag ""))
+
 (setq smtpmail-stream-type 'ssl
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 465

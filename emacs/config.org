@@ -3799,6 +3799,13 @@ Copy sent mail to the "sent" file.
 (setq message-default-headers (concat "FCC: " x8dcc/mail-directory "sent"))
 #+end_src
 
+Disable section tag for =footnote-mode=.
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'footnote
+  (setq footnote-section-tag ""))
+#+end_src
+
 *** Sending mail (Message)
 
 Set SMTP encryption, server and port.
