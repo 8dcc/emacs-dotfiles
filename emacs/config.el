@@ -1176,8 +1176,9 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   ;; Code -> Syntax
   "c s"   '(:ignore t                       :wk "Syntax")
   "c s ?" '(flycheck-explain-error-at-point :wk "Explain error")
-  "c s s" '(flycheck-buffer                 :wk "Check syntax")
-  "c s l" '(flycheck-list-errors            :wk "List syntax errors")
+  "c s s" '(flycheck-mode                   :wk "Toggle syntax checker")
+  "c s S" '(flycheck-buffer                 :wk "Check buffer")
+  "c s l" '(flycheck-list-errors            :wk "List errors")
   ;; Evaluate
   "e"   '(:ignore t              :wk "Evaluate")
   "e b" '(eval-buffer            :wk "Current buffer")
