@@ -1045,6 +1045,18 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   (with-editor* "GIT_EDITOR"
     (vc-git-command nil 'async files "add" "--edit")))
 
+(defun x8dcc/dired-do-multi-occur (regexp &optional nlines)
+  "Run `multi-occur' with REGEXP in all marked files.
+
+Optional argument NLINES specifies the number of context lines to show with each
+match, see `list-matching-lines-default-context-lines'."
+  (interactive (occur-read-primary-args))
+  (let ((marked-buffers (mapcar (lambda (filename)
+                                  (or (find-buffer-visiting filename)
+                                      (find-file-noselect filename)))
+                                (dired-get-marked-files))))
+    (multi-occur marked-buffers regexp nlines)))
+
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t

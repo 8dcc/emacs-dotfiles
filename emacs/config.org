@@ -1907,6 +1907,23 @@ Simple function for running =git add --edit= within Emacs.
     (vc-git-command nil 'async files "add" "--edit")))
 #+end_src
 
+Similar to =dired-do-find-regexp=, this function allows the user to call
+=multi-occur= in all marked files.
+
+#+begin_src emacs-lisp
+(defun x8dcc/dired-do-multi-occur (regexp &optional nlines)
+  "Run `multi-occur' with REGEXP in all marked files.
+
+Optional argument NLINES specifies the number of context lines to show with each
+match, see `list-matching-lines-default-context-lines'."
+  (interactive (occur-read-primary-args))
+  (let ((marked-buffers (mapcar (lambda (filename)
+                                  (or (find-buffer-visiting filename)
+                                      (find-file-noselect filename)))
+                                (dired-get-marked-files))))
+    (multi-occur marked-buffers regexp nlines)))
+#+end_src
+
 * Input
 ** Scrolling and motion
 
