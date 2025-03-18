@@ -4996,6 +4996,19 @@ can be found at commit [[https://github.com/8dcc/emacs-dotfiles/blob/0b03b1f3033
   "#endif /* " v1 " */" \n)
 #+end_src
 
+Common C/C++ snippets.
+
+#+begin_src emacs-lisp
+(define-skeleton x8dcc/skeleton-c-forloop
+  "Insert a C for-loop from 0 to N."
+  nil
+  '(setq v1 (skeleton-read "Iterator: " "i"))
+  '(setq v2 (skeleton-read "Limit: "))
+  "for (int " v1 " = 0; " v1 " < " v2 "; " v1 "++) {" \n
+  > _ \n
+  "}" > \n)
+#+end_src
+
 Insert GPL-3.0 (or later) comment.
 
 #+begin_src emacs-lisp

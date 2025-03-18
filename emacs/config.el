@@ -2868,6 +2868,15 @@ Used for highlighting more constants with `font-lock-constant-face' in
   _ "\n\n"
   "#endif /* " v1 " */" \n)
 
+(define-skeleton x8dcc/skeleton-c-forloop
+  "Insert a C for-loop from 0 to N."
+  nil
+  '(setq v1 (skeleton-read "Iterator: " "i"))
+  '(setq v2 (skeleton-read "Limit: "))
+  "for (int " v1 " = 0; " v1 " < " v2 "; " v1 "++) {" \n
+  > _ \n
+  "}" > \n)
+
 (define-skeleton x8dcc/skeleton-c-license-comment
   "Insert a basic C header skeleton with include guards."
   nil
