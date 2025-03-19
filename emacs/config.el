@@ -1057,6 +1057,25 @@ match, see `list-matching-lines-default-context-lines'."
                                 (dired-get-marked-files))))
     (multi-occur marked-buffers regexp nlines)))
 
+(defun x8dcc/recursive-multi-occur (file-wildcard directory line-regexp &optional nlines)
+  "Run `multi-occur' with REGEXP in all marked files.
+
+Optional argument NLINES specifies the number of context lines to show with each
+match, see `list-matching-lines-default-context-lines'."
+  (interactive
+   (let ((occur-args (occur-read-primary-args)))
+     (cl-list*
+      (grep-read-files (car occur-args))
+      (read-directory-name "Base directory: " nil nil 'must-match)
+      occur-args)))
+  (let ((buffers (mapcar (lambda (filename)
+                           (or (find-buffer-visiting filename)
+                               (find-file-noselect filename)))
+                         (directory-files-recursively
+                          directory
+                          (wildcard-to-regexp file-wildcard)))))
+    (multi-occur buffers line-regexp nlines)))
+
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
       mouse-wheel-follow-mouse t
