@@ -527,6 +527,10 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
   (setq nov-text-width 80)
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
+(use-package cmake-mode)
+
+(use-package eldoc-cmake)
+
 (defun x8dcc/non-empty-string-p (str)
   "Check if the string is neither nil nor empty."
   (and str (not (string-empty-p str))))

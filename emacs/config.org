@@ -1185,6 +1185,20 @@ Major mode for reading EPUBs in Emacs.
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 #+end_src
 
+*** CMake mode and ElDoc
+
+Major mode for editing CMake files.
+
+#+begin_src emacs-lisp
+(use-package cmake-mode)
+#+end_src
+
+And ElDoc support.
+
+#+begin_src emacs-lisp
+(use-package eldoc-cmake)
+#+end_src
+
 *** COMMENT Graphviz dot mode
 
 For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
