@@ -2814,6 +2814,16 @@ between lines.
               fill-column 80)
 #+end_src
 
+The fill column should be a bit lower for git commits.
+
+#+begin_src emacs-lisp
+(x8dcc/hook-to-targets
+ (lambda ()
+   (setq-local fill-column 72))
+ '(git-commit-mode-hook
+   vc-git-log-edit-mode-hook))
+#+end_src
+
 Display the fill column by default in =prog-mode= and =LaTeX-mode=. Can be toggled
 with =SPC t c=.
 
@@ -2823,7 +2833,9 @@ with =SPC t c=.
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
    TeX-mode-hook
-   message-mode-hook))
+   message-mode-hook
+   git-commit-mode-hook
+   vc-git-log-edit-mode-hook))
 #+end_src
 
 ** Tab bar

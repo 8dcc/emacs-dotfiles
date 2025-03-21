@@ -1672,10 +1672,18 @@ of characters, followed by the number of lines."
 
 (x8dcc/hook-to-targets
  (lambda ()
+   (setq-local fill-column 72))
+ '(git-commit-mode-hook
+   vc-git-log-edit-mode-hook))
+
+(x8dcc/hook-to-targets
+ (lambda ()
    (display-fill-column-indicator-mode 1))
  '(prog-mode-hook
    TeX-mode-hook
-   message-mode-hook))
+   message-mode-hook
+   git-commit-mode-hook
+   vc-git-log-edit-mode-hook))
 
 (tab-bar-history-mode 1)
 
