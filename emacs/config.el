@@ -438,6 +438,10 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                          (seq "u" (repeat 4 hex-digit))
                          (seq "U" (repeat 8 hex-digit))))))))
 
+(use-package c-eldoc
+  ;; :hook ((c-mode-common . c-turn-on-eldoc-mode))
+  )
+
 (use-package eldoc-box
   :diminish eldoc-box-hover-at-point-mode
   :hook ((eldoc-mode . eldoc-box-hover-at-point-mode)))

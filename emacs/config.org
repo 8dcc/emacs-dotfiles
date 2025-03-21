@@ -957,13 +957,14 @@ etc.
                          (seq "U" (repeat 8 hex-digit))))))))
 #+end_src
 
-*** COMMENT C ElDoc
+*** C ElDoc
 
 Display description of the function under the cursor. See =eldoc-mode=.
 
 #+begin_src emacs-lisp
 (use-package c-eldoc
-  :hook ((c-mode-common . c-turn-on-eldoc-mode)))
+  ;; :hook ((c-mode-common . c-turn-on-eldoc-mode))
+  )
 #+end_src
 
 *** Eldoc box
