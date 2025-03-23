@@ -2968,12 +2968,6 @@ Used for highlighting more constants with `font-lock-constant-face' in
   "\t@mkdir -p $(dir $@)\n"
   "\t$(CC) $(CFLAGS) -o $@ -c $<\n")
 
-(defun x8dcc/beardbolt-disassemble ()
-  "Enable `beardbolt-mode' and call `beardbolt-compile'."
-  (interactive)
-  (beardbolt-mode 1)
-  (call-interactively #'beardbolt-compile))
-
 (setq gdb-many-windows t)
 
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)

@@ -596,6 +596,16 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
         beardbolt-compile-delay nil))
 #+end_src
 
+This wrapper enables =beardbolt-mode= in a C buffer and calls =beardbolt-compile=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/beardbolt-disassemble ()
+  "Enable `beardbolt-mode' and call `beardbolt-compile'."
+  (interactive)
+  (beardbolt-mode 1)
+  (call-interactively #'beardbolt-compile))
+#+end_src
+
 *** COMMENT Whisper
 
 Speech-to-Text interface for Emacs. I am personally impressed about this being
@@ -5124,18 +5134,6 @@ Insert a simple Makefile skeleton for C.
   "obj/%.c.o : src/%.c\n"
   "\t@mkdir -p $(dir $@)\n"
   "\t$(CC) $(CFLAGS) -o $@ -c $<\n")
-#+end_src
-
-*** C misc functions
-
-This wrapper enables [[*Beardbolt][beardbolt-mode]] in a C buffer and calls =beardbolt-compile=.
-
-#+begin_src emacs-lisp
-(defun x8dcc/beardbolt-disassemble ()
-  "Enable `beardbolt-mode' and call `beardbolt-compile'."
-  (interactive)
-  (beardbolt-mode 1)
-  (call-interactively #'beardbolt-compile))
 #+end_src
 
 ** GDB
