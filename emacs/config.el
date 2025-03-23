@@ -2968,6 +2968,10 @@ Used for highlighting more constants with `font-lock-constant-face' in
   "\t@mkdir -p $(dir $@)\n"
   "\t$(CC) $(CFLAGS) -o $@ -c $<\n")
 
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (c-toggle-comment-style 1)))
+
 (setq gdb-many-windows t)
 
 (setq gdb-restore-window-configuration-after-quit 'if-gdb-many-windows)

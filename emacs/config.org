@@ -5136,6 +5136,16 @@ Insert a simple Makefile skeleton for C.
   "\t$(CC) $(CFLAGS) -o $@ -c $<\n")
 #+end_src
 
+*** C++ basic settings
+
+Use C comments in C++ buffers.
+
+#+begin_src emacs-lisp
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (c-toggle-comment-style 1)))
+#+end_src
+
 ** GDB
 
 Launch in the /Many Windows/ layout.
