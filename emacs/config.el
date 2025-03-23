@@ -813,7 +813,8 @@ Affected by `comment-start', `comment-padding' and `comment-end'."
                                  answer)))))))
 
 (defvar x8dcc/format-buffer-funcs
-  '((c-mode . clang-format-buffer))
+  '((c-mode . clang-format-buffer)
+    (c++-mode . clang-format-buffer))
   "Alist with major modes and their formatting functions.
 
 Each element should have the form (MAJOR-MODE . FMT-FUNC).
