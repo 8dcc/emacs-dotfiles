@@ -362,6 +362,13 @@ popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
         #'magit-display-buffer-same-window-except-diff-v1))
 #+end_src
 
+Disable commit keyword highlighting (in square brackets).
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'git-commit
+  (set-face-attribute 'git-commit-keyword nil :foreground 'unspecified))
+#+end_src
+
 *** With editor
 
 Use the Emacsclient as the ~$EDITOR~ of child processes.
