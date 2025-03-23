@@ -2875,8 +2875,12 @@ Not included: \"NULL\", \"true\" and \"false\".")
 Used for highlighting more constants with `font-lock-constant-face' in
 `c-mode'.")
 
-(font-lock-add-keywords 'c-mode
-  (list (cons x8dcc/c-constant-regexp 'font-lock-constant-face)))
+(mapcar (lambda (mode-name)
+          (font-lock-add-keywords mode-name
+                                  (list
+                                   (cons x8dcc/c-constant-regexp
+                                         'font-lock-constant-face))))
+        '(c-mode c++-mode))
 
 (define-skeleton x8dcc/skeleton-c-source
   "Insert a basic C source skeleton with a main function."
