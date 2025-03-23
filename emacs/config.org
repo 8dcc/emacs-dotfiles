@@ -3368,7 +3368,7 @@ of...\"."
         (real-fill-column
          (- fill-column (x8dcc/count-comment-characters))))
     (insert (x8dcc/gpl3-license project real-fill-column))
-    (x8dcc/comment-and-fill-region start (point))))
+    (comment-region start (point))))
 #+end_src
 
 * Mode-specific settings
