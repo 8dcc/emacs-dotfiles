@@ -1275,8 +1275,9 @@ match, see `list-matching-lines-default-context-lines'."
   "h m" '(describe-mode           :wk "Describe mode")
   "h v" '(describe-variable       :wk "Describe variable")
   ;; Insert
-  "i"   '(:ignore t               :wk "Insert")
-  "i c" '(insert-char             :wk "Character")
+  "i"   '(:ignore t                              :wk "Insert")
+  "i c" '(insert-char                            :wk "Character")
+  "i l" '(x8dcc/skeleton-generic-license-comment :wk "License comment")
   ;; Jump
   "j"   '(:ignore t             :wk "Jump")
   "j i" '(consult-imenu         :wk "Imenu")
