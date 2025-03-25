@@ -649,6 +649,16 @@ will be used for replacing with the `replace-regexp-in-string' function."
                                (cdar alist)
                                string))))
 
+(defun x8dcc/count-comment-characters ()
+  "Return the number of characters reserved for comments.
+Assuming the comment starts and ends on the same line."
+  (length
+   (concat (string-trim comment-start)
+           comment-padding
+           (if (x8dcc/non-empty-string-p comment-end)
+               (concat comment-padding
+                       (string-trim comment-end))))))
+
 (defun x8dcc/count-matching-buffers (regexp)
   "Return the number of buffers whose whole name matches REGEXP.
 The REGEXP is wrapped in \"^...$\"."
@@ -1875,7 +1885,8 @@ using `string-fill'.  If it's nil, it's filled to `fill-column'."
   (string-fill
    (concat
     "Copyright " (format-time-string "%Y") " " user-full-name ". All Rights Reserved.\n\n"
-    (if project (concat "This file is part of " project ".\n\n"))
+    (and (x8dcc/non-empty-string-p project)
+         (concat "This file is part of " project ".\n\n"))
     "This program is free software: you can redistribute it and/or modify it under\n"
     "the terms of the GNU General Public License as published by the Free Software\n"
     "Foundation, either version 3 of the License, or (at your option) any later\n"
@@ -1888,21 +1899,16 @@ using `string-fill'.  If it's nil, it's filled to `fill-column'."
    (or fill-col
        fill-column)))
 
-(defun x8dcc/count-comment-characters ()
-  "Return the number of characters reserved for comments."
-  (length
-   (concat (string-trim comment-start)
-           comment-padding
-           (if (x8dcc/non-empty-string-p comment-end)
-               (concat comment-padding
-                       (string-trim comment-end))))))
-
 (defun x8dcc/skeleton-generic-license-comment (&optional project)
   "Insert a generic GPL-v3-or-later license comment.
 
 If PROJECT is specified, it will show an extra line with \"This file is part
 of...\"."
-  (interactive)
+  (interactive
+   (let ((project (project-current)))
+     (list
+      (skeleton-read "Project name: "
+                     (and project (project-name project))))))
   (let ((start (point))
         (real-fill-column
          (- fill-column (x8dcc/count-comment-characters))))
