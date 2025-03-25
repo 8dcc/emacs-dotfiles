@@ -4065,7 +4065,9 @@ Org agenda location.
       (setq org-directory expanded-org-directory
             org-agenda-files (mapcar (lambda (filename)
                                        (concat org-directory filename))
-                                     '("agenda.org" "notes.org")))))
+                                     '("agenda.org"
+                                       "calendar.org"
+                                       "notes.org")))))
 #+end_src
 
 Set the first day of the week. See [[*Misc visual settings][Misc visual settings]].

@@ -2223,7 +2223,9 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
       (setq org-directory expanded-org-directory
             org-agenda-files (mapcar (lambda (filename)
                                        (concat org-directory filename))
-                                     '("agenda.org" "notes.org")))))
+                                     '("agenda.org"
+                                       "calendar.org"
+                                       "notes.org")))))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day
       org-agenda-weekend-days calendar-weekend-days)
