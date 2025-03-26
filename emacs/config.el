@@ -1067,6 +1067,13 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
   (with-editor* "GIT_EDITOR"
     (vc-git-command nil 'async files "add" "--edit")))
 
+(defun x8dcc/vc-print-log-follow (&optional working-revision limit)
+  "Print the log of the current fileset, while following renames.
+See `vc-print-log' and `vc-git-print-log-follow'."
+  (interactive)
+  (let ((vc-git-print-log-follow t))
+    (vc-print-log working-revision limit)))
+
 (defun x8dcc/dired-do-multi-occur (regexp &optional nlines)
   "Run `multi-occur' with REGEXP in all marked files.
 
@@ -1377,12 +1384,12 @@ match, see `list-matching-lines-default-context-lines'."
   "v b b" '(vc-switch-branch :wk "Switch to")
   "v b c" '(vc-create-branch :wk "Create")
   ;; Version control -> Log
-  "v l"   '(:ignore t           :wk "Log")
-  "v l b" '(vc-print-branch-log :wk "Branch")
-  "v l f" '(vc-print-log        :wk "Current file")
-  "v l l" '(vc-print-root-log   :wk "Root")
-  "v l o" '(vc-log-outgoing     :wk "Outgoing")
-  "v l r" '(vc-region-history   :wk "Region")
+  "v l"   '(:ignore t                 :wk "Log")
+  "v l b" '(vc-print-branch-log       :wk "Branch")
+  "v l f" '(x8dcc/vc-print-log-follow :wk "Current file")
+  "v l l" '(vc-print-root-log         :wk "Root")
+  "v l o" '(vc-log-outgoing           :wk "Outgoing")
+  "v l r" '(vc-region-history         :wk "Region")
   ;; Version control -> Stash
   "v z"   '(:ignore t          :wk "Git stash")
   "v z a" '(vc-git-stash-apply :wk "Apply")
