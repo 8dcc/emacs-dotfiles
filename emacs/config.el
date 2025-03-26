@@ -1302,9 +1302,9 @@ match, see `list-matching-lines-default-context-lines'."
   "o M" '(compose-mail          :wk "Compose mail")
   "o x" '(scratch-buffer        :wk "Scratch buffer")
   ;; Open -> Org
-  "o o"   '(:ignore t   :wk "Org")
-  "o o a" '(org-agenda  :wk "Agenda")
-  "o o c" '(org-capture :wk "Capture")
+  "o o"   '(:ignore t       :wk "Org")
+  "o o a" '(org-agenda-list :wk "Agenda")
+  "o o c" '(org-capture     :wk "Capture")
   ;; Project
   "p"   '(:ignore t                      :wk "Project")
   "p c" '(projectile-compile-project     :wk "Compile")
