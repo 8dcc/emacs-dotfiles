@@ -1,0 +1,1215 @@
+#+TITLE: GNU Emacs Keybinds
+#+SUBTITLE: Last exported on {{{time(%Y-%m-%d)}}}.
+#+AUTHOR: 8dcc
+#+PROPERTY: header-args:emacs-lisp :results none
+
+* Introduction
+
+This file contains the exported keybinds for my Emacs configuration, which
+currently can be found at [[https://github.com/8dcc/emacs-dotfiles][GitHub]].
+
+The following list shows pending changes:
+
+- Include =which-key= descriptions in tables.
+
+** Meta
+
+The contents of the following sections can be generated with the following
+function.
+
+#+begin_src emacs-lisp
+(general-describe-keybindings)
+#+end_src
+
+The Org tables can be formatted with the following function.
+
+#+begin_src emacs-lisp
+(org-table-map-tables
+ (lambda ()
+   ;; Remove the last "previous" column, which is always nil in my
+   ;; case. It would be better to go to the last column instead.
+   (org-table-goto-column 3 nil 'force)
+   (org-table-delete-column)
+
+   ;; Capitalize the table headers.
+   (capitalize-region (pos-bol) (pos-eol))
+
+   ;; Align the table, doesn't affect export.
+   (org-table-align)))
+#+end_src
+
+For exporting the file to PDF, the following can be used.
+
+#+begin_comment org
+TODO: Second pass is not working, ToC is not being generated.
+#+end_comment
+
+#+begin_src emacs-lisp
+(let ((texinfo-output (org-texinfo-export-to-texinfo)))
+  (with-current-buffer
+      (or (find-buffer-visiting texinfo-output)
+          (find-file-noselect texinfo-output))
+    (x8dcc/tex-compile)     ; First pass
+    (x8dcc/tex-compile)))   ; Second pass (ToC, etc.)
+#+end_src
+
+* Diff-Mode-Map Keybindings
+** Insert State
+| Key       | Command          |
+|-----------+------------------|
+| =M-SPC m a= | ~diff-apply-hunk~  |
+| =M-SPC m d= | ~diff-hunk-kill~   |
+| =M-SPC m e= | ~diff-ediff-patch~ |
+| =M-SPC m n= | ~diff-hunk-next~   |
+| =M-SPC m p= | ~diff-hunk-prev~   |
+| =M-SPC m s= | ~diff-split-hunk~  |
+
+** Emacs State
+| Key       | Command          |
+|-----------+------------------|
+| =M-SPC m a= | ~diff-apply-hunk~  |
+| =M-SPC m d= | ~diff-hunk-kill~   |
+| =M-SPC m e= | ~diff-ediff-patch~ |
+| =M-SPC m n= | ~diff-hunk-next~   |
+| =M-SPC m p= | ~diff-hunk-prev~   |
+| =M-SPC m s= | ~diff-split-hunk~  |
+
+** Normal State
+| Key     | Command          |
+|---------+------------------|
+| =SPC m a= | ~diff-apply-hunk~  |
+| =SPC m d= | ~diff-hunk-kill~   |
+| =SPC m e= | ~diff-ediff-patch~ |
+| =SPC m n= | ~diff-hunk-next~   |
+| =SPC m p= | ~diff-hunk-prev~   |
+| =SPC m s= | ~diff-split-hunk~  |
+
+** Visual State
+| Key     | Command          |
+|---------+------------------|
+| =SPC m a= | ~diff-apply-hunk~  |
+| =SPC m d= | ~diff-hunk-kill~   |
+| =SPC m e= | ~diff-ediff-patch~ |
+| =SPC m n= | ~diff-hunk-next~   |
+| =SPC m p= | ~diff-hunk-prev~   |
+| =SPC m s= | ~diff-split-hunk~  |
+
+* Message-Mode-Map Keybindings
+** Insert State
+| Key       | Command                         |
+|-----------+---------------------------------|
+| =M-SPC m a= | ~mml-attach-file~                 |
+| =M-SPC m c= | ~message-yank-original~           |
+| =M-SPC m e= | ~mml-secure-message-sign-encrypt~ |
+| =M-SPC m p= | ~mml-preview~                     |
+| =M-SPC m s= | ~mml-secure-message-sign~         |
+| =M-SPC m S= | ~message-send~                    |
+
+** Emacs State
+| Key       | Command                         |
+|-----------+---------------------------------|
+| =M-SPC m a= | ~mml-attach-file~                 |
+| =M-SPC m c= | ~message-yank-original~           |
+| =M-SPC m e= | ~mml-secure-message-sign-encrypt~ |
+| =M-SPC m p= | ~mml-preview~                     |
+| =M-SPC m s= | ~mml-secure-message-sign~         |
+| =M-SPC m S= | ~message-send~                    |
+
+** Normal State
+| Key     | Command                         |
+|---------+---------------------------------|
+| =SPC m a= | ~mml-attach-file~                 |
+| =SPC m c= | ~message-yank-original~           |
+| =SPC m e= | ~mml-secure-message-sign-encrypt~ |
+| =SPC m p= | ~mml-preview~                     |
+| =SPC m s= | ~mml-secure-message-sign~         |
+| =SPC m S= | ~message-send~                    |
+
+** Visual State
+| Key     | Command                         |
+|---------+---------------------------------|
+| =SPC m a= | ~mml-attach-file~                 |
+| =SPC m c= | ~message-yank-original~           |
+| =SPC m e= | ~mml-secure-message-sign-encrypt~ |
+| =SPC m p= | ~mml-preview~                     |
+| =SPC m s= | ~mml-secure-message-sign~         |
+| =SPC m S= | ~message-send~                    |
+
+* Java-Mode-Map Keybindings
+** Insert State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Emacs State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Normal State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Visual State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+* C++-Mode-Map Keybindings
+** Insert State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Emacs State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Normal State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Visual State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+* C-Mode-Map Keybindings
+** Insert State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Emacs State
+| Key         | Command                          |
+|-------------+----------------------------------|
+| =M-SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =M-SPC m m=   | ~c-macro-expand~                   |
+| =M-SPC m t a= | ~c-toggle-auto-newline~            |
+| =M-SPC m t e= | ~eldoc-mode~                       |
+| =M-SPC m t h= | ~c-toggle-hungry-state~            |
+| =M-SPC m t I= | ~hide-ifdef-mode~                  |
+| =M-SPC m t l= | ~c-toggle-electric-state~          |
+| =M-SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =M-SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =M-SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Normal State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+** Visual State
+| Key       | Command                          |
+|-----------+----------------------------------|
+| =SPC m d=   | ~x8dcc/beardbolt-disassemble~      |
+| =SPC m m=   | ~c-macro-expand~                   |
+| =SPC m t a= | ~c-toggle-auto-newline~            |
+| =SPC m t e= | ~eldoc-mode~                       |
+| =SPC m t h= | ~c-toggle-hungry-state~            |
+| =SPC m t I= | ~hide-ifdef-mode~                  |
+| =SPC m t l= | ~c-toggle-electric-state~          |
+| =SPC m i h= | ~x8dcc/skeleton-c-header~          |
+| =SPC m i l= | ~x8dcc/skeleton-c-license-comment~ |
+| =SPC m i s= | ~x8dcc/skeleton-c-source~          |
+
+* Pdf-View-Mode-Map Keybindings
+** Insert State
+| Key         | Command                              |
+|-------------+--------------------------------------|
+| =M-SPC m c=   | ~pdf-view-center-in-window~            |
+| =M-SPC m o=   | ~pdf-outline~                          |
+| =M-SPC m f h= | ~pdf-view-fit-height-to-window~        |
+| =M-SPC m f m= | ~pdf-view-set-slice-from-bounding-box~ |
+| =M-SPC m f M= | ~pdf-view-reset-slice~                 |
+| =M-SPC m f p= | ~pdf-view-fit-page-to-window~          |
+| =M-SPC m f w= | ~pdf-view-fit-width-to-window~         |
+| =M-SPC m t t= | ~pdf-view-themed-minor-mode~           |
+
+** Emacs State
+| Key         | Command                              |
+|-------------+--------------------------------------|
+| =M-SPC m c=   | ~pdf-view-center-in-window~            |
+| =M-SPC m o=   | ~pdf-outline~                          |
+| =M-SPC m f h= | ~pdf-view-fit-height-to-window~        |
+| =M-SPC m f m= | ~pdf-view-set-slice-from-bounding-box~ |
+| =M-SPC m f M= | ~pdf-view-reset-slice~                 |
+| =M-SPC m f p= | ~pdf-view-fit-page-to-window~          |
+| =M-SPC m f w= | ~pdf-view-fit-width-to-window~         |
+| =M-SPC m t t= | ~pdf-view-themed-minor-mode~           |
+
+** Normal State
+| Key       | Command                              |
+|-----------+--------------------------------------|
+| =SPC m c=   | ~pdf-view-center-in-window~            |
+| =SPC m o=   | ~pdf-outline~                          |
+| =SPC m f h= | ~pdf-view-fit-height-to-window~        |
+| =SPC m f m= | ~pdf-view-set-slice-from-bounding-box~ |
+| =SPC m f M= | ~pdf-view-reset-slice~                 |
+| =SPC m f p= | ~pdf-view-fit-page-to-window~          |
+| =SPC m f w= | ~pdf-view-fit-width-to-window~         |
+| =SPC m t t= | ~pdf-view-themed-minor-mode~           |
+
+** Visual State
+| Key       | Command                              |
+|-----------+--------------------------------------|
+| =SPC m c=   | ~pdf-view-center-in-window~            |
+| =SPC m o=   | ~pdf-outline~                          |
+| =SPC m f h= | ~pdf-view-fit-height-to-window~        |
+| =SPC m f m= | ~pdf-view-set-slice-from-bounding-box~ |
+| =SPC m f M= | ~pdf-view-reset-slice~                 |
+| =SPC m f p= | ~pdf-view-fit-page-to-window~          |
+| =SPC m f w= | ~pdf-view-fit-width-to-window~         |
+| =SPC m t t= | ~pdf-view-themed-minor-mode~           |
+
+* Markdown-Mode-Map Keybindings
+** Insert State
+| Key         | Command                                      |
+|-------------+----------------------------------------------|
+| =M-SPC m +=   | ~markdown-promote~                             |
+| =M-SPC m -=   | ~markdown-demote~                              |
+| =M-SPC m e=   | ~markdown-export~                              |
+| =M-SPC m f b= | ~markdown-insert-bold~                         |
+| =M-SPC m f c= | ~markdown-insert-code~                         |
+| =M-SPC m f i= | ~markdown-insert-italic~                       |
+| =M-SPC m f q= | ~markdown-insert-blockquote~                   |
+| =M-SPC m f s= | ~markdown-insert-strike-through~               |
+| =M-SPC m i -= | ~markdown-insert-hr~                           |
+| =M-SPC m i c= | ~markdown-insert-gfm-code-block~               |
+| =M-SPC m i h= | ~markdown-insert-header-dwim~                  |
+| =M-SPC m i l= | ~markdown-insert-link~                         |
+| =M-SPC m t i= | ~markdown-toggle-inline-images~                |
+| =M-SPC m t m= | ~markdown-toggle-markup-hiding~                |
+| =M-SPC m t l= | ~markdown-toggle-url-hiding~                   |
+| =M-SPC m t c= | ~markdown-toggle-fontify-code-blocks-natively~ |
+
+** Emacs State
+| Key         | Command                                      |
+|-------------+----------------------------------------------|
+| =M-SPC m +=   | ~markdown-promote~                             |
+| =M-SPC m -=   | ~markdown-demote~                              |
+| =M-SPC m e=   | ~markdown-export~                              |
+| =M-SPC m f b= | ~markdown-insert-bold~                         |
+| =M-SPC m f c= | ~markdown-insert-code~                         |
+| =M-SPC m f i= | ~markdown-insert-italic~                       |
+| =M-SPC m f q= | ~markdown-insert-blockquote~                   |
+| =M-SPC m f s= | ~markdown-insert-strike-through~               |
+| =M-SPC m i -= | ~markdown-insert-hr~                           |
+| =M-SPC m i c= | ~markdown-insert-gfm-code-block~               |
+| =M-SPC m i h= | ~markdown-insert-header-dwim~                  |
+| =M-SPC m i l= | ~markdown-insert-link~                         |
+| =M-SPC m t i= | ~markdown-toggle-inline-images~                |
+| =M-SPC m t m= | ~markdown-toggle-markup-hiding~                |
+| =M-SPC m t l= | ~markdown-toggle-url-hiding~                   |
+| =M-SPC m t c= | ~markdown-toggle-fontify-code-blocks-natively~ |
+
+** Normal State
+| Key       | Command                                      |
+|-----------+----------------------------------------------|
+| =SPC m +=   | ~markdown-promote~                             |
+| =SPC m -=   | ~markdown-demote~                              |
+| =SPC m e=   | ~markdown-export~                              |
+| =SPC m f b= | ~markdown-insert-bold~                         |
+| =SPC m f c= | ~markdown-insert-code~                         |
+| =SPC m f i= | ~markdown-insert-italic~                       |
+| =SPC m f q= | ~markdown-insert-blockquote~                   |
+| =SPC m f s= | ~markdown-insert-strike-through~               |
+| =SPC m i -= | ~markdown-insert-hr~                           |
+| =SPC m i c= | ~markdown-insert-gfm-code-block~               |
+| =SPC m i h= | ~markdown-insert-header-dwim~                  |
+| =SPC m i l= | ~markdown-insert-link~                         |
+| =SPC m t i= | ~markdown-toggle-inline-images~                |
+| =SPC m t m= | ~markdown-toggle-markup-hiding~                |
+| =SPC m t l= | ~markdown-toggle-url-hiding~                   |
+| =SPC m t c= | ~markdown-toggle-fontify-code-blocks-natively~ |
+
+** Visual State
+| Key       | Command                                      |
+|-----------+----------------------------------------------|
+| =SPC m +=   | ~markdown-promote~                             |
+| =SPC m -=   | ~markdown-demote~                              |
+| =SPC m e=   | ~markdown-export~                              |
+| =SPC m f b= | ~markdown-insert-bold~                         |
+| =SPC m f c= | ~markdown-insert-code~                         |
+| =SPC m f i= | ~markdown-insert-italic~                       |
+| =SPC m f q= | ~markdown-insert-blockquote~                   |
+| =SPC m f s= | ~markdown-insert-strike-through~               |
+| =SPC m i -= | ~markdown-insert-hr~                           |
+| =SPC m i c= | ~markdown-insert-gfm-code-block~               |
+| =SPC m i h= | ~markdown-insert-header-dwim~                  |
+| =SPC m i l= | ~markdown-insert-link~                         |
+| =SPC m t i= | ~markdown-toggle-inline-images~                |
+| =SPC m t m= | ~markdown-toggle-markup-hiding~                |
+| =SPC m t l= | ~markdown-toggle-url-hiding~                   |
+| =SPC m t c= | ~markdown-toggle-fontify-code-blocks-natively~ |
+
+* Org-Mode-Map Keybindings
+** Insert State
+| Key         | Command                       |
+|-------------+-------------------------------|
+| =M-SPC m T=   | ~org-babel-tangle~              |
+| =M-SPC m d d= | ~org-deadline~                  |
+| =M-SPC m d s= | ~org-schedule~                  |
+| =M-SPC m e a= | ~org-ascii-export-to-ascii~     |
+| =M-SPC m e h= | ~org-html-export-to-html~       |
+| =M-SPC m e l= | ~org-latex-export-to-latex~     |
+| =M-SPC m e p= | ~org-latex-export-to-pdf~       |
+| =M-SPC m e t= | ~org-texinfo-export-to-texinfo~ |
+| =M-SPC m i d= | ~x8dcc/skeleton-org-default~    |
+| =M-SPC m i b= | ~x8dcc/skeleton-org-blog~       |
+| =M-SPC m l l= | ~x8dcc/org-insert-link~         |
+| =M-SPC m l s= | ~org-store-link~                |
+| =M-SPC m p d= | ~org-priority-down~             |
+| =M-SPC m p p= | ~org-priority~                  |
+| =M-SPC m p u= | ~org-priority-up~               |
+| =M-SPC m t i= | ~org-indent-mode~               |
+| =M-SPC m t I= | ~org-toggle-inline-images~      |
+| =M-SPC m t t= | ~org-todo~                      |
+
+** Emacs State
+| Key         | Command                       |
+|-------------+-------------------------------|
+| =M-SPC m T=   | ~org-babel-tangle~              |
+| =M-SPC m d d= | ~org-deadline~                  |
+| =M-SPC m d s= | ~org-schedule~                  |
+| =M-SPC m e a= | ~org-ascii-export-to-ascii~     |
+| =M-SPC m e h= | ~org-html-export-to-html~       |
+| =M-SPC m e l= | ~org-latex-export-to-latex~     |
+| =M-SPC m e p= | ~org-latex-export-to-pdf~       |
+| =M-SPC m e t= | ~org-texinfo-export-to-texinfo~ |
+| =M-SPC m i d= | ~x8dcc/skeleton-org-default~    |
+| =M-SPC m i b= | ~x8dcc/skeleton-org-blog~       |
+| =M-SPC m l l= | ~x8dcc/org-insert-link~         |
+| =M-SPC m l s= | ~org-store-link~                |
+| =M-SPC m p d= | ~org-priority-down~             |
+| =M-SPC m p p= | ~org-priority~                  |
+| =M-SPC m p u= | ~org-priority-up~               |
+| =M-SPC m t i= | ~org-indent-mode~               |
+| =M-SPC m t I= | ~org-toggle-inline-images~      |
+| =M-SPC m t t= | ~org-todo~                      |
+
+** Normal State
+| Key       | Command                       |
+|-----------+-------------------------------|
+| =SPC m T=   | ~org-babel-tangle~              |
+| =SPC m d d= | ~org-deadline~                  |
+| =SPC m d s= | ~org-schedule~                  |
+| =SPC m e a= | ~org-ascii-export-to-ascii~     |
+| =SPC m e h= | ~org-html-export-to-html~       |
+| =SPC m e l= | ~org-latex-export-to-latex~     |
+| =SPC m e p= | ~org-latex-export-to-pdf~       |
+| =SPC m e t= | ~org-texinfo-export-to-texinfo~ |
+| =SPC m i d= | ~x8dcc/skeleton-org-default~    |
+| =SPC m i b= | ~x8dcc/skeleton-org-blog~       |
+| =SPC m l l= | ~x8dcc/org-insert-link~         |
+| =SPC m l s= | ~org-store-link~                |
+| =SPC m p d= | ~org-priority-down~             |
+| =SPC m p p= | ~org-priority~                  |
+| =SPC m p u= | ~org-priority-up~               |
+| =SPC m t i= | ~org-indent-mode~               |
+| =SPC m t I= | ~org-toggle-inline-images~      |
+| =SPC m t t= | ~org-todo~                      |
+
+** Visual State
+| Key       | Command                       |
+|-----------+-------------------------------|
+| =SPC m T=   | ~org-babel-tangle~              |
+| =SPC m d d= | ~org-deadline~                  |
+| =SPC m d s= | ~org-schedule~                  |
+| =SPC m e a= | ~org-ascii-export-to-ascii~     |
+| =SPC m e h= | ~org-html-export-to-html~       |
+| =SPC m e l= | ~org-latex-export-to-latex~     |
+| =SPC m e p= | ~org-latex-export-to-pdf~       |
+| =SPC m e t= | ~org-texinfo-export-to-texinfo~ |
+| =SPC m i d= | ~x8dcc/skeleton-org-default~    |
+| =SPC m i b= | ~x8dcc/skeleton-org-blog~       |
+| =SPC m l l= | ~x8dcc/org-insert-link~         |
+| =SPC m l s= | ~org-store-link~                |
+| =SPC m p d= | ~org-priority-down~             |
+| =SPC m p p= | ~org-priority~                  |
+| =SPC m p u= | ~org-priority-up~               |
+| =SPC m t i= | ~org-indent-mode~               |
+| =SPC m t I= | ~org-toggle-inline-images~      |
+| =SPC m t t= | ~org-todo~                      |
+
+* General-Override-Mode-Map Keybindings
+** Insert State
+| Key                 | Command                                |
+|---------------------+----------------------------------------|
+| =M-SPC SPC=           | ~projectile-find-file~                   |
+| =M-SPC .=             | ~find-file~                              |
+| =M-SPC TAB TAB=       | ~tab-recent~                             |
+| =M-SPC TAB c=         | ~tab-close~                              |
+| =M-SPC TAB l=         | ~tab-switch~                             |
+| =M-SPC TAB n=         | ~tab-new~                                |
+| =M-SPC TAB r=         | ~tab-rename~                             |
+| =M-SPC TAB t=         | ~tab-bar-mode~                           |
+| =M-SPC TAB <left>=    | ~tab-previous~                           |
+| =M-SPC TAB <right>=   | ~tab-next~                               |
+| =M-SPC TAB S-<left>=  | ~x8dcc/tab-move-left~                    |
+| =M-SPC TAB S-<right>= | ~x8dcc/tab-move-right~                   |
+| =M-SPC b b=           | ~previous-buffer~                        |
+| =M-SPC b B=           | ~next-buffer~                            |
+| =M-SPC b c=           | ~revert-buffer-with-coding-system~       |
+| =M-SPC b i=           | ~x8dcc/indent-buffer~                    |
+| =M-SPC b k=           | ~kill-current-buffer~                    |
+| =M-SPC b K=           | ~kill-buffer~                            |
+| =M-SPC b l=           | ~switch-to-buffer~                       |
+| =M-SPC b L=           | ~buffer-menu~                            |
+| =M-SPC b q=           | ~bury-buffer~                            |
+| =M-SPC b r=           | ~revert-buffer~                          |
+| =M-SPC b R=           | ~rename-buffer~                          |
+| =M-SPC b s=           | ~basic-save-buffer~                      |
+| =M-SPC b S=           | ~write-file~                             |
+| =M-SPC b <left>=      | ~previous-buffer~                        |
+| =M-SPC b <right>=     | ~next-buffer~                            |
+| =M-SPC c c=           | ~comment-dwim~                           |
+| =M-SPC c C=           | ~x8dcc/comment-separator~                |
+| =M-SPC c f=           | ~x8dcc/format-buffer-or-region~          |
+| =M-SPC c l=           | ~eglot~                                  |
+| =M-SPC c L=           | ~eglot-shutdown~                         |
+| =M-SPC c s ?=         | ~flycheck-explain-error-at-point~        |
+| =M-SPC c s s=         | ~flycheck-mode~                          |
+| =M-SPC c s S=         | ~flycheck-buffer~                        |
+| =M-SPC c s l=         | ~flycheck-list-errors~                   |
+| =M-SPC e b=           | ~eval-buffer~                            |
+| =M-SPC e e=           | ~eval-last-sexp~                         |
+| =M-SPC e E=           | ~eval-expression~                        |
+| =M-SPC e l=           | ~repeat-complex-command~                 |
+| =M-SPC e p=           | ~plumber-plumb~                          |
+| =M-SPC e P=           | ~plumber-plumb-as~                       |
+| =M-SPC e r=           | ~eval-region~                            |
+| =M-SPC f c=           | ~compile~                                |
+| =M-SPC f C=           | ~recompile~                              |
+| =M-SPC f d=           | ~diff~                                   |
+| =M-SPC f D=           | ~ediff~                                  |
+| =M-SPC f f=           | ~find-file~                              |
+| =M-SPC f F=           | ~find-name-dired~                        |
+| =M-SPC f o=           | ~ff-find-other-file~                     |
+| =M-SPC f O=           | ~find-file-at-point~                     |
+| =M-SPC f r=           | ~recentf-open~                           |
+| =M-SPC g c=           | ~magit-commit~                           |
+| =M-SPC g e=           | ~magit-ediff-wdim~                       |
+| =M-SPC g f=           | ~magit-fetch~                            |
+| =M-SPC g F=           | ~magit-pull~                             |
+| =M-SPC g g=           | ~magit-status~                           |
+| =M-SPC g p=           | ~magit-push~                             |
+| =M-SPC g s=           | ~magit-stage-buffer-file~                |
+| =M-SPC g u=           | ~magit-unstage-buffer-file~              |
+| =M-SPC h c=           | ~describe-char~                          |
+| =M-SPC h e=           | ~view-echo-area-messages~                |
+| =M-SPC h f=           | ~describe-function~                      |
+| =M-SPC h F=           | ~describe-face~                          |
+| =M-SPC h i=           | ~info~                                   |
+| =M-SPC h I=           | ~shortdoc~                               |
+| =M-SPC h k=           | ~describe-key~                           |
+| =M-SPC h l=           | ~find-library~                           |
+| =M-SPC h m=           | ~describe-mode~                          |
+| =M-SPC h v=           | ~describe-variable~                      |
+| =M-SPC i c=           | ~insert-char~                            |
+| =M-SPC i l=           | ~x8dcc/skeleton-generic-license-comment~ |
+| =M-SPC j i=           | ~consult-imenu~                          |
+| =M-SPC j j=           | ~evil-jump-backward~                     |
+| =M-SPC j J=           | ~evil-jump-forward~                      |
+| =M-SPC j d=           | ~xref-find-definitions~                  |
+| =M-SPC j x=           | ~xref-find-references~                   |
+| =M-SPC o .=           | ~dired-jump~                             |
+| =M-SPC o !=           | ~shell-command~                          |
+| =M-SPC o &=           | ~async-shell-command~                    |
+| =M-SPC o ?=           | ~man~                                    |
+| =M-SPC o c=           | ~calc~                                   |
+| =M-SPC o C=           | ~quick-calc~                             |
+| =M-SPC o d=           | ~projectile-run-gdb~                     |
+| =M-SPC o e=           | ~x8dcc/eshell-popup~                     |
+| =M-SPC o E=           | ~x8dcc/eshell-numbered~                  |
+| =M-SPC o m=           | ~rmail~                                  |
+| =M-SPC o M=           | ~compose-mail~                           |
+| =M-SPC o x=           | ~scratch-buffer~                         |
+| =M-SPC o o a=         | ~org-agenda~                             |
+| =M-SPC o o c=         | ~org-capture~                            |
+| =M-SPC p c=           | ~projectile-compile-project~             |
+| =M-SPC p C=           | ~projectile-repeat-last-command~         |
+| =M-SPC p f=           | ~projectile-find-file~                   |
+| =M-SPC p p=           | ~projectile-switch-project~              |
+| =M-SPC p r=           | ~project-query-replace-regexp~           |
+| =M-SPC r c=           | ~center-region~                          |
+| =M-SPC r u=           | ~capitalize-region~                      |
+| =M-SPC r U=           | ~upcase-region~                          |
+| =M-SPC r w=           | ~fill-region~                            |
+| =M-SPC r W=           | ~x8dcc/unfill-region~                    |
+| =M-SPC s g=           | ~rgrep~                                  |
+| =M-SPC s h=           | ~x8dcc/highlight-regexp~                 |
+| =M-SPC s H=           | ~unhighlight-regexp~                     |
+| =M-SPC s o=           | ~occur~                                  |
+| =M-SPC s r=           | ~query-replace~                          |
+| =M-SPC s R=           | ~query-replace-regexp~                   |
+| =M-SPC s s=           | ~isearch-forward~                        |
+| =M-SPC s S=           | ~isearch-forward-regexp~                 |
+| =M-SPC s n d=         | ~git-gutter:next-hunk~                   |
+| =M-SPC s n n=         | ~next-error~                             |
+| =M-SPC s n s=         | ~spell-fu-goto-next-error~               |
+| =M-SPC s p d=         | ~git-gutter:previous-hunk~               |
+| =M-SPC s p p=         | ~previous-error~                         |
+| =M-SPC s p s=         | ~spell-fu-goto-previous-error~           |
+| =M-SPC t b=           | ~big-font-mode~                          |
+| =M-SPC t c=           | ~display-fill-column-indicator-mode~     |
+| =M-SPC t f=           | ~variable-pitch-mode~                    |
+| =M-SPC t i=           | ~toggle-case-fold-search~                |
+| =M-SPC t l=           | ~display-line-numbers-mode~              |
+| =M-SPC t L=           | ~hl-line-mode~                           |
+| =M-SPC t p=           | ~popper-toggle~                          |
+| =M-SPC t P=           | ~popper-toggle-type~                     |
+| =M-SPC t r=           | ~read-only-mode~                         |
+| =M-SPC t s=           | ~spell-fu-mode~                          |
+| =M-SPC t S=           | ~whitespace-mode~                        |
+| =M-SPC t v=           | ~visible-mode~                           |
+| =M-SPC t w=           | ~toggle-truncate-lines~                  |
+| =M-SPC t W=           | ~auto-fill-mode~                         |
+| =M-SPC u v=           | ~vundo~                                  |
+| =M-SPC u l=           | ~yank-from-kill-ring~                    |
+| =M-SPC v d=           | ~vc-diff~                                |
+| =M-SPC v g=           | ~vc-annotate~                            |
+| =M-SPC v I=           | ~vc-log-incoming~                        |
+| =M-SPC v o=           | ~vc-revision-other-window~               |
+| =M-SPC v p=           | ~vc-update~                              |
+| =M-SPC v P=           | ~vc-push~                                |
+| =M-SPC v v=           | ~vc-next-action~                         |
+| =M-SPC v V=           | ~vc-refresh-state~                       |
+| =M-SPC v b b=         | ~vc-switch-branch~                       |
+| =M-SPC v b c=         | ~vc-create-branch~                       |
+| =M-SPC v l b=         | ~vc-print-branch-log~                    |
+| =M-SPC v l f=         | ~vc-print-log~                           |
+| =M-SPC v l l=         | ~vc-print-root-log~                      |
+| =M-SPC v l o=         | ~vc-log-outgoing~                        |
+| =M-SPC v l r=         | ~vc-region-history~                      |
+| =M-SPC v z a=         | ~vc-git-stash-apply~                     |
+| =M-SPC v z p=         | ~vc-git-stash-pop~                       |
+| =M-SPC v z s=         | ~vc-git-stash-show~                      |
+| =M-SPC v z z=         | ~vc-git-stash~                           |
+| =M-SPC w c=           | ~evil-window-delete~                     |
+| =M-SPC w C=           | ~x8dcc/evil-kill-buffer-and-window~      |
+| =M-SPC w h=           | ~evil-window-left~                       |
+| =M-SPC w H=           | ~evil-window-move-far-left~              |
+| =M-SPC w j=           | ~evil-window-down~                       |
+| =M-SPC w J=           | ~evil-window-move-very-bottom~           |
+| =M-SPC w k=           | ~evil-window-up~                         |
+| =M-SPC w K=           | ~evil-window-move-very-top~              |
+| =M-SPC w l=           | ~evil-window-right~                      |
+| =M-SPC w L=           | ~evil-window-move-far-right~             |
+| =M-SPC w s=           | ~evil-window-split~                      |
+| =M-SPC w v=           | ~evil-window-vsplit~                     |
+| =M-SPC w w=           | ~evil-window-next~                       |
+| =M-SPC z a=           | ~evil-toggle-fold~                       |
+| =M-SPC z c=           | ~evil-close-fold~                        |
+| =M-SPC z m=           | ~evil-close-folds~                       |
+| =M-SPC z o=           | ~evil-open-fold~                         |
+| =M-SPC z r=           | ~evil-open-folds~                        |
+
+** Emacs State
+| Key                 | Command                                |
+|---------------------+----------------------------------------|
+| =M-SPC SPC=           | ~projectile-find-file~                   |
+| =M-SPC .=             | ~find-file~                              |
+| =M-SPC TAB TAB=       | ~tab-recent~                             |
+| =M-SPC TAB c=         | ~tab-close~                              |
+| =M-SPC TAB l=         | ~tab-switch~                             |
+| =M-SPC TAB n=         | ~tab-new~                                |
+| =M-SPC TAB r=         | ~tab-rename~                             |
+| =M-SPC TAB t=         | ~tab-bar-mode~                           |
+| =M-SPC TAB <left>=    | ~tab-previous~                           |
+| =M-SPC TAB <right>=   | ~tab-next~                               |
+| =M-SPC TAB S-<left>=  | ~x8dcc/tab-move-left~                    |
+| =M-SPC TAB S-<right>= | ~x8dcc/tab-move-right~                   |
+| =M-SPC b b=           | ~previous-buffer~                        |
+| =M-SPC b B=           | ~next-buffer~                            |
+| =M-SPC b c=           | ~revert-buffer-with-coding-system~       |
+| =M-SPC b i=           | ~x8dcc/indent-buffer~                    |
+| =M-SPC b k=           | ~kill-current-buffer~                    |
+| =M-SPC b K=           | ~kill-buffer~                            |
+| =M-SPC b l=           | ~switch-to-buffer~                       |
+| =M-SPC b L=           | ~buffer-menu~                            |
+| =M-SPC b q=           | ~bury-buffer~                            |
+| =M-SPC b r=           | ~revert-buffer~                          |
+| =M-SPC b R=           | ~rename-buffer~                          |
+| =M-SPC b s=           | ~basic-save-buffer~                      |
+| =M-SPC b S=           | ~write-file~                             |
+| =M-SPC b <left>=      | ~previous-buffer~                        |
+| =M-SPC b <right>=     | ~next-buffer~                            |
+| =M-SPC c c=           | ~comment-dwim~                           |
+| =M-SPC c C=           | ~x8dcc/comment-separator~                |
+| =M-SPC c f=           | ~x8dcc/format-buffer-or-region~          |
+| =M-SPC c l=           | ~eglot~                                  |
+| =M-SPC c L=           | ~eglot-shutdown~                         |
+| =M-SPC c s ?=         | ~flycheck-explain-error-at-point~        |
+| =M-SPC c s s=         | ~flycheck-mode~                          |
+| =M-SPC c s S=         | ~flycheck-buffer~                        |
+| =M-SPC c s l=         | ~flycheck-list-errors~                   |
+| =M-SPC e b=           | ~eval-buffer~                            |
+| =M-SPC e e=           | ~eval-last-sexp~                         |
+| =M-SPC e E=           | ~eval-expression~                        |
+| =M-SPC e l=           | ~repeat-complex-command~                 |
+| =M-SPC e p=           | ~plumber-plumb~                          |
+| =M-SPC e P=           | ~plumber-plumb-as~                       |
+| =M-SPC e r=           | ~eval-region~                            |
+| =M-SPC f c=           | ~compile~                                |
+| =M-SPC f C=           | ~recompile~                              |
+| =M-SPC f d=           | ~diff~                                   |
+| =M-SPC f D=           | ~ediff~                                  |
+| =M-SPC f f=           | ~find-file~                              |
+| =M-SPC f F=           | ~find-name-dired~                        |
+| =M-SPC f o=           | ~ff-find-other-file~                     |
+| =M-SPC f O=           | ~find-file-at-point~                     |
+| =M-SPC f r=           | ~recentf-open~                           |
+| =M-SPC g c=           | ~magit-commit~                           |
+| =M-SPC g e=           | ~magit-ediff-wdim~                       |
+| =M-SPC g f=           | ~magit-fetch~                            |
+| =M-SPC g F=           | ~magit-pull~                             |
+| =M-SPC g g=           | ~magit-status~                           |
+| =M-SPC g p=           | ~magit-push~                             |
+| =M-SPC g s=           | ~magit-stage-buffer-file~                |
+| =M-SPC g u=           | ~magit-unstage-buffer-file~              |
+| =M-SPC h c=           | ~describe-char~                          |
+| =M-SPC h e=           | ~view-echo-area-messages~                |
+| =M-SPC h f=           | ~describe-function~                      |
+| =M-SPC h F=           | ~describe-face~                          |
+| =M-SPC h i=           | ~info~                                   |
+| =M-SPC h I=           | ~shortdoc~                               |
+| =M-SPC h k=           | ~describe-key~                           |
+| =M-SPC h l=           | ~find-library~                           |
+| =M-SPC h m=           | ~describe-mode~                          |
+| =M-SPC h v=           | ~describe-variable~                      |
+| =M-SPC i c=           | ~insert-char~                            |
+| =M-SPC i l=           | ~x8dcc/skeleton-generic-license-comment~ |
+| =M-SPC j i=           | ~consult-imenu~                          |
+| =M-SPC j j=           | ~evil-jump-backward~                     |
+| =M-SPC j J=           | ~evil-jump-forward~                      |
+| =M-SPC j d=           | ~xref-find-definitions~                  |
+| =M-SPC j x=           | ~xref-find-references~                   |
+| =M-SPC o .=           | ~dired-jump~                             |
+| =M-SPC o !=           | ~shell-command~                          |
+| =M-SPC o &=           | ~async-shell-command~                    |
+| =M-SPC o ?=           | ~man~                                    |
+| =M-SPC o c=           | ~calc~                                   |
+| =M-SPC o C=           | ~quick-calc~                             |
+| =M-SPC o d=           | ~projectile-run-gdb~                     |
+| =M-SPC o e=           | ~x8dcc/eshell-popup~                     |
+| =M-SPC o E=           | ~x8dcc/eshell-numbered~                  |
+| =M-SPC o m=           | ~rmail~                                  |
+| =M-SPC o M=           | ~compose-mail~                           |
+| =M-SPC o x=           | ~scratch-buffer~                         |
+| =M-SPC o o a=         | ~org-agenda~                             |
+| =M-SPC o o c=         | ~org-capture~                            |
+| =M-SPC p c=           | ~projectile-compile-project~             |
+| =M-SPC p C=           | ~projectile-repeat-last-command~         |
+| =M-SPC p f=           | ~projectile-find-file~                   |
+| =M-SPC p p=           | ~projectile-switch-project~              |
+| =M-SPC p r=           | ~project-query-replace-regexp~           |
+| =M-SPC r c=           | ~center-region~                          |
+| =M-SPC r u=           | ~capitalize-region~                      |
+| =M-SPC r U=           | ~upcase-region~                          |
+| =M-SPC r w=           | ~fill-region~                            |
+| =M-SPC r W=           | ~x8dcc/unfill-region~                    |
+| =M-SPC s g=           | ~rgrep~                                  |
+| =M-SPC s h=           | ~x8dcc/highlight-regexp~                 |
+| =M-SPC s H=           | ~unhighlight-regexp~                     |
+| =M-SPC s o=           | ~occur~                                  |
+| =M-SPC s r=           | ~query-replace~                          |
+| =M-SPC s R=           | ~query-replace-regexp~                   |
+| =M-SPC s s=           | ~isearch-forward~                        |
+| =M-SPC s S=           | ~isearch-forward-regexp~                 |
+| =M-SPC s n d=         | ~git-gutter:next-hunk~                   |
+| =M-SPC s n n=         | ~next-error~                             |
+| =M-SPC s n s=         | ~spell-fu-goto-next-error~               |
+| =M-SPC s p d=         | ~git-gutter:previous-hunk~               |
+| =M-SPC s p p=         | ~previous-error~                         |
+| =M-SPC s p s=         | ~spell-fu-goto-previous-error~           |
+| =M-SPC t b=           | ~big-font-mode~                          |
+| =M-SPC t c=           | ~display-fill-column-indicator-mode~     |
+| =M-SPC t f=           | ~variable-pitch-mode~                    |
+| =M-SPC t i=           | ~toggle-case-fold-search~                |
+| =M-SPC t l=           | ~display-line-numbers-mode~              |
+| =M-SPC t L=           | ~hl-line-mode~                           |
+| =M-SPC t p=           | ~popper-toggle~                          |
+| =M-SPC t P=           | ~popper-toggle-type~                     |
+| =M-SPC t r=           | ~read-only-mode~                         |
+| =M-SPC t s=           | ~spell-fu-mode~                          |
+| =M-SPC t S=           | ~whitespace-mode~                        |
+| =M-SPC t v=           | ~visible-mode~                           |
+| =M-SPC t w=           | ~toggle-truncate-lines~                  |
+| =M-SPC t W=           | ~auto-fill-mode~                         |
+| =M-SPC u v=           | ~vundo~                                  |
+| =M-SPC u l=           | ~yank-from-kill-ring~                    |
+| =M-SPC v d=           | ~vc-diff~                                |
+| =M-SPC v g=           | ~vc-annotate~                            |
+| =M-SPC v I=           | ~vc-log-incoming~                        |
+| =M-SPC v o=           | ~vc-revision-other-window~               |
+| =M-SPC v p=           | ~vc-update~                              |
+| =M-SPC v P=           | ~vc-push~                                |
+| =M-SPC v v=           | ~vc-next-action~                         |
+| =M-SPC v V=           | ~vc-refresh-state~                       |
+| =M-SPC v b b=         | ~vc-switch-branch~                       |
+| =M-SPC v b c=         | ~vc-create-branch~                       |
+| =M-SPC v l b=         | ~vc-print-branch-log~                    |
+| =M-SPC v l f=         | ~vc-print-log~                           |
+| =M-SPC v l l=         | ~vc-print-root-log~                      |
+| =M-SPC v l o=         | ~vc-log-outgoing~                        |
+| =M-SPC v l r=         | ~vc-region-history~                      |
+| =M-SPC v z a=         | ~vc-git-stash-apply~                     |
+| =M-SPC v z p=         | ~vc-git-stash-pop~                       |
+| =M-SPC v z s=         | ~vc-git-stash-show~                      |
+| =M-SPC v z z=         | ~vc-git-stash~                           |
+| =M-SPC w c=           | ~evil-window-delete~                     |
+| =M-SPC w C=           | ~x8dcc/evil-kill-buffer-and-window~      |
+| =M-SPC w h=           | ~evil-window-left~                       |
+| =M-SPC w H=           | ~evil-window-move-far-left~              |
+| =M-SPC w j=           | ~evil-window-down~                       |
+| =M-SPC w J=           | ~evil-window-move-very-bottom~           |
+| =M-SPC w k=           | ~evil-window-up~                         |
+| =M-SPC w K=           | ~evil-window-move-very-top~              |
+| =M-SPC w l=           | ~evil-window-right~                      |
+| =M-SPC w L=           | ~evil-window-move-far-right~             |
+| =M-SPC w s=           | ~evil-window-split~                      |
+| =M-SPC w v=           | ~evil-window-vsplit~                     |
+| =M-SPC w w=           | ~evil-window-next~                       |
+| =M-SPC z a=           | ~evil-toggle-fold~                       |
+| =M-SPC z c=           | ~evil-close-fold~                        |
+| =M-SPC z m=           | ~evil-close-folds~                       |
+| =M-SPC z o=           | ~evil-open-fold~                         |
+| =M-SPC z r=           | ~evil-open-folds~                        |
+
+** Normal State
+| Key               | Command                                |
+|-------------------+----------------------------------------|
+| =SPC SPC=           | ~projectile-find-file~                   |
+| =SPC .=             | ~find-file~                              |
+| =SPC TAB TAB=       | ~tab-recent~                             |
+| =SPC TAB c=         | ~tab-close~                              |
+| =SPC TAB l=         | ~tab-switch~                             |
+| =SPC TAB n=         | ~tab-new~                                |
+| =SPC TAB r=         | ~tab-rename~                             |
+| =SPC TAB t=         | ~tab-bar-mode~                           |
+| =SPC TAB <left>=    | ~tab-previous~                           |
+| =SPC TAB <right>=   | ~tab-next~                               |
+| =SPC TAB S-<left>=  | ~x8dcc/tab-move-left~                    |
+| =SPC TAB S-<right>= | ~x8dcc/tab-move-right~                   |
+| =SPC b b=           | ~previous-buffer~                        |
+| =SPC b B=           | ~next-buffer~                            |
+| =SPC b c=           | ~revert-buffer-with-coding-system~       |
+| =SPC b i=           | ~x8dcc/indent-buffer~                    |
+| =SPC b k=           | ~kill-current-buffer~                    |
+| =SPC b K=           | ~kill-buffer~                            |
+| =SPC b l=           | ~switch-to-buffer~                       |
+| =SPC b L=           | ~buffer-menu~                            |
+| =SPC b q=           | ~bury-buffer~                            |
+| =SPC b r=           | ~revert-buffer~                          |
+| =SPC b R=           | ~rename-buffer~                          |
+| =SPC b s=           | ~basic-save-buffer~                      |
+| =SPC b S=           | ~write-file~                             |
+| =SPC b <left>=      | ~previous-buffer~                        |
+| =SPC b <right>=     | ~next-buffer~                            |
+| =SPC c c=           | ~comment-dwim~                           |
+| =SPC c C=           | ~x8dcc/comment-separator~                |
+| =SPC c f=           | ~x8dcc/format-buffer-or-region~          |
+| =SPC c l=           | ~eglot~                                  |
+| =SPC c L=           | ~eglot-shutdown~                         |
+| =SPC c s ?=         | ~flycheck-explain-error-at-point~        |
+| =SPC c s s=         | ~flycheck-mode~                          |
+| =SPC c s S=         | ~flycheck-buffer~                        |
+| =SPC c s l=         | ~flycheck-list-errors~                   |
+| =SPC e b=           | ~eval-buffer~                            |
+| =SPC e e=           | ~eval-last-sexp~                         |
+| =SPC e E=           | ~eval-expression~                        |
+| =SPC e l=           | ~repeat-complex-command~                 |
+| =SPC e p=           | ~plumber-plumb~                          |
+| =SPC e P=           | ~plumber-plumb-as~                       |
+| =SPC e r=           | ~eval-region~                            |
+| =SPC f c=           | ~compile~                                |
+| =SPC f C=           | ~recompile~                              |
+| =SPC f d=           | ~diff~                                   |
+| =SPC f D=           | ~ediff~                                  |
+| =SPC f f=           | ~find-file~                              |
+| =SPC f F=           | ~find-name-dired~                        |
+| =SPC f o=           | ~ff-find-other-file~                     |
+| =SPC f O=           | ~find-file-at-point~                     |
+| =SPC f r=           | ~recentf-open~                           |
+| =SPC g c=           | ~magit-commit~                           |
+| =SPC g e=           | ~magit-ediff-wdim~                       |
+| =SPC g f=           | ~magit-fetch~                            |
+| =SPC g F=           | ~magit-pull~                             |
+| =SPC g g=           | ~magit-status~                           |
+| =SPC g p=           | ~magit-push~                             |
+| =SPC g s=           | ~magit-stage-buffer-file~                |
+| =SPC g u=           | ~magit-unstage-buffer-file~              |
+| =SPC h c=           | ~describe-char~                          |
+| =SPC h e=           | ~view-echo-area-messages~                |
+| =SPC h f=           | ~describe-function~                      |
+| =SPC h F=           | ~describe-face~                          |
+| =SPC h i=           | ~info~                                   |
+| =SPC h I=           | ~shortdoc~                               |
+| =SPC h k=           | ~describe-key~                           |
+| =SPC h l=           | ~find-library~                           |
+| =SPC h m=           | ~describe-mode~                          |
+| =SPC h v=           | ~describe-variable~                      |
+| =SPC i c=           | ~insert-char~                            |
+| =SPC i l=           | ~x8dcc/skeleton-generic-license-comment~ |
+| =SPC j i=           | ~consult-imenu~                          |
+| =SPC j j=           | ~evil-jump-backward~                     |
+| =SPC j J=           | ~evil-jump-forward~                      |
+| =SPC j d=           | ~xref-find-definitions~                  |
+| =SPC j x=           | ~xref-find-references~                   |
+| =SPC o .=           | ~dired-jump~                             |
+| =SPC o !=           | ~shell-command~                          |
+| =SPC o &=           | ~async-shell-command~                    |
+| =SPC o ?=           | ~man~                                    |
+| =SPC o c=           | ~calc~                                   |
+| =SPC o C=           | ~quick-calc~                             |
+| =SPC o d=           | ~projectile-run-gdb~                     |
+| =SPC o e=           | ~x8dcc/eshell-popup~                     |
+| =SPC o E=           | ~x8dcc/eshell-numbered~                  |
+| =SPC o m=           | ~rmail~                                  |
+| =SPC o M=           | ~compose-mail~                           |
+| =SPC o x=           | ~scratch-buffer~                         |
+| =SPC o o a=         | ~org-agenda~                             |
+| =SPC o o c=         | ~org-capture~                            |
+| =SPC p c=           | ~projectile-compile-project~             |
+| =SPC p C=           | ~projectile-repeat-last-command~         |
+| =SPC p f=           | ~projectile-find-file~                   |
+| =SPC p p=           | ~projectile-switch-project~              |
+| =SPC p r=           | ~project-query-replace-regexp~           |
+| =SPC r c=           | ~center-region~                          |
+| =SPC r u=           | ~capitalize-region~                      |
+| =SPC r U=           | ~upcase-region~                          |
+| =SPC r w=           | ~fill-region~                            |
+| =SPC r W=           | ~x8dcc/unfill-region~                    |
+| =SPC s g=           | ~rgrep~                                  |
+| =SPC s h=           | ~x8dcc/highlight-regexp~                 |
+| =SPC s H=           | ~unhighlight-regexp~                     |
+| =SPC s o=           | ~occur~                                  |
+| =SPC s r=           | ~query-replace~                          |
+| =SPC s R=           | ~query-replace-regexp~                   |
+| =SPC s s=           | ~isearch-forward~                        |
+| =SPC s S=           | ~isearch-forward-regexp~                 |
+| =SPC s n d=         | ~git-gutter:next-hunk~                   |
+| =SPC s n n=         | ~next-error~                             |
+| =SPC s n s=         | ~spell-fu-goto-next-error~               |
+| =SPC s p d=         | ~git-gutter:previous-hunk~               |
+| =SPC s p p=         | ~previous-error~                         |
+| =SPC s p s=         | ~spell-fu-goto-previous-error~           |
+| =SPC t b=           | ~big-font-mode~                          |
+| =SPC t c=           | ~display-fill-column-indicator-mode~     |
+| =SPC t f=           | ~variable-pitch-mode~                    |
+| =SPC t i=           | ~toggle-case-fold-search~                |
+| =SPC t l=           | ~display-line-numbers-mode~              |
+| =SPC t L=           | ~hl-line-mode~                           |
+| =SPC t p=           | ~popper-toggle~                          |
+| =SPC t P=           | ~popper-toggle-type~                     |
+| =SPC t r=           | ~read-only-mode~                         |
+| =SPC t s=           | ~spell-fu-mode~                          |
+| =SPC t S=           | ~whitespace-mode~                        |
+| =SPC t v=           | ~visible-mode~                           |
+| =SPC t w=           | ~toggle-truncate-lines~                  |
+| =SPC t W=           | ~auto-fill-mode~                         |
+| =SPC u v=           | ~vundo~                                  |
+| =SPC u l=           | ~yank-from-kill-ring~                    |
+| =SPC v d=           | ~vc-diff~                                |
+| =SPC v g=           | ~vc-annotate~                            |
+| =SPC v I=           | ~vc-log-incoming~                        |
+| =SPC v o=           | ~vc-revision-other-window~               |
+| =SPC v p=           | ~vc-update~                              |
+| =SPC v P=           | ~vc-push~                                |
+| =SPC v v=           | ~vc-next-action~                         |
+| =SPC v V=           | ~vc-refresh-state~                       |
+| =SPC v b b=         | ~vc-switch-branch~                       |
+| =SPC v b c=         | ~vc-create-branch~                       |
+| =SPC v l b=         | ~vc-print-branch-log~                    |
+| =SPC v l f=         | ~vc-print-log~                           |
+| =SPC v l l=         | ~vc-print-root-log~                      |
+| =SPC v l o=         | ~vc-log-outgoing~                        |
+| =SPC v l r=         | ~vc-region-history~                      |
+| =SPC v z a=         | ~vc-git-stash-apply~                     |
+| =SPC v z p=         | ~vc-git-stash-pop~                       |
+| =SPC v z s=         | ~vc-git-stash-show~                      |
+| =SPC v z z=         | ~vc-git-stash~                           |
+| =SPC w c=           | ~evil-window-delete~                     |
+| =SPC w C=           | ~x8dcc/evil-kill-buffer-and-window~      |
+| =SPC w h=           | ~evil-window-left~                       |
+| =SPC w H=           | ~evil-window-move-far-left~              |
+| =SPC w j=           | ~evil-window-down~                       |
+| =SPC w J=           | ~evil-window-move-very-bottom~           |
+| =SPC w k=           | ~evil-window-up~                         |
+| =SPC w K=           | ~evil-window-move-very-top~              |
+| =SPC w l=           | ~evil-window-right~                      |
+| =SPC w L=           | ~evil-window-move-far-right~             |
+| =SPC w s=           | ~evil-window-split~                      |
+| =SPC w v=           | ~evil-window-vsplit~                     |
+| =SPC w w=           | ~evil-window-next~                       |
+| =SPC z a=           | ~evil-toggle-fold~                       |
+| =SPC z c=           | ~evil-close-fold~                        |
+| =SPC z m=           | ~evil-close-folds~                       |
+| =SPC z o=           | ~evil-open-fold~                         |
+| =SPC z r=           | ~evil-open-folds~                        |
+
+** Visual State
+| Key               | Command                                |
+|-------------------+----------------------------------------|
+| =SPC SPC=           | ~projectile-find-file~                   |
+| =SPC .=             | ~find-file~                              |
+| =SPC TAB TAB=       | ~tab-recent~                             |
+| =SPC TAB c=         | ~tab-close~                              |
+| =SPC TAB l=         | ~tab-switch~                             |
+| =SPC TAB n=         | ~tab-new~                                |
+| =SPC TAB r=         | ~tab-rename~                             |
+| =SPC TAB t=         | ~tab-bar-mode~                           |
+| =SPC TAB <left>=    | ~tab-previous~                           |
+| =SPC TAB <right>=   | ~tab-next~                               |
+| =SPC TAB S-<left>=  | ~x8dcc/tab-move-left~                    |
+| =SPC TAB S-<right>= | ~x8dcc/tab-move-right~                   |
+| =SPC b b=           | ~previous-buffer~                        |
+| =SPC b B=           | ~next-buffer~                            |
+| =SPC b c=           | ~revert-buffer-with-coding-system~       |
+| =SPC b i=           | ~x8dcc/indent-buffer~                    |
+| =SPC b k=           | ~kill-current-buffer~                    |
+| =SPC b K=           | ~kill-buffer~                            |
+| =SPC b l=           | ~switch-to-buffer~                       |
+| =SPC b L=           | ~buffer-menu~                            |
+| =SPC b q=           | ~bury-buffer~                            |
+| =SPC b r=           | ~revert-buffer~                          |
+| =SPC b R=           | ~rename-buffer~                          |
+| =SPC b s=           | ~basic-save-buffer~                      |
+| =SPC b S=           | ~write-file~                             |
+| =SPC b <left>=      | ~previous-buffer~                        |
+| =SPC b <right>=     | ~next-buffer~                            |
+| =SPC c c=           | ~comment-dwim~                           |
+| =SPC c C=           | ~x8dcc/comment-separator~                |
+| =SPC c f=           | ~x8dcc/format-buffer-or-region~          |
+| =SPC c l=           | ~eglot~                                  |
+| =SPC c L=           | ~eglot-shutdown~                         |
+| =SPC c s ?=         | ~flycheck-explain-error-at-point~        |
+| =SPC c s s=         | ~flycheck-mode~                          |
+| =SPC c s S=         | ~flycheck-buffer~                        |
+| =SPC c s l=         | ~flycheck-list-errors~                   |
+| =SPC e b=           | ~eval-buffer~                            |
+| =SPC e e=           | ~eval-last-sexp~                         |
+| =SPC e E=           | ~eval-expression~                        |
+| =SPC e l=           | ~repeat-complex-command~                 |
+| =SPC e p=           | ~plumber-plumb~                          |
+| =SPC e P=           | ~plumber-plumb-as~                       |
+| =SPC e r=           | ~eval-region~                            |
+| =SPC f c=           | ~compile~                                |
+| =SPC f C=           | ~recompile~                              |
+| =SPC f d=           | ~diff~                                   |
+| =SPC f D=           | ~ediff~                                  |
+| =SPC f f=           | ~find-file~                              |
+| =SPC f F=           | ~find-name-dired~                        |
+| =SPC f o=           | ~ff-find-other-file~                     |
+| =SPC f O=           | ~find-file-at-point~                     |
+| =SPC f r=           | ~recentf-open~                           |
+| =SPC g c=           | ~magit-commit~                           |
+| =SPC g e=           | ~magit-ediff-wdim~                       |
+| =SPC g f=           | ~magit-fetch~                            |
+| =SPC g F=           | ~magit-pull~                             |
+| =SPC g g=           | ~magit-status~                           |
+| =SPC g p=           | ~magit-push~                             |
+| =SPC g s=           | ~magit-stage-buffer-file~                |
+| =SPC g u=           | ~magit-unstage-buffer-file~              |
+| =SPC h c=           | ~describe-char~                          |
+| =SPC h e=           | ~view-echo-area-messages~                |
+| =SPC h f=           | ~describe-function~                      |
+| =SPC h F=           | ~describe-face~                          |
+| =SPC h i=           | ~info~                                   |
+| =SPC h I=           | ~shortdoc~                               |
+| =SPC h k=           | ~describe-key~                           |
+| =SPC h l=           | ~find-library~                           |
+| =SPC h m=           | ~describe-mode~                          |
+| =SPC h v=           | ~describe-variable~                      |
+| =SPC i c=           | ~insert-char~                            |
+| =SPC i l=           | ~x8dcc/skeleton-generic-license-comment~ |
+| =SPC j i=           | ~consult-imenu~                          |
+| =SPC j j=           | ~evil-jump-backward~                     |
+| =SPC j J=           | ~evil-jump-forward~                      |
+| =SPC j d=           | ~xref-find-definitions~                  |
+| =SPC j x=           | ~xref-find-references~                   |
+| =SPC o .=           | ~dired-jump~                             |
+| =SPC o !=           | ~shell-command~                          |
+| =SPC o &=           | ~async-shell-command~                    |
+| =SPC o ?=           | ~man~                                    |
+| =SPC o c=           | ~calc~                                   |
+| =SPC o C=           | ~quick-calc~                             |
+| =SPC o d=           | ~projectile-run-gdb~                     |
+| =SPC o e=           | ~x8dcc/eshell-popup~                     |
+| =SPC o E=           | ~x8dcc/eshell-numbered~                  |
+| =SPC o m=           | ~rmail~                                  |
+| =SPC o M=           | ~compose-mail~                           |
+| =SPC o x=           | ~scratch-buffer~                         |
+| =SPC o o a=         | ~org-agenda~                             |
+| =SPC o o c=         | ~org-capture~                            |
+| =SPC p c=           | ~projectile-compile-project~             |
+| =SPC p C=           | ~projectile-repeat-last-command~         |
+| =SPC p f=           | ~projectile-find-file~                   |
+| =SPC p p=           | ~projectile-switch-project~              |
+| =SPC p r=           | ~project-query-replace-regexp~           |
+| =SPC r c=           | ~center-region~                          |
+| =SPC r u=           | ~capitalize-region~                      |
+| =SPC r U=           | ~upcase-region~                          |
+| =SPC r w=           | ~fill-region~                            |
+| =SPC r W=           | ~x8dcc/unfill-region~                    |
+| =SPC s g=           | ~rgrep~                                  |
+| =SPC s h=           | ~x8dcc/highlight-regexp~                 |
+| =SPC s H=           | ~unhighlight-regexp~                     |
+| =SPC s o=           | ~occur~                                  |
+| =SPC s r=           | ~query-replace~                          |
+| =SPC s R=           | ~query-replace-regexp~                   |
+| =SPC s s=           | ~isearch-forward~                        |
+| =SPC s S=           | ~isearch-forward-regexp~                 |
+| =SPC s n d=         | ~git-gutter:next-hunk~                   |
+| =SPC s n n=         | ~next-error~                             |
+| =SPC s n s=         | ~spell-fu-goto-next-error~               |
+| =SPC s p d=         | ~git-gutter:previous-hunk~               |
+| =SPC s p p=         | ~previous-error~                         |
+| =SPC s p s=         | ~spell-fu-goto-previous-error~           |
+| =SPC t b=           | ~big-font-mode~                          |
+| =SPC t c=           | ~display-fill-column-indicator-mode~     |
+| =SPC t f=           | ~variable-pitch-mode~                    |
+| =SPC t i=           | ~toggle-case-fold-search~                |
+| =SPC t l=           | ~display-line-numbers-mode~              |
+| =SPC t L=           | ~hl-line-mode~                           |
+| =SPC t p=           | ~popper-toggle~                          |
+| =SPC t P=           | ~popper-toggle-type~                     |
+| =SPC t r=           | ~read-only-mode~                         |
+| =SPC t s=           | ~spell-fu-mode~                          |
+| =SPC t S=           | ~whitespace-mode~                        |
+| =SPC t v=           | ~visible-mode~                           |
+| =SPC t w=           | ~toggle-truncate-lines~                  |
+| =SPC t W=           | ~auto-fill-mode~                         |
+| =SPC u v=           | ~vundo~                                  |
+| =SPC u l=           | ~yank-from-kill-ring~                    |
+| =SPC v d=           | ~vc-diff~                                |
+| =SPC v g=           | ~vc-annotate~                            |
+| =SPC v I=           | ~vc-log-incoming~                        |
+| =SPC v o=           | ~vc-revision-other-window~               |
+| =SPC v p=           | ~vc-update~                              |
+| =SPC v P=           | ~vc-push~                                |
+| =SPC v v=           | ~vc-next-action~                         |
+| =SPC v V=           | ~vc-refresh-state~                       |
+| =SPC v b b=         | ~vc-switch-branch~                       |
+| =SPC v b c=         | ~vc-create-branch~                       |
+| =SPC v l b=         | ~vc-print-branch-log~                    |
+| =SPC v l f=         | ~vc-print-log~                           |
+| =SPC v l l=         | ~vc-print-root-log~                      |
+| =SPC v l o=         | ~vc-log-outgoing~                        |
+| =SPC v l r=         | ~vc-region-history~                      |
+| =SPC v z a=         | ~vc-git-stash-apply~                     |
+| =SPC v z p=         | ~vc-git-stash-pop~                       |
+| =SPC v z s=         | ~vc-git-stash-show~                      |
+| =SPC v z z=         | ~vc-git-stash~                           |
+| =SPC w c=           | ~evil-window-delete~                     |
+| =SPC w C=           | ~x8dcc/evil-kill-buffer-and-window~      |
+| =SPC w h=           | ~evil-window-left~                       |
+| =SPC w H=           | ~evil-window-move-far-left~              |
+| =SPC w j=           | ~evil-window-down~                       |
+| =SPC w J=           | ~evil-window-move-very-bottom~           |
+| =SPC w k=           | ~evil-window-up~                         |
+| =SPC w K=           | ~evil-window-move-very-top~              |
+| =SPC w l=           | ~evil-window-right~                      |
+| =SPC w L=           | ~evil-window-move-far-right~             |
+| =SPC w s=           | ~evil-window-split~                      |
+| =SPC w v=           | ~evil-window-vsplit~                     |
+| =SPC w w=           | ~evil-window-next~                       |
+| =SPC z a=           | ~evil-toggle-fold~                       |
+| =SPC z c=           | ~evil-close-fold~                        |
+| =SPC z m=           | ~evil-close-folds~                       |
+| =SPC z o=           | ~evil-open-fold~                         |
+| =SPC z r=           | ~evil-open-folds~                        |
