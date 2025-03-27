@@ -940,6 +940,18 @@ to the overlay."
                                              (match-end group-num))))
         (overlay-put invisible-overlay 'invisible t)))))
 
+(defun x8dcc/toggle-line-numbers-style (&optional type)
+  "Toggle between relative and absolute line numbers."
+  (interactive)
+  (unless type
+    (setq type (if (equal display-line-numbers t) 'relative t)))
+  (setq display-line-numbers type
+        display-line-numbers-type type)
+  (cond (global-display-line-numbers-mode
+         (global-display-line-numbers-mode))
+        (display-line-numbers-mode
+         (display-line-numbers-mode))))
+
 (defun x8dcc/eshell-prompt-contents ()
   "Get the user text from the last prompt in the current *eshell* buffer."
   (save-excursion

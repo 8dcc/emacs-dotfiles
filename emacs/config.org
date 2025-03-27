@@ -1780,6 +1780,27 @@ to the overlay."
 
 #+end_src
 
+Toggle the line number format globally. Similar to
+=menu-bar-display-line-numbers-mode=.
+
+TODO: What's the difference between =display-line-numbers= and
+=display-line-numbers-type=? Which one should we check? Which one(s) should we
+set?
+
+#+begin_src emacs-lisp
+(defun x8dcc/toggle-line-numbers-style (&optional type)
+  "Toggle between relative and absolute line numbers."
+  (interactive)
+  (unless type
+    (setq type (if (equal display-line-numbers t) 'relative t)))
+  (setq display-line-numbers type
+        display-line-numbers-type type)
+  (cond (global-display-line-numbers-mode
+         (global-display-line-numbers-mode))
+        (display-line-numbers-mode
+         (display-line-numbers-mode))))
+#+end_src
+
 ** Simple wrapper functions
 
 Clear an eshell buffer, an alternative to =recenter-top-bottom=. Partial credits
