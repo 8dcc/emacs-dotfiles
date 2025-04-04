@@ -2417,7 +2417,8 @@ keybinds should be *moved* to their commented sub-sections.
   "u l" '(yank-from-kill-ring               :wk "Paste deleted")
   ;; Version control
   "v"   '(:ignore t                         :wk "VC")
-  "v d" '(vc-diff                           :wk "Diff")
+  "v d" '(vc-diff                           :wk "Diff (DWIM)")
+  "v D" '(vc-root-version-diff              :wk "Diff revisions")
   "v g" '(vc-annotate                       :wk "Annotate")
   "v I" '(vc-log-incoming                   :wk "Incoming log")
   "v o" '(vc-revision-other-window          :wk "Show other revision")
