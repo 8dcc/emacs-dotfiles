@@ -367,7 +367,8 @@ Using `x8dcc/general-create-definer'."
   (add-hook 'c-mode-hook
             (lambda ()
               (setq flycheck-clang-language-standard "c99"
-                    flycheck-gcc-language-standard "c99"))))
+                    flycheck-gcc-language-standard "c99")
+              (add-to-list 'flycheck-disabled-checkers 'c/c++-cppcheck))))
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-stay-out-of 'flymake))

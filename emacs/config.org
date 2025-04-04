@@ -819,7 +819,8 @@ Some settings for C modes:
   (add-hook 'c-mode-hook
             (lambda ()
               (setq flycheck-clang-language-standard "c99"
-                    flycheck-gcc-language-standard "c99"))))
+                    flycheck-gcc-language-standard "c99")
+              (add-to-list 'flycheck-disabled-checkers 'c/c++-cppcheck))))
 #+end_src
 
 *** Language server protocol (eglot)
