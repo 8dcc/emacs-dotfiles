@@ -2076,6 +2076,13 @@ Paste with =C-S-v=. Useful for the minibuffer (e.g. org links).
 (keymap-global-set "C-S-v" #'yank)
 #+end_src
 
+Move across errors with =C-<pgup>= and =C-<pgdn>=.
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-<prior>" #'previous-error)
+(keymap-global-set "C-<next>"  #'next-error)
+#+end_src
+
 Don't copy the last/next words with =C-<backspace>= and =C-<delete>,= just delete
 them. See [[*Input-related functions][Input-related functions]].
 

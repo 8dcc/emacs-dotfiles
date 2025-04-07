@@ -1136,6 +1136,9 @@ match, see `list-matching-lines-default-context-lines'."
 
 (keymap-global-set "C-S-v" #'yank)
 
+(keymap-global-set "C-<prior>" #'previous-error)
+(keymap-global-set "C-<next>"  #'next-error)
+
 (keymap-global-set "C-<backspace>" #'x8dcc/delete-word-backward)
 (keymap-global-set "C-<delete>"    #'x8dcc/delete-word-forward)
 
