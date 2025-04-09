@@ -2367,11 +2367,17 @@ keybinds should be *moved* to their commented sub-sections.
   "o o c" '(org-capture                     :wk "Capture")
   ;; Project
   "p"   '(:ignore t                         :wk "Project")
+  "p ." '(project-dired                     :wk "Open in dired")
   "p c" '(projectile-compile-project        :wk "Compile")
   "p C" '(projectile-repeat-last-command    :wk "Re-compile")
   "p f" '(projectile-find-file              :wk "Find file")
-  "p p" '(projectile-switch-project         :wk "Recent projects")
-  "p r" '(project-query-replace-regexp      :wk "Replace regex (query)")
+  "p p" '(projectile-switch-project         :wk "Switch project")
+  ;; Project -> Search
+  "p s" '(:ignore t                         :wk "Search")
+  "p s o" '(projectile-multi-occur          :wk "Occurences")
+  "p s r" '(project-query-replace-regexp    :wk "Replace regex (query)")
+  "p s s" '(project-search                  :wk "Search")
+  "p s S" '(project-find-regexp             :wk "Search regex")
   ;; Region
   ;; TODO: Move to other section (e.g. Refactor)
   ;; TODO: Add wrapper for `fill-region' that calls `fill-paragraph' if region
