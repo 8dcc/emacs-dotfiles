@@ -2576,7 +2576,11 @@ Uses `x8dcc/tex-get-font-key'."
 (x8dcc/tex-defun-font x8dcc/latex-font-slanted    "sl{")
 (x8dcc/tex-defun-font x8dcc/latex-font-typewriter "tt{")
 
-(defun LaTeX-indent-item ()
+(defconst x8dcc/LaTeX-indent-level-item-continuation 4
+  "Indentation of continuation lines for items in list environments.
+See `x8dcc/LaTeX-indent-item'.")
+
+(defun x8dcc/LaTeX-indent-item ()
   "Provide proper indentation for LaTeX list environments.
 
 Specifically: \"itemize\", \"enumerate\" and \"description\" environments.
@@ -2585,11 +2589,11 @@ Each \"\\item\" is indented `LaTeX-indent-level' spaces relative to the the
 beginning of the environment.
 
 Continuation lines are indented either twice `LaTeX-indent-level', or
-`LaTeX-indent-level-item-continuation' if the latter is bound."
+`x8dcc/LaTeX-indent-level-item-continuation' if the latter is bound."
   (save-match-data
     (let* ((offset LaTeX-indent-level)
-           (contin (or (and (boundp 'LaTeX-indent-level-item-continuation)
-                            LaTeX-indent-level-item-continuation)
+           (contin (or (and (boundp 'x8dcc/LaTeX-indent-level-item-continuation)
+                            x8dcc/LaTeX-indent-level-item-continuation)
                        (* 2 LaTeX-indent-level)))
            (re-beg "\\\\begin{")
            (re-end "\\\\end{")
@@ -2616,17 +2620,13 @@ Continuation lines are indented either twice `LaTeX-indent-level', or
             (t
              (+ contin indent))))))
 
-(defcustom LaTeX-indent-level-item-continuation 4
-  "Indentation of continuation lines for items in list environments.
-See `LaTeX-indent-item'."
-  :group 'LaTeX-indentation
-  :type 'integer)
+
 
 (with-eval-after-load 'latex
   (setq LaTeX-indent-environment-list
-        (nconc '(("itemize" LaTeX-indent-item)
-                 ("enumerate" LaTeX-indent-item)
-                 ("description" LaTeX-indent-item))
+        (nconc '(("itemize" x8dcc/LaTeX-indent-item)
+                 ("enumerate" x8dcc/LaTeX-indent-item)
+                 ("description" x8dcc/LaTeX-indent-item))
                LaTeX-indent-environment-list)))
 
 (define-skeleton x8dcc/skeleton-latex-article
