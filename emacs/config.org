@@ -841,6 +841,27 @@ NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= or
   (add-to-list 'eglot-stay-out-of 'flymake))
 #+end_src
 
+*Note for CMake projects.*
+
+For C projects with the =clangd= LSP, if you are unfortunate enough to use [[https://cmake.org/][CMake]]
+with a weird project structure, you can fix many errors by adding the following
+line to your =CMakeLists.txt= file.
+
+#+begin_src cmake
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#+end_src
+
+After that, a =compile_commands.json= file should be generated wherever you run
+=cmake= from (usually some =build= directory). You will need to add the relative
+path of that directory to a =.clangd= file, with the following format.
+
+#+begin_src
+CompileFlags:
+  CompilationDatabase: "build"
+#+end_src
+
+Credits for this solution to [[https://gist.github.com/Strus/042a92a00070a943053006bf46912ae9][this Gist by Strus]].
+
 *** Highlight numbers
 
 For highlighting numeric literals.
