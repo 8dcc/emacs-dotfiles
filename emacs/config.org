@@ -838,7 +838,14 @@ NOTE: This mode isn't hooked anywhere, so you will have to run =M-x eglot= or
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-stay-out-of 'flymake))
+  (add-to-list 'eglot-stay-out-of 'flymake)
+  (dolist (ignored-capability '(:completionProvider
+                                :documentHighlightProvider
+                                :documentFormattingProvider
+                                :documentRangeFormattingProvider
+                                :documentOnTypeFormattingProvider
+                                :inlayHintProvider))
+    (add-to-list 'eglot-ignored-server-capabilities ignored-capability)))
 #+end_src
 
 *Note for CMake projects.*

@@ -371,7 +371,14 @@ Using `x8dcc/general-create-definer'."
               (add-to-list 'flycheck-disabled-checkers 'c/c++-cppcheck))))
 
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-stay-out-of 'flymake))
+  (add-to-list 'eglot-stay-out-of 'flymake)
+  (dolist (ignored-capability '(:completionProvider
+                                :documentHighlightProvider
+                                :documentFormattingProvider
+                                :documentRangeFormattingProvider
+                                :documentOnTypeFormattingProvider
+                                :inlayHintProvider))
+    (add-to-list 'eglot-ignored-server-capabilities ignored-capability)))
 
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
