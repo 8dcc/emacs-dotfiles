@@ -4360,7 +4360,7 @@ See [[*Org mode keybinds][Org mode keybinds]].
   (interactive)
   (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
-  (funcall-interactively #'org-insert-link))
+  (call-interactively #'org-insert-link))
 #+end_src
 
 Create an [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][overlay]] for setting as invisible the commas that are used to escape

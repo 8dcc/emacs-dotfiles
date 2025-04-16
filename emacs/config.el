@@ -2351,7 +2351,7 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
   (interactive)
   (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
-  (funcall-interactively #'org-insert-link))
+  (call-interactively #'org-insert-link))
 
 (defun x8dcc/org-headline-to-id (headline)
   "Convert an Org mode HEADLINE to a CUSTOM-ID dashed string.
