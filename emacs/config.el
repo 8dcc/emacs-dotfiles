@@ -1048,6 +1048,16 @@ It highlights with `highlight-regexp', and finds the symbol at point with
                             symbol-end)
                         new))
 
+(defun x8dcc/jump-to-other-reference ()
+  (interactive)
+  (let ((xref-prompt-for-identifier t))
+    (call-interactively #'xref-find-references)))
+
+(defun x8dcc/jump-to-other-definition ()
+  (interactive)
+  (let ((xref-prompt-for-identifier t))
+    (call-interactively #'xref-find-definitions)))
+
 (defun x8dcc/reb-change-syntax (new-syntax)
   "Set `reb-re-syntax' to a NEW-SYNTAX.
 When called interactively, switch between `read' and `rx'."
@@ -1313,8 +1323,10 @@ match, see `list-matching-lines-default-context-lines'."
   "j i" '(consult-imenu                     :wk "Imenu")
   "j j" '(evil-jump-backward                :wk "Undo buffer jump")
   "j J" '(evil-jump-forward                 :wk "Redo buffer jump")
-  "j d" '(xref-find-definitions             :wk "Definitions")
-  "j x" '(xref-find-references              :wk "X-refs")
+  "j d" '(xref-find-definitions             :wk "Definition at point")
+  "j D" '(x8dcc/jump-to-other-definition    :wk "Definition")
+  "j x" '(xref-find-references              :wk "X-ref at point")
+  "j X" '(x8dcc/jump-to-other-reference     :wk "X-ref")
   ;; Mode
   "m"   '(:ignore t                         :wk "Mode")
   ;; Open

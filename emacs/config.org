@@ -1947,6 +1947,20 @@ Wrapper for =query-replace-regexp=.
                         new))
 #+end_src
 
+Jump to the specified reference/definition after prompting.
+
+#+begin_src emacs-lisp
+(defun x8dcc/jump-to-other-reference ()
+  (interactive)
+  (let ((xref-prompt-for-identifier t))
+    (call-interactively #'xref-find-references)))
+
+(defun x8dcc/jump-to-other-definition ()
+  (interactive)
+  (let ((xref-prompt-for-identifier t))
+    (call-interactively #'xref-find-definitions)))
+#+end_src
+
 Switch between ='read= and ='rx= syntax for =re-builder=.
 
 #+begin_src emacs-lisp
@@ -2371,8 +2385,10 @@ keybinds should be *moved* to their commented sub-sections.
   "j i" '(consult-imenu                     :wk "Imenu")
   "j j" '(evil-jump-backward                :wk "Undo buffer jump")
   "j J" '(evil-jump-forward                 :wk "Redo buffer jump")
-  "j d" '(xref-find-definitions             :wk "Definitions")
-  "j x" '(xref-find-references              :wk "X-refs")
+  "j d" '(xref-find-definitions             :wk "Definition at point")
+  "j D" '(x8dcc/jump-to-other-definition    :wk "Definition")
+  "j x" '(xref-find-references              :wk "X-ref at point")
+  "j X" '(x8dcc/jump-to-other-reference     :wk "X-ref")
   ;; Mode
   "m"   '(:ignore t                         :wk "Mode")
   ;; Open
