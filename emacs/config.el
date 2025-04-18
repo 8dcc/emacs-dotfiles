@@ -437,7 +437,9 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                          (variable-pitch 150 "FreeSerif"))))
 
 (use-package soft-comment
-  :straight (soft-comment :type git :host github :repo "8dcc/soft-comment.el"))
+  :straight (soft-comment :type git :host github :repo "8dcc/soft-comment.el")
+  :config
+  (setq soft-comment-ratio 0.2))
 
 (use-package hl-printf
   :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
