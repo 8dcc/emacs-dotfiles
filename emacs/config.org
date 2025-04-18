@@ -970,7 +970,7 @@ NOTE: For more information on creating the bitmaps easily with strings, see the
 
 *** Big font
 
-Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
+Personal minor mode for toggling a bigger font face.
 
 #+begin_src emacs-lisp
 (use-package big-font
@@ -979,6 +979,16 @@ Personal package for toggling a bigger font face. Uses a =straight.el= recipe.
   (setq big-font-faces '((default        120 "Source Code Pro")
                          (fixed-pitch    120 "Source Code Pro")
                          (variable-pitch 150 "FreeSerif"))))
+#+end_src
+
+*** Soft comments
+
+Personal minor mode for toggling a softer comment color, independently of the
+theme.
+
+#+begin_src emacs-lisp
+(use-package soft-comment
+  :straight (soft-comment :type git :host github :repo "8dcc/soft-comment.el"))
 #+end_src
 
 *** Highlight printf
