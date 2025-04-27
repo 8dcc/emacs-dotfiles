@@ -1929,6 +1929,33 @@ The page numbers start at 1."
                                          (max start 1) (max end 1)))))
     (lpr-buffer)))
 
+(defconst x8dcc/lpr-buffer-to-init-input "192.168.1."
+  "Initial input to be used on interactive calls to `x8dcc/lpr-buffer-to'.")
+
+(defvar 8dcc/lpr-buffer-to-history nil
+  "History of servers used in `x8dcc/lpr-buffer-to'.")
+
+(defun x8dcc/lpr-buffer-to (server &optional port)
+  "Print the current buffer into the specified SERVER and PORT.
+
+The SERVER argument must be a string, and the PORT argument must be a positive
+integer.
+
+The `lpr-buffer' function is used for printing."
+  (interactive
+   (list
+    (read-string "Server: " x8dcc/lpr-buffer-to-init-input
+                 '8dcc/lpr-buffer-to-history)))
+  (unless port (setq port 631))
+  (cl-assert (and (stringp server)
+                  (natnump port)))
+  ; The local and remote printer names might not match; use the default one on
+  ; the remote server.
+  ; TODO: This could be moved to a separate global variable.
+  (let ((printer-name nil)
+        (lpr-switches (list "-H" (format "%s:%d" server port))))
+    (lpr-buffer)))
+
 (defun x8dcc/gpl3-license (&optional project fill-col)
   "Return a GPL-v3-or-later license header.
 
