@@ -551,6 +551,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
 
 (use-package eldoc-cmake)
 
+(use-package gnuplot)
+
 (defun x8dcc/non-empty-string-p (str)
   "Check if the string is neither nil nor empty."
   (and str (not (string-empty-p str))))
@@ -2323,7 +2325,8 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
                              (scheme . t)
-                             (shell . t)))
+                             (shell . t)
+                             (gnuplot . t)))
 
 (setq org-imenu-depth 3)
 

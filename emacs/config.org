@@ -1258,6 +1258,17 @@ And ElDoc support.
 (use-package eldoc-cmake)
 #+end_src
 
+*** Gnuplot
+
+Major mode for editing/running [[http://gnuplot.info/][gnuplot]] files.
+
+Specially useful for exporting graphs in Org buffers; see also the
+=org-babel-do-load-languages= variable below.
+
+#+begin_src emacs-lisp
+(use-package gnuplot)
+#+end_src
+
 *** COMMENT Graphviz dot mode
 
 For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
@@ -4235,7 +4246,8 @@ matters.
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
                              (scheme . t)
-                             (shell . t)))
+                             (shell . t)
+                             (gnuplot . t)))
 #+end_src
 
 Increase the depth of headings that appears in =imenu=.
