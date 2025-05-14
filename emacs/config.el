@@ -1737,6 +1737,11 @@ If FRAME is nil, it defaults to the current frame."
 
 (add-to-list 'window-size-change-functions #'x8dcc/display-time-if-fullscreen)
 
+(setq display-time-24hr-format t  ; Overwritten by `display-time-format'
+      display-time-format "[%Y.%m.%d %H:%M]")
+
+(setq display-time-load-average-threshold 50)
+
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t)

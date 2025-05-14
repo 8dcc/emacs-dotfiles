@@ -2945,6 +2945,19 @@ If FRAME is nil, it defaults to the current frame."
 (add-to-list 'window-size-change-functions #'x8dcc/display-time-if-fullscreen)
 #+end_src
 
+Change the format of the modeline time.
+
+#+begin_src emacs-lisp
+(setq display-time-24hr-format t  ; Overwritten by `display-time-format'
+      display-time-format "[%Y.%m.%d %H:%M]")
+#+end_src
+
+Increase the average load threshold, effectively disabling it.
+
+#+begin_src emacs-lisp
+(setq display-time-load-average-threshold 50)
+#+end_src
+
 ** Line numbers and line highlight
 
 Style of line numbers. If set to =nil=, line numbers are disabled, =t= for
