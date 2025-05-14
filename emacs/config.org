@@ -914,7 +914,7 @@ enabled). See [[https://github.com/tarsius/hl-todo/discussions/85][GitHub discus
 
 #+begin_src emacs-lisp
 (use-package hl-todo
-  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
+  :hook ((prog-mode org-mode markdown-mode LaTeX-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":")
   (add-hook 'modux-themes-after-load-theme-hook

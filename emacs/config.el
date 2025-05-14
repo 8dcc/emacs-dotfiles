@@ -398,7 +398,7 @@ Using `x8dcc/general-create-definer'."
   :hook ((html-mode css-mode js-mode)  . rainbow-mode))
 
 (use-package hl-todo
-  :hook ((org-mode prog-mode LaTeX-mode) . hl-todo-mode)
+  :hook ((prog-mode org-mode markdown-mode LaTeX-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":")
   (add-hook 'modux-themes-after-load-theme-hook
