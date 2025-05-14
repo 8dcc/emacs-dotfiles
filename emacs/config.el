@@ -348,7 +348,7 @@ Using `x8dcc/general-create-definer'."
         languagetool-server-command "org.languagetool.server.HTTPServer"))
 
 (use-package flycheck
-  :hook ((c-mode-common sh-mode emacs-lisp-mode) . flycheck-mode)
+  :hook ((c-mode-common sh-mode python-mode emacs-lisp-mode) . flycheck-mode)
   :config
   (setq flycheck-check-syntax-automatically
         '(mode-enabled save idle-buffer-switch))
