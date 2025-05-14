@@ -745,6 +745,13 @@ According to `image-type-file-name-regexps'."
    path
    (mapcar #'car image-type-file-name-regexps)))
 
+(defun x8dcc/is-fullscreen-frame (&optional frame)
+  "Is the specified FRAME in fullscreen mode?
+If FRAME is nil, it defaults to the current frame.
+
+The check is made using the `frame-parameters' function."
+  (eq (alist-get 'fullscreen (frame-parameters frame)) 'fullboth))
+
 (defun x8dcc/future-date (&optional seconds)
   "Return a string representing a date in the future.
 
@@ -1714,6 +1721,21 @@ of characters, followed by the number of lines."
           (display-battery-mode 1)))))
 
 (require 'battery)
+
+(defun x8dcc/display-time-if-fullscreen (&optional frame)
+  "Display the time on the modeline if FRAME is on fullscreen mode.
+If FRAME isn't on fullscreen mode, disable `display-time-mode'.
+
+If FRAME is nil, it defaults to the current frame."
+  (if (x8dcc/is-fullscreen-frame frame)
+      (when (not display-time-mode)
+        (message "Enabling `display-time-mode' on fullscreen...")
+        (display-time-mode 1))
+    (when display-time-mode
+      (message "Disabling `display-time-mode' after exiting fullscreen...")
+      (display-time-mode 0))))
+
+(add-to-list 'window-size-change-functions #'x8dcc/display-time-if-fullscreen)
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative

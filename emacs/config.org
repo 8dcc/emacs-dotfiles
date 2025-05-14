@@ -1550,6 +1550,17 @@ According to `image-type-file-name-regexps'."
    (mapcar #'car image-type-file-name-regexps)))
 #+end_src
 
+Is the specified frame in fullscreen mode?
+
+#+begin_src emacs-lisp
+(defun x8dcc/is-fullscreen-frame (&optional frame)
+  "Is the specified FRAME in fullscreen mode?
+If FRAME is nil, it defaults to the current frame.
+
+The check is made using the `frame-parameters' function."
+  (eq (alist-get 'fullscreen (frame-parameters frame)) 'fullboth))
+#+end_src
+
 Return a string representing a date in the future. Used by [[*Org capture][Org capture]].
 
 #+begin_src emacs-lisp
@@ -2902,6 +2913,36 @@ display.
           (display-battery-mode 1)))))
 
 (require 'battery)
+#+end_src
+
+*** Time
+
+The following function enables =display-time-mode= depending on whether Emacs is
+in fullscreen mode or not. It's then hooked/added to =window-size-change-functions=.
+
+TODO: The functions in =window-size-change-functions= get called very often. We
+currently call =display-time-mode= only when necessary, but the checks are still
+being made many times. Furthermore, if the user manually toggles
+=display-time-mode=, it will get immediately reset to the "correct" value
+according to the fullscreen state. Perhaps this could be avoided by using some
+external variable that stores the previous fullscreen state; this could be
+abstracted into two hooks (depending on whether fullscreen was enabled or not).
+
+#+begin_src emacs-lisp
+(defun x8dcc/display-time-if-fullscreen (&optional frame)
+  "Display the time on the modeline if FRAME is on fullscreen mode.
+If FRAME isn't on fullscreen mode, disable `display-time-mode'.
+
+If FRAME is nil, it defaults to the current frame."
+  (if (x8dcc/is-fullscreen-frame frame)
+      (when (not display-time-mode)
+        (message "Enabling `display-time-mode' on fullscreen...")
+        (display-time-mode 1))
+    (when display-time-mode
+      (message "Disabling `display-time-mode' after exiting fullscreen...")
+      (display-time-mode 0))))
+
+(add-to-list 'window-size-change-functions #'x8dcc/display-time-if-fullscreen)
 #+end_src
 
 ** Line numbers and line highlight
