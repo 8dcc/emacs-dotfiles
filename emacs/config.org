@@ -3038,7 +3038,7 @@ with =SPC t c=.
  '(prog-mode-hook
    TeX-mode-hook
    message-mode-hook
-   git-commit-mode-hook
+   git-commit-setup-hook
    vc-git-log-edit-mode-hook))
 #+end_src
 

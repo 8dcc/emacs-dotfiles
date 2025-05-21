@@ -1781,7 +1781,7 @@ If FRAME is nil, it defaults to the current frame."
  '(prog-mode-hook
    TeX-mode-hook
    message-mode-hook
-   git-commit-mode-hook
+   git-commit-setup-hook
    vc-git-log-edit-mode-hook))
 
 (tab-bar-history-mode 1)
