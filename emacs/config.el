@@ -1772,7 +1772,7 @@ If FRAME is nil, it defaults to the current frame."
 (x8dcc/hook-to-targets
  (lambda ()
    (setq-local fill-column 72))
- '(git-commit-mode-hook
+ '(git-commit-setup-hook
    vc-git-log-edit-mode-hook))
 
 (x8dcc/hook-to-targets

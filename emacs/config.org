@@ -3024,7 +3024,7 @@ The fill column should be a bit lower for git commits.
 (x8dcc/hook-to-targets
  (lambda ()
    (setq-local fill-column 72))
- '(git-commit-mode-hook
+ '(git-commit-setup-hook
    vc-git-log-edit-mode-hook))
 #+end_src
 
