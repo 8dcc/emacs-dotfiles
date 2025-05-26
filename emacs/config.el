@@ -1131,7 +1131,8 @@ match, see `list-matching-lines-default-context-lines'."
     (multi-occur marked-buffers regexp nlines)))
 
 (defun x8dcc/recursive-multi-occur (file-wildcard directory line-regexp &optional nlines)
-  "Run `multi-occur' with REGEXP in all marked files.
+  "Run `multi-occur' in all buffers matching FILE-WILDCARD in DIRECTORY.
+Using LINE-REGEXP as the pattern for `multi-occur'.
 
 Optional argument NLINES specifies the number of context lines to show with each
 match, see `list-matching-lines-default-context-lines'."
