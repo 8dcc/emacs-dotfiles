@@ -664,6 +664,14 @@ will be used for replacing with the `replace-regexp-in-string' function."
                                (cdar alist)
                                string))))
 
+(defun x8dcc/wildcards-to-regexp (wildcards)
+  "Return a regexp that matches any whitespace-separated wildcard in WILDCARDS.
+See `wildcard-to-regexp'."
+  (mapconcat #'wildcard-to-regexp
+             ;; FIXME: Handle escaped whitespaces.
+             (split-string wildcards nil t)
+             "\\|"))
+
 (defun x8dcc/count-comment-characters ()
   "Return the number of characters reserved for comments.
 Assuming the comment starts and ends on the same line."
@@ -1135,7 +1143,10 @@ match, see `list-matching-lines-default-context-lines'."
 Using LINE-REGEXP as the pattern for `multi-occur'.
 
 Optional argument NLINES specifies the number of context lines to show with each
-match, see `list-matching-lines-default-context-lines'."
+match, see `list-matching-lines-default-context-lines'.
+
+Keep in mind that this function will open all matching files in background
+buffers, so be specially careful around `.git' directories."
   (interactive
    (let ((occur-args (occur-read-primary-args)))
      (cl-list*
@@ -1147,7 +1158,7 @@ match, see `list-matching-lines-default-context-lines'."
                                (find-file-noselect filename)))
                          (directory-files-recursively
                           directory
-                          (wildcard-to-regexp file-wildcard)))))
+                          (x8dcc/wildcards-to-regexp file-wildcard)))))
     (multi-occur buffers line-regexp nlines)))
 
 (setq scroll-step 1
