@@ -28,6 +28,7 @@
  ("git-gutter" . "4c9e2f22b35918ce1cd9e64bce06a3ceda54095f")
  ("git-gutter-fringe" . "648cb5b57faec55711803cdc9434e55a733c3eba")
  ("gnu-elpa-mirror" . "69eb8c9dc8510767d2cbfcce2c41c0d4389f8c16")
+ ("gnuplot" . "663a89d263d4f26b996796d01b6a3b783449e0f5")
  ("goto-chg" . "278cd3e6d5107693aa2bb33189ca503f22f227d0")
  ("guile" . "71a6be00433a157de3936f208c7a1bd0192b12cd")
  ("highlight-indent-guides" . "321a5b026406ab51a2206d64fe990c76395f7c18")
