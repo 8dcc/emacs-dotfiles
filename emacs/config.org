@@ -4204,7 +4204,7 @@ FIXME: This doesn't set the values, and setting the values manually in the
 #+begin_comment emacs-lisp
 ;; NOTE: Commented
 (add-hook
- 'message-send-mail-hook
+ 'message-send-hook
  (lambda ()
    (let ((from (mail-fetch-field "from")))
      (when from
@@ -4214,7 +4214,7 @@ FIXME: This doesn't set the values, and setting the values manually in the
          (when name
            (setq-local user-full-name name))
          (when addr
-           (setq-local user-mail-address addr))))))
+           (setq-local user-mail-address addr)))))))
 #+end_comment
 
 *** Receiving mail (Rmail)
