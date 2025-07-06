@@ -3053,6 +3053,13 @@ Used for highlighting more constants with `font-lock-constant-face' in
   > _ \n
   "}" > \n)
 
+(define-skeleton x8dcc/skeleton-c-ifndef-macro
+  "Insert a macro definition surrounded by an \"ifndef\" conditional."
+  "Macro name: "
+  "#ifndef " str \n
+  "#define " str " " _ \n
+  "#endif /* " str " */" \n)
+
 (define-skeleton x8dcc/skeleton-c-license-comment
   "Insert a basic C header skeleton with include guards."
   nil

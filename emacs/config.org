@@ -5313,6 +5313,13 @@ Common C/C++ snippets.
   "for (int " v1 " = 0; " v1 " < " v2 "; " v1 "++) {" \n
   > _ \n
   "}" > \n)
+
+(define-skeleton x8dcc/skeleton-c-ifndef-macro
+  "Insert a macro definition surrounded by an \"ifndef\" conditional."
+  "Macro name: "
+  "#ifndef " str \n
+  "#define " str " " _ \n
+  "#endif /* " str " */" \n)
 #+end_src
 
 Insert GPL-3.0 (or later) comment.
