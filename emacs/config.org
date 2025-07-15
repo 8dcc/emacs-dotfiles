@@ -222,6 +222,7 @@ For using vi-like keybinds in other buffer types.
   :after evil
   :config
   (add-to-list 'evil-collection-mode-list 'help)
+  (setq evil-collection-mode-list (remove 'diff-mode evil-collection-mode-list))
   (evil-collection-init))
 #+end_src
 

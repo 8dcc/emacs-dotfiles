@@ -83,6 +83,7 @@
   :after evil
   :config
   (add-to-list 'evil-collection-mode-list 'help)
+  (setq evil-collection-mode-list (remove 'diff-mode evil-collection-mode-list))
   (evil-collection-init))
 
 (use-package evil-lion
