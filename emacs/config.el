@@ -1602,7 +1602,6 @@ buffers, so be specially careful around `.git' directories."
 
 (x8dcc/def-keys-c
   ;; Mode (C)
-  "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
   ;; Mode -> Toggle
   "m t"   '(:ignore t               :wk "Toggle")

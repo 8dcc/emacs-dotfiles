@@ -612,6 +612,9 @@ This wrapper enables =beardbolt-mode= in a C buffer and calls =beardbolt-compile
   (interactive)
   (beardbolt-mode 1)
   (call-interactively #'beardbolt-compile))
+
+;; Moved here, since this section is commented.
+(x8dcc/def-keys-c "m d" '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble"))
 #+end_src
 
 *** COMMENT Whisper
@@ -2729,7 +2732,6 @@ See also [[*C mode][C mode]].
 #+begin_src emacs-lisp
 (x8dcc/def-keys-c
   ;; Mode (C)
-  "m d"   '(x8dcc/beardbolt-disassemble :wk "Beardbolt disassemble")
   "m m"   '(c-macro-expand              :wk "Expand macros in region")
   ;; Mode -> Toggle
   "m t"   '(:ignore t               :wk "Toggle")
