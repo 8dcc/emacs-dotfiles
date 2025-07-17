@@ -460,8 +460,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
   )
 
 (use-package eldoc-box
-  :diminish eldoc-box-hover-at-point-mode
-  :hook ((eldoc-mode . eldoc-box-hover-at-point-mode)))
+  :diminish (list eldoc-box-hover-at-point-mode eldoc-box-hover-mode)
+  :hook ((eldoc-mode . eldoc-box-hover-mode)))
 
 (use-package page-break-lines
   :diminish
