@@ -2039,6 +2039,23 @@ of...\"."
     (insert (x8dcc/gpl3-license project real-fill-column))
     (comment-region start (point))))
 
+(define-skeleton x8dcc/skeleton-bash-script
+  "Insert a basic Bash script skeleton."
+  nil
+  "#!/usr/bin/env bash\n"
+  "set -e\n\n"
+  "if [ $# -ne 2 ]; then\n"
+  > "echo \"Usage: $(basename \"$0\") ARG1 ARG2\" 1>&2\n"
+  > "exit 1\n"
+  "fi\n\n"
+  "assert_cmd() {\n"
+  "if [ ! \"$(command -v \"$1\")\" ]; then" > "\n"
+  "echo \"$(basename \"$0\"): The '$1' command is not installed.\" 1>&2" > "\n"
+  "exit 1" > "\n"
+  "fi" > "\n"
+  "}\n\n"
+  _ \n)
+
 (setq eshell-prompt-function
       (lambda ()
         (let ((default '(:inherit default))

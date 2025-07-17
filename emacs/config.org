@@ -3599,6 +3599,27 @@ of...\"."
     (comment-region start (point))))
 #+end_src
 
+Simple bash script skeleton.
+
+#+begin_src emacs-lisp
+(define-skeleton x8dcc/skeleton-bash-script
+  "Insert a basic Bash script skeleton."
+  nil
+  "#!/usr/bin/env bash\n"
+  "set -e\n\n"
+  "if [ $# -ne 2 ]; then\n"
+  > "echo \"Usage: $(basename \"$0\") ARG1 ARG2\" 1>&2\n"
+  > "exit 1\n"
+  "fi\n\n"
+  "assert_cmd() {\n"
+  "if [ ! \"$(command -v \"$1\")\" ]; then" > "\n"
+  "echo \"$(basename \"$0\"): The '$1' command is not installed.\" 1>&2" > "\n"
+  "exit 1" > "\n"
+  "fi" > "\n"
+  "}\n\n"
+  _ \n)
+#+end_src
+
 * Mode-specific settings
 ** Eshell
 *** Eshell prompt settings
