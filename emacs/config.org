@@ -4220,10 +4220,13 @@ TODO: Change =user-full-name= depending on the =address= argument.
 #+end_src
 
 We make sure the right mail address is being set for SMTP in
-=message-send-mail-hook=.
+=message-send-mail-hook=. Keep in mind that there is a distinction between the
+address that is specified in the "From" header, and the credentials used to
+authenticate with the SMTP server. We change the former through =user-full-name=
+and =user-mail-address=, and the later through =smtpmail-smtp-user=.
 
-FIXME: This doesn't set the values, and setting the values manually in the
-=*mail*= buffer doesn't even affect SMTP.
+FIXME: The authentication with the SMTP server only changes if the value of
+=smtpmail-smtp-user= is set globally, not locally in the =message-mode= buffer.
 
 #+begin_comment emacs-lisp
 ;; NOTE: Commented
@@ -4238,7 +4241,8 @@ FIXME: This doesn't set the values, and setting the values manually in the
          (when name
            (setq-local user-full-name name))
          (when addr
-           (setq-local user-mail-address addr)))))))
+           (setq-local user-mail-address addr
+                       smtpmail-smtp-user addr)))))))
 #+end_comment
 
 *** Receiving mail (Rmail)
