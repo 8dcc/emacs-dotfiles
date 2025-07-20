@@ -1368,7 +1368,7 @@ buffers, so be specially careful around `.git' directories."
   "o e" '(x8dcc/eshell-popup                :wk "Eshell popup")
   "o E" '(x8dcc/eshell-numbered             :wk "Eshell")
   "o m" '(rmail                             :wk "Read mail")
-  "o M" '(compose-mail                      :wk "Compose mail")
+  "o M" '(x8dcc/compose-mail-as             :wk "Compose mail as")
   "o x" '(scratch-buffer                    :wk "Scratch buffer")
   ;; Open -> Org
   "o o"   '(:ignore t                       :wk "Org")
