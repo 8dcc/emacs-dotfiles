@@ -2339,6 +2339,44 @@ elements in `x8dcc/authinfo-mail-hosts', using `x8dcc/authinfo-get-host-mails'."
   (let ((user-mail-address address))
     (call-interactively #'compose-mail)))
 
+(require 'smtpmail)
+
+(defvar x8dcc/old-smtpmail-user 'unknown
+  "Old value of `smtpmail-smtp-user' before sending a mail.
+
+This variable is set in `message-send-hook', and cleared in
+`message-send-hook'. It is needed because the value of `smtpmail-smtp-user' is
+accessed in a temporary buffer, so it needs to be modified globally.
+
+The special symbol \"unknown\" is used to denote an invalid value, since the
+default value of `smtpmail-smtp-user' is nil.")
+
+(add-hook
+ 'message-send-hook
+ (lambda ()
+   (let ((from (mail-fetch-field "from")))
+     (when from
+       (let* ((components (mail-extract-address-components from))
+              (name (car components))
+              (addr (cadr components)))
+         (when name
+           (setq-local user-full-name name))
+         (when addr
+           (setq-local user-mail-address addr)
+           (message "Setting `smtpmail-smtp-user' (`%s' -> `%s')..."
+                    smtpmail-smtp-user addr)
+           (setq x8dcc/old-smtpmail-user smtpmail-smtp-user
+                 smtpmail-smtp-user addr)))))))
+
+(add-hook
+ 'message-sent-hook
+ (lambda ()
+   (unless (equal x8dcc/old-smtpmail-user 'unknown)
+     (message "Restoring `smtpmail-smtp-user' (`%s' -> `%s')..."
+              smtpmail-smtp-user x8dcc/old-smtpmail-user)
+     (setq smtpmail-smtp-user x8dcc/old-smtpmail-user
+           x8dcc/old-smtpmail-user 'unknown))))
+
 (setq rmail-file-name (concat x8dcc/mail-directory "inbox")
       rmail-secondary-file-directory x8dcc/mail-directory)
 

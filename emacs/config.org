@@ -4220,16 +4220,31 @@ TODO: Change =user-full-name= depending on the =address= argument.
 #+end_src
 
 We make sure the right mail address is being set for SMTP in
-=message-send-mail-hook=. Keep in mind that there is a distinction between the
-address that is specified in the "From" header, and the credentials used to
-authenticate with the SMTP server. We change the former through =user-full-name=
-and =user-mail-address=, and the later through =smtpmail-smtp-user=.
+=message-send-mail-hook=.
 
-FIXME: The authentication with the SMTP server only changes if the value of
-=smtpmail-smtp-user= is set globally, not locally in the =message-mode= buffer.
+Keep in mind that there is a distinction between the address that is specified
+in the "From" header, and the credentials used to authenticate with the SMTP
+server. We change the former through =user-full-name= and =user-mail-address=, and
+the later through =smtpmail-smtp-user=.
 
-#+begin_comment emacs-lisp
-;; NOTE: Commented
+Also note that the value of =smtpmail-smtp-user= is accessed by the SMTP library
+in a temporary buffer, so the local value is ignored; we have to set it
+globally, and restore its old value in =message-sent-hook=. This is not ideal, but
+there isn't much alternative; see [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug=78996][GNU bug #78996]].
+
+#+begin_src emacs-lisp
+(require 'smtpmail)
+
+(defvar x8dcc/old-smtpmail-user 'unknown
+  "Old value of `smtpmail-smtp-user' before sending a mail.
+
+This variable is set in `message-send-hook', and cleared in
+`message-send-hook'. It is needed because the value of `smtpmail-smtp-user' is
+accessed in a temporary buffer, so it needs to be modified globally.
+
+The special symbol \"unknown\" is used to denote an invalid value, since the
+default value of `smtpmail-smtp-user' is nil.")
+
 (add-hook
  'message-send-hook
  (lambda ()
@@ -4241,9 +4256,21 @@ FIXME: The authentication with the SMTP server only changes if the value of
          (when name
            (setq-local user-full-name name))
          (when addr
-           (setq-local user-mail-address addr
-                       smtpmail-smtp-user addr)))))))
-#+end_comment
+           (setq-local user-mail-address addr)
+           (message "Setting `smtpmail-smtp-user' (`%s' -> `%s')..."
+                    smtpmail-smtp-user addr)
+           (setq x8dcc/old-smtpmail-user smtpmail-smtp-user
+                 smtpmail-smtp-user addr)))))))
+
+(add-hook
+ 'message-sent-hook
+ (lambda ()
+   (unless (equal x8dcc/old-smtpmail-user 'unknown)
+     (message "Restoring `smtpmail-smtp-user' (`%s' -> `%s')..."
+              smtpmail-smtp-user x8dcc/old-smtpmail-user)
+     (setq smtpmail-smtp-user x8dcc/old-smtpmail-user
+           x8dcc/old-smtpmail-user 'unknown))))
+#+end_src
 
 *** Receiving mail (Rmail)
 
