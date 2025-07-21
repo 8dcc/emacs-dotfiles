@@ -8,9 +8,14 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
+(defconst x8dcc/daytime-range '(8 . 20)
+  "Pair of hours where the night starts and ends.")
+
 (setq custom-theme-directory (concat user-emacs-directory "themes/"))
 (load-theme
- (if (<= 9 (nth 2 (decode-time)) 19)
+ (if (<= (car x8dcc/daytime-range)
+         (nth 2 (decode-time))
+         (cdr x8dcc/daytime-range))
      'modux-operandi
    'modux-vivendi))
 
