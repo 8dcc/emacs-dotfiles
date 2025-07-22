@@ -795,6 +795,8 @@ to Emacs' [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Flymake.ht
 We set =flycheck-check-syntax-automatically= so it only checks the syntax when we
 save or switch buffers, not whenever we type a newline.
 
+We modify =flycheck-temp-prefix= to hide temporary files (e.g. in Magit buffers).
+
 We modify =flycheck-mode-line= so it checks if the mode line text is =FlyC-=
 (i.e. if flycheck is not enabled in this buffer), since we can't [[*Diminish][diminish]] /some/
 mode line texts.
@@ -818,6 +820,7 @@ Some settings for C modes:
           (let ((status-text (flycheck-mode-line-status-text)))
             (and (not (string-match-p "-\\'" status-text))
                  status-text))))
+  (setq flycheck-temp-prefix ".flycheck")
 
   ;; C modes
   (setq flycheck-clang-pedantic t

@@ -363,6 +363,7 @@ Using `x8dcc/general-create-definer'."
           (let ((status-text (flycheck-mode-line-status-text)))
             (and (not (string-match-p "-\\'" status-text))
                  status-text))))
+  (setq flycheck-temp-prefix ".flycheck")
 
   ;; C modes
   (setq flycheck-clang-pedantic t
