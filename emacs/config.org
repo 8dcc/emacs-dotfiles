@@ -1135,6 +1135,16 @@ navigation.
                 (goto-char 0))))
 #+end_src
 
+*** Vterm
+
+Fully-fledged terminal emulator inside GNU Emacs. Straight-forward alternative
+to =eshell=.
+
+#+begin_src emacs-lisp
+(use-package vterm
+  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
 *** EMMS
 
 Enable the /Emacs Multi-Media System/ (EMMS).
@@ -2467,6 +2477,7 @@ keybinds should be *moved* to their commented sub-sections.
   "o E" '(x8dcc/eshell-numbered             :wk "Eshell")
   "o m" '(rmail                             :wk "Read mail")
   "o M" '(x8dcc/compose-mail-as             :wk "Compose mail as")
+  "o t" '(projectile-run-vterm              :wk "Terminal")
   "o x" '(scratch-buffer                    :wk "Scratch buffer")
   ;; Open -> Org
   "o o"   '(:ignore t                       :wk "Org")

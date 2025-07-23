@@ -494,6 +494,9 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                 (interactive)
                 (goto-char 0))))
 
+(use-package vterm
+  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
+
 (use-package emms
   :config
   (emms-all)
@@ -1375,6 +1378,7 @@ buffers, so be specially careful around `.git' directories."
   "o E" '(x8dcc/eshell-numbered             :wk "Eshell")
   "o m" '(rmail                             :wk "Read mail")
   "o M" '(x8dcc/compose-mail-as             :wk "Compose mail as")
+  "o t" '(projectile-run-vterm              :wk "Terminal")
   "o x" '(scratch-buffer                    :wk "Scratch buffer")
   ;; Open -> Org
   "o o"   '(:ignore t                       :wk "Org")
