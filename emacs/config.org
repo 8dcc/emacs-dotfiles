@@ -4392,6 +4392,7 @@ matters.
  'org-babel-load-languages '((C . t)
                              (scheme . t)
                              (shell . t)
+                             (python . t)
                              (gnuplot . t)))
 #+end_src
 

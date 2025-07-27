@@ -2430,6 +2430,7 @@ default value of `smtpmail-smtp-user' is nil.")
  'org-babel-load-languages '((C . t)
                              (scheme . t)
                              (shell . t)
+                             (python . t)
                              (gnuplot . t)))
 
 (setq org-imenu-depth 3)
