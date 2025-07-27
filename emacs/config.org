@@ -383,7 +383,7 @@ Specifically, for setting ~$GIT_EDITOR~ in eshell buffers.
 
 #+begin_src emacs-lisp
 (use-package with-editor
-  :hook (eshell-mode . with-editor-export-git-editor))
+  :hook ((eshell-mode vterm-mode) . with-editor-export-git-editor))
 #+end_src
 
 *** Vertico

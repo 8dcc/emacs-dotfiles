@@ -176,7 +176,7 @@ Using `x8dcc/general-create-definer'."
   (set-face-attribute 'git-commit-keyword nil :foreground 'unspecified))
 
 (use-package with-editor
-  :hook (eshell-mode . with-editor-export-git-editor))
+  :hook ((eshell-mode vterm-mode) . with-editor-export-git-editor))
 
 (use-package vertico
   :config
