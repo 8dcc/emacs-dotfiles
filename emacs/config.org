@@ -2067,6 +2067,32 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
                                              input)))))
 #+end_src
 
+** Terminal functions
+
+These functions are meant for terminal-like buffers, currently used for =eshell=
+and =vterm=.
+
+This function is basically the same as =projectile-run-eshell= in
+[[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]]. If we are in a project, it will open the shell in the project's
+root. The difference is that if we are not, it will open =eshell= normally. It
+also does not rename the buffer, so our =display-buffer-alist= rules still apply.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/default-terminal-function #'eshell
+  "Default terminal used by custom functions.")
+
+(defun x8dcc/terminal-project-or-current (&optional term-func)
+  "Run TERM-FUNC in the project's root whenever possible.
+  If TERM-FUNC is nil, use `x8dcc/default-terminal-function'."
+  (interactive)
+  (unless term-func (setq term-func x8dcc/default-terminal-function))
+  (if (projectile-project-p)
+      (projectile-with-default-dir (projectile-acquire-root)
+        (funcall term-func))
+    (funcall term-func)))
+#+end_src
+
+
 ** New features
 
 Remove text properties from region.
@@ -3695,26 +3721,8 @@ executing a previous command.
 
 *** Eshell buffer settings
 
-This function is basically the same from =projectile-run-eshell= in
-[[https://github.com/bbatsov/projectile/blob/0163b335a18af0f077a474d4dc6b36e22b5e3274/projectile.el#L4531-L4541][projectile.el]]. If we are in a project, it will open the shell in the project's
-root. The difference is that if we are not, it will open =eshell= normally. It
-also does not rename the buffer, so our =display-buffer-alist= rules still apply.
-
-It will be used for =x8dcc/eshell-popup= and =x8dcc/eshell-numbered=.
-
-#+begin_src emacs-lisp
-(defun x8dcc/eshell-project-or-current (&optional eshell-func)
-  "Run ESHELL-FUNC in the project's root whenever possible."
-  (interactive)
-  (unless eshell-func (setq eshell-func #'eshell))
-  (if (projectile-project-p)
-      (projectile-with-default-dir (projectile-acquire-root)
-        (funcall eshell-func))
-    (funcall eshell-func)))
-#+end_src
-
 This function will be used to open an eshell buffer by calling
-=x8dcc/eshell-project-or-current=, but will append a counter to the buffer name
+=x8dcc/terminal-project-or-current=, but will append a counter to the buffer name
 depending on the number of existing eshell buffers. This will /only/ be used when
 opening eshell in the current window (with =SPC o E=), since we only want to allow
 one =*eshell-popup*=.
@@ -3726,21 +3734,17 @@ one =*eshell-popup*=.
 That is, append a count to the buffer name if this was not the first buffer
 named BUFFER-NAME.  If BUFFER-NAME is nil, \"*eshell*\" is used.
 
-It uses `x8dcc/eshell-project-or-current' for calling `eshell', and
+It uses `x8dcc/terminal-project-or-current' for calling `eshell', and
 `x8dcc/suffixed-buffer-name' for obtaining the buffer name."
   (interactive)
   (unless buffer-name (setq buffer-name "*eshell*"))
   (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
-    (x8dcc/eshell-project-or-current)))
+    (x8dcc/terminal-project-or-current #'eshell)))
 #+end_src
 
 This function will be used to create an =eshell= buffer named =*eshell-popup*=. This
 will be used for making different rules for normal and popup eshell buffers on
 =display-buffer-alist=.
-
-TODO: Don't depend on =display-buffer-alist=. Perhaps create a buffer
-without showing it, and then display it with something like
-~(display-buffer-pop-up-window (eshell) nil)~.
 
 TODO: Instead of only allowing a single eshell popup, allow one per project by
 appending the project name to the buffer name.
@@ -3756,11 +3760,15 @@ different rules in `display-buffer-alist'."
   (interactive)
   (unless buffer-name (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
-    (x8dcc/eshell-project-or-current)))
+    (x8dcc/terminal-project-or-current #'eshell)))
 #+end_src
 
 If the buffer is called =*eshell-popup*=, open it in a side window, instead of
 taking over the current window.
+
+TODO: Don't depend on =display-buffer-alist=. Perhaps create a buffer
+without showing it, and then display it with something like
+~(display-buffer-pop-up-window (eshell) nil)~.
 
 #+begin_src emacs-lisp
 (x8dcc/set-display-bottom-window "\\*eshell-popup\\*")
