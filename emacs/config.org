@@ -1899,6 +1899,18 @@ set?
          (display-line-numbers-mode))))
 #+end_src
 
+Simple function for locally modifying the tab width.
+
+#+begin_src emacs-lisp
+(defun x8dcc/set-local-tab-width (width)
+  "Locally set the tab width to the specified WIDTH."
+  (interactive
+   (list
+    (read-number "New tab width: "
+                 (if (= tab-width 4) 8 4))))
+  (setq-local tab-width width))
+#+end_src
+
 ** Simple wrapper functions
 
 Clear an eshell buffer, an alternative to =recenter-top-bottom=. Partial credits

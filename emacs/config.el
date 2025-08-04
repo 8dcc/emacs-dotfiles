@@ -992,6 +992,14 @@ to the overlay."
         (display-line-numbers-mode
          (display-line-numbers-mode))))
 
+(defun x8dcc/set-local-tab-width (width)
+  "Locally set the tab width to the specified WIDTH."
+  (interactive
+   (list
+    (read-number "New tab width: "
+                 (if (= tab-width 4) 8 4))))
+  (setq-local tab-width width))
+
 (defun x8dcc/eshell-prompt-contents ()
   "Get the user text from the last prompt in the current *eshell* buffer."
   (save-excursion
