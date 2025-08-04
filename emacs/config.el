@@ -1131,6 +1131,42 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
         (funcall term-func))
     (funcall term-func)))
 
+(defun x8dcc/eshell-numbered (&optional buffer-name)
+  "Open an eshell buffer, adding a counter suffix when needed.
+That is, append a count to the buffer name if this was not the first buffer
+named BUFFER-NAME.  If BUFFER-NAME is nil, the value of `eshell-buffer-name' is
+used."
+  (interactive)
+  (unless buffer-name (setq buffer-name eshell-buffer-name))
+  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
+    (x8dcc/terminal-project-or-current #'eshell)))
+
+(defun x8dcc/vterm-numbered (&optional buffer-name)
+  "Open a vterm buffer, adding a counter suffix when needed.
+That is, append a count to the buffer name if this was not the first buffer
+named BUFFER-NAME.  If BUFFER-NAME is nil, the value of `vterm-buffer-name' is
+used."
+  (interactive)
+  (unless buffer-name (setq buffer-name vterm-buffer-name))
+  (let* ((vterm-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
+    (x8dcc/terminal-project-or-current #'vterm)))
+
+(defun x8dcc/eshell-popup (&optional buffer-name)
+  "Create or switch to a popup eshell buffer with a unique name."
+  (interactive)
+  (unless buffer-name (setq buffer-name "*eshell-popup*"))
+  (let ((eshell-buffer-name buffer-name))
+    (x8dcc/terminal-project-or-current #'eshell)))
+(x8dcc/set-display-bottom-window "\\*eshell-popup\\*")
+
+(defun x8dcc/vterm-popup (&optional buffer-name)
+  "Create or switch to a popup vterm buffer with a unique name."
+  (interactive)
+  (unless buffer-name (setq buffer-name "*vterm-popup*"))
+  (let ((vterm-buffer-name buffer-name))
+    (x8dcc/terminal-project-or-current #'vterm)))
+(x8dcc/set-display-bottom-window "\\*vterm-popup\\*")
+
 (defun x8dcc/remove-text-properties (start end)
   "Remote all text properties from START to END."
   (interactive "r")
@@ -2108,33 +2144,6 @@ of...\"."
            (propertize " " 'face default)))))
 
 (setq eshell-prompt-regexp "^[^#λ]* [#λ] ")
-
-(defun x8dcc/eshell-numbered (&optional buffer-name)
-  "Open an eshell buffer, adding a number suffix when necessary.
-
-That is, append a count to the buffer name if this was not the first buffer
-named BUFFER-NAME.  If BUFFER-NAME is nil, \"*eshell*\" is used.
-
-It uses `x8dcc/terminal-project-or-current' for calling `eshell', and
-`x8dcc/suffixed-buffer-name' for obtaining the buffer name."
-  (interactive)
-  (unless buffer-name (setq buffer-name "*eshell*"))
-  (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
-    (x8dcc/terminal-project-or-current #'eshell)))
-
-(defun x8dcc/eshell-popup (&optional buffer-name)
-  "Create or open a popup eshell buffer.
-
-Creates a new eshell buffer with the specified BUFFER-NAME, or
-\"*eshell-popup*\" if omited. Depending on `projectile-project-p', it will call
-`eshell' in the project root or in the current folder. Useful for setting
-different rules in `display-buffer-alist'."
-  (interactive)
-  (unless buffer-name (setq buffer-name "*eshell-popup*"))
-  (let ((eshell-buffer-name buffer-name))
-    (x8dcc/terminal-project-or-current #'eshell)))
-
-(x8dcc/set-display-bottom-window "\\*eshell-popup\\*")
 
 (setq eshell-hist-ignoredups t)
 
