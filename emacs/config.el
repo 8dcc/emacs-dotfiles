@@ -1427,7 +1427,8 @@ buffers, so be specially careful around `.git' directories."
   "o E" '(x8dcc/eshell-numbered             :wk "Eshell")
   "o m" '(rmail                             :wk "Read mail")
   "o M" '(x8dcc/compose-mail-as             :wk "Compose mail as")
-  "o t" '(projectile-run-vterm              :wk "Terminal")
+  "o t" '(x8dcc/vterm-popup                :wk "Terminal popup")
+  "o T" '(x8dcc/vterm-numbered             :wk "Terminal")
   "o x" '(scratch-buffer                    :wk "Scratch buffer")
   ;; Open -> Org
   "o o"   '(:ignore t                       :wk "Org")
