@@ -1171,6 +1171,25 @@ filename.
   (emms-mode-line-mode 0))
 #+end_src
 
+The following code overwrites the function used to display track descriptions,
+so the metadata is used when available. This is useful in the buffer generated
+by =emms-streams= in EMMS version 19.
+
+First, the function tries to obtain the metadata associated to the current track
+being processed. If the metadata is a list with at least two elements, it
+assumes that they are the description and URL, so it formats them into two
+columns. Otherwise, =emms-track-simple-description= is called, which is the
+default value of =emms-track-description-function=.
+
+#+begin_src emacs-lisp
+(setq emms-track-description-function
+      (lambda (track)
+        (let ((metadata (emms-track-get track 'metadata)))
+          (if (and metadata (> (length metadata) 2))
+              (format "%-40s (%s)" (car metadata) (cadr metadata))
+            (emms-track-simple-description track)))))
+#+end_src
+
 *** Ada mode
 
 Major mode for programming in Ada. Mainstream version is out of date.
