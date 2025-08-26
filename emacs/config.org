@@ -379,11 +379,13 @@ Disable commit keyword highlighting (in square brackets).
 
 Use the Emacsclient as the ~$EDITOR~ of child processes.
 
-Specifically, for setting ~$GIT_EDITOR~ in eshell buffers.
+It will overwrite the ~$EDITOR~ and ~$GIT_EDITOR~ environment variables in =eshell=
+and =vterm= buffers.
 
 #+begin_src emacs-lisp
 (use-package with-editor
-  :hook ((eshell-mode vterm-mode) . with-editor-export-git-editor))
+  :hook (((eshell-mode vterm-mode) . with-editor-export-editor)
+         ((eshell-mode vterm-mode) . with-editor-export-git-editor)))
 #+end_src
 
 *** Vertico
