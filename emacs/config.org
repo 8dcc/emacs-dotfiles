@@ -1147,6 +1147,44 @@ to =eshell=.
   :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
+Add integration with =desktop-save-mode=. Credits: [[https://github.com/akermu/emacs-libvterm/issues/666][emacs-libvterm#666]].
+
+FIXME: The =default-directory= variable contains the path where the =vterm= buffer
+was opened, not the current path inside the shell. The shell path should be
+saved, but I don't know a way of obtaining this value.
+
+#+begin_src emacs-lisp
+(defun x8dcc/vterm-save-desktop-buffer (desktop-dirname)
+  "Save a vterm buffer for `desktop-save-mode'.
+
+This function should be used as the value for `desktop-save-buffer' in
+`vterm-mode' buffers.
+
+The function returns the path of the current buffer, which will be
+saved/restored for the vterm buffer."
+  (desktop-file-name default-directory desktop-dirname))
+
+(defun x8dcc/vterm-restore-desktop-buffer (filename buffer-name misc)
+  "Restoration function used by `desktop-save-mode' for vterm buffers.
+
+This function creates a new `vterm-mode' buffer with the old
+
+The FILENAME argument is unused, the BUFFER-NAME argument will be used as the
+new buffer name, and MISC is the saved value that was returned by
+`x8dcc/vterm-save-desktop-buffer' (the working directory of the old vterm
+buffer)."
+  (let ((default-directory misc))
+    (require 'vterm)
+    (with-current-buffer (get-buffer-create buffer-name)
+      (vterm-mode))))
+
+(add-to-list 'desktop-buffer-mode-handlers
+             '(vterm-mode . x8dcc/vterm-restore-desktop-buffer))
+(add-hook 'vterm-mode-hook
+          (lambda ()
+            (setq-local desktop-save-buffer #'x8dcc/vterm-save-desktop-buffer)))
+#+end_src
+
 *** EMMS
 
 Enable the /Emacs Multi-Media System/ (EMMS).
