@@ -498,6 +498,24 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
 (use-package vterm
   :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
+(defun x8dcc/vterm-get-cwd (&optional vterm-buffer)
+  "Get the current working directory of a vterm buffer.
+
+The function tries to get the actual working directory of the shell; if that
+fails, it returns the value of `default-directory', which is usually the
+directory where `vterm' was launched.
+
+The optional argument VTERM-BUFFER can be a buffer object or a buffer name, and
+defaults to the current buffer."
+  (unless vterm-buffer (setq vterm-buffer (current-buffer)))
+  (with-current-buffer vterm-buffer
+    (if vterm--process
+        ;; Ideally, obtain the actual shell directory.
+        (let ((pid (process-id vterm--process)))
+          (file-truename (format "/proc/%d/cwd/" pid)))
+      ;; Fall back to the directory where vterm was launched.
+      default-directory)))
+
 (defun x8dcc/vterm-save-desktop-buffer (desktop-dirname)
   "Save a vterm buffer for `desktop-save-mode'.
 
@@ -506,7 +524,7 @@ This function should be used as the value for `desktop-save-buffer' in
 
 The function returns the path of the current buffer, which will be
 saved/restored for the vterm buffer."
-  (desktop-file-name default-directory desktop-dirname))
+  (desktop-file-name (x8dcc/vterm-get-cwd) desktop-dirname))
 
 (defun x8dcc/vterm-restore-desktop-buffer (filename buffer-name misc)
   "Restoration function used by `desktop-save-mode' for vterm buffers.
