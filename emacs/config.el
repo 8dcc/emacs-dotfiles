@@ -532,6 +532,15 @@ The FILENAME argument is unused, the BUFFER-NAME argument will be used as the
 new buffer name, and MISC is the saved value that was returned by
 `x8dcc/vterm-save-desktop-buffer' (the working directory of the old vterm
 buffer)."
+  (let ((existing-buffer (get-buffer buffer-name)))
+    (when existing-buffer
+      ;; If there is already a buffer with that name, rename that one (since
+      ;; `desktop-mode' loads that specific name).
+      (let ((new-name (x8dcc/suffixed-buffer-name "*vterm* [old]")))
+        (with-current-buffer existing-buffer
+          (rename-buffer new-name))
+        (message "Renamed buffer `%s' to `%s' to avoid collisions."
+                 buffer-name new-name))))
   (let ((default-directory misc))
     (require 'vterm)
     (with-current-buffer (get-buffer-create buffer-name)
