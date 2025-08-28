@@ -244,8 +244,7 @@ Using `x8dcc/general-create-definer'."
         dashboard-set-footer nil
         dashboard-page-separator "\n\n"
         dashboard-items '((recents . 10)
-                          (projects . 5)
-                          (agenda . 10)))
+                          (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
 
