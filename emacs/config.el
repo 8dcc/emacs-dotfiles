@@ -172,9 +172,6 @@ Using `x8dcc/general-create-definer'."
         magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))
 
-(with-eval-after-load 'git-commit
-  (set-face-attribute 'git-commit-keyword nil :foreground 'unspecified))
-
 (use-package with-editor
   :hook (((eshell-mode vterm-mode) . with-editor-export-editor)
          ((eshell-mode vterm-mode) . with-editor-export-git-editor)))
