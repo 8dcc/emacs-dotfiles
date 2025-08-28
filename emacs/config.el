@@ -513,7 +513,7 @@ defaults to the current buffer."
       ;; Fall back to the directory where vterm was launched.
       default-directory)))
 
-(defun x8dcc/vterm-save-desktop-buffer (desktop-dirname)
+(defun x8dcc/desktop-vterm-save-buffer (desktop-dirname)
   "Save a vterm buffer for `desktop-save-mode'.
 
 This function should be used as the value for `desktop-save-buffer' in
@@ -523,7 +523,7 @@ The function returns the path of the current buffer, which will be
 saved/restored for the vterm buffer."
   (desktop-file-name (x8dcc/vterm-get-cwd) desktop-dirname))
 
-(defun x8dcc/vterm-restore-desktop-buffer (filename buffer-name misc)
+(defun x8dcc/desktop-vterm-restore-buffer (filename buffer-name misc)
   "Restoration function used by `desktop-save-mode' for vterm buffers.
 
 This function creates a new `vterm-mode' buffer with the old
@@ -547,10 +547,10 @@ buffer)."
       (vterm-mode))))
 
 (add-to-list 'desktop-buffer-mode-handlers
-             '(vterm-mode . x8dcc/vterm-restore-desktop-buffer))
+             '(vterm-mode . x8dcc/desktop-vterm-restore-buffer))
 (add-hook 'vterm-mode-hook
           (lambda ()
-            (setq-local desktop-save-buffer #'x8dcc/vterm-save-desktop-buffer)))
+            (setq-local desktop-save-buffer #'x8dcc/desktop-vterm-save-buffer)))
 
 (use-package emms
   :config
