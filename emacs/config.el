@@ -1187,6 +1187,22 @@ Replacements are read from `x8dcc/quick-calc-replacements'."
             (x8dcc/replace-regexps-in-string x8dcc/quick-calc-replacements
                                              input)))))
 
+(defvar x8dcc/rfc-history nil
+  "History for `x8dcc/rfc'.")
+
+(defun x8dcc/rfc (rfc-id)
+  "Open an RFC in EWW.
+
+The RFC-ID argument is case-insensitive, and can have the format \"RFC 123\",
+\"RFC123\" or \"123\"."
+  (interactive
+   (list (read-string "Open RFC: " "RFC " 'x8dcc/rfc-history)))
+  (let ((lowercase (downcase rfc-id)))
+    (unless (s-contains? "rfc" lowercase)
+      (setq lowercase (concat "rfc" lowercase)))
+    (eww (concat "https://www.rfc-editor.org/rfc/"
+                 (s-replace-regexp "[[:space:]]+" "" lowercase)))))
+
 (defconst x8dcc/default-terminal-function #'eshell
   "Default terminal used by custom functions.")
 
