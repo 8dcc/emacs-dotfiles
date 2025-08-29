@@ -33,7 +33,7 @@
  ("guile" . "71a6be00433a157de3936f208c7a1bd0192b12cd")
  ("highlight-indent-guides" . "321a5b026406ab51a2206d64fe990c76395f7c18")
  ("highlight-numbers" . "8b4744c7f46c72b1d3d599d4fb75ef8183dee307")
- ("hl-todo" . "70ce48470c85f1441de2c9428a240c3287995846")
+ ("hl-todo" . "f7890aba745c8910d891dbbd6789a07c2675f1d1")
  ("languagetool.el" . "b136d531129eb488dc4134784e34c4afedcb0c2f")
  ("let-alist" . "8141e7c941105c92e89bba44e73aae6cdd962b49")
  ("magit" . "2b02bfb0495bf738e006d82f3a233e8f511b90b8")
