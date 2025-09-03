@@ -1222,7 +1222,11 @@ That is, append a count to the buffer name if this was not the first buffer
 named BUFFER-NAME.  If BUFFER-NAME is nil, the value of `eshell-buffer-name' is
 used."
   (interactive)
-  (unless buffer-name (setq buffer-name eshell-buffer-name))
+  (unless buffer-name
+    (setq buffer-name
+          (if (boundp 'eshell-buffer-name)
+              eshell-buffer-name
+            "*eshell*")))
   (let* ((eshell-buffer-name (x8dcc/suffixed-buffer-name buffer-name)))
     (x8dcc/terminal-project-or-current #'eshell)))
 
