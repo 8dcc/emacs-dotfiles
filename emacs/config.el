@@ -1559,6 +1559,7 @@ buffers, so be specially careful around `.git' directories."
   "s h" '(x8dcc/highlight-regexp            :wk "Highlight")
   "s H" '(unhighlight-regexp                :wk "Unhighlight")
   "s o" '(occur                             :wk "Occurrences")
+  "s O" '(x8dcc/recursive-multi-occur       :wk "Recursive occurrences")
   "s r" '(query-replace                     :wk "Replace (query)")
   "s R" '(query-replace-regexp              :wk "Replace regex (query)")
   "s s" '(isearch-forward                   :wk "I-search")
