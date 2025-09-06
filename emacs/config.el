@@ -228,6 +228,13 @@ Using `x8dcc/general-create-definer'."
         (setq element (concat "^" (regexp-quote element) "$")))
     (add-to-list 'popper-reference-buffers element 'append))
 
+  (setq popper-window-height
+        (lambda (win)
+          (fit-window-to-buffer
+           win
+           (floor (frame-height) 3)
+           (floor (frame-height) 4))))
+
   (let ((popper-mode-line-formatted (propertize " *POP* " 'face 'bold)))
     (setq popper-mode-line popper-mode-line-formatted))
   (popper-mode 1))
