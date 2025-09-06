@@ -436,8 +436,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
 (use-package big-font
   :straight (big-font :type git :host github :repo "8dcc/big-font.el")
   :config
-  (setq big-font-faces '((default        120 "Source Code Pro")
-                         (fixed-pitch    120 "Source Code Pro")
+  (setq big-font-faces '((default        120 "Iosevka Comfy Fixed")
+                         (fixed-pitch    120 "Iosevka Comfy Fixed")
                          (variable-pitch 150 "FreeSerif"))))
 
 (use-package soft-comment
