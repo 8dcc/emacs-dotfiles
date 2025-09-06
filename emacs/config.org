@@ -479,6 +479,8 @@ with =SPC t p=. See [[Space keybinds][Space keybinds]].
                      "*Macroexpansion*"
                      "*evil-registers*"
                      "*Flycheck errors*"
+                     "*eshell-popup*"
+                     "*vterm-popup*"
                      ,shell-command-buffer-name-async))
     (if (stringp element)
         (setq element (concat "^" (regexp-quote element) "$")))
@@ -2245,15 +2247,10 @@ used."
 
 This function will be used to create a terminal buffer with a /popup/ suffix. This
 suffix will be used for creating different display rules for base and popup
-terminal buffers (on =display-buffer-alist=, through
-=x8dcc/set-display-bottom-window=).
+terminal buffers (see [[*Popper][Popper]]).
 
 TODO: Instead of only allowing a single eshell/vterm popup, allow one per
 project by appending the project name to the buffer name.
-
-TODO: Don't depend on =display-buffer-alist=. Perhaps create a buffer
-without showing it, and then display it with something like
-~(display-buffer-pop-up-window (eshell) nil)~.
 
 TODO: This duplicated logic should be abstracted somehow, but it's not easy.
 
@@ -2264,7 +2261,6 @@ TODO: This duplicated logic should be abstracted somehow, but it's not easy.
   (unless buffer-name (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'eshell)))
-(x8dcc/set-display-bottom-window (regexp-quote "*eshell-popup*"))
 
 (defun x8dcc/vterm-popup (&optional buffer-name)
   "Create or switch to a popup vterm buffer with a unique name."
@@ -2272,7 +2268,6 @@ TODO: This duplicated logic should be abstracted somehow, but it's not easy.
   (unless buffer-name (setq buffer-name "*vterm-popup*"))
   (let ((vterm-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'vterm)))
-(x8dcc/set-display-bottom-window (regexp-quote "*vterm-popup*"))
 #+end_src
 
 ** New features

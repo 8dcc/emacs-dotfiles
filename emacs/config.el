@@ -223,6 +223,8 @@ Using `x8dcc/general-create-definer'."
                      "*Macroexpansion*"
                      "*evil-registers*"
                      "*Flycheck errors*"
+                     "*eshell-popup*"
+                     "*vterm-popup*"
                      ,shell-command-buffer-name-async))
     (if (stringp element)
         (setq element (concat "^" (regexp-quote element) "$")))
@@ -1253,7 +1255,6 @@ used."
   (unless buffer-name (setq buffer-name "*eshell-popup*"))
   (let ((eshell-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'eshell)))
-(x8dcc/set-display-bottom-window (regexp-quote "*eshell-popup*"))
 
 (defun x8dcc/vterm-popup (&optional buffer-name)
   "Create or switch to a popup vterm buffer with a unique name."
@@ -1261,7 +1262,6 @@ used."
   (unless buffer-name (setq buffer-name "*vterm-popup*"))
   (let ((vterm-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'vterm)))
-(x8dcc/set-display-bottom-window (regexp-quote "*vterm-popup*"))
 
 (defun x8dcc/remove-text-properties (start end)
   "Remote all text properties from START to END."
