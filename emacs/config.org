@@ -4635,6 +4635,18 @@ Change the HTML for the "Up | Home" buttons.
 </div>")
 #+end_src
 
+Change the process for generating the PDF file from the exported LaTeX
+file. Instead of using =latexmk= (currently the default value of the variable), it
+calls =pdflatex= twice (to ensure all references are correct) with the
+=-shell-escape= option enabled (to allow certain LaTeX packages like =svg= to use
+external programs like =inkscape=).
+
+#+begin_src emacs-lisp
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+#+end_src
+
 Use different pages for the title and TOC in LaTeX.
 
 #+begin_src emacs-lisp

@@ -2583,6 +2583,10 @@ default value of `smtpmail-smtp-user' is nil.")
   <a accesskey=\"u\" href=\"%s\">Up</a> | <a accesskey=\"h\" href=\"%s\">Home</a>
 </div>")
 
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 (setq org-latex-title-command "\\maketitle\n\\clearpage"
       org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
 
