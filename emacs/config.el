@@ -2800,8 +2800,11 @@ The INFO argument will be used when calling `org-html-meta-tags-default'."
 
 (setq TeX-parse-self t)
 
-(add-hook 'LaTeX-mode-hook (lambda ()
-                             (TeX-fold-mode 1)))
+(setq TeX-command-extra-options " -shell-escape ")
+
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (TeX-fold-mode 1)))
 
 (setq TeX-fold-unfold-around-mark t)
 

@@ -4994,12 +4994,21 @@ Enable self-parsing.
 (setq TeX-parse-self t)
 #+end_src
 
+Enable shell escape when running the TeX compiler. This is needed for running
+many external commands; specially useful when using the =svg= latex package, which
+invokes the =inkscape= program for converting images.
+
+#+begin_src emacs-lisp
+(setq TeX-command-extra-options " -shell-escape ")
+#+end_src
+
 Enable =TeX-fold-mode= by default. This doesn't fold anything, it just enables the
 feature.
 
 #+begin_src emacs-lisp
-(add-hook 'LaTeX-mode-hook (lambda ()
-                             (TeX-fold-mode 1)))
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (TeX-fold-mode 1)))
 #+end_src
 
 Unfold around active region.
