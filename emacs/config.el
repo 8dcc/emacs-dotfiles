@@ -501,7 +501,9 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                 (goto-char 0))))
 
 (use-package vterm
-  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
+  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (setq vterm-max-scrollback 10000))
 
 (defun x8dcc/vterm-get-cwd (&optional vterm-buffer)
   "Get the current working directory of a vterm buffer.

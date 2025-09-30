@@ -1145,7 +1145,9 @@ to =eshell=.
 
 #+begin_src emacs-lisp
 (use-package vterm
-  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
+  :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
+  :config
+  (setq vterm-max-scrollback 10000))
 #+end_src
 
 Simple function for obtaining the shell's working directory inside a =vterm=
