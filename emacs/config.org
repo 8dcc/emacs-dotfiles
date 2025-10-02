@@ -1332,7 +1332,7 @@ Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with 
 
 #+begin_src emacs-lisp
 (use-package nasm-mode
-  :straight (:type git :host github :repo "8dcc/nasm-mode")
+  :straight (:type git :host github :repo "8dcc/nasm-mode" :branch "require-nasmtok")
   :config
   (setq nasm-basic-offset 4)
   (add-hook 'nasm-mode-hook
