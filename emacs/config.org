@@ -532,7 +532,7 @@ Paste whole buffers or parts of buffers to several pastebin-like services.
 
 #+begin_src emacs-lisp
 (use-package webpaste
-  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
+  :straight (:type git :host github :repo "8dcc/webpaste.el")
   :config
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))
@@ -560,7 +560,7 @@ We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
 
 #+begin_src emacs-lisp
 (use-package move-text
-  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :straight (:type git :host github :repo "8dcc/move-text")
   :hook ((text-mode prog-mode) . move-text-mode)
   :config
   (move-text-default-bindings)
@@ -575,7 +575,7 @@ for more information.
 
 #+begin_src emacs-lisp
 (use-package plumber
-  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
+  :straight (:type git :host github :repo "8dcc/plumber.el"))
 #+end_src
 
 *** x86-lookup
@@ -606,7 +606,7 @@ Personal fork of the [[https://github.com/joaotavora/beardbolt][beardbolt]] pack
 
 #+begin_src emacs-lisp
 (use-package beardbolt
-  :straight (beardbolt :type git :host github :repo "8dcc/beardbolt")
+  :straight (:type git :host github :repo "8dcc/beardbolt")
   :config
   (setq beardbolt-shuffle-rainbow t
         beardbolt-compile-delay nil))
@@ -634,7 +634,7 @@ The installation is ~200 MiB.
 
 #+begin_src emacs-lisp
 (use-package whisper
-  :straight (whisper :type git :host github :repo "natrys/whisper.el")
+  :straight (:type git :host github :repo "natrys/whisper.el")
   :config
   (setq whisper-install-directory "~/.cache"
         whisper-model "base"
@@ -659,8 +659,7 @@ with =SPC t C=, see [[*Space keybinds][Space keybinds]].
 
 #+begin_src emacs-lisp
 (use-package highlight-indent-guides
-  :straight (highlight-indent-guides
-             :type git :host github :repo "getong/highlight-indent-guides"))
+  :straight (:type git :host github :repo "getong/highlight-indent-guides"))
 #+end_src
 
 Use the same character as the fill column, and ignore the first indentation
@@ -989,7 +988,7 @@ Personal minor mode for toggling a bigger font face.
 
 #+begin_src emacs-lisp
 (use-package big-font
-  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
+  :straight (:type git :host github :repo "8dcc/big-font.el")
   :config
   (setq big-font-faces '((default        120 "Iosevka Comfy Fixed")
                          (fixed-pitch    120 "Iosevka Comfy Fixed")
@@ -1003,7 +1002,7 @@ theme.
 
 #+begin_src emacs-lisp
 (use-package soft-comment
-  :straight (soft-comment :type git :host github :repo "8dcc/soft-comment.el")
+  :straight (:type git :host github :repo "8dcc/soft-comment.el")
   :config
   (setq soft-comment-ratio 0.2))
 #+end_src
@@ -1017,7 +1016,7 @@ etc.
 
 #+begin_src emacs-lisp
 (use-package hl-printf
-  :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
+  :straight (:type git :host github :repo "8dcc/hl-printf.el")
   :hook ((c-mode-common . hl-printf-mode))
   :config
   (setq hl-printf-regexp
@@ -1267,7 +1266,7 @@ Major mode for programming in Ada. Mainstream version is out of date.
 
 #+begin_src emacs-lisp
 (use-package ada-mode
-  :straight (ada-mode :type git :host github :repo "8dcc/ada-mode")
+  :straight (:type git :host github :repo "8dcc/ada-mode")
   :config
   (dolist (var '(ada-indent ada-use-indent ada-when-indent ada-broken-indent
                  ada-continuation-indent ada-indent-record-rel-type))
@@ -1333,7 +1332,7 @@ Personal fork of [[https://github.com/skeeto/nasm-mode][skeeto/nasm-mode]] with 
 
 #+begin_src emacs-lisp
 (use-package nasm-mode
-  :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode")
+  :straight (:type git :host github :repo "8dcc/nasm-mode")
   :config
   (setq nasm-basic-offset 4)
   (add-hook 'nasm-mode-hook

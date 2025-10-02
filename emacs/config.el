@@ -258,7 +258,7 @@ Using `x8dcc/general-create-definer'."
   (dashboard-setup-startup-hook))
 
 (use-package webpaste
-  :straight (webpaste :type git :host github :repo "8dcc/webpaste.el")
+  :straight (:type git :host github :repo "8dcc/webpaste.el")
   :config
   (setq webpaste-provider-priority '("bpa.st" "dpaste.org" "gist.github.com")
         webpaste-paste-confirmation t))
@@ -268,7 +268,7 @@ Using `x8dcc/general-create-definer'."
   (setq clang-format-style "file"))
 
 (use-package move-text
-  :straight (move-text :type git :host github :repo "8dcc/move-text")
+  :straight (:type git :host github :repo "8dcc/move-text")
   :hook ((text-mode prog-mode) . move-text-mode)
   :config
   (move-text-default-bindings)
@@ -276,7 +276,7 @@ Using `x8dcc/general-create-definer'."
   (keymap-set move-text-mode-map "M-k" 'move-text-up))
 
 (use-package plumber
-  :straight (plumber :type git :host github :repo "8dcc/plumber.el"))
+  :straight (:type git :host github :repo "8dcc/plumber.el"))
 
 (use-package x86-lookup
   :config
@@ -443,19 +443,19 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
   (global-git-gutter-mode 1))
 
 (use-package big-font
-  :straight (big-font :type git :host github :repo "8dcc/big-font.el")
+  :straight (:type git :host github :repo "8dcc/big-font.el")
   :config
   (setq big-font-faces '((default        120 "Iosevka Comfy Fixed")
                          (fixed-pitch    120 "Iosevka Comfy Fixed")
                          (variable-pitch 150 "FreeSerif"))))
 
 (use-package soft-comment
-  :straight (soft-comment :type git :host github :repo "8dcc/soft-comment.el")
+  :straight (:type git :host github :repo "8dcc/soft-comment.el")
   :config
   (setq soft-comment-ratio 0.2))
 
 (use-package hl-printf
-  :straight (hl-printf :type git :host github :repo "8dcc/hl-printf.el")
+  :straight (:type git :host github :repo "8dcc/hl-printf.el")
   :hook ((c-mode-common . hl-printf-mode))
   :config
   (setq hl-printf-regexp
@@ -582,7 +582,7 @@ buffer)."
             (emms-track-simple-description track)))))
 
 (use-package ada-mode
-  :straight (ada-mode :type git :host github :repo "8dcc/ada-mode")
+  :straight (:type git :host github :repo "8dcc/ada-mode")
   :config
   (dolist (var '(ada-indent ada-use-indent ada-when-indent ada-broken-indent
                  ada-continuation-indent ada-indent-record-rel-type))
@@ -613,7 +613,7 @@ buffer)."
 (use-package geiser-guile)
 
 (use-package nasm-mode
-  :straight (nasm-mode :type git :host github :repo "8dcc/nasm-mode")
+  :straight (:type git :host github :repo "8dcc/nasm-mode")
   :config
   (setq nasm-basic-offset 4)
   (add-hook 'nasm-mode-hook
