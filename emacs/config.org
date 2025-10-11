@@ -1150,7 +1150,8 @@ to =eshell=.
 #+end_src
 
 Simple function for obtaining the shell's working directory inside a =vterm=
-buffer.
+buffer. This is only useful if you haven't enabled vterm's [[https://github.com/akermu/emacs-libvterm/blob/master/README.md#shell-side-configuration][shell-side
+configuration]] and [[https://github.com/akermu/emacs-libvterm/blob/master/README.md#directory-tracking-and-prompt-tracking][directory tracking]].
 
 #+begin_src emacs-lisp
 (defun x8dcc/vterm-get-cwd (&optional vterm-buffer)
