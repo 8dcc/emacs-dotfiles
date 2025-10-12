@@ -2589,6 +2589,30 @@ default value of `smtpmail-smtp-user' is nil.")
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+(setq org-latex-image-default-width "")
+
+(add-to-list 'org-latex-default-packages-alist
+             '("export" "adjustbox" 'also-snippets))
+
+(defun x8dcc/org-latex-svg-wrap (orig-func link info)
+  "Hook for setting a max width for SVG images in `org-latex--inline-image'.
+
+The LINK should be the link to the SVG file, and INFO should be as expected by
+the original function.
+
+The advice should be added with the `:around' property, so it is called with the
+original function as the first ORIG-FUNC argument. See `advice-add'."
+  (let ((orig-result (funcall orig-func link info))
+        (path (org-element-property :path link)))
+    (if (string-match "\\.\\(svg\\|SVG\\)$" path)
+        (s-replace-regexp
+         "\\\\includesvg{\\(.+\\)}"
+         "\\\\adjustbox{max width=\\\\linewidth}{\\\\includesvg{\\1}}"
+         orig-result)
+      orig-result)))
+
+(advice-add 'org-latex--inline-image :around #'x8dcc/org-latex-svg-wrap)
+
 (setq org-latex-title-command "\\maketitle\n\\clearpage"
       org-latex-toc-command "\\tableofcontents\n\\clearpage\n")
 

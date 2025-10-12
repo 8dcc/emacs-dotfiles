@@ -4649,6 +4649,47 @@ external programs like =inkscape=).
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 #+end_src
 
+Don't use a default width when exporting images to LaTeX (and PDF). The default
+value made it so images were 90% of the text width, which didn't make sense if
+the image was smaller than that.
+
+#+begin_src emacs-lisp
+(setq org-latex-image-default-width "")
+#+end_src
+
+To set a "max width" for SVG images, we need to:
+
+1. Include the =adjustbox= package, with the =export= option.
+2. Define our own function, which receives a link to the image; if the link
+   points to an SVG image, wrap it in ~\adjustbox{max width=\linewidth}{\includesvg{%s}}~.
+3. Add an advice for =org-latex--inline-image=, so that our function is called
+   before it. It needs =:around= so our function receives the original function as
+   the first argument (see the documentation of =advice-add=).
+
+#+begin_src emacs-lisp
+(add-to-list 'org-latex-default-packages-alist
+             '("export" "adjustbox" 'also-snippets))
+
+(defun x8dcc/org-latex-svg-wrap (orig-func link info)
+  "Hook for setting a max width for SVG images in `org-latex--inline-image'.
+
+The LINK should be the link to the SVG file, and INFO should be as expected by
+the original function.
+
+The advice should be added with the `:around' property, so it is called with the
+original function as the first ORIG-FUNC argument. See `advice-add'."
+  (let ((orig-result (funcall orig-func link info))
+        (path (org-element-property :path link)))
+    (if (string-match "\\.\\(svg\\|SVG\\)$" path)
+        (s-replace-regexp
+         "\\\\includesvg{\\(.+\\)}"
+         "\\\\adjustbox{max width=\\\\linewidth}{\\\\includesvg{\\1}}"
+         orig-result)
+      orig-result)))
+
+(advice-add 'org-latex--inline-image :around #'x8dcc/org-latex-svg-wrap)
+#+end_src
+
 Use different pages for the title and TOC in LaTeX.
 
 #+begin_src emacs-lisp
