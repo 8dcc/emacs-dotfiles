@@ -4681,9 +4681,15 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
   (let* ((orig-result (funcall orig-func link info))
          (path (org-element-property :path link))
          (includegraphics-regexp
-          (if (string-match "\\.\\(svg\\|SVG\\)$" path)
-              "\\(\\\\includesvg\\(?:\\[.+\\]\\)?{.+}\\)"
-            "\\(\\\\includegraphics\\(?:\\[.+\\]\\)?{.+}\\)")))
+          (rx
+           (group-n 1
+             (seq "\\"
+                  (literal
+                   (if (string-match "\\.\\(svg\\|SVG\\)$" path)
+                       "includesvg"
+                     "includegraphics"))
+                  (opt "[" (one-or-more anything) "]")
+                  "{" (one-or-more anything) "}")))))
     (s-replace-regexp includegraphics-regexp
                       "\\\\adjustbox{max width=\\\\linewidth}{\\1}"
                       orig-result)  ))
