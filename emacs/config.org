@@ -4678,14 +4678,15 @@ the original function.
 
 The advice should be added with the `:around' property, so it is called with the
 original function as the first ORIG-FUNC argument. See `advice-add'."
-  (let ((orig-result (funcall orig-func link info))
-        (path (org-element-property :path link)))
-    (if (string-match "\\.\\(svg\\|SVG\\)$" path)
-        (s-replace-regexp
-         "\\\\includesvg{\\(.+\\)}"
-         "\\\\adjustbox{max width=\\\\linewidth}{\\\\includesvg{\\1}}"
-         orig-result)
-      orig-result)))
+  (let* ((orig-result (funcall orig-func link info))
+         (path (org-element-property :path link))
+         (includegraphics-regexp
+          (if (string-match "\\.\\(svg\\|SVG\\)$" path)
+              "\\(\\\\includesvg\\(?:\\[.+\\]\\)?{.+}\\)"
+            "\\(\\\\includegraphics\\(?:\\[.+\\]\\)?{.+}\\)")))
+    (s-replace-regexp includegraphics-regexp
+                      "\\\\adjustbox{max width=\\\\linewidth}{\\1}"
+                      orig-result)  ))
 
 (advice-add 'org-latex--inline-image :around #'x8dcc/org-latex-svg-wrap)
 #+end_src
