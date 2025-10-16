@@ -1143,6 +1143,14 @@ navigation.
                 (goto-char 0))))
 #+end_src
 
+If you get the following error when opening a PDF file:
+
+#+begin_quote
+The =pdf-util-convert-program= is unset or non-executable.
+#+end_quote
+
+You might need to install =imagemagick= on your system.
+
 *** Vterm
 
 Fully-fledged terminal emulator inside GNU Emacs. Straight-forward alternative
