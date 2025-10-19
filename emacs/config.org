@@ -1047,7 +1047,7 @@ Display description of the function under the cursor. See =eldoc-mode=.
   :hook ((eldoc-mode . eldoc-box-hover-mode)))
 #+end_src
 
-*** COMMENT Whiteroom mode
+*** COMMENT Writeroom mode
 
 Great mode for distraction-free editing.
 
