@@ -1497,6 +1497,7 @@ buffers, so be specially careful around `.git' directories."
   "h l" '(find-library                      :wk "Find library")
   "h m" '(describe-mode                     :wk "Describe mode")
   "h v" '(describe-variable                 :wk "Describe variable")
+  "h w" '(count-words                       :wk "Count words")
   ;; Insert
   "i"   '(:ignore t                         :wk "Insert")
   "i c" '(insert-char                       :wk "Character")
