@@ -3513,6 +3513,15 @@ number of versions to keep.
       kept-old-versions 5)
 #+end_src
 
+Use a trash directory, instead of deleting files, whenever possible. Note that
+=trash-directory= could be customized, or =system-move-file-to-trash= could be
+defined; since they aren't, it will use the /freedesktop/ trash, usually
+=/home/username/.local/share/Trash/=.
+
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t)
+#+end_src
+
 ** Indentation
 
 Use spaces instead of tabs. Should be the default already.

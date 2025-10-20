@@ -2042,6 +2042,8 @@ Obtained from git-commit.el, version 3.3.0.50, modified by 8dcc.")
       kept-new-versions 20
       kept-old-versions 5)
 
+(setq delete-by-moving-to-trash t)
+
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
