@@ -4634,6 +4634,18 @@ Use smart quotes when exporting to HTML or LaTeX.
 (setq org-export-with-smart-quotes t)
 #+end_src
 
+By default, when exporting tables to HTML, include all borders.
+
+NOTE: The call to =setq= shouldn't be necessary, but the documentation of
+=plist-put= recommends it.
+
+#+begin_src emacs-lisp
+(setq org-html-table-default-attributes
+      (thread-first org-html-table-default-attributes
+                    (plist-put :rules "all")
+                    (plist-put :frame "border")))
+#+end_src
+
 Prefer user labels when exporting to HTML or LaTeX.
 
 #+begin_src emacs-lisp
