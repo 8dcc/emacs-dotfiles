@@ -4650,10 +4650,11 @@ NOTE: The call to =setq= shouldn't be necessary, but the documentation of
 =plist-put= recommends it.
 
 #+begin_src emacs-lisp
-(setq org-html-table-default-attributes
-      (thread-first org-html-table-default-attributes
-                    (plist-put :rules "all")
-                    (plist-put :frame "border")))
+(with-eval-after-load 'ox-html
+  (setq org-html-table-default-attributes
+        (thread-first org-html-table-default-attributes
+                      (plist-put :rules "all")
+                      (plist-put :frame "border"))))
 #+end_src
 
 Prefer user labels when exporting to HTML or LaTeX.

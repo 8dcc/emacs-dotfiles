@@ -2579,10 +2579,11 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (setq org-export-with-smart-quotes t)
 
-(setq org-html-table-default-attributes
-      (thread-first org-html-table-default-attributes
-                    (plist-put :rules "all")
-                    (plist-put :frame "border")))
+(with-eval-after-load 'ox-html
+  (setq org-html-table-default-attributes
+        (thread-first org-html-table-default-attributes
+                      (plist-put :rules "all")
+                      (plist-put :frame "border"))))
 
 (setq org-html-prefer-user-labels t
       org-latex-prefer-user-labels t)
