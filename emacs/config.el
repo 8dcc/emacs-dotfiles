@@ -581,6 +581,10 @@ buffer)."
               (format "%-40s (%s)" (car metadata) (cadr metadata))
             (emms-track-simple-description track)))))
 
+(use-package chess
+  :config
+  (setq chess-default-display '(chess-ics1 chess-plain chess-images)))
+
 (use-package ada-mode
   :straight (:type git :host github :repo "8dcc/ada-mode")
   :config

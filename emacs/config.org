@@ -1275,6 +1275,20 @@ default value of =emms-track-description-function=.
             (emms-track-simple-description track)))))
 #+end_src
 
+*** Chess
+
+Major mode for playing chess.
+
+TODO: Add an /advice/ to =chess-ics= that reads usernames matching the specified
+server, asks the user for one (if there are multiple) and passes that to the
+original =chess-ics=.
+
+#+begin_src emacs-lisp
+(use-package chess
+  :config
+  (setq chess-default-display '(chess-ics1 chess-plain chess-images)))
+#+end_src
+
 *** Ada mode
 
 Major mode for programming in Ada. Mainstream version is out of date.
