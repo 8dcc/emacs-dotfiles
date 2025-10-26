@@ -5076,18 +5076,18 @@ Then, overwrite =org-html-meta-tags= to our function.
 
 Simple skeleton for Org files.
 
-FIXME: Show default value in title prompt; check other skeletons.
-
 #+begin_src emacs-lisp
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
-  '(setq str (skeleton-read "Title: "))
-  '(setq v1 (or (and (not (string-empty-p str))
-                     str)
-                (and buffer-file-name
-                     (capitalize (file-name-base buffer-file-name)))))
-  "#+TITLE: " v1 "\n"
+  '(setq str (skeleton-read "Title: "
+                            (when buffer-file-name
+                              (thread-last
+                                buffer-file-name
+                                file-name-base
+                                x8dcc/undashify-string
+                                capitalize))))
+  "#+TITLE: " str "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+OPTIONS: toc:2\n"
   "#+STARTUP: nofold\n\n"
@@ -5100,12 +5100,14 @@ Skeleton for [[https://8dcc.github.io/][my blog]] articles.
 (define-skeleton x8dcc/skeleton-org-blog
   "Insert an Org skeleton for blog articles."
   nil
-  '(setq str (skeleton-read "Title: "))
-  '(setq v1 (or (and (not (string-empty-p str))
-                     str)
-                (and buffer-file-name
-                     (capitalize (file-name-base buffer-file-name)))))
-  "#+TITLE: " v1 "\n"
+  '(setq str (skeleton-read "Title: "
+                            (when buffer-file-name
+                              (thread-last
+                                buffer-file-name
+                                file-name-base
+                                x8dcc/undashify-string
+                                capitalize))))
+  "#+TITLE: " str "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+STARTUP: nofold\n"
   "#+HTML_HEAD: <link rel=\"icon\" type=\"image/x-icon\" href=\"../img/favicon.png\">\n"

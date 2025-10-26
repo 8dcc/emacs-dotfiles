@@ -2845,12 +2845,14 @@ The INFO argument will be used when calling `org-html-meta-tags-default'."
 (define-skeleton x8dcc/skeleton-org-default
   "Insert a basic Org header skeleton."
   nil
-  '(setq str (skeleton-read "Title: "))
-  '(setq v1 (or (and (not (string-empty-p str))
-                     str)
-                (and buffer-file-name
-                     (capitalize (file-name-base buffer-file-name)))))
-  "#+TITLE: " v1 "\n"
+  '(setq str (skeleton-read "Title: "
+                            (when buffer-file-name
+                              (thread-last
+                                buffer-file-name
+                                file-name-base
+                                x8dcc/undashify-string
+                                capitalize))))
+  "#+TITLE: " str "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+OPTIONS: toc:2\n"
   "#+STARTUP: nofold\n\n"
@@ -2859,12 +2861,14 @@ The INFO argument will be used when calling `org-html-meta-tags-default'."
 (define-skeleton x8dcc/skeleton-org-blog
   "Insert an Org skeleton for blog articles."
   nil
-  '(setq str (skeleton-read "Title: "))
-  '(setq v1 (or (and (not (string-empty-p str))
-                     str)
-                (and buffer-file-name
-                     (capitalize (file-name-base buffer-file-name)))))
-  "#+TITLE: " v1 "\n"
+  '(setq str (skeleton-read "Title: "
+                            (when buffer-file-name
+                              (thread-last
+                                buffer-file-name
+                                file-name-base
+                                x8dcc/undashify-string
+                                capitalize))))
+  "#+TITLE: " str "\n"
   "#+AUTHOR: " user-full-name "\n"
   "#+STARTUP: nofold\n"
   "#+HTML_HEAD: <link rel=\"icon\" type=\"image/x-icon\" href=\"../img/favicon.png\">\n"
