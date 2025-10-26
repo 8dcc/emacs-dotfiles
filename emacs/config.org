@@ -1579,6 +1579,47 @@ will be used for replacing with the `replace-regexp-in-string' function."
                                string))))
 #+end_src
 
+Convert a title text to a dashed format suitable for filenames or URLs, and
+viceversa.
+
+#+begin_src emacs-lisp
+(defun x8dcc/dashify-string (str &optional dash-char)
+  "Dashify a string STR, replacing spaces and removing non-alphanumeric chars.
+Spaces will be replaced with the character or string DASH-CHAR, by default \"-\".
+
+Useful for converting titles such as \"My test... =heading=\" into a symbol like
+\"my-test-heading\", which can be used for titles or URLs."
+  (if (null dash-char)
+      (setq dash-char "-")
+    (when (characterp dash-char)
+      (setq dash-char (char-to-string dash-char))))
+  (thread-last
+    (downcase headline)
+    (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
+    (replace-regexp-in-string "[^[:alnum:]]+" dash-char)
+    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
+
+(defun x8dcc/undashify-string (str &optional dash-chars)
+  "Undashify a string STR, replacing DASH-CHARS with spaces.
+
+The argument DASH-CHARS is a list of characters or strings that should be
+replaced with spaces. The default is '(\"-\" \"_\").
+
+The caller might want to also pass the output of this function to `capitalize'."
+  (if (null dash-chars)
+      (setq dash-chars '("-" "_"))
+    (setq dash-chars
+          (mapcar (lambda (dash-char)
+                    (cond
+                     ((stringp dash-char) dash-char)
+                     ((characterp dash-char) (char-to-string dash-char))
+                     (t (error "%s%s"
+                               "Invalid type in `dash-chars' list, "
+                               "expected string or character."))))
+                  dash-chars)))
+  (replace-regexp-in-string (regexp-opt dash-chars) " " str))
+#+end_src
+
 Small function that returns a regexp for matches any whitespace-separated
 wildcards in its argument. Used by =x8dcc/recursive-multi-occur=, for example.
 
@@ -4838,27 +4879,7 @@ asterisks in org buffers.
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to
 [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Lee Hinman]] and [[https://protesilaos.com/][Protesilaos Stavrou]].
 
-Since I want my custom ids to look similar to the headlines themselves, I
-created this =headline-to-id= function. First, it converts the headline to
-lowercase, then it removes the quotes, it replaces non-alphanumerical characters
-with a single dash, and then removes any extra dashes from the start and end of
-the ID.
-
-TODO: We could make this function more general, not necessarily associated to
-Org mode.
-
-#+begin_src emacs-lisp
-(defun x8dcc/org-headline-to-id (headline)
-  "Convert an Org mode HEADLINE to a CUSTOM-ID dashed string.
-For example: \"My test... =heading=\" becomes \"my-test-heading\"."
-  (thread-last
-    (downcase headline)
-    (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
-    (replace-regexp-in-string "[^[:alnum:]]+" "-")
-    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
-#+end_src
-
-We will also need a function for checking if there is an element with a specific
+We will need a function for checking if there is an element with a specific
 =CUSTOM_ID= property.
 
 #+begin_src emacs-lisp
@@ -4887,9 +4908,9 @@ The SUFFIX-COUNT argument is used when this function calls itself recursively."
        (if suffix-count (1+ suffix-count) 1)))))
 #+end_src
 
-Next, our =org-custom-id-get= function. It uses =x8dcc/org-headline-to-id= instead
-of =org-id-new=. I also removed the call to =org-id-add-location=, since I don't use
-=org-id-locations=.
+Next, our =org-custom-id-get= function. It uses =x8dcc/dashify-string= along with
+=x8dcc/org-custom-id-make-unique=, instead of =org-id-new=. I also removed the call
+to =org-id-add-location=, since I don't use =org-id-locations=.
 
 #+begin_src emacs-lisp
 (defun x8dcc/org-custom-id-get (&optional pom create)
@@ -4909,8 +4930,7 @@ In any case, the CUSTOM_ID of the entry is returned."
                  create)
         ;; The entry has no ID, and we want to create one.
         (setq id (x8dcc/org-custom-id-make-unique
-                  (x8dcc/org-headline-to-id
-                   headline)))
+                  (x8dcc/dashify-string headline)))
         (org-entry-put pom "CUSTOM_ID" id))
       ;; Either way, return the ID.
       id)))

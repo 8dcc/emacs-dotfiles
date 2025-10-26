@@ -750,6 +750,42 @@ will be used for replacing with the `replace-regexp-in-string' function."
                                (cdar alist)
                                string))))
 
+(defun x8dcc/dashify-string (str &optional dash-char)
+  "Dashify a string STR, replacing spaces and removing non-alphanumeric chars.
+Spaces will be replaced with the character or string DASH-CHAR, by default \"-\".
+
+Useful for converting titles such as \"My test... =heading=\" into a symbol like
+\"my-test-heading\", which can be used for titles or URLs."
+  (if (null dash-char)
+      (setq dash-char "-")
+    (when (characterp dash-char)
+      (setq dash-char (char-to-string dash-char))))
+  (thread-last
+    (downcase headline)
+    (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
+    (replace-regexp-in-string "[^[:alnum:]]+" dash-char)
+    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
+
+(defun x8dcc/undashify-string (str &optional dash-chars)
+  "Undashify a string STR, replacing DASH-CHARS with spaces.
+
+The argument DASH-CHARS is a list of characters or strings that should be
+replaced with spaces. The default is '(\"-\" \"_\").
+
+The caller might want to also pass the output of this function to `capitalize'."
+  (if (null dash-chars)
+      (setq dash-chars '("-" "_"))
+    (setq dash-chars
+          (mapcar (lambda (dash-char)
+                    (cond
+                     ((stringp dash-char) dash-char)
+                     ((characterp dash-char) (char-to-string dash-char))
+                     (t (error "%s%s"
+                               "Invalid type in `dash-chars' list, "
+                               "expected string or character."))))
+                  dash-chars)))
+  (replace-regexp-in-string (regexp-opt dash-chars) " " str))
+
 (defun x8dcc/wildcards-to-regexp (wildcards)
   "Return a regexp that matches any whitespace-separated wildcard in WILDCARDS.
 See `wildcard-to-regexp'."
@@ -2666,15 +2702,6 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
       (insert " "))
   (call-interactively #'org-insert-link))
 
-(defun x8dcc/org-headline-to-id (headline)
-  "Convert an Org mode HEADLINE to a CUSTOM-ID dashed string.
-For example: \"My test... =heading=\" becomes \"my-test-heading\"."
-  (thread-last
-    (downcase headline)
-    (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
-    (replace-regexp-in-string "[^[:alnum:]]+" "-")
-    (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
-
 (defun x8dcc/org-custom-id-exists-p (custom-id)
   "Is there an element in the current document with the specified CUSTOM-ID?
 Uses `org-find-property'."
@@ -2711,8 +2738,7 @@ In any case, the CUSTOM_ID of the entry is returned."
                  create)
         ;; The entry has no ID, and we want to create one.
         (setq id (x8dcc/org-custom-id-make-unique
-                  (x8dcc/org-headline-to-id
-                   headline)))
+                  (x8dcc/dashify-string headline)))
         (org-entry-put pom "CUSTOM_ID" id))
       ;; Either way, return the ID.
       id)))
