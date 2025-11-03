@@ -637,6 +637,27 @@ buffer)."
 
 (use-package eldoc-cmake)
 
+(use-package polymode)
+
+;; Simple Polymode for RaspberryPi Pico PIO files that uses
+;; both asm-mode as host-mode and c-mode for pass-through section
+
+(define-hostmode poly-pio-hostmode
+  :mode 'asm-mode)
+
+(define-innermode poly-pio-c-innermode
+  :mode 'c-mode
+  :head-matcher "^% c-sdk {$"
+  :tail-matcher "^%}$"
+  :head-mode 'poly-head-tail-mode
+  :tail-mode 'poly-head-tail-mode)
+
+(define-polymode poly-pio-mode
+  :hostmode 'poly-pio-hostmode
+  :innermodes '(poly-pio-c-innermode))
+
+(add-to-list 'auto-mode-alist '("\\.pio$" . poly-pio-mode))
+
 (use-package gnuplot)
 
 (defun x8dcc/non-empty-string-p (str)
