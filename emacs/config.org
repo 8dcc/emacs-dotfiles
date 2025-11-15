@@ -1398,36 +1398,24 @@ And ElDoc support.
 (use-package eldoc-cmake)
 #+end_src
 
-*** Polymode
+*** COMMENT Pio mode
 
-Framework for Multiple Major Modes inside a single buffer.
+First, configure Polymode, the framework for Multiple Major Modes inside a
+single buffer.
 
 #+begin_src emacs-lisp
-(use-package polymode)
+(use-package polymode
+  :config
+  (add-hook 'polymode-init-inner-hook
+            (lambda ()
+              (flycheck-mode 0))))
 #+end_src
 
-Define a major mode for [[https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf#instructionSet][PIO assembly files]]. Credits to Beshr Kayali
-Reinholdsson, see [[https://log.beshr.com/emacs-polymode-pi-pico/][his article]] and [[https://gist.github.com/beshrkayali/bea7596284e7a2025ce8ffa8996cfe7c][his Gist]].
+Major mode for [[https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf#instructionSet][PIO assembly files]].
 
 #+begin_src emacs-lisp
-;; Simple Polymode for RaspberryPi Pico PIO files that uses
-;; both asm-mode as host-mode and c-mode for pass-through section
-
-(define-hostmode poly-pio-hostmode
-  :mode 'asm-mode)
-
-(define-innermode poly-pio-c-innermode
-  :mode 'c-mode
-  :head-matcher "^% c-sdk {$"
-  :tail-matcher "^%}$"
-  :head-mode 'poly-head-tail-mode
-  :tail-mode 'poly-head-tail-mode)
-
-(define-polymode poly-pio-mode
-  :hostmode 'poly-pio-hostmode
-  :innermodes '(poly-pio-c-innermode))
-
-(add-to-list 'auto-mode-alist '("\\.pio$" . poly-pio-mode))
+(straight-use-package
+ '(pio-mode :type git :host github :repo "8dcc/pio-mode.el"))
 #+end_src
 
 *** Gnuplot
