@@ -2297,7 +2297,12 @@ of...\"."
             (setq-local tab-width (default-value 'tab-width))))
 
 (setq dired-listing-switches
-      "-l --almost-all --sort=version --group-directories-first --human-readable")
+      (concat "-l "
+              "--almost-all "
+              "--sort=version "
+              "--group-directories-first "
+              "--human-readable "
+              "\"--time-style=+%Y.%m.%d %R\""))
 
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
