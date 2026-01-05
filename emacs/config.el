@@ -500,6 +500,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                 (interactive)
                 (goto-char 0))))
 
+(use-package rg)
+
 (use-package vterm
   :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
   :config
@@ -1598,7 +1600,7 @@ buffers, so be specially careful around `.git' directories."
   "r W" '(x8dcc/unfill-region               :wk "Unfill")
   ;; Search
   "s"   '(:ignore t                         :wk "Search")
-  "s g" '(rgrep                             :wk "Grep (recursive)")
+  "s g" '(rg                                :wk "Grep (recursive)")
   "s h" '(x8dcc/highlight-regexp            :wk "Highlight")
   "s H" '(unhighlight-regexp                :wk "Unhighlight")
   "s o" '(occur                             :wk "Occurrences")

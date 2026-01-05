@@ -1151,6 +1151,16 @@ The =pdf-util-convert-program= is unset or non-executable.
 
 You might need to install =imagemagick= on your system.
 
+*** Ripgrep
+
+Emacs integration with =ripgrep=. I personally don't care about using =grep= or
+=ripgrep= in the command line, but the Emacs interface from this package is much
+cleaner in my opinion, and is a good replacement for Emacs' =rgrep=.
+
+#+begin_src emacs-lisp
+(use-package rg)
+#+end_src
+
 *** Vterm
 
 Fully-fledged terminal emulator inside GNU Emacs. Straight-forward alternative
@@ -2813,7 +2823,7 @@ keybinds should be *moved* to their commented sub-sections.
   "r W" '(x8dcc/unfill-region               :wk "Unfill")
   ;; Search
   "s"   '(:ignore t                         :wk "Search")
-  "s g" '(rgrep                             :wk "Grep (recursive)")
+  "s g" '(rg                                :wk "Grep (recursive)")
   "s h" '(x8dcc/highlight-regexp            :wk "Highlight")
   "s H" '(unhighlight-regexp                :wk "Unhighlight")
   "s o" '(occur                             :wk "Occurrences")
