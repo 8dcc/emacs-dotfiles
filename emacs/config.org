@@ -4042,7 +4042,9 @@ The default =tab-width= is overwritten in =esh-mode.el=.
 
 ** Dired
 
-Change the =ls= flags used by Dired.
+Change the =ls= flags used by Dired. We also need to update the sorting regexps,
+so the Dired modeline is correctly set in Emacs 29.3 (see
+=dired-sort-set-mode-line=).
 
 #+begin_src emacs-lisp
 (setq dired-listing-switches
@@ -4052,6 +4054,19 @@ Change the =ls= flags used by Dired.
               "--group-directories-first "
               "--human-readable "
               "\"--time-style=+%Y.%m.%d %R\""))
+
+(setq dired-sort-by-name-regexp
+      (concat "\\`\\(\\(\\`\\| +\\)\\(--[^ ]+\\|-[^- t"
+              dired-ls-sorting-switches
+              "]+\\|\"[^\"]*\"\\)\\)* *$"))
+
+(setq dired-sort-by-date-regexp
+      (concat
+       "\\(\\`\\| \\)-[^- ]*t[^ "
+       dired-ls-sorting-switches
+       "]*\\(\\(\\`\\| +\\)\\(--[^ ]+\\|-[^- t"
+       dired-ls-sorting-switches
+       "]+\\|\"[^\"]*\"\\)\\)* *$"))
 #+end_src
 
 Allow Dired to recursively copy and delete folders, after asking for

@@ -2306,6 +2306,19 @@ of...\"."
               "--human-readable "
               "\"--time-style=+%Y.%m.%d %R\""))
 
+(setq dired-sort-by-name-regexp
+      (concat "\\`\\(\\(\\`\\| +\\)\\(--[^ ]+\\|-[^- t"
+              dired-ls-sorting-switches
+              "]+\\|\"[^\"]*\"\\)\\)* *$"))
+
+(setq dired-sort-by-date-regexp
+      (concat
+       "\\(\\`\\| \\)-[^- ]*t[^ "
+       dired-ls-sorting-switches
+       "]*\\(\\(\\`\\| +\\)\\(--[^ ]+\\|-[^- t"
+       dired-ls-sorting-switches
+       "]+\\|\"[^\"]*\"\\)\\)* *$"))
+
 (setq dired-recursive-copies  'top
       dired-recursive-deletes 'top)
 
