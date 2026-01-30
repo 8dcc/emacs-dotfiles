@@ -167,6 +167,7 @@ Using `x8dcc/general-create-definer'."
 
 (use-package magit
   :hook ((git-commit-setup . evil-insert-state))
+  :diminish magit-wip-mode
   :config
   (magit-wip-mode)
   (setq magit-diff-refine-hunk t

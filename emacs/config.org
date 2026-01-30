@@ -366,6 +366,7 @@ popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
 #+begin_src emacs-lisp
 (use-package magit
   :hook ((git-commit-setup . evil-insert-state))
+  :diminish magit-wip-mode
   :config
   (magit-wip-mode)
   (setq magit-diff-refine-hunk t
