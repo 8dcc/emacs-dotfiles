@@ -356,6 +356,10 @@ For managing projects.
 Magit is an interface to the version control system Git, implemented as an Emacs
 package.
 
+We enable the global =magit-wip-mode= to allow tracking of uncommited/unstaged
+changes. By using =magit-wip-log=, the user can see and navigate a log of all
+uncommited changes (e.g. unstages, restorations, etc.).
+
 We change =magit-display-buffer-function= so the status window doesn't open as a
 popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
 
@@ -363,6 +367,7 @@ popup. For other available functions, see =C-h f magit-display-buffer- TAB=.
 (use-package magit
   :hook ((git-commit-setup . evil-insert-state))
   :config
+  (magit-wip-mode)
   (setq magit-diff-refine-hunk t
         magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))

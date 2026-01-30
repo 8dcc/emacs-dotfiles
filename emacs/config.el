@@ -168,6 +168,7 @@ Using `x8dcc/general-create-definer'."
 (use-package magit
   :hook ((git-commit-setup . evil-insert-state))
   :config
+  (magit-wip-mode)
   (setq magit-diff-refine-hunk t
         magit-display-buffer-function
         #'magit-display-buffer-same-window-except-diff-v1))
