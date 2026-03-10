@@ -769,7 +769,7 @@ Useful for converting titles such as \"My test... =heading=\" into a symbol like
     (when (characterp dash-char)
       (setq dash-char (char-to-string dash-char))))
   (thread-last
-    (downcase headline)
+    (downcase str)
     (replace-regexp-in-string "\\(\"+\\|'+\\)" "")
     (replace-regexp-in-string "[^[:alnum:]]+" dash-char)
     (replace-regexp-in-string "\\(^-+\\|-+$\\)" "")))
