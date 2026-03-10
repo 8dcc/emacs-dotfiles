@@ -778,7 +778,7 @@ Useful for converting titles such as \"My test... =heading=\" into a symbol like
   "Undashify a string STR, replacing DASH-CHARS with spaces.
 
 The argument DASH-CHARS is a list of characters or strings that should be
-replaced with spaces. The default is '(\"-\" \"_\").
+replaced with spaces. The default is (\"-\" \"_\").
 
 The caller might want to also pass the output of this function to `capitalize'."
   (if (null dash-chars)
