@@ -3765,6 +3765,13 @@ Set monday as the first day of the week.
       calendar-weekend-days '(6 0))
 #+end_src
 
+Increase the maximum output read from a process. Increases performance of
+packages that interact with processes, LSPs, etc.
+
+#+begin_src emacs-lisp
+(setq read-process-output-max (* 1024 1024))
+#+end_src
+
 * Feature-specific settings
 ** Plumber
 

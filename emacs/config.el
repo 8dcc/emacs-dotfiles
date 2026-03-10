@@ -2143,6 +2143,8 @@ See `x8dcc/allow-modify-on-save'."
 (setq calendar-week-start-day 1
       calendar-weekend-days '(6 0))
 
+(setq read-process-output-max (* 1024 1024))
+
 (defconst x8dcc/audio-file-regexp
   (rx (seq (one-or-more (any alnum blank ?\\ ?/ ?~ ?. ?_ ?- ?\( ?\)))
            "."
