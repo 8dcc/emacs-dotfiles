@@ -3422,11 +3422,10 @@ Only show the tab bar if there are more than one tabs open.
 (setq tab-bar-show 1)
 #+end_src
 
-Hide "New tab" and "Close tab" buttons.
+Hide "Close tab" button.
 
 #+begin_src emacs-lisp
-(setq tab-bar-close-button-show nil
-      tab-bar-new-button-show nil)
+(setq tab-bar-close-button-show nil)
 #+end_src
 
 Hide "Back" and "Forward" history buttons from the tab bar.

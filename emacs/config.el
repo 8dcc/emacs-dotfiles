@@ -2008,8 +2008,7 @@ If FRAME is nil, it defaults to the current frame."
 
 (setq tab-bar-show 1)
 
-(setq tab-bar-close-button-show nil
-      tab-bar-new-button-show nil)
+(setq tab-bar-close-button-show nil)
 
 (setq tab-bar-format
       '(tab-bar-format-tabs
