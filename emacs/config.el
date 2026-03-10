@@ -2166,6 +2166,8 @@ See `x8dcc/allow-modify-on-save'."
 
 (setq vc-find-revision-no-save t)
 
+(setq vc-handled-backends '(Git))
+
 (setq printer-name "MainPrinter")
 
 (defun x8dcc/lpr-buffer-pages (start end)

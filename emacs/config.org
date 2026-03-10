@@ -3817,6 +3817,12 @@ Don't write the buffers created by =vc-find-revision= to disk.
 (setq vc-find-revision-no-save t)
 #+end_src
 
+Only support Git as the VC backend.
+
+#+begin_src emacs-lisp
+(setq vc-handled-backends '(Git))
+#+end_src
+
 ** Printing
 *** System printing configuration
 
