@@ -787,6 +787,7 @@ does.
 
 #+begin_src emacs-lisp
 (use-package languagetool
+  :defer t
   :config
   (setq languagetool-java-arguments
         '("-Dfile.encoding=UTF-8"
@@ -1127,7 +1128,8 @@ Syntax highlighting and supporting commands for editing Markdown files.
 Essential package for LaTeX editing, comes with a useful preview mode.
 
 #+begin_src emacs-lisp
-(use-package auctex)
+(use-package auctex
+  :defer t)
 #+end_src
 
 *** PDF tools
@@ -1260,6 +1262,7 @@ filename.
 
 #+begin_src emacs-lisp
 (use-package emms
+  :defer t
   :config
   (emms-all)
   (setq emms-player-list '(emms-player-mpv
@@ -1361,7 +1364,8 @@ Major mode for programming in Ada (with Tree-Sitter).
 Use [[https://www.gnu.org/software/guile/][Guile]] as the default Scheme implementation for [[https://www.nongnu.org/geiser/][Geiser]].
 
 #+begin_src emacs-lisp
-(use-package geiser-guile)
+(use-package geiser-guile
+  :defer t)
 #+end_src
 
 *** Nasm mode

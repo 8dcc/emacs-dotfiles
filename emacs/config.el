@@ -354,6 +354,7 @@ Using `x8dcc/general-create-definer'."
                         org-verbatim))))))
 
 (use-package languagetool
+  :defer t
   :config
   (setq languagetool-java-arguments
         '("-Dfile.encoding=UTF-8"
@@ -490,7 +491,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
         markdown-asymmetric-header t)
   (markdown-toggle-fontify-code-blocks-natively 1))
 
-(use-package auctex)
+(use-package auctex
+  :defer t)
 
 (use-package pdf-tools
   :hook (pdf-view-mode . (lambda () (display-line-numbers-mode 0)))
@@ -567,6 +569,7 @@ buffer)."
             (setq-local desktop-save-buffer #'x8dcc/desktop-vterm-save-buffer)))
 
 (use-package emms
+  :defer t
   :config
   (emms-all)
   (setq emms-player-list '(emms-player-mpv
@@ -618,7 +621,8 @@ buffer)."
     > _ "\n"
     "end " str ";" \n)
 
-(use-package geiser-guile)
+(use-package geiser-guile
+  :defer t)
 
 (use-package nasm-mode
   :straight (:type git :host github :repo "8dcc/nasm-mode" :branch "require-nasmtok")
