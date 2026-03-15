@@ -1,3 +1,8 @@
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold
+                  (x8dcc/get-standard-value 'gc-cons-threshold))))
+
 (setq user-full-name "8dcc"
       user-mail-address "8dcc.git@gmail.com")
 

@@ -4,7 +4,7 @@
 ;; -----------------------------------------------------------------------------
 
 ;; Increase the garbage collection threshold to improve startup times.
-(setq gc-cons-threshold (* 100 1024 1024))
+(setq gc-cons-threshold most-positive-fixnum)
 
 ;; Disable package.el (for straight.el)
 (setq package-enable-at-startup nil)

@@ -17,6 +17,18 @@ configuration.
                 "\\1(benchmark-run\n\\2\n)\\3")
 #+end_src
 
+* Startup
+
+Add a hook for restoring =gc-cons-threshold= (set in =early-init.el=) to its
+standard value.
+
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold
+                  (x8dcc/get-standard-value 'gc-cons-threshold))))
+#+end_src
+
 * Identification
 
 Identification for GPG configuration, email, templates, etc.
