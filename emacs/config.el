@@ -899,6 +899,12 @@ defaults to the number of seconds in a day."
   (format-time-string "%Y-%m-%d %a"
                       (time-add (current-time) seconds)))
 
+(defun x8dcc/get-standard-value (symbol)
+  (let ((sv (get symbol 'standard-value)))
+    (if (consp sv)
+        (car sv)                 ; Actual standard value.
+      (default-value symbol))))  ; Fallback to non buffer-local value.
+
 (defun x8dcc/insert-line-below (text &optional line-num)
   "Insert TEXT as its own line, right below point.
 

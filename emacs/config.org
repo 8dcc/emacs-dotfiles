@@ -1817,6 +1817,17 @@ defaults to the number of seconds in a day."
                       (time-add (current-time) seconds)))
 #+end_src
 
+Return the standard (original) value of a symbol. See the definition of
+=describe-variable= for more information (search for "Original value was").
+
+#+begin_src emacs-lisp
+(defun x8dcc/get-standard-value (symbol)
+  (let ((sv (get symbol 'standard-value)))
+    (if (consp sv)
+        (car sv)                 ; Actual standard value.
+      (default-value symbol))))  ; Fallback to non buffer-local value.
+#+end_src
+
 ** Text manipulation
 
 Move forward N lines, and insert some text in its own line. N can be negative.
