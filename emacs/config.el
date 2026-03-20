@@ -1123,6 +1123,12 @@ to the overlay."
         (display-line-numbers-mode
          (display-line-numbers-mode))))
 
+(defun x8dcc/toggle-window-dedication (&optional window)
+  "Toggles window dedication in the selected window."
+  (interactive)
+  (unless window (setq window (selected-window)))
+  (set-window-dedicated-p window (not (window-dedicated-p window))))
+
 (defun x8dcc/set-local-tab-width (width)
   "Locally set the tab width to the specified WIDTH."
   (interactive
@@ -1688,6 +1694,7 @@ buffers, so be specially careful around `.git' directories."
   "w"   '(:ignore t                         :wk "Window")
   "w c" '(evil-window-delete                :wk "Close")
   "w C" '(x8dcc/evil-kill-buffer-and-window :wk "Kill buffer and window")
+  "w d" '(x8dcc/toggle-window-dedication    :wk "Toggle dedication")
   "w h" '(evil-window-left                  :wk "Left")
   "w H" '(evil-window-move-far-left         :wk "Move current left")
   "w j" '(evil-window-down                  :wk "Down")

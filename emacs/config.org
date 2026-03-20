@@ -2130,6 +2130,17 @@ set?
          (display-line-numbers-mode))))
 #+end_src
 
+Simple interactive wrapper for toggling window dedication. See [[https://www.masteringemacs.org/article/demystifying-emacs-window-manager][this article]] for
+more information on dedicated windows.
+
+#+begin_src emacs-lisp
+(defun x8dcc/toggle-window-dedication (&optional window)
+  "Toggles window dedication in the selected window."
+  (interactive)
+  (unless window (setq window (selected-window)))
+  (set-window-dedicated-p window (not (window-dedicated-p window))))
+#+end_src
+
 Simple function for locally modifying the tab width.
 
 #+begin_src emacs-lisp
@@ -2927,6 +2938,7 @@ keybinds should be *moved* to their commented sub-sections.
   "w"   '(:ignore t                         :wk "Window")
   "w c" '(evil-window-delete                :wk "Close")
   "w C" '(x8dcc/evil-kill-buffer-and-window :wk "Kill buffer and window")
+  "w d" '(x8dcc/toggle-window-dedication    :wk "Toggle dedication")
   "w h" '(evil-window-left                  :wk "Left")
   "w H" '(evil-window-move-far-left         :wk "Move current left")
   "w j" '(evil-window-down                  :wk "Down")
