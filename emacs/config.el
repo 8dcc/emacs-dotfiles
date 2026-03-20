@@ -724,7 +724,8 @@ alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
                              display-buffer-at-bottom
                              display-buffer-pop-up-window)
                            '((side . bottom)
-                             (window-height . 0.30))))))
+                             (window-height . 0.30))))
+               'append))
 
 (defun x8dcc/set-display-same-window (condition)
   "Specify that a buffer should be displayed in the same window.
@@ -734,9 +735,9 @@ alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
   (add-to-list 'display-buffer-alist
                (cons condition
                      (cons '(display-buffer-same-window
-                             display-buffer-reuse-window
-                             display-buffer-in-side-window)
-                           nil))))
+                             display-buffer-reuse-window)
+                           nil))
+               'append))
 
 (defun x8dcc/alist-insert-before-key (alist new-element key &optional compare-fn)
   "Insert NEW-ELEMENT to ALIST before KEY is found.
