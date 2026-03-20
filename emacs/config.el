@@ -727,6 +727,18 @@ alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
                              (window-height . 0.30))))
                'append))
 
+(defun x8dcc/set-display-side-window (condition side)
+  "Specify that a buffer should be displayed in a side window.
+
+Adds an entry to `display-buffer-alist' using the specified CONDITION as the
+alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
+  (add-to-list 'display-buffer-alist
+               (cons condition
+                     (cons '(display-buffer-in-side-window
+                             display-buffer-pop-up-window)
+                           (list (cons 'side side))))
+               'append))
+
 (defun x8dcc/set-display-same-window (condition)
   "Specify that a buffer should be displayed in the same window.
 
@@ -736,6 +748,19 @@ alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
                (cons condition
                      (cons '(display-buffer-same-window
                              display-buffer-reuse-window)
+                           nil))
+               'append))
+
+(defun x8dcc/set-display-reuse-window (condition)
+  "Specify that a buffer should be displayed in the same window.
+
+Adds an entry to `display-buffer-alist' using the specified CONDITION as the
+alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
+  (add-to-list 'display-buffer-alist
+               (cons condition
+                     (cons '(display-buffer-reuse-window
+                             display-buffer-reuse-mode-window
+                             display-buffer-same-window)
                            nil))
                'append))
 
