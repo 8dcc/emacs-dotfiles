@@ -2413,6 +2413,18 @@ TODO: This duplicated logic should be abstracted somehow, but it's not easy.
     (x8dcc/terminal-project-or-current #'vterm)))
 #+end_src
 
+Simple function for resetting the =serial-term= session (e.g. after
+disconnecting and reconnecting the serial device).
+
+#+begin_src emacs-lisp
+(defun x8dcc/serial-term-reload ()
+  "Reload the `serial-term' session of the current buffer."
+  (interactive)
+  (unless (equal major-mode #'term-mode)
+    (user-error "Major mode is not `term-mode'; aborting."))
+  (serial-term load-file-name (serial-speed)))
+#+end_src
+
 ** New features
 
 Remove text properties from region.
