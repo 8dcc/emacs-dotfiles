@@ -704,6 +704,14 @@ represent the first and second arguments of `keymap-set', respectively."
                 (car key-pair)
                 (eval-function (cdr key-pair)))))
 
+(defun x8dcc/display-buffer-popup (buffer alist)
+  "Display BUFFER in a bottom side window and select it.
+
+Mainly used for `display-buffer-alist'."
+  (when-let* ((window (display-buffer-in-side-window buffer alist)))
+    (select-window window)
+    window))
+
 (defun x8dcc/set-display-bottom-window (condition)
   "Specify that a buffer should be displayed in a bottom window.
 

@@ -1568,6 +1568,18 @@ represent the first and second arguments of `keymap-set', respectively."
                 (eval-function (cdr key-pair)))))
 #+end_src
 
+Simple wrapper for displaying a buffer in a side window while also selecting it.
+
+#+begin_src emacs-lisp
+(defun x8dcc/display-buffer-popup (buffer alist)
+  "Display BUFFER in a bottom side window and select it.
+
+Mainly used for `display-buffer-alist'."
+  (when-let* ((window (display-buffer-in-side-window buffer alist)))
+    (select-window window)
+    window))
+#+end_src
+
 Specify that all buffers matching a =regexp= should be displayed on the same
 window, on in a bottom window. Used in [[*Window settings][Window settings]].
 
