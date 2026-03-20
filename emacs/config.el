@@ -1127,7 +1127,11 @@ to the overlay."
   "Toggles window dedication in the selected window."
   (interactive)
   (unless window (setq window (selected-window)))
-  (set-window-dedicated-p window (not (window-dedicated-p window))))
+  (let ((is-dedicated (window-dedicated-p window)))
+    (if is-dedicated
+        (message "Disabling dedicated window.")
+      (message "Enabling window dedication for `%s'." (buffer-name)))
+    (set-window-dedicated-p window (not is-dedicated))))
 
 (defun x8dcc/set-local-tab-width (width)
   "Locally set the tab width to the specified WIDTH."

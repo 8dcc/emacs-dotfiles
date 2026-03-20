@@ -2138,7 +2138,11 @@ more information on dedicated windows.
   "Toggles window dedication in the selected window."
   (interactive)
   (unless window (setq window (selected-window)))
-  (set-window-dedicated-p window (not (window-dedicated-p window))))
+  (let ((is-dedicated (window-dedicated-p window)))
+    (if is-dedicated
+        (message "Disabling dedicated window.")
+      (message "Enabling window dedication for `%s'." (buffer-name)))
+    (set-window-dedicated-p window (not is-dedicated))))
 #+end_src
 
 Simple function for locally modifying the tab width.
