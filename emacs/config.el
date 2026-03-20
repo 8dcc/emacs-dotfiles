@@ -2596,6 +2596,8 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (setq rmail-mime-prefer-html nil)
 
+(setq shr-max-width 80)
+
 (with-eval-after-load 'org
   (require 'org-tempo))
 

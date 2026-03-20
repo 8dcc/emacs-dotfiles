@@ -4651,6 +4651,16 @@ Prefer plaintext when possible.
 (setq rmail-mime-prefer-html nil)
 #+end_src
 
+** EWW
+
+Settings for EWW (Emacs Web Wowser) and SHR (Simple HTML Renderer).
+
+Change the maximum line width to make lines wrap sooner.
+
+#+begin_src emacs-lisp
+(setq shr-max-width 80)
+#+end_src
+
 ** Org mode
 *** Org basic settings
 
