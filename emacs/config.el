@@ -2076,6 +2076,10 @@ If FRAME is nil, it defaults to the current frame."
         tab-bar-format-menu-bar
         tab-bar-separator))
 
+(setq switch-to-buffer-in-dedicated-window 'prompt)
+
+(setq switch-to-buffer-obey-display-actions t)
+
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
 

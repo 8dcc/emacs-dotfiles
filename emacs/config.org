@@ -3534,6 +3534,19 @@ I used to set this, but I prefer a blacklist approach. This breaks, for example,
       '(display-buffer-same-window))
 #+end_comment
 
+If the user tries to switch the buffer on strongly dedicated windows, prompt for
+confirmation. See [[https://www.masteringemacs.org/article/demystifying-emacs-window-manager][this article]] for more information on dedicated windows.
+
+#+begin_src emacs-lisp
+(setq switch-to-buffer-in-dedicated-window 'prompt)
+#+end_src
+
+Respect rules in =display-buffer-alist= when the user manually switches buffers.
+
+#+begin_src emacs-lisp
+(setq switch-to-buffer-obey-display-actions t)
+#+end_src
+
 Try to reuse the same window for some buffers (e.g. =*vc*=). If it's not
 possible, then display it in an existing window or in a side window.
 
