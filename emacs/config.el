@@ -586,12 +586,13 @@ buffer)."
                                      "--volume=50"))
   (emms-mode-line-mode 0))
 
-(setq emms-track-description-function
-      (lambda (track)
-        (let ((metadata (emms-track-get track 'metadata)))
-          (if (and metadata (> (length metadata) 2))
-              (format "%-40s (%s)" (car metadata) (cadr metadata))
-            (emms-track-simple-description track)))))
+(with-eval-after-load 'emms
+  (setq emms-track-description-function
+        (lambda (track)
+          (let ((metadata (emms-track-get track 'metadata)))
+            (if (and metadata (> (length metadata) 2))
+                (format "%-40s (%s)" (car metadata) (cadr metadata))
+              (emms-track-simple-description track))))))
 
 (use-package chess
   :config

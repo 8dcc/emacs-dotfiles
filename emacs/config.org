@@ -1298,12 +1298,13 @@ columns. Otherwise, =emms-track-simple-description= is called, which is the
 default value of =emms-track-description-function=.
 
 #+begin_src emacs-lisp
-(setq emms-track-description-function
-      (lambda (track)
-        (let ((metadata (emms-track-get track 'metadata)))
-          (if (and metadata (> (length metadata) 2))
-              (format "%-40s (%s)" (car metadata) (cadr metadata))
-            (emms-track-simple-description track)))))
+(with-eval-after-load 'emms
+  (setq emms-track-description-function
+        (lambda (track)
+          (let ((metadata (emms-track-get track 'metadata)))
+            (if (and metadata (> (length metadata) 2))
+                (format "%-40s (%s)" (car metadata) (cadr metadata))
+              (emms-track-simple-description track))))))
 #+end_src
 
 *** Chess
