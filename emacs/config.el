@@ -1370,6 +1370,13 @@ used."
   (let ((vterm-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'vterm)))
 
+(defun x8dcc/serial-term-reload ()
+  "Reload the `serial-term' session of the current buffer."
+  (interactive)
+  (unless (equal major-mode #'term-mode)
+    (user-error "Major mode is not `term-mode'; aborting."))
+  (serial-term load-file-name (serial-speed)))
+
 (defun x8dcc/remove-text-properties (start end)
   "Remote all text properties from START to END."
   (interactive "r")
@@ -2646,6 +2653,8 @@ default value of `smtpmail-smtp-user' is nil.")
 (setq rmail-preserve-inbox nil)
 
 (setq rmail-mime-prefer-html nil)
+
+(setq shr-max-width 80)
 
 (with-eval-after-load 'org
   (require 'org-tempo))
