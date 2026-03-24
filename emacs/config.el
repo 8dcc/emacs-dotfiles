@@ -1371,6 +1371,14 @@ used."
   (let ((vterm-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'vterm)))
 
+(defun x8dcc/eshell-sidebar ()
+  (interactive)
+  (x8dcc/eshell-popup "*eshell-sidebar*"))
+
+(defun x8dcc/vterm-sidebar ()
+  (interactive)
+  (x8dcc/vterm-popup "*vterm-sidebar*"))
+
 (defun x8dcc/serial-term-reload ()
   "Reload the `serial-term' session of the current buffer."
   (interactive)
@@ -2090,6 +2098,15 @@ If FRAME is nil, it defaults to the current frame."
 
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
+
+(dolist (element '("*eshell-sidebar*"
+                   "*vterm-sidebar*"))
+  (x8dcc/set-display-side-window
+   (cond ((stringp element)
+          (concat "^" (regexp-quote element) "$"))
+         ((functionp element)
+          (cons 'major-mode element)))
+   'right))
 
 (global-visual-line-mode 0)
 (setq-default truncate-lines t

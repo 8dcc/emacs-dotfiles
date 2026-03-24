@@ -2444,9 +2444,11 @@ used."
     (x8dcc/terminal-project-or-current #'vterm)))
 #+end_src
 
-This function will be used to create a terminal buffer with a /popup/ suffix. This
-suffix will be used for creating different display rules for base and popup
-terminal buffers (see [[*Popper][Popper]]).
+This function will be used to create a terminal buffer with a /popup/
+suffix. These suffixes will be used to create different display rules for base
+and popup terminal buffers (see [[*Popper][Popper]]).
+
+Also add wrappers for opening terminals in sidebars.
 
 TODO: Instead of only allowing a single eshell/vterm popup, allow one per
 project by appending the project name to the buffer name.
@@ -2467,6 +2469,14 @@ TODO: This duplicated logic should be abstracted somehow, but it's not easy.
   (unless buffer-name (setq buffer-name "*vterm-popup*"))
   (let ((vterm-buffer-name buffer-name))
     (x8dcc/terminal-project-or-current #'vterm)))
+
+(defun x8dcc/eshell-sidebar ()
+  (interactive)
+  (x8dcc/eshell-popup "*eshell-sidebar*"))
+
+(defun x8dcc/vterm-sidebar ()
+  (interactive)
+  (x8dcc/vterm-popup "*vterm-sidebar*"))
 #+end_src
 
 Simple function for resetting the =serial-term= session (e.g. after
@@ -3566,6 +3576,19 @@ possible, then display it in an existing window or in a side window.
 #+begin_src emacs-lisp
 (dolist (condition '("\\*vc-.+\\*"))
   (x8dcc/set-display-same-window condition))
+#+end_src
+
+Specify the list of buffers that should be displayed as sidebars on the left.
+
+#+begin_src emacs-lisp
+(dolist (element '("*eshell-sidebar*"
+                   "*vterm-sidebar*"))
+  (x8dcc/set-display-side-window
+   (cond ((stringp element)
+          (concat "^" (regexp-quote element) "$"))
+         ((functionp element)
+          (cons 'major-mode element)))
+   'right))
 #+end_src
 
 ** Misc visual settings
