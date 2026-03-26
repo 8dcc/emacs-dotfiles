@@ -728,16 +728,23 @@ alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
                              (window-height . 0.30))))
                'append))
 
-(defun x8dcc/set-display-side-window (condition side)
+(defun x8dcc/set-display-side-window (condition side &optional width)
   "Specify that a buffer should be displayed in a side window.
 
 Adds an entry to `display-buffer-alist' using the specified CONDITION as the
-alist key.  See `buffer-match-p', for a list of possible values for CONDITION."
+alist key.  See `buffer-match-p', for a list of possible values for CONDITION.
+
+The SIDE argument specifies where the window is placed, as described in
+`display-buffer-in-side-window'. The WIDTH of the window can be specified as an
+integer, float or function according to `display-buffer', and defaults to 85
+characters."
+  (unless width (setq width 85))
   (add-to-list 'display-buffer-alist
                (cons condition
                      (cons '(display-buffer-in-side-window
                              display-buffer-pop-up-window)
-                           (list (cons 'side side))))
+                           (list (cons 'side side)
+                                 (cons 'window-width width))))
                'append))
 
 (defun x8dcc/set-display-same-window (condition)
