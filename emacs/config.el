@@ -631,7 +631,7 @@ buffer)."
   :defer t)
 
 (use-package nasm-mode
-  :straight (:type git :host github :repo "8dcc/nasm-mode" :branch "require-nasmtok")
+  :straight (:type git :host github :repo "8dcc/nasm-mode")
   :config
   (setq nasm-basic-offset 4)
   (add-hook 'nasm-mode-hook
