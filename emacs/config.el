@@ -382,9 +382,9 @@ Using `x8dcc/general-create-definer'."
   ;; C modes
   (setq flycheck-clang-pedantic t
         flycheck-gcc-pedantic t)
-  (mapcar (lambda (sym)
-            (add-to-list sym "no-unused-function" 'append))
-          '(flycheck-clang-warnings flycheck-gcc-warnings))
+  (mapc (lambda (sym)
+          (add-to-list sym "no-unused-function" 'append))
+        '(flycheck-clang-warnings flycheck-gcc-warnings))
   (add-hook 'c-mode-hook
             (lambda ()
               (setq flycheck-clang-language-standard "c99"
@@ -3395,12 +3395,12 @@ Not included: \"NULL\", \"true\" and \"false\".")
 Used for highlighting more constants with `font-lock-constant-face' in
 `c-mode'.")
 
-(mapcar (lambda (mode-name)
-          (font-lock-add-keywords mode-name
-                                  (list
-                                   (cons x8dcc/c-constant-regexp
-                                         'font-lock-constant-face))))
-        '(c-mode c++-mode))
+(mapc (lambda (mode-name)
+        (font-lock-add-keywords mode-name
+                                (list
+                                 (cons x8dcc/c-constant-regexp
+                                       'font-lock-constant-face))))
+      '(c-mode c++-mode))
 
 (define-skeleton x8dcc/skeleton-c-source
   "Insert a basic C source skeleton with a main function."
