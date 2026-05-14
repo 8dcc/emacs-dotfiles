@@ -338,7 +338,8 @@ history as a branching tree of changes. This package allows you to visualize and
 navigate this tree easily.
 
 #+begin_src emacs-lisp
-(use-package vundo)
+(use-package vundo
+  :defer t)
 #+end_src
 
 Remember buffer undo history across sessions.
@@ -467,6 +468,7 @@ Depends on =s=, =dash= and =popup= packages.
 
 #+begin_src emacs-lisp
 (use-package dumb-jump
+  :defer t
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 #+end_src
@@ -1178,7 +1180,8 @@ Emacs integration with =ripgrep=. I personally don't care about using =grep= or
 cleaner in my opinion, and is a good replacement for Emacs' =rgrep=.
 
 #+begin_src emacs-lisp
-(use-package rg)
+(use-package rg
+  :defer t)
 #+end_src
 
 *** Vterm
@@ -2586,6 +2589,8 @@ buffers, so be specially careful around `.git' directories."
 
 * Input
 ** Scrolling and motion
+
+General scrolling changes.
 
 1. Scroll smoothly when cursor moves out of the screen (1 line at a time).
 2. Don't accelerate scrolling.

@@ -156,7 +156,8 @@ Using `x8dcc/general-create-definer'."
         which-key-allow-imprecise-window-fit t)
   (which-key-mode 1))
 
-(use-package vundo)
+(use-package vundo
+  :defer t)
 
 (use-package undo-fu-session
   :init
@@ -207,6 +208,7 @@ Using `x8dcc/general-create-definer'."
   (setq completion-styles '(orderless basic)))
 
 (use-package dumb-jump
+  :defer t
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
@@ -509,7 +511,8 @@ Uses `define-fringe-bitmap' for defining the bitmap with the alignment ALIGN."
                 (interactive)
                 (goto-char 0))))
 
-(use-package rg)
+(use-package rg
+  :defer t)
 
 (use-package vterm
   :hook (vterm-mode . (lambda () (display-line-numbers-mode 0)))
