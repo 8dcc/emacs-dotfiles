@@ -1536,6 +1536,16 @@ FIXME: Use the same parameter order as =x8dcc/hook-funcs=.
     (add-hook target function)))
 #+end_src
 
+Evaluate a symbol or function to the actual function.
+
+#+begin_src emacs-lisp
+(defun x8dcc/eval-function (symbol-or-function)
+  "Evaluate symbol to function when needed."
+  (if (functionp symbol-or-function)
+      symbol-or-function
+    (function symbol-or-function)))
+#+end_src
+
 Define the specified key to the specified function, in all the specified
 keymaps.
 
@@ -1559,14 +1569,10 @@ Define the specified keys in a specific keymap.
 
 Each element in the KEY-ALIST list have the format (KEY . FUNC), and they
 represent the first and second arguments of `keymap-set', respectively."
-  (defun eval-function (symbol-or-function)
-    (if (functionp symbol-or-function)
-        symbol-or-function
-      (function symbol-or-function)))
   (dolist (key-pair key-alist)
     (keymap-set keymap
                 (car key-pair)
-                (eval-function (cdr key-pair)))))
+                (x8dcc/eval-function (cdr key-pair)))))
 #+end_src
 
 Simple wrapper for displaying a buffer in a side window while also selecting it.

@@ -681,6 +681,12 @@ Using `string-match-p'."
   (dolist (target targets)
     (add-hook target function)))
 
+(defun x8dcc/eval-function (symbol-or-function)
+  "Evaluate symbol to function when needed."
+  (if (functionp symbol-or-function)
+      symbol-or-function
+    (function symbol-or-function)))
+
 (defun x8dcc/keymaps-set (keymaps key func)
   "Define the KEY string to FUNC in every keymap in the KEYMAPS list."
   (defun eval-keymap (symbol-or-keymap)
@@ -696,14 +702,10 @@ Using `string-match-p'."
 
 Each element in the KEY-ALIST list have the format (KEY . FUNC), and they
 represent the first and second arguments of `keymap-set', respectively."
-  (defun eval-function (symbol-or-function)
-    (if (functionp symbol-or-function)
-        symbol-or-function
-      (function symbol-or-function)))
   (dolist (key-pair key-alist)
     (keymap-set keymap
                 (car key-pair)
-                (eval-function (cdr key-pair)))))
+                (x8dcc/eval-function (cdr key-pair)))))
 
 (defun x8dcc/display-buffer-popup (buffer alist)
   "Display BUFFER in a bottom side window and select it.
