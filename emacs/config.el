@@ -279,8 +279,8 @@ Using `x8dcc/general-create-definer'."
   :hook ((text-mode prog-mode) . move-text-mode)
   :config
   (move-text-default-bindings)
-  (keymap-set move-text-mode-map "M-j" 'move-text-down)
-  (keymap-set move-text-mode-map "M-k" 'move-text-up))
+  (keymap-set move-text-mode-map "M-j" #'move-text-down)
+  (keymap-set move-text-mode-map "M-k" #'move-text-up))
 
 (use-package plumber
   :straight (:type git :host github :repo "8dcc/plumber.el"))

@@ -582,8 +582,8 @@ We change =move-text-mode-map= to drag stuff with =M-j= and =M-k=, not just with
   :hook ((text-mode prog-mode) . move-text-mode)
   :config
   (move-text-default-bindings)
-  (keymap-set move-text-mode-map "M-j" 'move-text-down)
-  (keymap-set move-text-mode-map "M-k" 'move-text-up))
+  (keymap-set move-text-mode-map "M-j" #'move-text-down)
+  (keymap-set move-text-mode-map "M-k" #'move-text-up))
 #+end_src
 
 *** Plumber
