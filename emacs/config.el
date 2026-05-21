@@ -1461,8 +1461,14 @@ buffers, so be specially careful around `.git' directories."
 
 (setq scroll-step 1
       mouse-wheel-progressive-speed nil
-      mouse-wheel-follow-mouse t
-      mouse-wheel-scroll-amount '(3 ((shift) . hscroll)))
+      mouse-wheel-follow-mouse t)
+
+(defconst x8dcc/scroll-amount-lines 3
+  "Target number of lines to scroll by default.")
+
+(setq mouse-wheel-scroll-amount (list x8dcc/scroll-amount-lines
+                                      '((shift) . hscroll))
+      mouse-wheel-scroll-amount-horizontal x8dcc/scroll-amount-lines)
 
 (keymap-global-set "C-+"            #'text-scale-increase)
 (keymap-global-set "C--"            #'text-scale-decrease)
