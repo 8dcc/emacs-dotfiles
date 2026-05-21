@@ -1470,6 +1470,30 @@ buffers, so be specially careful around `.git' directories."
                                       '((shift) . hscroll))
       mouse-wheel-scroll-amount-horizontal x8dcc/scroll-amount-lines)
 
+(pixel-scroll-precision-mode 1)
+(setq pixel-scroll-precision-interpolate-page t)
+
+(defconst x8dcc/pixel-scroll-hires-threshold 100.0
+  "Threshold for determining high-resolution and low-resolution scroll events.
+
+High-resolution scroll events are below this threshold.")
+
+(defun x8dcc/pixel-scroll-precision (event)
+  "Scroll by approximately 3 lines per wheel tick."
+  (interactive "e")
+  (let* ((pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
+         (ev (copy-sequence event))
+         (data (nth 4 ev)))  ; Its CDR is the target scroll in pixels.
+    (when (and (consp data)
+               (> (abs (cdr data)) x8dcc/pixel-scroll-hires-threshold))
+      (let ((scaled (cons (car data)
+                          (* (if (> (cdr data) 0) 1 -1) pixels))))
+        (setcar (nthcdr 4 ev) scaled)))
+    (pixel-scroll-precision ev)))
+
+(keymap-set pixel-scroll-precision-mode-map "<wheel-down>" #'x8dcc/pixel-scroll-precision)
+(keymap-set pixel-scroll-precision-mode-map "<wheel-up>"   #'x8dcc/pixel-scroll-precision)
+
 (keymap-global-set "C-+"            #'text-scale-increase)
 (keymap-global-set "C--"            #'text-scale-decrease)
 (keymap-global-set "C-<wheel-up>"   #'text-scale-increase)

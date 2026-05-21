@@ -2624,6 +2624,44 @@ Scroll 3 lines at a time with mouse wheel, and scroll horizontally with shift.
       mouse-wheel-scroll-amount-horizontal x8dcc/scroll-amount-lines)
 #+end_src
 
+Enable precise pixel scrolling, which is specially useful for high-resolution
+scroll wheels (which send =REL_WHEEL_HI_RES= events), as opposed to regular ones
+(which send =REL_WHEEL=). We also enable interpolation on PageUp and PageDown
+keys, to make them smoother.
+
+#+begin_src emacs-lisp
+(pixel-scroll-precision-mode 1)
+(setq pixel-scroll-precision-interpolate-page t)
+#+end_src
+
+The pixel scroll mode ignores the =mouse-wheel-scroll-amount=, so we need to
+redefine =pixel-scroll-precision= to ensure that normal scroll wheels (which are
+detected because they send pixel scroll events greater than a threshold) keep
+the normal "N line scroll" behavior, along with the pixel smoothness.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/pixel-scroll-hires-threshold 100.0
+  "Threshold for determining high-resolution and low-resolution scroll events.
+
+High-resolution scroll events are below this threshold.")
+
+(defun x8dcc/pixel-scroll-precision (event)
+  "Scroll by approximately 3 lines per wheel tick."
+  (interactive "e")
+  (let* ((pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
+         (ev (copy-sequence event))
+         (data (nth 4 ev)))  ; Its CDR is the target scroll in pixels.
+    (when (and (consp data)
+               (> (abs (cdr data)) x8dcc/pixel-scroll-hires-threshold))
+      (let ((scaled (cons (car data)
+                          (* (if (> (cdr data) 0) 1 -1) pixels))))
+        (setcar (nthcdr 4 ev) scaled)))
+    (pixel-scroll-precision ev)))
+
+(keymap-set pixel-scroll-precision-mode-map "<wheel-down>" #'x8dcc/pixel-scroll-precision)
+(keymap-set pixel-scroll-precision-mode-map "<wheel-up>"   #'x8dcc/pixel-scroll-precision)
+#+end_src
+
 ** Misc remaps and tweaks
 *** Global remaps
 
