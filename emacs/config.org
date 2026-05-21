@@ -42,10 +42,21 @@ Identification for GPG configuration, email, templates, etc.
 
 Remove GUI bars.
 
+FIXME: Move =x8dcc/compiled-with-ui= function to helpers section, without moving
+the entire section up.
+
 #+begin_src emacs-lisp
+(defun x8dcc/compiled-with-ui ()
+  (or (featurep 'x)
+      (featurep 'w32)
+      (featurep 'ns)
+      (featurep 'pgtk)
+      (featurep 'haiku)))
+
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(when (x8dcc/compiled-with-ui)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 #+end_src
 
 Use a separate Custom file for more readability. This will contain the

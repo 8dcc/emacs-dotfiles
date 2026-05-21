@@ -6,9 +6,17 @@
 (setq user-full-name "8dcc"
       user-mail-address "8dcc.git@gmail.com")
 
+(defun x8dcc/compiled-with-ui ()
+  (or (featurep 'x)
+      (featurep 'w32)
+      (featurep 'ns)
+      (featurep 'pgtk)
+      (featurep 'haiku)))
+
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(when (x8dcc/compiled-with-ui)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
