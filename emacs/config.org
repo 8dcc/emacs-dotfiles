@@ -484,6 +484,31 @@ Depends on =s=, =dash= and =popup= packages.
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 #+end_src
 
+*** Org download
+
+Drag and drop images to Emacs org-mode.
+
+#+begin_src emacs-lisp
+(use-package org-download
+  :after org
+  :config
+  (setq org-download-annotate-function (lambda (link) "")
+        org-download-image-attr-list nil))
+#+end_src
+
+The original =org-download-clipboard= function also creates an ID property by
+calling =org-id-get-create=, which I don't want. By using an advice, we can
+temporarily overwrite this =org-id-get-create= function when
+=org-download-clipboard= is called.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-download-clipboard (orig-fun &optional basename)
+  "Like `org-download-clipboard' but without creating an org-id."
+  (cl-letf (((symbol-function 'org-id-get-create) #'ignore))
+    (funcall orig-fun basename)))
+
+(advice-add 'org-download-clipboard :around #'x8dcc/org-download-clipboard)
+#+end_src
 *** Popper
 
 For converting less-important buffers into popups. They can be toggled

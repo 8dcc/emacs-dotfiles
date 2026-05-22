@@ -220,6 +220,19 @@ Using `x8dcc/general-create-definer'."
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(use-package org-download
+  :after org
+  :config
+  (setq org-download-annotate-function (lambda (link) "")
+        org-download-image-attr-list nil))
+
+(defun x8dcc/org-download-clipboard (orig-fun &optional basename)
+  "Like `org-download-clipboard' but without creating an org-id."
+  (cl-letf (((symbol-function 'org-id-get-create) #'ignore))
+    (funcall orig-fun basename)))
+
+(advice-add 'org-download-clipboard :around #'x8dcc/org-download-clipboard)
+
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile)
