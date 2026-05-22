@@ -1471,7 +1471,8 @@ buffers, so be specially careful around `.git' directories."
       mouse-wheel-scroll-amount-horizontal x8dcc/scroll-amount-lines)
 
 (pixel-scroll-precision-mode 1)
-(setq pixel-scroll-precision-interpolate-page t)
+(setq pixel-scroll-precision-interpolate-page t
+      pixel-scroll-precision-large-scroll-height 1)
 
 (defun x8dcc/pixel-scroll-precision (orig-fun event)
   "Scroll by approximately 3 lines per wheel tick."

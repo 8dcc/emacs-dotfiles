@@ -2626,12 +2626,17 @@ Scroll 3 lines at a time with mouse wheel, and scroll horizontally with shift.
 
 Enable precise pixel scrolling, which is specially useful for high-resolution
 scroll wheels (which send =REL_WHEEL_HI_RES= events), as opposed to regular ones
-(which send =REL_WHEEL=). We also enable interpolation on PageUp and PageDown
-keys, to make them smoother.
+(which send =REL_WHEEL=).
+
+1. We also enable interpolation on PageUp and PageDown keys, to make them
+   smoother.
+2. We set the large scroll height to 1 pixel to ensure all scrolls are
+   interpolated.
 
 #+begin_src emacs-lisp
 (pixel-scroll-precision-mode 1)
-(setq pixel-scroll-precision-interpolate-page t)
+(setq pixel-scroll-precision-interpolate-page t
+      pixel-scroll-precision-large-scroll-height 1)
 #+end_src
 
 The pixel scroll mode ignores the =mouse-wheel-scroll-amount=, so we need to
