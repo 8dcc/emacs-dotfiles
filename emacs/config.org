@@ -4873,7 +4873,8 @@ Org agenda location.
                                        (concat org-directory filename))
                                      '("agenda.org"
                                        "calendar.org"
-                                       "notes.org")))))
+                                       "notes.org")))
+    (warn "Custom org directory not found at: %s" expanded-org-directory)))
 #+end_src
 
 Set the first day of the week. See [[*Misc visual settings][Misc visual settings]].

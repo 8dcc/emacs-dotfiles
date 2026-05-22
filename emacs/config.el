@@ -2737,7 +2737,8 @@ default value of `smtpmail-smtp-user' is nil.")
                                        (concat org-directory filename))
                                      '("agenda.org"
                                        "calendar.org"
-                                       "notes.org")))))
+                                       "notes.org")))
+    (warn "Custom org directory not found at: %s" expanded-org-directory)))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day
       org-agenda-weekend-days calendar-weekend-days)
