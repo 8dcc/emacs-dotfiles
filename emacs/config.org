@@ -2635,27 +2635,21 @@ keys, to make them smoother.
 #+end_src
 
 The pixel scroll mode ignores the =mouse-wheel-scroll-amount=, so we need to
-redefine =pixel-scroll-precision= to ensure that normal scroll wheels (which are
-detected because they send pixel scroll events greater than a threshold) keep
-the normal "N line scroll" behavior, along with the pixel smoothness.
+redefine =pixel-scroll-precision= to ensure that normal scroll wheels (which send
+pixel scroll events greater than N lines) keep the normal "N line scroll"
+behavior, along with the pixel smoothness.
 
 #+begin_src emacs-lisp
-(defconst x8dcc/pixel-scroll-hires-threshold 100.0
-  "Threshold for determining high-resolution and low-resolution scroll events.
-
-High-resolution scroll events are below this threshold.")
-
 (defun x8dcc/pixel-scroll-precision (orig-fun event)
   "Scroll by approximately 3 lines per wheel tick."
   (interactive "e")
-  (let* ((pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
+  (let* ((max-scroll-pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
          (ev (copy-sequence event))
          (data (nth 4 ev)))  ; Its CDR is the target scroll in pixels.
     (when (and (consp data)
-               (> (abs (cdr data)) x8dcc/pixel-scroll-hires-threshold))
-      (let ((scaled (cons (car data)
-                          (* (if (> (cdr data) 0) 1 -1) pixels))))
-        (setcar (nthcdr 4 ev) scaled)))
+               (> (abs (cdr data)) max-scroll-pixels))
+      (setcdr (car (nthcdr 4 ev))
+              (* (if (> (cdr data) 0) 1 -1) max-scroll-pixels)))
     (funcall orig-fun ev)))
 
 (advice-add 'pixel-scroll-precision :around #'x8dcc/pixel-scroll-precision)

@@ -1473,22 +1473,16 @@ buffers, so be specially careful around `.git' directories."
 (pixel-scroll-precision-mode 1)
 (setq pixel-scroll-precision-interpolate-page t)
 
-(defconst x8dcc/pixel-scroll-hires-threshold 100.0
-  "Threshold for determining high-resolution and low-resolution scroll events.
-
-High-resolution scroll events are below this threshold.")
-
 (defun x8dcc/pixel-scroll-precision (orig-fun event)
   "Scroll by approximately 3 lines per wheel tick."
   (interactive "e")
-  (let* ((pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
+  (let* ((max-scroll-pixels (* x8dcc/scroll-amount-lines (frame-char-height)))
          (ev (copy-sequence event))
          (data (nth 4 ev)))  ; Its CDR is the target scroll in pixels.
     (when (and (consp data)
-               (> (abs (cdr data)) x8dcc/pixel-scroll-hires-threshold))
-      (let ((scaled (cons (car data)
-                          (* (if (> (cdr data) 0) 1 -1) pixels))))
-        (setcar (nthcdr 4 ev) scaled)))
+               (> (abs (cdr data)) max-scroll-pixels))
+      (setcdr (car (nthcdr 4 ev))
+              (* (if (> (cdr data) 0) 1 -1) max-scroll-pixels)))
     (funcall orig-fun ev)))
 
 (advice-add 'pixel-scroll-precision :around #'x8dcc/pixel-scroll-precision)
