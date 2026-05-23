@@ -3030,8 +3030,7 @@ The INFO argument will be used when calling `org-html-meta-tags-default'."
                                 capitalize))))
   "#+TITLE: " str "\n"
   "#+AUTHOR: " user-full-name "\n"
-  "#+OPTIONS: toc:2\n"
-  "#+STARTUP: nofold\n\n"
+  "#+DATE: " (format-time-string "[%Y-%m-%d %a %H:%M]") "\n\n"
   _ \n)
 
 (define-skeleton x8dcc/skeleton-org-blog
