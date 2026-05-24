@@ -5047,6 +5047,13 @@ Change the HTML for the "Up | Home" buttons.
 </div>")
 #+end_src
 
+Ensure that HTML images have a max width of 100%, so they don't go into the
+margins.
+
+#+begin_src emacs-lisp
+(setq org-html-head-extra "<style>img { max-width: 100%; }</style>")
+#+end_src
+
 Change the process for generating the PDF file from the exported LaTeX
 file. Instead of using =latexmk= (currently the default value of the variable), it
 calls =pdflatex= twice (to ensure all references are correct) with the

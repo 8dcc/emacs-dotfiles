@@ -2810,6 +2810,8 @@ default value of `smtpmail-smtp-user' is nil.")
   <a accesskey=\"u\" href=\"%s\">Up</a> | <a accesskey=\"h\" href=\"%s\">Home</a>
 </div>")
 
+(setq org-html-head-extra "<style>img { max-width: 100%; }</style>")
+
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
