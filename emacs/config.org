@@ -1511,13 +1511,18 @@ For editing [[https://graphviz.org/documentation/][Graphviz]]'s DOT language.
   (setq graphviz-dot-indent-width 4))
 #+end_src
 
-*** COMMENT LilyPond mode
+*** LilyPond mode
 
 Major mode for editing [[https://lilypond.org][LilyPond]] source files.
 
 #+begin_src emacs-lisp
 (use-package lilypond-mode
-  :straight (:type git :host github :repo "benide/lilypond-mode"))
+  :straight (:type git :host github :repo "8dcc/lilypond-mode"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package ob-lilypond
+  :straight (:type git :host github :repo "8dcc/ob-lilypond"))
 #+end_src
 
 * Custom functions and macros
@@ -4924,7 +4929,8 @@ matters.
                              (scheme . t)
                              (shell . t)
                              (python . t)
-                             (gnuplot . t)))
+                             (gnuplot . t)
+                             (lilypond . t)))
 #+end_src
 
 Increase the depth of headings that appears in =imenu=.

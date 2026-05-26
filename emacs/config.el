@@ -677,6 +677,12 @@ buffer)."
 
 (use-package gnuplot)
 
+(use-package lilypond-mode
+  :straight (:type git :host github :repo "8dcc/lilypond-mode"))
+
+(use-package ob-lilypond
+  :straight (:type git :host github :repo "8dcc/ob-lilypond"))
+
 (defun x8dcc/non-empty-string-p (str)
   "Check if the string is neither nil nor empty."
   (and str (not (string-empty-p str))))
@@ -2763,7 +2769,8 @@ default value of `smtpmail-smtp-user' is nil.")
                              (scheme . t)
                              (shell . t)
                              (python . t)
-                             (gnuplot . t)))
+                             (gnuplot . t)
+                             (lilypond . t)))
 
 (setq org-imenu-depth 3)
 
