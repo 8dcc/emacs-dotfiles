@@ -1836,7 +1836,8 @@ buffers, so be specially careful around `.git' directories."
 
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m T"   '(org-babel-tangle :wk "Tangle current file")
+  "m o"   '(org-open-at-point :wk "Open")
+  "m T"   '(org-babel-tangle  :wk "Tangle current file")
   ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
