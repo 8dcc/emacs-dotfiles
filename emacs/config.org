@@ -493,7 +493,8 @@ Drag and drop images to Emacs org-mode.
   :after org
   :config
   (setq org-download-annotate-function (lambda (link) "")
-        org-download-image-attr-list nil))
+        org-download-image-attr-list nil
+        org-download-display-inline-images nil))
 #+end_src
 
 The original =org-download-clipboard= function also creates an ID property by

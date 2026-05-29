@@ -224,7 +224,8 @@ Using `x8dcc/general-create-definer'."
   :after org
   :config
   (setq org-download-annotate-function (lambda (link) "")
-        org-download-image-attr-list nil))
+        org-download-image-attr-list nil
+        org-download-display-inline-images nil))
 
 (defun x8dcc/org-download-clipboard (orig-fun &optional basename)
   "Like `org-download-clipboard' but without creating an org-id."
