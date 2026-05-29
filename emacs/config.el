@@ -2775,6 +2775,8 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (setq org-imenu-depth 3)
 
+(setf (alist-get 'file org-link-frame-setup) #'find-file)
+
 (setq org-fontify-quote-and-verse-blocks t
       org-src-fontify-natively t
       org-hide-emphasis-markers t

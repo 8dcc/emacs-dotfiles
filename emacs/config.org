@@ -4940,6 +4940,13 @@ Increase the depth of headings that appears in =imenu=.
 (setq org-imenu-depth 3)
 #+end_src
 
+Open file links in the same window. This is done by modifying the function
+associated to the ='file= key in =org-link-frame-setup=.
+
+#+begin_src emacs-lisp
+(setf (alist-get 'file org-link-frame-setup) #'find-file)
+#+end_src
+
 *** Org visual settings
 
 Org visual settings.
