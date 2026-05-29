@@ -1836,8 +1836,9 @@ buffers, so be specially careful around `.git' directories."
 
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m o"   '(org-open-at-point :wk "Open")
-  "m T"   '(org-babel-tangle  :wk "Tangle current file")
+  "m o"   '(org-open-at-point                    :wk "Open")
+  "m O"   '(x8dcc/org-open-at-point-other-window :wk "Open in other window")
+  "m T"   '(org-babel-tangle                     :wk "Tangle current file")
   ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
@@ -2890,6 +2891,12 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
   (if (not (looking-back "^\\|[ \t]" nil))
       (insert " "))
   (call-interactively #'org-insert-link))
+
+(defun x8dcc/org-open-at-point-other-window (&optional arg)
+  (interactive "P")
+  (let ((org-link-frame-setup (cons (cons 'file #'find-file)
+                                    org-link-frame-setup)))
+    (org-open-at-point arg)))
 
 (defun x8dcc/org-custom-id-exists-p (custom-id)
   "Is there an element in the current document with the specified CUSTOM-ID?

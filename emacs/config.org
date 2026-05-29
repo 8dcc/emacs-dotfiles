@@ -3137,8 +3137,9 @@ Instead of =SPC m t=, you can use =S-<left>= and =S-<right>= to change the todo 
 #+begin_src emacs-lisp
 (x8dcc/def-keys-org
   ;; Mode (Org)
-  "m o"   '(org-open-at-point :wk "Open")
-  "m T"   '(org-babel-tangle  :wk "Tangle current file")
+  "m o"   '(org-open-at-point                    :wk "Open")
+  "m O"   '(x8dcc/org-open-at-point-other-window :wk "Open in other window")
+  "m T"   '(org-babel-tangle                     :wk "Tangle current file")
   ;; Mode -> Date
   "m d"   '(:ignore t    :wk "Date")
   "m d d" '(org-deadline :wk "Deadline")
@@ -5213,6 +5214,16 @@ asterisks in org buffers.
 ;; NOTE: Commented to avoid a performance impact
 (x8dcc/make-invisible "^\\s*\\(,\\)\\*" 1)
 #+end_comment
+
+Simple wrapper for opening an org link in another window.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-open-at-point-other-window (&optional arg)
+  (interactive "P")
+  (let ((org-link-frame-setup (cons (cons 'file #'find-file)
+                                    org-link-frame-setup)))
+    (org-open-at-point arg)))
+#+end_src
 
 *** Org custom heading IDs
 
