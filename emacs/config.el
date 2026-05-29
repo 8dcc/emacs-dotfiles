@@ -2822,7 +2822,37 @@ default value of `smtpmail-smtp-user' is nil.")
   <a accesskey=\"u\" href=\"%s\">Up</a> | <a accesskey=\"h\" href=\"%s\">Home</a>
 </div>")
 
-(setq org-html-head-extra "<style>img { max-width: 100%; }</style>")
+(setq org-html-head-extra
+      (concat "<style>"
+              "body { max-width: 750px; margin: 40px auto; padding: 0 1.2rem;"
+              "       font-family: 'Libertinus', Georgia, Cambria,"
+              "       'Times New Roman', Times, serif; color: #222;"
+              "       margin-bottom: 4em; background-color: #FFFFFF; }"
+              "h1, h2, h3, h4 { font-family: 'Libertinus', Georgia, Cambria,"
+              "                'Times New Roman', Times, serif;"
+              "                font-weight: normal; color: #333333; }"
+              "h1 { font-size: 1.8em; border-bottom: 1px solid #ddd;"
+              "     padding-bottom: 0.3em; }"
+              "h2 { font-size: 1.3em; }"
+              "pre { background: #f6f6f6; border: 1px solid #ddd;"
+              "      border-radius: 3px; padding: 0.9rem 1rem;"
+              "      overflow-x: auto; font-size: 0.88em; line-height: normal;"
+              "      font-variant-ligatures: none; }"
+              "table tbody td { padding: 4px 10px; border: solid 1px #cccccc; }"
+              "#table-of-contents { background: #f9f9f9;"
+              "                     border: 1px solid #e0e0e0;"
+              "                     border-radius: 3px; padding: 0.6em 1.2em;"
+              "                     display: inline-block;"
+              "                     margin-bottom: 1.5em; }"
+              "#table-of-contents h2 { font-size: 1em; margin: 0.4em 0; }"
+              "blockquote { background: #F1F1F1; border-left: 5px solid #ccc;"
+              "             margin: 1.5em; padding: 0.5em 1.5em; }"
+              "img { max-width: 100%; }"
+              "hr { border: none; height: 1px; color: #aaaaaa;"
+              "     background-color: #aaaaaa; }"
+              "#footnotes { margin-top: 2em; border-top: 1px solid #222; }"
+              "p, .footdef { text-align: justify; }"
+              "</style>"))
 
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
