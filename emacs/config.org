@@ -5190,6 +5190,25 @@ sudo pacman -S extra/texlive-latex extra/texlive-latexextra extra/texlive-plaing
 sudo emerge app-text/texlive dev-texlive/texlive-latex dev-texlive/texlive-latexextra texlive-plaingeneric
 #+end_src
 
+*** Org new link types
+
+New link type for book ISBNs.
+
+#+begin_src emacs-lisp
+(org-link-set-parameters
+ "isbn"
+ :follow
+ (lambda (isbn)
+   (browse-url (concat "https://openlibrary.org/isbn/" isbn)))
+ :export
+ (lambda (isbn desc backend)
+   (let ((url (concat "https://openlibrary.org/isbn/" isbn)))
+     (pcase backend
+       (`html (format "<a href=\"%s\">%s</a>" url (or desc isbn)))
+       (`latex (format "\\href{%s}{%s}" url (or desc isbn)))
+       (_ (or desc isbn))))))
+#+end_src
+
 *** Org capture
 
 [[https://orgmode.org/org.html#Capture-1][Org capture]] is used to quickly store data using templates.

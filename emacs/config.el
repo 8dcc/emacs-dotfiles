@@ -2902,6 +2902,19 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
           hidelinks
        }\n")
 
+(org-link-set-parameters
+ "isbn"
+ :follow
+ (lambda (isbn)
+   (browse-url (concat "https://openlibrary.org/isbn/" isbn)))
+ :export
+ (lambda (isbn desc backend)
+   (let ((url (concat "https://openlibrary.org/isbn/" isbn)))
+     (pcase backend
+       (`html (format "<a href=\"%s\">%s</a>" url (or desc isbn)))
+       (`latex (format "\\href{%s}{%s}" url (or desc isbn)))
+       (_ (or desc isbn))))))
+
 (setq org-default-notes-file (concat org-directory "notes.org"))
 
 (setq org-capture-templates
