@@ -1358,7 +1358,7 @@ The RFC-ID argument is case-insensitive, and can have the format \"RFC 123\",
     (unless (s-contains? "rfc" lowercase)
       (setq lowercase (concat "rfc" lowercase)))
     (eww (concat "https://www.rfc-editor.org/rfc/"
-                 (s-replace-regexp "[[:space:]]+" "" lowercase)))))
+                 (replace-regexp-in-string "[[:space:]]+" "" lowercase)))))
 
 (defconst x8dcc/default-terminal-function #'eshell
   "Default terminal used by custom functions.")
@@ -2883,9 +2883,9 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
                      "includegraphics"))
                   (opt "[" (one-or-more anything) "]")
                   "{" (one-or-more anything) "}")))))
-    (s-replace-regexp includegraphics-regexp
+    (replace-regexp-in-string includegraphics-regexp
                       "\\\\adjustbox{max width=\\\\linewidth}{\\1}"
-                      orig-result)  ))
+                      orig-result)))
 
 (advice-add 'org-latex--inline-image :around #'x8dcc/org-latex-svg-wrap)
 
