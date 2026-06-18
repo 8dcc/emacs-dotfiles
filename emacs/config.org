@@ -3986,7 +3986,7 @@ Enable auto-closing of brackets with =electric-pair-mode=.
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook
           (lambda ()
-            (electric-pair-mode 1)))
+            (electric-pair-local-mode 1)))
 #+end_src
 
 Comment empty lines.

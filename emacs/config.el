@@ -2292,7 +2292,7 @@ See `x8dcc/allow-modify-on-save'."
 
 (add-hook 'prog-mode-hook
           (lambda ()
-            (electric-pair-mode 1)))
+            (electric-pair-local-mode 1)))
 
 (setq comment-empty-lines 'eol)
 
