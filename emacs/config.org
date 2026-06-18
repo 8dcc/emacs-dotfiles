@@ -266,6 +266,20 @@ Evil align operator, port of vim-lion by Tom McDonald.
   (evil-lion-mode))
 #+end_src
 
+*** Evil matchit
+
+Jump between matching keywords and tags with =%=, similar to Vim's built-in
+=matchit= plugin. This extends the default =%= behavior (which only matches
+single characters like parentheses) to language constructs such as
+=if=-=endif=, =begin=-=end=, or HTML tags.
+
+#+begin_src emacs-lisp
+(use-package evil-matchit
+  :after evil
+  :config
+  (global-evil-matchit-mode 1))
+#+end_src
+
 *** General keybinds
 
 Define our own =SPC= keybinds.

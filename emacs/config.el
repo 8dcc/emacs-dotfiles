@@ -110,6 +110,11 @@
   (setq evil-lion-right-align-key (kbd "g A"))
   (evil-lion-mode))
 
+(use-package evil-matchit
+  :after evil
+  :config
+  (global-evil-matchit-mode 1))
+
 (defmacro x8dcc/general-create-definer (name keymaps)
   "Create a General definer named NAME for the specified KEYMAPS.
 
