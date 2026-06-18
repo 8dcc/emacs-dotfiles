@@ -428,6 +428,12 @@ Using `x8dcc/general-create-definer'."
 (use-package highlight-numbers
   :hook ((prog-mode . highlight-numbers-mode)))
 
+(use-package smartparens
+  :diminish smartparens-mode
+  :hook (prog-mode . smartparens-mode)
+  :config
+  (require 'smartparens-config))
+
 (use-package rainbow-delimiters
   :hook ((emacs-lisp-mode
           scheme-mode
@@ -2290,10 +2296,6 @@ See `x8dcc/allow-modify-on-save'."
 
 (setq browse-url-generic-program "firefox")
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (electric-pair-local-mode 1)))
-
 (setq comment-empty-lines 'eol)
 
 (setq calendar-week-start-day 1
@@ -2742,15 +2744,6 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (with-eval-after-load 'org
   (require 'org-tempo))
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq-local
-             electric-pair-inhibit-predicate
-             (lambda (c)
-               (if (char-equal c ?<)
-                   t
-                 (electric-pair-default-inhibit c))))))
 
 (let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
   (if (file-directory-p expanded-org-directory)

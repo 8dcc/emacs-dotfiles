@@ -950,6 +950,23 @@ For highlighting numeric literals.
   :hook ((prog-mode . highlight-numbers-mode)))
 #+end_src
 
+*** Smartparens
+
+Auto-closing of brackets and quotes, replacing the built-in
+=electric-pair-mode=. Smartparens keeps its own pairing state instead of relying
+on the global syntax parser, so typing a closing quote skips over the existing
+one reliably, instead of sometimes inserting a duplicate.
+
+The =smartparens-config= library provides sane per-language default pairs.
+
+#+begin_src emacs-lisp
+(use-package smartparens
+  :diminish smartparens-mode
+  :hook (prog-mode . smartparens-mode)
+  :config
+  (require 'smartparens-config))
+#+end_src
+
 *** Rainbow delimiters
 
 Add rainbow colors to parentheses.
@@ -3981,14 +3998,6 @@ Set default browser.
 (setq browse-url-generic-program "firefox")
 #+end_src
 
-Enable auto-closing of brackets with =electric-pair-mode=.
-
-#+begin_src emacs-lisp
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (electric-pair-local-mode 1)))
-#+end_src
-
 Comment empty lines.
 
 #+begin_src emacs-lisp
@@ -4880,20 +4889,6 @@ Enable "<s TAB" completion.
 #+begin_src emacs-lisp
 (with-eval-after-load 'org
   (require 'org-tempo))
-#+end_src
-
-Disable =electric-pair-mode= pairing of '<', so we can use "<s TAB"
-completion.
-
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq-local
-             electric-pair-inhibit-predicate
-             (lambda (c)
-               (if (char-equal c ?<)
-                   t
-                 (electric-pair-default-inhibit c))))))
 #+end_src
 
 Org agenda location.
