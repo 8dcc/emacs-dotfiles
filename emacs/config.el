@@ -2753,11 +2753,12 @@ default value of `smtpmail-smtp-user' is nil.")
 (let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
-            org-agenda-files (mapcar (lambda (filename)
-                                       (concat org-directory filename))
-                                     '("agenda.org"
-                                       "calendar.org"
-                                       "notes.org")))
+            org-agenda-files (seq-filter #'file-exists-p
+                                         (mapcar (lambda (filename)
+                                                   (concat org-directory filename))
+                                                 '("agenda.org"
+                                                   "calendar.org"
+                                                   "notes.org"))))
     (warn "Custom org directory not found at: %s" expanded-org-directory)))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day
