@@ -2750,15 +2750,21 @@ default value of `smtpmail-smtp-user' is nil.")
 (with-eval-after-load 'org
   (require 'org-tempo))
 
-(let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
+(defconst x8dcc/org-directory "~/Sync/Org/"
+  "Default user location when looking for Org files. See `org-directory'.")
+
+(defconst x8dcc/org-agenda-files '("agenda.org"
+                                   "calendar.org"
+                                   "notes.org")
+  "List of relative paths to user Org agenda files. See `org-agenda-files'.")
+
+(let ((expanded-org-directory (expand-file-name x8dcc/org-directory)))
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (seq-filter #'file-exists-p
                                          (mapcar (lambda (filename)
                                                    (concat org-directory filename))
-                                                 '("agenda.org"
-                                                   "calendar.org"
-                                                   "notes.org"))))
+                                                 x8dcc/org-agenda-files)))
     (warn "Custom org directory not found at: %s" expanded-org-directory)))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day

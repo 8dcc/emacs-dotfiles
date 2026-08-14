@@ -4905,18 +4905,26 @@ Enable "<s TAB" completion.
   (require 'org-tempo))
 #+end_src
 
-Org agenda location.
+Org agenda location. First, we make sure that the org directory exists. Then,
+for each of the relative paths to agenda files, we concatenate them to the
+=org-directory=, ensuring the file exists.
 
 #+begin_src emacs-lisp
-(let ((expanded-org-directory (expand-file-name "~/Sync/Org/")))
+(defconst x8dcc/org-directory "~/Sync/Org/"
+  "Default user location when looking for Org files. See `org-directory'.")
+
+(defconst x8dcc/org-agenda-files '("agenda.org"
+                                   "calendar.org"
+                                   "notes.org")
+  "List of relative paths to user Org agenda files. See `org-agenda-files'.")
+
+(let ((expanded-org-directory (expand-file-name x8dcc/org-directory)))
   (if (file-directory-p expanded-org-directory)
       (setq org-directory expanded-org-directory
             org-agenda-files (seq-filter #'file-exists-p
                                          (mapcar (lambda (filename)
                                                    (concat org-directory filename))
-                                                 '("agenda.org"
-                                                   "calendar.org"
-                                                   "notes.org"))))
+                                                 x8dcc/org-agenda-files)))
     (warn "Custom org directory not found at: %s" expanded-org-directory)))
 #+end_src
 
