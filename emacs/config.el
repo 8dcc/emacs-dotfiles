@@ -283,14 +283,15 @@ Using `x8dcc/general-create-definer'."
   :init
   (setq dashboard-banner-logo-title "8dcc's Emacs"
         dashboard-startup-banner (concat user-emacs-directory
-                                        "my-media/splash.png")
+                                         "my-media/splash.png")
         dashboard-center-content t
         dashboard-show-shortcuts nil
         dashboard-set-footer nil
         dashboard-page-separator "\n\n"
         dashboard-items '((recents . 10)
                           (projects . 5)
-                          (agenda . 10)))
+                          (agenda . 10))
+        dashboard-agenda-sort-strategy '(time-up todo-state-up priority-up))
   :config
   (dashboard-setup-startup-hook))
 
