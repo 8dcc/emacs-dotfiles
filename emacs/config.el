@@ -3618,6 +3618,8 @@ Used for highlighting more constants with `font-lock-constant-face' in
 (setq gdb-window-configuration-directory
       (concat user-emacs-directory "gdb-layouts/"))
 
+(setq vhdl-basic-offset tab-width)
+
 (setq compilation-scroll-output 'first-error)
 
 (setq compilation-always-kill t)

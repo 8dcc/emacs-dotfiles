@@ -6177,6 +6177,14 @@ Directory where the window configurations are saved. See the
       (concat user-emacs-directory "gdb-layouts/"))
 #+end_src
 
+** VHDL mode
+
+Respect usual tab width in VHDL mode.
+
+#+begin_src emacs-lisp
+(setq vhdl-basic-offset tab-width)
+#+end_src
+
 ** Compilation
 
 Automatically scroll the output of compilation buffers, unless an error is
