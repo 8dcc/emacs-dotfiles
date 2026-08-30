@@ -1724,8 +1724,8 @@ buffers, so be specially careful around `.git' directories."
   "o E" '(x8dcc/eshell-numbered             :wk "Eshell")
   "o m" '(rmail                             :wk "Read mail")
   "o M" '(x8dcc/compose-mail-as             :wk "Compose mail as")
-  "o t" '(x8dcc/vterm-popup                :wk "Terminal popup")
-  "o T" '(x8dcc/vterm-numbered             :wk "Terminal")
+  "o t" '(x8dcc/vterm-popup                 :wk "Terminal popup")
+  "o T" '(x8dcc/vterm-numbered              :wk "Terminal")
   "o x" '(scratch-buffer                    :wk "Scratch buffer")
   ;; Open -> Org
   "o o"   '(:ignore t                       :wk "Org")
@@ -1837,6 +1837,7 @@ buffers, so be specially careful around `.git' directories."
   "w l" '(evil-window-right                 :wk "Right")
   "w L" '(evil-window-move-far-right        :wk "Move current right")
   "w s" '(evil-window-split                 :wk "Split horizontally")
+  "w S" '(window-toggle-side-windows        :wk "Toggle side windows")
   "w v" '(evil-window-vsplit                :wk "Split vertically")
   "w w" '(evil-window-next                  :wk "Next")
   ;; Fold
