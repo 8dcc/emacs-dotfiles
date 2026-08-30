@@ -3745,6 +3745,11 @@ By default:
 (global-visual-line-mode 0)
 (setq-default truncate-lines t
               word-wrap t)
+
+(x8dcc/hook-to-targets
+ (lambda () (auto-fill-mode 1))
+ '(markdown-mode-hook
+   org-mode-hook))
 #+end_src
 
 Don't blink the cursor.

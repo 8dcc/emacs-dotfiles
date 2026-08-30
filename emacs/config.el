@@ -2192,6 +2192,11 @@ If FRAME is nil, it defaults to the current frame."
 (setq-default truncate-lines t
               word-wrap t)
 
+(x8dcc/hook-to-targets
+ (lambda () (auto-fill-mode 1))
+ '(markdown-mode-hook
+   org-mode-hook))
+
 (blink-cursor-mode 0)
 
 (show-paren-mode 1)
