@@ -2795,7 +2795,7 @@ default value of `smtpmail-smtp-user' is nil.")
                                          (mapcar (lambda (filename)
                                                    (concat org-directory filename))
                                                  x8dcc/org-agenda-files)))
-    (warn "Custom org directory not found at: %s" expanded-org-directory)))
+    (message "Custom org directory not found at: %s" expanded-org-directory)))
 
 (setq org-agenda-start-on-weekday calendar-week-start-day
       org-agenda-weekend-days calendar-weekend-days)
