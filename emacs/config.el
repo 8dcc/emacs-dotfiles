@@ -2436,6 +2436,28 @@ of...\"."
   "}\n\n"
   _ \n)
 
+(define-skeleton x8dcc/skeleton-lilypond-piano
+  "Insert a basic Bash script skeleton."
+  nil
+  '(setq v1 (skeleton-read "Language: "))
+  '(setq v2 (skeleton-read "Title: "))
+  '(setq v3 (skeleton-read "Composer: "))
+  "\n\\version \"2.24.0\"\n"
+  "\\language \"" v1 "\"\n"
+  "\\header {\n"
+  > "title = \"" v2 "\"\n"
+  > "composer = \"" v3 "\"\n"
+  > "tagline = \" \"\n"
+  "}\n\n"
+  "\\score {\n"
+  > "\\new Staff {\n"
+  > "\\clef treble\n"
+  > "\\relative do' {\n"
+  > _ "\n"
+  "}" > "\n"
+  "}" > "\n"
+  "}" \n)
+
 (setq eshell-prompt-function
       (lambda ()
         (let ((default '(:inherit default))
