@@ -524,6 +524,16 @@ temporarily overwrite this =org-id-get-create= function when
 
 (advice-add 'org-download-clipboard :around #'x8dcc/org-download-clipboard)
 #+end_src
+
+Simple interactive wrapper for =org-download-clipboard=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-download-clipboard-as (basename)
+  (interactive
+   (list (read-file-name "Download clipboard as: " org-download-image-dir)))
+  (org-download-clipboard (expand-file-name basename)))
+#+end_src
+
 *** Popper
 
 For converting less-important buffers into popups. They can be toggled

@@ -239,6 +239,11 @@ Using `x8dcc/general-create-definer'."
 
 (advice-add 'org-download-clipboard :around #'x8dcc/org-download-clipboard)
 
+(defun x8dcc/org-download-clipboard-as (basename)
+  (interactive
+   (list (read-file-name "Download clipboard as: " org-download-image-dir)))
+  (org-download-clipboard (expand-file-name basename)))
+
 (use-package popper
   :config
   (setq popper-group-function #'popper-group-by-projectile)
