@@ -2545,6 +2545,12 @@ of...\"."
    (replace-regexp-in-string (rx "\n" string-end) ""
                              (x8dcc/md5sums filenames))))
 
+(defun x8dcc/dired-copy-here (&optional arg)
+  "Call `dired-do-copy', overwriting `dired-dwim-target' to nil."
+  (interactive "P")
+  (let ((dired-dwim-target nil))
+    (dired-do-copy arg)))
+
 (setq ediff-window-setup-function #'ediff-setup-windows-plain
       ediff-split-window-function #'split-window-horizontally)
 

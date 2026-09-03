@@ -4441,6 +4441,17 @@ FIXME: Move auxiliary functions to another section.
                              (x8dcc/md5sums filenames))))
 #+end_src
 
+Small function for copying a file to the current directory, overwriting
+=dired-dwim-target=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/dired-copy-here (&optional arg)
+  "Call `dired-do-copy', overwriting `dired-dwim-target' to nil."
+  (interactive "P")
+  (let ((dired-dwim-target nil))
+    (dired-do-copy arg)))
+#+end_src
+
 ** Ediff
 
 Don't open a new frame for the =ediff= control panel.
