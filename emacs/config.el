@@ -1091,6 +1091,22 @@ Affected by `comment-start', `comment-padding' and `comment-end'."
                                          hex-format)
                                  answer)))))))
 
+(defmacro x8dcc/decl-org-emph-wrapper (wrapper-name emph-char)
+  "Declare a `org-emphasize' wrapper with the specified WRAPPER-NAME.
+
+Declares a function named WRAPPER-NAME that, when called, calls `org-emphasize'
+with the emphasis character."
+  `(defun ,wrapper-name ()
+     (interactive)
+     (org-emphasize ,emph-char)))
+
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-bold           ?*)
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-italics        ?/)
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-strikeout      ?+)
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-typewriter     ?=)
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-typewriter-alt ?~)
+(x8dcc/decl-org-emph-wrapper x8dcc/org-emph-underscore     ?_)
+
 (defvar x8dcc/format-buffer-funcs
   '((c-mode . clang-format-buffer)
     (c++-mode . clang-format-buffer))
@@ -1869,6 +1885,14 @@ buffers, so be specially careful around `.git' directories."
   "m e l" '(org-latex-export-to-latex     :wk "LaTeX")
   "m e p" '(org-latex-export-to-pdf       :wk "PDF")
   "m e t" '(org-texinfo-export-to-texinfo :wk "Texinfo")
+  ;; Mode -> Format text
+  "m f"   '(:ignore t                     :wk "Text format")
+  "m f b" '(x8dcc/org-emph-bold           :wk "Bold")
+  "m f e" '(x8dcc/org-emph-italics        :wk "Emphasized")
+  "m f s" '(x8dcc/org-emph-strikeout      :wk "Strikeout")
+  "m f t" '(x8dcc/org-emph-typewriter     :wk "Typewriter")
+  "m f T" '(x8dcc/org-emph-typewriter-alt :wk "Typewriter (Alt.)")
+  "m f u" '(x8dcc/org-emph-underscore     :wk "Underline")
   ;; Mode -> Insert
   "m i"   '(:ignore t                  :wk "Insert")
   "m i d" '(x8dcc/skeleton-org-default :wk "Default header")
