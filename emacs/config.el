@@ -229,6 +229,7 @@ Using `x8dcc/general-create-definer'."
   :after org
   :config
   (setq org-download-annotate-function (lambda (link) "")
+        org-download-heading-lvl nil
         org-download-image-attr-list nil
         org-download-display-inline-images nil))
 
