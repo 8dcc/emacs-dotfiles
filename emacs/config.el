@@ -239,10 +239,14 @@ Using `x8dcc/general-create-definer'."
 
 (advice-add 'org-download-clipboard :around #'x8dcc/org-download-clipboard)
 
-(defun x8dcc/org-download-clipboard-as (basename)
+(defun x8dcc/org-download-clipboard-as (path)
   (interactive
    (list (read-file-name "Download clipboard as: " org-download-image-dir)))
-  (org-download-clipboard (expand-file-name basename)))
+  (let* ((path (expand-file-name path))
+         (org-download-image-dir (file-name-directory path))
+         (org-download-heading-lvl nil)
+         (org-download-timestamp ""))
+    (org-download-clipboard (file-name-nondirectory path))))
 
 (use-package popper
   :config
