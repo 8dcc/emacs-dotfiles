@@ -1561,7 +1561,9 @@ Major mode for editing [[https://lilypond.org][LilyPond]] source files.
 
 #+begin_src emacs-lisp
 (use-package lilypond-mode
-  :straight (:type git :host github :repo "8dcc/lilypond-mode"))
+  :straight (:type git :host github :repo "8dcc/lilypond-mode")
+  :config
+  (setq lilypond-fancy-comments nil))
 #+end_src
 
 #+begin_src emacs-lisp

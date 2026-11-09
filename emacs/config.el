@@ -697,7 +697,9 @@ buffer)."
 (use-package gnuplot)
 
 (use-package lilypond-mode
-  :straight (:type git :host github :repo "8dcc/lilypond-mode"))
+  :straight (:type git :host github :repo "8dcc/lilypond-mode")
+  :config
+  (setq lilypond-fancy-comments nil))
 
 (use-package ob-lilypond
   :straight (:type git :host github :repo "8dcc/ob-lilypond"))
