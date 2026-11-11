@@ -5128,6 +5128,22 @@ Show LaTeX entities and expressions in a different face.
 
 *** Org export settings
 
+Allow whitelisting some languages for Org evaluation.
+
+#+begin_src emacs-lisp
+(defconst x8dcc/org-whitelisted-eval-langs '("lilypond")
+  "List of whitelisted languages for evaluating from Org buffers.
+
+These don't prompt for confirmation according to `org-confirm-babel-evaluate'.")
+
+(setq org-confirm-babel-evaluate
+      (lambda (lang body)
+        (if (not (member lang x8dcc/org-whitelisted-eval-langs))
+            t
+          (message "Skipping evaluation confirmation for language `%s'..." lang)
+          nil)))
+#+end_src
+
 Disable footers in HTML exports.
 
 #+begin_src emacs-lisp

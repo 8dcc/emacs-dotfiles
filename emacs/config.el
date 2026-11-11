@@ -2879,6 +2879,18 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (setq org-highlight-latex-and-related '(latex entities))
 
+(defconst x8dcc/org-whitelisted-eval-langs '("lilypond")
+  "List of whitelisted languages for evaluating from Org buffers.
+
+These don't prompt for confirmation according to `org-confirm-babel-evaluate'.")
+
+(setq org-confirm-babel-evaluate
+      (lambda (lang body)
+        (if (not (member lang x8dcc/org-whitelisted-eval-langs))
+            t
+          (message "Skipping evaluation confirmation for language `%s'..." lang)
+          nil)))
+
 (setq org-html-postamble nil
       org-export-time-stamp-file nil)
 
