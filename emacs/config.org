@@ -5131,7 +5131,7 @@ Show LaTeX entities and expressions in a different face.
 Allow whitelisting some languages for Org evaluation.
 
 #+begin_src emacs-lisp
-(defconst x8dcc/org-whitelisted-eval-langs '("lilypond")
+(defconst x8dcc/org-whitelisted-eval-langs '("lilypond" "gnuplot" "mermaid")
   "List of whitelisted languages for evaluating from Org buffers.
 
 These don't prompt for confirmation according to `org-confirm-babel-evaluate'.")

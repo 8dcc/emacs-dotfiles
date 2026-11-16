@@ -2879,7 +2879,7 @@ default value of `smtpmail-smtp-user' is nil.")
 
 (setq org-highlight-latex-and-related '(latex entities))
 
-(defconst x8dcc/org-whitelisted-eval-langs '("lilypond")
+(defconst x8dcc/org-whitelisted-eval-langs '("lilypond" "gnuplot" "mermaid")
   "List of whitelisted languages for evaluating from Org buffers.
 
 These don't prompt for confirmation according to `org-confirm-babel-evaluate'.")
