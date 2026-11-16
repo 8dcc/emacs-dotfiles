@@ -5387,6 +5387,41 @@ Simple wrapper for opening an org link in another window.
     (org-open-at-point arg)))
 #+end_src
 
+Functions for determining whether to use absolute or relative links when
+inserting them in a file. The rules are:
+
+1. If the file is in the current directory or in a subdirectory of it, use a relative path.
+2. If the file is under the same git project as the current directory, also use
+   a relative path.
+3. Otherwise, use an absolute path, abbreviated with =~= for the home directory.
+
+Note that there is currently no equivalent of the =noabbrev= option for
+=org-link-file-path-type=.
+
+#+begin_src emacs-lisp
+(defun x8dcc/org-get-file-link-target-adaptative (file)
+  "Return FILE as a relative path if it is under `default-directory' or in
+the same git project as `default-directory'; otherwise return an absolute path."
+  (let ((root (locate-dominating-file default-directory ".git")))
+    (if (or (file-in-directory-p file default-directory)
+            (and root (file-in-directory-p file root)))
+        (file-relative-name file)
+      (abbreviate-file-name file))))
+
+(defun x8dcc/org-get-file-link-target (filename &optional type)
+  "Return the path to use for FILENAME in an Org file link.
+TYPE may be `relative' or `absolute'.  If nil, defer to
+`x8dcc/org-get-link-target-adaptative'."
+  (let ((file (expand-file-name filename)))
+    (pcase type
+      ('relative (file-relative-name file))
+      ('absolute (abbreviate-file-name file))
+      ('nil (x8dcc/org-get-file-link-target-adaptative file))
+      (_ (user-error "Invalid type %S: expected `relative' or `absolute'" type)))))
+
+(setq org-link-file-path-type #'x8dcc/org-get-file-link-target)
+#+end_src
+
 *** Org custom heading IDs
 
 Automatically add the =CUSTOM_ID= property to all org headers. Huge credits to

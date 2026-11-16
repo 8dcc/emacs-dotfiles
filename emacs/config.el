@@ -3020,6 +3020,28 @@ original function as the first ORIG-FUNC argument. See `advice-add'."
                                     org-link-frame-setup)))
     (org-open-at-point arg)))
 
+(defun x8dcc/org-get-file-link-target-adaptative (file)
+  "Return FILE as a relative path if it is under `default-directory' or in
+the same git project as `default-directory'; otherwise return an absolute path."
+  (let ((root (locate-dominating-file default-directory ".git")))
+    (if (or (file-in-directory-p file default-directory)
+            (and root (file-in-directory-p file root)))
+        (file-relative-name file)
+      (abbreviate-file-name file))))
+
+(defun x8dcc/org-get-file-link-target (filename &optional type)
+  "Return the path to use for FILENAME in an Org file link.
+TYPE may be `relative' or `absolute'.  If nil, defer to
+`x8dcc/org-get-link-target-adaptative'."
+  (let ((file (expand-file-name filename)))
+    (pcase type
+      ('relative (file-relative-name file))
+      ('absolute (abbreviate-file-name file))
+      ('nil (x8dcc/org-get-file-link-target-adaptative file))
+      (_ (user-error "Invalid type %S: expected `relative' or `absolute'" type)))))
+
+(setq org-link-file-path-type #'x8dcc/org-get-file-link-target)
+
 (defun x8dcc/org-custom-id-exists-p (custom-id)
   "Is there an element in the current document with the specified CUSTOM-ID?
 Uses `org-find-property'."
